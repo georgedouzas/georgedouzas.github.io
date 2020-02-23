@@ -89,6 +89,7 @@ phone = ""
 contact_links = [
   {icon = "skype", icon_pack = "fab", name = "Skype Me", link = "skype:georgios.douzas?call"},
   {icon = "twitter", icon_pack = "fab", name = "DM Me", link = "https://twitter.com/messages/compose?recipient_id=1229427984689438724"},
+  {icon = "linkedin", icon_pack = "fab", name = "DM Me", link = "https://www.linkedin.com/in/gdouzas/messaging"},
   ]
 
 ############################
@@ -184,14 +185,14 @@ plugins_js  = []
   #   0: Disabled
   #   1: Disqus (https://disqus.com)
   #   2: Commento (https://commento.io)
-  engine = 0
+  engine = 1
 
   # Which page types are commentable?
   commentable = {page = true, post = true, docs = true, project = true, publication = true, talk = true}
 
   # Configuration of Disqus.
   [comments.disqus]
-    shortname = ""  # Paste the shortname from your Disqus dashboard.
+    shortname = "aiandfriends"  # Paste the shortname from your Disqus dashboard.
     show_count = true  # Show comment count in page header? (true/false)
 
   # Configuration of Commento.
