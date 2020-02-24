@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>K-Means | AI and friends</title>
+    <link>https://georgedouzas.github.io/blog/tags/k-means/</link>
+      <atom:link href="https://georgedouzas.github.io/blog/tags/k-means/index.xml" rel="self" type="application/rss+xml" />
+    <description>K-Means</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 01 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>K-Means</title>
+      <link>https://georgedouzas.github.io/blog/tags/k-means/</link>
+    </image>
+    
+    <item>
+      <title>Improving imbalanced learning through a heuristic oversampling method based on k-means and SMOTE</title>
+      <link>https://georgedouzas.github.io/blog/publication/kmeans_smote_journal/</link>
+      <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
+      <guid>https://georgedouzas.github.io/blog/publication/kmeans_smote_journal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Oversampling for Imbalanced Learning Based on K-Means and SMOTE</title>
+      <link>https://georgedouzas.github.io/blog/publication/kmeans_smote_preprint/</link>
+      <pubDate>Tue, 12 Dec 2017 00:00:00 +0000</pubDate>
+      <guid>https://georgedouzas.github.io/blog/publication/kmeans_smote_preprint/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

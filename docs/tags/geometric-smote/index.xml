@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Geometric SMOTE | AI and friends</title>
+    <link>https://georgedouzas.github.io/blog/tags/geometric-smote/</link>
+      <atom:link href="https://georgedouzas.github.io/blog/tags/geometric-smote/index.xml" rel="self" type="application/rss+xml" />
+    <description>Geometric SMOTE</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 17 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Geometric SMOTE</title>
+      <link>https://georgedouzas.github.io/blog/tags/geometric-smote/</link>
+    </image>
+    
+    <item>
+      <title>Imbalanced Learning in Land Cover Classification: Improving Minority Classes’ Prediction Accuracy Using the Geometric SMOTE Algorithm</title>
+      <link>https://georgedouzas.github.io/blog/publication/land_cover_classification/</link>
+      <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://georgedouzas.github.io/blog/publication/land_cover_classification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Geometric SMOTE a geometrically enhanced drop-in replacement for SMOTE</title>
+      <link>https://georgedouzas.github.io/blog/publication/gsmote_journal/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://georgedouzas.github.io/blog/publication/gsmote_journal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Geometric SMOTE: Effective oversampling for imbalanced learning through a geometric extension of SMOTE</title>
+      <link>https://georgedouzas.github.io/blog/publication/gsmote_preprint/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://georgedouzas.github.io/blog/publication/gsmote_preprint/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
