@@ -35,7 +35,7 @@ featured: false
 # links:
 # - name: ""
 #   url: ""
-url_pdf: https://www.sciencedirect.com/user/login?targetURL=%2Fuser%2Frouter%2Flogin%3FtargetURL%3D%252Fscience%252Farticle%252Fpii%252FS0020025518304997
+url_pdf: https://www.sciencedirect.com/science/article/pii/S0020025518304997/pdfft?md5=525fb015c7a6acb56ca498a3ae5210d3&pid=1-s2.0-S0020025518304997-main.pdf
 url_code: ''
 url_dataset: ''
 url_poster: ''

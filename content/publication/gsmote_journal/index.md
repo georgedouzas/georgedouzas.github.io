@@ -33,7 +33,7 @@ featured: false
 # links:
 # - name: ""
 #   url: ""
-url_pdf: https://www.sciencedirect.com/user/login?targetURL=%2Fuser%2Frouter%2Flogin%3FtargetURL%3D%252Fscience%252Farticle%252Fpii%252FS0020025519305353
+url_pdf: https://www.sciencedirect.com/science/article/pii/S0020025519305353/pdfft?md5=88cfae2562f0fc98d833480e23e41236&pid=1-s2.0-S0020025519305353-main.pdf
 url_code: ''
 url_dataset: ''
 url_poster: ''
@@ -54,7 +54,7 @@ image:
 #   Simply enter your project's folder or file name without extension.
 #   E.g. `internal-project` references `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
-projects: []
+projects: ["geometric-smote"]
 
 # Slides (optional).
 #   Associate this publication with Markdown slides.

@@ -107,7 +107,6 @@ $E[CF] = \frac{2}{\pi} exp \Big( - \frac{PF}{2} \Big) - PF \cdot erf \Big( - \fr
 Θα σχεδιάσω την αναμενόμενη τιμή $E[CF]$ ως συνάρτηση του $PF$ για τιμές γύρω απο το μηδεν και τρείς τυπικές αποκλίσεις. Το παρακάτω απόσπασμα κώδικα σε Python 3 παράγει το ζητούμενο γράφημα:
 
 ```python
-
 # Imports
 from math import sqrt, exp, erf
 import numpy as np
