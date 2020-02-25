@@ -230,8 +230,7 @@ sapiens έζησε στην Αφρική πριν απο 200.000 χρόνια. �
 &lt;p&gt;όπου $erf$ η 
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Error_function&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;συνάρτηση σφάλματος&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Θα σχεδιάσω την αναμενόμενη τιμή $E[CF]$ ως συνάρτηση του $PF$ για τιμές γύρω απο το μηδεν και τρείς τυπικές αποκλίσεις. Το παρακάτω απόσπασμα κώδικα σε Python 3 παράγει το ζητούμενο γράφημα:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;
-# Imports
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Imports
 from math import sqrt, exp, erf
 import numpy as np
 import matplotlib.pyplot as plt

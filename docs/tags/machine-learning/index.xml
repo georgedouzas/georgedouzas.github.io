@@ -29,6 +29,48 @@
     </item>
     
     <item>
+      <title>Geometric SMOTE</title>
+      <link>https://georgedouzas.github.io/blog/project/geometric-smote/</link>
+      <pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>https://georgedouzas.github.io/blog/project/geometric-smote/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Classification of imbalanced datasets is a challenging task for standard machine learning algorithms. Training a classifier on imbalanced data, often results in a low out-of-sample accuracy for the minority classes. To deal with this problem several approaches have been proposed. A general approach, known as oversampling, is the generation of artificial data for the minority classes that are used to enhance the training data.&lt;/p&gt;
+&lt;p&gt;SMOTE is the most popular oversampler, while many variants of it have been proposed. Geometric SMOTE, a geometric modification of the SMOTE data generation mechanism, is a state-of-the-art oversampling algorithm that 
+&lt;a href=&#34;../../publication/gsmote_journal&#34;&gt;has been shown&lt;/a&gt; to outperform other standard oversamplers in a large number of datasets.&lt;/p&gt;
+&lt;p&gt;A Python implementation of SMOTE and several of its variants is available in the 
+&lt;a href=&#34;https://imbalanced-learn.org/stable/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Imbalanced-Learn&lt;/a&gt; library, which is fully compatible with the popular machine learning toolbox 
+&lt;a href=&#34;https://scikit-learn.org/stable/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Scikit-Learn&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I have developed a Python implementation of Geometric SMOTE oversampler, called &lt;code&gt;geometric-smote&lt;/code&gt;, that integrates seamlessly with the Scikit-Learn and Imblanced-Learn ecosystems.&lt;/p&gt;
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Detailed documentation that includes installation guidelines, API description and various examples can found 
+&lt;a href=&#34;https://geometric-smote.readthedocs.io/en/latest/?badge=latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. In what follows, I will describe briefly some aspects of &lt;code&gt;geometric-smote&lt;/code&gt;&#39;s functionality.&lt;/p&gt;
+&lt;p&gt;The class that represents the Geometric SMOTE oversampler is called &lt;code&gt;GeometricSMOTE&lt;/code&gt;. Its API follows closely the API of oversamplers provided by Imbalanced-Learn. In order to show its functionality I will initially generate some binary class imbalanced data, represented by the input matrix &lt;code&gt;X&lt;/code&gt; and the target vector &lt;code&gt;y&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Import scikit-learn
+from sklearn.datasets import make_classification
+
+# Set random seed
+rnd_seed = 40
+
+# Generate imbalanced data
+X, y = make_classification(
+  n_classes=2,
+  weights=[0.9, 0.1],
+  random_state=rnd_seed
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The following snippet prints the main characteristics of the dataset:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Import Counter
+from collections import Counter
+
+# Print dataset&#39;s characteristics
+print(
+  &#39;Number of samples&#39;
+)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Improving imbalanced learning through a heuristic oversampling method based on k-means and SMOTE</title>
       <link>https://georgedouzas.github.io/blog/publication/kmeans_smote_journal/</link>
       <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
