@@ -42,6 +42,9 @@ education:
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "#contact" for contact widget.
 social:
+- icon: cv
+  icon_pack: ai
+  link: files/cv.pdf
 - icon: envelope
   icon_pack: fas
   link: mailto:gdouzas@novaims.unl.pt  # For a direct email link, use "mailto:test@example.org".
@@ -57,11 +60,11 @@ social:
 - icon: linkedin
   icon_pack: fab
   link: https://www.linkedin.com/in/gdouzas/
+- icon: stack-overflow
+  icon_pack: fab
+  link: https://stackoverflow.com/users/10274504/georgios-douzas
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
-# - icon: cv
-#   icon_pack: ai
-#   link: files/cv.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ""
@@ -73,4 +76,4 @@ user_groups:
 - Visitors
 ---
 
-I work as a machine learning researcher at the Nova University of Lisbon, School of Information Management. My research interests include physics, mathematics and artificial intelligence with various publications in machine learning and high energy physics journals. In the past, I have worked in multiple companies as a software and machine learning engineer. Additionally, I often contribute or maintain my own open source projects. Besides science, sports is my main hobby. Currently, my focus is in gymnastics and calisthenics while in the past I was a competitive sprinter.
+I work as a machine learning researcher at the [Nova IMS](https://www.novaims.unl.pt/default), University of Lisbon. I am also a [member](https://www.novaims.unl.pt/magic/#team-section) of the [MagIC](https://www.novaims.unl.pt/magic/#home-section) research and development center. My research areas are physics, mathematics and artificial intelligence with multiple [publications](#publications) in machine learning and high energy physics journals. My [professional experience](#experience) includes working for various companies as a software and machine learning engineer. Additionally, I often maintain or contribute to open-source [projects](#projects). Besides science, sports is my main hobby. Currently, my focus is on [gymnastics](hobbies/gymnastics/) while in the past I was a competitive sprinter. Lately, I have been working on various [robotics](hobbies/robotics/) projects.

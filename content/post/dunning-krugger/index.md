@@ -1,10 +1,9 @@
 ---
 title: "Το φαινόμενο Dunning-Krugger και ο Ηλίας Μάσκας"
+summary: "Όταν μια απλή καράφλα δεν ειναι ικανή να σε σταματήσει."
+tags:
+- Other
 date: 2019-03-28
-math: true
-diagram: true
-image:
-  placement: 1
 ---
 
 ## Αυστηρός ορισμός του προβλήματος

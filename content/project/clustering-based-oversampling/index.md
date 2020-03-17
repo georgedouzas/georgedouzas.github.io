@@ -1,10 +1,10 @@
 ---
-title: Geometric SMOTE
-summary: A Python package for flexible and efficient oversampling.
+title: Clustering-Based Oversampling
+summary: A Python package for combining clustering and oversampling.
 tags:
 - Machine Learning
 - Imbalanced Learning Problem
-- Geometric SMOTE
+- Clustering
 - Production
 date: "2019-06-01T00:00:00Z"
 
@@ -15,7 +15,7 @@ links:
 - icon: github
   icon_pack: fab
   name: Repository
-  url: https://github.com/AlgoWit/geometric-smote
+  url: https://github.com/AlgoWit/cluster-over-sampling
 url_code: ""
 url_pdf: ""
 url_slides: ""
@@ -31,32 +31,30 @@ slides: ""
 
 ## Introduction
 
-Classification of imbalanced datasets is a challenging task for standard machine learning algorithms. Training a classifier on imbalanced data, often results in a low out-of-sample accuracy for the minority classes. To deal with this problem several approaches have been proposed. A general approach, known as oversampling, is the generation of artificial data for the minority classes that are used to enhance the training data.
+Learning from imbalanced data is a common and challenging problem in supervised learning. Training a classifier on imbalanced data, often results in a low out-of-sample accuracy for the minority classes. While different strategies exist to tackle this problem, the most general approach known as oversampling, is the generation of artificial data to achieve a balanced class distribution that in turn are used to enhance the training data.
 
-SMOTE is the most popular oversampling algorithm, while many variants of it have been developed. SMOTE generates synthetic data between the line segment that connects two randomly chosen neighboring minority class instances. On the other hand, Geometric SMOTE epands the data generation area by generating synthetic data inside a hypersphere that is defined by a randomly chosen minority class instance and one of its neighbors either from the minority or majority class. Geometric SMOTE [has been shown](../../publication/gsmote_journal) to outperform other standard oversamplers in a large number of datasets. The following figure illustrates the difference between the two data generation mechanisms:
+SMOTE algorithm, the most popular oversampler, as well as any other oversampling method based on it, generates synthetic samples along line segments that join minority class instances. SMOTE addresses only the issue of between-classes imbalance. On the other hand, by clustering the input space and applying any oversampling algorithm for each resulting cluster with appropriate resampling ratio, the within-classes imbalanced issue can be addressed. [SOMO](../../publication/somo) and [KMeans-SMOTE](../../publication/kmeans_smote_journal) are specific realizations of this approach that have been shown to outperform other standard oversamplers in a large number of datasets.
 
-{{< figure src="smote_vs_gsmote.png" title="SMOTE vs Geometric SMOTE" width="700px" >}}
-
-A Python implementation of SMOTE and several of its variants is available in the [Imbalanced-Learn](https://imbalanced-learn.org/stable/) library, which is fully compatible with the popular machine learning toolbox [Scikit-Learn](https://scikit-learn.org/stable/). I have developed a Python [implementation](https://github.com/AlgoWit/geometric-smote) of Geometric SMOTE oversampler, called `geometric-smote`, that integrates seamlessly with the Scikit-Learn and Imbalanced-Learn ecosystems.
+A Python implementation of SMOTE and several of its variants is available in the [Imbalanced-Learn](https://imbalanced-learn.org/stable/) library, which is fully compatible with the popular machine learning toolbox [Scikit-Learn](https://scikit-learn.org/stable/). I have developed a Python [implementation](https://github.com/AlgoWit/cluster-over-sampling) of the above clustering-based oversampling approach, called `cluster-over-sampling`, that integrates seamlessly with the Scikit-Learn and Imbalanced-Learn ecosystems.
 
 
 ## Installation
 
-The easiest way to install the `geometric-smote` package, assuming you have already Python 3 and `pip` installed as well as you have optionally activated a Python virtual environment, is to open a shell and run the following command:
+The easiest way to install the `cluster-over-sampling` package, assuming you have already Python 3 and `pip` installed as well as you have optionally activated a Python virtual environment, is to open a shell and run the following command:
 
 ```shell
-pip install geometric-smote
+pip install cluster-over-sampling
 ```
 
 This will install the latest version and its dependencies.
 
 ## Documentation
 
-Detailed documentation that includes installation guidelines, API description and various examples can found [here](https://geometric-smote.readthedocs.io/en/latest/?badge=latest). 
+Detailed documentation that includes installation guidelines, API description and various examples can found [here](https://cluster-over-sampling.readthedocs.io/en/latest/?badge=latest). 
 
 ## Functionality
 
-In what follows, I will describe briefly some aspects of `geometric-smote`'s functionality. The class that represents the Geometric SMOTE oversampler is called `GeometricSMOTE`. Its API follows closely the API of oversamplers provided by Imbalanced-Learn. 
+In what follows, I will describe briefly some aspects of `cluster-over-sampling`'s functionality. The class that represents the Geometric SMOTE oversampler is called `GeometricSMOTE`. Its API follows closely the API of oversamplers provided by Imbalanced-Learn. 
 
 #### Resampling an imbalanced dataset
 
