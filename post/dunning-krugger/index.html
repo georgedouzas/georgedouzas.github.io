@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Georgios Douzas">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Όταν μια απλή καράφλα δεν ειναι ικανή να σε σταματήσει.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://georgedouzas.github.io/post/dunning-krugger/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://georgedouzas.github.io/post/dunning-krugger/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@GDouzas">
+  <meta property="twitter:creator" content="@GDouzas">
+  
+  <meta property="og:site_name" content="AI and friends">
+  <meta property="og:url" content="https://georgedouzas.github.io/post/dunning-krugger/">
+  <meta property="og:title" content="Το φαινόμενο Dunning-Krugger και ο Ηλίας Μάσκας | AI and friends">
+  <meta property="og:description" content="Όταν μια απλή καράφλα δεν ειναι ικανή να σε σταματήσει."><meta property="og:image" content="https://georgedouzas.github.io/post/dunning-krugger/featured.jpg">
+  <meta property="twitter:image" content="https://georgedouzas.github.io/post/dunning-krugger/featured.jpg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-03-28T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-03-28T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://georgedouzas.github.io/post/dunning-krugger/"
+  },
+  "headline": "Το φαινόμενο Dunning-Krugger και ο Ηλίας Μάσκας",
+  
+  "image": [
+    "https://georgedouzas.github.io/post/dunning-krugger/featured.jpg"
+  ],
+  
+  "datePublished": "2019-03-28T00:00:00Z",
+  "dateModified": "2019-03-28T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Georgios Douzas"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI and friends",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://georgedouzas.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Όταν μια απλή καράφλα δεν ειναι ικανή να σε σταματήσει."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Το φαινόμενο Dunning-Krugger και ο Ηλίας Μάσκας | AI and friends</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">AI and friends</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">AI and friends</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/hobbies/"><span>Hobbies</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Το φαινόμενο Dunning-Krugger και ο Ηλίας Μάσκας</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Mar 28, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    10 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/dunning-krugger/#disqus_thread"></a>
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 405px;">
+  <div style="position: relative">
+    <img src="/post/dunning-krugger/featured_hu9795a1c7a260632308cd713c55480386_22382_720x0_resize_q90_lanczos.jpg" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="αυστηρός-ορισμός-του-προβλήματος">Αυστηρός ορισμός του προβλήματος</h2>
+<p>Όλοι έχουμε βρεθεί σε μια παρέα στην οποία κάποιος φαίνεται να έχει απάντησεις για όλα τα θέματα. Έστω ότι τον λένε Μάκη. Ο Μάκης λοιπόν γνωρίζει απο διαστημική τεχνολογία, άρμεγμα της γίδας, διαφορική γεωμετρία σε πολλαπλότητες Calabi-Yau και οποιοδήποτε άλλο θέμα προκύψει πάνω στην κουβέντα. Όχι μόνο έχει απόψη αλλά μιλάει με την σιγουριά που θα εξηγούσε ένας νομπελίστας φυσικός κάποια θεωρία την οποία διατύπωσε ο ίδιος. Με ορατό τον κινδυνο να σε προσβάλλω και να σε χάσω απο πελάτη, θέλω να τονίσω ότι αν δεν αναγνωρίζεις κάποιον Μάκη στην παρέα σου είναι γιατί προφανώς ο Μάκης είσαι εσύ.</p>
+<h2 id="η-επιστημονική-εξήγηση">Η επιστημονική εξήγηση</h2>
+<p>Που θέλω να καταλήξω με όλα αυτά; Πολύ απλά και λαικά, το φαινόμενο του άχρηστου μπετόβλακα ο οποίος θεωρεί ότι ξέρει τα πάντα έχει ονομασία: Φαινόμενο Ντάνινγκ–Κρούγκερ. Απο την πάντα αξιόπιστη wikipedia:</p>
+<div class="alert alert-note">
+  <div>
+    Το φαινόμενο Ντάνινγκ–Κρούγκερ είναι μια γνωστική διαταραχή στην οποία άτομα περιορισμένων δεξιοτήτων αποκτούν μια ψευδαίσθηση ανωτερώτητας, εκτιμώντας εσφαλμένα οτι οι γνωστικές τους ικανότητες, είναι υψηλότερες από ό,τι πραγματικά είναι.
+  </div>
+</div>
+<p>Επειδή σε ότι κάνω χρησιμοποιώ αποκλειστικά την επιστημονική μέθοδο, το έψαξα αρκετά και τελικά κατάλαβα ότι ο ακαδημαικός Ντάνινγκ–Κρούγκερ είναι δύο διαφορετικοί άνθρωποι. Χωρίς να θέλω να κάνω τον έξυπνο, είναι πολυ λογικό γιατι υπάρχει η &ldquo;-&rdquo; ανάμεσα στα ονόματα. Έχεις δει ποτέ να γράφουμε Ζαν-Κλοντ-Βαν-Νταμ; Τέλος πάντων οι Ντάνινγκ–Κρούγκερ δεν μελέτησαν μόνο τους ηλίθιους αλλά και τους έξυπνους:</p>
+<div class="alert alert-note">
+  <div>
+    Άτομα υψηλής ειδίκευσης μπορεί να υποτιμούν τη δική τους σχετική ικανότητά και μπορεί εσφαλμένα να υποθέτουν ότι τα καθήκοντα τα οποία είναι εύκολα για αυτούς είναι επίσης εύκολα για τους άλλους.
+  </div>
+</div>
+<p>Το ζουμί της ιστορίας είναι το παρακάτω γράφημα:</p>
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+
+  <a data-fancybox="" href="/post/dunning-krugger/simple-dn_hu0e5feadbcfd7edd8ed8410ba9b0c9b0a_85348_2000x2000_fit_lanczos_2.png" data-caption="Ωραίο γράφημα αλλά είναι παραμύθι.">
+
+
+  <img data-src="/post/dunning-krugger/simple-dn_hu0e5feadbcfd7edd8ed8410ba9b0c9b0a_85348_2000x2000_fit_lanczos_2.png" class="lazyload" alt="" width="700px" height="425">
+</a>
+
+
+  
+  
+  <figcaption>
+    Ωραίο γράφημα αλλά είναι παραμύθι.
+  </figcaption>
+
+
+</figure>
+
+<p>Άρα βλέπουμε ότι αρχικά ο άχρηστος δεν ξέρει ούτε το όνομά του και προφανώς έχει μηδέν αυτοπεποίθηση. Με το που θα μάθει δύo πράγματα, η αυτοπεποίθησή του γρήγορα μέγιστοποιείται. Όταν λέω δύο πράγματα εννοώ να ανοίγει μια κονσέρβα ή να αλλάζει κανάλι. Αισθάνεται αυθεντία. Αν τελικά αποφασίσει να μάθει κάτι παραπάνω τότε καταλαβαίνει ότι δεν έχει ιδέα και δεν νιώθει σιγουριά για τις ικανότητές του. Στα δεξιά της καμπύλης ανήκουν οι πραγματικές αυθεντίες, όπως είναι ο Άδωνις Γεωργιάδης ή ο Νίκος Καρβέλας. Έχουν μπόλικη αυτοπεποίθηση αλλά σαφώς μικρότερη από αυτή που διαθέτει ο γκασμάς.</p>
+<p>Υποτίθεται ότι το γράφημα συνοψίζει με απλό τρόπο το φαινόμενο Ντάνινγκ–Κρούγκερ και αν το κοιτάξεις θα δείς ότι αναφέρεται σχεδόν σε όλα τα σχετικα άρθρα. Δυστυχώς ένα προβληματάκι
+που έχει είναι ότι δεν βρίσκεται στις δημοσίευσεις των Ντάνινγκ–Κρούγκερ. Κάποιος το ζωγράφισε
+στο Paint και οι υπόλοιποι το πίστεψαν. Ελπίζω δηλαδή, γιατί εγώ σίγουρα το πίστεψα. Εντάξει δεν πειράζει, ο σκοπός δεν είναι να δείξουμε τι ισχύει αλλά τι μας συμφέρει να ισχύει.
+Να ένα πραγματικό γράφημα:</p>
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+
+  <a data-fancybox="" href="/post/dunning-krugger/real-dn_huec9932930f769cd520f97ebec17b6af8_21871_2000x2000_fit_lanczos_2.png" data-caption="Αυτό είναι το πραγματικό ναούμε.">
+
+
+  <img data-src="/post/dunning-krugger/real-dn_huec9932930f769cd520f97ebec17b6af8_21871_2000x2000_fit_lanczos_2.png" class="lazyload" alt="" width="700px" height="246">
+</a>
+
+
+  
+  
+  <figcaption>
+    Αυτό είναι το πραγματικό ναούμε.
+  </figcaption>
+
+
+</figure>
+
+<p>Το τελευταίο δείχνει ότι όσοι λένε κρυάδες θεωρούν ότι έχουν αρκετή πλάκα ενώ οι Σεφερλήδες υποτιμούν το πόσο αστείοι είναι. ΧΑΧΑΧΑΑΧΧΑΑΧ. Ξέσπασα.
+Αντίστοιχα γραφήματα υπάρχουν και για άλλες δεξιότητες. Δηλαδή ο άχρηστος δεν θεωρεί ότι είναι αυθεντία αλλά ότι είναι καλύτερος απο το μέσο όρο.
+Αυτό ακούγεται πιο λογικό σε σχέση με το προηγούμενο.</p>
+<p>Μεταγενέστερες μελέτες ασκούν κριτική στα ευρήματα των Ντάνινγκ–Κρούγκερ εντοπίζοντας μεθοδολογικά λάθη και υποστηρίζουν ότι όλοι υπερεκτιμούν τις ικανότητές τους.
+Δεν παραθέτω τις πηγές μου, αν δεν σου αρέσει πήγαινε να διαβάσεις το Νature. Πάντως το τελευταίο συμπέρασμα με βολεύει και θα το κρατήσω για τη συνέχεια.</p>
+<p>Κλείνοντας θα ήθελα να σημειώσω ότι στους Ντάνινγκ–Κρούγκερ απονεμήθηκε το σατιρικό Ig Νόμπελ ψυχολογίας.
+Δηλαδή οι Ντάνινγκ–Κρούγκερ μάλλον είχαν υπερεκτιμήσει την επιστημονική αξία του έργου τους. Φοβερό; Μόνος μου το σκέφτηκα.</p>
+<h2 id="o-elon-musk">O Elon Musk</h2>
+<p>Ομολογώ ότι δυσκολεύτηκα να αποφασίσω για το εαν θα έπρεπε να γράψω αυτά που ακολουθούν. Άρχικα με τον Elon μας συνδέει μια βαθιά φιλιά και εκτίμηση. Μπορεί να μην
+με ξέρει αλλά η καταγωγή μας είναι κοινή. Όχι, ο Elon δεν είναι Πυργιώτης αλλά γεννήθηκε και μεγάλωσε στην Νότια Αφρική. Είναι γνωστό επίσης ότι και ο Homo
+sapiens έζησε στην Αφρική πριν απο 200.000 χρόνια. Αυτό.</p>
+<p>Ο σημαντικότερος όμως ανασταλτικός παράγοντας για να ασκήσω κριτίκη στον Elon είναι οτι κάποια στιγμή στο μέλλον έχω δουλέψει σε μία απο τις εταιρίες του. Σε περίπτωση που η
+προηγούμενη πρόταση δεν ακούγεται σωστή είναι γιατί αν θέλεις να συμβεί κάτι τότε το σύμπαν συνομώτει για να τα καταφέρεις. Αντίστροφα, αν δεν τα καταφέρεις είναι γιατί δεν συνομώτησε.
+Τώρα αν ο Elon διαβάσει αυτό το άρθρο ενδέχεται να με αντιπαθήσει αλλά υποθέτοντας οτι τον πετυχαίνω στην ανάγκη, πιστεύω ότι θα αναγκαστεί να με προσλάβει στο μαγαζί του.
+Το έχω δει να συμβαίνει live σε σουβλατζίδικο όταν ο ψήστης τσακώθηκε με το αφεντικό, παράτησε τα μπιφτέκια στη μέση αλλά μετά απο λίγο επέστρεψε για να συνεχίσει το ψήσιμο. Αν το καλοσκεφτείς και η Tesla ένα μεγάλο
+σουβλατζίδικο είναι.</p>
+<p>Όσοι απο τους αναγνώστες μου έζησαν τα εφηβικά τους χρόνια στα 90s σίγουρα θα θυμούνται τον Τζίμη τον Αλήθεια. Μια απο τις πλέον χαρακτηριστικές ιστορίες του είναι αυτή με τη μεγάλη φωτιά στο χωριό του. Κάποια στιγμή το πυροσβεστικό αεροπλάνο επιστρέφει για ανεφοδιασμό. Τότε μαζί με το νερό, παίρνει και έναν καρχαρία ο οποίος έτυχε να κολυμπάει στην περιοχή υδροληψίας. Ρίχνοντας το νερό στο φλεγόμενο χωριό, <strong>ο καρχαρίας προσγειώνεται στο έδαφος και τρώει τα πρόβατα του παππού του</strong>. Αν διαβάσει κανείς το Quora θα βρεί ιστορίες για τον Elon οι οποίες κάνουν το προηγούμενο σενάριο να μοιάζει σαν ένα αριστούργημα του σοσιαλιστικού ρεαλισμού. Μαθαίνουμε ότι υπήρξε παιδί θαυμα και μέχρι 2 ετών είχε διαβάσει ότι κυκλοφορούσε, δηλαδή απο τον κώδικα του Χαμουραμπί μέχρι κβαντική φυσική. Όταν τα υπόλοιπα παιδάκια έβλεπαν Thundercats αυτός διάβαζε Σιμόν ντε Μπoβουάρ. Αφου τα έμαθε όλα, άρχισε να εφαρμόζει τις γνώσεις του. Έφτιαξε απο μόνος του ένα video game, ένα μίξερ και ένα πολυόργανο Ηρακλής. Πήγε στο Stanford αλλά το παράτησε γιατί άκουσε το κάλεσμα απο τον ουρανό. Έπρεπε να σώσει την ανθρωπότητα. Δεν κοιμάται ποτέ, ίσως δεν τρώει. Ένας γραφικός Ινδός τον χαρακτήρισε ως metahuman. Τρέχει ταυτόχρονα 5000 projects και 10 εταιρείες. Φτιάχνει μπαταρίες, πυραύλους, είναι κοντά στην AI singularity και ετοιμάζεται να πεθάνει στον Άρη. Δεν έχει νόημα να συνεχίσω. Αυτός δεν είναι άνθρωπος. Το είπε εξάλλου ο Ινδός.</p>
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+
+  <a data-fancybox="" href="/post/dunning-krugger/elon-musk_hudee8bd004f44aac87b0a70b4f971b441_403016_2000x2000_fit_lanczos_2.png" data-caption="Αυτός ο τύπος θα σώσει την ανθρωπότητα. Μια απλή καράφλα δεν είναι αρκετή για να τον σταματήσει.">
+
+
+  <img data-src="/post/dunning-krugger/elon-musk_hudee8bd004f44aac87b0a70b4f971b441_403016_2000x2000_fit_lanczos_2.png" class="lazyload" alt="" width="700px" height="403">
+</a>
+
+
+  
+  
+  <figcaption>
+    Αυτός ο τύπος θα σώσει την ανθρωπότητα. Μια απλή καράφλα δεν είναι αρκετή για να τον σταματήσει.
+  </figcaption>
+
+
+</figure>
+
+<p>Όταν οι διάφοροι θαυμαστές του επαναλαμβάνουν συνεχώς τα παραπάνω με όλο και αυξανόμενη ένταση τότε είναι λογίκο να τα πιστέψει. Εδώ έχεις τη μάνα σου να λέει ότι είσαι το πιο όμορφο παιδάκι και τελικά το πιστεύεις, σκέψου να στο λένε άγνωστοι. Το αποτέλεσμα είναι αυτή η αηδία, η γελοιότητα, ο πιο εκνευριστικός κλαρινογαμπρός-εντερπρενέρ στο κόσμο, ο Elon Musk.</p>
+<h2 id="μαθηματικό-μοντέλο">Μαθηματικό μοντέλο</h2>
+<p>Ο Elon Musk λοιπόν είναι άλλος ένας άνθρωπος ο οποίος συστηματικά υπερεκτιμάει τις ικανότητές του. Προκλητικά αγνοεί τον παράγοντα τύχη και θεωρεί ότι είναι κλώνος του Νίκολα Τέσλα. Νομίζω ότι τώρα κάπως το έσωσα και το κούμπωσα με το φαινόμενο Ντάνινγκ–Κρούγκερ. Ευτυχώς γιατί είχα αρχίσει να ανησυχώ ότι θα χάσω το κοινό μου. Δεν είναι εκεί το θέμα όμως. Σκοπός μου είναι να δείξω πως με απλά μαθηματικά μπορεί κανείς να ποσοτικοποιήσει, σχεδόν να εξηγήσει, όλα τα παραπάνω.</p>
+<p>Πρίν μπώ δυνατά στις λεπτομέρειες και στο φορμαλισμό του μαθηματικού μοντέλου θα ήθελα να κάνω μια σύντομη εισαγωγή. Πιο συγκεκριμένα θα προσπαθήσω να περιγραψω πως οδηγήθηκα σε αυτό γιατί σύχνα εμείς οι επιστήμονες δίνουμε την εντύπωση ότι οι ιδέες μας γεννιούνται στο κενό. Ένα ερώτημα το οποίο με βασάνιζε απο 2.5 μηνών ήταν ποιό στοιχείο διαφοροποιεί τον άνθρωπο απο τα ζώα. Δεν ισχυρίζομαι ότι είμαι ο πρώτος που το σκέφτηκε. Ας είμαστε σοβαροί. Όμως είμαι ο πρώτος που το έλυσε και μάλιστα πριν απο 40 χρόνια:</p>
+<div class="alert alert-note">
+  <div>
+    Η θεμελιώδης διαφορά ανάμεσα στον άνθρωπο και στα ζώα (λιοντάρια, κουνέλια, κόμπρες, άλογα κτλ) είναι η παπάτζα.
+  </div>
+</div>
+<p>Έχεις δει ποτέ ζώο να πουλάει παραμύθι; Θα προσπαθήσει ποτέ η αρκούδα να σε πείσει ότι μπορεί να σε φάει; Η χελώνα θα σου εξηγήσει με επιχειρήματα ότι είναι πιο γρήγορη απο εσένα; Κατάλαβες που το πάω; Αν όχι, δεν πειράζει. Οι μεγάλες ιδέες δεν γίνονται άμεσα κατανοητές.</p>
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+
+  <a data-fancybox="" href="/post/dunning-krugger/priest_huef45f6c9876e80cf771040bddc4db553_208997_2000x2000_fit_lanczos_2.png" data-caption="Ο Elon Musk σε μια βραδινή έξοδο στο Lohan Nightclub.">
+
+
+  <img data-src="/post/dunning-krugger/priest_huef45f6c9876e80cf771040bddc4db553_208997_2000x2000_fit_lanczos_2.png" class="lazyload" alt="" width="700px" height="445">
+</a>
+
+
+  
+  
+  <figcaption>
+    Ο Elon Musk σε μια βραδινή έξοδο στο Lohan Nightclub.
+  </figcaption>
+
+
+</figure>
+
+<p>Το μοντέλο μου λοιπόν ξεκινάει με την υπόθεση ότι η μόνη πραγματική δεξιότητα που υπάρχει στον άνθρωπο είναι η παπάτζα. Ομολογώ ότι είναι ισχυρή υπόθεση αλλά όπως είναι γνωστό:</p>
+<div class="alert alert-note">
+  <div>
+    All models are wrong but some are useful.
+  </div>
+</div>
+<p>Το γράφω στα αγγλικά γιατί το ίδιο στα ελληνικά δεν γράφει ωραία. Δίχως να χάνω χρόνο, προχωρώ στο notation. Ονομάζω ως $PF$ (Priest Factor) τον παράγοντα ο οποίος μετράει την ικανότητα ενός ατόμου στη παπάτζα και θεωρώ ότι παίρνει τιμές στο σύνολο των πραγματικών αριθμών. Υποθέτω ότι η αυτοπεποίθηση ενός ατόμου, την οποία ονομάζω $CF$ (Confidence Factor), εξαρτάται απο την αλληλεπίδρασή του με κάποια άλλα άτομα. Αυτό είναι λογικό αν το σκεφτείς. Πάντα συγκρίνεις τον εαυτό σου με τους άλλους. Είσαι κοντός γιατί οι άλλοι είναι ψηλοί. Είσαι όμορφος γιατί οι άλλοι είναι μπάζα κ.ο.κ. Στη ζωή όλα είναι σχετικά σύμφωνα με τον Einstein (ή τη γυναίκα του αν πιστέψουμε τις διάφορες θωρίες συνομωσίας).</p>
+<p>Το κρίσιμο σημείο είναι ότι ο $CF$ ενός ατόμου είναι συνάρτηση του $PF$ του ίδιου ατόμου καθώς και των $PF_{i}$ των $i = 1, \cdots, n$ ατόμων με τα οποία αλληλεπιδρά. Ποιοτικά θα λέγαμε ότι αν βρέθεις σε μια παρέα στην οποία πουλάς τη μεγαλύτερη παπάτζα τότε όλοι σε πιστεύουν και η αυτοπεποίθησή σου πιάνει μέγιστο. Ομοίως αν είσαι ο ηλίθιος της παρέας, ή ισοδύναμα αυτός που έχει τη μικρότερη ικανότητα στο παραμύθι, τότε κανένας δεν σε πιστεύει και επειδή δεν το παίρνεις καν χαμπάρι (αφού οι υπόλοιποι σου πούλησαν το δικό τους ψέμα) πάλι έχεις μεγάλη σιγουριά για τον εαυτό σου. Το πρόβλημα εμφανίζεται όταν βρίσκονται στον ίδιο χώρο άτομα με αντίστοιχα επίπεδα παπάτζας. Τότε στην περίπτωση που είναι και οι δύο καλοί ψεύτες είναι αδύνατο να κοροιδέψει ο ένας τον άλλον. Αντίστοιχα εάν κανένας απο τους δύο δεν διαθέτει αυτή την ικανότητα τότε μένουν αποσβωλομένοι να κοιτούν με το χαρακτηριστικό βλέμα του πιγκουίνου περιμένοντας κάποιος να πεί το πρώτο ψέμα. Το αποτέλεσμα και στα δύο σενάρια είναι η χαμηλή αυτοπεποίθηση. Ποσοτικά η παραπάνω περιγραφή αντιστοιχεί στην εξής σχέση:</p>
+<p>$$CF = \frac{1}{n} \displaystyle\sum_{i=1}^n | PF - PF_{i} |$$</p>
+<p>δηλαδή η αυτοπεποίθηση ενός ατόμου είναι ίση με το άθροισμα των αποστάσεων ανάμεσα στη παπάτζα του και στην παπάτζα των υπολοίπων. Αυτό είναι πραγματικά deep result. Very deep.</p>
+<p>Υποθέτω δίχως δισταγμό ότι ο $PF_{i}$ για οποιοδήποτε απο αυτά τα ανεξάρτητα άτομα ακολουθεί μια τυποποιημένη κανονική κατανομή, δηλαδή:</p>
+<p>$$PF_{i} \stackrel{i.i.d.}{\sim} N(0, 1)$$</p>
+<p>Η ποσότητα που μας ενδιαφέρει είναι η αναμενόμενη τιμή του $CF$. Απο τις δύο προηγούμενες σχέσεις προκύπτει ότι ο $CF$ ακολουθεί τη λεγόμενη ως διπλωμένη κανονική κατανομή και συνεπώς:</p>
+<p>$E[CF] = \frac{2}{\pi} exp \Big( - \frac{PF}{2} \Big) - PF \cdot erf \Big( - \frac{PF}{\sqrt{2}} \Big)$</p>
+<p>όπου $erf$ η 
+<a href="https://en.wikipedia.org/wiki/Error_function" target="_blank" rel="noopener">συνάρτηση σφάλματος</a>.</p>
+<p>Θα σχεδιάσω την αναμενόμενη τιμή $E[CF]$ ως συνάρτηση του $PF$ για τιμές γύρω απο το μηδεν και τρείς τυπικές αποκλίσεις. Το παρακάτω απόσπασμα κώδικα σε Python 3 παράγει το ζητούμενο γράφημα:</p>
+<pre><code class="language-python"># Imports
+from math import sqrt, exp, erf
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define expectation of confidence factors
+def calculate_confidence_factors(priest_factors):
+    values = (2.0 / np.pi) * np.exp(-priest*factors / 2)
+    corrections = priest_factors * np.erf(-priest_factors / np.sqrt(2))
+    return values - corrections
+
+# Generate priest and confidence factors values
+priest_factors = np.linspace(-3.0, 3.0, 20)
+expected_confidence_factors = calculate_confidence_factors(priest_factors)
+
+# Plot
+fig, ax = plt.subplots()
+ax.plot(priest_factors, expected_confidence_factors)
+ax.set(
+    xlabel='Priest Factor',
+    ylabel='Expected Confidence Factor',
+    title='Dunning-Kruger Effect'
+)
+ax.grid()
+plt.show()
+</code></pre>
+<p>Η ομοιότητα με το υποτιθέμενο Ντάνινγκ–Κρούγκερ γράφημα είναι χωρίς υπερβολές ανατριχιαστική. Απο την συγκίνηση δυσκολέυομαι να γράψω ακόμα και τον επίλογο αυτού του άρθρου. Θα χαρακτήριζα την ανακάλυψη του μοντέλου ως μια μεταφυσική εμπειρία η οποία με άλλαξε ως άνθρωπο. Συγκεκριμένα μου προκάλεσε μια αστρική προβολή η οποία με ταξίδεψε στα όρια του γαλαξία μας. Ας αφήσω καλύτερα τις λεπτομέρειες για ένα επόμενο άρθρο.</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/other/">Other</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu25d333fcded103db2f52f7476cb1420a_832383_270x270_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://georgedouzas.github.io/">Georgios Douzas</a></h5>
+      <h6 class="card-subtitle">Machine Learning Researcher</h6>
+      <p class="card-text">My research interests include physics, mathematics and artificial intelligence.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/cv.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:gdouzas@novaims.unl.pt" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/GDouzas" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=-A4zUTUAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/georgedouzas" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/gdouzas/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://stackoverflow.com/users/10274504/georgios-douzas" target="_blank" rel="noopener">
+        <i class="fab fa-stack-overflow"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "aiandfriends" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js" integrity="sha256-JEqEejGt4tR35L0a1zodzsV0/PJ6GIf7J4yDtywdrH8=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://aiandfriends.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.a8d7005002cb4a052fd6d721e83df9ba.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
