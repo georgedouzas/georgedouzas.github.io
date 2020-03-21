@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Imbalanced Learning Problem | AI and friends</title>
-    <link>https://georgedouzas.github.io/site/tags/imbalanced-learning-problem/</link>
-      <atom:link href="https://georgedouzas.github.io/site/tags/imbalanced-learning-problem/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://aiandfriends.blog/site/tags/imbalanced-learning-problem/</link>
+      <atom:link href="https://aiandfriends.blog/site/tags/imbalanced-learning-problem/index.xml" rel="self" type="application/rss+xml" />
     <description>Imbalanced Learning Problem</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 17 Dec 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Imbalanced Learning Problem</title>
-      <link>https://georgedouzas.github.io/site/tags/imbalanced-learning-problem/</link>
+      <link>https://aiandfriends.blog/site/tags/imbalanced-learning-problem/</link>
     </image>
     
     <item>
       <title>Imbalanced Learning in Land Cover Classification: Improving Minority Classes’ Prediction Accuracy Using the Geometric SMOTE Algorithm</title>
-      <link>https://georgedouzas.github.io/site/publication/land_cover_classification/</link>
+      <link>https://aiandfriends.blog/site/publication/land_cover_classification/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/publication/land_cover_classification/</guid>
+      <guid>https://aiandfriends.blog/site/publication/land_cover_classification/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Geometric SMOTE a geometrically enhanced drop-in replacement for SMOTE</title>
-      <link>https://georgedouzas.github.io/site/publication/gsmote_journal/</link>
+      <link>https://aiandfriends.blog/site/publication/gsmote_journal/</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/publication/gsmote_journal/</guid>
+      <guid>https://aiandfriends.blog/site/publication/gsmote_journal/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Clustering-Based Oversampling</title>
-      <link>https://georgedouzas.github.io/site/project/clustering-based-oversampling/</link>
+      <link>https://aiandfriends.blog/site/project/clustering-based-oversampling/</link>
       <pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/project/clustering-based-oversampling/</guid>
+      <guid>https://aiandfriends.blog/site/project/clustering-based-oversampling/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Learning from imbalanced data is a common and challenging problem in supervised learning. Training a classifier on imbalanced data, often results in a low out-of-sample accuracy for the minority classes. While different strategies exist to tackle this problem, the most general approach known as oversampling, is the generation of artificial data to achieve a balanced class distribution that in turn are used to enhance the training data.&lt;/p&gt;
 &lt;p&gt;SMOTE algorithm, the most popular oversampler, as well as any other oversampling method based on it, generates synthetic samples along line segments that join minority class instances. SMOTE addresses only the issue of between-classes imbalance. On the other hand, by clustering the input space and applying any oversampling algorithm for each resulting cluster with appropriate resampling ratio, the within-classes imbalanced issue can be addressed i.e. areas of the input space that differ significantly in the density of the minority class. 
@@ -205,9 +205,9 @@ print(cv_scores)
     
     <item>
       <title>Geometric SMOTE</title>
-      <link>https://georgedouzas.github.io/site/project/geometric-smote/</link>
+      <link>https://aiandfriends.blog/site/project/geometric-smote/</link>
       <pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/project/geometric-smote/</guid>
+      <guid>https://aiandfriends.blog/site/project/geometric-smote/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Classification of imbalanced datasets is a challenging task for standard machine learning algorithms. Training a classifier on imbalanced data, often results in a low out-of-sample accuracy for the minority classes. To deal with this problem several approaches have been proposed. A general approach, known as oversampling, is the generation of artificial data for the minority classes that are used to enhance the training data.&lt;/p&gt;
 &lt;p&gt;SMOTE is the most popular oversampling algorithm, while many variants of it have been developed. SMOTE generates synthetic data between the line segment that connects two randomly chosen neighboring minority class instances. On the other hand, Geometric SMOTE expands the data generation area by generating synthetic data inside a hypersphere that is defined by a randomly chosen minority class instance and one of its neighbors either from the minority or majority class. Geometric SMOTE 
@@ -233,10 +233,10 @@ print(cv_scores)
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://georgedouzas.github.io/site/site/project/geometric-smote/smote_vs_gsmote_huf5fcb04c55734e9a4ddd9006d03d5b15_12117_2000x2000_fit_lanczos_2.png&#34; data-caption=&#34;SMOTE vs Geometric SMOTE&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://aiandfriends.blog/site/site/project/geometric-smote/smote_vs_gsmote_huf5fcb04c55734e9a4ddd9006d03d5b15_12117_2000x2000_fit_lanczos_2.png&#34; data-caption=&#34;SMOTE vs Geometric SMOTE&#34;&gt;
 
 
-  &lt;img data-src=&#34;https://georgedouzas.github.io/site/site/project/geometric-smote/smote_vs_gsmote_huf5fcb04c55734e9a4ddd9006d03d5b15_12117_2000x2000_fit_lanczos_2.png&#34; class=&#34;lazyload&#34; alt=&#34;&#34; width=&#34;700px&#34; height=&#34;540&#34;&gt;
+  &lt;img data-src=&#34;https://aiandfriends.blog/site/site/project/geometric-smote/smote_vs_gsmote_huf5fcb04c55734e9a4ddd9006d03d5b15_12117_2000x2000_fit_lanczos_2.png&#34; class=&#34;lazyload&#34; alt=&#34;&#34; width=&#34;700px&#34; height=&#34;540&#34;&gt;
 &lt;/a&gt;
 
 
@@ -416,41 +416,41 @@ print(cv_scores)
     
     <item>
       <title>Improving imbalanced learning through a heuristic oversampling method based on k-means and SMOTE</title>
-      <link>https://georgedouzas.github.io/site/publication/kmeans_smote_journal/</link>
+      <link>https://aiandfriends.blog/site/publication/kmeans_smote_journal/</link>
       <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/publication/kmeans_smote_journal/</guid>
+      <guid>https://aiandfriends.blog/site/publication/kmeans_smote_journal/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Effective data generation for imbalanced learning using conditional generative adversarial networks</title>
-      <link>https://georgedouzas.github.io/site/publication/cgan/</link>
+      <link>https://aiandfriends.blog/site/publication/cgan/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/publication/cgan/</guid>
+      <guid>https://aiandfriends.blog/site/publication/cgan/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Oversampling for Imbalanced Learning Based on K-Means and SMOTE</title>
-      <link>https://georgedouzas.github.io/site/publication/kmeans_smote_preprint/</link>
+      <link>https://aiandfriends.blog/site/publication/kmeans_smote_preprint/</link>
       <pubDate>Tue, 12 Dec 2017 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/publication/kmeans_smote_preprint/</guid>
+      <guid>https://aiandfriends.blog/site/publication/kmeans_smote_preprint/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Self-Organizing Map Oversampling (SOMO) for imbalanced data set learning</title>
-      <link>https://georgedouzas.github.io/site/publication/somo/</link>
+      <link>https://aiandfriends.blog/site/publication/somo/</link>
       <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/publication/somo/</guid>
+      <guid>https://aiandfriends.blog/site/publication/somo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Geometric SMOTE: Effective oversampling for imbalanced learning through a geometric extension of SMOTE</title>
-      <link>https://georgedouzas.github.io/site/publication/gsmote_preprint/</link>
+      <link>https://aiandfriends.blog/site/publication/gsmote_preprint/</link>
       <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/publication/gsmote_preprint/</guid>
+      <guid>https://aiandfriends.blog/site/publication/gsmote_preprint/</guid>
       <description></description>
     </item>
     

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Clustering | AI and friends</title>
-    <link>https://georgedouzas.github.io/site/tags/clustering/</link>
-      <atom:link href="https://georgedouzas.github.io/site/tags/clustering/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://aiandfriends.blog/site/tags/clustering/</link>
+      <atom:link href="https://aiandfriends.blog/site/tags/clustering/index.xml" rel="self" type="application/rss+xml" />
     <description>Clustering</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jun 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Clustering</title>
-      <link>https://georgedouzas.github.io/site/tags/clustering/</link>
+      <link>https://aiandfriends.blog/site/tags/clustering/</link>
     </image>
     
     <item>
       <title>Clustering-Based Oversampling</title>
-      <link>https://georgedouzas.github.io/site/project/clustering-based-oversampling/</link>
+      <link>https://aiandfriends.blog/site/project/clustering-based-oversampling/</link>
       <pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/project/clustering-based-oversampling/</guid>
+      <guid>https://aiandfriends.blog/site/project/clustering-based-oversampling/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Learning from imbalanced data is a common and challenging problem in supervised learning. Training a classifier on imbalanced data, often results in a low out-of-sample accuracy for the minority classes. While different strategies exist to tackle this problem, the most general approach known as oversampling, is the generation of artificial data to achieve a balanced class distribution that in turn are used to enhance the training data.&lt;/p&gt;
 &lt;p&gt;SMOTE algorithm, the most popular oversampler, as well as any other oversampling method based on it, generates synthetic samples along line segments that join minority class instances. SMOTE addresses only the issue of between-classes imbalance. On the other hand, by clustering the input space and applying any oversampling algorithm for each resulting cluster with appropriate resampling ratio, the within-classes imbalanced issue can be addressed i.e. areas of the input space that differ significantly in the density of the minority class. 
@@ -189,9 +189,9 @@ print(cv_scores)
     
     <item>
       <title>SOM for Scikit-Learn</title>
-      <link>https://georgedouzas.github.io/site/project/som-for-scikit-learn/</link>
+      <link>https://aiandfriends.blog/site/project/som-for-scikit-learn/</link>
       <pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate>
-      <guid>https://georgedouzas.github.io/site/project/som-for-scikit-learn/</guid>
+      <guid>https://aiandfriends.blog/site/project/som-for-scikit-learn/</guid>
       <description>
 
 
@@ -212,10 +212,10 @@ print(cv_scores)
 &lt;figure&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://georgedouzas.github.io/site/site/img/under_construction.png&#34; &gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://aiandfriends.blog/site/site/img/under_construction.png&#34; &gt;
 
 
-  &lt;img src=&#34;https://georgedouzas.github.io/site/site/img/under_construction.png&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;https://aiandfriends.blog/site/site/img/under_construction.png&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
