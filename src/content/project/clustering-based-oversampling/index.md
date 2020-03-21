@@ -33,7 +33,7 @@ slides: ""
 
 Learning from imbalanced data is a common and challenging problem in supervised learning. Training a classifier on imbalanced data, often results in a low out-of-sample accuracy for the minority classes. While different strategies exist to tackle this problem, the most general approach known as oversampling, is the generation of artificial data to achieve a balanced class distribution that in turn are used to enhance the training data.
 
-SMOTE algorithm, the most popular oversampler, as well as any other oversampling method based on it, generates synthetic samples along line segments that join minority class instances. SMOTE addresses only the issue of between-classes imbalance. On the other hand, by clustering the input space and applying any oversampling algorithm for each resulting cluster with appropriate resampling ratio, the within-classes imbalanced issue can be addressed. [SOMO](../../publication/somo) and [KMeans-SMOTE](../../publication/kmeans_smote_journal) are specific realizations of this approach that have been shown to outperform other standard oversamplers in a large number of datasets.
+SMOTE algorithm, the most popular oversampler, as well as any other oversampling method based on it, generates synthetic samples along line segments that join minority class instances. SMOTE addresses only the issue of between-classes imbalance. On the other hand, by clustering the input space and applying any oversampling algorithm for each resulting cluster with appropriate resampling ratio, the within-classes imbalanced issue can be addressed i.e. areas of the input space that differ significantly in the density of the minority class. [SOMO](../../publication/somo) and [KMeans-SMOTE](../../publication/kmeans_smote_journal) are specific realizations of this approach that have been shown to outperform other standard oversamplers in a large number of datasets.
 
 A Python implementation of SMOTE and several of its variants is available in the [Imbalanced-Learn](https://imbalanced-learn.org/stable/) library, which is fully compatible with the popular machine learning toolbox [Scikit-Learn](https://scikit-learn.org/stable/). I have developed a Python [implementation](https://github.com/AlgoWit/cluster-over-sampling) of the above clustering-based oversampling approach, called `cluster-over-sampling`, that integrates seamlessly with the Scikit-Learn and Imbalanced-Learn ecosystems.
 
@@ -54,7 +54,7 @@ Detailed documentation that includes installation guidelines, API description an
 
 ## Functionality
 
-In what follows, I will describe briefly some aspects of `cluster-over-sampling`'s functionality. The class that represents the Geometric SMOTE oversampler is called `GeometricSMOTE`. Its API follows closely the API of oversamplers provided by Imbalanced-Learn. 
+In what follows, I will describe briefly some aspects of `cluster-over-sampling`'s functionality. The main modification that `cluster-over-sampling` applies to the oversamplers provided by Imbalanced-Learn is that it appends to their initializer the `clusterer` and the `distributor` parameters. The first parameter defines the clustering algorithm that is applied to the input space before oversampling. It can be any Scikit-Learn compatible clusterer. The second parameter should be a distributor object i.e. an instance of any class that inherits from the `BaseDistributor` class provided by `cluster-over-sampling`. Such a class is already included and it is called `DensityDistributor`.
 
 #### Resampling an imbalanced dataset
 
@@ -65,7 +65,7 @@ Let's generate a binary class imbalanced dataset, represented by the input matri
 from sklearn.datasets import make_classification
 
 # Set random seed
-rnd_seed = 43
+rnd_seed = 12
 
 # Generate imbalanced data
 X, y = make_classification(
@@ -76,7 +76,7 @@ X, y = make_classification(
 )
 ```
 
-The following functions extract and print the main characteristics of a binary class dataset. Specifically, the `extract_characteristics` function returns the number of samples, the number of features,  the labels and the number of samples for the majority and minority classes as well as the Imbalance Ratio defined as the ratio between the number of samples of the majority and minority classes, while the `print_characteristics` funcion prints them in an appropriate format:
+The following functions extract and print the main characteristics of a binary class dataset. Specifically, the `extract_characteristics` function returns the number of samples, the number of features, the labels and the number of samples for the majority and minority classes as well as the Imbalance Ratio defined as the ratio between the number of samples of the majority and minority classes, while the `print_characteristics` function prints them in an appropriate format:
 
 ```python
 # Imports
@@ -124,17 +124,20 @@ print_characteristics(X, y)
 # Imbalance Ratio: 9.0
 ```
 
-Following the Imbalanced Learn's API, the `fit_resample` method of a `GeometricSMOTE` instance can be used to resample the imbalanced dataset:
+ I will use the KMeans-SMOTE algorithm to rebalance the above dataset. An instance of KMeans-SMOTE can be constructed by importing `SMOTE` oversampler from `cluster-over-sampling` instead of Imbalanced-Learn and setting the `clusterer` parameter equal to an instance of the `KMeans` clusterer. Then following the Imbalanced Learn's API, the `fit_resample` method of the resulting oversampler can be used to resample the imbalanced dataset:
 
 ```python
 # Imports
-from gsmote import GeometricSMOTE
+from clover.over_sampling import SMOTE
+from clover.distribution import DensityDistributor
+from sklearn.cluster import KMeans
 
-# Create GeometricSMOTE instance
-geometric_smote = GeometricSMOTE(random_state=rnd_seed + 5)
+# Create KMeans-SMOTE instance
+kmeans = KMeans(n_clusters=50, random_state=rnd_seed + 2)
+kmeans_smote = SMOTE(clusterer=kmeans, random_state=rnd_seed + 5)
 
 # Fit and resample imbalanced data
-X_res, y_res = geometric_smote.fit_resample(X, y)
+X_res, y_res = kmeans_smote.fit_resample(X, y)
 ```
 
 Again we can print the main characteristics of the rebalanced dataset:
@@ -156,11 +159,11 @@ print_characteristics(X_res, y_res)
 # Imbalance Ratio: 1.0
 ```
 
-As expected, the default behaviour of the `GeometricSMOTE` instance is to generate the apropriate number of minority class instances so that the resampled dataset is perfeclty balanced. 
+As expected, the default behavior of the oversampler is to generate the appropriate number of minority class instances so that the resampled dataset is perfectly balanced. 
 
 #### Performance on out-of-sample data
 
-As I mentioned above, training a classifier on imbalanced data may result in suboptimal performance on out-of-sample data. The function `calculate_cv_scores` calculates the average 10-fold cross-validation geometric mean and accuracy scores across 100 runs of a decision tree classifier:
+As I mentioned above, training a classifier on imbalanced data may result in suboptimal performance on out-of-sample data. The function `calculate_cv_scores` calculates the average 10-fold cross-validation geometric mean and accuracy scores across 100 runs of a decision tree classifier that is optionally combined to an oversampler through a pipeline:
 
 ```python
 # Imports
@@ -199,20 +202,17 @@ def calculate_cv_scores(oversampler, X, y):
   return cv_scores
 ```
 
-Using the above function we can calculate the out-of-sample performance when no oversampling is applied as well as when SMOTE and Geometric SMOTE are used as oversamplers:
+Again I will use the KMeans-SMOTE algorithm to rebalance the above dataset as well as the plain SMOTE oversampler for comparison. Using the above function we can calculate the out-of-sample performance of three different cases:
 
 ```python
-# Imports
-from imblearn.over_sampling import SMOTE
-
 # Calculate cross-validation scores
-mapping = {'No oversampling': None, 'SMOTE': SMOTE(), 'Geometric SMOTE': GeometricSMOTE()}
+mapping = {'No oversampling': None, 'SMOTE': SMOTE(), 'KMeans-SMOTE': SMOTE(clusterer=KMeans(n_clusters=60))}
 cv_scores = {}
 for name, oversampler in mapping.items():
-  cv_scores[name] = calculate_cv_score(oversampler, X, y)
+  cv_scores[name] = calculate_cv_scores(oversampler, X, y)
 ```
 
-Printing a table of the scores, we see that Geometric SMOTE outperforms the other methods when geometric mean score is used as an evaluation metric, while the highest accuracy is achieved when no oversampling is applied:
+Printing a table of the scores, we see that KMeans-SMOTE outperforms the other methods when both geometric mean score and accuracy are used as evaluation metrics:
 
 ```python
 cv_scores = pd.DataFrame(cv_scores, index = ['Geometric Mean', 'Accuracy'])
@@ -222,11 +222,11 @@ print(cv_scores)
 # Output #
 ##########
 
-#                 No oversampling     SMOTE  Geometric SMOTE
-# Geometric Mean         0.782843  0.582843         0.841616
-# Accuracy               0.950000  0.920000         0.870000
+#                 No oversampling     SMOTE  KMeans-SMOTE
+# Geometric Mean         0.094281  0.364122      0.470664
+# Accuracy               0.810000  0.780000      0.880000
 ```
 
-Notice that using the accuracy as an evaluation metric is not considered a good choice when the data is imbalanced. For example, a trivial classifier that always predicts the majority class would still have an accuracy equal to 0.90, even though all the minority class instances are misclassified. On the other hand, geometric mean score is an appropriate evaluation metric for imbalanced data since it equaly weighs the accuracies per class. 
+Notice that using the accuracy as an evaluation metric is not considered a good choice when the data is imbalanced. For example, a trivial classifier that always predicts the majority class would still have an accuracy equal to 0.90, even though all the minority class instances are misclassified. On the other hand, geometric mean score is an appropriate evaluation metric for imbalanced data since it equally weighs the accuracies per class. 
 
-For more details you can look at the `geometric-smote` [documentation](https://geometric-smote.readthedocs.io/en/latest/?badge=latest). The [documentation](https://imbalanced-learn.readthedocs.io/en/stable/) of the `imbalanced-learn` project provides also various examples and an introduction to the imbalanced learning problem.
+For more details you can look at the `cluster-over-sampling` [documentation](https://cluster-over-sampling.readthedocs.io/en/latest/?badge=latest). The [documentation](https://imbalanced-learn.readthedocs.io/en/stable/) of the `imbalanced-learn` project provides also various examples and an introduction to the imbalanced learning problem.
