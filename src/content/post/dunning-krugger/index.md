@@ -2,7 +2,7 @@
 title: "Το φαινόμενο Dunning-Krugger και ο Ηλίας Μάσκας"
 summary: "Όταν μια απλή καράφλα δεν ειναι ικανή να σε σταματήσει."
 tags:
-- Other
+- General
 date: 2019-03-28
 ---
 
@@ -107,14 +107,14 @@ $E[CF] = \frac{2}{\pi} exp \Big( - \frac{PF}{2} \Big) - PF \cdot erf \Big( - \fr
 
 ```python
 # Imports
-from math import sqrt, exp, erf
+from scipy.special import erf
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Define expectation of confidence factors
 def calculate_confidence_factors(priest_factors):
-    values = (2.0 / np.pi) * np.exp(-priest*factors / 2)
-    corrections = priest_factors * np.erf(-priest_factors / np.sqrt(2))
+    values = (2.0 / np.pi) * np.exp(-priest_factors / 2)
+    corrections = priest_factors * erf(-priest_factors / np.sqrt(2))
     return values - corrections
 
 # Generate priest and confidence factors values
@@ -132,5 +132,7 @@ ax.set(
 ax.grid()
 plt.show()
 ```
+
+{{< figure src="simulated-dn.png" title="Συγκλονιστική ομοιότητα με το πραγματικό." width="700px" >}}
 
 Η ομοιότητα με το υποτιθέμενο Ντάνινγκ–Κρούγκερ γράφημα είναι χωρίς υπερβολές ανατριχιαστική. Απο την συγκίνηση δυσκολέυομαι να γράψω ακόμα και τον επίλογο αυτού του άρθρου. Θα χαρακτήριζα την ανακάλυψη του μοντέλου ως μια μεταφυσική εμπειρία η οποία με άλλαξε ως άνθρωπο. Συγκεκριμένα μου προκάλεσε μια αστρική προβολή η οποία με ταξίδεψε στα όρια του γαλαξία μας. Ας αφήσω καλύτερα τις λεπτομέρειες για ένα επόμενο άρθρο.

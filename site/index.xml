@@ -825,14 +825,14 @@ sapiens έζησε στην Αφρική πριν απο 200.000 χρόνια. �
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Error_function&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;συνάρτηση σφάλματος&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Θα σχεδιάσω την αναμενόμενη τιμή $E[CF]$ ως συνάρτηση του $PF$ για τιμές γύρω απο το μηδεν και τρείς τυπικές αποκλίσεις. Το παρακάτω απόσπασμα κώδικα σε Python 3 παράγει το ζητούμενο γράφημα:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Imports
-from math import sqrt, exp, erf
+from scipy.special import erf
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Define expectation of confidence factors
 def calculate_confidence_factors(priest_factors):
-    values = (2.0 / np.pi) * np.exp(-priest*factors / 2)
-    corrections = priest_factors * np.erf(-priest_factors / np.sqrt(2))
+    values = (2.0 / np.pi) * np.exp(-priest_factors / 2)
+    corrections = priest_factors * erf(-priest_factors / np.sqrt(2))
     return values - corrections
 
 # Generate priest and confidence factors values
@@ -850,6 +850,43 @@ ax.set(
 ax.grid()
 plt.show()
 &lt;/code&gt;&lt;/pre&gt;
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://aiandfriends.blog/site/site/post/dunning-krugger/simulated-dn_hu8e9bce5468f421f341dc0283d63d314f_27372_2000x2000_fit_lanczos_2.png&#34; data-caption=&#34;Συγκλονιστική ομοιότητα με το πραγματικό.&#34;&gt;
+
+
+  &lt;img data-src=&#34;https://aiandfriends.blog/site/site/post/dunning-krugger/simulated-dn_hu8e9bce5468f421f341dc0283d63d314f_27372_2000x2000_fit_lanczos_2.png&#34; class=&#34;lazyload&#34; alt=&#34;&#34; width=&#34;700px&#34; height=&#34;480&#34;&gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Συγκλονιστική ομοιότητα με το πραγματικό.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
 &lt;p&gt;Η ομοιότητα με το υποτιθέμενο Ντάνινγκ–Κρούγκερ γράφημα είναι χωρίς υπερβολές ανατριχιαστική. Απο την συγκίνηση δυσκολέυομαι να γράψω ακόμα και τον επίλογο αυτού του άρθρου. Θα χαρακτήριζα την ανακάλυψη του μοντέλου ως μια μεταφυσική εμπειρία η οποία με άλλαξε ως άνθρωπο. Συγκεκριμένα μου προκάλεσε μια αστρική προβολή η οποία με ταξίδεψε στα όρια του γαλαξία μας. Ας αφήσω καλύτερα τις λεπτομέρειες για ένα επόμενο άρθρο.&lt;/p&gt;
 </description>
     </item>

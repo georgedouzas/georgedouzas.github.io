@@ -26,20 +26,12 @@ subtitle = ""
      tag = "*"
 
    [[content.filter_button]]
-     name = "Publication"
-     tag = "Publication"
-  
-   [[content.filter_button]]
-     name = "Textbook"
-     tag = "Textbook"
-  
-   [[content.filter_button]]
-     name = "Online Course"
-     tag = "Online Course"
+     name = "Technical"
+     tag = "Technical"
    
    [[content.filter_button]]
-     name = "Other"
-     tag = "Other"
+     name = "General"
+     tag = "General"
    
 
 [design]
