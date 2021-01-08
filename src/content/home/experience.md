@@ -72,16 +72,4 @@ date_format = "Jan 2006"
   Member of the IRI's "Solutions and Innovation Team" (R&D) working on the company's transition towards Open Source and Elastic Computing. Participated in an agile team working on the migration of IRI’s main US "Price & Promo Analytics" Solution, generating more than $25M Annual Revenues, to Hadoop distributed storage and Spark cluster computing. Python was the core language of the implementation, but integration with R and Julia was performed to leverage special functionality. The legacy version was implemented in SAS. The main objectives of the project were the design of the parallelization schema, the enhancement of data manipulation with the use of distributed processing and the migration of the statistical modeling algorithms (regression mixed models). The final system was able to process 5 years of data for more than 300 categories containing 1 million products.
   """
 
-[[experience]]
-  title = "Co-owner & CTO"
-  company = "Sports Performance Training"
-  company_url = ""
-  location = "Greece"
-  date_start = "2009-09-01"
-  date_end = "2013-09-01"
-  description = """
-  Co-owner and CTO of Sports Performance Training (SPT) startup. SPT provided consulting services to individual professional athletes and athletic organizations in multiple sports. Using standard ergometric measurements and a custom process through biometric sensors, a variety of signals were recorded and preprocessed. A combination of descriptive statistics, predictive modeling and domain knowledge was applied to adjust the training load of the athlete or team in the pre-competition period and to maximize performance in the competition period. The deliverable to the client included also training guidelines on individual basis that aimed to avoid sports specific injuries.
-  """
-
-
 +++
