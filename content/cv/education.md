@@ -1,13 +1,16 @@
 # Education
 
 ## PhD in Theoretical Particle Physics
-*09/03 - 09/08*
-*National Technical University of Athens*
+
+_09/03 - 09/08_
+_National Technical University of Athens_
 
 ## MSc in Physics
-*09/01 - 09/03*
-*National Technical University of Athens*
+
+_09/01 - 09/03_
+_National Technical University of Athens_
 
 ## BSc in Physics
-*09/97 - 09/01*
-*National and Kapodistrian University of Athens*
+
+_09/97 - 09/01_
+_National and Kapodistrian University of Athens_

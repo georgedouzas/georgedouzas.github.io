@@ -10,16 +10,15 @@ description: "A practical introduction to the Geometric SMOTE algorithm."
 
 Classification of imbalanced datasets is a challenging task for standard machine learning algorithms. Training a classifier on imbalanced data, often results in a low out-of-sample accuracy for the minority classes. To deal with this problem several approaches have been proposed. A general approach, known as oversampling, is the generation of artificial data for the minority classes that are used to enhance the training data.
 
-*SMOTE* is the most popular oversampling algorithm, while many variants of it have been developed. SMOTE generates synthetic data between the line segment that connects two randomly chosen neighboring minority class instances. On the other hand, Geometric SMOTE expands the data generation area by generating synthetic data inside a hypersphere that is defined by a randomly chosen minority class instance and one of its neighbors either from the minority or majority class. [*Geometric SMOTE*](https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353) has been shown to outperform other standard oversamplers in a large number of datasets. The following figure illustrates the difference between the two data generation mechanisms:
+_SMOTE_ is the most popular oversampling algorithm, while many variants of it have been developed. SMOTE generates synthetic data between the line segment that connects two randomly chosen neighboring minority class instances. On the other hand, Geometric SMOTE expands the data generation area by generating synthetic data inside a hypersphere that is defined by a randomly chosen minority class instance and one of its neighbors either from the minority or majority class. [_Geometric SMOTE_](https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353) has been shown to outperform other standard oversamplers in a large number of datasets. The following figure illustrates the difference between the two data generation mechanisms:
 
 ![SMOTE vs Geometric SMOTE](smote_vs_gsmote.png "SMOTE vs Geometric SMOTE")
 
-A Python implementation of *SMOTE* and several of its variants is available in the [*Imbalanced-Learn*](https://imbalanced-learn.org/stable/) library, which is fully compatible with the popular machine learning toolbox [*Scikit-Learn*](https://scikit-learn.org/stable/). I have developed a *Python* implementation of the *Geometric SMOTE* oversampler, called [*geometric-smote*](https://github.com/georgedouzas/geometric-smote), that integrates seamlessly with the *Scikit-Learn* and *Imbalanced-Learn* ecosystems.
-
+A Python implementation of _SMOTE_ and several of its variants is available in the [_Imbalanced-Learn_](https://imbalanced-learn.org/stable/) library, which is fully compatible with the popular machine learning toolbox [_Scikit-Learn_](https://scikit-learn.org/stable/). I have developed a _Python_ implementation of the _Geometric SMOTE_ oversampler, called [_geometric-smote_](https://github.com/georgedouzas/geometric-smote), that integrates seamlessly with the _Scikit-Learn_ and _Imbalanced-Learn_ ecosystems.
 
 ## Installation
 
-The easiest way to install the *geometric-smote* package, assuming you have already *Python 3* and *pip* installed as well as you have optionally activated a *Python virtual environment*, is to open a shell and run the following command:
+The easiest way to install the _geometric-smote_ package, assuming you have already _Python 3_ and _pip_ installed as well as you have optionally activated a _Python virtual environment_, is to open a shell and run the following command:
 
 ```
 pip install geometric-smote
@@ -29,11 +28,11 @@ This will install the latest version and its dependencies.
 
 ## Documentation
 
-Detailed documentation that includes installation guidelines, API description and various examples can found [here](https://geometric-smote.readthedocs.io/en/latest/?badge=latest). 
+Detailed documentation that includes installation guidelines, API description and various examples can found [here](https://geometric-smote.readthedocs.io/en/latest/?badge=latest).
 
 ## Functionality
 
-In what follows, I will describe briefly some aspects of *geometric-smote* functionality. The class that represents the Geometric SMOTE oversampler is called `GeometricSMOTE`. Its API follows closely the API of oversamplers provided by *Imbalanced-Learn*. 
+In what follows, I will describe briefly some aspects of _geometric-smote_ functionality. The class that represents the Geometric SMOTE oversampler is called `GeometricSMOTE`. Its API follows closely the API of oversamplers provided by _Imbalanced-Learn_.
 
 #### Resampling an imbalanced dataset
 
@@ -55,7 +54,7 @@ X, y = make_classification(
 )
 ```
 
-The following functions extract and print the main characteristics of a binary class dataset. Specifically, the `extract_characteristics` function returns the number of samples, the number of features,  the labels and the number of samples for the majority and minority classes as well as the Imbalance Ratio defined as the ratio between the number of samples of the majority and minority classes, while the `print_characteristics` function prints them in an appropriate format:
+The following functions extract and print the main characteristics of a binary class dataset. Specifically, the `extract_characteristics` function returns the number of samples, the number of features, the labels and the number of samples for the majority and minority classes as well as the Imbalance Ratio defined as the ratio between the number of samples of the majority and minority classes, while the `print_characteristics` function prints them in an appropriate format:
 
 ```python
 # Imports
@@ -103,7 +102,7 @@ print_characteristics(X, y)
 # Imbalance Ratio: 9.0
 ```
 
-Following the *Imbalanced-Learn* API, the `fit_resample` method of a `GeometricSMOTE` instance can be used to resample the imbalanced dataset:
+Following the _Imbalanced-Learn_ API, the `fit_resample` method of a `GeometricSMOTE` instance can be used to resample the imbalanced dataset:
 
 ```python
 # Imports
@@ -135,7 +134,7 @@ print_characteristics(X_res, y_res)
 # Imbalance Ratio: 1.0
 ```
 
-As expected, the default behavior of the `GeometricSMOTE` instance is to generate the appropriate number of minority class instances so that the resampled dataset is perfectly balanced. 
+As expected, the default behavior of the `GeometricSMOTE` instance is to generate the appropriate number of minority class instances so that the resampled dataset is perfectly balanced.
 
 #### Performance on out-of-sample data
 
@@ -163,7 +162,7 @@ def calculate_cv_scores(oversampler, X, y):
     classifier = DecisionTreeClassifier(random_state=rnd_seed)
     if oversampler is not None:
       classifier = make_pipeline(
-        oversampler.set_params(random_state=rnd_seed + 4), 
+        oversampler.set_params(random_state=rnd_seed + 4),
         classifier
       )
     cv_scores = cross_validate(
@@ -178,7 +177,7 @@ def calculate_cv_scores(oversampler, X, y):
   return cv_scores
 ```
 
-Using the above function we can calculate the out-of-sample performance when no oversampling is applied as well as when *SMOTE* and *Geometric SMOTE* are used as oversamplers:
+Using the above function we can calculate the out-of-sample performance when no oversampling is applied as well as when _SMOTE_ and _Geometric SMOTE_ are used as oversamplers:
 
 ```python
 # Imports
@@ -191,7 +190,7 @@ for name, oversampler in mapping.items():
   cv_scores[name] = calculate_cv_scores(oversampler, X, y)
 ```
 
-Printing a table of the scores, we see that *Geometric SMOTE* outperforms the other methods when geometric mean score is used as an evaluation metric, while the highest accuracy is achieved when no oversampling is applied:
+Printing a table of the scores, we see that _Geometric SMOTE_ outperforms the other methods when geometric mean score is used as an evaluation metric, while the highest accuracy is achieved when no oversampling is applied:
 
 ```python
 cv_scores = pd.DataFrame(cv_scores, index = ['Geometric Mean', 'Accuracy'])
@@ -206,7 +205,6 @@ print(cv_scores)
 # Accuracy               0.950000  0.920000         0.870000
 ```
 
-Notice that using the accuracy as an evaluation metric is not considered a good choice when the data is imbalanced. For example, a trivial classifier that always predicts the majority class would still have an accuracy equal to 0.90, even though all the minority class instances are misclassified. On the other hand, geometric mean score is an appropriate evaluation metric for imbalanced data since it equally weighs the accuracies per class. 
+Notice that using the accuracy as an evaluation metric is not considered a good choice when the data is imbalanced. For example, a trivial classifier that always predicts the majority class would still have an accuracy equal to 0.90, even though all the minority class instances are misclassified. On the other hand, geometric mean score is an appropriate evaluation metric for imbalanced data since it equally weighs the accuracies per class.
 
-For more details you can look at the *geometric-smote* [documentation](https://geometric-smote.readthedocs.io/en/latest/?badge=latest). The [documentation](https://imbalanced-learn.readthedocs.io/en/stable/) of the *Imbalanced-Learn* project provides also various examples and an introduction to the imbalanced learning problem.
-
+For more details you can look at the _geometric-smote_ [documentation](https://geometric-smote.readthedocs.io/en/latest/?badge=latest). The [documentation](https://imbalanced-learn.readthedocs.io/en/stable/) of the _Imbalanced-Learn_ project provides also various examples and an introduction to the imbalanced learning problem.

@@ -10,12 +10,6 @@ module.exports = {
     social: {
       twitter: `gdouzas`,
     },
-    menuLinks: [
-      {
-        name: `Home`,
-        link: `/`
-      }
-    ]
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -40,8 +34,8 @@ module.exports = {
           {
             resolve: `gatsby-remark-katex`,
             options: {
-              strict: `ignore`
-            }
+              strict: `ignore`,
+            },
           },
           {
             resolve: `gatsby-remark-images`,
