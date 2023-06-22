@@ -1,0 +1,43 @@
+---
+title: "Mathematical Foundations of Reinforcement Learning"
+description: "A mathematical but friendly introduction to the fundamental concepts of Reinforcement Learning."
+author: "Georgios Douzas"
+date: "2023-06-022"
+categories: [Artificial Intelligence, Textbook, Review]
+image: "featured.png"
+jupyter: python3
+draft: true
+---
+
+![](featured.png)
+
+Summary of the textbook [Mathematical Foundations of Reinforcement Learning](https://github.com/MathFoundationRL/Book-Mathematical-Foundation-of-Reinforcement-Learning).
+
+An MDP is defined as follows
+
+- Sets
+	- State space: $\mathcal{S}=\left\{s_1, s_2, \ldots \right\}$
+	- Action space: $\mathcal{A}(s)=\left\{a_1, a_2, \ldots, \right\}$
+	- Reward space: $\mathcal{R}(s, a)=\left\{r_1, r_2, \ldots \right\}$
+- Model
+	- State transition probability: $p(s' \mid s, a)$
+	- Reward probability: $p(r \mid s, a)$
+- Policy
+	- $\pi(a \mid s) = p(a \mid s)$
+- Markov property
+	- $p\left(s_{t+1} \mid s_t, a_t, s_{t-1}, a_{t-1}, \ldots, s_0, a_0\right)=p\left(s_{t+1} \mid s_t, a_t\right)$
+	- $p\left(r_{t+1} \mid s_t, a_t, s_{t-1}, a_{t-1}, \ldots, s_0, a_0\right)=p\left(r_{t+1} \mid s_t, a_t\right)$
+
+ Reinforcement learning can be described as an agent-environment interaction process. The agent is a decision-maker that can sense
+ its state, maintain policies, and execute actions. Everything outside of the agent is regarded as the environment.
+
+A State-action-reward trajectory is defined as 
+
+$$S_t, R_{t} \xrightarrow{A_t} S_{t+1}, R_{t+1} \xrightarrow{A_{t+1}} S_{t+2}, R_{t+2} \xrightarrow{A_{t+2}} S_{t+3}, R_{t+3} \ldots$$
+
+Discounted return is defined as 
+
+$$G_t = R_{t+1} + \gamma \cdot R_{t+2} + \gamma^2 \cdot R_{t+3} + \cdots$$
+
+A terminal state is defined as as state with the property that any action from it resets the next state to a starting state. If
+there are terminal states then the task is episodic, otherwise it is continuing.

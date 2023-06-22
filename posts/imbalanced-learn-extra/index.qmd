@@ -1,0 +1,233 @@
+---
+title: imbalanced-learn-extra
+description: "Implementation of novel oversampling algorithms."
+author: "Georgios Douzas"
+date: "2022-05-02"
+categories: [Machine Learning, Open Source, Imbalanced Data]
+image: "featured.png"
+jupyter: python3
+---
+
+![](featured.png)
+
+# Introduction
+
+The library [imbalanced-learn-extra](https://github.com/georgedouzas/imbalanced-learn-extra) is a Python package that extends
+[imbalanced-learn](https://imbalanced-learn.org/stable/). It implements algorithms that are not included in
+[imbalanced-learn](https://imbalanced-learn.org/stable/) due to their novelty or lower citation number. The current version
+includes the following:
+
+- A general interface for clustering-based oversampling algorithms.
+
+- The Geometric SMOTE algorithm.
+
+# Clustering-based oversampling
+
+Clustering-based oversampling algorithms deal with the within-classes imbalance issue, since
+[SMOTE](https://arxiv.org/pdf/1106.1813.pdf) and its variants addresses only the between-classes imbalance. To present the API,
+let's first load some data:
+
+```{python}
+# Imports
+from sklearn.datasets import load_breast_cancer
+
+# Load data
+X, y = load_breast_cancer(return_X_y=True)
+```
+
+The data are imbalanced:
+
+```{python}
+# Imports
+from collections import Counter
+
+# Classes distribution
+counter = Counter(y)
+print(
+    f"Number of majority class samples: {counter[1]}.",
+    f"Number of minority class samples: {counter[0]}.",
+    sep="\n",
+)
+```
+
+I will use `KMeans` and `SMOTE` to create a clustering-based oversampler, but any other combination would work:
+
+```{python}
+# Imports
+from sklearn.datasets import load_breast_cancer
+from imblearn.over_sampling import SMOTE
+from sklearn.cluster import KMeans
+from imblearn_extra.clover.over_sampling import ClusterOverSampler
+
+# Create KMeans-SMOTE instance
+rnd_seed = 14
+smote = SMOTE(random_state=rnd_seed + 1)
+kmeans = KMeans(n_clusters=10, random_state=rnd_seed + 3, n_init=50)
+kmeans_smote = ClusterOverSampler(oversampler=smote, clusterer=kmeans)
+```
+
+Now we can use the `fit_resample` method to get the resampled data:
+
+```{python}
+_, y_res = kmeans_smote.fit_resample(X, y)
+counter = Counter(y_res)
+print(
+    f"Number of majority class samples: {counter[1]}.",
+    f"Number of minority class samples: {counter[0]}.",
+    sep="\n",
+)
+```
+
+The clustering-based oversamplers can be used in machine learning pipelines:
+
+```{python}
+# Imports
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score
+from imblearn.pipeline import make_pipeline
+
+# Cross validation score
+classifier = RandomForestClassifier(random_state=rnd_seed)
+classifier = make_pipeline(kmeans_smote, classifier)
+score = cross_val_score(estimator=classifier, X=X, y=y, scoring="f1").mean()
+print(f"The cross-validation F-score is {score}.")
+```
+
+# Geometric SMOTE
+
+[Geometric SMOTE](https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353) is not just another member of the
+[SMOTE](https://arxiv.org/pdf/1106.1813.pdf)'s family since it expands the data generation area and does not just use linear
+interpolation of existing samples to generate for new samples. To test its performance, let's first simulate various imbalanced
+datasets:
+
+```{python}
+# Imports
+from sklearn.datasets import make_classification
+from sklearn.model_selection import ParameterGrid
+
+# Set random seed
+rnd_seed = 43
+
+# Generate imbalanced datasets
+datasets = []
+datasets_params = ParameterGrid(
+    {"weights": [[0.8, 0.2], [0.9, 0.1]], "class_sep": [0.01, 0.1]}
+)
+for data_params in datasets_params:
+    datasets.append(
+        make_classification(
+            random_state=rnd_seed,
+            n_informative=10,
+            n_samples=2000,
+            n_classes=2,
+            **data_params,
+        )
+    )
+```
+
+We will also create pipelines of various oversamplers, classifiers and their hyperparameters:
+
+```{python}
+# Imports
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier, NearestNeighbors
+from sklearn.model_selection import cross_val_score, StratifiedKFold, GridSearchCV
+from imblearn.pipeline import make_pipeline
+from imblearn.over_sampling import RandomOverSampler, SMOTE
+from imblearn_extra.gsmote import GeometricSMOTE
+
+# Pipelines
+classifiers = [LogisticRegression(), KNeighborsClassifier()]
+oversamplers = [None, RandomOverSampler(), SMOTE(), GeometricSMOTE()]
+pipelines = []
+oversamplers_param_grids = {
+    "SMOTE": {
+        "smote__k_neighbors": [
+            NearestNeighbors(n_neighbors=2),
+            NearestNeighbors(n_neighbors=3),
+        ]
+    },
+    "GeometricSMOTE": {
+        "geometricsmote__k_neighbors": [2, 3],
+        "geometricsmote__deformation_factor": [0.0, 0.25, 0.5, 0.75, 1.0],
+    },
+}
+cv = StratifiedKFold(n_splits=2, shuffle=True, random_state=rnd_seed + 5)
+for classifier in classifiers:
+    for oversampler in oversamplers:
+        oversampler_name = (
+            oversampler.__class__.__name__ if oversampler is not None else None
+        )
+        param_grid = oversamplers_param_grids.get(oversampler_name, {})
+        estimator = (
+            make_pipeline(oversampler, classifier)
+            if oversampler is not None
+            else make_pipeline(classifier)
+        )
+        pipelines.append(GridSearchCV(estimator, param_grid, cv=cv, scoring="f1"))
+```
+
+Finally, we will calculate the [nested cross-validation
+scores](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html) of the above
+pipelines using F-score as evaluation metric:
+
+```{python}
+# | output: false
+n_runs = 3
+cv_scores = []
+for run_id in range(n_runs):
+    for dataset_id, (X, y) in enumerate(datasets):
+        for pipeline_id, pipeline in enumerate(pipelines):
+            for param in pipeline.get_params():
+                if param.endswith("__n_jobs") and param != "estimator__smote__n_jobs":
+                    pipeline.set_params(**{param: -1})
+                if param.endswith("__random_state"):
+                    pipeline.set_params(
+                        **{
+                            param: rnd_seed
+                            * (run_id + 1)
+                            * (dataset_id + 1)
+                            * (pipeline_id + 1)
+                        }
+                    )
+            cv = StratifiedKFold(n_splits=3, shuffle=True, random_state=10 * run_id)
+            scores = cross_val_score(
+                estimator=pipeline,
+                X=X,
+                y=y,
+                scoring="f1",
+                cv=cv,
+            )
+            print(f"Run: {run_id} | Dataset: {dataset_id} | Pipeline: {pipeline_id}")
+            pipeline_name = '-'.join(
+                [
+                    estimator.__class__.__name__
+                    for _, estimator in pipeline.get_params()['estimator'].get_params()[
+                        'steps'
+                    ]
+                ]
+            )
+            cv_scores.append((run_id, dataset_id, pipeline_name, scores.mean()))
+```
+
+Let's see the final results of the experiment:
+
+```{python}
+cv_scores = (
+    pd.DataFrame(cv_scores, columns=["Run", "Dataset", "Pipeline", "Score"])
+    .groupby(["Dataset", "Pipeline"])["Score"]
+    .mean()
+    .reset_index()
+)
+cv_scores
+```
+
+The next table shows the pipeline with the highest F-score per dataset:
+
+```{python}
+cv_scores_best = cv_scores.loc[cv_scores.groupby("Dataset")["Score"].idxmax()]
+cv_scores_best
+```
+
+Therefore, Geometric SMOTE outperforms the other methods in all datasets when the F-score is used as an evaluation metric.

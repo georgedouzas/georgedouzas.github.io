@@ -1,0 +1,238 @@
+---
+title: "Prefect"
+description: "Build, deploy and observe data workflows."
+author: "Georgios Douzas"
+date: "2023-06-22"
+categories: [Software Engineering, Open Source, Data Engineering]
+image: "featured.png"
+jupyter: python3
+---
+
+![](featured.png)
+
+# Introduction
+
+[Prefect](https://docs.prefect.io) is a workflow orchestration tool. It makes accessible the creation, scheduling, and monitoring
+of complex data pipelines. The workflows are defined as Python code, while Prefect provides error handling, retry mechanisms, and
+a user-friendly dashboard for monitoring.
+
+# Workflow for soccer data
+
+As an example, let's assume that we would like to create a data workflow that downloads, stores and updates historical and
+fixtures soccer data from [Football-Data.co.uk](https://www.football-data.co.uk). The URL of each of those main leagues has the
+following form: 
+
+```{python}
+base_url = 'https://www.football-data.co.uk/mmz4281/{season}/{league_id}.csv'
+base_url
+```
+
+where `season` is the season of the league and `league_id` is the league ID. Let's select a few of those seasons and leagues:
+
+```{python}
+SEASONS = ['1819', '1920', '2021', '2122', '2223', '2324']
+LEAGUES_MAPPING = {
+    'E0': 'English',
+    'SC0': 'Scotish',
+    'D1': 'German',
+    'I1': 'Italian',
+    'SP1': 'Spanish',
+    'F1': 'French',
+    'N1': 'Dutch',
+}
+URLS_MAPPING = {
+    f'https://www.football-data.co.uk/mmz4281/{season}/{league_id}.csv': (
+        league,
+        '-'.join([season[0:2], season[2:]]),
+    )
+    for season in SEASONS
+    for league_id, league in LEAGUES_MAPPING.items()
+}
+FIXTURES_URL = 'https://www.football-data.co.uk/fixtures.csv'
+```
+
+Our workflow will include the following tasks:
+
+- Check if a local SQLite database exists. If not, then create it.
+- Check if the database is updated with the latest historical data. If the historical data do not exist, download all the data and
+store them to the database while if the historical data are not updated, download only the latest data and update the database.
+- Download the latest fixtures data and store them to the database.
+
+### Tasks
+
+The above tasks represent discrete units of work, and they will receive the `task` decorator. We will also use an asynchronous
+httpx client to concurrently download the data since we have multiple files.
+
+The function `create_db` implements the first task:
+
+```{python}
+import sqlite3
+from prefect import task
+from prefect.logging import get_run_logger
+from pathlib import Path
+from tempfile import mkdtemp
+
+TEMP_DIR = Path(mkdtemp())
+
+
+@task(name='Create database', description='Create the database to store the data')
+def create_db():
+    logger = get_run_logger()
+    db_path = TEMP_DIR / 'soccer_data.db'
+    try:
+        con = sqlite3.connect(f'file:{db_path}?mode=rw', uri=True)
+        logger.info('Database exists.')
+    except sqlite3.OperationalError:
+        con = sqlite3.connect(db_path)
+        logger.info('Database created.')
+    finally:
+        con.close()
+```
+
+The function `update_historical_data` implements the second task:
+
+```{python}
+import httpx
+import asyncio
+import pandas as pd
+from io import StringIO
+
+
+async def request_csv_data(client: httpx.Client, url: str, **kwargs):
+    return await client.get(url=url)
+
+
+async def download_csvs_data(urls_mapping: dict[str, tuple[str, str]]):
+    async with httpx.AsyncClient(limits=httpx.Limits(max_connections=30)) as client:
+        requests = [
+            request_csv_data(client, url, league=league, season=season)
+            for url, (league, season) in urls_mapping.items()
+        ]
+        responses = await asyncio.gather(*requests)
+    csvs_data = [
+        StringIO(str(response.content, encoding='windows-1254'))
+        for response in responses
+    ]
+    return csvs_data
+
+
+@task(
+    name='Update historical data',
+    description='Fetch latest data to update historical data',
+)
+async def update_historical_data(urls_mapping):
+    logger = get_run_logger()
+    db_path = TEMP_DIR / 'soccer_data.db'
+    with sqlite3.connect(db_path) as con:
+        try:
+            data = pd.read_sql('SELECT * FROM historical', con)
+            logger.info(f'Table with historical data exists. Shape: {data.shape}')
+        except pd.errors.DatabaseError:
+            logger.info('Table with historical data does not exist.')
+            csvs_data = await download_csvs_data(urls_mapping)
+            data = pd.concat(
+                [
+                    pd.read_csv(csv_data, encoding='windows-1254')
+                    for csv_data in csvs_data
+                ],
+                ignore_index=True,
+            )
+            data.to_sql('historical', con=con, index=False)
+            logger.info(f'Table with historical data was created. Shape: {data.shape}')
+            return None
+    urls_mapping = {
+        url: (league, season)
+        for url, (league, season) in urls_mapping.items()
+        if season == '23-24'
+    }
+    latest_csvs_data = await download_csvs_data(urls_mapping)
+    latest_data = pd.concat(
+        [
+            pd.read_csv(csv_data, encoding='windows-1254')
+            for csv_data in latest_csvs_data
+        ],
+        ignore_index=True,
+    )
+    data = pd.concat([data, latest_data], ignore_index=True).drop_duplicates(
+        subset=['Div', 'Date', 'HomeTeam', 'AwayTeam', 'Time'], ignore_index=True
+    )
+    data.to_sql('historical', con=con, index=False, if_exists='replace')
+    logger.info(f'Table with historical data was updated. Shape: {data.shape}')
+```
+
+The function `update_fixtures_data` implements the third task:
+
+```{python}
+@task(name='Update fixtures data', description='Fetch latest fixtures data')
+async def update_fixtures_data():
+    logger = get_run_logger()
+    db_path = TEMP_DIR / 'soccer_data.db'
+    data = pd.read_csv(FIXTURES_URL)
+    with sqlite3.connect(db_path) as con:
+        data.to_sql('fixtures', con=con, index=False, if_exists='replace')
+        logger.info(f'Fixtures data were updated. Shape: {data.shape}')
+```
+
+### Flow
+
+The full data workflow will receive the `flow` decorator.
+
+```{python}
+from prefect import flow
+from prefect.task_runners import ConcurrentTaskRunner
+
+
+@flow(
+    name='Download asynchronously the data and update the database',
+    validate_parameters=True,
+    task_runner=ConcurrentTaskRunner(),
+    log_prints=True,
+)
+async def update_db(urls_mapping: dict[str, tuple[str, str]]):
+    create_db()
+    await update_historical_data(urls_mapping)
+    await update_fixtures_data()
+```
+
+
+# Results
+
+We can run the above flow:
+
+```{python}
+await update_db(URLS_MAPPING)
+```
+
+Let's read the data from the database:
+
+```{python}
+from shutil import rmtree
+
+db_path = TEMP_DIR / 'soccer_data.db'
+with sqlite3.connect(db_path) as con:
+    historical_data = pd.read_sql('SELECT * FROM historical', con)
+    fixtures_data = pd.read_sql('SELECT * FROM fixtures', con)
+rmtree(TEMP_DIR)
+```
+
+The historical data:
+
+```{python}
+historical_data
+```
+
+The fixtures data:
+
+```{python}
+fixtures_data
+```
+
+# Final thoughts
+
+You can spin up a local Prefect server UI with the `prefect server start` command in the shell and explore the characteristics of
+the above Prefect flow we ran. The data are stored in the Prefect database which by default is a local SQLite database.
+
+Prefect also supports deployments i.e. packaging workflow code, settings, and infrastructure configuration so that the data
+workflow can be managed via the Prefect API and run remotely by a Prefect agent.
+
+You can read more at the official [Prefect documentation](https://docs.prefect.io).
