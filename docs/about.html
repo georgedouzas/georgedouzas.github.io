@@ -59,6 +59,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -84,12 +86,8 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="./about.html" rel="" target="" aria-current="page">
  <span class="menu-text">About</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./cv.html" rel="" target="">
- <span class="menu-text">CV</span></a>
-  </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/georgedouzas" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -106,22 +104,60 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-jolla">
-  <img src="profile.png" class="about-image
-  round " style="height: 15em; width: 15em;">
- <header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-about-marquee">
+  <div class="about-image-container">
+    <img src="profile.png" class="about-image " style="width: 100%;">
+  </div>
+  <div class="about-contents">
+    <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">About</h1>
 </div>
 <div class="quarto-title-meta">
   </div>
-</header><main class="content" id="quarto-document-content">
+</header> <main class="content" id="quarto-document-content">
 <p>Hi, I am Georgios Douzas. I am a machine learning researcher at Nova IMS, University of Lisbon, and a member of the MagIC research and development center. My research areas are physics, mathematics and artificial intelligence, with multiple publications in machine learning and high-energy physics journals. My professional experience includes working as a software and machine learning engineer for various companies. Additionally, I often maintain or contribute to open-source projects.</p>
+<section id="education" class="level2">
+<h2 data-anchor-id="education">Education</h2>
+<p><strong>Ph.D.&nbsp;in Theoretical Particle Physics</strong><br>
+National Technical University of Athens<br>
+<span class="math inline">\(09/03\)</span> - <span class="math inline">\(09/08\)</span></p>
+<p><strong>M.Sc. in Physics</strong><br>
+National Technical University of Athens<br>
+<span class="math inline">\(09/01\)</span> - <span class="math inline">\(09/03\)</span></p>
+<p><strong>B.Sc. in Physics</strong><br>
+National and Kapodistrian University of Athens<br>
+<span class="math inline">\(09/97\)</span> - <span class="math inline">\(09/01\)</span></p>
+</section>
+<section id="experience" class="level2">
+<h2 data-anchor-id="experience">Experience</h2>
+<p><strong>Machine Learning Engineer</strong><br>
+Trasys, Greece<br>
+<span class="math inline">\(8/20\)</span> - Present</p>
+<p>Designed and implemented Parallel Distribution, a software tool for the European Medicines Agency that applies OCR on PDF documents and generates a comparison report. The primary language of implementation was Python, while various text mining and machine learning libraries were used. The frontend of the tool used HTML, CSS, and JavaScript to provide an interactive dashboard of the results.</p>
+<p><strong>Machine Learning Researcher</strong><br>
+University of Lisbon Nova IMS, Portugal<br>
+<span class="math inline">\(09/13\)</span> - <span class="math inline">\(09/14\)</span> &amp; <span class="math inline">\(09/18\)</span> - Present</p>
+<p>Designed, implemented, and tested various new approaches for the class imbalance problem. Research focused on clustering-based over-sampling methods that deal with the within-the-class imbalance problem. Additionally, Geometric SMOTE, an extension of the SMOTE algorithm, was proposed and implemented. The final publication presented results showing a significant improvement over SMOTE and its variations. Deep learning models, particularly Conditional Generative Adversarial Networks (CGANs), were also used as over-sampling methods with great success. The frameworks of the implementation were TensorFlow, Keras, and PyTorch. Work is published in high-impact machine learning journals. Implementation of the above algorithms was developed and made available as open-source software. Work in progress includes comparative experiments between variations of CGANs as over-samplers and the investigation of novel algorithms in the context of reinforcement learning.</p>
+<p><strong>Machine Learning Engineer</strong><br>
+Tripsta, Greece<br>
+<span class="math inline">\(10/17\)</span> - <span class="math inline">\(08/18\)</span></p>
+<p>Designed and implemented the main parts of the company’s automated pricing system. These parts included machine learning estimators for the add-ons and the competitor’s prices and the application of metaheuristic algorithms for the budget multi-objective optimization problem. The training data of the various estimators were at the order of TB while the prediction time of the automated pricing system was required to be less than <span class="math inline">\(100\)</span> msec for the incoming <span class="math inline">\(50\)</span>K requests/sec.&nbsp;The implementation languages were Python, Java, and Scala, while Spark, Dask, Scikit-Learn and jMetal were used as distributed data processing, machine learning, and optimization frameworks/libraries.</p>
+<p><strong>Data Scientist</strong><br>
+Quantum Retail, Remote <span class="math inline">\(12/16\)</span> - <span class="math inline">\(09/17\)</span></p>
+<p>Worked on demand forecasting and clustering for retail companies. Proposed and applied machine learning methods to improve the company’s main forecasting solution based on exponential smoothing of the time series data and adjustments guided by a seasonality curve. Boosting trees were selected as the final machine-learning model. Applied feature extraction that integrated the business logic and extensive model hyperparameter tuning, the forecasting precision was improved by <span class="math inline">\(30\)</span>% compared to the original model.</p>
+<p><strong>Machine Learning Engineer</strong><br>
+CERN, Remote<br>
+<span class="math inline">\(05/16\)</span> - <span class="math inline">\(09/16\)</span></p>
+<p>Developed the parallelization of various features for TMVA, the Toolkit for Multivariate Data Analysis with ROOT, as a part of a project funded by Google. ROOT is the main framework developed by CERN to deal with the big data processing, statistical analysis, visualization, and storage of massive amounts of data produced from particle physics experiments. The legacy version was implemented in C++. The parallelized features included the application of brute-force and metaheuristic algorithms to the hyperparameter grid search of machine learning algorithms. The implementation was based on Python and Spark.</p>
+<p><strong>Scientific Software Engineer</strong> IRI, Greece<br>
+<span class="math inline">\(01/14\)</span> - <span class="math inline">\(05/16\)</span></p>
+<p>Member of the IRI’s “Solutions and Innovation Team” (R&amp;D) working on the company’s transition towards Open Source and Elastic Computing. Participated in an agile team migrating IRI’s leading US “Price &amp; Promo Analytics” Solution, generating more than <span class="math inline">\(\$25\)</span>M Annual Revenues, to Hadoop distributed storage and Spark cluster computing. Python was the core language of the implementation, but integration with R and Julia was performed to leverage unique functionality. The legacy version was implemented in SAS. The project’s main objectives were the design of the parallelization schema, the enhancement of data manipulation with the use of distributed processing, and the migration of the statistical modeling algorithms (regression mixed models). The final system processed <span class="math inline">\(5\)</span> years of data for more than <span class="math inline">\(300\)</span> categories containing <span class="math inline">\(1\)</span> million products.</p>
 
 
+</section>
 </main> 
-  <hr class="about-sep">
-   <div class="about-links">
+    <div class="about-footer"><div class="about-links">
   <a href="https://github.com/georgedouzas" class="about-link" rel="" target="">
     <i class="bi bi-github"></i>
      <span class="about-link-text">Github</span>
@@ -131,6 +167,8 @@ ul.task-list li input[type="checkbox"] {
      <span class="about-link-text">LinkedIn</span>
   </a>
 </div>
+</div>
+  </div>
 </div>
  <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
