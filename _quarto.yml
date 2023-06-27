@@ -3,12 +3,12 @@ project:
 
 website:
   title: "AI & Friends"
+  
   navbar:
     right:
       - about.qmd
-      - cv.md
       - icon: github
-        href: https://github.com/
+        href: https://github.com/georgedouzas
 format:
   html:
     theme: litera
