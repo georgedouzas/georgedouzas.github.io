@@ -16,78 +16,25 @@ jupyter: python3
 of complex data pipelines. The workflows are defined as Python code, while Prefect provides error handling, retry mechanisms, and
 a user-friendly dashboard for monitoring. Prefect is based on the following concepts:
 
-**Tasks**
-
-Functions that represent a discrete unit of work in a Prefect workflow.
-
-**Flows**
-
-Containers for workflow logic and allow users to interact with and reason about the state of their workflows.
-
-**Results**
-
-They represent the data returned by a flow or a task. 
-
-**Artifacts**
-
-They are formatted outputs rendered in the Prefect UI, such as markdown, tables, or links.
-
-**States**
-
-They represent the status of a particular task run or flow run.
-
-**Task Runners**
-
-They allow selecting specific executors for Prefect tasks, such as concurrent, parallel, or distributed execution of
-tasks.
-
-**Runtime Context**
-
-It provides information about the current flow or task run that you can refer to in your code.
-
-**Profiles and Configuration**
-
-They are settings that can be used to interact with Prefect Cloud and a Prefect server.
-
-**Blocks**
-
-Prefect primitives that enable the storage of configuration and provide a UI interface.
-
-**Variables**
-
-They are named, mutable string values, much like environment variables.
-
-**Deployments**
-
-They are server-side concepts that encapsulate flows, allowing them to be scheduled and triggered via API.
-
-**Deployment Management**	
-
-A set of files that describe how to prepare one or more flow deployments.
-
-**Work Pools, Workers & Agents**	
-
-They bridge the Prefect orchestration environment with the execution environment.
-
-**Storage**	
-
-It configures how flow code for deployments is persisted and retrieved by Prefect agents.
-
-**Filesystems**	
-
-They are blocks that allow to read and write data from paths.
-
-**Infrastructure**
-
-They are blocks that specify infrastructure for flow runs created by the deployment.
-
-**Schedules**	
-
-They define how to create new flow runs automatically on a specified cadence.
-
-**Logging**	
-
-They log useful information about flows and tasks runs on the server.
+- **Tasks**: Functions that represent a discrete unit of work in a Prefect workflow.
+- **Flows**: Containers for workflow logic and allow users to interact with and reason about the state of their workflows.
+- **Results**: They represent the data returned by a flow or a task. 
+- **Artifacts**: They are formatted outputs rendered in the Prefect UI, such as markdown, tables, or links.
+- **States**: They represent the status of a particular task run or flow run.
+- **Task Runners**: They allow selecting specific executors for Prefect tasks, such as concurrent, parallel, or distributed
+execution of tasks.
+- **Runtime Context**: It provides information about the current flow or task run that you can refer to in your code.
+- **Profiles and Configuration**: They are settings that can be used to interact with Prefect Cloud and a Prefect server.
+- **Blocks**: Prefect primitives that enable the storage of configuration and provide a UI interface.
+- **Variables**: They are named, mutable string values, much like environment variables.
+- **Deployments**: They are server-side concepts that encapsulate flows, allowing them to be scheduled and triggered via API.
+- **Deployment Management**: A set of files that describe how to prepare one or more flow deployments.
+- **Work Pools, Workers & Agents**	: They bridge the Prefect orchestration environment with the execution environment.
+- **Storage**: It configures how flow code for deployments is persisted and retrieved by Prefect agents.
+- **Filesystems**: They are blocks that allow to read and write data from paths.
+- **Infrastructure**: They are blocks that specify infrastructure for flow runs created by the deployment.
+- **Schedules**	: They define how to create new flow runs automatically on a specified cadence.
+- **Logging**: They log useful information about flows and tasks runs on the server.
 
 ## Extracting the URLs
 
