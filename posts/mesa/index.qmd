@@ -1,0 +1,23 @@
+---
+title: "Mesa"
+description: "Agent-based modelling."
+author: "Georgios Douzas"
+date: "2023-06-022"
+categories: [Open Source, Review]
+image: "featured.png"
+jupyter: python3
+draft: true
+---
+
+![](featured.png)
+
+# Introduction
+
+## Extracting the URLs
+
+```{python}
+import mesa
+import seaborn as sns
+import numpy as np
+import pandas as pd
+```
