@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="functionality" class="level2">
 <h2 class="anchored" data-anchor-id="functionality">Functionality</h2>
 <p>Let’s first generate a binary class imbalanced dataset, represented by the input matrix <code>X</code> and the target vector <code>y</code>. Using a high value for the <code>flip_y</code> parameter, we ensure that the data are noisy thus the clustering of the input space will help the oversampling process:</p>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -223,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function <code>print_characteristics</code> extracts and prints the main characteristics of a binary class dataset. Specifically, it prints the number of samples, the number of features, the labels, and the number of samples for the majority and minority classes as well as the Imbalance Ratio, defined as the ratio between the number of instances of the majority and minority classes.</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -245,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>I use the above function to print the main characteristics of the generated imbalanced dataset:</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>print_characteristics(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of samples: 500
@@ -258,7 +258,7 @@ Imbalance Ratio: 3.1</code></pre>
 </div>
 </div>
 <p>I will combine the <code>SMOTE</code> oversampler and the <code>KMeans</code> clusterer to rebalance the above dataset. The combined clusterer-oversampler can be constructed by importing the <code>SMOTE</code> oversampler from Imbalanced-Learn, <code>KMeans</code> from Scikit-Learn, and <code>ClusterOverSampler</code> from <code>cluster-over-sampling</code>. Then following the Imbalanced Learn API, we can use the <code>fit_resample</code> method to resample the imbalanced dataset:</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> imblearn.over_sampling <span class="im">import</span> SMOTE</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
@@ -273,7 +273,7 @@ Imbalance Ratio: 3.1</code></pre>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>X_res, y_res <span class="op">=</span> kmeans_smote.fit_resample(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Again we can print the main characteristics of the rebalanced dataset:</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>print_characteristics(X_res, y_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of samples: 759
@@ -287,7 +287,7 @@ Imbalance Ratio: 1.0</code></pre>
 </div>
 <p>The default behavior is to generate the appropriate number of minority class samples so that the resampled dataset is perfectly balanced (although this sometimes may result in an approximately balanced dataset). Also, cluster-over-sampling provides for convenience, the clustering-based oversamplers <a href="https://www.sciencedirect.com/science/article/abs/pii/S0957417417302324">SOMO</a> and <a href="https://www.sciencedirect.com/science/article/abs/pii/S0020025518304997">KMeans-SMOTE</a>, as well as <a href="https://www.sciencedirect.com/science/article/abs/pii/S095741742100662X">G-SOMO</a> that uses <a href="../../publication/gsmote_journal">Geometric SMOTE</a> as the oversampler in place of SMOTE.</p>
 <p>As mentioned above, training a classifier on imbalanced data may result in suboptimal performance on out-of-sample data. The function <code>calculate_cv_scores</code> calculates the average 5-fold cross-validation F and accuracy scores across 5 runs of a <code>RandomForestClassifier</code> that is optionally combined with an oversampler through a pipeline:</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -320,7 +320,7 @@ Imbalance Ratio: 1.0</code></pre>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> np.mean(cv_scores, axis<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Using the above function, we can calculate the out-of-sample performance when no oversampling is applied, as well as when SMOTE and DBSCAN-SMOTE are used as oversamplers:</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clover.over_sampling <span class="im">import</span> ClusterOverSampler</span>
@@ -350,13 +350,13 @@ Imbalance Ratio: 1.0</code></pre>
 <td data-quarto-table-cell-role="th">F-score</td>
 <td>0.250849</td>
 <td>0.349954</td>
-<td>0.365352</td>
+<td>0.366361</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Accuracy</td>
 <td>0.773200</td>
 <td>0.715600</td>
-<td>0.723600</td>
+<td>0.722800</td>
 </tr>
 </tbody>
 </table>

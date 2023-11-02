@@ -199,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="tracking" class="level2">
 <h2 class="anchored" data-anchor-id="tracking">Tracking</h2>
 <p>Let’s assume we would like to run multiple classification experiments with various classifiers, datasets and random seeds.</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer, load_iris</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
@@ -219,57 +219,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>param_grids <span class="op">=</span> [{<span class="st">'n_neighbors'</span>: [<span class="dv">3</span>, <span class="dv">5</span>]}, {<span class="st">'max_depth'</span>: [<span class="dv">3</span>, <span class="dv">5</span>], <span class="st">'n_estimators'</span>: [<span class="dv">50</span>, <span class="dv">100</span>], <span class="st">'random_state'</span>: [rnd_seed <span class="op">+</span> <span class="dv">10</span>]}]</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [load_breast_cancer(return_X_y<span class="op">=</span><span class="va">True</span>), load_iris(return_X_y<span class="op">=</span><span class="va">True</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="manual-tracking" class="level3">
-<h3 class="anchored" data-anchor-id="manual-tracking">Manual tracking</h3>
 <p>We can manually track the parameters and results of an experiment.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> clf, param_grid <span class="kw">in</span> <span class="bu">zip</span>(clfs, param_grids):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> X, y <span class="kw">in</span> data:</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        results.append(run_experiment(clf, param_grid, X, y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="mlflow-tracking" class="level3">
-<h3 class="anchored" data-anchor-id="mlflow-tracking">MLflow tracking</h3>
-<div class="cell" data-execution_count="4">
+<p>A simple call to MLflow’s <code>autolog</code> function can be used instead of manual tracking:</p>
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mlflow.autolog()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> clf, param_grid <span class="kw">in</span> <span class="bu">zip</span>(clfs, param_grids):</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> X, y <span class="kw">in</span> data:</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        results.append(run_experiment(clf, param_grid, X, y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2023/10/29 10:52:44 WARNING mlflow.utils.autologging_utils: You are using an unsupported version of sklearn. If you encounter errors during autologging, try upgrading / downgrading sklearn to a supported version, or try upgrading MLflow.
-2023/10/29 10:52:44 INFO mlflow.tracking.fluent: Autologging successfully enabled for sklearn.
-2023/10/29 10:52:44 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '77eadc0cb20c4d2aba061954f2ece32a', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:52:48 WARNING mlflow.utils.autologging_utils: MLflow autologging encountered a warning: "/Users/georgiosdouzas/Projects/personal/blog/.venv/lib/python3.10/site-packages/_distutils_hack/__init__.py:33: UserWarning: Setuptools is replacing distutils."
-2023/10/29 10:52:50 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:52:50 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '3389c86e6bc04d4487e90de20da54f1a', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:52:56 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:52:56 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'cad68d24f8f04b70876a7d23ba8ad80c', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:53:03 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:53:03 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '2189f6bbca8d44618b83ae242514e20c', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:53:08 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:53:08 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'd1cf56383e2f4d8aa52fb2297b0aa453', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:53:14 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:53:14 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '1c8b194f8df8470f9fa2855e69a3ebf5', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:53:19 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:53:19 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '84d5d55575da4f9e953464acab9b493a', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:53:28 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:53:28 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '8034811cb6da41a99d5b1c785835e3ea', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:53:38 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:53:38 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'd082a11c60fd453d867c5da64a82f6fe', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:53:47 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:53:47 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'ea53a501cee143d2a751225096ca3e69', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:53:56 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:53:56 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'cd9f4b1babb5417ea6f76605f250485e', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:54:04 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/10/29 10:54:04 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'd4efa3104a23441891ba6d2184fb69ee', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/10/29 10:54:15 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.</code></pre>
+<pre><code>2023/11/02 22:45:40 INFO mlflow.tracking.fluent: Autologging successfully enabled for sklearn.
+2023/11/02 22:45:40 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'bac15cbe7d964d8ea481f8a220b79d04', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:45:46 WARNING mlflow.utils.autologging_utils: MLflow autologging encountered a warning: "/Users/georgiosdouzas/Projects/personal/blog/posts/mlflow/.venv/lib/python3.10/site-packages/_distutils_hack/__init__.py:33: UserWarning: Setuptools is replacing distutils."
+2023/11/02 22:45:49 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:45:49 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'b701f1568219425bac9f345d36506055', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:45:56 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:45:56 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'c9b73aeaa7ae4d3fb96c4f9b0ddcaa7b', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:46:03 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:46:03 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '96e8365f953b45a488b3953e1e371d1b', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:46:09 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:46:09 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'b324b1d75f7e4420bdab879e9703ebe7', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:46:15 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:46:15 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '05535571516e4caaa711904c6d2f834f', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:46:21 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:46:22 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '49a5c52e5ded40b5825d19ece55b71ee', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:46:34 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:46:34 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '7326bfe7daed4976a975bc6788db51f8', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:46:46 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:46:46 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'ee7c4d19cb5a4fe3ad3dc00a0378be2c', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:46:58 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:46:58 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'ecd0495f6ef242d68ace9f58774e7d6e', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:47:08 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:47:09 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '0d2606777b1b4ee498eb1b3e9390f973', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:47:18 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
+2023/11/02 22:47:19 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'c751a8dcc44e485cbddc3133b5e2e157', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
+2023/11/02 22:47:28 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.</code></pre>
 </div>
 </div>
 
 
-</section>
 </section>
 </section>
 

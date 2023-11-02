@@ -50,8 +50,6 @@ param_grids = [{'n_neighbors': [3, 5]}, {'max_depth': [3, 5], 'n_estimators': [5
 data = [load_breast_cancer(return_X_y=True), load_iris(return_X_y=True)]
 ```
 
-### Manual tracking
-
 We can manually track the parameters and results of an experiment.
 
 ```{python}
@@ -61,7 +59,7 @@ for clf, param_grid in zip(clfs, param_grids):
         results.append(run_experiment(clf, param_grid, X, y))
 ```
 
-### MLflow tracking
+A simple call to MLflow's `autolog` function can be used instead of manual tracking:
 
 ```{python}
 mlflow.autolog()
