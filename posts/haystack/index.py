@@ -1,17 +1,20 @@
----
-title: "Haystack"
-description: "Open-source LLM framework to build production-ready applications."
-author: "Georgios Douzas"
-date: "2023-06-022"
-categories: [Open Source, Review]
-image: "featured.png"
-jupyter: python3
-draft: true
----
+# %% [markdown]
+# ---
+# title: "Haystack"
+# description: "Open-source LLM framework to build production-ready applications."
+# author: "Georgios Douzas"
+# date: "2023-06-022"
+# categories: [Open Source, Review]
+# image: "featured.png"
+# jupyter: python3
+# draft: true
+# ---
 
+# %%[markdown]
+"""
 ![](featured.png)
 
-# Introduction
+## Introduction
 
 [Haystack](https://haystack.deepset.ai/) is an open-source Python framework by deepset, tailored for developing custom NLP
 applications using large language models (LLMs) like GPT-4. It facilitates seamless integration with various models from platforms
@@ -20,4 +23,4 @@ comprehensive tools that span model deployment, data preprocessing, and evaluati
 concepts, including components, pipelines, and agents, which offer both predefined and customizable functionalities. Designed for
 both NLP experts and beginners, the framework's growth is supported by a robust open-source community that collaborates through
 platforms like GitHub and Discord, and participates in various community events and webinars.
-
+"""

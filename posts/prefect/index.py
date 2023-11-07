@@ -1,16 +1,19 @@
----
-title: "Prefect"
-description: "Build, deploy and observe data workflows."
-author: "Georgios Douzas"
-date: "2023-06-022"
-categories: [Open Source, Review]
-image: "featured.png"
-jupyter: python3
----
+# %% [markdown]
+# ---
+# title: "Prefect"
+# description: "Build, deploy and observe data workflows."
+# author: "Georgios Douzas"
+# date: "2023-06-022"
+# categories: [Open Source, Review]
+# image: "featured.png"
+# jupyter: python3
+# ---
 
+# %% [markdown]
+"""
 ![](featured.png)
 
-# Introduction
+## Introduction
 
 [Prefect](https://docs.prefect.io) is a workflow orchestration tool. It makes accessible the creation, scheduling, and monitoring
 of complex data pipelines. The workflows are defined as Python code, while Prefect provides error handling, retry mechanisms, and
@@ -41,37 +44,58 @@ execution of tasks.
 The goal is to create a data workflow that downloads soccer data from [Football-Data.co.uk](https://www.football-data.co.uk). The
 URL of each of those main leagues has the form `'https://www.football-data.co.uk/mmz4281/{season}/{league_id}.csv'` where `season`
 is the season of the league and `league_id` is the league ID. Let's define a few of those seasons and leagues:
+"""
 
-```{python}
-SEASONS = ['1213', '1314', '1516', '1617', '1718', '1819', '1920', '2021', '2122', '2223']
+# %%
+SEASONS = [
+    '1213',
+    '1314',
+    '1516',
+    '1617',
+    '1718',
+    '1819',
+    '1920',
+    '2021',
+    '2122',
+    '2223',
+]
 LEAGUES_MAPPING = {
-  'E0': 'English',
-  'SC0': 'Scotish',
-  'D1': 'German', 
-  'I1': 'Italian', 
-  'SP1': 'Spanish', 
-  'F1': 'French', 
-  'N1': 'Dutch', 
-  'B1': 'Belgian', 
-  'P1': 'Portuguese', 
-  'T1': 'Turkish', 
-  'G1': 'Greek'
+    'E0': 'English',
+    'SC0': 'Scotish',
+    'D1': 'German',
+    'I1': 'Italian',
+    'SP1': 'Spanish',
+    'F1': 'French',
+    'N1': 'Dutch',
+    'B1': 'Belgian',
+    'P1': 'Portuguese',
+    'T1': 'Turkish',
+    'G1': 'Greek',
 }
-```
 
+# %% [markdown]
+"""
 We can use the above seasons and leagues to construct a mapping of (URL, league name and season) pairs:
+"""
 
-```{python}
+# %%
 URLS_MAPPING = {
-  f'https://www.football-data.co.uk/mmz4281/{season}/{league_id}.csv': (league, '-'.join([season[0:2], season[2:]])) for season in SEASONS for league_id, league in LEAGUES_MAPPING.items()
+    f'https://www.football-data.co.uk/mmz4281/{season}/{league_id}.csv': (
+        league,
+        '-'.join([season[0:2], season[2:]]),
+    )
+    for season in SEASONS
+    for league_id, league in LEAGUES_MAPPING.items()
 }
 URLS_MAPPING
-```
 
+# %% [markdown]
+"""
 We will use the above URLs to download and extract the data into a single dataframe. Additionally, the following imports will be
 required:
+"""
 
-```{python}
+# %%
 from time import time
 import httpx
 import asyncio
@@ -81,31 +105,44 @@ from prefect import flow
 from prefect import task
 from prefect.logging import get_run_logger
 from prefect.task_runners import ConcurrentTaskRunner
-```
 
+# %% [markdown]
+"""
 ## Just Python functions
 
 The simplest approach to implement the data workflow is not to use Prefect and rely on Python functions. Let's start by defining
 the three following functions:
+"""
 
-```{python}
+
+# %%
 def request_csv_data(client, url, **kwargs):
-  response = client.get(url=url)
-  return response
+    response = client.get(url=url)
+    return response
+
 
 def download_csvs_data(urls_mapping):
-  with httpx.Client() as client:
-    responses = [request_csv_data(client, url) for url, (league, season) in urls_mapping.items()]
-  csvs_data = [StringIO(str(response.content, encoding='windows-1254')) for response in responses]
-  return csvs_data
+    with httpx.Client() as client:
+        responses = [
+            request_csv_data(client, url)
+            for url, (league, season) in urls_mapping.items()
+        ]
+    csvs_data = [
+        StringIO(str(response.content, encoding='windows-1254'))
+        for response in responses
+    ]
+    return csvs_data
+
 
 def download_data(urls_mapping):
-  csvs_data = download_csvs_data(urls_mapping)
-  data = [pd.read_csv(csv_data, encoding = 'windows-1254') for csv_data in csvs_data]
-  data = pd.concat(data, ignore_index=True)
-  return data
-```
+    csvs_data = download_csvs_data(urls_mapping)
+    data = [pd.read_csv(csv_data, encoding='windows-1254') for csv_data in csvs_data]
+    data = pd.concat(data, ignore_index=True)
+    return data
 
+
+# %% [markdown]
+"""
 - `request_csv_data` will use the parameters `client` and `url` of a CSV to request the data.
 - `download_csvs_data` will use the parameter `urls_mapping` and the `request_csv_data` function to download all CSVs data and
 convert them to a list of `StringIO` objects that can be read from the `pd.read_csv` function as dataframes.
@@ -113,12 +150,14 @@ convert them to a list of `StringIO` objects that can be read from the `pd.read_
 as dataframes and combine them into a single dataframe. 
 
 Let's use the last function to run the data workflow:
+"""
 
-```{python}
+# %%
 data = download_data(URLS_MAPPING)
 data
-```
 
+# %% [markdown]
+"""
 The above code works perfectly fine but if you would like to have properties like scheduling, retries, logging, observability etc
 then you would have to implement these features from scratch. 
 
@@ -132,44 +171,60 @@ Based on the definitions of Prefect concepts, we can decorate the functions as f
 - `download_data` implements the full data workflow and will receive the `flow` decorator.
 
 Therefore `request_csv_data` represents tasks, while `download_csvs_data` is a subflow of the `download_data` flow:
+"""
 
-```{python}
+
+# %%
 @task(name='Request CSV data.', retries=5)
 def request_csv_data(client: httpx.Client, url: str, **kwargs):
-  logger = get_run_logger()
-  start_time = time()
-  response = client.get(url=url)
-  logger.info(f'CSV data, {kwargs["league"]} league and {kwargs["season"]} season, response time: {time() - start_time}s')
-  return response
+    logger = get_run_logger()
+    start_time = time()
+    response = client.get(url=url)
+    logger.info(
+        f'CSV data, {kwargs["league"]} league and {kwargs["season"]} season, response time: {time() - start_time}s'
+    )
+    return response
+
 
 @flow(name='Download synchronously CSVs data.', validate_parameters=True)
 def download_csvs_data(urls_mapping: dict[str, tuple[str, str]]):
-  logger = get_run_logger()
-  start_time = time()
-  with httpx.Client() as client:
-    responses = [request_csv_data(client, url, league=league, season=season) for url, (league, season) in urls_mapping.items()]
-  csvs_data = [StringIO(str(response.content, encoding='windows-1254')) for response in responses]
-  logger.info(f'CSVs data download time: {time() - start_time}s')
-  return csvs_data
+    logger = get_run_logger()
+    start_time = time()
+    with httpx.Client() as client:
+        responses = [
+            request_csv_data(client, url, league=league, season=season)
+            for url, (league, season) in urls_mapping.items()
+        ]
+    csvs_data = [
+        StringIO(str(response.content, encoding='windows-1254'))
+        for response in responses
+    ]
+    logger.info(f'CSVs data download time: {time() - start_time}s')
+    return csvs_data
+
 
 @flow(name='Download synchronously data.', validate_parameters=True)
 def download_data(urls_mapping: dict[str, tuple[str, str]]):
-  logger = get_run_logger()
-  start_time = time()
-  csvs_data = download_csvs_data(urls_mapping)
-  data = [pd.read_csv(csv_data, encoding = 'windows-1254') for csv_data in csvs_data]
-  data = pd.concat(data, ignore_index=True)
-  logger.info(f'Data download time: {time() - start_time}s')
-  return data
-```
+    logger = get_run_logger()
+    start_time = time()
+    csvs_data = download_csvs_data(urls_mapping)
+    data = [pd.read_csv(csv_data, encoding='windows-1254') for csv_data in csvs_data]
+    data = pd.concat(data, ignore_index=True)
+    logger.info(f'Data download time: {time() - start_time}s')
+    return data
 
+
+# %% [markdown]
+"""
 We run the updated flow:
+"""
 
-```{python}
+# %% [markdown]
 data = download_data(URLS_MAPPING)
 data
-```
 
+# %% [markdown]
+"""
 ## Concurrent task runner
 
 The above code executes the tasks in a sequence. This is not optimal for downloading a large number of files. Instead, using an
@@ -177,43 +232,64 @@ asynchronous httpx client will concurrently download the data. A current limitat
 the asynchronous client from the flow to the tasks. Therefore we remove the `task` decorator from `request_csv_data`.
 Nevertheless, we can still log the same message with the use of the `print` function and the `log_prints` parameter of the `flow`
 decorator:
+"""
 
-```{python}
+
+# %%
 async def request_csv_data(client: httpx.AsyncClient, url: str, **kwargs):
-  start_time = time()
-  response = await client.get(url=url)
-  print(f'CSV data, {kwargs["league"]} league and {kwargs["season"]} season, response time: {time() - start_time}s')
-  return response
+    start_time = time()
+    response = await client.get(url=url)
+    print(
+        f'CSV data, {kwargs["league"]} league and {kwargs["season"]} season, response time: {time() - start_time}s'
+    )
+    return response
+
 
 @flow(name='Download asynchronously CSVs data.', validate_parameters=True)
 async def download_csvs_data(urls_mapping: dict[str, tuple[str, str]]):
-  logger = get_run_logger()
-  start_time = time()
-  async with httpx.AsyncClient(limits=httpx.Limits(max_connections=30)) as client:
-    requests = [request_csv_data(client, url, league=league, season=season) for url, (league, season) in urls_mapping.items()]
-    responses = await asyncio.gather(*requests)
-  csvs_data = [StringIO(str(response.content, encoding='windows-1254')) for response in responses]
-  logger.info(f'CSVs data download time: {time() - start_time}s')
-  return csvs_data
+    logger = get_run_logger()
+    start_time = time()
+    async with httpx.AsyncClient(limits=httpx.Limits(max_connections=30)) as client:
+        requests = [
+            request_csv_data(client, url, league=league, season=season)
+            for url, (league, season) in urls_mapping.items()
+        ]
+        responses = await asyncio.gather(*requests)
+    csvs_data = [
+        StringIO(str(response.content, encoding='windows-1254'))
+        for response in responses
+    ]
+    logger.info(f'CSVs data download time: {time() - start_time}s')
+    return csvs_data
 
-@flow(name='Download asynchronously the data.', validate_parameters=True, task_runner=ConcurrentTaskRunner(), log_prints=True)
+
+@flow(
+    name='Download asynchronously the data.',
+    validate_parameters=True,
+    task_runner=ConcurrentTaskRunner(),
+    log_prints=True,
+)
 async def download_data(urls_mapping: dict[str, tuple[str, str]]):
-  logger = get_run_logger()
-  start_time = time()
-  csvs_data = await download_csvs_data(urls_mapping)
-  data = [pd.read_csv(csv_data, encoding = 'windows-1254') for csv_data in csvs_data]
-  data = pd.concat(data, ignore_index=True)
-  logger.info(f'Data download time: {time() - start_time}s')
-  return data
-```
+    logger = get_run_logger()
+    start_time = time()
+    csvs_data = await download_csvs_data(urls_mapping)
+    data = [pd.read_csv(csv_data, encoding='windows-1254') for csv_data in csvs_data]
+    data = pd.concat(data, ignore_index=True)
+    logger.info(f'Data download time: {time() - start_time}s')
+    return data
 
+
+# %% [markdown]
+"""
 Running the flow speeds up the process significantly:
+"""
 
-```{python}
+# %%
 data = await download_data(URLS_MAPPING)
 data
-```
 
+# %% [markdown]
+"""
 ## Prefect UI and deployments
 
 You can spin up a local Prefect server UI with the `prefect server start` command in the shell and explore the characteristics of
@@ -224,3 +300,4 @@ Prefect also supports deployments i.e. packaging workflow code, settings, and in
 workflow can be managed via the Prefect API and run remotely by a Prefect agent.
 
 You can read more at the official [Prefect documentation](https://docs.prefect.io).
+"""

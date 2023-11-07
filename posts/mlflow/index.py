@@ -1,17 +1,20 @@
----
-title: "MLflow"
-description: "An open source platform for the machine learning lifecycle."
-author: "Georgios Douzas"
-date: "2023-06-022"
-categories: [Open Source, Review]
-image: "featured.png"
-jupyter: python3
-draft: true
----
+# %% [markdown]
+# ---
+# title: "MLflow"
+# description: "An open source platform for the machine learning lifecycle."
+# author: "Georgios Douzas"
+# date: "2023-06-022"
+# categories: [Open Source, Review]
+# image: "featured.png"
+# jupyter: python3
+# draft: true
+# ---
 
+# %% [markdown]
+"""
 ![](featured.png)
 
-# Introduction
+## Introduction
 
 [MLflow](https://mlflow.org/) is an open-source platform designed to manage the entire machine learning lifecycle. It encompasses
 four main functionalities:
@@ -28,8 +31,9 @@ CLI, and additional APIs for Python, R, and Java.
 ## Tracking
 
 Let's assume we would like to run multiple classification experiments with various classifiers, datasets and random seeds.
+"""
 
-```{python}
+# %%
 from sklearn.datasets import load_breast_cancer, load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -39,32 +43,40 @@ import mlflow
 
 rnd_seed = 23
 
+
 def run_experiment(clf, param_grid, X, y):
     cv = KFold(n_splits=3, shuffle=True, random_state=56 * rnd_seed)
     gscv = GridSearchCV(clf, param_grid=param_grid, cv=cv)
     results = cross_validate(gscv, X, y, cv=cv, scoring=['accuracy', 'f1_micro'])
     return results
 
+
 clfs = [KNeighborsClassifier(), GradientBoostingClassifier()]
-param_grids = [{'n_neighbors': [3, 5]}, {'max_depth': [3, 5], 'n_estimators': [50, 100], 'random_state': [rnd_seed + 10]}]
+param_grids = [
+    {'n_neighbors': [3, 5]},
+    {'max_depth': [3, 5], 'n_estimators': [50, 100], 'random_state': [rnd_seed + 10]},
+]
 data = [load_breast_cancer(return_X_y=True), load_iris(return_X_y=True)]
-```
 
+# %% [markdown]
+"""
 We can manually track the parameters and results of an experiment.
+"""
 
-```{python}
+# %%
 results = []
 for clf, param_grid in zip(clfs, param_grids):
     for X, y in data:
         results.append(run_experiment(clf, param_grid, X, y))
-```
 
+# %% [markdown]
+"""
 A simple call to MLflow's `autolog` function can be used instead of manual tracking:
+"""
 
-```{python}
+# %%
 mlflow.autolog()
 
 for clf, param_grid in zip(clfs, param_grids):
     for X, y in data:
         results.append(run_experiment(clf, param_grid, X, y))
-```
