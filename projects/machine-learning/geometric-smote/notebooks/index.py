@@ -11,6 +11,8 @@
 
 # %% [markdown]
 """
+![](featured.png)
+
 The [SMOTE](https://arxiv.org/pdf/1106.1813.pdf) algorithm is the most popular oversampler, with many proposed variants. On the
 other hand, [Geometric SMOTE](https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353) is not another member of
 the SMOTE's family since it expands the data generation area and does not use linear interpolation for new samples. You can check
