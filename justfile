@@ -6,6 +6,8 @@ set positional-arguments
 
 # Clean cache of project
 @clean category project:
+    rm -rf .quarto/_freeze/projects/$1/$2/notebooks/.jupyter_cache
+    rm -rf _freeze/projects/$1/$2/notebooks/.jupyter_cache
     rm -rf projects/$1/$2/notebooks/.jupyter_cache
 
 # Render project

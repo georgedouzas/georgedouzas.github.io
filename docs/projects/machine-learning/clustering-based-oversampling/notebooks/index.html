@@ -8,9 +8,9 @@
 
 <meta name="author" content="Georgios Douzas">
 <meta name="dcterms.date" content="2022-05-02">
-<meta name="description" content="Combining clustering and oversampling to increase classification performance.">
+<meta name="description" content="A general interface for clustering based over-sampling algorithms.">
 
-<title>AI &amp; Friends - Clustering-based oversampling</title>
+<title>AI &amp; Friends - cluster-over-sampling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -102,9 +102,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../../../styles.css">
@@ -152,10 +149,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Clustering-based oversampling</h1>
+      <h1 class="title">cluster-over-sampling</h1>
                   <div>
         <div class="description">
-          Combining clustering and oversampling to increase classification performance.
+          A general interface for clustering based over-sampling algorithms.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -199,191 +196,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><img src="featured.png" class="img-fluid"></p>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>SMOTE algorithm and its variants generate synthetic samples along line segments that join minority class instances. SMOTE addresses only the between-classes imbalance. On the other hand, SMOTE does nothing about areas of the input space that differ significantly in the density of a particular class, an issue known as within-classes imbalance.</p>
-<p>A straightforward approach is to combine oversamplers with clustering algorithms. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0957417417302324">SOMO</a> and <a href="https://www.sciencedirect.com/science/article/abs/pii/S0020025518304997">KMeans-SMOTE</a> algorithms are specific realizations of this approach that have been shown to outperform other standard oversamplers in a large number of datasets.</p>
-</section>
-<section id="implementation" class="level2">
-<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
-<p>I have developed a Python implementation of the above clustering-based oversampling approach called <a href="https://github.com/georgedouzas/cluster-over-sampling">cluster-over-sampling</a>, which integrates seamlessly with the <a href="https://scikit-learn.org/stable/">Scikit-Learn</a> and <a href="https://imbalanced-learn.org/stable/">Imbalanced-Learn</a> ecosystems. You can check the <a href="https://github.com/georgedouzas/cluster-over-sampling">documentation</a> for more details on installation and the API.</p>
-</section>
-<section id="functionality" class="level2">
-<h2 class="anchored" data-anchor-id="functionality">Functionality</h2>
-<p>Let’s first generate a binary class imbalanced dataset, represented by the input matrix <code>X</code> and the target vector <code>y</code>. Using a high value for the <code>flip_y</code> parameter, we ensure that the data are noisy thus the clustering of the input space will help the oversampling process:</p>
-<div id="e7d7388d" class="cell" data-execution_count="2">
+<p>SMOTE algorithm and its variants generate synthetic samples along line segments that join minority class instances. SMOTE addresses only the between-classes imbalance. On the other hand, SMOTE does nothing about areas of the input space that differ significantly in the density of a particular class, an issue known as within-classes imbalance. An approach that deals with this issue is to use a clusterer to select sparse areas of the input space and then apply oversampling to them. I have developed a Python implementation of the above clustering-based oversampling approach called <a href="https://github.com/georgedouzas/cluster-over-sampling">cluster-over-sampling</a>, which integrates seamlessly with the <a href="https://scikit-learn.org/stable/">Scikit-Learn</a> and <a href="https://imbalanced-learn.org/stable/">Imbalanced-Learn</a> ecosystems. To present the API, let’s first load some data:</p>
+<div id="f3264f41" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set random seed</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>rnd_seed <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate imbalanced data</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_classification(</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">500</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    n_classes<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    weights<span class="op">=</span>[<span class="fl">0.9</span>, <span class="fl">0.1</span>],</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span>rnd_seed,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    n_informative<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    class_sep<span class="op">=</span><span class="fl">1.0</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    n_features<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    flip_y<span class="op">=</span><span class="fl">0.3</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> load_breast_cancer(return_X_y<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The function <code>print_characteristics</code> extracts and prints the main characteristics of a binary class dataset. Specifically, it prints the number of samples, the number of features, the labels, and the number of samples for the majority and minority classes as well as the Imbalance Ratio, defined as the ratio between the number of instances of the majority and minority classes.</p>
-<div id="a06ff299" class="cell" data-execution_count="3">
+<p>The data are clearly imbalanced:</p>
+<div id="d1f04b9e" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to print dataset's characteristics</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_characteristics(X, y):</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    n_samples, n_features <span class="op">=</span> X.shape</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    count_y <span class="op">=</span> Counter(y)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    (maj_label, n_samples_maj), (min_label, n_samples_min) <span class="op">=</span> count_y.most_common()</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    ir <span class="op">=</span> n_samples_maj <span class="op">/</span> n_samples_min</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Number of samples: </span><span class="sc">{</span>n_samples<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Number of features: </span><span class="sc">{</span>n_features<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Majority class label: </span><span class="sc">{</span>maj_label<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Number of majority class samples: </span><span class="sc">{</span>n_samples_maj<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Minority class label: </span><span class="sc">{</span>min_label<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Number of minority class samples: </span><span class="sc">{</span>n_samples_min<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'Imbalance Ratio: </span><span class="sc">{</span>ir<span class="sc">:.1f}</span><span class="ss">'</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        sep<span class="op">=</span><span class="st">'</span><span class="ch">\n</span><span class="st">'</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>I use the above function to print the main characteristics of the generated imbalanced dataset:</p>
-<div id="6f2a3ab3" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>print_characteristics(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Classes distribution</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> Counter(y)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Number of majority class samples: </span><span class="sc">{</span>counter[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">."</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Number of minority class samples: </span><span class="sc">{</span>counter[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">."</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of samples: 500
-Number of features: 10
-Majority class label: 0
-Number of majority class samples: 379
-Minority class label: 1
-Number of minority class samples: 121
-Imbalance Ratio: 3.1</code></pre>
+<pre><code>Number of majority class samples: 357.
+Number of minority class samples: 212.</code></pre>
 </div>
 </div>
-<p>I will combine the <code>SMOTE</code> oversampler and the <code>KMeans</code> clusterer to rebalance the above dataset. The combined clusterer-oversampler can be constructed by importing the <code>SMOTE</code> oversampler from Imbalanced-Learn, <code>KMeans</code> from Scikit-Learn, and <code>ClusterOverSampler</code> from <code>cluster-over-sampling</code>. Then following the Imbalanced Learn API, we can use the <code>fit_resample</code> method to resample the imbalanced dataset:</p>
-<div id="48080e9c" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> imblearn.over_sampling <span class="im">import</span> SMOTE</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clover.over_sampling <span class="im">import</span> ClusterOverSampler</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create KMeans-SMOTE instance</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>smote <span class="op">=</span> SMOTE(random_state<span class="op">=</span>rnd_seed <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span>rnd_seed <span class="op">+</span> <span class="dv">3</span>, n_init<span class="op">=</span><span class="dv">50</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>kmeans_smote <span class="op">=</span> ClusterOverSampler(oversampler<span class="op">=</span>smote, clusterer<span class="op">=</span>kmeans)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit and resample imbalanced data</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>X_res, y_res <span class="op">=</span> kmeans_smote.fit_resample(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I will use <code>KMeans</code> and <code>SMOTE</code> to create a clustering-based oversampler but any combination would work:</p>
+<div id="68e41a9c" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> imblearn.over_sampling <span class="im">import</span> SMOTE</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clover.over_sampling <span class="im">import</span> ClusterOverSampler</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create KMeans-SMOTE instance</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>rnd_seed <span class="op">=</span> <span class="dv">14</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>smote <span class="op">=</span> SMOTE(random_state<span class="op">=</span>rnd_seed <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span>rnd_seed <span class="op">+</span> <span class="dv">3</span>, n_init<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>kmeans_smote <span class="op">=</span> ClusterOverSampler(oversampler<span class="op">=</span>smote, clusterer<span class="op">=</span>kmeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Again we can print the main characteristics of the rebalanced dataset:</p>
-<div id="11d31276" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>print_characteristics(X_res, y_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now we can use the <code>fit</code> method to calculate statistics of the oversampling process:</p>
+<div id="ca354d2e" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>kmeans_smote.fit(X, y)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Number of generated minority class instances to rebalance dataset: </span><span class="sc">{</span>kmeans_smote<span class="sc">.</span>sampling_strategy_[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">."</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of samples: 759
-Number of features: 10
-Majority class label: 1
-Number of majority class samples: 380
-Minority class label: 0
-Number of minority class samples: 379
-Imbalance Ratio: 1.0</code></pre>
+<pre><code>Number of generated minority class instances to rebalance dataset: 145.</code></pre>
 </div>
 </div>
-<p>The default behavior is to generate the appropriate number of minority class samples so that the resampled dataset is perfectly balanced (although this sometimes may result in an approximately balanced dataset). Also, cluster-over-sampling provides for convenience, the clustering-based oversamplers <a href="https://www.sciencedirect.com/science/article/abs/pii/S0957417417302324">SOMO</a> and <a href="https://www.sciencedirect.com/science/article/abs/pii/S0020025518304997">KMeans-SMOTE</a>, as well as <a href="https://www.sciencedirect.com/science/article/abs/pii/S095741742100662X">G-SOMO</a> that uses <a href="../../publication/gsmote_journal">Geometric SMOTE</a> as the oversampler in place of SMOTE.</p>
-<p>As mentioned above, training a classifier on imbalanced data may result in suboptimal performance on out-of-sample data. The function <code>calculate_cv_scores</code> calculates the average 5-fold cross-validation F and accuracy scores across 5 runs of a <code>RandomForestClassifier</code> that is optionally combined with an oversampler through a pipeline:</p>
-<div id="8f194c54" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate, StratifiedKFold</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> make_scorer, accuracy_score, f1_score</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> imblearn.pipeline <span class="im">import</span> make_pipeline</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function that calculates out-of-sample scores</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_cv_scores(oversampler, X, y):</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    cv_scores <span class="op">=</span> []</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    scorers <span class="op">=</span> {</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">'f_score'</span>: make_scorer(f1_score),</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">'accuracy'</span>: make_scorer(accuracy_score),</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    n_runs <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ind <span class="kw">in</span> <span class="bu">range</span>(n_runs):</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        rnd_seed <span class="op">=</span> <span class="dv">8</span> <span class="op">*</span> ind</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        classifier <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span>rnd_seed)</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> oversampler <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>            classifier <span class="op">=</span> make_pipeline(</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                oversampler.set_params(random_state<span class="op">=</span>rnd_seed <span class="op">+</span> <span class="dv">5</span>), classifier</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        scores <span class="op">=</span> cross_validate(</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>            estimator<span class="op">=</span>classifier,</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>            X<span class="op">=</span>X,</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>y,</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>            scoring<span class="op">=</span>scorers,</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>            cv<span class="op">=</span>StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span>rnd_seed <span class="op">+</span> <span class="dv">6</span>),</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>        cv_scores.append([scores[<span class="ss">f'test_</span><span class="sc">{</span>scorer<span class="sc">}</span><span class="ss">'</span>].mean() <span class="cf">for</span> scorer <span class="kw">in</span> scorers])</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.mean(cv_scores, axis<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Or use the <code>fit_resample</code> method to get the resampled data:</p>
+<div id="00679b91" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>_, y_res <span class="op">=</span> kmeans_smote.fit_resample(X, y)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> Counter(y_res)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Number of majority class samples: </span><span class="sc">{</span>counter[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">."</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Number of minority class samples: </span><span class="sc">{</span>counter[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">."</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of majority class samples: 357.
+Number of minority class samples: 357.</code></pre>
 </div>
-<p>Using the above function, we can calculate the out-of-sample performance when no oversampling is applied, as well as when SMOTE and DBSCAN-SMOTE are used as oversamplers:</p>
-<div id="896288c2" class="cell" data-execution_count="8">
+</div>
+<p>The clustering-based oversamplers can be used in machine learning pipelines:</p>
+<div id="6e33ef04" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clover.over_sampling <span class="im">import</span> ClusterOverSampler</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate cross-validation scores</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>mapping <span class="op">=</span> {</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'No oversampling'</span>: <span class="va">None</span>,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SMOTE'</span>: SMOTE(),</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DBSCAN-SMOTE'</span>: ClusterOverSampler(oversampler<span class="op">=</span>SMOTE(), clusterer<span class="op">=</span>DBSCAN()),</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> {}</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, oversampler <span class="kw">in</span> mapping.items():</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    cv_scores[name] <span class="op">=</span> calculate_cv_scores(oversampler, X, y)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> pd.DataFrame(cv_scores, index<span class="op">=</span>[<span class="st">'F-score'</span>, <span class="st">'Accuracy'</span>])</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>cv_scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">No oversampling</th>
-<th data-quarto-table-cell-role="th">SMOTE</th>
-<th data-quarto-table-cell-role="th">DBSCAN-SMOTE</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">F-score</td>
-<td>0.250849</td>
-<td>0.349954</td>
-<td>0.3656</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Accuracy</td>
-<td>0.773200</td>
-<td>0.715600</td>
-<td>0.7260</td>
-</tr>
-</tbody>
-</table>
-
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> imblearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross validation score</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>classifier <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span>rnd_seed)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>classifier <span class="op">=</span> make_pipeline(kmeans_smote, classifier)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> cross_val_score(estimator<span class="op">=</span>classifier, X<span class="op">=</span>X, y<span class="op">=</span>y, scoring<span class="op">=</span><span class="st">"f1"</span>).mean()</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The cross-validation F-score is </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The cross-validation F-score is 0.9664262119887302.</code></pre>
 </div>
 </div>
-</div>
-<p>Notice that using accuracy as an evaluation metric is not a good choice when the data is imbalanced. For example, a trivial classifier that always predicts the majority class would still have an accuracy equal to 0.90, even though all the minority class instances are misclassified. On the other hand, the F-score is an appropriate evaluation metric for imbalanced data since it considers the accuracies per class.</p>
+<p>For more details and examples you can check the <a href="https://georgedouzas.github.io/cluster-over-sampling/">documentation</a>.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
