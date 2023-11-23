@@ -160,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">Machine Learning</div>
-                <div class="quarto-category">Open Source</div>
+                <div class="quarto-category">Publication</div>
                 <div class="quarto-category">Imbalanced Data</div>
               </div>
                   </div>
@@ -199,10 +199,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><img src="featured.png" class="img-fluid"></p>
-<p>The <a href="https://arxiv.org/pdf/1106.1813.pdf">SMOTE</a> algorithm is the most popular oversampler, with many proposed variants. On the other hand, <a href="https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353">Geometric SMOTE</a> is not another member of the SMOTE’s family since it expands the data generation area and does not use linear interpolation for new samples. You can check the following figure for a visual representation of the their difference:</p>
+<p>The <a href="https://arxiv.org/pdf/1106.1813.pdf">SMOTE</a> algorithm is the most popular oversampler, with many proposed variants. On the other hand, <a href="https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353">Geometric SMOTE</a> is not another member of the SMOTE’s family since it expands the data generation area and does not just use linear interpolation of existing samples to generate for new samples. You can check the following figure for a visual representation of the their difference:</p>
 <p><img src="smote_vs_gsmote.png" class="img-fluid"></p>
 <p>I have developed a Python implementation of the Geometric SMOTE oversampler called <a href="https://github.com/georgedouzas/geometric-smote">geometric-smote</a>, which integrates with the <a href="https://scikit-learn.org/stable/">Scikit-Learn</a> and <a href="https://imbalanced-learn.org/stable/">Imbalanced-Learn</a> ecosystems. To run a comparison experiment, let’s first create various imbalanced binary datasets with different characteristics:</p>
-<div id="11ee976a" class="cell" data-execution_count="2">
+<div id="249f7a07" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> ParameterGrid</span>
@@ -227,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will also create pipelines of various oversamplers, classifiers and their hyperparameters:</p>
-<div id="8ed7ee08" class="cell" data-execution_count="3">
+<div id="a0aaccec" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
@@ -268,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        pipelines.append(GridSearchCV(estimator, param_grid, cv<span class="op">=</span>cv, scoring<span class="op">=</span><span class="st">"f1"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, we will calculate the <a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html">nested cross-validation scores</a> of the above pipelines using F-score as evaluation metric:</p>
-<div id="bff420ca" class="cell" data-execution_count="4">
+<div id="95146f4e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n_runs <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> []</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> run_id <span class="kw">in</span> <span class="bu">range</span>(n_runs):</span>
@@ -299,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>            cv_scores.append((run_id, dataset_id, pipeline_name, scores.mean()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s see the final results of the experiment:</p>
-<div id="244a8ef2" class="cell" data-execution_count="5">
+<div id="4d12c49b" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> (</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    pd.DataFrame(cv_scores, columns<span class="op">=</span>[<span class="st">"Run"</span>, <span class="st">"Dataset"</span>, <span class="st">"Pipeline"</span>, <span class="st">"Score"</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"Dataset"</span>, <span class="st">"Pipeline"</span>])[<span class="st">"Score"</span>]</span>
@@ -520,7 +520,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The next table shows the pipeline with the highest F-score per dataset:</p>
-<div id="d9a88320" class="cell" data-execution_count="6">
+<div id="2205001c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cv_scores_best <span class="op">=</span> cv_scores.loc[cv_scores.groupby(<span class="st">"Dataset"</span>)[<span class="st">"Score"</span>].idxmax()]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cv_scores_best</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
