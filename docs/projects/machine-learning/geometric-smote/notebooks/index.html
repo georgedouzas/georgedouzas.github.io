@@ -198,6 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<p><img src="featured.png" class="img-fluid"></p>
 <p>The <a href="https://arxiv.org/pdf/1106.1813.pdf">SMOTE</a> algorithm is the most popular oversampler, with many proposed variants. On the other hand, <a href="https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353">Geometric SMOTE</a> is not another member of the SMOTE’s family since it expands the data generation area and does not use linear interpolation for new samples. You can check the following figure for a visual representation of the their difference:</p>
 <p><img src="smote_vs_gsmote.png" class="img-fluid"></p>
 <p>I have developed a Python implementation of the Geometric SMOTE oversampler called <a href="https://github.com/georgedouzas/geometric-smote">geometric-smote</a>, which integrates with the <a href="https://scikit-learn.org/stable/">Scikit-Learn</a> and <a href="https://imbalanced-learn.org/stable/">Imbalanced-Learn</a> ecosystems. To run a comparison experiment, let’s first create various imbalanced binary datasets with different characteristics:</p>
