@@ -11,191 +11,152 @@
 
 # %% [markdown]
 """
-![](featured.png)
-
-## Introduction
-
-[SMOTE](https://arxiv.org/pdf/1106.1813.pdf) is the most popular
-[oversampling](https://en.wikipedia.org/wiki/Oversampling_and_undersampling_in_data_analysis) algorithm, while many variants of it
-have been developed. It generates synthetic data between the line segment that connects two randomly chosen neighboring minority
-class instances.
-
-On the other hand, [Geometric SMOTE](https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353) expands the data
-generation area by generating synthetic data inside a hypersphere defined by a randomly chosen minority class instance and one of
-its neighbors, either from the minority or majority class.
-
-The following figure illustrates a typical sample generated from the two algorithms:
+The [SMOTE](https://arxiv.org/pdf/1106.1813.pdf) algorithm is the most popular oversampler, with many proposed variants. On the
+other hand, [Geometric SMOTE](https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353) is not another member of
+the SMOTE's family since it expands the data generation area and does not use linear interpolation for new samples. You can check
+the following figure for a visual representation of the their difference:
 
 ![](smote_vs_gsmote.png)
 
-## Implementation
-
 I have developed a Python implementation of the Geometric SMOTE oversampler called
-[geometric-smote](https://github.com/georgedouzas/geometric-smote), which integrates seamlessly with the
-[Scikit-Learn](https://scikit-learn.org/stable/) and [Imbalanced-Learn](https://imbalanced-learn.org/stable/) ecosystems. You can
-check the [documentation](https://geometric-smote.readthedocs.io/en/latest/?badge=latest) for more details on installation and the
-API.
-
-## Functionality
-
-Let's first generate a binary class imbalanced dataset, represented by the input matrix `X` and the target vector `y`: 
+[geometric-smote](https://github.com/georgedouzas/geometric-smote), which integrates with the
+[Scikit-Learn](https://scikit-learn.org/stable/) and [Imbalanced-Learn](https://imbalanced-learn.org/stable/) ecosystems. To run a
+comparison experiment, let's first create various imbalanced binary datasets with different characteristics:
 """
 
 # %%
 
 # Imports
 from sklearn.datasets import make_classification
+from sklearn.model_selection import ParameterGrid
 
 # Set random seed
 rnd_seed = 43
 
-# Generate imbalanced data
-X, y = make_classification(
-    n_samples=1000,
-    n_features=10,
-    n_classes=2,
-    weights=[0.95, 0.05],
-    random_state=rnd_seed,
-    n_informative=7,
-    class_sep=0.1,
+# Generate imbalanced datasets
+datasets = []
+datasets_params = ParameterGrid(
+    {"weights": [[0.8, 0.2], [0.9, 0.1]], "class_sep": [0.01, 0.1]}
 )
-
-# %% [markdown]
-"""
-The function `print_characteristics` extracts and prints the main characteristics of a binary class dataset. Specifically, it
-prints the number of samples, the number of features, the labels, and the number of samples for the majority and minority classes
-as well as the Imbalance Ratio, defined as the ratio between the number of instances of the majority and minority classes.
-"""
-
-# %%
-# Imports
-from collections import Counter
-
-
-# Define function to print dataset's characteristics
-def print_characteristics(X, y):
-    n_samples, n_features = X.shape
-    count_y = Counter(y)
-    (maj_label, n_samples_maj), (min_label, n_samples_min) = count_y.most_common()
-    ir = n_samples_maj / n_samples_min
-    print(
-        f'Number of samples: {n_samples}',
-        f'Number of features: {n_features}',
-        f'Majority class label: {maj_label}',
-        f'Number of majority class samples: {n_samples_maj}',
-        f'Minority class label: {min_label}',
-        f'Number of minority class samples: {n_samples_min}',
-        f'Imbalance Ratio: {ir:.1f}',
-        sep='\n',
+for data_params in datasets_params:
+    datasets.append(
+        make_classification(
+            random_state=rnd_seed,
+            n_informative=10,
+            n_samples=2000,
+            n_classes=2,
+            **data_params,
+        )
     )
 
-
 # %% [markdown]
 """
-I use the above function to print the main characteristics of the generated imbalanced dataset:
-"""
-
-# %%
-print_characteristics(X, y)
-
-# %% [markdown]
-"""
-The class that represents the Geometric SMOTE oversampler is called `GeometricSMOTE`. The most basic functionality is to resample
-an imbalanced dataset. Following the Imbalanced-Learn API, the `fit_resample` method of a `GeometricSMOTE` instance can be used to
-resample the imbalanced dataset:
+We will also create pipelines of various oversamplers, classifiers and their hyperparameters:
 """
 
 # %%
 # Imports
-from gsmote import GeometricSMOTE
-
-# Create GeometricSMOTE instance
-geometric_smote = GeometricSMOTE(random_state=rnd_seed + 5)
-
-# Fit and resample imbalanced data
-X_res, y_res = geometric_smote.fit_resample(X, y)
-
-# %% [markdown]
-"""
-Again we can print the main characteristics of the rebalanced dataset:
-"""
-
-# %%
-print_characteristics(X_res, y_res)
-
-# %% [markdown]
-"""
-As expected, the default behavior of the `GeometricSMOTE` instance is to generate the appropriate number of minority class
-samples so that the resampled dataset is perfectly balanced.
-
-As mentioned above, training a classifier on imbalanced data may result in suboptimal performance on out-of-sample data. The
-function `calculate_cv_scores` calculates the average 5-fold cross-validation geometric mean and accuracy scores across 10 runs
-of a logistic regression classifier that is optionally combined with an oversampler through a pipeline:
-"""
-
-# %%
-# Imports
-import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import cross_validate, StratifiedKFold
-from sklearn.metrics import make_scorer, accuracy_score
+from sklearn.neighbors import KNeighborsClassifier, NearestNeighbors
+from sklearn.model_selection import cross_val_score, StratifiedKFold, GridSearchCV
 from imblearn.pipeline import make_pipeline
-from imblearn.metrics import geometric_mean_score
+from imblearn.over_sampling import RandomOverSampler, SMOTE
+from gsmote import GeometricSMOTE
 
-
-# Define function that calculates out-of-sample scores
-def calculate_cv_scores(oversampler, X, y):
-    cv_scores = []
-    scorers = {
-        'g_mean': make_scorer(geometric_mean_score),
-        'accuracy': make_scorer(accuracy_score),
-    }
-    n_runs = 10
-    for ind in range(n_runs):
-        rnd_seed = 10 * ind
-        classifier = LogisticRegression(random_state=rnd_seed)
-        if oversampler is not None:
-            classifier = make_pipeline(
-                oversampler.set_params(random_state=rnd_seed + 4), classifier
-            )
-        scores = cross_validate(
-            estimator=classifier,
-            X=X,
-            y=y,
-            scoring=scorers,
-            cv=StratifiedKFold(n_splits=10, shuffle=True, random_state=rnd_seed + 6),
+# Pipelines
+classifiers = [LogisticRegression(), KNeighborsClassifier()]
+oversamplers = [None, RandomOverSampler(), SMOTE(), GeometricSMOTE()]
+pipelines = []
+oversamplers_param_grids = {
+    "SMOTE": {
+        "smote__k_neighbors": [
+            NearestNeighbors(n_neighbors=2),
+            NearestNeighbors(n_neighbors=3),
+        ]
+    },
+    "GeometricSMOTE": {
+        "geometricsmote__k_neighbors": [2, 3],
+        "geometricsmote__deformation_factor": [0.0, 0.25, 0.5, 0.75, 1.0],
+    },
+}
+cv = StratifiedKFold(n_splits=2, shuffle=True, random_state=rnd_seed + 5)
+for classifier in classifiers:
+    for oversampler in oversamplers:
+        oversampler_name = (
+            oversampler.__class__.__name__ if oversampler is not None else None
         )
-        cv_scores.append([scores[f'test_{scorer}'].mean() for scorer in scorers])
-    return np.mean(cv_scores, axis=0)
-
+        param_grid = oversamplers_param_grids.get(oversampler_name, {})
+        estimator = (
+            make_pipeline(oversampler, classifier)
+            if oversampler is not None
+            else make_pipeline(classifier)
+        )
+        pipelines.append(GridSearchCV(estimator, param_grid, cv=cv, scoring="f1"))
 
 # %% [markdown]
 """
-Using the above function, we can calculate the out-of-sample performance when no oversampling is applied as well as when random
-oversampling, SMOTE and Geometric SMOTE are used as oversamplers:
+Finally, we will calculate the [nested cross-validation
+scores](https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html) of the above
+pipelines using F-score as evaluation metric:
 """
 
 # %%
-# Imports
-from imblearn.over_sampling import RandomOverSampler, SMOTE
+#| output: false
+n_runs = 3
+cv_scores = []
+for run_id in range(n_runs):
+    for dataset_id, (X, y) in enumerate(datasets):
+        for pipeline_id, pipeline in enumerate(pipelines):
+            for param in pipeline.get_params():
+                if param.endswith("__n_jobs") and param != "estimator__smote__n_jobs":
+                    pipeline.set_params(**{param: -1})
+                if param.endswith("__random_state"):
+                    pipeline.set_params(
+                        **{
+                            param: rnd_seed
+                            * (run_id + 1)
+                            * (dataset_id + 1)
+                            * (pipeline_id + 1)
+                        }
+                    )
+            cv = StratifiedKFold(n_splits=3, shuffle=True, random_state=10 * run_id)
+            scores = cross_val_score(
+                estimator=pipeline,
+                X=X,
+                y=y,
+                scoring="f1",
+                cv=cv,
+            )
+            print(f"Run: {run_id} | Dataset: {dataset_id} | Pipeline: {pipeline_id}")
+            pipeline_name = '-'.join([estimator.__class__.__name__ for _, estimator in pipeline.get_params()['estimator'].get_params()['steps']])
+            cv_scores.append((run_id, dataset_id, pipeline_name, scores.mean()))
 
-# Calculate cross-validation scores
-mapping = {
-    'No oversampling': None,
-    'Random Oversampling': RandomOverSampler(),
-    'SMOTE': SMOTE(),
-    'Geometric SMOTE': GeometricSMOTE(),
-}
-cv_scores = {}
-for name, oversampler in mapping.items():
-    cv_scores[name] = calculate_cv_scores(oversampler, X, y)
-cv_scores = pd.DataFrame(cv_scores, index=['Geometric Mean', 'Accuracy'])
+# %% [markdown]
+"""
+Let's see the final results of the experiment:
+"""
+
+# %%
+cv_scores = (
+    pd.DataFrame(cv_scores, columns=["Run", "Dataset", "Pipeline", "Score"])
+    .groupby(["Dataset", "Pipeline"])["Score"]
+    .mean()
+    .reset_index()
+)
 cv_scores
 
 # %% [markdown]
 """
-Geometric SMOTE outperforms the other methods when the geometric mean score is used as an evaluation metric. At the same time, the
-highest accuracy is achieved when no oversampling is applied, although if the goal is to consider performance equally on all
-classes, it is not a suitable metric for imbalanced data.
+The next table shows the pipeline with the highest F-score per dataset:
+"""
+
+# %%
+
+cv_scores_best = cv_scores.loc[cv_scores.groupby("Dataset")["Score"].idxmax()]
+cv_scores_best
+
+# %% [markdown]
+"""
+Therefore, Geometric SMOTE outperforms the other methods in all datasets when the F-score is used as an evaluation metric.
 """
