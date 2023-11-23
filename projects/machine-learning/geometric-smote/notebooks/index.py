@@ -4,7 +4,7 @@
 # description: "Extending SMOTE's data generation mechanism."
 # author: "Georgios Douzas"
 # date: "2022-05-01"
-# categories: [Machine Learning, Open Source, Imbalanced Data]
+# categories: [Machine Learning, Publication, Imbalanced Data]
 # image: "featured.png"
 # jupyter: python3
 # ---
@@ -15,8 +15,8 @@
 
 The [SMOTE](https://arxiv.org/pdf/1106.1813.pdf) algorithm is the most popular oversampler, with many proposed variants. On the
 other hand, [Geometric SMOTE](https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353) is not another member of
-the SMOTE's family since it expands the data generation area and does not use linear interpolation for new samples. You can check
-the following figure for a visual representation of the their difference:
+the SMOTE's family since it expands the data generation area and does not just use linear interpolation of existing samples to
+generate for new samples. You can check the following figure for a visual representation of the their difference:
 
 ![](smote_vs_gsmote.png)
 
