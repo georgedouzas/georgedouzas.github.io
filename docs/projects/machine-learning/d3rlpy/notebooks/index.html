@@ -8,9 +8,9 @@
 
 <meta name="author" content="Georgios Douzas">
 <meta name="dcterms.date" content="2023-06-22">
-<meta name="description" content="An open source platform for the machine learning lifecycle.">
+<meta name="description" content="An offline deep reinforcement learning library.">
 
-<title>AI &amp; Friends - MLflow</title>
+<title>AI &amp; Friends - d3rlpy</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,59 +23,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,7 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -114,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">AI &amp; Friends</span>
     </a>
   </div>
@@ -125,11 +91,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
+    <a class="nav-link" href="../../../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/georgedouzas"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/gdouzas"> <i class="bi bi-linkedin" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -144,15 +115,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">MLflow</h1>
+      <h1 class="title">d3rlpy</h1>
                   <div>
         <div class="description">
-          An open source platform for the machine learning lifecycle.
+          An offline deep reinforcement learning library.
         </div>
       </div>
                           <div class="quarto-categories">
+                <div class="quarto-category">Machine Learning</div>
                 <div class="quarto-category">Open Source</div>
-                <div class="quarto-category">Review</div>
+                <div class="quarto-category">Reinforcement Learning</div>
               </div>
                   </div>
   </div>
@@ -190,88 +162,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><img src="featured.png" class="img-fluid"></p>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p><a href="https://mlflow.org/">MLflow</a> is an open-source platform designed to manage the entire machine learning lifecycle. It encompasses four main functionalities:</p>
-<ul>
-<li><strong>Tracking</strong>: Monitors experiments, logging parameters and outcomes.<br>
-</li>
-<li><strong>Projects</strong>: Enables the packaging of ML code into a reproducible and shareable format.<br>
-</li>
-<li><strong>Models</strong>: Oversees the management and deployment of models across various ML libraries and serving platforms.<br>
-</li>
-<li><strong>Model Registry</strong>: Central repository that facilitates collaborative management of MLflow Models throughout their lifecycle, including aspects like versioning and stage transitions.</li>
-</ul>
-<p>Notably, MLflow is library-agnostic and supports integration with various ML libraries and programming languages through REST API, CLI, and additional APIs for Python, R, and Java.</p>
-<section id="tracking" class="level2">
-<h2 class="anchored" data-anchor-id="tracking">Tracking</h2>
-<p>Let’s assume we would like to run multiple classification experiments with various classifiers, datasets and random seeds.</p>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer, load_iris</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> GradientBoostingClassifier</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV, cross_val_score, KFold, cross_validate</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlflow</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>rnd_seed <span class="op">=</span> <span class="dv">23</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_experiment(clf, param_grid, X, y):</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    cv <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">3</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">56</span> <span class="op">*</span> rnd_seed)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    gscv <span class="op">=</span> GridSearchCV(clf, param_grid<span class="op">=</span>param_grid, cv<span class="op">=</span>cv)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> cross_validate(gscv, X, y, cv<span class="op">=</span>cv, scoring<span class="op">=</span>[<span class="st">'accuracy'</span>, <span class="st">'f1_micro'</span>])</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>clfs <span class="op">=</span> [KNeighborsClassifier(), GradientBoostingClassifier()]</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>param_grids <span class="op">=</span> [{<span class="st">'n_neighbors'</span>: [<span class="dv">3</span>, <span class="dv">5</span>]}, {<span class="st">'max_depth'</span>: [<span class="dv">3</span>, <span class="dv">5</span>], <span class="st">'n_estimators'</span>: [<span class="dv">50</span>, <span class="dv">100</span>], <span class="st">'random_state'</span>: [rnd_seed <span class="op">+</span> <span class="dv">10</span>]}]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [load_breast_cancer(return_X_y<span class="op">=</span><span class="va">True</span>), load_iris(return_X_y<span class="op">=</span><span class="va">True</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We can manually track the parameters and results of an experiment.</p>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> clf, param_grid <span class="kw">in</span> <span class="bu">zip</span>(clfs, param_grids):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> X, y <span class="kw">in</span> data:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        results.append(run_experiment(clf, param_grid, X, y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>A simple call to MLflow’s <code>autolog</code> function can be used instead of manual tracking:</p>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mlflow.autolog()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> clf, param_grid <span class="kw">in</span> <span class="bu">zip</span>(clfs, param_grids):</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> X, y <span class="kw">in</span> data:</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        results.append(run_experiment(clf, param_grid, X, y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>2023/11/02 22:45:40 INFO mlflow.tracking.fluent: Autologging successfully enabled for sklearn.
-2023/11/02 22:45:40 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'bac15cbe7d964d8ea481f8a220b79d04', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:45:46 WARNING mlflow.utils.autologging_utils: MLflow autologging encountered a warning: "/Users/georgiosdouzas/Projects/personal/blog/posts/mlflow/.venv/lib/python3.10/site-packages/_distutils_hack/__init__.py:33: UserWarning: Setuptools is replacing distutils."
-2023/11/02 22:45:49 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:45:49 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'b701f1568219425bac9f345d36506055', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:45:56 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:45:56 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'c9b73aeaa7ae4d3fb96c4f9b0ddcaa7b', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:46:03 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:46:03 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '96e8365f953b45a488b3953e1e371d1b', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:46:09 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:46:09 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'b324b1d75f7e4420bdab879e9703ebe7', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:46:15 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:46:15 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '05535571516e4caaa711904c6d2f834f', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:46:21 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:46:22 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '49a5c52e5ded40b5825d19ece55b71ee', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:46:34 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:46:34 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '7326bfe7daed4976a975bc6788db51f8', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:46:46 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:46:46 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'ee7c4d19cb5a4fe3ad3dc00a0378be2c', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:46:58 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:46:58 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'ecd0495f6ef242d68ace9f58774e7d6e', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:47:08 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:47:09 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID '0d2606777b1b4ee498eb1b3e9390f973', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:47:18 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.
-2023/11/02 22:47:19 INFO mlflow.utils.autologging_utils: Created MLflow autologging run with ID 'c751a8dcc44e485cbddc3133b5e2e157', which will track hyperparameters, performance metrics, model artifacts, and lineage information for the current sklearn workflow
-2023/11/02 22:47:28 INFO mlflow.sklearn.utils: Logging the 5 best runs, no runs will be omitted.</code></pre>
-</div>
-</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p><code>d3rlpy</code> provides state-of-the-art offline deep reinforcement learning algorithms through out-of-the-box scikit-learn-style APIs. Unlike other RL libraries, the provided algorithms can achieve extremely powerful performance beyond their papers via several tweaks.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
