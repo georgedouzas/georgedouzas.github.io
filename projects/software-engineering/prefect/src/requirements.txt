@@ -15,4 +15,4 @@ pytest~=7.2
 # Pin problematic traitlets release -  https://github.com/jupyter/notebook/issues/7048
 traitlets<5.10.0
 pandas==2.1.2
-prefect==2.14.2
+prefect==2.14.3
