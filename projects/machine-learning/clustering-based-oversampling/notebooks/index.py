@@ -13,14 +13,10 @@
 """
 ![](featured.png)
 
-SMOTE algorithm and its variants generate synthetic samples along line segments that join minority class instances. SMOTE
-addresses only the between-classes imbalance. On the other hand, SMOTE does nothing about areas of the input space that differ
-significantly in the density of a particular class, an issue known as within-classes imbalance. An approach that deals with this
-issue is to use a clusterer to select sparse areas of the input space and then apply oversampling to them.  I have developed a
-Python implementation of the above clustering-based oversampling approach called
-[cluster-over-sampling](https://github.com/georgedouzas/cluster-over-sampling), which integrates seamlessly with the
-[Scikit-Learn](https://scikit-learn.org/stable/) and [Imbalanced-Learn](https://imbalanced-learn.org/stable/) ecosystems. To
-present the API, let's first load some data:
+The library [cluster-over-sampling](https://github.com/georgedouzas/cluster-over-sampling) implements a general interface for
+clustering based over-sampling algorithms, a class of algorithms that deal with the within-classes imbalance issue, since
+[SMOTE](https://arxiv.org/pdf/1106.1813.pdf) and its variants addresses only the between-classes imbalance. To present the API,
+let's first load some data:
 """
 
 # %%
@@ -32,7 +28,7 @@ X, y = load_breast_cancer(return_X_y=True)
 
 # %% [markdown]
 """
-The data are clearly imbalanced:
+The data are imbalanced:
 """
 
 # %%
@@ -49,7 +45,7 @@ print(
 
 # %% [markdown]
 """
-I will use `KMeans` and `SMOTE` to create a clustering-based oversampler but any combination would work:
+I will use `KMeans` and `SMOTE` to create a clustering-based oversampler, but any other combination would work:
 """
 
 # %%

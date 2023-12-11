@@ -14,8 +14,8 @@
 ![](featured.png)
 
 The [SMOTE](https://arxiv.org/pdf/1106.1813.pdf) algorithm is the most popular oversampler, with many proposed variants. On the
-other hand, [Geometric SMOTE](https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353) is not another member of
-the SMOTE's family since it expands the data generation area and does not just use linear interpolation of existing samples to
+other hand, [Geometric SMOTE](https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353) is not just another member
+of the SMOTE's family since it expands the data generation area and does not just use linear interpolation of existing samples to
 generate for new samples. You can check the following figure for a visual representation of the their difference:
 
 ![](smote_vs_gsmote.png)
@@ -104,7 +104,7 @@ pipelines using F-score as evaluation metric:
 """
 
 # %%
-#| output: false
+# | output: false
 n_runs = 3
 cv_scores = []
 for run_id in range(n_runs):
@@ -131,7 +131,14 @@ for run_id in range(n_runs):
                 cv=cv,
             )
             print(f"Run: {run_id} | Dataset: {dataset_id} | Pipeline: {pipeline_id}")
-            pipeline_name = '-'.join([estimator.__class__.__name__ for _, estimator in pipeline.get_params()['estimator'].get_params()['steps']])
+            pipeline_name = '-'.join(
+                [
+                    estimator.__class__.__name__
+                    for _, estimator in pipeline.get_params()['estimator'].get_params()[
+                        'steps'
+                    ]
+                ]
+            )
             cv_scores.append((run_id, dataset_id, pipeline_name, scores.mean()))
 
 # %% [markdown]

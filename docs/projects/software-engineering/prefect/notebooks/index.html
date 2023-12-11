@@ -199,1114 +199,241 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><img src="featured.png" class="img-fluid"></p>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p><a href="https://docs.prefect.io">Prefect</a> is a workflow orchestration tool. It makes accessible the creation, scheduling, and monitoring of complex data pipelines. The workflows are defined as Python code, while Prefect provides error handling, retry mechanisms, and a user-friendly dashboard for monitoring. Prefect is based on the following concepts:</p>
+<p><a href="https://docs.prefect.io">Prefect</a> is a workflow orchestration tool. It makes accessible the creation, scheduling, and monitoring of complex data pipelines. The workflows are defined as Python code, while Prefect provides error handling, retry mechanisms, and a user-friendly dashboard for monitoring.</p>
+<p>As an example, let’s assume that we would like to create a data workflow that downloads, stores and updates historical and fixtures soccer data from <a href="https://www.football-data.co.uk">Football-Data.co.uk</a>. The URL of each of those main leagues has the following form:</p>
+<pre><code>'https://www.football-data.co.uk/mmz4281/{season}/{league_id}.csv'</code></pre>
+<p>where <code>season</code> is the season of the league and <code>league_id</code> is the league ID. Let’s select a few of those seasons and leagues:</p>
+<div id="0ce6e415" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>SEASONS <span class="op">=</span> [<span class="st">'1819'</span>, <span class="st">'1920'</span>, <span class="st">'2021'</span>, <span class="st">'2122'</span>, <span class="st">'2223'</span>, <span class="st">'2324'</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>LEAGUES_MAPPING <span class="op">=</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'E0'</span>: <span class="st">'English'</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SC0'</span>: <span class="st">'Scotish'</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D1'</span>: <span class="st">'German'</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'I1'</span>: <span class="st">'Italian'</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SP1'</span>: <span class="st">'Spanish'</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'F1'</span>: <span class="st">'French'</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'N1'</span>: <span class="st">'Dutch'</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>URLS_MAPPING <span class="op">=</span> {</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f'https://www.football-data.co.uk/mmz4281/</span><span class="sc">{</span>season<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>league_id<span class="sc">}</span><span class="ss">.csv'</span>: (</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        league,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">'-'</span>.join([season[<span class="dv">0</span>:<span class="dv">2</span>], season[<span class="dv">2</span>:]]),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> season <span class="kw">in</span> SEASONS</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> league_id, league <span class="kw">in</span> LEAGUES_MAPPING.items()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>FIXTURES_URL <span class="op">=</span> <span class="st">'https://www.football-data.co.uk/fixtures.csv'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Our workflow will include the following tasks:</p>
 <ul>
-<li><strong>Tasks</strong>: Functions that represent a discrete unit of work in a Prefect workflow.</li>
-<li><strong>Flows</strong>: Containers for workflow logic and allow users to interact with and reason about the state of their workflows.</li>
-<li><strong>Results</strong>: They represent the data returned by a flow or a task.</li>
-<li><strong>Artifacts</strong>: They are formatted outputs rendered in the Prefect UI, such as markdown, tables, or links.</li>
-<li><strong>States</strong>: They represent the status of a particular task run or flow run.</li>
-<li><strong>Task Runners</strong>: They allow selecting specific executors for Prefect tasks, such as concurrent, parallel, or distributed execution of tasks.</li>
-<li><strong>Runtime Context</strong>: It provides information about the current flow or task run that you can refer to in your code.</li>
-<li><strong>Profiles and Configuration</strong>: They are settings that can be used to interact with Prefect Cloud and a Prefect server.</li>
-<li><strong>Blocks</strong>: Prefect primitives that enable the storage of configuration and provide a UI interface.</li>
-<li><strong>Variables</strong>: They are named, mutable string values, much like environment variables.</li>
-<li><strong>Deployments</strong>: They are server-side concepts that encapsulate flows, allowing them to be scheduled and triggered via API.</li>
-<li><strong>Deployment Management</strong>: A set of files that describe how to prepare one or more flow deployments.</li>
-<li><strong>Work Pools, Workers &amp; Agents</strong> : They bridge the Prefect orchestration environment with the execution environment.</li>
-<li><strong>Storage</strong>: It configures how flow code for deployments is persisted and retrieved by Prefect agents.</li>
-<li><strong>Filesystems</strong>: They are blocks that allow to read and write data from paths.</li>
-<li><strong>Infrastructure</strong>: They are blocks that specify infrastructure for flow runs created by the deployment.</li>
-<li><strong>Schedules</strong> : They define how to create new flow runs automatically on a specified cadence.</li>
-<li><strong>Logging</strong>: They log useful information about flows and tasks runs on the server.</li>
+<li>Check if a local SQLite database exists. If not, then create it.</li>
+<li>Check if the database is updated with the latest historical data. If the historical data do not exist, download all the data and store them to the database while if the historical data are not updated, download only the latest data and update the database.</li>
+<li>Download the latest fixtures data and store them to the database.</li>
 </ul>
-</section>
-<section id="extracting-the-urls" class="level2">
-<h2 class="anchored" data-anchor-id="extracting-the-urls">Extracting the URLs</h2>
-<p>The goal is to create a data workflow that downloads soccer data from <a href="https://www.football-data.co.uk">Football-Data.co.uk</a>. The URL of each of those main leagues has the form <code>'https://www.football-data.co.uk/mmz4281/{season}/{league_id}.csv'</code> where <code>season</code> is the season of the league and <code>league_id</code> is the league ID. Let’s define a few of those seasons and leagues:</p>
-<div id="6ee2b9ab" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>SEASONS <span class="op">=</span> [</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'1213'</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'1314'</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'1516'</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'1617'</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'1718'</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'1819'</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'1920'</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'2021'</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'2122'</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'2223'</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>LEAGUES_MAPPING <span class="op">=</span> {</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'E0'</span>: <span class="st">'English'</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SC0'</span>: <span class="st">'Scotish'</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D1'</span>: <span class="st">'German'</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'I1'</span>: <span class="st">'Italian'</span>,</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SP1'</span>: <span class="st">'Spanish'</span>,</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'F1'</span>: <span class="st">'French'</span>,</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'N1'</span>: <span class="st">'Dutch'</span>,</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'B1'</span>: <span class="st">'Belgian'</span>,</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'P1'</span>: <span class="st">'Portuguese'</span>,</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'T1'</span>: <span class="st">'Turkish'</span>,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'G1'</span>: <span class="st">'Greek'</span>,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The above tasks represent discrete units of work, and they will receive the <code>task</code> decorator. We will also use an asynchronous httpx client to concurrently download the data since we have multiple files.</p>
+<p>The function <code>create_db</code> implements the first task:</p>
+<div id="48278b48" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect <span class="im">import</span> task</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect.logging <span class="im">import</span> get_run_logger</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tempfile <span class="im">import</span> mkdtemp</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>TEMP_DIR <span class="op">=</span> Path(mkdtemp())</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">@task</span>(name<span class="op">=</span><span class="st">'Create database'</span>, description<span class="op">=</span><span class="st">'Create the database to store the data'</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_db():</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    logger <span class="op">=</span> get_run_logger()</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    db_path <span class="op">=</span> TEMP_DIR <span class="op">/</span> <span class="st">'soccer_data.db'</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        con <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="ss">f'file:</span><span class="sc">{</span>db_path<span class="sc">}</span><span class="ss">?mode=rw'</span>, uri<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        logger.info(<span class="st">'Database exists.'</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> sqlite3.OperationalError:</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        con <span class="op">=</span> sqlite3.<span class="ex">connect</span>(db_path)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        logger.info(<span class="st">'Database created.'</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">finally</span>:</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        con.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The function <code>update_historical_data</code> implements the second task:</p>
+<div id="20627d48" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> httpx</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> asyncio</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> request_csv_data(client: httpx.Client, url: <span class="bu">str</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cf">await</span> client.get(url<span class="op">=</span>url)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> download_csvs_data(urls_mapping: <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">tuple</span>[<span class="bu">str</span>, <span class="bu">str</span>]]):</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">async</span> <span class="cf">with</span> httpx.AsyncClient(limits<span class="op">=</span>httpx.Limits(max_connections<span class="op">=</span><span class="dv">30</span>)) <span class="im">as</span> client:</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        requests <span class="op">=</span> [</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            request_csv_data(client, url, league<span class="op">=</span>league, season<span class="op">=</span>season)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> url, (league, season) <span class="kw">in</span> urls_mapping.items()</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        responses <span class="op">=</span> <span class="cf">await</span> asyncio.gather(<span class="op">*</span>requests)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    csvs_data <span class="op">=</span> [</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        StringIO(<span class="bu">str</span>(response.content, encoding<span class="op">=</span><span class="st">'windows-1254'</span>))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> response <span class="kw">in</span> responses</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> csvs_data</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="at">@task</span>(</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'Update historical data'</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    description<span class="op">=</span><span class="st">'Fetch latest data to update historical data'</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> update_historical_data(urls_mapping):</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    logger <span class="op">=</span> get_run_logger()</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    db_path <span class="op">=</span> TEMP_DIR <span class="op">/</span> <span class="st">'soccer_data.db'</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> sqlite3.<span class="ex">connect</span>(db_path) <span class="im">as</span> con:</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>            data <span class="op">=</span> pd.read_sql(<span class="st">'SELECT * FROM historical'</span>, con)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>            logger.info(<span class="ss">f'Table with historical data exists. Shape: </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> pd.errors.DatabaseError:</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>            logger.info(<span class="st">'Table with historical data does not exist.'</span>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>            csvs_data <span class="op">=</span> <span class="cf">await</span> download_csvs_data(urls_mapping)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>            data <span class="op">=</span> pd.concat(</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>                [</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>                    pd.read_csv(csv_data, encoding<span class="op">=</span><span class="st">'windows-1254'</span>)</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">for</span> csv_data <span class="kw">in</span> csvs_data</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>                ],</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>                ignore_index<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>            data.to_sql(<span class="st">'historical'</span>, con<span class="op">=</span>con, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>            logger.info(<span class="ss">f'Table with historical data was created. Shape: </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    urls_mapping <span class="op">=</span> {</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>        url: (league, season)</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> url, (league, season) <span class="kw">in</span> urls_mapping.items()</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> season <span class="op">==</span> <span class="st">'23-24'</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    latest_csvs_data <span class="op">=</span> <span class="cf">await</span> download_csvs_data(urls_mapping)</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    latest_data <span class="op">=</span> pd.concat(</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>        [</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>            pd.read_csv(csv_data, encoding<span class="op">=</span><span class="st">'windows-1254'</span>)</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> csv_data <span class="kw">in</span> latest_csvs_data</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>        ignore_index<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> pd.concat([data, latest_data], ignore_index<span class="op">=</span><span class="va">True</span>).drop_duplicates(</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>        subset<span class="op">=</span>[<span class="st">'Div'</span>, <span class="st">'Date'</span>, <span class="st">'HomeTeam'</span>, <span class="st">'AwayTeam'</span>, <span class="st">'Time'</span>], ignore_index<span class="op">=</span><span class="va">True</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    data.to_sql(<span class="st">'historical'</span>, con<span class="op">=</span>con, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    logger.info(<span class="ss">f'Table with historical data was updated. Shape: </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can use the above seasons and leagues to construct a mapping of (URL, league name and season) pairs:</p>
-<div id="3a23a6f3" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>URLS_MAPPING <span class="op">=</span> {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f'https://www.football-data.co.uk/mmz4281/</span><span class="sc">{</span>season<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>league_id<span class="sc">}</span><span class="ss">.csv'</span>: (</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        league,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'-'</span>.join([season[<span class="dv">0</span>:<span class="dv">2</span>], season[<span class="dv">2</span>:]]),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> season <span class="kw">in</span> SEASONS</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> league_id, league <span class="kw">in</span> LEAGUES_MAPPING.items()</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>URLS_MAPPING</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>{'https://www.football-data.co.uk/mmz4281/1213/E0.csv': ('English', '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1213/SC0.csv': ('Scotish', '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1213/D1.csv': ('German', '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1213/I1.csv': ('Italian', '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1213/SP1.csv': ('Spanish', '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1213/F1.csv': ('French', '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1213/N1.csv': ('Dutch', '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1213/B1.csv': ('Belgian', '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1213/P1.csv': ('Portuguese',
-  '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1213/T1.csv': ('Turkish', '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1213/G1.csv': ('Greek', '12-13'),
- 'https://www.football-data.co.uk/mmz4281/1314/E0.csv': ('English', '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1314/SC0.csv': ('Scotish', '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1314/D1.csv': ('German', '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1314/I1.csv': ('Italian', '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1314/SP1.csv': ('Spanish', '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1314/F1.csv': ('French', '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1314/N1.csv': ('Dutch', '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1314/B1.csv': ('Belgian', '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1314/P1.csv': ('Portuguese',
-  '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1314/T1.csv': ('Turkish', '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1314/G1.csv': ('Greek', '13-14'),
- 'https://www.football-data.co.uk/mmz4281/1516/E0.csv': ('English', '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1516/SC0.csv': ('Scotish', '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1516/D1.csv': ('German', '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1516/I1.csv': ('Italian', '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1516/SP1.csv': ('Spanish', '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1516/F1.csv': ('French', '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1516/N1.csv': ('Dutch', '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1516/B1.csv': ('Belgian', '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1516/P1.csv': ('Portuguese',
-  '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1516/T1.csv': ('Turkish', '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1516/G1.csv': ('Greek', '15-16'),
- 'https://www.football-data.co.uk/mmz4281/1617/E0.csv': ('English', '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1617/SC0.csv': ('Scotish', '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1617/D1.csv': ('German', '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1617/I1.csv': ('Italian', '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1617/SP1.csv': ('Spanish', '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1617/F1.csv': ('French', '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1617/N1.csv': ('Dutch', '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1617/B1.csv': ('Belgian', '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1617/P1.csv': ('Portuguese',
-  '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1617/T1.csv': ('Turkish', '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1617/G1.csv': ('Greek', '16-17'),
- 'https://www.football-data.co.uk/mmz4281/1718/E0.csv': ('English', '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1718/SC0.csv': ('Scotish', '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1718/D1.csv': ('German', '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1718/I1.csv': ('Italian', '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1718/SP1.csv': ('Spanish', '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1718/F1.csv': ('French', '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1718/N1.csv': ('Dutch', '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1718/B1.csv': ('Belgian', '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1718/P1.csv': ('Portuguese',
-  '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1718/T1.csv': ('Turkish', '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1718/G1.csv': ('Greek', '17-18'),
- 'https://www.football-data.co.uk/mmz4281/1819/E0.csv': ('English', '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1819/SC0.csv': ('Scotish', '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1819/D1.csv': ('German', '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1819/I1.csv': ('Italian', '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1819/SP1.csv': ('Spanish', '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1819/F1.csv': ('French', '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1819/N1.csv': ('Dutch', '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1819/B1.csv': ('Belgian', '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1819/P1.csv': ('Portuguese',
-  '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1819/T1.csv': ('Turkish', '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1819/G1.csv': ('Greek', '18-19'),
- 'https://www.football-data.co.uk/mmz4281/1920/E0.csv': ('English', '19-20'),
- 'https://www.football-data.co.uk/mmz4281/1920/SC0.csv': ('Scotish', '19-20'),
- 'https://www.football-data.co.uk/mmz4281/1920/D1.csv': ('German', '19-20'),
- 'https://www.football-data.co.uk/mmz4281/1920/I1.csv': ('Italian', '19-20'),
- 'https://www.football-data.co.uk/mmz4281/1920/SP1.csv': ('Spanish', '19-20'),
- 'https://www.football-data.co.uk/mmz4281/1920/F1.csv': ('French', '19-20'),
- 'https://www.football-data.co.uk/mmz4281/1920/N1.csv': ('Dutch', '19-20'),
- 'https://www.football-data.co.uk/mmz4281/1920/B1.csv': ('Belgian', '19-20'),
- 'https://www.football-data.co.uk/mmz4281/1920/P1.csv': ('Portuguese',
-  '19-20'),
- 'https://www.football-data.co.uk/mmz4281/1920/T1.csv': ('Turkish', '19-20'),
- 'https://www.football-data.co.uk/mmz4281/1920/G1.csv': ('Greek', '19-20'),
- 'https://www.football-data.co.uk/mmz4281/2021/E0.csv': ('English', '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2021/SC0.csv': ('Scotish', '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2021/D1.csv': ('German', '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2021/I1.csv': ('Italian', '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2021/SP1.csv': ('Spanish', '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2021/F1.csv': ('French', '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2021/N1.csv': ('Dutch', '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2021/B1.csv': ('Belgian', '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2021/P1.csv': ('Portuguese',
-  '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2021/T1.csv': ('Turkish', '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2021/G1.csv': ('Greek', '20-21'),
- 'https://www.football-data.co.uk/mmz4281/2122/E0.csv': ('English', '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2122/SC0.csv': ('Scotish', '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2122/D1.csv': ('German', '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2122/I1.csv': ('Italian', '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2122/SP1.csv': ('Spanish', '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2122/F1.csv': ('French', '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2122/N1.csv': ('Dutch', '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2122/B1.csv': ('Belgian', '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2122/P1.csv': ('Portuguese',
-  '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2122/T1.csv': ('Turkish', '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2122/G1.csv': ('Greek', '21-22'),
- 'https://www.football-data.co.uk/mmz4281/2223/E0.csv': ('English', '22-23'),
- 'https://www.football-data.co.uk/mmz4281/2223/SC0.csv': ('Scotish', '22-23'),
- 'https://www.football-data.co.uk/mmz4281/2223/D1.csv': ('German', '22-23'),
- 'https://www.football-data.co.uk/mmz4281/2223/I1.csv': ('Italian', '22-23'),
- 'https://www.football-data.co.uk/mmz4281/2223/SP1.csv': ('Spanish', '22-23'),
- 'https://www.football-data.co.uk/mmz4281/2223/F1.csv': ('French', '22-23'),
- 'https://www.football-data.co.uk/mmz4281/2223/N1.csv': ('Dutch', '22-23'),
- 'https://www.football-data.co.uk/mmz4281/2223/B1.csv': ('Belgian', '22-23'),
- 'https://www.football-data.co.uk/mmz4281/2223/P1.csv': ('Portuguese',
-  '22-23'),
- 'https://www.football-data.co.uk/mmz4281/2223/T1.csv': ('Turkish', '22-23'),
- 'https://www.football-data.co.uk/mmz4281/2223/G1.csv': ('Greek', '22-23')}</code></pre>
+<p>The function <code>update_fixtures_data</code> implements the third task:</p>
+<div id="9945ca0d" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">@task</span>(name<span class="op">=</span><span class="st">'Update fixtures data'</span>, description<span class="op">=</span><span class="st">'Fetch latest fixtures data'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> update_fixtures_data():</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    logger <span class="op">=</span> get_run_logger()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    db_path <span class="op">=</span> TEMP_DIR <span class="op">/</span> <span class="st">'soccer_data.db'</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> pd.read_csv(FIXTURES_URL)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> sqlite3.<span class="ex">connect</span>(db_path) <span class="im">as</span> con:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        data.to_sql(<span class="st">'fixtures'</span>, con<span class="op">=</span>con, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        logger.info(<span class="ss">f'Fixtures data were updated. Shape: </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The full data workflow will receive the <code>flow</code> decorator.</p>
+<div id="0141b158" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect <span class="im">import</span> flow</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect.task_runners <span class="im">import</span> ConcurrentTaskRunner</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">@flow</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'Download asynchronously the data and update the database'</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    validate_parameters<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    task_runner<span class="op">=</span>ConcurrentTaskRunner(),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    log_prints<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> update_db(urls_mapping: <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">tuple</span>[<span class="bu">str</span>, <span class="bu">str</span>]]):</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    create_db()</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> update_historical_data(urls_mapping)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> update_fixtures_data()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We will use the above URLs to download and extract the data into a single dataframe. Additionally, the following imports will be required:</p>
-<div id="dddc82ab" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> time</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> httpx</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> asyncio</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect <span class="im">import</span> flow</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect <span class="im">import</span> task</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect.logging <span class="im">import</span> get_run_logger</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect.task_runners <span class="im">import</span> ConcurrentTaskRunner</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="just-python-functions" class="level2">
-<h2 class="anchored" data-anchor-id="just-python-functions">Just Python functions</h2>
-<p>The simplest approach to implement the data workflow is not to use Prefect and rely on Python functions. Let’s start by defining the three following functions:</p>
-<div id="0c07cf15" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> request_csv_data(client, url, <span class="op">**</span>kwargs):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> client.get(url<span class="op">=</span>url)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> response</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_csvs_data(urls_mapping):</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> httpx.Client() <span class="im">as</span> client:</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        responses <span class="op">=</span> [</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            request_csv_data(client, url)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> url, (league, season) <span class="kw">in</span> urls_mapping.items()</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    csvs_data <span class="op">=</span> [</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        StringIO(<span class="bu">str</span>(response.content, encoding<span class="op">=</span><span class="st">'windows-1254'</span>))</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> response <span class="kw">in</span> responses</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> csvs_data</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_data(urls_mapping):</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    csvs_data <span class="op">=</span> download_csvs_data(urls_mapping)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> [pd.read_csv(csv_data, encoding<span class="op">=</span><span class="st">'windows-1254'</span>) <span class="cf">for</span> csv_data <span class="kw">in</span> csvs_data]</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> pd.concat(data, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><code>request_csv_data</code> will use the parameters <code>client</code> and <code>url</code> of a CSV to request the data.</li>
-<li><code>download_csvs_data</code> will use the parameter <code>urls_mapping</code> and the <code>request_csv_data</code> function to download all CSVs data and convert them to a list of <code>StringIO</code> objects that can be read from the <code>pd.read_csv</code> function as dataframes.</li>
-<li><code>download_data</code> will use the parameter <code>urls_mapping</code> and the <code>download_csvs_data</code> function to download all CSVs data, read them as dataframes and combine them into a single dataframe.</li>
-</ul>
-<p>Let’s use the last function to run the data workflow:</p>
-<div id="6f1de3fd" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> download_data(URLS_MAPPING)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Div</th>
-<th data-quarto-table-cell-role="th">Date</th>
-<th data-quarto-table-cell-role="th">HomeTeam</th>
-<th data-quarto-table-cell-role="th">AwayTeam</th>
-<th data-quarto-table-cell-role="th">FTHG</th>
-<th data-quarto-table-cell-role="th">FTAG</th>
-<th data-quarto-table-cell-role="th">FTR</th>
-<th data-quarto-table-cell-role="th">HTHG</th>
-<th data-quarto-table-cell-role="th">HTAG</th>
-<th data-quarto-table-cell-role="th">HTR</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">AHCh</th>
-<th data-quarto-table-cell-role="th">B365CAHH</th>
-<th data-quarto-table-cell-role="th">B365CAHA</th>
-<th data-quarto-table-cell-role="th">PCAHH</th>
-<th data-quarto-table-cell-role="th">PCAHA</th>
-<th data-quarto-table-cell-role="th">MaxCAHH</th>
-<th data-quarto-table-cell-role="th">MaxCAHA</th>
-<th data-quarto-table-cell-role="th">AvgCAHH</th>
-<th data-quarto-table-cell-role="th">AvgCAHA</th>
-<th data-quarto-table-cell-role="th">Unnamed: 105</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>E0</td>
-<td>18/08/12</td>
-<td>Arsenal</td>
-<td>Sunderland</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>D</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>D</td>
-<td>...</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>E0</td>
-<td>18/08/12</td>
-<td>Fulham</td>
-<td>Norwich</td>
-<td>5.0</td>
-<td>0.0</td>
-<td>H</td>
-<td>2.0</td>
-<td>0.0</td>
-<td>H</td>
-<td>...</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>E0</td>
-<td>18/08/12</td>
-<td>Newcastle</td>
-<td>Tottenham</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>H</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>D</td>
-<td>...</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>E0</td>
-<td>18/08/12</td>
-<td>QPR</td>
-<td>Swansea</td>
-<td>0.0</td>
-<td>5.0</td>
-<td>A</td>
-<td>0.0</td>
-<td>1.0</td>
-<td>A</td>
-<td>...</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>E0</td>
-<td>18/08/12</td>
-<td>Reading</td>
-<td>Stoke</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>D</td>
-<td>0.0</td>
-<td>1.0</td>
-<td>A</td>
-<td>...</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">34679</td>
-<td>G1</td>
-<td>13/05/2023</td>
-<td>Ionikos</td>
-<td>Lamia</td>
-<td>2.0</td>
-<td>2.0</td>
-<td>D</td>
-<td>2.0</td>
-<td>0.0</td>
-<td>H</td>
-<td>...</td>
-<td>-0.50</td>
-<td>2.05</td>
-<td>1.80</td>
-<td>2.04</td>
-<td>1.72</td>
-<td>2.19</td>
-<td>1.87</td>
-<td>2.03</td>
-<td>1.76</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">34680</td>
-<td>G1</td>
-<td>13/05/2023</td>
-<td>Levadeiakos</td>
-<td>Giannina</td>
-<td>3.0</td>
-<td>3.0</td>
-<td>D</td>
-<td>2.0</td>
-<td>2.0</td>
-<td>D</td>
-<td>...</td>
-<td>-0.25</td>
-<td>1.82</td>
-<td>2.02</td>
-<td>1.85</td>
-<td>2.01</td>
-<td>2.04</td>
-<td>2.05</td>
-<td>1.86</td>
-<td>1.93</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">34681</td>
-<td>G1</td>
-<td>14/05/2023</td>
-<td>AEK</td>
-<td>Volos NFC</td>
-<td>4.0</td>
-<td>0.0</td>
-<td>H</td>
-<td>2.0</td>
-<td>0.0</td>
-<td>H</td>
-<td>...</td>
-<td>-3.50</td>
-<td>1.93</td>
-<td>1.93</td>
-<td>1.92</td>
-<td>1.93</td>
-<td>2.05</td>
-<td>1.94</td>
-<td>1.91</td>
-<td>1.87</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">34682</td>
-<td>G1</td>
-<td>14/05/2023</td>
-<td>Panathinaikos</td>
-<td>Aris</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>D</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>D</td>
-<td>...</td>
-<td>-1.25</td>
-<td>1.95</td>
-<td>1.90</td>
-<td>1.95</td>
-<td>1.90</td>
-<td>1.99</td>
-<td>1.96</td>
-<td>1.89</td>
-<td>1.90</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">34683</td>
-<td>G1</td>
-<td>14/05/2023</td>
-<td>PAOK</td>
-<td>Olympiakos</td>
-<td>0.0</td>
-<td>1.0</td>
-<td>A</td>
-<td>0.0</td>
-<td>1.0</td>
-<td>A</td>
-<td>...</td>
-<td>-0.50</td>
-<td>1.85</td>
-<td>2.00</td>
-<td>1.89</td>
-<td>1.96</td>
-<td>1.98</td>
-<td>2.05</td>
-<td>1.91</td>
-<td>1.88</td>
-<td>NaN</td>
-</tr>
-</tbody>
-</table>
-
-<p>34684 rows × 139 columns</p>
-</div>
-</div>
-</div>
-<p>The above code works perfectly fine but if you would like to have properties like scheduling, retries, logging, observability etc then you would have to implement these features from scratch.</p>
-</section>
-<section id="using-task-and-flows" class="level2">
-<h2 class="anchored" data-anchor-id="using-task-and-flows">Using task and flows</h2>
-<p>Prefect offers all the above functionality. It also uses some sensible defaults but we can further customize the data workflow. Based on the definitions of Prefect concepts, we can decorate the functions as follows:</p>
-<ul>
-<li><code>request_csv_data</code> represents a discrete unit of work and will receive the <code>task</code> decorator.</li>
-<li><code>download_csvs_data</code> contains the above tasks and will receive the <code>flow</code> decorator.</li>
-<li><code>download_data</code> implements the full data workflow and will receive the <code>flow</code> decorator.</li>
-</ul>
-<p>Therefore <code>request_csv_data</code> represents tasks, while <code>download_csvs_data</code> is a subflow of the <code>download_data</code> flow:</p>
-<div id="796bc8dc" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="at">@task</span>(name<span class="op">=</span><span class="st">'Request CSV data.'</span>, retries<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> request_csv_data(client: httpx.Client, url: <span class="bu">str</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    logger <span class="op">=</span> get_run_logger()</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time()</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> client.get(url<span class="op">=</span>url)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    logger.info(</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'CSV data, </span><span class="sc">{</span>kwargs[<span class="st">"league"</span>]<span class="sc">}</span><span class="ss"> league and </span><span class="sc">{</span>kwargs[<span class="st">"season"</span>]<span class="sc">}</span><span class="ss"> season, response time: </span><span class="sc">{</span>time() <span class="op">-</span> start_time<span class="sc">}</span><span class="ss">s'</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> response</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">@flow</span>(name<span class="op">=</span><span class="st">'Download synchronously CSVs data.'</span>, validate_parameters<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_csvs_data(urls_mapping: <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">tuple</span>[<span class="bu">str</span>, <span class="bu">str</span>]]):</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    logger <span class="op">=</span> get_run_logger()</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time()</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> httpx.Client() <span class="im">as</span> client:</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        responses <span class="op">=</span> [</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>            request_csv_data(client, url, league<span class="op">=</span>league, season<span class="op">=</span>season)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> url, (league, season) <span class="kw">in</span> urls_mapping.items()</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    csvs_data <span class="op">=</span> [</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        StringIO(<span class="bu">str</span>(response.content, encoding<span class="op">=</span><span class="st">'windows-1254'</span>))</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> response <span class="kw">in</span> responses</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    logger.info(<span class="ss">f'CSVs data download time: </span><span class="sc">{</span>time() <span class="op">-</span> start_time<span class="sc">}</span><span class="ss">s'</span>)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> csvs_data</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="at">@flow</span>(name<span class="op">=</span><span class="st">'Download synchronously data.'</span>, validate_parameters<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_data(urls_mapping: <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">tuple</span>[<span class="bu">str</span>, <span class="bu">str</span>]]):</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    logger <span class="op">=</span> get_run_logger()</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time()</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    csvs_data <span class="op">=</span> download_csvs_data(urls_mapping)</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> [pd.read_csv(csv_data, encoding<span class="op">=</span><span class="st">'windows-1254'</span>) <span class="cf">for</span> csv_data <span class="kw">in</span> csvs_data]</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> pd.concat(data, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    logger.info(<span class="ss">f'Data download time: </span><span class="sc">{</span>time() <span class="op">-</span> start_time<span class="sc">}</span><span class="ss">s'</span>)</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We run the updated flow:</p>
-<p>data = download_data(URLS_MAPPING) data</p>
-</section>
-<section id="concurrent-task-runner" class="level2">
-<h2 class="anchored" data-anchor-id="concurrent-task-runner">Concurrent task runner</h2>
-<p>The above code executes the tasks in a sequence. This is not optimal for downloading a large number of files. Instead, using an asynchronous httpx client will concurrently download the data. A current limitation of Prefect is that it does not allow passing the asynchronous client from the flow to the tasks. Therefore we remove the <code>task</code> decorator from <code>request_csv_data</code>. Nevertheless, we can still log the same message with the use of the <code>print</code> function and the <code>log_prints</code> parameter of the <code>flow</code> decorator:</p>
-<div id="b11d4939" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> request_csv_data(client: httpx.AsyncClient, url: <span class="bu">str</span>, <span class="op">**</span>kwargs):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time()</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> <span class="cf">await</span> client.get(url<span class="op">=</span>url)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'CSV data, </span><span class="sc">{</span>kwargs[<span class="st">"league"</span>]<span class="sc">}</span><span class="ss"> league and </span><span class="sc">{</span>kwargs[<span class="st">"season"</span>]<span class="sc">}</span><span class="ss"> season, response time: </span><span class="sc">{</span>time() <span class="op">-</span> start_time<span class="sc">}</span><span class="ss">s'</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> response</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="at">@flow</span>(name<span class="op">=</span><span class="st">'Download asynchronously CSVs data.'</span>, validate_parameters<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> download_csvs_data(urls_mapping: <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">tuple</span>[<span class="bu">str</span>, <span class="bu">str</span>]]):</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    logger <span class="op">=</span> get_run_logger()</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time()</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">async</span> <span class="cf">with</span> httpx.AsyncClient(limits<span class="op">=</span>httpx.Limits(max_connections<span class="op">=</span><span class="dv">30</span>)) <span class="im">as</span> client:</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        requests <span class="op">=</span> [</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            request_csv_data(client, url, league<span class="op">=</span>league, season<span class="op">=</span>season)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> url, (league, season) <span class="kw">in</span> urls_mapping.items()</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        responses <span class="op">=</span> <span class="cf">await</span> asyncio.gather(<span class="op">*</span>requests)</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    csvs_data <span class="op">=</span> [</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        StringIO(<span class="bu">str</span>(response.content, encoding<span class="op">=</span><span class="st">'windows-1254'</span>))</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> response <span class="kw">in</span> responses</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    logger.info(<span class="ss">f'CSVs data download time: </span><span class="sc">{</span>time() <span class="op">-</span> start_time<span class="sc">}</span><span class="ss">s'</span>)</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> csvs_data</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="at">@flow</span>(</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'Download asynchronously the data.'</span>,</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    validate_parameters<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    task_runner<span class="op">=</span>ConcurrentTaskRunner(),</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    log_prints<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> download_data(urls_mapping: <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">tuple</span>[<span class="bu">str</span>, <span class="bu">str</span>]]):</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    logger <span class="op">=</span> get_run_logger()</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time()</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    csvs_data <span class="op">=</span> <span class="cf">await</span> download_csvs_data(urls_mapping)</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> [pd.read_csv(csv_data, encoding<span class="op">=</span><span class="st">'windows-1254'</span>) <span class="cf">for</span> csv_data <span class="kw">in</span> csvs_data]</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> pd.concat(data, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    logger.info(<span class="ss">f'Data download time: </span><span class="sc">{</span>time() <span class="op">-</span> start_time<span class="sc">}</span><span class="ss">s'</span>)</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Running the flow speeds up the process significantly:</p>
-<div id="cb7269f7" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="cf">await</span> download_data(URLS_MAPPING)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:14.667 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | prefect.engine - Created flow run<span style="color: #800080; text-decoration-color: #800080"> 'amethyst-reindeer'</span> for flow<span style="color: #800080; text-decoration-color: #800080; font-weight: bold"> 'Download asynchronously the data.'</span>
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:14.910 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'amethyst-reindeer'</span> - Created subflow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> for flow<span style="color: #800080; text-decoration-color: #800080; font-weight: bold"> 'Download asynchronously CSVs data.'</span>
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.642 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Scotish league and 12-13 season, response time: 0.6336770057678223s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.652 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Greek league and 12-13 season, response time: 0.6416089534759521s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.660 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Belgian league and 13-14 season, response time: 0.6477789878845215s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.727 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Belgian league and 15-16 season, response time: 0.7104108333587646s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.751 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, German league and 12-13 season, response time: 0.7429869174957275s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.760 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Turkish league and 12-13 season, response time: 0.7498030662536621s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.768 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Spanish league and 12-13 season, response time: 0.7591559886932373s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.781 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Dutch league and 12-13 season, response time: 0.7717771530151367s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.792 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Italian league and 12-13 season, response time: 0.7832348346710205s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.818 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, German league and 15-16 season, response time: 0.8035109043121338s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.826 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, German league and 13-14 season, response time: 0.8155229091644287s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.834 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Greek league and 13-14 season, response time: 0.8216331005096436s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.843 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Dutch league and 13-14 season, response time: 0.8309857845306396s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.849 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Dutch league and 15-16 season, response time: 0.8328042030334473s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.855 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Italian league and 15-16 season, response time: 0.8402910232543945s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.862 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Portuguese league and 13-14 season, response time: 0.8501789569854736s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.874 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, French league and 13-14 season, response time: 0.8621432781219482s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.879 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, French league and 12-13 season, response time: 0.8697159290313721s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.886 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Italian league and 13-14 season, response time: 0.874751091003418s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.893 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, English league and 12-13 season, response time: 0.8853902816772461s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.900 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Spanish league and 15-16 season, response time: 0.8842580318450928s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.909 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Spanish league and 13-14 season, response time: 0.897454023361206s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.916 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, French league and 15-16 season, response time: 0.8997268676757812s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.924 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Scotish league and 13-14 season, response time: 0.912977933883667s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.928 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Turkish league and 13-14 season, response time: 0.9161601066589355s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.938 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, English league and 15-16 season, response time: 0.9251151084899902s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.944 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, English league and 13-14 season, response time: 0.9332690238952637s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.953 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Scotish league and 15-16 season, response time: 0.9398610591888428s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.961 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Turkish league and 15-16 season, response time: 0.944206953048706s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.968 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Portuguese league and 15-16 season, response time: 0.9515140056610107s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.975 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, English league and 16-17 season, response time: 0.9584231376647949s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.981 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Scotish league and 16-17 season, response time: 0.9639420509338379s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:15.987 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Greek league and 15-16 season, response time: 0.9702777862548828s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.021 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, German league and 21-22 season, response time: 0.9885902404785156s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.025 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Italian league and 16-17 season, response time: 1.0077612400054932s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.036 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Italian league and 21-22 season, response time: 1.0038988590240479s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.068 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, German league and 16-17 season, response time: 1.050347089767456s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.099 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Dutch league and 16-17 season, response time: 1.081061840057373s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.109 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Belgian league and 12-13 season, response time: 1.0996479988098145s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.118 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, French league and 21-22 season, response time: 1.0851571559906006s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.126 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Greek league and 16-17 season, response time: 1.1075646877288818s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.139 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Scotish league and 17-18 season, response time: 1.1196048259735107s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.143 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Portuguese league and 16-17 season, response time: 1.1241426467895508s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.178 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, French league and 16-17 season, response time: 1.1599040031433105s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.228 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Portuguese league and 12-13 season, response time: 1.2183952331542969s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.277 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Spanish league and 16-17 season, response time: 1.2594189643859863s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.451 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Turkish league and 18-19 season, response time: 1.42592191696167s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.480 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Turkish league and 16-17 season, response time: 1.4612810611724854s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.487 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, German league and 17-18 season, response time: 1.4681837558746338s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.550 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Scotish league and 18-19 season, response time: 1.5270898342132568s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.575 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, English league and 18-19 season, response time: 1.5525729656219482s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.584 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, French league and 17-18 season, response time: 1.564594030380249s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.590 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Belgian league and 17-18 season, response time: 1.5696821212768555s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.595 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Belgian league and 18-19 season, response time: 1.5704259872436523s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.601 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Portuguese league and 18-19 season, response time: 1.5757250785827637s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.615 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Greek league and 18-19 season, response time: 1.590122938156128s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.624 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Portuguese league and 17-18 season, response time: 1.602999210357666s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.631 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Dutch league and 19-20 season, response time: 1.6042449474334717s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.636 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Italian league and 17-18 season, response time: 1.6165509223937988s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.643 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Turkish league and 17-18 season, response time: 1.6220529079437256s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.683 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, English league and 19-20 season, response time: 1.6570820808410645s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.688 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Belgian league and 19-20 season, response time: 1.6616299152374268s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.694 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Belgian league and 16-17 season, response time: 1.6760220527648926s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.699 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Dutch league and 18-19 season, response time: 1.674577236175537s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.718 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, German league and 18-19 season, response time: 1.694092035293579s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.725 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Scotish league and 19-20 season, response time: 1.6995530128479004s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.730 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, French league and 18-19 season, response time: 1.7057158946990967s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.743 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, French league and 19-20 season, response time: 1.7170801162719727s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.749 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Italian league and 18-19 season, response time: 1.7246227264404297s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.751 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Spanish league and 17-18 season, response time: 1.731330156326294s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.760 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Dutch league and 17-18 season, response time: 1.7398650646209717s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.787 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Turkish league and 19-20 season, response time: 1.760179042816162s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.891 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Spanish league and 18-19 season, response time: 1.867173194885254s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:16.897 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, English league and 17-18 season, response time: 1.8779850006103516s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.164 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, German league and 19-20 season, response time: 2.1380579471588135s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.282 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Greek league and 17-18 season, response time: 2.2602460384368896s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.294 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Dutch league and 20-21 season, response time: 2.2662270069122314s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.300 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, English league and 20-21 season, response time: 2.272784948348999s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.315 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Greek league and 20-21 season, response time: 2.2854621410369873s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.356 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, French league and 22-23 season, response time: 2.3214991092681885s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.378 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Scotish league and 20-21 season, response time: 2.35066294670105s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.385 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Italian league and 19-20 season, response time: 2.359006881713867s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.392 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Portuguese league and 22-23 season, response time: 2.357428789138794s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.396 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Spanish league and 19-20 season, response time: 2.3701021671295166s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.403 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Italian league and 20-21 season, response time: 2.375141143798828s
-</pre>
-</div>
+<p>We can run the above flow:</p>
+<div id="c04a3423" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> update_db(URLS_MAPPING)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.415 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Belgian league and 21-22 season, response time: 2.382357120513916s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:10.889 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | prefect.engine - Created flow run<span style="color: #800080; text-decoration-color: #800080"> 'paper-ringtail'</span> for flow<span style="color: #800080; text-decoration-color: #800080; font-weight: bold"> 'Download asynchronously the data and update the database'</span>
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.428 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Belgian league and 20-21 season, response time: 2.4002697467803955s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:10.972 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'paper-ringtail'</span> - Created task run 'Create database-0' for task 'Create database'
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.457 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Dutch league and 22-23 season, response time: 2.4225428104400635s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:10.974 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'paper-ringtail'</span> - Executing 'Create database-0' immediately...
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.473 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Scotish league and 22-23 season, response time: 2.43923020362854s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:11.029 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Create database-0' - Database created.
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.479 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Spanish league and 22-23 season, response time: 2.44524884223938s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:11.065 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Create database-0' - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.484 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Greek league and 19-20 season, response time: 2.4569339752197266s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:11.093 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'paper-ringtail'</span> - Created task run 'Update historical data-0' for task 'Update historical data'
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.491 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Scotish league and 21-22 season, response time: 2.458601951599121s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:11.095 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'paper-ringtail'</span> - Executing 'Update historical data-0' immediately...
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.527 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, German league and 20-21 season, response time: 2.499450922012329s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:11.146 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update historical data-0' - Table with historical data does not exist.
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.543 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, German league and 22-23 season, response time: 2.508971929550171s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:14.527 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update historical data-0' - Table with historical data was created. Shape: (12533, 124)
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.576 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Belgian league and 22-23 season, response time: 2.541059970855713s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:14.563 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update historical data-0' - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.581 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Portuguese league and 20-21 season, response time: 2.5525267124176025s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:14.590 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'paper-ringtail'</span> - Created task run 'Update fixtures data-0' for task 'Update fixtures data'
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.625 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, French league and 20-21 season, response time: 2.5975940227508545s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:14.592 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'paper-ringtail'</span> - Executing 'Update fixtures data-0' immediately...
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.635 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, English league and 22-23 season, response time: 2.60119891166687s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:15.065 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update fixtures data-0' - Fixtures data were updated. Shape: (169, 93)
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.652 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Greek league and 22-23 season, response time: 2.617156982421875s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:15.100 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update fixtures data-0' - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.665 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Italian league and 22-23 season, response time: 2.630805015563965s
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:01:15.137 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'paper-ringtail'</span> - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>('All states completed.')
 </pre>
 </div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.677 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Dutch league and 21-22 season, response time: 2.6438891887664795s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.685 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Spanish league and 20-21 season, response time: 2.657824993133545s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.703 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Turkish league and 22-23 season, response time: 2.6679699420928955s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.720 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Greek league and 21-22 season, response time: 2.6864521503448486s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.784 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Portuguese league and 19-20 season, response time: 2.7578470706939697s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.833 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Turkish league and 21-22 season, response time: 2.799938917160034s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.861 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Portuguese league and 21-22 season, response time: 2.8281331062316895s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.989 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Spanish league and 21-22 season, response time: 2.956023693084717s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:17.994 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, English league and 21-22 season, response time: 2.961747884750366s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:18.031 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSV data, Turkish league and 20-21 season, response time: 3.001934051513672s
-</pre>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>[Completed(message=None, type=COMPLETED, result=UnpersistedResult(type='unpersisted', artifact_type='result', artifact_description='Unpersisted result of type `NoneType`')),
+ Completed(message=None, type=COMPLETED, result=UnpersistedResult(type='unpersisted', artifact_type='result', artifact_description='Unpersisted result of type `NoneType`')),
+ Completed(message=None, type=COMPLETED, result=UnpersistedResult(type='unpersisted', artifact_type='result', artifact_description='Unpersisted result of type `NoneType`'))]</code></pre>
 </div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:18.086 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - CSVs data download time: 3.0944268703460693s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:18.183 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'nebulous-wren'</span> - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
-</pre>
 </div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:19.362 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'amethyst-reindeer'</span> - Data download time: 4.614122152328491s
-</pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">17:27:19.406 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'amethyst-reindeer'</span> - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
-</pre>
+<p>Let’s read the data from the database:</p>
+<div id="2e4faea0" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shutil <span class="im">import</span> rmtree</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>db_path <span class="op">=</span> TEMP_DIR <span class="op">/</span> <span class="st">'soccer_data.db'</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sqlite3.<span class="ex">connect</span>(db_path) <span class="im">as</span> con:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    historical_data <span class="op">=</span> pd.read_sql(<span class="st">'SELECT * FROM historical'</span>, con)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    fixtures_data <span class="op">=</span> pd.read_sql(<span class="st">'SELECT * FROM fixtures'</span>, con)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>rmtree(TEMP_DIR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The historical data:</p>
+<div id="573f86ca" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>historical_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -1326,6 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th data-quarto-table-cell-role="th">HTAG</th>
 <th data-quarto-table-cell-role="th">HTR</th>
 <th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">AvgC&lt;2.5</th>
 <th data-quarto-table-cell-role="th">AHCh</th>
 <th data-quarto-table-cell-role="th">B365CAHH</th>
 <th data-quarto-table-cell-role="th">B365CAHA</th>
@@ -1335,22 +463,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th data-quarto-table-cell-role="th">MaxCAHA</th>
 <th data-quarto-table-cell-role="th">AvgCAHH</th>
 <th data-quarto-table-cell-role="th">AvgCAHA</th>
-<th data-quarto-table-cell-role="th">Unnamed: 105</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>E0</td>
-<td>18/08/12</td>
-<td>Arsenal</td>
-<td>Sunderland</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>D</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>D</td>
+<td>10/08/2018</td>
+<td>Man United</td>
+<td>Leicester</td>
+<td>2</td>
+<td>1</td>
+<td>H</td>
+<td>1</td>
+<td>0</td>
+<td>H</td>
 <td>...</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -1366,14 +493,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>E0</td>
-<td>18/08/12</td>
-<td>Fulham</td>
-<td>Norwich</td>
-<td>5.0</td>
-<td>0.0</td>
+<td>11/08/2018</td>
+<td>Bournemouth</td>
+<td>Cardiff</td>
+<td>2</td>
+<td>0</td>
 <td>H</td>
-<td>2.0</td>
-<td>0.0</td>
+<td>1</td>
+<td>0</td>
 <td>H</td>
 <td>...</td>
 <td>NaN</td>
@@ -1390,15 +517,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>E0</td>
-<td>18/08/12</td>
-<td>Newcastle</td>
-<td>Tottenham</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>H</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>D</td>
+<td>11/08/2018</td>
+<td>Fulham</td>
+<td>Crystal Palace</td>
+<td>0</td>
+<td>2</td>
+<td>A</td>
+<td>0</td>
+<td>1</td>
+<td>A</td>
 <td>...</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -1414,14 +541,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>E0</td>
-<td>18/08/12</td>
-<td>QPR</td>
-<td>Swansea</td>
-<td>0.0</td>
-<td>5.0</td>
+<td>11/08/2018</td>
+<td>Huddersfield</td>
+<td>Chelsea</td>
+<td>0</td>
+<td>3</td>
 <td>A</td>
-<td>0.0</td>
-<td>1.0</td>
+<td>0</td>
+<td>2</td>
 <td>A</td>
 <td>...</td>
 <td>NaN</td>
@@ -1438,14 +565,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>E0</td>
-<td>18/08/12</td>
-<td>Reading</td>
-<td>Stoke</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>D</td>
-<td>0.0</td>
-<td>1.0</td>
+<td>11/08/2018</td>
+<td>Newcastle</td>
+<td>Tottenham</td>
+<td>1</td>
+<td>2</td>
+<td>A</td>
+<td>1</td>
+<td>2</td>
 <td>A</td>
 <td>...</td>
 <td>NaN</td>
@@ -1484,141 +611,443 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">34679</td>
-<td>G1</td>
-<td>13/05/2023</td>
-<td>Ionikos</td>
-<td>Lamia</td>
-<td>2.0</td>
-<td>2.0</td>
-<td>D</td>
-<td>2.0</td>
-<td>0.0</td>
-<td>H</td>
+<td data-quarto-table-cell-role="th">12528</td>
+<td>N1</td>
+<td>09/12/2023</td>
+<td>Zwolle</td>
+<td>Nijmegen</td>
+<td>1</td>
+<td>3</td>
+<td>A</td>
+<td>0</td>
+<td>1</td>
+<td>A</td>
 <td>...</td>
-<td>-0.50</td>
-<td>2.05</td>
-<td>1.80</td>
-<td>2.04</td>
-<td>1.72</td>
-<td>2.19</td>
-<td>1.87</td>
-<td>2.03</td>
-<td>1.76</td>
-<td>NaN</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">34680</td>
-<td>G1</td>
-<td>13/05/2023</td>
-<td>Levadeiakos</td>
-<td>Giannina</td>
-<td>3.0</td>
-<td>3.0</td>
-<td>D</td>
-<td>2.0</td>
-<td>2.0</td>
-<td>D</td>
-<td>...</td>
+<td>2.20</td>
 <td>-0.25</td>
-<td>1.82</td>
-<td>2.02</td>
 <td>1.85</td>
-<td>2.01</td>
-<td>2.04</td>
 <td>2.05</td>
 <td>1.86</td>
-<td>1.93</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">34681</td>
-<td>G1</td>
-<td>14/05/2023</td>
-<td>AEK</td>
-<td>Volos NFC</td>
-<td>4.0</td>
-<td>0.0</td>
-<td>H</td>
-<td>2.0</td>
-<td>0.0</td>
-<td>H</td>
-<td>...</td>
-<td>-3.50</td>
-<td>1.93</td>
-<td>1.93</td>
-<td>1.92</td>
-<td>1.93</td>
 <td>2.05</td>
-<td>1.94</td>
-<td>1.91</td>
-<td>1.87</td>
-<td>NaN</td>
+<td>1.88</td>
+<td>2.11</td>
+<td>1.84</td>
+<td>1.99</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">34682</td>
-<td>G1</td>
-<td>14/05/2023</td>
-<td>Panathinaikos</td>
-<td>Aris</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>D</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>D</td>
+<td data-quarto-table-cell-role="th">12529</td>
+<td>N1</td>
+<td>09/12/2023</td>
+<td>AZ Alkmaar</td>
+<td>Almere City</td>
+<td>4</td>
+<td>1</td>
+<td>H</td>
+<td>1</td>
+<td>0</td>
+<td>H</td>
 <td>...</td>
-<td>-1.25</td>
-<td>1.95</td>
-<td>1.90</td>
-<td>1.95</td>
-<td>1.90</td>
-<td>1.99</td>
-<td>1.96</td>
-<td>1.89</td>
-<td>1.90</td>
-<td>NaN</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">34683</td>
-<td>G1</td>
-<td>14/05/2023</td>
-<td>PAOK</td>
-<td>Olympiakos</td>
-<td>0.0</td>
-<td>1.0</td>
-<td>A</td>
-<td>0.0</td>
-<td>1.0</td>
-<td>A</td>
-<td>...</td>
-<td>-0.50</td>
-<td>1.85</td>
-<td>2.00</td>
-<td>1.89</td>
+<td>2.42</td>
+<td>-1.75</td>
+<td>1.92</td>
+<td>1.98</td>
+<td>1.93</td>
 <td>1.96</td>
 <td>1.98</td>
-<td>2.05</td>
-<td>1.91</td>
+<td>2.00</td>
 <td>1.88</td>
-<td>NaN</td>
+<td>1.94</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12530</td>
+<td>N1</td>
+<td>10/12/2023</td>
+<td>Go Ahead Eagles</td>
+<td>Utrecht</td>
+<td>0</td>
+<td>2</td>
+<td>A</td>
+<td>0</td>
+<td>2</td>
+<td>A</td>
+<td>...</td>
+<td>2.11</td>
+<td>-0.25</td>
+<td>2.03</td>
+<td>1.87</td>
+<td>2.04</td>
+<td>1.88</td>
+<td>2.09</td>
+<td>1.96</td>
+<td>1.99</td>
+<td>1.84</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">12531</td>
+<td>N1</td>
+<td>10/12/2023</td>
+<td>For Sittard</td>
+<td>Waalwijk</td>
+<td>1</td>
+<td>0</td>
+<td>H</td>
+<td>0</td>
+<td>0</td>
+<td>D</td>
+<td>...</td>
+<td>2.07</td>
+<td>-0.25</td>
+<td>1.86</td>
+<td>2.04</td>
+<td>1.85</td>
+<td>2.07</td>
+<td>1.87</td>
+<td>2.15</td>
+<td>1.81</td>
+<td>2.02</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12532</td>
+<td>N1</td>
+<td>10/12/2023</td>
+<td>Vitesse</td>
+<td>Heracles</td>
+<td>2</td>
+<td>0</td>
+<td>H</td>
+<td>1</td>
+<td>0</td>
+<td>H</td>
+<td>...</td>
+<td>2.10</td>
+<td>-0.25</td>
+<td>1.90</td>
+<td>2.00</td>
+<td>1.93</td>
+<td>1.98</td>
+<td>1.93</td>
+<td>2.05</td>
+<td>1.88</td>
+<td>1.94</td>
 </tr>
 </tbody>
 </table>
 
-<p>34684 rows × 139 columns</p>
+<p>12533 rows × 124 columns</p>
 </div>
 </div>
 </div>
-</section>
-<section id="prefect-ui-and-deployments" class="level2">
-<h2 class="anchored" data-anchor-id="prefect-ui-and-deployments">Prefect UI and deployments</h2>
-<p>You can spin up a local Prefect server UI with the <code>prefect server start</code> command in the shell and explore the characteristics of the above Prefect flows we ran. The data are stored in the Prefect database which by default is a local SQLite database. To reset it, you can run the command <code>prefect server database reset -y</code>.</p>
+<p>The fixtures data:</p>
+<div id="47370cdb" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fixtures_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Div</th>
+<th data-quarto-table-cell-role="th">Date</th>
+<th data-quarto-table-cell-role="th">Time</th>
+<th data-quarto-table-cell-role="th">HomeTeam</th>
+<th data-quarto-table-cell-role="th">AwayTeam</th>
+<th data-quarto-table-cell-role="th">FTHG</th>
+<th data-quarto-table-cell-role="th">FTAG</th>
+<th data-quarto-table-cell-role="th">FTR</th>
+<th data-quarto-table-cell-role="th">HTHG</th>
+<th data-quarto-table-cell-role="th">HTAG</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">AvgC&lt;2.5</th>
+<th data-quarto-table-cell-role="th">AHCh</th>
+<th data-quarto-table-cell-role="th">B365CAHH</th>
+<th data-quarto-table-cell-role="th">B365CAHA</th>
+<th data-quarto-table-cell-role="th">PCAHH</th>
+<th data-quarto-table-cell-role="th">PCAHA</th>
+<th data-quarto-table-cell-role="th">MaxCAHH</th>
+<th data-quarto-table-cell-role="th">MaxCAHA</th>
+<th data-quarto-table-cell-role="th">AvgCAHH</th>
+<th data-quarto-table-cell-role="th">AvgCAHA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>B1</td>
+<td>08/12/2023</td>
+<td>19:45</td>
+<td>Kortrijk</td>
+<td>Westerlo</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>B1</td>
+<td>09/12/2023</td>
+<td>15:00</td>
+<td>Cercle Brugge</td>
+<td>Antwerp</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>B1</td>
+<td>09/12/2023</td>
+<td>17:15</td>
+<td>St Truiden</td>
+<td>Oud-Heverlee Leuven</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>B1</td>
+<td>09/12/2023</td>
+<td>19:45</td>
+<td>Gent</td>
+<td>RWD Molenbeek</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>B1</td>
+<td>10/12/2023</td>
+<td>12:30</td>
+<td>Mechelen</td>
+<td>Club Brugge</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">164</td>
+<td>T1</td>
+<td>10/12/2023</td>
+<td>13:00</td>
+<td>Buyuksehyr</td>
+<td>Hatayspor</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">165</td>
+<td>T1</td>
+<td>10/12/2023</td>
+<td>13:00</td>
+<td>Kayserispor</td>
+<td>Pendikspor</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">166</td>
+<td>T1</td>
+<td>10/12/2023</td>
+<td>16:00</td>
+<td>Gaziantep</td>
+<td>Trabzonspor</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">167</td>
+<td>T1</td>
+<td>11/12/2023</td>
+<td>17:00</td>
+<td>Ankaragucu</td>
+<td>Rizespor</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">168</td>
+<td>T1</td>
+<td>11/12/2023</td>
+<td>17:00</td>
+<td>Konyaspor</td>
+<td>Sivasspor</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+<p>169 rows × 93 columns</p>
+</div>
+</div>
+</div>
+<p>You can spin up a local Prefect server UI with the <code>prefect server start</code> command in the shell and explore the characteristics of the above Prefect flow we ran. The data are stored in the Prefect database which by default is a local SQLite database.</p>
 <p>Prefect also supports deployments i.e.&nbsp;packaging workflow code, settings, and infrastructure configuration so that the data workflow can be managed via the Prefect API and run remotely by a Prefect agent.</p>
 <p>You can read more at the official <a href="https://docs.prefect.io">Prefect documentation</a>.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

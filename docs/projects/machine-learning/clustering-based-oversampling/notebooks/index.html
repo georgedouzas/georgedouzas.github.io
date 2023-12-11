@@ -196,16 +196,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><img src="featured.png" class="img-fluid"></p>
-<p>SMOTE algorithm and its variants generate synthetic samples along line segments that join minority class instances. SMOTE addresses only the between-classes imbalance. On the other hand, SMOTE does nothing about areas of the input space that differ significantly in the density of a particular class, an issue known as within-classes imbalance. An approach that deals with this issue is to use a clusterer to select sparse areas of the input space and then apply oversampling to them. I have developed a Python implementation of the above clustering-based oversampling approach called <a href="https://github.com/georgedouzas/cluster-over-sampling">cluster-over-sampling</a>, which integrates seamlessly with the <a href="https://scikit-learn.org/stable/">Scikit-Learn</a> and <a href="https://imbalanced-learn.org/stable/">Imbalanced-Learn</a> ecosystems. To present the API, let’s first load some data:</p>
-<div id="f3264f41" class="cell" data-execution_count="1">
+<p>The library <a href="https://github.com/georgedouzas/cluster-over-sampling">cluster-over-sampling</a> implements a general interface for clustering based over-sampling algorithms, a class of algorithms that deal with the within-classes imbalance issue, since <a href="https://arxiv.org/pdf/1106.1813.pdf">SMOTE</a> and its variants addresses only the between-classes imbalance. To present the API, let’s first load some data:</p>
+<div id="0e1a8210" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> load_breast_cancer(return_X_y<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The data are clearly imbalanced:</p>
-<div id="d1f04b9e" class="cell" data-execution_count="2">
+<p>The data are imbalanced:</p>
+<div id="d1ec1d61" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -221,8 +221,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Number of minority class samples: 212.</code></pre>
 </div>
 </div>
-<p>I will use <code>KMeans</code> and <code>SMOTE</code> to create a clustering-based oversampler but any combination would work:</p>
-<div id="68e41a9c" class="cell" data-execution_count="3">
+<p>I will use <code>KMeans</code> and <code>SMOTE</code> to create a clustering-based oversampler, but any other combination would work:</p>
+<div id="becc484f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> imblearn.over_sampling <span class="im">import</span> SMOTE</span>
@@ -236,7 +236,7 @@ Number of minority class samples: 212.</code></pre>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>kmeans_smote <span class="op">=</span> ClusterOverSampler(oversampler<span class="op">=</span>smote, clusterer<span class="op">=</span>kmeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can use the <code>fit</code> method to calculate statistics of the oversampling process:</p>
-<div id="ca354d2e" class="cell" data-execution_count="4">
+<div id="6fcd32e2" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>kmeans_smote.fit(X, y)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Number of generated minority class instances to rebalance dataset: </span><span class="sc">{</span>kmeans_smote<span class="sc">.</span>sampling_strategy_[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">."</span></span>
@@ -246,7 +246,7 @@ Number of minority class samples: 212.</code></pre>
 </div>
 </div>
 <p>Or use the <code>fit_resample</code> method to get the resampled data:</p>
-<div id="00679b91" class="cell" data-execution_count="5">
+<div id="b5e90b9c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>_, y_res <span class="op">=</span> kmeans_smote.fit_resample(X, y)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> Counter(y_res)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
@@ -260,7 +260,7 @@ Number of minority class samples: 357.</code></pre>
 </div>
 </div>
 <p>The clustering-based oversamplers can be used in machine learning pipelines:</p>
-<div id="6e33ef04" class="cell" data-execution_count="6">
+<div id="2211abee" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
