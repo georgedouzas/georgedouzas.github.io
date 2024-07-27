@@ -1,0 +1,171 @@
+---
+title: "An Introduction to Statistical Learning"
+description: "A detailed presentation of statistical and machine learning approaches."
+author: "Georgios Douzas"
+date: "2023-06-022"
+categories: [Artificial Intelligence, Textbook, Review]
+image: "featured.png"
+jupyter: python3
+draft: true
+---
+
+![](featured.png)
+
+# Introduction
+
+Statistical learning methods can be classified as supervised or unsupervised.
+
+- Supervised learning models predict an output based on one or more inputs.
+
+- Unsupervised learning models learn relationships and structure from data.
+
+The following notation is used:
+
+- $n$ represents the number of samples and $p$ denotes the number of variables
+
+- $\mathbf{X}$ is th input matrix
+
+$$\mathbf{X}=\left(\begin{array}{cccc}x_{11} & x_{12} & \ldots & x_{1 p} \\ x_{21} & x_{22} & \ldots & x_{2 p} \\ \vdots & \vdots & \ddots & \vdots \\ x_{n 1} & x_{n 2} & \ldots & x_{n p}\end{array}\right)$$
+
+- $\mathbf{y}$ is the output vector:
+
+$$\mathbf{y}=\left(\begin{array}{c}y_1 \\ y_2 \\ \vdots \\ y_n\end{array}\right)$$
+
+## Examples
+
+### Wage
+
+The **Wage** is predicted from **Age**, **Year** and **Education**.
+
+```{python}
+# Load data
+from ISLP import load_data
+wage_data = load_data('Wage')
+wage_data.rename(columns={col: col.title() for col in wage_data.columns}, inplace=True)
+wage_data['Education'] = wage_data['Education'].cat.rename_categories(lambda c: c[0])
+
+# Plot Wage vs Age, Year and Education
+import seaborn as sns
+import matplotlib.pyplot as plt
+fig, (ax1, ax2, ax3) = plt.subplots(ncols=3, sharey=True, figsize=(9.5, 5))
+sns.scatterplot(data=wage_data, x='Age', y='Wage', ax=ax1)
+sns.scatterplot(data=wage_data, x='Year', y='Wage', ax=ax2)
+sns.boxplot(data=wage_data, x='Education', y='Wage', ax=ax3)
+```
+
+### Stock market
+
+The goal is to predict whether or not the index will increase or decrease on a given day, using the  past day's pecentage changes
+in the index.
+
+```{python}
+# Load data
+smarket_data = load_data('Smarket')
+smarket_data.rename(columns={'Direction': 'Today’s Direction'}, inplace=True)
+
+# Plot previous day’s percentage change
+fig, (ax1, ax2, ax3) = plt.subplots(ncols=3, sharey=True, figsize=(9.5, 5))
+ax1.set_title('Yesterday')
+ax2.set_title('Two Days Previous')
+ax3.set_title('Three Days Previous')
+palette = {'Down': 'blue', 'Up': 'red'}
+sns.boxplot(data=smarket_data.rename(columns={'Lag1': 'Percentage change in S&P'}), x='Today’s Direction', hue='Today’s Direction', y='Percentage change in S&P', ax=ax1, order=['Down', 'Up'], palette=palette)
+sns.boxplot(data=smarket_data.rename(columns={'Lag2': 'Percentage change in S&P'}), x='Today’s Direction', hue='Today’s Direction', y='Percentage change in S&P', ax=ax2, order=['Down', 'Up'], palette=palette)
+sns.boxplot(data=smarket_data.rename(columns={'Lag3': 'Percentage change in S&P'}), x='Today’s Direction', hue='Today’s Direction', y='Percentage change in S&P', ax=ax3, order=['Down', 'Up'], palette=palette)
+```
+
+```{python}
+# Split data
+smarket_data['y'] = (smarket_data['Today’s Direction'] == 'Down').astype(int)
+train_mask = smarket_data['Year'] != 2005
+train_data = smarket_data[train_mask].copy()
+test_data = smarket_data[~train_mask].copy()
+input_cols = ['Lag1', 'Lag2']
+X_train, y_train = train_data[input_cols], train_data['y']
+X_test, y_test = test_data[input_cols], test_data['y']
+
+# Fit model
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+classifier = QuadraticDiscriminantAnalysis()
+classifier.fit(X_train, y_train)
+
+# Import accuracy score
+from sklearn.metrics import accuracy_score
+```
+
+```{python}
+test_data['Predicted Probability'] = classifier.predict_proba(X_test)[:, 1]
+sns.boxplot(data=test_data, x='Today’s Direction', hue='Today’s Direction', y='Predicted Probability', order=['Down', 'Up'], palette=palette)
+```
+
+### Gene expression
+
+Each cell line is represented with the first two principal components of the data.
+
+```{python}
+# Load data
+nci60_data = load_data('NCI60')
+X, y = nci60_data['data'], nci60_data['labels']
+
+# Apply PCA
+import pandas as pd
+from sklearn.decomposition import PCA
+pca = PCA(n_components=2)
+X_pca = pd.DataFrame(pca.fit_transform(X), columns=['Z1', 'Z2'])
+X_pca = pd.concat([X_pca, y], axis=1)
+
+# Plot data
+fig, (ax1, ax2) = plt.subplots(ncols=2, sharey=True, figsize=(9.5, 5))
+sns.scatterplot(data=X_pca, x='Z1', y='Z2', ax=ax1)
+sns.scatterplot(data=X_pca, x='Z1', y='Z2', hue='label', ax=ax2, legend=None)
+```
+
+# Statistical Learning
+
+Let $Y$ a quantitative response and $p$ different predictors, $X = X_{1}, X_{2}, . . . , X_{p}$. Assume that there is some
+relationship between $Y$ and $X$ with $f$ an unknown function and $\epsilon$ is a random error term, which is independent of $X$
+and has mean zero:
+
+$$Y=f(X)+\epsilon$$
+
+Statistical learning refers to a set of approaches for estimating $f$ for prediction and inference.
+
+$Y$ is predicted  using $\hat{Y} = \hat{f}(X)$. The accuracy of $\hat{Y}$ as a prediction for $Y$ depends on the reducible and
+irreducible errors:
+
+- The reducible error corresponding to the inaccuracy of the estimation of $f$ from $\hat{f}$.
+
+- The irreducible error corresponding to the variability associated with $\epsilon$.
+
+## Examples
+
+### Advertising
+
+The **Sales** are predicted from **TV**, **Radio**, and **Newspaper** advetising budgets.
+
+```{python}
+# Load data
+
+import pandas as pd
+advertising_data = pd.read_csv('data/Advertising.csv', index_col=0)
+advertising_data.rename(columns={'radio': 'Radio', 'newspaper': 'Newspaper', 'sales': 'Sales'}, inplace=True)
+
+# Plot Sales vs TV, Radio and Newspaper
+import seaborn as sns
+import matplotlib.pyplot as plt
+fig, (ax1, ax2, ax3) = plt.subplots(ncols=3, sharey=True, figsize=(9.5, 5))
+sns.regplot(data=advertising_data, x='TV', y='Sales', ax=ax1, scatter_kws={'color': 'red'})
+sns.regplot(data=advertising_data, x='Radio', y='Sales', ax=ax2, scatter_kws={'color': 'red'})
+sns.regplot(data=advertising_data, x='Newspaper', y='Sales', ax=ax3, scatter_kws={'color': 'red'})
+```
+
+### Income
+
+The **Income** is predicted from **Years of Education**.
+
+```{python}
+fig, (ax1, ax2) = plt.subplots(ncols=2, sharey=True, figsize=(9.5, 5))
+income_data = pd.read_csv('data/Income1.csv', index_col=0).rename(columns={'Education': 'Years of Education'})
+sns.scatterplot(data=income_data, x='Years of Education', y='Income', color='red', ax=ax1)
+sns.regplot(data=income_data, x='Years of Education', y='Income', ci=None, order=3, scatter_kws={'color': 'red'}, ax=ax2)
+```
