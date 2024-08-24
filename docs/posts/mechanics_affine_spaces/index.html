@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Georgios Douzas">
+<meta name="dcterms.date" content="2024-08-22">
+<meta name="description" content="Introduction to affine spaces.">
 
-<title>AI &amp; Friends - Posts</title>
+<title>AI &amp; Friends - Mechanics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -128,17 +100,17 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">AI &amp; Friends</span>
     </a>
   </div>
@@ -149,7 +121,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -172,158 +144,203 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Posts</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Mechanics</h1>
+                  <div>
+        <div class="description">
+          Introduction to affine spaces.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Physics</div>
+                <div class="quarto-category">Mechanics</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Georgios Douzas </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 22, 2024</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Data Engineering">Data Engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Imbalanced Data">Imbalanced Data <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Machine Learning">Machine Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Mechanics">Mechanics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Open Source">Open Source <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Physics">Physics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Software Engineering">Software Engineering <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<p><img src="featured.png" class="img-fluid"></p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>It is common to define the physical space as <span class="math inline">\(\mathbb{R}^3\)</span>. This is incorrect both mathematically and physically. The reason is that the structure of <span class="math inline">\(\mathbb{R}^3\)</span> is not invariant under displacements and under other physically important transformations called isometries, in contrast to the nature of Euclidean geometry’s results. The three-dimensional space and the temporal axis of Classical Physics (but also four-dimensional spacetime in Special Relativity) are first of all affine spaces.</p>
+</section>
+<section id="definition-of-an-affine-space" class="level1">
+<h1>Definition of an affine space</h1>
+<p>A real affine space of finite dimension <span class="math inline">\(n\)</span> is a set <span class="math inline">\(\mathbb{A}^n\)</span> whose elements are called points equipped with the following structures:</p>
+<ul>
+<li>A <span class="math inline">\(n\)</span>-dimensional vector space <span class="math inline">\(V\)</span> called space of displacements or space of free vectors.</li>
+<li>A map <span class="math inline">\(\mathbb{A}^n \times \mathbb{A}^n \ni(P, Q) \mapsto P-Q \in V\)</span> with the following two properties:
+<ul>
+<li>For any pair <span class="math inline">\(Q \in \mathbb{A}^n, \mathbf{v} \in V\)</span> there is a unique <span class="math inline">\(P \in \mathbb{A}^n\)</span> such that <span class="math inline">\(P-Q=\mathbf{v}\)</span>.</li>
+<li>For any triplet <span class="math inline">\(P, Q, R \in \mathbb{A}^n\)</span>, the identity <span class="math inline">\(P-Q+Q-R=P-R\)</span> holds.</li>
+</ul></li>
+</ul>
+<p>If <span class="math inline">\(Q \in \mathbb{A}^n\)</span> and <span class="math inline">\(\mathbf{v} \in V\)</span> then the unique point <span class="math inline">\(P\)</span> in <span class="math inline">\(\mathbb{A}^n\)</span> such that <span class="math inline">\(P-Q=\mathbf{v}\)</span> is denoted as <span class="math inline">\(Q+\mathbf{v}\)</span>.</p>
+</section>
+<section id="lines-and-line-segments" class="level1">
+<h1>Lines and line segments</h1>
+<p>We define a line and a line segment in <span class="math inline">\(\mathbb{A}^n\)</span> as follows:</p>
+<ul>
+<li>A line in <span class="math inline">\(\mathbb{A}^n\)</span> with origin <span class="math inline">\(P\)</span> and tangent vector <span class="math inline">\(\mathbf{v} \in V\)</span> is the map <span class="math inline">\(\mathbb{R} \ni t \mapsto P+t
+\mathbf{u} \in \mathbb{A}^n\)</span>.</li>
+<li>A line segment in <span class="math inline">\(\mathbb{A}^n\)</span> is a restriction of the above map to some interval.</li>
+</ul>
+</section>
+<section id="various-properties" class="level1">
+<h1>Various properties</h1>
+<p>The following properties hold for any <span class="math inline">\(P, Q \in \mathbb{A}^n\)</span> and <span class="math inline">\(\mathbf{u}, \mathbf{v} \in V\)</span>:</p>
+<ul>
+<li><span class="math inline">\(P-P=\mathbf{0}\)</span>.</li>
+<li><span class="math inline">\((Q+\mathbf{u})+\mathbf{v}=Q+(\mathbf{u}+\mathbf{v})\)</span>.</li>
+<li><span class="math inline">\(P-Q=-(Q-P)\)</span>.</li>
+<li><span class="math inline">\(P-Q=(P+\mathbf{u})-(Q+\mathbf{u})\)</span>.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Prove the above properties.</p>
+</blockquote>
+</section>
+<section id="coordinate-systems" class="level1">
+<h1>Coordinate systems</h1>
+<p>A local coordinate system on <span class="math inline">\(\mathbb{A}^n\)</span> is a map <span class="math inline">\(\psi: U \subset \mathbb{A}^n \rightarrow \mathbb{R}^n\)</span> with the following properties:</p>
+<ul>
+<li><span class="math inline">\(\psi\)</span> is injective.</li>
+<li><span class="math inline">\(\psi(U) \subset \mathbb{R}^n\)</span> is an open set.</li>
+</ul>
+<p>The coordinate system is global if <span class="math inline">\(U=\mathbb{A}^n\)</span>.</p>
+<p>Every affine space admits a family of global coordinate systems called Cartesian coordinate systems. A Cartesian coordinate system with origin <span class="math inline">\(O\)</span> and axes <span class="math inline">\(\mathbf{e}_1, \ldots, \mathbf{e}_n\)</span> is defined as follows:</p>
+<ul>
+<li>Fix a point <span class="math inline">\(O\)</span> and a basis <span class="math inline">\(\mathbf{e}_1, \ldots, \mathbf{e}_n\)</span> of <span class="math inline">\(V\)</span>.</li>
+<li>Define a map <span class="math inline">\(f: \mathbb{A}^n \rightarrow \mathbb{R}^n\)</span> with <span class="math inline">\(f(P) = \left((P-O)^1, \ldots,(P-O)^n\right)\)</span></li>
+</ul>
+<blockquote class="blockquote">
+<p>Prove the above map is bijective and therefore <span class="math inline">\(f\)</span> is a global coordinate system.</p>
+</blockquote>
+<p>Non-Cartesian local coordinate systems are called curvilinear coordinate systems.</p>
+</section>
+<section id="properties-of-cartesian-coordinate-systems" class="level1">
+<h1>Properties of cartesian coordinate systems</h1>
+<p>Let <span class="math inline">\(\left(\mathbb{A}^n, f\right)\)</span> be a Cartesian coordinate system with coordinates <span class="math inline">\(x^1, \cdots, x^n\)</span> and <span class="math inline">\(\left(\mathbb{A}^n, g\right)\)</span> another Cartesian coordinate system with coordinates <span class="math inline">\(x^{\prime 1}, \cdots, x^{\prime n}\)</span>, origin <span class="math inline">\(O^{\prime}\)</span> and axes <span class="math inline">\(\mathbf{e}^{\prime}{ }_1, \ldots, \mathbf{e}_n^{\prime}\)</span>, so that</p>
+<p><span class="math display">\[
+\mathbf{e}_i=\sum_j B^j{ }_i \mathbf{e}^{\prime}{ }_j
+\]</span></p>
+<p>Let <span class="math inline">\(\left(O-O^{\prime}\right)=\sum_i b^i \mathbf{e}_i\)</span> then the following properties hold:</p>
+<ul>
+<li><p>The map <span class="math inline">\(g \circ f^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> is expressed in coordinates as <span class="math inline">\(x^{\prime j}=\sum_{i=1}^n B^j{
+}_i\left(x^i+b^i\right)\)</span>.</p></li>
+<li><p>The map <span class="math inline">\(f \circ g^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> is expressed in coordinates as <span class="math inline">\(x^i=-b^i+\sum_{j=1}^n\left(B^{-1}\right)^i{ }_j x^{\prime j}\)</span>.</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>Prove the above properties.</p>
+</blockquote>
+</section>
+<section id="affine-transformations" class="level1">
+<h1>Affine transformations</h1>
+<p>A map <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m\)</span> between affine spaces <span class="math inline">\(\mathbb{A}_1^n\)</span> and <span class="math inline">\(\mathbb{A}_2^n\)</span> with spaces of displacements <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span> is called an affine transformation and has the following properties:</p>
+<ul>
+<li><span class="math inline">\(\psi\)</span> is invariant under displacements i.e.&nbsp;<span class="math inline">\(\psi(P+\mathbf{u})-\psi(Q+\mathbf{u})=\psi(P)-\psi(Q)\)</span> for any <span class="math inline">\(P, Q \in
+\mathbb{A}_1^n\)</span> and <span class="math inline">\(\mathbf{u} \in V_1\)</span>.</li>
+<li>The map <span class="math inline">\(d \psi: V_1 \rightarrow V_2\)</span> with <span class="math inline">\(d \psi(P - Q) = \psi(P) - \psi(Q)\)</span> is a linear between the vector spaces <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span>.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Prove the map is well defined and linear.</p>
+</blockquote>
+<p>An affine transformation is called an isomorphism of affine spaces if it is bijective. Note that the inverse of an isomorphism of affine spaces is an affine map and hence an isomorphism of affine spaces. If <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow
+\mathbb{A}_2^n\)</span> is an isomorphism of affine spaces then <span class="math inline">\(d \psi: V_1 \rightarrow V_2\)</span> is a vector space isomorphism.</p>
+<blockquote class="blockquote">
+<p>Prove the above properties.</p>
+</blockquote>
+<p>Affine transformations map straight lines to straight lines: If <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^n\)</span> is affine and <span class="math inline">\(P(t):=P+t \mathbf{u}\)</span>, with <span class="math inline">\(t \in \mathbb{R}\)</span>, is the line in <span class="math inline">\(\mathbb{A}_1^n\)</span> with origin <span class="math inline">\(P\)</span> and tangent vector <span class="math inline">\(\mathbf{v}
+\in V_1\)</span>, then <span class="math inline">\(\psi(P(t))\)</span>, as <span class="math inline">\(t \in \mathbb{R}\)</span> varies, defines a line in <span class="math inline">\(\mathbb{A}^m\)</span>.</p>
+<blockquote class="blockquote">
+<p>Prove the above properties.</p>
+</blockquote>
+</section>
+<section id="representation-of-affine-transformations" class="level1">
+<h1>Representation of affine transformations</h1>
+<p>Let <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m\)</span> an affine transformation. Then, for any choice of Cartesian coordinate systems in the two spaces <span class="math inline">\(\left(\mathbb{A}_1^n, f_1\right)\)</span> and <span class="math inline">\(\left(\mathbb{A}_2^m, f_2\right)\)</span>, the representation of <span class="math inline">\(\psi\)</span> in coordinates, i.e.&nbsp;the map <span class="math inline">\(f_2 \circ \psi \circ f_1^{-1}: \mathbb{R}^n \ni\left(x_1^1, \ldots, x_1^n\right) \mapsto\left(x_2^1,
+\ldots, x_2^m\right) \in \mathbb{R}^m\)</span> has the form</p>
+<p><span class="math display">\[x_2^i=c^i+\sum_{j=1}^n L^i{ }_j x_1^j \quad(i=1,2, \ldots, m)\]</span></p>
+<blockquote class="blockquote">
+<p>Prove the above property.</p>
+</blockquote>
+<p>for suitable coefficients <span class="math inline">\(L^i{ }_j\)</span> and <span class="math inline">\(c^i\)</span> depending on <span class="math inline">\(\psi\)</span> and on the coordinate systems. Above, <span class="math inline">\(\left(x_2^1, \ldots,
+x_2^m\right)\)</span> are the Cartesian coordinates of <span class="math inline">\(\psi(P) \in \mathbb{A}_2^m\)</span> and <span class="math inline">\(\left(x_1^1, \ldots, x_1^n\right)\)</span> those of <span class="math inline">\(P
+\in \mathbb{A}_1^n\)</span>.</p>
+<p>Conversely, <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m\)</span> is affine if there exist Cartesian coordinate systems on the two spaces in which <span class="math inline">\(\psi\)</span> has the above form in coordinates.</p>
+<blockquote class="blockquote">
+<p>Prove the above property.</p>
+</blockquote>
+</section>
+<section id="group-of-displacements" class="level1">
+<h1>Group of displacements</h1>
+<p>The mapping <span class="math inline">\(T_{\mathbf{v}}: \mathbb{A}^n \rightarrow \mathbb{A}^n\)</span> of <span class="math inline">\(\mathbf{v} \in V\)</span> on <span class="math inline">\(\mathbb{A}^n\)</span> is defined as <span class="math inline">\(T_{\mathbf{v}}: P \mapsto P+\mathbf{v}\)</span>.</p>
+<p>The set <span class="math inline">\(\left\{T_{\mathbf{v}}\right\}_{\mathbf{v} \in V}\)</span> is a group under composition, called the group of displacements of <span class="math inline">\(\mathbb{A}^n\)</span>. As <span class="math inline">\(T_{\mathbf{u}} T_{\mathbf{v}}=T_{\mathbf{u}+\mathbf{v}}\)</span> and <span class="math inline">\(\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}\)</span>, the group is Abelian.</p>
+<blockquote class="blockquote">
+<p>Prove the above properties.</p>
+</blockquote>
+<p>The following properties hold:</p>
+<ul>
+<li>The map <span class="math inline">\(V \ni \mathbf{v} \mapsto T_{\mathbf{v}}\)</span> is injective. It is a group isomorphism when we view <span class="math inline">\(V\)</span> as Abelian group under addition.</li>
+<li>Only <span class="math inline">\(\mathbf{v}=\mathbf{0}\)</span> satisfies <span class="math inline">\(T_{\mathbf{v}}(P)=P\)</span> for some <span class="math inline">\(P \in \mathbb{A}^n\)</span>, i.e.&nbsp;the action of the group of displacements is free. We also have the stronger condition <span class="math inline">\(T_0(P)=P\)</span> for any <span class="math inline">\(P \in \mathbb{A}^n\)</span>.</li>
+<li>For any pair <span class="math inline">\(P, Q \in \mathbb{A}^n\)</span> there is a displacement <span class="math inline">\(T_{\mathbf{v}}\)</span> such that <span class="math inline">\(T_{\mathbf{v}}(P)=Q\)</span> i.e. the group of displacements acts transitively.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Prove the above properties.</p>
+</blockquote>
+</section>
+<section id="group-action" class="level1">
+<h1>Group action</h1>
+<p>Given a set <span class="math inline">\(S\)</span>, and a group <span class="math inline">\(G\)</span> with neutral element <span class="math inline">\(e\)</span> and product <span class="math inline">\(\circ\)</span>, an action of <span class="math inline">\(G\)</span> on <span class="math inline">\(S\)</span> is a map <span class="math inline">\(A: G \times S \ni(g, s) \mapsto\)</span> <span class="math inline">\(A_g(s) \in S\)</span>, where <span class="math inline">\(A_g \in \mathcal{G}_S\)</span> and the latter is the group of bijections on <span class="math inline">\(S\)</span> under composition, such that:</p>
+<ul>
+<li><span class="math inline">\(A_e=i d\)</span>,</li>
+<li><span class="math inline">\(A_g A_{g^{\prime}}=A_{g \circ g^{\prime}}\)</span> where <span class="math inline">\(g, g^{\prime} \in G\)</span>.</li>
+</ul>
+<p>We have the following definitions:</p>
+<ul>
+<li>The action is called free if <span class="math inline">\(A_g(s)=s\)</span> for some <span class="math inline">\(s \in S\)</span> implies <span class="math inline">\(g=e\)</span>.</li>
+<li>The action is called transitive if for any <span class="math inline">\(s, s^{\prime} \in S\)</span> there exists <span class="math inline">\(g \in G\)</span> such that <span class="math inline">\(A_g(s)=s^{\prime}\)</span>.</li>
+<li>The action is called faithful if <span class="math inline">\(G \ni g \mapsto A_g \in \mathcal{G}_S\)</span> is injective.</li>
+</ul>
+<p>An action always determines a group homomorphism <span class="math inline">\(G \rightarrow \mathcal{G}_S\)</span>, and therefore <span class="math inline">\(G_S:=\left\{A_g\right\}_{g \in G}\)</span> is a subgroup of <span class="math inline">\(\mathcal{G}_S\)</span> and <span class="math inline">\(A\)</span> is faithful if and only if defines a group isomorphism <span class="math inline">\(G \rightarrow G_S\)</span>.</p>
+<blockquote class="blockquote">
+<p>Prove the above properties.</p>
+</blockquote>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Physics,Mechanics" data-listing-date-sort="1724274000000" data-listing-file-modified-sort="1724481146794" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1046">
-<div class="thumbnail">
-<p><a href="./posts/mechanics_affine_spaces/index.html" class="no-external"></a></p><a href="./posts/mechanics_affine_spaces/index.html" class="no-external">
-<p><img src="./posts/mechanics_affine_spaces/featured.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/mechanics_affine_spaces/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/mechanics_affine_spaces/index.html" class="no-external">Mechanics</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/mechanics_affine_spaces/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Physics'); return false;">
-Physics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Mechanics'); return false;">
-Mechanics
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/mechanics_affine_spaces/index.html" class="no-external">Introduction to affine spaces.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/mechanics_affine_spaces/index.html" class="no-external">
-<div class="listing-date">
-Aug 22, 2024
-</div>
-<div class="listing-author">
-Georgios Douzas
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Software Engineering,Open Source,Data Engineering" data-listing-date-sort="1687381200000" data-listing-file-modified-sort="1724353614122" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1218">
-<div class="thumbnail">
-<p><a href="./posts/prefect/index.html" class="no-external"></a></p><a href="./posts/prefect/index.html" class="no-external">
-<p><img src="./posts/prefect/featured.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/prefect/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/prefect/index.html" class="no-external">Prefect</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/prefect/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Software Engineering'); return false;">
-Software Engineering
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Open Source'); return false;">
-Open Source
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Data Engineering'); return false;">
-Data Engineering
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/prefect/index.html" class="no-external">Build, deploy and observe data workflows.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/prefect/index.html" class="no-external">
-<div class="listing-date">
-Jun 22, 2023
-</div>
-<div class="listing-author">
-Georgios Douzas
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Machine Learning,Open Source,Imbalanced Data" data-listing-date-sort="1651438800000" data-listing-file-modified-sort="1724426868616" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1349">
-<div class="thumbnail">
-<p><a href="./posts/imbalanced-learn-extra/index.html" class="no-external"></a></p><a href="./posts/imbalanced-learn-extra/index.html" class="no-external">
-<p><img src="./posts/imbalanced-learn-extra/featured.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/imbalanced-learn-extra/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/imbalanced-learn-extra/index.html" class="no-external">imbalanced-learn-extra</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/imbalanced-learn-extra/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Machine Learning'); return false;">
-Machine Learning
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Open Source'); return false;">
-Open Source
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Imbalanced Data'); return false;">
-Imbalanced Data
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/imbalanced-learn-extra/index.html" class="no-external">Implementation of novel oversampling algorithms.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/imbalanced-learn-extra/index.html" class="no-external">
-<div class="listing-date">
-May 2, 2022
-</div>
-<div class="listing-author">
-Georgios Douzas
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
