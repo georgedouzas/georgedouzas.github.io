@@ -10,16 +10,21 @@ jupyter: python3
 
 ![](featured.png)
 
+# Introduction
+
 [Prefect](https://docs.prefect.io) is a workflow orchestration tool. It makes accessible the creation, scheduling, and monitoring
 of complex data pipelines. The workflows are defined as Python code, while Prefect provides error handling, retry mechanisms, and
 a user-friendly dashboard for monitoring.
 
-As an example, let's assume that we would like to create a data workflow that downloads,
-stores and updates historical and fixtures soccer data from [Football-Data.co.uk](https://www.football-data.co.uk). The URL of
-each of those main leagues has the following form: 
+# Workflow for soccer data
+
+As an example, let's assume that we would like to create a data workflow that downloads, stores and updates historical and
+fixtures soccer data from [Football-Data.co.uk](https://www.football-data.co.uk). The URL of each of those main leagues has the
+following form: 
 
 ```{python}
-'https://www.football-data.co.uk/mmz4281/{season}/{league_id}.csv'
+base_url = 'https://www.football-data.co.uk/mmz4281/{season}/{league_id}.csv'
+base_url
 ```
 
 where `season` is the season of the league and `league_id` is the league ID. Let's select a few of those seasons and leagues:
@@ -52,6 +57,8 @@ Our workflow will include the following tasks:
 - Check if the database is updated with the latest historical data. If the historical data do not exist, download all the data and
 store them to the database while if the historical data are not updated, download only the latest data and update the database.
 - Download the latest fixtures data and store them to the database.
+
+### Tasks
 
 The above tasks represent discrete units of work, and they will receive the `task` decorator. We will also use an asynchronous
 httpx client to concurrently download the data since we have multiple files.
@@ -166,6 +173,8 @@ async def update_fixtures_data():
         logger.info(f'Fixtures data were updated. Shape: {data.shape}')
 ```
 
+### Flow
+
 The full data workflow will receive the `flow` decorator.
 
 ```{python}
@@ -184,6 +193,9 @@ async def update_db(urls_mapping: dict[str, tuple[str, str]]):
     await update_historical_data(urls_mapping)
     await update_fixtures_data()
 ```
+
+
+# Results
 
 We can run the above flow:
 
@@ -214,6 +226,8 @@ The fixtures data:
 ```{python}
 fixtures_data
 ```
+
+# Final thoughts
 
 You can spin up a local Prefect server UI with the `prefect server start` command in the shell and explore the characteristics of
 the above Prefect flow we ran. The data are stored in the Prefect database which by default is a local SQLite database.

@@ -10,6 +10,8 @@ jupyter: python3
 
 ![](featured.png)
 
+# Introduction
+
 The library [imbalanced-learn-extra](https://github.com/georgedouzas/imbalanced-learn-extra) is a Python package that extends
 [imbalanced-learn](https://imbalanced-learn.org/stable/). It implements algorithms that are not included in
 [imbalanced-learn](https://imbalanced-learn.org/stable/) due to their novelty or lower citation number. The current version
@@ -19,7 +21,7 @@ includes the following:
 
 - The Geometric SMOTE algorithm.
 
-## Clustering-based oversampling
+# Clustering-based oversampling
 
 Clustering-based oversampling algorithms deal with the within-classes imbalance issue, since
 [SMOTE](https://arxiv.org/pdf/1106.1813.pdf) and its variants addresses only the between-classes imbalance. To present the API,
@@ -91,7 +93,7 @@ score = cross_val_score(estimator=classifier, X=X, y=y, scoring="f1").mean()
 print(f"The cross-validation F-score is {score}.")
 ```
 
-## Geometric SMOTE
+# Geometric SMOTE
 
 [Geometric SMOTE](https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353) is not just another member of the
 [SMOTE](https://arxiv.org/pdf/1106.1813.pdf)'s family since it expands the data generation area and does not just use linear

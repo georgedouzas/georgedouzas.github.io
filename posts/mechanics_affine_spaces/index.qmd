@@ -12,162 +12,166 @@ jupyter: python3
 
 # Introduction
 
-It is common to define the physical space as $\mathbb{R}^3$. This is incorrect both mathematically and physically. The reason is
-that the structure of $\mathbb{R}^3$ is not invariant under displacements and under other physically important transformations
-called isometries, in contrast to the nature of Euclidean geometry’s results. The three-dimensional space and the temporal axis of
-Classical Physics (but also four-dimensional spacetime in Special Relativity) are first of all affine spaces.
+It’s quite common to think of physical space as $\mathbb{R}^3$, but this perspective can be misleading, both from a mathematical
+and a physical standpoint. The main issue is that the structure of $\mathbb{R}^3$ isn’t naturally invariant under displacements or
+other critical transformations, known as isometries, which are fundamental to Euclidean geometry. Instead, the three-dimensional
+space we encounter in Classical Physics (and even the four-dimensional spacetime in Special Relativity) is more accurately
+captured by the concept of affine spaces.
 
-# Definition of an affine space
+# Affine spaces
 
-A real affine space of finite dimension $n$ is a set $\mathbb{A}^n$ whose elements are called points equipped with the following
-structures:
+To understand this better, let’s dive into what a real affine space is. A real affine space of finite dimension $n$, denoted by
+$\mathbb{A}^n$, is a collection of elements known as points, but with some additional structure:
 
-- A $n$-dimensional vector space $V$ called space of displacements or space of free vectors.
-- A map $\mathbb{A}^n \times \mathbb{A}^n \ni(P, Q) \mapsto P-Q \in V$ with the following two properties:
-    - For any pair $Q \in \mathbb{A}^n, \mathbf{v} \in V$ there is a unique $P \in \mathbb{A}^n$ such that $P-Q=\mathbf{v}$.
-    - For any triplet $P, Q, R \in \mathbb{A}^n$, the identity $P-Q+Q-R=P-R$ holds.
+- There’s an associated $n$-dimensional vector space $V$, which we call the space of displacements or the space of free vectors.
+- A mapping $\mathbb{A}^n \times \mathbb{A}^n \ni (P, Q) \mapsto P - Q \in V$ that respects certain conditions:
+    - For every point $Q\in \mathbb{A}^n$ and every vector $\mathbf{v} \in V$, there’s a unique point $P \in \mathbb{A}^n$ such that $P - Q =
+    \mathbf{v}$. 
+    - For any three points $P, Q, R \in \mathbb{A}^n$, the equation $P - Q + Q - R = P - R$ always holds.
 
-If $Q \in \mathbb{A}^n$ and $\mathbf{v} \in V$ then the unique point $P$ in $\mathbb{A}^n$ such that $P-Q=\mathbf{v}$ is denoted
-as $Q+\mathbf{v}$.
+### Additional definitions
 
-# Lines and line segments
+Let’s define a few useful concepts:
 
-We define a line and a line segment in $\mathbb{A}^n$ as follows:
+- Given a point $Q \in \mathbb{A}^n$ and a vector $\mathbf{v} \in V$, the unique point $P \in \mathbb{A}^n$ that satisfies $P - Q
+= \mathbf{v}$ is denoted as $Q + \mathbf{v}$.
+- A line in $\mathbb{A}^n$ originating from a point $P$ with direction given by a vector $\mathbf{v} \in V$ is described by the
+map $\mathbb{R} \ni t \mapsto P + t\mathbf{v} \in \mathbb{A}^n$.
+- A line segment is simply a restriction of the above map to a specific interval.
 
-- A line in $\mathbb{A}^n$ with origin $P$ and tangent vector $\mathbf{v} \in V$ is the map $\mathbb{R} \ni t \mapsto P+t
-\mathbf{u} \in \mathbb{A}^n$.
-- A line segment in $\mathbb{A}^n$ is a restriction of the above map to some interval.
+### Properties
 
-# Various properties
+The following interesting properties hold for any points $P, Q \in \mathbb{A}^n$ and vectors $\mathbf{u}, \mathbf{v} \in V$:
 
-The following properties hold for any $P, Q \in \mathbb{A}^n$ and $\mathbf{u}, \mathbf{v} \in V$:
+- $P - P = \mathbf{0}$.
+- $(Q + \mathbf{u}) + \mathbf{v} = Q + (\mathbf{u} + \mathbf{v})$.
+- $P - Q = -(Q - P)$.
+- $P - Q = (P + \mathbf{u}) - (Q + \mathbf{u})$.
 
-- $P-P=\mathbf{0}$.
-- $(Q+\mathbf{u})+\mathbf{v}=Q+(\mathbf{u}+\mathbf{v})$.
-- $P-Q=-(Q-P)$.
-- $P-Q=(P+\mathbf{u})-(Q+\mathbf{u})$.
+> You can try proving these properties to deepen your understanding.
 
-> Prove the above properties.
+# Coordinate systems on affine spaces
 
-# Coordinate systems
+Now that we’ve established what an affine space is, let’s discuss how we can introduce coordinate systems on such spaces. A local
+coordinate system on an affine space $\mathbb{A}^n$ is a map $\psi: U \subset \mathbb{A}^n \rightarrow \mathbb{R}^n$ that
+satisfies:
 
-A local coordinate system on $\mathbb{A}^n$ is a map $\psi: U \subset \mathbb{A}^n \rightarrow \mathbb{R}^n$ with the following properties:
+- The map $\psi$ is injective.
+- The image $\psi(U)$ is an open subset of $\mathbb{R}^n$.
 
-- $\psi$ is injective.
-- $\psi(U) \subset \mathbb{R}^n$ is an open set.
+If $U = \mathbb{A}^n$, we call the coordinate system global.
 
-The coordinate system is global if $U=\mathbb{A}^n$.
+### Cartesian coordinate systems
 
-Every affine space admits a family of global coordinate systems called Cartesian coordinate systems. A Cartesian coordinate system
-with origin $O$ and axes $\mathbf{e}_1, \ldots, \mathbf{e}_n$ is defined as follows:
+Every affine space has a family of global coordinate systems known as Cartesian coordinate systems. To define one, we need to:
 
-- Fix a point $O$ and a basis $\mathbf{e}_1, \ldots, \mathbf{e}_n$ of $V$.
-- Define a map $f: \mathbb{A}^n \rightarrow \mathbb{R}^n$ with $f(P) = \left((P-O)^1, \ldots,(P-O)^n\right)$
+- Choose a point $O$ (the origin) and a basis $\mathbf{e}_1, \ldots, \mathbf{e}_n$ for the vector space $V$.
+- Define a map $f: \mathbb{A}^n \rightarrow \mathbb{R}^n$ by $f(P) = \left((P - O)^1, \ldots, (P - O)^n\right)$.
 
-> Prove the above map is bijective and therefore $f$ is a global coordinate system.
+> Try proving that this map $f$ is bijective, which will confirm that $f$ is indeed a global coordinate system.
 
-Non-Cartesian local coordinate systems are called curvilinear coordinate systems.
+Non-Cartesian local coordinate systems, on the other hand, are referred to as curvilinear coordinate systems.
 
-# Properties of cartesian coordinate systems
+### Properties of Cartesian coordinate systems
 
-Let $\left(\mathbb{A}^n, f\right)$ be a Cartesian coordinate system with coordinates $x^1, \cdots, x^n$
-and $\left(\mathbb{A}^n, g\right)$ another Cartesian coordinate system with coordinates $x^{\prime 1}, \cdots, x^{\prime n}$,
-origin $O^{\prime}$ and axes $\mathbf{e}^{\prime}{ }_1, \ldots, \mathbf{e}_n^{\prime}$, so that
+Suppose we have two Cartesian coordinate systems: $\left(\mathbb{A}^n, f\right)$ with coordinates $x^1, \cdots, x^n$, and another
+$\left(\mathbb{A}^n, g\right)$ with coordinates $x^{\prime 1}, \cdots, x^{\prime n}$, origin $O^{\prime}$, and basis vectors
+$\mathbf{e}_1^{\prime}, \ldots, \mathbf{e}_n^{\prime}$. If the relation between the basis vectors is:
 
 $$
-\mathbf{e}_i=\sum_j B^j{ }_i \mathbf{e}^{\prime}{ }_j
+\mathbf{e}_i = \sum_j B^j{}_i \mathbf{e}_j^{\prime}
 $$
 
-Let $\left(O-O^{\prime}\right)=\sum_i b^i \mathbf{e}_i$ then the following properties hold:
+and $O - O^{\prime} = \sum_i b^i \mathbf{e}_i$, then the following properties hold:
 
-- The map $g \circ f^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n$ is expressed in coordinates as $x^{\prime j}=\sum_{i=1}^n B^j{
-}_i\left(x^i+b^i\right)$.
+- The transformation map $g \circ f^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n$ is given by $x^{\prime j} = \sum_{i=1}^n
+B^j{}_i\left(x^i + b^i\right)$.
+- Conversely, the map $f \circ g^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n$ is expressed as $x^i = -b^i +
+\sum_{j=1}^n\left(B^{-1}\right)^i{}_j x^{\prime j}$.
 
--  The map $f \circ g^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n$ is expressed in coordinates as
-$x^i=-b^i+\sum_{j=1}^n\left(B^{-1}\right)^i{ }_j x^{\prime j}$.
+> Again, try proving these transformations to see how coordinate systems relate to each other.
 
-> Prove the above properties.
+# Affine transformations between affine spaces
 
-# Affine transformations
+Let’s now explore how we can map one affine space to another. A map $\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m$ between two
+affine spaces, with associated vector spaces $V_1$ and $V_2$, is called an affine transformation if:
 
-A map $\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m$ between affine spaces $\mathbb{A}_1^n$ and $\mathbb{A}_2^n$ with spaces of
-displacements $V_1$ and $V_2$ is called an affine transformation and has the following properties:
+- The map $\psi$ is invariant under displacements, meaning that for any points $P, Q \in \mathbb{A}_1^n$ and any vector
+$\mathbf{u} \in V_1$, the equality $\psi(P + \mathbf{u}) - \psi(Q + \mathbf{u}) = \psi(P) - \psi(Q)$ holds.
+- The derivative map $d\psi: V_1 \rightarrow V_2$, defined by $d\psi(P - Q) = \psi(P) - \psi(Q)$, is a linear transformation
+between the vector spaces $V_1$ and $V_2$.
 
-- $\psi$ is invariant under displacements i.e. $\psi(P+\mathbf{u})-\psi(Q+\mathbf{u})=\psi(P)-\psi(Q)$ for any $P, Q \in
-\mathbb{A}_1^n$ and $\mathbf{u} \in V_1$.
-- The map $d \psi: V_1 \rightarrow V_2$ with $d \psi(P - Q) = \psi(P) - \psi(Q)$ is a linear between the vector spaces $V_1$ and
-$V_2$.
+> Proving that $d\psi$ is well-defined and linear will help you understand the relationship between these spaces.
 
-> Prove the map is well defined and linear.
+### Isomorphism of affine spaces
 
-An affine transformation is called an isomorphism of affine spaces if it is bijective. Note that the inverse of an isomorphism of
-affine spaces is an affine map and hence an isomorphism of affine spaces. If $\psi: \mathbb{A}_1^n \rightarrow
-\mathbb{A}_2^n$ is an isomorphism of affine spaces then $d \psi: V_1 \rightarrow V_2$ is a vector space isomorphism.
+An affine transformation $\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m$ is called an isomorphism if it is bijective. This
+concept is particularly important because it tells us when two affine spaces are structurally the same.
 
-> Prove the above properties.
+### Properties of affine transformations
 
-Affine transformations map straight lines to straight lines: If $\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^n$ is affine and
-$P(t):=P+t \mathbf{u}$, with $t \in \mathbb{R}$, is the line in $\mathbb{A}_1^n$ with origin $P$ and tangent vector $\mathbf{v}
-\in V_1$, then $\psi(P(t))$, as $t \in \mathbb{R}$ varies, defines a line in $\mathbb{A}^m$.
+Affine transformations have several key properties:
 
-> Prove the above properties.
+- The inverse of an isomorphism is itself an affine transformation, making it an isomorphism as well.
+- If $\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^n$ is an isomorphism, then the derivative map $d\psi: V_1 \rightarrow V_2$ is
+a vector space isomorphism.
+- Affine transformations map straight lines to straight lines. Specifically, if $P(t) := P + t \mathbf{u}$ describes a line in
+$\mathbb{A}_1^n$, then $\psi(P(t))$ defines a line in $\mathbb{A}_2^m$.
+- Given Cartesian coordinate systems on $\mathbb{A}_1^n$ and $\mathbb{A}_2^m$, the affine transformation $\psi$ has a particularly
+simple form in these coordinates: $x_2^i = c^i + \sum_{j=1}^n L^i{}_j x_1^j$, where the coefficients $L^i{}_j$ and $c^i$ depend on
+$\psi$ and the chosen coordinate systems.
 
-# Representation of affine transformations
+> Proving these properties gives you a clearer view of how affine spaces relate to each other under transformations.
 
-Let $\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m$ an affine transformation. Then, for any choice of Cartesian coordinate
-systems in the two spaces $\left(\mathbb{A}_1^n, f_1\right)$ and $\left(\mathbb{A}_2^m, f_2\right)$, the representation of $\psi$
-in coordinates, i.e. the map $f_2 \circ \psi \circ f_1^{-1}: \mathbb{R}^n \ni\left(x_1^1, \ldots, x_1^n\right) \mapsto\left(x_2^1,
-\ldots, x_2^m\right) \in \mathbb{R}^m$ has the form
+# Group of displacements of affine spaces
 
-$$x_2^i=c^i+\sum_{j=1}^n L^i{ }_j x_1^j \quad(i=1,2, \ldots, m)$$ 
+In the context of affine spaces, the concept of displacements is crucial. For a given vector $\mathbf{v} \in V$, we can define a
+mapping $T_{\mathbf{v}}: \mathbb{A}^n \rightarrow \mathbb{A}^n$ that shifts every point $P$ in the affine space by $\mathbf{v}$.
+Formally, this map is defined as $T_{\mathbf{v}}(P) = P + \mathbf{v}$. The collection of all such transformations, denoted
+$\left\{T_{\mathbf{v}}\right\}_{\mathbf{v} \in V}$, forms what is known as the group of displacements of $\mathbb{A}^n$. This
+group operates under the composition of mappings.
 
-> Prove the above property.
+> To explore this concept further, you can try proving that the set $\left\{T_{\mathbf{v}}\right\}_{\mathbf{v} \in V}$ indeed
+forms a group under composition.
 
-for suitable coefficients $L^i{ }_j$ and $c^i$ depending on $\psi$ and on the coordinate systems. Above, $\left(x_2^1, \ldots,
-x_2^m\right)$ are the Cartesian coordinates of $\psi(P) \in \mathbb{A}_2^m$ and $\left(x_1^1, \ldots, x_1^n\right)$ those of $P
-\in \mathbb{A}_1^n$.
+### Properties
 
-Conversely, $\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m$ is affine if there exist Cartesian coordinate systems on the two
-spaces in which $\psi$ has the above form in coordinates.
+The group of displacements comes with several interesting properties:
 
-> Prove the above property.
+- The group of displacements of $\mathbb{A}^n$ is abelian, meaning that the order in which you apply displacements doesn’t matter;
+that is, $T_{\mathbf{v}} \circ T_{\mathbf{u}} = T_{\mathbf{u}} \circ T_{\mathbf{v}}$ for any vectors $\mathbf{u}, \mathbf{v} \in
+V$.
+- The map $V \ni \mathbf{v} \mapsto T_{\mathbf{v}}$ is injective, which means that each vector $\mathbf{v}$ corresponds to a
+unique transformation. Moreover, this mapping is a group isomorphism when $V$ is viewed as an abelian group under vector addition.
+- Only the zero vector $\mathbf{v} = \mathbf{0}$ satisfies $T_{\mathbf{v}}(P) = P$ for some $P \in \mathbb{A}^n$. In fact, this
+holds for every point $P$, so the action of the group of displacements is free.
+- For any two points $P, Q \in \mathbb{A}^n$, there exists a displacement $T_{\mathbf{v}}$ such that $T_{\mathbf{v}}(P) = Q$. This
+property highlights the fact that the group of displacements acts transitively on the affine space.
 
-# Group of displacements
+> These properties are foundational to understanding the structure of affine spaces. You might find it helpful to prove these
+properties yourself.
 
-The mapping $T_{\mathbf{v}}: \mathbb{A}^n \rightarrow \mathbb{A}^n$ of $\mathbf{v} \in V$ on $\mathbb{A}^n$ is defined as
-$T_{\mathbf{v}}: P \mapsto P+\mathbf{v}$.
+### Group action
 
-The set $\left\{T_{\mathbf{v}}\right\}_{\mathbf{v} \in V}$ is a group under composition, called the group of
-displacements of $\mathbb{A}^n$. As $T_{\mathbf{u}} T_{\mathbf{v}}=T_{\mathbf{u}+\mathbf{v}}$ and
-$\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}$, the group is Abelian.
+To generalize the idea of how a group can interact with a set, we use the concept of a group action. Let’s consider a set $S$ and
+a group $G$ with a neutral element $e$ and a group operation $\circ$. A group action is a map $A: G \times S \ni (g, s) \mapsto
+A_g(s) \in S$, where $A_g \in \mathcal{G}_S$ (the group of bijections on $S$ under composition). For this map to be a valid group
+action, it must satisfy two key properties:
 
-> Prove the above properties.
+- The action of the neutral element is the identity: $A_e = \text{id}$.
+- The action respects the group operation: $A_g \circ A_{g^{\prime}} = A_{g \circ g^{\prime}}$ for all $g, g^{\prime} \in G$.
 
-The following properties hold:
+There are a few special types of group actions that are worth noting:
 
-- The map $V \ni \mathbf{v} \mapsto T_{\mathbf{v}}$ is injective. It is a group isomorphism when we view $V$ as Abelian group
-under addition.
-- Only $\mathbf{v}=\mathbf{0}$ satisfies $T_{\mathbf{v}}(P)=P$ for some $P \in \mathbb{A}^n$, i.e. the action of the
-group of displacements is free. We also have the stronger condition $T_0(P)=P$ for any $P \in \mathbb{A}^n$.
-- For any pair $P, Q \in \mathbb{A}^n$ there is a displacement $T_{\mathbf{v}}$ such that $T_{\mathbf{v}}(P)=Q$ i.e.
-the group of displacements acts transitively.
+- The action is called free if $A_g(s) = s$ for some $s \in S$ implies $g = e$.
+- The action is transitive if for any two elements $s, s^{\prime} \in S$, there exists a group element $g \in G$ such that $A_g(s)
+= s^{\prime}$.
+- The action is faithful if the map $G \ni g \mapsto A_g \in \mathcal{G}_S$ is injective, meaning that different elements of $G$
+induce different bijections on $S$.
 
-> Prove the above properties.
+Whenever we have a group action, it naturally defines a group homomorphism from $G$ to $\mathcal{G}_S$. The image of this
+homomorphism, denoted $G_S = \left\{A_g\right\}_{g \in G}$, is a subgroup of $\mathcal{G}_S$. If the action is faithful, then this
+homomorphism is actually an isomorphism between $G$ and $G_S$.
 
-# Group action
-
-Given a set $S$, and a group $G$ with neutral element $e$ and product $\circ$, an action of $G$ on $S$ is a map $A: G \times S \ni(g, s) \mapsto$ $A_g(s) \in S$, where $A_g \in \mathcal{G}_S$ and the latter is the group of bijections on $S$ under composition, such that:
-
-- $A_e=i d$,
-- $A_g A_{g^{\prime}}=A_{g \circ g^{\prime}}$ where $g, g^{\prime} \in G$.
-
-We have the following definitions:
-
-- The action is called free if $A_g(s)=s$ for some $s \in S$ implies $g=e$.
-- The action is called transitive if for any $s, s^{\prime} \in S$ there exists $g \in G$ such that $A_g(s)=s^{\prime}$.
-- The action is called faithful if $G \ni g \mapsto A_g \in \mathcal{G}_S$ is injective. 
-
-An action always determines a group homomorphism $G \rightarrow \mathcal{G}_S$, and therefore $G_S:=\left\{A_g\right\}_{g \in G}$
-is a subgroup of $\mathcal{G}_S$ and $A$ is faithful if and only if defines a group isomorphism $G \rightarrow G_S$.
-
-> Prove the above properties.
+> To deepen your understanding, try proving the property that an action defines a group homomorphism and explore the implications
+of free, transitive, and faithful actions.
