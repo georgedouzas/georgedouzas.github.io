@@ -193,151 +193,152 @@ window.Quarto = {
 <p><img src="featured.png" class="img-fluid"></p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>It is common to define the physical space as <span class="math inline">\(\mathbb{R}^3\)</span>. This is incorrect both mathematically and physically. The reason is that the structure of <span class="math inline">\(\mathbb{R}^3\)</span> is not invariant under displacements and under other physically important transformations called isometries, in contrast to the nature of Euclidean geometry’s results. The three-dimensional space and the temporal axis of Classical Physics (but also four-dimensional spacetime in Special Relativity) are first of all affine spaces.</p>
+<p>It’s quite common to think of physical space as <span class="math inline">\(\mathbb{R}^3\)</span>, but this perspective can be misleading, both from a mathematical and a physical standpoint. The main issue is that the structure of <span class="math inline">\(\mathbb{R}^3\)</span> isn’t naturally invariant under displacements or other critical transformations, known as isometries, which are fundamental to Euclidean geometry. Instead, the three-dimensional space we encounter in Classical Physics (and even the four-dimensional spacetime in Special Relativity) is more accurately captured by the concept of affine spaces.</p>
 </section>
-<section id="definition-of-an-affine-space" class="level1">
-<h1>Definition of an affine space</h1>
-<p>A real affine space of finite dimension <span class="math inline">\(n\)</span> is a set <span class="math inline">\(\mathbb{A}^n\)</span> whose elements are called points equipped with the following structures:</p>
+<section id="affine-spaces" class="level1">
+<h1>Affine spaces</h1>
+<p>To understand this better, let’s dive into what a real affine space is. A real affine space of finite dimension <span class="math inline">\(n\)</span>, denoted by <span class="math inline">\(\mathbb{A}^n\)</span>, is a collection of elements known as points, but with some additional structure:</p>
 <ul>
-<li>A <span class="math inline">\(n\)</span>-dimensional vector space <span class="math inline">\(V\)</span> called space of displacements or space of free vectors.</li>
-<li>A map <span class="math inline">\(\mathbb{A}^n \times \mathbb{A}^n \ni(P, Q) \mapsto P-Q \in V\)</span> with the following two properties:
+<li>There’s an associated <span class="math inline">\(n\)</span>-dimensional vector space <span class="math inline">\(V\)</span>, which we call the space of displacements or the space of free vectors.</li>
+<li>A mapping <span class="math inline">\(\mathbb{A}^n \times \mathbb{A}^n \ni (P, Q) \mapsto P - Q \in V\)</span> that respects certain conditions:
 <ul>
-<li>For any pair <span class="math inline">\(Q \in \mathbb{A}^n, \mathbf{v} \in V\)</span> there is a unique <span class="math inline">\(P \in \mathbb{A}^n\)</span> such that <span class="math inline">\(P-Q=\mathbf{v}\)</span>.</li>
-<li>For any triplet <span class="math inline">\(P, Q, R \in \mathbb{A}^n\)</span>, the identity <span class="math inline">\(P-Q+Q-R=P-R\)</span> holds.</li>
+<li>For every point <span class="math inline">\(Q\in \mathbb{A}^n\)</span> and every vector <span class="math inline">\(\mathbf{v} \in V\)</span>, there’s a unique point <span class="math inline">\(P \in \mathbb{A}^n\)</span> such that <span class="math inline">\(P - Q =
+  \mathbf{v}\)</span>.</li>
+<li>For any three points <span class="math inline">\(P, Q, R \in \mathbb{A}^n\)</span>, the equation <span class="math inline">\(P - Q + Q - R = P - R\)</span> always holds.</li>
 </ul></li>
 </ul>
-<p>If <span class="math inline">\(Q \in \mathbb{A}^n\)</span> and <span class="math inline">\(\mathbf{v} \in V\)</span> then the unique point <span class="math inline">\(P\)</span> in <span class="math inline">\(\mathbb{A}^n\)</span> such that <span class="math inline">\(P-Q=\mathbf{v}\)</span> is denoted as <span class="math inline">\(Q+\mathbf{v}\)</span>.</p>
-</section>
-<section id="lines-and-line-segments" class="level1">
-<h1>Lines and line segments</h1>
-<p>We define a line and a line segment in <span class="math inline">\(\mathbb{A}^n\)</span> as follows:</p>
+<section id="additional-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="additional-definitions">Additional definitions</h3>
+<p>Let’s define a few useful concepts:</p>
 <ul>
-<li>A line in <span class="math inline">\(\mathbb{A}^n\)</span> with origin <span class="math inline">\(P\)</span> and tangent vector <span class="math inline">\(\mathbf{v} \in V\)</span> is the map <span class="math inline">\(\mathbb{R} \ni t \mapsto P+t
-\mathbf{u} \in \mathbb{A}^n\)</span>.</li>
-<li>A line segment in <span class="math inline">\(\mathbb{A}^n\)</span> is a restriction of the above map to some interval.</li>
+<li>Given a point <span class="math inline">\(Q \in \mathbb{A}^n\)</span> and a vector <span class="math inline">\(\mathbf{v} \in V\)</span>, the unique point <span class="math inline">\(P \in \mathbb{A}^n\)</span> that satisfies <span class="math inline">\(P - Q
+= \mathbf{v}\)</span> is denoted as <span class="math inline">\(Q + \mathbf{v}\)</span>.</li>
+<li>A line in <span class="math inline">\(\mathbb{A}^n\)</span> originating from a point <span class="math inline">\(P\)</span> with direction given by a vector <span class="math inline">\(\mathbf{v} \in V\)</span> is described by the map <span class="math inline">\(\mathbb{R} \ni t \mapsto P + t\mathbf{v} \in \mathbb{A}^n\)</span>.</li>
+<li>A line segment is simply a restriction of the above map to a specific interval.</li>
 </ul>
 </section>
-<section id="various-properties" class="level1">
-<h1>Various properties</h1>
-<p>The following properties hold for any <span class="math inline">\(P, Q \in \mathbb{A}^n\)</span> and <span class="math inline">\(\mathbf{u}, \mathbf{v} \in V\)</span>:</p>
+<section id="properties" class="level3">
+<h3 class="anchored" data-anchor-id="properties">Properties</h3>
+<p>The following interesting properties hold for any points <span class="math inline">\(P, Q \in \mathbb{A}^n\)</span> and vectors <span class="math inline">\(\mathbf{u}, \mathbf{v} \in V\)</span>:</p>
 <ul>
-<li><span class="math inline">\(P-P=\mathbf{0}\)</span>.</li>
-<li><span class="math inline">\((Q+\mathbf{u})+\mathbf{v}=Q+(\mathbf{u}+\mathbf{v})\)</span>.</li>
-<li><span class="math inline">\(P-Q=-(Q-P)\)</span>.</li>
-<li><span class="math inline">\(P-Q=(P+\mathbf{u})-(Q+\mathbf{u})\)</span>.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Prove the above properties.</p>
-</blockquote>
-</section>
-<section id="coordinate-systems" class="level1">
-<h1>Coordinate systems</h1>
-<p>A local coordinate system on <span class="math inline">\(\mathbb{A}^n\)</span> is a map <span class="math inline">\(\psi: U \subset \mathbb{A}^n \rightarrow \mathbb{R}^n\)</span> with the following properties:</p>
-<ul>
-<li><span class="math inline">\(\psi\)</span> is injective.</li>
-<li><span class="math inline">\(\psi(U) \subset \mathbb{R}^n\)</span> is an open set.</li>
-</ul>
-<p>The coordinate system is global if <span class="math inline">\(U=\mathbb{A}^n\)</span>.</p>
-<p>Every affine space admits a family of global coordinate systems called Cartesian coordinate systems. A Cartesian coordinate system with origin <span class="math inline">\(O\)</span> and axes <span class="math inline">\(\mathbf{e}_1, \ldots, \mathbf{e}_n\)</span> is defined as follows:</p>
-<ul>
-<li>Fix a point <span class="math inline">\(O\)</span> and a basis <span class="math inline">\(\mathbf{e}_1, \ldots, \mathbf{e}_n\)</span> of <span class="math inline">\(V\)</span>.</li>
-<li>Define a map <span class="math inline">\(f: \mathbb{A}^n \rightarrow \mathbb{R}^n\)</span> with <span class="math inline">\(f(P) = \left((P-O)^1, \ldots,(P-O)^n\right)\)</span></li>
+<li><span class="math inline">\(P - P = \mathbf{0}\)</span>.</li>
+<li><span class="math inline">\((Q + \mathbf{u}) + \mathbf{v} = Q + (\mathbf{u} + \mathbf{v})\)</span>.</li>
+<li><span class="math inline">\(P - Q = -(Q - P)\)</span>.</li>
+<li><span class="math inline">\(P - Q = (P + \mathbf{u}) - (Q + \mathbf{u})\)</span>.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Prove the above map is bijective and therefore <span class="math inline">\(f\)</span> is a global coordinate system.</p>
+<p>You can try proving these properties to deepen your understanding.</p>
 </blockquote>
-<p>Non-Cartesian local coordinate systems are called curvilinear coordinate systems.</p>
 </section>
-<section id="properties-of-cartesian-coordinate-systems" class="level1">
-<h1>Properties of cartesian coordinate systems</h1>
-<p>Let <span class="math inline">\(\left(\mathbb{A}^n, f\right)\)</span> be a Cartesian coordinate system with coordinates <span class="math inline">\(x^1, \cdots, x^n\)</span> and <span class="math inline">\(\left(\mathbb{A}^n, g\right)\)</span> another Cartesian coordinate system with coordinates <span class="math inline">\(x^{\prime 1}, \cdots, x^{\prime n}\)</span>, origin <span class="math inline">\(O^{\prime}\)</span> and axes <span class="math inline">\(\mathbf{e}^{\prime}{ }_1, \ldots, \mathbf{e}_n^{\prime}\)</span>, so that</p>
+</section>
+<section id="coordinate-systems-on-affine-spaces" class="level1">
+<h1>Coordinate systems on affine spaces</h1>
+<p>Now that we’ve established what an affine space is, let’s discuss how we can introduce coordinate systems on such spaces. A local coordinate system on an affine space <span class="math inline">\(\mathbb{A}^n\)</span> is a map <span class="math inline">\(\psi: U \subset \mathbb{A}^n \rightarrow \mathbb{R}^n\)</span> that satisfies:</p>
+<ul>
+<li>The map <span class="math inline">\(\psi\)</span> is injective.</li>
+<li>The image <span class="math inline">\(\psi(U)\)</span> is an open subset of <span class="math inline">\(\mathbb{R}^n\)</span>.</li>
+</ul>
+<p>If <span class="math inline">\(U = \mathbb{A}^n\)</span>, we call the coordinate system global.</p>
+<section id="cartesian-coordinate-systems" class="level3">
+<h3 class="anchored" data-anchor-id="cartesian-coordinate-systems">Cartesian coordinate systems</h3>
+<p>Every affine space has a family of global coordinate systems known as Cartesian coordinate systems. To define one, we need to:</p>
+<ul>
+<li>Choose a point <span class="math inline">\(O\)</span> (the origin) and a basis <span class="math inline">\(\mathbf{e}_1, \ldots, \mathbf{e}_n\)</span> for the vector space <span class="math inline">\(V\)</span>.</li>
+<li>Define a map <span class="math inline">\(f: \mathbb{A}^n \rightarrow \mathbb{R}^n\)</span> by <span class="math inline">\(f(P) = \left((P - O)^1, \ldots, (P - O)^n\right)\)</span>.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Try proving that this map <span class="math inline">\(f\)</span> is bijective, which will confirm that <span class="math inline">\(f\)</span> is indeed a global coordinate system.</p>
+</blockquote>
+<p>Non-Cartesian local coordinate systems, on the other hand, are referred to as curvilinear coordinate systems.</p>
+</section>
+<section id="properties-of-cartesian-coordinate-systems" class="level3">
+<h3 class="anchored" data-anchor-id="properties-of-cartesian-coordinate-systems">Properties of Cartesian coordinate systems</h3>
+<p>Suppose we have two Cartesian coordinate systems: <span class="math inline">\(\left(\mathbb{A}^n, f\right)\)</span> with coordinates <span class="math inline">\(x^1, \cdots, x^n\)</span>, and another <span class="math inline">\(\left(\mathbb{A}^n, g\right)\)</span> with coordinates <span class="math inline">\(x^{\prime 1}, \cdots, x^{\prime n}\)</span>, origin <span class="math inline">\(O^{\prime}\)</span>, and basis vectors <span class="math inline">\(\mathbf{e}_1^{\prime}, \ldots, \mathbf{e}_n^{\prime}\)</span>. If the relation between the basis vectors is:</p>
 <p><span class="math display">\[
-\mathbf{e}_i=\sum_j B^j{ }_i \mathbf{e}^{\prime}{ }_j
+\mathbf{e}_i = \sum_j B^j{}_i \mathbf{e}_j^{\prime}
 \]</span></p>
-<p>Let <span class="math inline">\(\left(O-O^{\prime}\right)=\sum_i b^i \mathbf{e}_i\)</span> then the following properties hold:</p>
+<p>and <span class="math inline">\(O - O^{\prime} = \sum_i b^i \mathbf{e}_i\)</span>, then the following properties hold:</p>
 <ul>
-<li><p>The map <span class="math inline">\(g \circ f^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> is expressed in coordinates as <span class="math inline">\(x^{\prime j}=\sum_{i=1}^n B^j{
-}_i\left(x^i+b^i\right)\)</span>.</p></li>
-<li><p>The map <span class="math inline">\(f \circ g^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> is expressed in coordinates as <span class="math inline">\(x^i=-b^i+\sum_{j=1}^n\left(B^{-1}\right)^i{ }_j x^{\prime j}\)</span>.</p></li>
+<li>The transformation map <span class="math inline">\(g \circ f^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> is given by <span class="math inline">\(x^{\prime j} = \sum_{i=1}^n
+B^j{}_i\left(x^i + b^i\right)\)</span>.</li>
+<li>Conversely, the map <span class="math inline">\(f \circ g^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> is expressed as <span class="math inline">\(x^i = -b^i +
+\sum_{j=1}^n\left(B^{-1}\right)^i{}_j x^{\prime j}\)</span>.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Prove the above properties.</p>
+<p>Again, try proving these transformations to see how coordinate systems relate to each other.</p>
 </blockquote>
 </section>
-<section id="affine-transformations" class="level1">
-<h1>Affine transformations</h1>
-<p>A map <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m\)</span> between affine spaces <span class="math inline">\(\mathbb{A}_1^n\)</span> and <span class="math inline">\(\mathbb{A}_2^n\)</span> with spaces of displacements <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span> is called an affine transformation and has the following properties:</p>
+</section>
+<section id="affine-transformations-between-affine-spaces" class="level1">
+<h1>Affine transformations between affine spaces</h1>
+<p>Let’s now explore how we can map one affine space to another. A map <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m\)</span> between two affine spaces, with associated vector spaces <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span>, is called an affine transformation if:</p>
 <ul>
-<li><span class="math inline">\(\psi\)</span> is invariant under displacements i.e.&nbsp;<span class="math inline">\(\psi(P+\mathbf{u})-\psi(Q+\mathbf{u})=\psi(P)-\psi(Q)\)</span> for any <span class="math inline">\(P, Q \in
-\mathbb{A}_1^n\)</span> and <span class="math inline">\(\mathbf{u} \in V_1\)</span>.</li>
-<li>The map <span class="math inline">\(d \psi: V_1 \rightarrow V_2\)</span> with <span class="math inline">\(d \psi(P - Q) = \psi(P) - \psi(Q)\)</span> is a linear between the vector spaces <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span>.</li>
+<li>The map <span class="math inline">\(\psi\)</span> is invariant under displacements, meaning that for any points <span class="math inline">\(P, Q \in \mathbb{A}_1^n\)</span> and any vector <span class="math inline">\(\mathbf{u} \in V_1\)</span>, the equality <span class="math inline">\(\psi(P + \mathbf{u}) - \psi(Q + \mathbf{u}) = \psi(P) - \psi(Q)\)</span> holds.</li>
+<li>The derivative map <span class="math inline">\(d\psi: V_1 \rightarrow V_2\)</span>, defined by <span class="math inline">\(d\psi(P - Q) = \psi(P) - \psi(Q)\)</span>, is a linear transformation between the vector spaces <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span>.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Prove the map is well defined and linear.</p>
+<p>Proving that <span class="math inline">\(d\psi\)</span> is well-defined and linear will help you understand the relationship between these spaces.</p>
 </blockquote>
-<p>An affine transformation is called an isomorphism of affine spaces if it is bijective. Note that the inverse of an isomorphism of affine spaces is an affine map and hence an isomorphism of affine spaces. If <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow
-\mathbb{A}_2^n\)</span> is an isomorphism of affine spaces then <span class="math inline">\(d \psi: V_1 \rightarrow V_2\)</span> is a vector space isomorphism.</p>
+<section id="isomorphism-of-affine-spaces" class="level3">
+<h3 class="anchored" data-anchor-id="isomorphism-of-affine-spaces">Isomorphism of affine spaces</h3>
+<p>An affine transformation <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m\)</span> is called an isomorphism if it is bijective. This concept is particularly important because it tells us when two affine spaces are structurally the same.</p>
+</section>
+<section id="properties-of-affine-transformations" class="level3">
+<h3 class="anchored" data-anchor-id="properties-of-affine-transformations">Properties of affine transformations</h3>
+<p>Affine transformations have several key properties:</p>
+<ul>
+<li>The inverse of an isomorphism is itself an affine transformation, making it an isomorphism as well.</li>
+<li>If <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^n\)</span> is an isomorphism, then the derivative map <span class="math inline">\(d\psi: V_1 \rightarrow V_2\)</span> is a vector space isomorphism.</li>
+<li>Affine transformations map straight lines to straight lines. Specifically, if <span class="math inline">\(P(t) := P + t \mathbf{u}\)</span> describes a line in <span class="math inline">\(\mathbb{A}_1^n\)</span>, then <span class="math inline">\(\psi(P(t))\)</span> defines a line in <span class="math inline">\(\mathbb{A}_2^m\)</span>.</li>
+<li>Given Cartesian coordinate systems on <span class="math inline">\(\mathbb{A}_1^n\)</span> and <span class="math inline">\(\mathbb{A}_2^m\)</span>, the affine transformation <span class="math inline">\(\psi\)</span> has a particularly simple form in these coordinates: <span class="math inline">\(x_2^i = c^i + \sum_{j=1}^n L^i{}_j x_1^j\)</span>, where the coefficients <span class="math inline">\(L^i{}_j\)</span> and <span class="math inline">\(c^i\)</span> depend on <span class="math inline">\(\psi\)</span> and the chosen coordinate systems.</li>
+</ul>
 <blockquote class="blockquote">
-<p>Prove the above properties.</p>
-</blockquote>
-<p>Affine transformations map straight lines to straight lines: If <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^n\)</span> is affine and <span class="math inline">\(P(t):=P+t \mathbf{u}\)</span>, with <span class="math inline">\(t \in \mathbb{R}\)</span>, is the line in <span class="math inline">\(\mathbb{A}_1^n\)</span> with origin <span class="math inline">\(P\)</span> and tangent vector <span class="math inline">\(\mathbf{v}
-\in V_1\)</span>, then <span class="math inline">\(\psi(P(t))\)</span>, as <span class="math inline">\(t \in \mathbb{R}\)</span> varies, defines a line in <span class="math inline">\(\mathbb{A}^m\)</span>.</p>
-<blockquote class="blockquote">
-<p>Prove the above properties.</p>
+<p>Proving these properties gives you a clearer view of how affine spaces relate to each other under transformations.</p>
 </blockquote>
 </section>
-<section id="representation-of-affine-transformations" class="level1">
-<h1>Representation of affine transformations</h1>
-<p>Let <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m\)</span> an affine transformation. Then, for any choice of Cartesian coordinate systems in the two spaces <span class="math inline">\(\left(\mathbb{A}_1^n, f_1\right)\)</span> and <span class="math inline">\(\left(\mathbb{A}_2^m, f_2\right)\)</span>, the representation of <span class="math inline">\(\psi\)</span> in coordinates, i.e.&nbsp;the map <span class="math inline">\(f_2 \circ \psi \circ f_1^{-1}: \mathbb{R}^n \ni\left(x_1^1, \ldots, x_1^n\right) \mapsto\left(x_2^1,
-\ldots, x_2^m\right) \in \mathbb{R}^m\)</span> has the form</p>
-<p><span class="math display">\[x_2^i=c^i+\sum_{j=1}^n L^i{ }_j x_1^j \quad(i=1,2, \ldots, m)\]</span></p>
+</section>
+<section id="group-of-displacements-of-affine-spaces" class="level1">
+<h1>Group of displacements of affine spaces</h1>
+<p>In the context of affine spaces, the concept of displacements is crucial. For a given vector <span class="math inline">\(\mathbf{v} \in V\)</span>, we can define a mapping <span class="math inline">\(T_{\mathbf{v}}: \mathbb{A}^n \rightarrow \mathbb{A}^n\)</span> that shifts every point <span class="math inline">\(P\)</span> in the affine space by <span class="math inline">\(\mathbf{v}\)</span>. Formally, this map is defined as <span class="math inline">\(T_{\mathbf{v}}(P) = P + \mathbf{v}\)</span>. The collection of all such transformations, denoted <span class="math inline">\(\left\{T_{\mathbf{v}}\right\}_{\mathbf{v} \in V}\)</span>, forms what is known as the group of displacements of <span class="math inline">\(\mathbb{A}^n\)</span>. This group operates under the composition of mappings.</p>
 <blockquote class="blockquote">
-<p>Prove the above property.</p>
+<p>To explore this concept further, you can try proving that the set <span class="math inline">\(\left\{T_{\mathbf{v}}\right\}_{\mathbf{v} \in V}\)</span> indeed forms a group under composition.</p>
 </blockquote>
-<p>for suitable coefficients <span class="math inline">\(L^i{ }_j\)</span> and <span class="math inline">\(c^i\)</span> depending on <span class="math inline">\(\psi\)</span> and on the coordinate systems. Above, <span class="math inline">\(\left(x_2^1, \ldots,
-x_2^m\right)\)</span> are the Cartesian coordinates of <span class="math inline">\(\psi(P) \in \mathbb{A}_2^m\)</span> and <span class="math inline">\(\left(x_1^1, \ldots, x_1^n\right)\)</span> those of <span class="math inline">\(P
-\in \mathbb{A}_1^n\)</span>.</p>
-<p>Conversely, <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m\)</span> is affine if there exist Cartesian coordinate systems on the two spaces in which <span class="math inline">\(\psi\)</span> has the above form in coordinates.</p>
+<section id="properties-1" class="level3">
+<h3 class="anchored" data-anchor-id="properties-1">Properties</h3>
+<p>The group of displacements comes with several interesting properties:</p>
+<ul>
+<li>The group of displacements of <span class="math inline">\(\mathbb{A}^n\)</span> is abelian, meaning that the order in which you apply displacements doesn’t matter; that is, <span class="math inline">\(T_{\mathbf{v}} \circ T_{\mathbf{u}} = T_{\mathbf{u}} \circ T_{\mathbf{v}}\)</span> for any vectors <span class="math inline">\(\mathbf{u}, \mathbf{v} \in
+V\)</span>.</li>
+<li>The map <span class="math inline">\(V \ni \mathbf{v} \mapsto T_{\mathbf{v}}\)</span> is injective, which means that each vector <span class="math inline">\(\mathbf{v}\)</span> corresponds to a unique transformation. Moreover, this mapping is a group isomorphism when <span class="math inline">\(V\)</span> is viewed as an abelian group under vector addition.</li>
+<li>Only the zero vector <span class="math inline">\(\mathbf{v} = \mathbf{0}\)</span> satisfies <span class="math inline">\(T_{\mathbf{v}}(P) = P\)</span> for some <span class="math inline">\(P \in \mathbb{A}^n\)</span>. In fact, this holds for every point <span class="math inline">\(P\)</span>, so the action of the group of displacements is free.</li>
+<li>For any two points <span class="math inline">\(P, Q \in \mathbb{A}^n\)</span>, there exists a displacement <span class="math inline">\(T_{\mathbf{v}}\)</span> such that <span class="math inline">\(T_{\mathbf{v}}(P) = Q\)</span>. This property highlights the fact that the group of displacements acts transitively on the affine space.</li>
+</ul>
 <blockquote class="blockquote">
-<p>Prove the above property.</p>
+<p>These properties are foundational to understanding the structure of affine spaces. You might find it helpful to prove these properties yourself.</p>
 </blockquote>
 </section>
-<section id="group-of-displacements" class="level1">
-<h1>Group of displacements</h1>
-<p>The mapping <span class="math inline">\(T_{\mathbf{v}}: \mathbb{A}^n \rightarrow \mathbb{A}^n\)</span> of <span class="math inline">\(\mathbf{v} \in V\)</span> on <span class="math inline">\(\mathbb{A}^n\)</span> is defined as <span class="math inline">\(T_{\mathbf{v}}: P \mapsto P+\mathbf{v}\)</span>.</p>
-<p>The set <span class="math inline">\(\left\{T_{\mathbf{v}}\right\}_{\mathbf{v} \in V}\)</span> is a group under composition, called the group of displacements of <span class="math inline">\(\mathbb{A}^n\)</span>. As <span class="math inline">\(T_{\mathbf{u}} T_{\mathbf{v}}=T_{\mathbf{u}+\mathbf{v}}\)</span> and <span class="math inline">\(\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}\)</span>, the group is Abelian.</p>
-<blockquote class="blockquote">
-<p>Prove the above properties.</p>
-</blockquote>
-<p>The following properties hold:</p>
+<section id="group-action" class="level3">
+<h3 class="anchored" data-anchor-id="group-action">Group action</h3>
+<p>To generalize the idea of how a group can interact with a set, we use the concept of a group action. Let’s consider a set <span class="math inline">\(S\)</span> and a group <span class="math inline">\(G\)</span> with a neutral element <span class="math inline">\(e\)</span> and a group operation <span class="math inline">\(\circ\)</span>. A group action is a map <span class="math inline">\(A: G \times S \ni (g, s) \mapsto
+A_g(s) \in S\)</span>, where <span class="math inline">\(A_g \in \mathcal{G}_S\)</span> (the group of bijections on <span class="math inline">\(S\)</span> under composition). For this map to be a valid group action, it must satisfy two key properties:</p>
 <ul>
-<li>The map <span class="math inline">\(V \ni \mathbf{v} \mapsto T_{\mathbf{v}}\)</span> is injective. It is a group isomorphism when we view <span class="math inline">\(V\)</span> as Abelian group under addition.</li>
-<li>Only <span class="math inline">\(\mathbf{v}=\mathbf{0}\)</span> satisfies <span class="math inline">\(T_{\mathbf{v}}(P)=P\)</span> for some <span class="math inline">\(P \in \mathbb{A}^n\)</span>, i.e.&nbsp;the action of the group of displacements is free. We also have the stronger condition <span class="math inline">\(T_0(P)=P\)</span> for any <span class="math inline">\(P \in \mathbb{A}^n\)</span>.</li>
-<li>For any pair <span class="math inline">\(P, Q \in \mathbb{A}^n\)</span> there is a displacement <span class="math inline">\(T_{\mathbf{v}}\)</span> such that <span class="math inline">\(T_{\mathbf{v}}(P)=Q\)</span> i.e. the group of displacements acts transitively.</li>
+<li>The action of the neutral element is the identity: <span class="math inline">\(A_e = \text{id}\)</span>.</li>
+<li>The action respects the group operation: <span class="math inline">\(A_g \circ A_{g^{\prime}} = A_{g \circ g^{\prime}}\)</span> for all <span class="math inline">\(g, g^{\prime} \in G\)</span>.</li>
 </ul>
-<blockquote class="blockquote">
-<p>Prove the above properties.</p>
-</blockquote>
-</section>
-<section id="group-action" class="level1">
-<h1>Group action</h1>
-<p>Given a set <span class="math inline">\(S\)</span>, and a group <span class="math inline">\(G\)</span> with neutral element <span class="math inline">\(e\)</span> and product <span class="math inline">\(\circ\)</span>, an action of <span class="math inline">\(G\)</span> on <span class="math inline">\(S\)</span> is a map <span class="math inline">\(A: G \times S \ni(g, s) \mapsto\)</span> <span class="math inline">\(A_g(s) \in S\)</span>, where <span class="math inline">\(A_g \in \mathcal{G}_S\)</span> and the latter is the group of bijections on <span class="math inline">\(S\)</span> under composition, such that:</p>
+<p>There are a few special types of group actions that are worth noting:</p>
 <ul>
-<li><span class="math inline">\(A_e=i d\)</span>,</li>
-<li><span class="math inline">\(A_g A_{g^{\prime}}=A_{g \circ g^{\prime}}\)</span> where <span class="math inline">\(g, g^{\prime} \in G\)</span>.</li>
+<li>The action is called free if <span class="math inline">\(A_g(s) = s\)</span> for some <span class="math inline">\(s \in S\)</span> implies <span class="math inline">\(g = e\)</span>.</li>
+<li>The action is transitive if for any two elements <span class="math inline">\(s, s^{\prime} \in S\)</span>, there exists a group element <span class="math inline">\(g \in G\)</span> such that <span class="math inline">\(A_g(s)
+= s^{\prime}\)</span>.</li>
+<li>The action is faithful if the map <span class="math inline">\(G \ni g \mapsto A_g \in \mathcal{G}_S\)</span> is injective, meaning that different elements of <span class="math inline">\(G\)</span> induce different bijections on <span class="math inline">\(S\)</span>.</li>
 </ul>
-<p>We have the following definitions:</p>
-<ul>
-<li>The action is called free if <span class="math inline">\(A_g(s)=s\)</span> for some <span class="math inline">\(s \in S\)</span> implies <span class="math inline">\(g=e\)</span>.</li>
-<li>The action is called transitive if for any <span class="math inline">\(s, s^{\prime} \in S\)</span> there exists <span class="math inline">\(g \in G\)</span> such that <span class="math inline">\(A_g(s)=s^{\prime}\)</span>.</li>
-<li>The action is called faithful if <span class="math inline">\(G \ni g \mapsto A_g \in \mathcal{G}_S\)</span> is injective.</li>
-</ul>
-<p>An action always determines a group homomorphism <span class="math inline">\(G \rightarrow \mathcal{G}_S\)</span>, and therefore <span class="math inline">\(G_S:=\left\{A_g\right\}_{g \in G}\)</span> is a subgroup of <span class="math inline">\(\mathcal{G}_S\)</span> and <span class="math inline">\(A\)</span> is faithful if and only if defines a group isomorphism <span class="math inline">\(G \rightarrow G_S\)</span>.</p>
+<p>Whenever we have a group action, it naturally defines a group homomorphism from <span class="math inline">\(G\)</span> to <span class="math inline">\(\mathcal{G}_S\)</span>. The image of this homomorphism, denoted <span class="math inline">\(G_S = \left\{A_g\right\}_{g \in G}\)</span>, is a subgroup of <span class="math inline">\(\mathcal{G}_S\)</span>. If the action is faithful, then this homomorphism is actually an isomorphism between <span class="math inline">\(G\)</span> and <span class="math inline">\(G_S\)</span>.</p>
 <blockquote class="blockquote">
-<p>Prove the above properties.</p>
+<p>To deepen your understanding, try proving the property that an action defines a group homomorphism and explore the implications of free, transitive, and faithful actions.</p>
 </blockquote>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
