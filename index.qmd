@@ -1,12 +1,38 @@
 ---
-title: "Posts"
 listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
-page-layout: full
-title-block-banner: true
+  - id: posts
+    contents: posts
+    type: grid
+    categories: true
+    fields: [image, title, description]
+  - id: publications
+    contents: publications
+    type: grid
+    categories: true
+    fields: [image, title, description]
+  - id: presentations
+    contents: presentations
+    type: grid
+    categories: true
 ---
+
+## Posts
+
+My articles on open-source, machine learning, mathematics, and more.
+
+:::{#posts}
+:::
+
+## Publications
+
+Published work and work in progress.
+
+:::{#publications}
+:::
+
+## Presentations
+
+Slides and materials I have created.
+
+:::{#presentations}
+:::
