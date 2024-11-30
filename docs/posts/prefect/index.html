@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-06-22">
 <meta name="description" content="Build, deploy and observe data workflows.">
 
-<title>AI &amp; Friends - Prefect</title>
+<title>Prefect – AI &amp; Friends</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -144,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="workflow-for-soccer-data" class="level1">
 <h1>Workflow for soccer data</h1>
 <p>As an example, let’s assume that we would like to create a data workflow that downloads, stores and updates historical and fixtures soccer data from <a href="https://www.football-data.co.uk">Football-Data.co.uk</a>. The URL of each of those main leagues has the following form:</p>
-<div id="5e01e3b5" class="cell" data-execution_count="2">
+<div id="c43180be" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">'https://www.football-data.co.uk/mmz4281/</span><span class="sc">{season}</span><span class="st">/</span><span class="sc">{league_id}</span><span class="st">.csv'</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>base_url</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
@@ -215,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>where <code>season</code> is the season of the league and <code>league_id</code> is the league ID. Let’s select a few of those seasons and leagues:</p>
-<div id="0a43f3aa" class="cell" data-execution_count="3">
+<div id="e401ad84" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>SEASONS <span class="op">=</span> [<span class="st">'1819'</span>, <span class="st">'1920'</span>, <span class="st">'2021'</span>, <span class="st">'2122'</span>, <span class="st">'2223'</span>, <span class="st">'2324'</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>LEAGUES_MAPPING <span class="op">=</span> {</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'E0'</span>: <span class="st">'English'</span>,</span>
@@ -246,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="tasks">Tasks</h3>
 <p>The above tasks represent discrete units of work, and they will receive the <code>task</code> decorator. We will also use an asynchronous httpx client to concurrently download the data since we have multiple files.</p>
 <p>The function <code>create_db</code> implements the first task:</p>
-<div id="eb207969" class="cell" data-execution_count="4">
+<div id="7684a219" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect <span class="im">import</span> task</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect.logging <span class="im">import</span> get_run_logger</span>
@@ -270,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        con.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function <code>update_historical_data</code> implements the second task:</p>
-<div id="8750c7bd" class="cell" data-execution_count="5">
+<div id="5442fa2a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> httpx</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> asyncio</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -339,7 +339,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>    logger.info(<span class="ss">f'Table with historical data was updated. Shape: </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function <code>update_fixtures_data</code> implements the third task:</p>
-<div id="09a15e9a" class="cell" data-execution_count="6">
+<div id="b84595be" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">@task</span>(name<span class="op">=</span><span class="st">'Update fixtures data'</span>, description<span class="op">=</span><span class="st">'Fetch latest fixtures data'</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> update_fixtures_data():</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    logger <span class="op">=</span> get_run_logger()</span>
@@ -353,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="flow" class="level3">
 <h3 class="anchored" data-anchor-id="flow">Flow</h3>
 <p>The full data workflow will receive the <code>flow</code> decorator.</p>
-<div id="719065f6" class="cell" data-execution_count="7">
+<div id="6533dd11" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect <span class="im">import</span> flow</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect.task_runners <span class="im">import</span> ConcurrentTaskRunner</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -374,66 +374,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="results" class="level1">
 <h1>Results</h1>
 <p>We can run the above flow:</p>
-<div id="e6166d95" class="cell" data-execution_count="8">
+<div id="e7f95a1d" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> update_db(URLS_MAPPING)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:57.184 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | prefect.engine - Created flow run<span style="color: #800080; text-decoration-color: #800080"> 'peridot-pronghorn'</span> for flow<span style="color: #800080; text-decoration-color: #800080; font-weight: bold"> 'Download asynchronously the data and update the database'</span>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:50.135 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | prefect.engine - Created flow run<span style="color: #800080; text-decoration-color: #800080"> 'transparent-prawn'</span> for flow<span style="color: #800080; text-decoration-color: #800080; font-weight: bold"> 'Download asynchronously the data and update the database'</span>
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:57.211 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'peridot-pronghorn'</span> - Created task run 'Create database-0' for task 'Create database'
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:50.169 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'transparent-prawn'</span> - Created task run 'Create database-0' for task 'Create database'
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:57.212 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'peridot-pronghorn'</span> - Executing 'Create database-0' immediately...
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:50.170 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'transparent-prawn'</span> - Executing 'Create database-0' immediately...
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:57.230 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Create database-0' - Database created.
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:50.191 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Create database-0' - Database created.
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:57.237 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Create database-0' - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:50.202 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Create database-0' - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:57.246 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'peridot-pronghorn'</span> - Created task run 'Update historical data-0' for task 'Update historical data'
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:50.213 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'transparent-prawn'</span> - Created task run 'Update historical data-0' for task 'Update historical data'
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:57.246 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'peridot-pronghorn'</span> - Executing 'Update historical data-0' immediately...
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:50.214 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'transparent-prawn'</span> - Executing 'Update historical data-0' immediately...
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:57.262 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update historical data-0' - Table with historical data does not exist.
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:50.232 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update historical data-0' - Table with historical data does not exist.
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:59.736 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update historical data-0' - Table with historical data was created. Shape: (13862, 124)
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:52.155 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update historical data-0' - Table with historical data was created. Shape: (13862, 124)
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:59.746 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update historical data-0' - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:52.169 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update historical data-0' - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:59.755 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'peridot-pronghorn'</span> - Created task run 'Update fixtures data-0' for task 'Update fixtures data'
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:52.181 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'transparent-prawn'</span> - Created task run 'Update fixtures data-0' for task 'Update fixtures data'
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:51:59.755 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'peridot-pronghorn'</span> - Executing 'Update fixtures data-0' immediately...
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:52.181 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'transparent-prawn'</span> - Executing 'Update fixtures data-0' immediately...
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:52:00.105 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update fixtures data-0' - Fixtures data were updated. Shape: (191, 101)
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:52.522 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update fixtures data-0' - Fixtures data were updated. Shape: (148, 102)
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:52:00.117 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update fixtures data-0' - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:52.538 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Task run 'Update fixtures data-0' - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>()
 </pre>
 </div>
 <div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">11:52:00.130 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'peridot-pronghorn'</span> - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>('All states completed.')
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">18:19:52.554 | <span style="color: #008080; text-decoration-color: #008080">INFO</span>    | Flow run<span style="color: #800080; text-decoration-color: #800080"> 'transparent-prawn'</span> - Finished in state <span style="color: #008000; text-decoration-color: #008000">Completed</span>('All states completed.')
 </pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -443,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Let’s read the data from the database:</p>
-<div id="321501ff" class="cell" data-execution_count="9">
+<div id="2bea3f60" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shutil <span class="im">import</span> rmtree</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>db_path <span class="op">=</span> TEMP_DIR <span class="op">/</span> <span class="st">'soccer_data.db'</span></span>
@@ -453,13 +453,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>rmtree(TEMP_DIR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The historical data:</p>
-<div id="30cc90f8" class="cell" data-execution_count="10">
+<div id="d131ae58" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>historical_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -759,13 +759,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The fixtures data:</p>
-<div id="adbac380" class="cell" data-execution_count="11">
+<div id="71380727" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fixtures_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -774,11 +774,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th data-quarto-table-cell-role="th">Time</th>
 <th data-quarto-table-cell-role="th">HomeTeam</th>
 <th data-quarto-table-cell-role="th">AwayTeam</th>
+<th data-quarto-table-cell-role="th">Referee</th>
 <th data-quarto-table-cell-role="th">B365H</th>
 <th data-quarto-table-cell-role="th">B365D</th>
 <th data-quarto-table-cell-role="th">B365A</th>
 <th data-quarto-table-cell-role="th">BWH</th>
-<th data-quarto-table-cell-role="th">BWD</th>
 <th data-quarto-table-cell-role="th">...</th>
 <th data-quarto-table-cell-role="th">B365CAHH</th>
 <th data-quarto-table-cell-role="th">B365CAHA</th>
@@ -796,15 +796,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>B1</td>
-<td>24/08/2024</td>
-<td>17:15</td>
-<td>Westerlo</td>
-<td>Oud-Heverlee Leuven</td>
-<td>1.95</td>
-<td>3.5</td>
+<td>29/11/2024</td>
+<td>19:45</td>
+<td>Kortrijk</td>
+<td>Mechelen</td>
+<td>None</td>
 <td>3.40</td>
-<td>2.00</td>
-<td>3.70</td>
+<td>3.60</td>
+<td>2.05</td>
+<td>3.40</td>
 <td>...</td>
 <td>None</td>
 <td>None</td>
@@ -820,15 +820,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>B1</td>
-<td>24/08/2024</td>
-<td>19:45</td>
-<td>Antwerp</td>
-<td>Mechelen</td>
-<td>1.53</td>
-<td>4.1</td>
-<td>5.00</td>
-<td>1.57</td>
-<td>4.33</td>
+<td>30/11/2024</td>
+<td>17:15</td>
+<td>Club Brugge</td>
+<td>Dender</td>
+<td>None</td>
+<td>1.25</td>
+<td>7.00</td>
+<td>8.00</td>
+<td>1.25</td>
 <td>...</td>
 <td>None</td>
 <td>None</td>
@@ -844,15 +844,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>B1</td>
-<td>25/08/2024</td>
-<td>12:30</td>
-<td>Dender</td>
-<td>Club Brugge</td>
-<td>4.75</td>
-<td>4.2</td>
-<td>1.55</td>
-<td>5.00</td>
-<td>4.20</td>
+<td>30/11/2024</td>
+<td>19:45</td>
+<td>Charleroi</td>
+<td>Standard</td>
+<td>None</td>
+<td>1.95</td>
+<td>3.40</td>
+<td>3.90</td>
+<td>1.98</td>
 <td>...</td>
 <td>None</td>
 <td>None</td>
@@ -868,15 +868,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>B1</td>
-<td>25/08/2024</td>
-<td>15:00</td>
+<td>01/12/2024</td>
+<td>12:30</td>
 <td>St Truiden</td>
-<td>St. Gilloise</td>
-<td>5.50</td>
-<td>4.1</td>
-<td>1.48</td>
-<td>6.00</td>
-<td>4.40</td>
+<td>Genk</td>
+<td>None</td>
+<td>4.50</td>
+<td>4.00</td>
+<td>1.73</td>
+<td>4.33</td>
 <td>...</td>
 <td>None</td>
 <td>None</td>
@@ -892,15 +892,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>B1</td>
-<td>25/08/2024</td>
-<td>17:30</td>
-<td>Standard</td>
+<td>01/12/2024</td>
+<td>15:00</td>
 <td>Beerschot VA</td>
-<td>1.73</td>
-<td>3.6</td>
-<td>4.10</td>
-<td>1.77</td>
-<td>3.80</td>
+<td>Cercle Brugge</td>
+<td>None</td>
+<td>3.90</td>
+<td>3.50</td>
+<td>1.90</td>
+<td>3.60</td>
 <td>...</td>
 <td>None</td>
 <td>None</td>
@@ -938,65 +938,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">186</td>
+<td data-quarto-table-cell-role="th">143</td>
 <td>T1</td>
-<td>24/08/2024</td>
-<td>17:15</td>
-<td>Sivasspor</td>
-<td>Eyupspor</td>
-<td>2.30</td>
-<td>3.3</td>
-<td>3.10</td>
-<td>2.30</td>
-<td>3.30</td>
-<td>...</td>
+<td>30/11/2024</td>
+<td>16:00</td>
+<td>Buyuksehyr</td>
+<td>Goztep</td>
 <td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">187</td>
-<td>T1</td>
-<td>24/08/2024</td>
-<td>19:45</td>
-<td>Bodrumspor</td>
-<td>Konyaspor</td>
-<td>2.90</td>
-<td>3.1</td>
-<td>2.50</td>
-<td>2.85</td>
+<td>2.38</td>
 <td>3.25</td>
-<td>...</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">188</td>
-<td>T1</td>
-<td>25/08/2024</td>
-<td>17:15</td>
-<td>Kasimpasa</td>
-<td>Ad. Demirspor</td>
-<td>1.57</td>
-<td>4.2</td>
-<td>5.25</td>
-<td>1.58</td>
-<td>4.33</td>
+<td>3.00</td>
+<td>2.35</td>
 <td>...</td>
 <td>None</td>
 <td>None</td>
@@ -1010,17 +962,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>None</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">189</td>
+<td data-quarto-table-cell-role="th">144</td>
 <td>T1</td>
-<td>25/08/2024</td>
-<td>19:45</td>
-<td>Antalyaspor</td>
-<td>Hatayspor</td>
-<td>2.20</td>
-<td>3.3</td>
-<td>3.30</td>
-<td>2.15</td>
-<td>3.40</td>
+<td>01/12/2024</td>
+<td>13:00</td>
+<td>Rizespor</td>
+<td>Kayserispor</td>
+<td>None</td>
+<td>1.83</td>
+<td>3.60</td>
+<td>4.20</td>
+<td>1.82</td>
 <td>...</td>
 <td>None</td>
 <td>None</td>
@@ -1034,17 +986,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>None</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">190</td>
+<td data-quarto-table-cell-role="th">145</td>
 <td>T1</td>
-<td>25/08/2024</td>
-<td>19:45</td>
-<td>Rizespor</td>
+<td>01/12/2024</td>
+<td>16:00</td>
+<td>Galatasaray</td>
+<td>Eyupspor</td>
+<td>None</td>
+<td>1.25</td>
+<td>7.00</td>
+<td>8.50</td>
+<td>1.26</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">146</td>
+<td>T1</td>
+<td>02/12/2024</td>
+<td>17:00</td>
 <td>Fenerbahce</td>
-<td>4.75</td>
-<td>3.8</td>
-<td>1.70</td>
-<td>4.60</td>
-<td>4.00</td>
+<td>Gaziantep</td>
+<td>None</td>
+<td>1.25</td>
+<td>6.50</td>
+<td>9.00</td>
+<td>1.24</td>
+<td>...</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">147</td>
+<td>T1</td>
+<td>02/12/2024</td>
+<td>17:00</td>
+<td>Hatayspor</td>
+<td>Besiktas</td>
+<td>None</td>
+<td>4.10</td>
+<td>3.60</td>
+<td>1.83</td>
+<td>3.80</td>
 <td>...</td>
 <td>None</td>
 <td>None</td>
@@ -1060,7 +1060,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 
-<p>191 rows × 101 columns</p>
+<p>148 rows × 102 columns</p>
 </div>
 </div>
 </div>
@@ -1110,18 +1110,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1153,7 +1142,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1188,7 +1217,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
