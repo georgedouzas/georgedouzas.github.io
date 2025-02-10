@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Posts – AI &amp; Friends</title>
+<title>Georgios Douzas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,10 +37,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-79108a0fc1995748cbd19a5b0e3e3e7c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,20 +71,76 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-posts .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-image','listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-posts'] = new List('listing-posts', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-publications .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-image','listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-publications'] = new List('listing-publications', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-presentations .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-presentations'] = new List('listing-presentations', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -128,18 +184,17 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">AI &amp; Friends</span>
+    <span class="navbar-title">Georgios Douzas</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -148,10 +203,6 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/georgedouzas"> <i class="bi bi-github" role="img">
 </i> 
@@ -170,160 +221,174 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Posts</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Data Engineering">Data Engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Imbalanced Data">Imbalanced Data <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Machine Learning">Machine Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Mechanics">Mechanics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Open Source">Open Source <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Physics">Physics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Software Engineering">Software Engineering <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="QXJ0aWZpY2lhbCUyMEludGVsbGlnZW5jZQ==">Artificial Intelligence <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RGF0YSUyMEVuZ2luZWVyaW5n">Data Engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SW1iYWxhbmNlZCUyMERhdGE=">Imbalanced Data <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TExN">LLM <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWFjaGluZSUyMExlYXJuaW5n">Machine Learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TWVjaGFuaWNz">Mechanics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="T3BlbiUyMFNvdXJjZQ==">Open Source <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UGh5c2ljcw==">Physics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHVibGljYXRpb24=">Publication <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UmVpbmZvcmNlbWVudCUyMExlYXJuaW5n">Reinforcement Learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U29mdHdhcmUlMjBEZXZlbG9wbWVudA==">Software Development <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VHJhZGluZw==">Trading <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
-
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Physics,Mechanics" data-listing-date-sort="1724274000000" data-listing-file-modified-sort="1732980837753" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1425">
-<div class="thumbnail">
-<p><a href="./posts/mechanics_affine_spaces/index.html" class="no-external"></a></p><a href="./posts/mechanics_affine_spaces/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/mechanics_affine_spaces/featured.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/mechanics_affine_spaces/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/mechanics_affine_spaces/index.html" class="no-external">Mechanics</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/mechanics_affine_spaces/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Physics'); return false;">
-Physics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Mechanics'); return false;">
+<section id="posts" class="level2">
+<h2 class="anchored" data-anchor-id="posts">Posts</h2>
+<p>My articles on open-source, machine learning, mathematics, and more.</p>
+<div id="listing-posts" class="quarto-listing quarto-listing-container-grid">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="UGh5c2ljcyUyQ01lY2hhbmljcw==" data-listing-file-modified-sort="1739214930511" data-listing-reading-time-sort="8" data-listing-word-count-sort="1425">
+<a href="./posts/mechanics_affine_spaces/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/mechanics_affine_spaces/featured.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
 Mechanics
+</h5>
+<div class="card-text listing-description">
+Introduction to affine spaces and their properties.
 </div>
 </div>
-<div class="listing-description">
-<a href="./posts/mechanics_affine_spaces/index.html" class="no-external">Introduction to affine spaces.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/mechanics_affine_spaces/index.html" class="no-external">
-<div class="listing-date">
-Aug 22, 2024
-</div>
-<div class="listing-author">
-Georgios Douzas
 </div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Software Engineering,Open Source,Data Engineering" data-listing-date-sort="1687381200000" data-listing-file-modified-sort="1732980837754" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1229">
-<div class="thumbnail">
-<p><a href="./posts/prefect/index.html" class="no-external"></a></p><a href="./posts/prefect/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/prefect/featured.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/prefect/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/prefect/index.html" class="no-external">Prefect</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/prefect/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Software Engineering'); return false;">
-Software Engineering
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Open Source'); return false;">
-Open Source
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Data Engineering'); return false;">
-Data Engineering
+<div class="g-col-1" data-index="1" data-categories="U29mdHdhcmUlMjBEZXZlbG9wbWVudCUyQ09wZW4lMjBTb3VyY2UlMkNEYXRhJTIwRW5naW5lZXJpbmc=" data-listing-file-modified-sort="1739214930511" data-listing-reading-time-sort="7" data-listing-word-count-sort="1229">
+<a href="./posts/prefect/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/prefect/featured.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Prefect
+</h5>
+<div class="card-text listing-description">
+Build, deploy and observe data workflows.
 </div>
 </div>
-<div class="listing-description">
-<a href="./posts/prefect/index.html" class="no-external">Build, deploy and observe data workflows.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/prefect/index.html" class="no-external">
-<div class="listing-date">
-Jun 22, 2023
-</div>
-<div class="listing-author">
-Georgios Douzas
 </div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Machine Learning,Open Source,Imbalanced Data" data-listing-date-sort="1651438800000" data-listing-file-modified-sort="1732980837753" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1351">
-<div class="thumbnail">
-<p><a href="./posts/imbalanced-learn-extra/index.html" class="no-external"></a></p><a href="./posts/imbalanced-learn-extra/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/imbalanced-learn-extra/featured.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/imbalanced-learn-extra/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/imbalanced-learn-extra/index.html" class="no-external">imbalanced-learn-extra</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/imbalanced-learn-extra/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Machine Learning'); return false;">
-Machine Learning
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Open Source'); return false;">
-Open Source
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Imbalanced Data'); return false;">
-Imbalanced Data
+<div class="g-col-1" data-index="2" data-categories="QXJ0aWZpY2lhbCUyMEludGVsbGlnZW5jZSUyQ01hY2hpbmUlMjBMZWFybmluZyUyQ09wZW4lMjBTb3VyY2UlMkNJbWJhbGFuY2VkJTIwRGF0YQ==" data-listing-file-modified-sort="1739214930510" data-listing-reading-time-sort="7" data-listing-word-count-sort="1351">
+<a href="./posts/imbalanced-learn-extra/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/imbalanced-learn-extra/featured.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+imbalanced-learn-extra
+</h5>
+<div class="card-text listing-description">
+Implementation of novel oversampling algorithms.
 </div>
 </div>
-<div class="listing-description">
-<a href="./posts/imbalanced-learn-extra/index.html" class="no-external">Implementation of novel oversampling algorithms.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/imbalanced-learn-extra/index.html" class="no-external">
-<div class="listing-date">
-May 2, 2022
-</div>
-<div class="listing-author">
-Georgios Douzas
 </div>
 </a>
-</div>
 </div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-</div></main> <!-- /main -->
+</div>
+</section>
+<section id="publications" class="level2">
+<h2 class="anchored" data-anchor-id="publications">Publications</h2>
+<p>Published work and work in progress.</p>
+<div id="listing-publications" class="quarto-listing quarto-listing-container-grid">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="VHJhZGluZyUyQ1JlaW5mb3JjZW1lbnQlMjBMZWFybmluZyUyQ1B1YmxpY2F0aW9u" data-listing-file-modified-sort="1739214930521" data-listing-reading-time-sort="20" data-listing-word-count-sort="3973">
+<a href="./publications/intraday-trading-via-deep-reinforcement-learning-and-technical-indicators/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./publications/intraday-trading-via-deep-reinforcement-learning-and-technical-indicators/cpr.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Intraday trading via Deep Reinforcement Learning and Technical Indicators
+</h5>
+<div class="card-text listing-description">
+Work In Progress.
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="QXJ0aWZpY2lhbCUyMEludGVsbGlnZW5jZSUyQ01hY2hpbmUlMjBMZWFybmluZyUyQ0ltYmFsYW5jZWQlMjBEYXRhJTJDUHVibGljYXRpb24=" data-listing-file-modified-sort="1739214930518" data-listing-reading-time-sort="15" data-listing-word-count-sort="2955">
+<a href="./publications/imbalanced-learn-implementation-of-novel-oversampling-algorithms/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./publications/imbalanced-learn-implementation-of-novel-oversampling-algorithms/smote_vs_gsmote.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+imbalanced-learn-extra: A Python package for novel oversampling algorithms
+</h5>
+<div class="card-text listing-description">
+Work In Progress.
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="presentations" class="level2">
+<h2 class="anchored" data-anchor-id="presentations">Presentations</h2>
+<p>Slides and materials I have created.</p>
+<div id="listing-presentations" class="quarto-listing quarto-listing-container-grid">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="QXJ0aWZpY2lhbCUyMEludGVsbGlnZW5jZSUyQ1JlaW5mb3JjZW1lbnQlMjBMZWFybmluZyUyQ0xMTQ==" data-listing-file-modified-sort="1739214930516" data-listing-reading-time-sort="18" data-listing-word-count-sort="3487">
+<a href="./presentations/reinforcement-learning/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./presentations/reinforcement-learning/images/rl_llm_based_agents.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Reinforcement Learning and LLM-based Agents
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('QXJ0aWZpY2lhbCUyMEludGVsbGlnZW5jZQ=='); return false;">
+Artificial Intelligence
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('UmVpbmZvcmNlbWVudCUyMExlYXJuaW5n'); return false;">
+Reinforcement Learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('TExN'); return false;">
+LLM
+</div>
+</div>
+<div class="card-text listing-description">
+Leveraging Reinforcement Learning and LLMs for building smart, adaptive agents.
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -406,8 +471,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -518,7 +581,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Work In Progress.">
+
+<title>Intraday trading via Deep Reinforcement Learning and Technical Indicators – Georgios Douzas</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-79108a0fc1995748cbd19a5b0e3e3e7c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Georgios Douzas</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/georgedouzas"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/gdouzas"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Intraday trading via Deep Reinforcement Learning and Technical Indicators</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Trading</div>
+    <div class="quarto-category">Reinforcement Learning</div>
+    <div class="quarto-category">Publication</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Work In Progress.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>Deep Reinforcement Learning algorithms (DRL) have been used with success to deal with previously hard problems. The automation of profit generation in the financial markets is possible using DRL, by combining the prediction and allocation steps of the portfolio in one unified step to produce fully autonomous systems that can interact with their environment in order to make optimal decisions through trial and error. However, previous research has shown that DRL algorithms in day-trading tasks tend to suffer from noisy financial signals and costly search of continuous-valued action spaces. By presenting a DRL model for generating profitable trades in the cryptocurrency market, this work effectively overcomes the limitations of conventional strategies and forecasting methods. We formulate the trading problem as a Markov Decision Process using Technical Indicators (TI), taking liquidity and transaction costs into consideration, as well as the constraints imposed by the market. The proposed method utilizes the DRL algorithm Twin Delayed Deep Deterministic Policy Gradients (TD3). Our model outperforms other popular strategies, reporting a Sharpe Ratio <span class="math inline">\(2.36\)</span> on unseen data.</p>
+  </div>
+</div>
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Investors aim to minimize the risks involved in the trading process and maximize profits. Investing in market assets requires successful prediction of prices or trends, as well as optimal allocation of capital among the selected assets in order to meet this objective. For a human being, it is extremely difficult to consider all relevant factors in such a complex and dynamic environment. Thus, the development of adaptive automated trading systems that can meet investor objectives and create profitable trading strategies has been a significant research topic.</p>
+<p>In the last decade, there have been numerous attempts to develop automated trading systems. Most of these efforts have been focused on using Supervised Learning (SL) techniques <span class="citation" data-cites="patel_predicting_2015">(<a href="#ref-patel_predicting_2015" role="doc-biblioref">Patel et al. 2015</a>)</span>, <span class="citation" data-cites="tsantekidis_forecasting_2017">(<a href="#ref-tsantekidis_forecasting_2017" role="doc-biblioref">Tsantekidis et al. 2017</a>)</span>, <span class="citation" data-cites="ntakaris_mid-price_2020">(<a href="#ref-ntakaris_mid-price_2020" role="doc-biblioref">Ntakaris et al. 2020</a>)</span>, <span class="citation" data-cites="hao_predicting_2020">(<a href="#ref-hao_predicting_2020" role="doc-biblioref">Hao and Gao 2020</a>)</span>, <span class="citation" data-cites="vargas_deep_2018">(<a href="#ref-vargas_deep_2018" role="doc-biblioref">Vargas et al. 2018</a>)</span>]. Their focus is to create forecasting models trained on historical data. Even though these techniques have gained popularity, they suffer from various limitations, which has lead to suboptimal results <span class="citation" data-cites="lopez_de_prado_10_2018">(<a href="#ref-lopez_de_prado_10_2018" role="doc-biblioref">Lopez de Prado 2018</a>)</span>.</p>
+<p>Online decision-making is a core component of financial trading <span class="citation" data-cites="deng_deep_2017">(<a href="#ref-deng_deep_2017" role="doc-biblioref">Deng et al. 2017</a>)</span>. Additionally, it is highly time-dependent in nature, making it an ideal candidate for Markov Decision Processes (MDP) <span class="citation" data-cites="puterman_markov_1994">(<a href="#ref-puterman_markov_1994" role="doc-biblioref">Puterman 1994</a>)</span>. In MDP, all the available information is included in the agent’s current state, <span class="citation" data-cites="chakraborty_capturing_2019">(<a href="#ref-chakraborty_capturing_2019" role="doc-biblioref">Chakraborty 2019</a>)</span>. By combining the prediction and allocation steps of trading activity into one unified process, RL deals with a major disadvantage of SL methods: There is no need to define an additional strategy on top of the prediction model since the trading agent interacts with the environment to make optimal decisions in order to optimize the investor’s objective <span class="citation" data-cites="meng_reinforcement_2019">(<a href="#ref-meng_reinforcement_2019" role="doc-biblioref">Meng and Khushi 2019</a>)</span>. As demonstrated in previous works <span class="citation" data-cites="moody_learning_2001">(<a href="#ref-moody_learning_2001" role="doc-biblioref">Moody and Saffell 2001</a>)</span>, <span class="citation" data-cites="dempster_automated_2006">(<a href="#ref-dempster_automated_2006" role="doc-biblioref">Dempster and Leemans 2006</a>)</span>, RL has the potential to be profitable in trading activities.</p>
+<p>As the title suggests, we are focusing on intraday trading, or trading “within the day” where all positions are closed before the market closes. Intraday price fluctuations are used by day traders to determine when they should purchase a security and then sell it to take advantage of short-term price fluctuations. There are a variety of intraday trading strategies identified by practitioners, including scalping (high-speed trading), range trading (which utilizes support levels and resistance levels as indicators for buying and selling), and news-based trading (which capitalizes on market volatility resulting from news-based events). Trading strategies that utilize automated trading techniques face three challenges associated with intraday trading:</p>
+<ul>
+<li><p>Short-term financial movements are sometimes associated with short-term noise oscillations.</p></li>
+<li><p>There is a high computational complexity associated with making decisions in the daily continuous-value price range.</p></li>
+<li><p>An early stop of an order when applying intraday trading strategies based on Target Profit (TP) or Stop Loss (SL) signals.</p></li>
+</ul>
+<p>The majority of works studying RL’s applications in financial markets considered discrete action spaces, such as buying, holding, and selling a fixed amount to trade a single asset <span class="citation" data-cites="vargas_deep_2018">(<a href="#ref-vargas_deep_2018" role="doc-biblioref">Vargas et al. 2018</a>)</span>, <span class="citation" data-cites="corazza_q-learning-based_2014">(<a href="#ref-corazza_q-learning-based_2014" role="doc-biblioref">Corazza and Bertoluzzo 2014</a>)</span>, <span class="citation" data-cites="tan_stock_2011">(<a href="#ref-tan_stock_2011" role="doc-biblioref">Tan, Quek, and Cheng 2011</a>)</span>, and <span class="citation" data-cites="deng_deep_2017">(<a href="#ref-deng_deep_2017" role="doc-biblioref">Deng et al. 2017</a>)</span>. To achieve better agent-environment interaction and faster convergence, a continuous action space approach is adopted to gradually adjust the portfolio’s positions with each time step. Additionally, the approach allows to manage multiple assets rather than just one. Based on market constraints, such as liquidity and transaction costs, we first formulate the trading problem as MDP. Specifically, we enhance the state representation with ten different TIs in order to use high-level signals often utilized by traders. The Twin Delayed Deep Deterministic Policy Gradient (TD3) algorithm is then used and a policy is learned in a high-dimensional and continuous action space. Finally, we evaluate our proposed approach by performing back-testing, which is the process traders and analysts use to test a trading strategy on historical data in order to determine its viability.</p>
+<p>In summary, our main contributions are the following:</p>
+<ul>
+<li><p>We propose a novel end-to-end daytrade DRL model that directly learns the optimal trading strategy, thus dealing with the early stop of strategies based on TP and SL signals.</p></li>
+<li><p>We constraint the DRL agent’s action space via the utilization of TI.</p></li>
+<li><p>Compared to state-of-the-art rule-based and SL-based strategies, our approach is more profitable and robust.</p></li>
+</ul>
+</section>
+<section id="background-and-related-work" class="level1">
+<h1>Background and related work</h1>
+<p>This study focuses DRL-based trading agents as well as strategies that utilize TI. Therefore, we briefly review past studies and provide some background information on these topics.</p>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>MDP <span class="citation" data-cites="alagoz_markov_2010">(<a href="#ref-alagoz_markov_2010" role="doc-biblioref">Alagoz et al. 2010</a>)</span> is a framework that is used to model stochastic processes. They include random variables that transition from one state to another while certain assumptions and probabilistic rules apply. MDPs are used to define RL problems. In MDP, the agent interacts with the environment and the learning process ensues from this interaction. At each time step <span class="math inline">\(t
+\in\{1,2,3, \ldots, T\}\)</span> the agent receives information of its current state <span class="math inline">\(S_{t} \in \mathcal{S}\)</span>, and selects an action <span class="math inline">\(A_{t}
+\in \mathcal{A}\)</span> to perform. As a result of its action, the agent finds itself in a new state, and the environment returns a reward <span class="math inline">\(R_{t+1} \in \mathcal{R}\)</span> to the agent as a feedback regarding the quality of its action <span class="citation" data-cites="sutton_reinforcement_2018">(<a href="#ref-sutton_reinforcement_2018" role="doc-biblioref">Sutton and Barto 2018</a>)</span>.</p>
+<p>In any RL problem, the goal is to maximize the cumulative reward it receives over time, rather than the immediate reward <span class="math inline">\(R_{t}\)</span>:</p>
+<p><span class="math display">\[\mathbb{G}_{t} = R_{t+1}+R_{t+2}+R_{t+3}+\ldots+R_{T}\]</span></p>
+<p>The term <span class="math inline">\(R_{T}\)</span> in the previous formula indicates the reward that is received at the terminal state <span class="math inline">\(t=T\)</span>, which means the equation at hand is valid only if the problem is episodic, that is, it ends in a terminal state. In the case of continuous tasks that do not have terminal states, a discount factor known as gamma is introduced:</p>
+<p><span class="math display">\[\mathbb{G}_{t}=R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\ldots+\gamma^{k-1} R_{t+k}+\ldots =\sum_{0}^{\infty} \gamma^{k} R_{t+k+1}\]</span></p>
+<p>Value functions are being used by RL methods to estimate evaluate states or to state-action pairs. This evaluation is based on the future expected sum of rewards. We call the selection of actions in a given state as s Policy <span class="math inline">\(\pi\)</span> <span class="citation" data-cites="sutton_reinforcement_2018">(<a href="#ref-sutton_reinforcement_2018" role="doc-biblioref">Sutton and Barto 2018</a>)</span> which maps states to probabilities of selecting each possible action.</p>
+<p>Bellman equations <span class="citation" data-cites="bellman_dynamic_2010">(<a href="#ref-bellman_dynamic_2010" role="doc-biblioref">Bellman and Dreyfus 2010</a>)</span> define linear equations among value functions used in Dynamic Programming. They are fundamental to understand how RL algorithms work. The value function <span class="math inline">\(v_{\pi}(s)\)</span> of a state <span class="math inline">\(s\)</span> satisifies the following equation:</p>
+<p><span class="math inline">\(v_{\pi}(s) = \sum_{a} \pi(a \mid s) \sum_{s^{\prime}} \sum_{r} Pr\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]\)</span></p>
+<p>Similarly, for the action-value function <span class="math inline">\(q_{\pi}(s, a)\)</span>:</p>
+<p><span class="math inline">\(q_{\pi}(s, a)=\sum_{s^{\prime}} \sum_{r} Pr\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma \sum_{a^{\prime}} \pi\left(a^{\prime} \mid s^{\prime}\right) q_{\pi}\left(s^{\prime}, a^{\prime}\right)\right]\)</span></p>
+<p>Bellman equations can be used to derive what is referred to as the Bellman Optimality Equations. The Bellman optimality equation expresses the fact that the value of a state under an optimal policy <span class="math inline">\(\pi_{*}\)</span> must be equal the expected return for the best action from that state <span class="citation" data-cites="sutton_reinforcement_2018">(<a href="#ref-sutton_reinforcement_2018" role="doc-biblioref">Sutton and Barto 2018</a>)</span>. The optimal state-value function <span class="math inline">\(v_{*}\)</span> equals to:</p>
+<p><span class="math display">\[v_{*}(s)=\max _{a} \sum_{s^{\prime}} \sum_{r} Pr\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma v_{*}\left(s^{\prime}\right)\right]\]</span></p>
+<p>Similarly, for the action-value function <span class="math inline">\(q_{*}\)</span> as:</p>
+<p><span class="math display">\[q_{*}(s, a)=\max _{\pi} q_{\pi}(s, a)=\sum_{s^{\prime}} \sum_{r} Pr\left(s^{\prime}, r \mid s, a\right)\left[r+\gamma \max _{a^{\prime}} q_{*}\left(s^{\prime}, a^{\prime}\right)\right]\]</span></p>
+<p>It is possible to classify RL algorithms into three main categories:</p>
+<section id="critic-only" class="level3">
+<h3 class="anchored" data-anchor-id="critic-only">Critic-Only</h3>
+<p>This family of algorithms learns to estimate the value function by utilizing a method called Generalized Policy Iteration (GPI). GPI includes two steps. The first one is the policy-evaluation. The primary goal of this step is to collect information under the given policy and evaluate it. The second step is to improve the policy by choosing greedy actions based on the value functions computed from the policy-evaluation step. Once the value functions and policies stabilize, the process has reached an optimal policy when the two steps alternate in a sequential manner.</p>
+<p>There are two different ways the agent learns the value function of the system. The first is the Tabular Solution Method that finds exact solutions: The value functions are represented as tables and updated after each iteration as the agent collects more experience. However, it requires that the state and action spaces must be small enough to be stored in tables. The second possible way in the critic-only approach is called Approximate Solution Method and it is capable of learning the value function of systems with large state and action spaces. Approximate methods achieve this generalization by combining RL with SL algorithms. DRL is an approximate method that combines Deep Neural Networks with RL <span class="citation" data-cites="mnih_playing_2013">(<a href="#ref-mnih_playing_2013" role="doc-biblioref">Mnih et al. 2013</a>)</span>, <span class="citation" data-cites="mnih_human-level_2015">(<a href="#ref-mnih_human-level_2015" role="doc-biblioref">Mnih et al. 2015</a>)</span>.</p>
+</section>
+<section id="actor-only" class="level3">
+<h3 class="anchored" data-anchor-id="actor-only">Actor-Only</h3>
+<p>Actor-Only methods, also known as Policy Gradient Methods, estimate the gradient of the objective, which is maximizing rewards with respect to the policy parameters and adjust the policy parameters <span class="math inline">\(\theta\)</span>:</p>
+<p><span class="math display">\[\theta_{t+1}=\theta_{t}+\alpha \nabla \ln \pi\left(a_{t} \mid s_{t}, \theta_{t}\right) G_{t}\]</span></p>
+<p>In contrast to Critic-Only methods, the parameterized policy function takes state and action as an input and returns the probability of taking that action in that state.</p>
+</section>
+<section id="actor-critic" class="level3">
+<h3 class="anchored" data-anchor-id="actor-critic">Actor-Critic</h3>
+<p>An improvement of the original DQN <span class="citation" data-cites="van_hasselt_deep_2015">(<a href="#ref-van_hasselt_deep_2015" role="doc-biblioref">Hasselt, Guez, and Silver 2015</a>)</span> proposed to use two networks instead of one Q-network to choose the action and the other to evaluate the action taken to solve the deviation problem in DQN. The proposed architecture was called Double-DQN. In this approach, known as Actor-Critic, the actor selects actions at each time step to form the policy, whereas the critic evaluates these actions. In this approach, the policy parameters <span class="math inline">\(\theta\)</span> are gradually adjusting in order to maximize the total reward predicted by the critic. The error <span class="math inline">\(\delta\)</span> calculated by the critic to evaluate the action is as follows:</p>
+<p><span class="math display">\[\delta=R_{t+1}+\gamma \hat{v}\left(s_{t+1}, w\right)-\hat{v}\left(s_{t}, w\right)\]</span></p>
+<p>The value function estimation of the current state <span class="math inline">\(\hat{v}\left(s_{t}, w\right)\)</span> is added as a baseline to make the learning faster. The equation to update the gradient at each time step <span class="math inline">\(t\)</span> as the following:</p>
+<p><span class="math display">\[\theta_{t+1}=\theta_{t}+\alpha \nabla \ln \pi\left(a_{t} \mid s_{t}, \theta_{t}\right)\left(R_{t+1}+\gamma \hat{v}\left(s_{t+1}, w\right)-\hat{v}\left(s_{t}, w\right)\right)\]</span></p>
+<p><span class="citation" data-cites="lillicrap_continuous_2015">(<a href="#ref-lillicrap_continuous_2015" role="doc-biblioref">Lillicrap et al. 2015</a>)</span> proposed a variation of Double-DQN, an algorithm based on the deterministic policy gradient (DDPG), for continuous action spaces. The Twin Delayed Deep Deterministic Policy Gradient (TD3) algorithm which we use this work, was proposed in <span class="citation" data-cites="fujimoto_addressing_2018">(<a href="#ref-fujimoto_addressing_2018" role="doc-biblioref">Fujimoto, Hoof, and Meger 2018</a>)</span> to tackle the problem of the approximation error in DDPG.</p>
+</section>
+<section id="deep-reinforcement-learning-in-trading" class="level3">
+<h3 class="anchored" data-anchor-id="deep-reinforcement-learning-in-trading">Deep Reinforcement Learning in trading</h3>
+<p>Algorithmic trading has been applied various subareas, including risk control, portfolio optimization <span class="citation" data-cites="giudici_network_2020">(<a href="#ref-giudici_network_2020" role="doc-biblioref">Giudici, Pagnottoni, and Polinesi 2020</a>)</span>, and trading strategies <span class="citation" data-cites="vella_dynamic_2015">(<a href="#ref-vella_dynamic_2015" role="doc-biblioref">Vella and Ng 2015</a>)</span>, <span class="citation" data-cites="chen_trading_2021">(<a href="#ref-chen_trading_2021" role="doc-biblioref">Chen et al. 2021</a>)</span>. Both academia and industry are increasingly interested in AI-based trading, particularly with the RL approach. Nevertheless, RL agents have not been adequately addressed in intraday trading, primarily due to the difficulty in designing an action space for frequent trading strategies. <span class="citation" data-cites="moody_learning_2001">(<a href="#ref-moody_learning_2001" role="doc-biblioref">Moody and Saffell 2001</a>)</span> proposed a RL algorithm as a trading agent and performed a detailed comparison between the Q-learning with the policy gradient method. <span class="citation" data-cites="bertoluzzo_testing_2012">(<a href="#ref-bertoluzzo_testing_2012" role="doc-biblioref">Bertoluzzo and Corazza 2012</a>)</span> evaluated the performance of different RL algorithms in day-trading for an Italian stock. Q-learning algorithm and Kernel-based RL were compared, concluding that Q-learning outperformed Kernel-based RL. <span class="citation" data-cites="corazza_q-learning-based_2014">(<a href="#ref-corazza_q-learning-based_2014" role="doc-biblioref">Corazza and Bertoluzzo 2014</a>)</span>, explored the effect of various reward functions such as Sharpe ratio and average log return on the performance of Q-learning. <span class="citation" data-cites="huang_robust_2016">(<a href="#ref-huang_robust_2016" role="doc-biblioref">Huang et al. 2016</a>)</span> further proposed a robust trading agent based on the DQN architecture. <span class="citation" data-cites="deng_deep_2017">(<a href="#ref-deng_deep_2017" role="doc-biblioref">Deng et al. 2017</a>)</span> proposed a combination of Deep Learning (DL) with Recurrent Reinforcement Learning to directly approximate a policy function. Their method is called Deep Recurrent Reinforcement Learning (DRRL). The DL algorithm extracts 45 useful features from the market. Then a Recurrent Neural Network (RNN) is used as a trading agent to interact with the state features and make decisions. <span class="citation" data-cites="conegundes_beating_2020">(<a href="#ref-conegundes_beating_2020" role="doc-biblioref">Conegundes and Pereira 2020</a>)</span> used Deep Deterministic Policy Gradient (DDPG) algorithm to deal with the asset allocation problem. They back-tested their method on the Brazilian Stock Exchange datasets, considering different constraints such as liquidity, latency, slippage, and transaction costs, obtaining <span class="math inline">\(311 \%\)</span> cumulative return in three years with an annual average maximum drawdown around <span class="math inline">\(19 \%\)</span>.</p>
+</section>
+<section id="technical-indicators-in-trading" class="level3">
+<h3 class="anchored" data-anchor-id="technical-indicators-in-trading">Technical Indicators in trading</h3>
+<p>Trading requires the analysis of various charts and the extraction of strategies based on patterns and indicators. It is accepted among industry practitioners that TI play an important role in market analysis since the financial market is dynamic. The hypothesis of technical analysis states that the future behavior of financial markets is conditioned on its past. Hence TI are being used to provide useful information about market trends and help maximize the returns. We selected the ten most popular TI used often by practitioners <span class="citation" data-cites="kirkpatrick_technical_2011">(<a href="#ref-kirkpatrick_technical_2011" role="doc-biblioref">Kirkpatrick and Dahlquist 2011</a>)</span>. The following is a brief description of them:</p>
+<ol type="1">
+<li><p>Relative Strength Index (RSI): A momentum indicator to measure the speed and magnitude of an assets’ recent price changes to evaluate overvalued or undervalued conditions in the price.</p></li>
+<li><p>Simple Moving Average (SMA): An important indicator to identify current price trends and the potential for a change in an established trend.</p></li>
+<li><p>Exponential Moving Average (EMA): EMA is considered an improved version of SMA by giving more weight to the recent prices considering old price history less relevant.</p></li>
+<li><p>Stochastic Oscillator (SO): A momentum indicator comparing the closing price of the asset to a range of its prices in a look-back window period.</p></li>
+<li><p>Moving Average Convergence/Divergence (MACD): A popular momentum indicator to identify the relationship between two moving averages of the assets’ price.</p></li>
+<li><p>Accumulation/Distribution Oscillator (AD): A volume-based cumulative momentum indicator that assess whether the asset is being accumulated or distributed.</p></li>
+<li><p>On-Balance Volume Indicator (OBVI): A volume-based momentum indicator that uses volume flow to predict the changes in assets’s price.</p></li>
+<li><p>Price Rate Of Change (ROC): A momentum based indicator that measures the speed of assets’ price changes over the look-back window.</p></li>
+<li><p>Williams Percent Range (WPR): A momentum indicator used to spot entry and exit points in the market by comparing the closing price of the asset to the high-low range of prices in the look-back window.</p></li>
+<li><p>Disparity Index (DI): It is the percentage equal to the relative position of the current closing price of the asset to a selected moving average.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="trading-environment" class="level1">
+<h1>Trading environment</h1>
+<p>We model the trading problem as a MDP, which can be formulated by describing its State Space, Action Space, and Reward Function. This formulation is known as the trading environment, and it is designed to simulate the real-world trading process.</p>
+<section id="states" class="level2">
+<h2 class="anchored" data-anchor-id="states">States</h2>
+<p>The state-space is designed to support multiple assets by representing the state as a <span class="math inline">\((1 + 12 \times \mathcal{N})\)</span>-dimensional vector, where <span class="math inline">\(\mathcal{N}\)</span> is the number of assets. Therefore, the state space increases linearly with the number of assets available to be traded. There are two main parts of the state presentation. The first part holds the current cash balance and shares owned by each asset in the portfolio and it is a <span class="math inline">\(\mathbb{R}_{+}^{1+2\mathcal{N}}\)</span> vector. The second part of the state is the TI information and it is represented by a <span class="math inline">\(\mathbb{R}^{10 \times \mathcal{N}}\)</span> vector. Therefore, the final state vector at each time step is provided to the agent as follows:</p>
+<p><span class="math display">\[S_t=\left[balance_t, share_t^1, \ldots, share_t^{\mathcal{N}}, price_t^1, \ldots, price_t^{\mathcal{N}}, TI_t^{1,1}, \ldots, TI_t^{\mathcal{N},10} \right]\]</span></p>
+<p>Each component of the state vector is defined as follows:</p>
+<ul>
+<li><p><span class="math inline">\(balance_t \in \mathbb{R}_{+}\)</span>: The available cash balance in the portfolio at time step <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(share_t^i \in \mathbb{Z}_{+}\)</span>: The number of shares owned for each asset <span class="math inline">\(i \in \mathcal{N}\)</span> at time step <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(price_t^i \in \mathbb{R}_{+}\)</span>: The close price for each asset <span class="math inline">\(i \in \mathcal{N}\)</span> at time step <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(TI_t^{i,j}\)</span> : The <span class="math inline">\(j\)</span>th Technical Indicator for asset <span class="math inline">\(i\)</span> in the portfolio at time step <span class="math inline">\(t\)</span> using the past prices of the asset in a specified look-back window.</p></li>
+</ul>
+<p>To provide and example of the state space, let’s assume that we have three different assets <span class="math inline">\(\mathcal{N}=3\)</span> and an initial capital of <span class="math inline">\(10000\)</span> to be invested. Then the state vector would be a 37-dimensional vector with the following initial state:</p>
+<p><span class="math display">\[S_t=\left[10000, 0, 0, 0, price_t^1, price_t^2, price_t^3, TI_t^{1,1}, \ldots, TI_t^{3,10} \right]\]</span></p>
+</section>
+<section id="actions" class="level2">
+<h2 class="anchored" data-anchor-id="actions">Actions</h2>
+<p>The agent receives the state <span class="math inline">\(S_{t}\)</span> at each time step <span class="math inline">\(t\)</span> as input and selectes action in the range <span class="math inline">\(A_{t}^i \in[-1,1]\)</span>. Then the action is re-scaled using a constrain <span class="math inline">\(K_{\max }\)</span>, which represents the maximum allocation (buy/sell shares), transforming <span class="math inline">\(A_t^i\)</span> to an integer <span class="math inline">\(K \in\left[-K_{\max }, \ldots,-1,0,1, \ldots, K_{\max }\right]\)</span>, which stands for the number of shares to be executed, resulting in decreasing, increasing or holding of the current position of the corresponding asset. There are two important conditions regarding the action execution in our approach:</p>
+<ul>
+<li><p>If the current capital in the portfolio is insufficient to execute the buy action, the action will be partially executed.</p></li>
+<li><p>If the number of shares for a specific asset <span class="math inline">\(share_{t}^{i}\)</span> in the portfolio is less than the number of shares to be sold <span class="math inline">\(K &lt; 0\)</span>, the agent will sell all the remaining shares of this asset.</p></li>
+</ul>
+<p>The action vector is expressed as the follows:</p>
+<p><span class="math display">\[
+A_{t}=\left[A_{t}^{0}, A_{t}^{1}, \ldots, A_{t}^{\mathcal{N}}\right]
+\]</span></p>
+<p>The dimensionality of the action space depends on the number of assets available in the portfolio and it’s given as <span class="math inline">\(\left(2
+\times K_{\max}+1\right)^{\mathcal{N}}\)</span>. Hence its dimensionality increases exponentially by increasing <span class="math inline">\(\mathcal{N}\)</span>.</p>
+</section>
+<section id="rewards" class="level2">
+<h2 class="anchored" data-anchor-id="rewards">Rewards</h2>
+<p>The portfolio value <span class="math inline">\(\mathcal{value}\)</span> at each time step is calculated as follows:</p>
+<p><span class="math display">\[value_{t}=balance_{t} + \sum_i share_{t}^i \cdot price_{t}^i\]</span></p>
+<p>The difference between the portfolio value <span class="math inline">\(\mathcal{value}_{t}\)</span> at the end of period <span class="math inline">\(t\)</span> and the value at the end of previous period <span class="math inline">\(t-1\)</span> represents the immediate reward received by the agent after each action.</p>
+<p>The transaction cost varies from one broker to another. To simulate more accurately the trading process, transaction costs are included into the immediate reward calculation. We set the transaction cost as a fixed percentage of the total closed deal cash amount, where <span class="math inline">\(d_{\text{buy}}\)</span> represents the commission percentage when buying is performed, and <span class="math inline">\(d_{\text{sell}}\)</span> is the commission percentage for selling:</p>
+<p><span class="math display">\[
+\begin{gathered}
+d_{t}=\left[d_{t}^{0}, d_{t}^{1}, \ldots, d_{t}^{\mathcal{N}}\right] \\
+d_{t}^{i}= \begin{cases}d_{\text {buy }}, &amp; \text { if } A_{t}^{i}&gt;0 \\
+0, &amp; \text { if } A_{t}^{i}=0 \\
+d_{\text {sell }}, &amp; \text { if } A_{t}^{i}&lt;0\end{cases}
+\end{gathered}
+\]</span></p>
+<p>The commission vector <span class="math inline">\(d_{t}\)</span> is incorporated into the immediate reward function by excluding the commission amount paid from the portfolio value. Consequently, the agent would avoid excessive trading that results in a high commission rate and therefore avoids a negative reward:</p>
+<p><span class="math display">\[value_{t}=balance_{t} + \sum_i share_{t}^i \cdot \left(price_{t}^i - price_{t-1}^i \cdot d_{t}^i\right)\]</span></p>
+<p>The action of buying/selling occurred in the previous state and therefore commission should be calculated using the closing prices on that state. Therefore in the above equation, the amount paid for the commission is calculated by taking the product of the commission vector and the closing price of the previous period.</p>
+</section>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
+<p>In order to simulate as realistically as possible the trading process, we impose the following assumptions on the MDP environment:</p>
+<section id="non-negative-balance" class="level3">
+<h3 class="anchored" data-anchor-id="non-negative-balance">Non-negative balance</h3>
+<p>The cash balance in any state is not allowed to be negative. To achieve that, the environment prioritizes the execution of sell actions in the action vector. If the buy action still results in a negative balance, it is fulfilled partially as explained above.</p>
+</section>
+<section id="short-selling" class="level3">
+<h3 class="anchored" data-anchor-id="short-selling">Short-selling</h3>
+<p>Short selling is prohibited in the designed environment, i.e.&nbsp;all portfolio’s positions must be strictly non-negative.</p>
+</section>
+<section id="zero-slippage" class="level3">
+<h3 class="anchored" data-anchor-id="zero-slippage">Zero slippage</h3>
+<p>When the market volatility is high, slippage occurs between the price at which the trade was ordered and the price at which it’s completed. In this study, the market liquidity is assumed to be high enough to meet the transaction at the same price when it was ordered.</p>
+</section>
+<section id="zero-market-impact" class="level3">
+<h3 class="anchored" data-anchor-id="zero-market-impact">Zero market impact</h3>
+<p>In financial markets, a market participant impacts the market when it buys or sells an asset which causes the price change. The impact provoked by the agent in this study is assumed to have no effect on the market when it performs its actions.</p>
+</section>
+</section>
+<section id="trading-agent" class="level2">
+<h2 class="anchored" data-anchor-id="trading-agent">Trading agent</h2>
+<p>Actor-Critic-based algorithms deal with the continuous action space by utilizing function approximation and policy gradient methods. Deep Deterministic Policy Gradient algorithm (DDPG) is a popular actor-critic, off-policy algorithm. Despite its excellent performance in continuous control problems, it has a significant drawback similar to many RL algorithms: it tends to overestimate the action values as a result of function approximation error. In this study, we use Twin Delayed Deep Deterministic Policy Gradient (TD3) <span class="citation" data-cites="fujimoto_addressing_2018">(<a href="#ref-fujimoto_addressing_2018" role="doc-biblioref">Fujimoto, Hoof, and Meger 2018</a>)</span> algorithm, which improves the overestimation problem if DDPG. TD3 introduces three main components into DDPG:</p>
+<ol type="1">
+<li><p>Clipped double critic networks: It is a variant of Double Q-learning <span class="citation" data-cites="van_hasselt_deep_2015">(<a href="#ref-van_hasselt_deep_2015" role="doc-biblioref">Hasselt, Guez, and Silver 2015</a>)</span> to replace the single critic. It utilizes two different critic networks to make an independent estimate of the value function.</p></li>
+<li><p>Delayed Updates: The second component delays the policy network update and allows the value network to stabilize before it can be used to update the policy gradient. This results in a lower variance of estimates and, therefore, better policy.</p></li>
+<li><p>Target Policy Smoothing Regularization: A regularization strategy is applied to the target policy by adding a small random noise and averaging over mini-batches. This reduces the variance of the target values when updating the critic.</p></li>
+</ol>
+</section>
+</section>
+<section id="experimental-procedure" class="level1">
+<h1>Experimental procedure</h1>
+<p>We conduct the empirical evaluation of the proposed DRL agent in the highly volatile cryptocurrency market. In our experiment, we select multiple cryptocurrencies over a testing period in which the crypto market crashed twice. The initial capital is set to <span class="math inline">\(10.000\)</span> at a transaction cost of <span class="math inline">\(0.5\%\)</span>. The evaluation is conducted from the perspective of obtaining profits as well as robustness when agents face the unexpected change of market states. We also include various comparison methods as described below. An important issue is that the experiment results are stochastic: They may change at each run depending on different factors such as the actions the agent randomly starts with and uses to explore or the random weight initialization. Therefore, following <span class="citation" data-cites="henderson_deep_2017">(<a href="#ref-henderson_deep_2017" role="doc-biblioref">Henderson et al. 2017</a>)</span> we average multiple runs over different random seeds. While the recommended number of trials to evaluate an RL algorithm is still an open question in the field, we report the mean across five runs, which is the suggested number in many studies. For each trading strategy we use multiple hyperparameters and apply cross-validation on a rolling basis to select the optimal configuration. The scripts that run the experimental procedure can be found in <a href="https://github.com/NOVA-IMS-Innovation-and-Analytics-Lab/publications">GitHub</a>, while a detailed description of the process, formulas and hyperparameters space is presented in the Appendix. In the following subsections we provide a high-level description of the experiments and their results.</p>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The following ten cryptocurrencies with high trading volumes are selected:</p>
+<ul>
+<li>AAVE</li>
+<li>AVAX</li>
+<li>BTC</li>
+<li>NEAR</li>
+<li>LINK</li>
+<li>ETH</li>
+<li>LTC</li>
+<li>MATIC</li>
+<li>UNI</li>
+<li>SOL</li>
+</ul>
+<p>A five-minute-level data from 02/02/2022 to 06/27/2022 is used. We split it into a training period (from 02/02/2022 to 04/30/2022) and a testing period (from 05/01/2022 to 06/27/2022), corresponding to approximately 25000 and 16000 observations per asset, respectively. All datasets utilized in experiments are free to download and described in detail in Appendix.</p>
+</section>
+<section id="evaluation-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-metrics">Evaluation metrics</h2>
+<p>We use two metrics to evaluate our results. The first metric is the cumulative price return (CPR):</p>
+<p><span class="math inline">\(\mathrm{CPR}=\sum \left(\mathrm{return}_{\mathrm{t}}^{\text {(holding) }}-\mathrm{return}_{\mathrm{t}}^{\text {(settlement) }}\right)\)</span></p>
+<p>The second metric is the annualized Sharpe Ratio (SR) <span class="citation" data-cites="sharpe_sharpe_1994">(<a href="#ref-sharpe_sharpe_1994" role="doc-biblioref">Sharpe 1994</a>)</span> which combines the return and the risk to give the average of the risk-free return by the portfolio’s deviation:</p>
+<p><span class="math inline">\(\mathrm{SR}=\frac{\text { Average }(CPR)}{\text { StandardDeviation }(CPR)}\)</span></p>
+<p>In general, a SR above <span class="math inline">\(1.0\)</span> is considered to be “good” by investors because this suggests that the portfolio is offering excess returns relative to its volatility. A Sharpe ratio higher than <span class="math inline">\(2.0\)</span> is rated as “very good”, while a ratio above <span class="math inline">\(3.0\)</span> is considered “excellent”.</p>
+</section>
+<section id="comparison-methods" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-methods">Comparison methods</h2>
+<p>To compare the performance of the proposed DRL agent, various methods are selected:</p>
+<ul>
+<li><p>MB: Market baseline performance. A strategy used to measure the overall performance of the market during the testing period, by holding the assets consistently. We assume a portfolio of equal assets allocation.</p></li>
+<li><p>SLTP: Stop Loss and Take Profit strategy. A simple strategy that consists of using a fixed percentage to determine SL and TP levels.</p></li>
+<li><p>MVP: Minimum Variance Portfolio. A popular strategy that aims to maximizes performance while minimizing risk.</p></li>
+<li><p>TI: Each one of the 10 TI is used to define a strategy i.e.&nbsp;entry, exit and trade management rules.</p></li>
+<li><p>FCM: A SL forecasting model based on a Recurrent Neural Network, consisting of a multi-layer Long Short-Term Memory architecture. It utilizes the Buy-Winner-Sell-Loser strategy.</p></li>
+<li><p>RF: Similar to FCM but uses as forecasting model the Random Forest algorithm.</p></li>
+<li><p>FDRNN <span class="citation" data-cites="deng_deep_2017">(<a href="#ref-deng_deep_2017" role="doc-biblioref">Deng et al. 2017</a>)</span>: A state-of-the-art DRL trader as described above.</p></li>
+</ul>
+<p>A detailed description of each of the above comparison methods is presented in the Appendix.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>The results below are presented for the unseen data of the testing period 01/05/2022 to 06/27/2022.</p>
+<p><a href="#tbl-performance" class="quarto-xref">Table&nbsp;1</a> presents the evaluation of each methods performance, with the metrics of CPR and the SR:</p>
+<div id="tbl-performance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-performance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: CPR and SR of various strategies compared to proposed method.
+</figcaption>
+<div aria-describedby="tbl-performance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th>CPR</th>
+<th>SR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MB</td>
+<td>-42.53</td>
+<td>-0.12</td>
+</tr>
+<tr class="even">
+<td>SLTP</td>
+<td>-10.91</td>
+<td>-0.03</td>
+</tr>
+<tr class="odd">
+<td>MVP</td>
+<td>-39.13</td>
+<td>-0.07</td>
+</tr>
+<tr class="even">
+<td>RSI</td>
+<td>-13.23</td>
+<td>-0.02</td>
+</tr>
+<tr class="odd">
+<td>SMA</td>
+<td>-4.56</td>
+<td>-0.03</td>
+</tr>
+<tr class="even">
+<td>EMA</td>
+<td>-6.23</td>
+<td>-0.03</td>
+</tr>
+<tr class="odd">
+<td>SO</td>
+<td>3.45</td>
+<td>0.04</td>
+</tr>
+<tr class="even">
+<td>MACD</td>
+<td>1.56</td>
+<td>0.06</td>
+</tr>
+<tr class="odd">
+<td>AD</td>
+<td>2.89</td>
+<td>0.05</td>
+</tr>
+<tr class="even">
+<td>OBVI</td>
+<td>-3.41</td>
+<td>-0.01</td>
+</tr>
+<tr class="odd">
+<td>ROC</td>
+<td>11.62</td>
+<td>0.12</td>
+</tr>
+<tr class="even">
+<td>WPR</td>
+<td>5.34</td>
+<td>0.08</td>
+</tr>
+<tr class="odd">
+<td>DI</td>
+<td>-7.84</td>
+<td>-0.13</td>
+</tr>
+<tr class="even">
+<td>FCM</td>
+<td>12.67</td>
+<td>0.58</td>
+</tr>
+<tr class="odd">
+<td>RF</td>
+<td>8.56</td>
+<td>0.43</td>
+</tr>
+<tr class="even">
+<td>FDRNN</td>
+<td>13.45</td>
+<td>0.64</td>
+</tr>
+<tr class="odd">
+<td>Proposed method</td>
+<td><strong>76.34</strong></td>
+<td><strong>2.36</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><a href="#tbl-netprofit" class="quarto-xref">Table&nbsp;2</a> presents the net profit of each strategy:</p>
+<div id="tbl-netprofit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-netprofit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Net profit of strategies compared to proposed method.
+</figcaption>
+<div aria-describedby="tbl-netprofit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th>CPR</th>
+<th>SR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MB</td>
+<td>-4253.0</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>SLTP</td>
+<td>-1290.3</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>MVP</td>
+<td>-3913</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>RSI</td>
+<td>-1150.4</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>SMA</td>
+<td>-389.7</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>EMA</td>
+<td>-612.3</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>SO</td>
+<td>378.8</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>MACD</td>
+<td>136.4</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>AD</td>
+<td>293.2</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>OBVI</td>
+<td>-341.8</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>ROC</td>
+<td>1342.3</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>WPR</td>
+<td>504.2</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>DI</td>
+<td>-584.7</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>FCM</td>
+<td>1303.3</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>RF</td>
+<td>834.6</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>FDRNN</td>
+<td>1401.3</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Proposed method</td>
+<td><strong>7348.1</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The CPR of the testing period for the market baseline and the three best methods is presented in <a href="#fig-cpr" class="quarto-xref">Figure&nbsp;1</a>:</p>
+<div id="fig-cpr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cpr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="cpr.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cpr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: CPR of market baseline and best methods.
+</figcaption>
+</figure>
+</div>
+<p>The result of MB and MVP strategies denote that the crypto market was in a downtrend and actually crashed twice during the testing period. Excluding SLTP, all day-trading strategies are less affected by this market trend. Particularly, the backtesting results of Table show the good generalization of the proposed method: It is the strategy with the highest CPR and SR. Although it uses the same information as TI, the proposed DRL trading agent seems to form a profitable strategy that utilizes the combined signals and outperforms strategies from single TI. Similarly it outperforms the SL-based strategies FCM and RF as well the state-of-the-art DRL trading agent FDRNN.</p>
+</section>
+</section>
+<section id="conclusions-and-future-work" class="level1">
+<h1>Conclusions and Future Work</h1>
+<p>This work presented a DRL trading agent, based on the TD3 algorithm, that utilizes TI to find an optimal trading policy for assets in the cryptocurrency market. Results show that the addition of TI in the state representation has allowed to learn a profitable strategy. The proposed DRL agent outperforms all comparison methods and particularly utilized the TI signals to outperform standard strategies in the technical analysis field. Additionally, a possible advantage of using a continuous action space over a discrete one is presented. Our approach achieved a Sharpe ratio of (2.36) on test data, which is considered “Very good” by investors. The proposed method can be improved in future work by having more computational power to tune the available hyperparameters. In addition, including fundamental information, for instance an NLP algorithm to process the financial news content, may positively affect the agent performance.</p>
+</section>
+<section id="references" class="level1">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-alagoz_markov_2010" class="csl-entry" role="listitem">
+Alagoz, Oguzhan, Heather Hsu, Andrew J. Schaefer, and Mark S. Roberts. 2010. <span>“Markov <span>Decision</span> <span>Processes</span>: <span>A</span> <span>Tool</span> for <span>Sequential</span> <span>Decision</span> <span>Making</span> Under <span>Uncertainty</span>.”</span> <em>Medical Decision Making</em> 30 (4): 474–83. <a href="https://doi.org/10.1177/0272989X09353194">https://doi.org/10.1177/0272989X09353194</a>.
+</div>
+<div id="ref-bellman_dynamic_2010" class="csl-entry" role="listitem">
+Bellman, Richard, and Stuart Dreyfus. 2010. <em>Dynamic Programming</em>. 1. Princeton Landmarks in Mathematics ed., with a new introduction. Princeton <span>Landmarks</span> in Mathematics. Princeton, NJ: Princeton University Press.
+</div>
+<div id="ref-bertoluzzo_testing_2012" class="csl-entry" role="listitem">
+Bertoluzzo, Francesco, and Marco Corazza. 2012. <span>“Testing <span>Different</span> <span>Reinforcement</span> <span>Learning</span> <span>Configurations</span> for <span>Financial</span> <span>Trading</span>: <span>Introduction</span> and <span>Applications</span>.”</span> <em>Procedia Economics and Finance</em> 3: 68–77. <a href="https://doi.org/10.1016/S2212-5671(12)00122-0">https://doi.org/10.1016/S2212-5671(12)00122-0</a>.
+</div>
+<div id="ref-chakraborty_capturing_2019" class="csl-entry" role="listitem">
+Chakraborty, Souradeep. 2019. <span>“Capturing <span>Financial</span> Markets to Apply <span>Deep</span> <span>Reinforcement</span> <span>Learning</span>.”</span> <a href="https://doi.org/10.48550/ARXIV.1907.04373">https://doi.org/10.48550/ARXIV.1907.04373</a>.
+</div>
+<div id="ref-chen_trading_2021" class="csl-entry" role="listitem">
+Chen, Jiao, Changqing Luo, Lurun Pan, and Yun Jia. 2021. <span>“Trading Strategy of Structured Mutual Fund Based on Deep Learning Network.”</span> <em>Expert Systems with Applications</em> 183 (November): 115390. <a href="https://doi.org/10.1016/j.eswa.2021.115390">https://doi.org/10.1016/j.eswa.2021.115390</a>.
+</div>
+<div id="ref-conegundes_beating_2020" class="csl-entry" role="listitem">
+Conegundes, Leonardo, and Adriano C. Machado Pereira. 2020. <span>“Beating the <span>Stock</span> <span>Market</span> with a <span>Deep</span> <span>Reinforcement</span> <span>Learning</span> <span>Day</span> <span>Trading</span> <span>System</span>.”</span> In <em>2020 <span>International</span> <span>Joint</span> <span>Conference</span> on <span>Neural</span> <span>Networks</span> (<span>IJCNN</span>)</em>, 1–8. Glasgow, United Kingdom: IEEE. <a href="https://doi.org/10.1109/IJCNN48605.2020.9206938">https://doi.org/10.1109/IJCNN48605.2020.9206938</a>.
+</div>
+<div id="ref-corazza_q-learning-based_2014" class="csl-entry" role="listitem">
+Corazza, Marco, and Francesco Bertoluzzo. 2014. <span>“Q-<span>Learning</span>-<span>Based</span> <span>Financial</span> <span>Trading</span> <span>Systems</span> with <span>Applications</span>.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.2507826">https://doi.org/10.2139/ssrn.2507826</a>.
+</div>
+<div id="ref-dempster_automated_2006" class="csl-entry" role="listitem">
+Dempster, M. A. H., and V. Leemans. 2006. <span>“An Automated <span>FX</span> Trading System Using Adaptive Reinforcement Learning.”</span> <em>Expert Systems with Applications</em> 30 (3): 543–52. <a href="https://doi.org/10.1016/j.eswa.2005.10.012">https://doi.org/10.1016/j.eswa.2005.10.012</a>.
+</div>
+<div id="ref-deng_deep_2017" class="csl-entry" role="listitem">
+Deng, Yue, Feng Bao, Youyong Kong, Zhiquan Ren, and Qionghai Dai. 2017. <span>“Deep <span>Direct</span> <span>Reinforcement</span> <span>Learning</span> for <span>Financial</span> <span>Signal</span> <span>Representation</span> and <span>Trading</span>.”</span> <em>IEEE Transactions on Neural Networks and Learning Systems</em> 28 (3): 653–64. <a href="https://doi.org/10.1109/TNNLS.2016.2522401">https://doi.org/10.1109/TNNLS.2016.2522401</a>.
+</div>
+<div id="ref-fujimoto_addressing_2018" class="csl-entry" role="listitem">
+Fujimoto, Scott, Herke van Hoof, and David Meger. 2018. <span>“Addressing <span>Function</span> <span>Approximation</span> <span>Error</span> in <span>Actor</span>-<span>Critic</span> <span>Methods</span>.”</span> <a href="https://doi.org/10.48550/ARXIV.1802.09477">https://doi.org/10.48550/ARXIV.1802.09477</a>.
+</div>
+<div id="ref-giudici_network_2020" class="csl-entry" role="listitem">
+Giudici, Paolo, Paolo Pagnottoni, and Gloria Polinesi. 2020. <span>“Network <span>Models</span> to <span>Enhance</span> <span>Automated</span> <span>Cryptocurrency</span> <span>Portfolio</span> <span>Management</span>.”</span> <em>Frontiers in Artificial Intelligence</em> 3 (April): 22. <a href="https://doi.org/10.3389/frai.2020.00022">https://doi.org/10.3389/frai.2020.00022</a>.
+</div>
+<div id="ref-hao_predicting_2020" class="csl-entry" role="listitem">
+Hao, Yaping, and Qiang Gao. 2020. <span>“Predicting the <span>Trend</span> of <span>Stock</span> <span>Market</span> <span>Index</span> <span>Using</span> the <span>Hybrid</span> <span>Neural</span> <span>Network</span> <span>Based</span> on <span>Multiple</span> <span>Time</span> <span>Scale</span> <span>Feature</span> <span>Learning</span>.”</span> <em>Applied Sciences</em> 10 (11): 3961. <a href="https://doi.org/10.3390/app10113961">https://doi.org/10.3390/app10113961</a>.
+</div>
+<div id="ref-van_hasselt_deep_2015" class="csl-entry" role="listitem">
+Hasselt, Hado van, Arthur Guez, and David Silver. 2015. <span>“Deep <span>Reinforcement</span> <span>Learning</span> with <span>Double</span> <span>Q</span>-Learning.”</span> <a href="https://doi.org/10.48550/ARXIV.1509.06461">https://doi.org/10.48550/ARXIV.1509.06461</a>.
+</div>
+<div id="ref-henderson_deep_2017" class="csl-entry" role="listitem">
+Henderson, Peter, Riashat Islam, Philip Bachman, Joelle Pineau, Doina Precup, and David Meger. 2017. <span>“Deep <span>Reinforcement</span> <span>Learning</span> That <span>Matters</span>.”</span> <a href="https://doi.org/10.48550/ARXIV.1709.06560">https://doi.org/10.48550/ARXIV.1709.06560</a>.
+</div>
+<div id="ref-huang_robust_2016" class="csl-entry" role="listitem">
+Huang, Ding-jiang, Junlong Zhou, Bin Li, Steven C. H. Hoi, and Shuigeng Zhou. 2016. <span>“Robust <span>Median</span> <span>Reversion</span> <span>Strategy</span> for <span>Online</span> <span>Portfolio</span> <span>Selection</span>.”</span> <em>IEEE Transactions on Knowledge and Data Engineering</em> 28 (9): 2480–93. <a href="https://doi.org/10.1109/TKDE.2016.2563433">https://doi.org/10.1109/TKDE.2016.2563433</a>.
+</div>
+<div id="ref-kirkpatrick_technical_2011" class="csl-entry" role="listitem">
+Kirkpatrick, Charles D., and Julie R. Dahlquist. 2011. <em>Technical Analysis: The Complete Resource for Financial Market Technicians</em>. 2nd ed. Upper Saddle River, N.J: FT Press.
+</div>
+<div id="ref-lillicrap_continuous_2015" class="csl-entry" role="listitem">
+Lillicrap, Timothy P., Jonathan J. Hunt, Alexander Pritzel, Nicolas Heess, Tom Erez, Yuval Tassa, David Silver, and Daan Wierstra. 2015. <span>“Continuous Control with Deep Reinforcement Learning.”</span> <a href="https://doi.org/10.48550/ARXIV.1509.02971">https://doi.org/10.48550/ARXIV.1509.02971</a>.
+</div>
+<div id="ref-lopez_de_prado_10_2018" class="csl-entry" role="listitem">
+Lopez de Prado, Marcos. 2018. <span>“The 10 <span>Reasons</span> <span>Most</span> <span>Machine</span> <span>Learning</span> <span>Funds</span> <span>Fail</span>.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.3104816">https://doi.org/10.2139/ssrn.3104816</a>.
+</div>
+<div id="ref-meng_reinforcement_2019" class="csl-entry" role="listitem">
+Meng, Terry Lingze, and Matloob Khushi. 2019. <span>“Reinforcement <span>Learning</span> in <span>Financial</span> <span>Markets</span>.”</span> <em>Data</em> 4 (3): 110. <a href="https://doi.org/10.3390/data4030110">https://doi.org/10.3390/data4030110</a>.
+</div>
+<div id="ref-mnih_playing_2013" class="csl-entry" role="listitem">
+Mnih, Volodymyr, Koray Kavukcuoglu, David Silver, Alex Graves, Ioannis Antonoglou, Daan Wierstra, and Martin Riedmiller. 2013. <span>“Playing <span>Atari</span> with <span>Deep</span> <span>Reinforcement</span> <span>Learning</span>.”</span> <a href="https://doi.org/10.48550/ARXIV.1312.5602">https://doi.org/10.48550/ARXIV.1312.5602</a>.
+</div>
+<div id="ref-mnih_human-level_2015" class="csl-entry" role="listitem">
+Mnih, Volodymyr, Koray Kavukcuoglu, David Silver, Andrei A. Rusu, Joel Veness, Marc G. Bellemare, Alex Graves, et al. 2015. <span>“Human-Level Control Through Deep Reinforcement Learning.”</span> <em>Nature</em> 518 (7540): 529–33. <a href="https://doi.org/10.1038/nature14236">https://doi.org/10.1038/nature14236</a>.
+</div>
+<div id="ref-moody_learning_2001" class="csl-entry" role="listitem">
+Moody, J., and M. Saffell. 2001. <span>“Learning to Trade via Direct Reinforcement.”</span> <em>IEEE Transactions on Neural Networks</em> 12 (4): 875–89. <a href="https://doi.org/10.1109/72.935097">https://doi.org/10.1109/72.935097</a>.
+</div>
+<div id="ref-ntakaris_mid-price_2020" class="csl-entry" role="listitem">
+Ntakaris, Adamantios, Juho Kanniainen, Moncef Gabbouj, and Alexandros Iosifidis. 2020. <span>“Mid-Price Prediction Based on Machine Learning Methods with Technical and Quantitative Indicators.”</span> Edited by Alejandro Raul Hernandez Montoya. <em>PLOS ONE</em> 15 (6): e0234107. <a href="https://doi.org/10.1371/journal.pone.0234107">https://doi.org/10.1371/journal.pone.0234107</a>.
+</div>
+<div id="ref-patel_predicting_2015" class="csl-entry" role="listitem">
+Patel, Jigar, Sahil Shah, Priyank Thakkar, and K Kotecha. 2015. <span>“Predicting Stock and Stock Price Index Movement Using <span>Trend</span> <span>Deterministic</span> <span>Data</span> <span>Preparation</span> and Machine Learning Techniques.”</span> <em>Expert Systems with Applications</em> 42 (1): 259–68. <a href="https://doi.org/10.1016/j.eswa.2014.07.040">https://doi.org/10.1016/j.eswa.2014.07.040</a>.
+</div>
+<div id="ref-puterman_markov_1994" class="csl-entry" role="listitem">
+Puterman, Martin L. 1994. <em>Markov <span>Decision</span> <span>Processes</span>: <span>Discrete</span> <span>Stochastic</span> <span>Dynamic</span> <span>Programming</span></em>. 1st ed. Wiley <span>Series</span> in <span>Probability</span> and <span>Statistics</span>. Wiley. <a href="https://doi.org/10.1002/9780470316887">https://doi.org/10.1002/9780470316887</a>.
+</div>
+<div id="ref-sharpe_sharpe_1994" class="csl-entry" role="listitem">
+Sharpe, William F. 1994. <span>“The <span>Sharpe</span> <span>Ratio</span>.”</span> <em>The Journal of Portfolio Management</em> 21 (1): 49–58. <a href="https://doi.org/10.3905/jpm.1994.409501">https://doi.org/10.3905/jpm.1994.409501</a>.
+</div>
+<div id="ref-sutton_reinforcement_2018" class="csl-entry" role="listitem">
+Sutton, Richard S., and Andrew G. Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. Second edition. Adaptive Computation and Machine Learning Series. Cambridge, Massachusetts: The MIT Press.
+</div>
+<div id="ref-tan_stock_2011" class="csl-entry" role="listitem">
+Tan, Zhiyong, Chai Quek, and Philip Y. K. Cheng. 2011. <span>“Stock Trading with Cycles: <span>A</span> Financial Application of <span>ANFIS</span> and Reinforcement Learning.”</span> <em>Expert Systems with Applications</em> 38 (5): 4741–55. <a href="https://doi.org/10.1016/j.eswa.2010.09.001">https://doi.org/10.1016/j.eswa.2010.09.001</a>.
+</div>
+<div id="ref-tsantekidis_forecasting_2017" class="csl-entry" role="listitem">
+Tsantekidis, Avraam, Nikolaos Passalis, Anastasios Tefas, Juho Kanniainen, Moncef Gabbouj, and Alexandros Iosifidis. 2017. <span>“Forecasting <span>Stock</span> <span>Prices</span> from the <span>Limit</span> <span>Order</span> <span>Book</span> <span>Using</span> <span>Convolutional</span> <span>Neural</span> <span>Networks</span>.”</span> In <em>2017 <span>IEEE</span> 19th <span>Conference</span> on <span>Business</span> <span>Informatics</span> (<span>CBI</span>)</em>, 7–12. Thessaloniki, Greece: IEEE. <a href="https://doi.org/10.1109/CBI.2017.23">https://doi.org/10.1109/CBI.2017.23</a>.
+</div>
+<div id="ref-vargas_deep_2018" class="csl-entry" role="listitem">
+Vargas, Manuel R., Carlos E. M. dos Anjos, Gustavo L. G. Bichara, and Alexandre G. Evsukoff. 2018. <span>“Deep <span>Leaming</span> for <span>Stock</span> <span>Market</span> <span>Prediction</span> <span>Using</span> <span>Technical</span> <span>Indicators</span> and <span>Financial</span> <span>News</span> <span>Articles</span>.”</span> In <em>2018 <span>International</span> <span>Joint</span> <span>Conference</span> on <span>Neural</span> <span>Networks</span> (<span>IJCNN</span>)</em>, 1–8. Rio de Janeiro: IEEE. <a href="https://doi.org/10.1109/IJCNN.2018.8489208">https://doi.org/10.1109/IJCNN.2018.8489208</a>.
+</div>
+<div id="ref-vella_dynamic_2015" class="csl-entry" role="listitem">
+Vella, Vince, and Wing Lon Ng. 2015. <span>“A <span>Dynamic</span> <span>Fuzzy</span> <span>Money</span> <span>Management</span> <span>Approach</span> for <span>Controlling</span> the <span>Intraday</span> <span>Risk</span>-<span>Adjusted</span> <span>Performance</span> of <span>AI</span> <span>Trading</span> <span>Algorithms</span>: <span>DYNAMIC</span> <span>FUZZY</span> <span>MONEY</span> <span>MANAGEMENT</span> <span>APPROACH</span> <span>FOR</span> <span>AI</span> <span>TRADING</span> <span>ALGORITHMS</span>.”</span> <em>Intelligent Systems in Accounting, Finance and Management</em> 22 (2): 153–78. <a href="https://doi.org/10.1002/isaf.1359">https://doi.org/10.1002/isaf.1359</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
