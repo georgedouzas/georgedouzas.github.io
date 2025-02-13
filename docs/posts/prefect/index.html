@@ -222,8 +222,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Check if the database is updated with the latest historical data. If the historical data do not exist, download all the data and store them to the database while if the historical data are not updated, download only the latest data and update the database.</li>
 <li>Download the latest fixtures data and store them to the database.</li>
 </ul>
-<section id="tasks" class="level3">
-<h3 class="anchored" data-anchor-id="tasks">Tasks</h3>
+</section>
+<section id="tasks" class="level1">
+<h1>Tasks</h1>
 <p>The above tasks represent discrete units of work, and they will receive the <code>task</code> decorator. We will also use an asynchronous httpx client to concurrently download the data since we have multiple files.</p>
 <p>The function <code>create_db</code> implements the first task:</p>
 <div id="3928576e" class="cell" data-execution_count="4">
@@ -330,8 +331,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        logger.info(<span class="ss">f'Fixtures data were updated. Shape: </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="flow" class="level3">
-<h3 class="anchored" data-anchor-id="flow">Flow</h3>
+<section id="flow" class="level1">
+<h1>Flow</h1>
 <p>The full data workflow will receive the <code>flow</code> decorator.</p>
 <div id="0255dee2" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prefect <span class="im">import</span> flow</span>
@@ -349,7 +350,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> update_historical_data(urls_mapping)</span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> update_fixtures_data()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
 </section>
 <section id="results" class="level1">
 <h1>Results</h1>

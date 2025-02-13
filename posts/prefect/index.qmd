@@ -55,7 +55,7 @@ Our workflow will include the following tasks:
 store them to the database while if the historical data are not updated, download only the latest data and update the database.
 - Download the latest fixtures data and store them to the database.
 
-### Tasks
+# Tasks
 
 The above tasks represent discrete units of work, and they will receive the `task` decorator. We will also use an asynchronous
 httpx client to concurrently download the data since we have multiple files.
@@ -170,7 +170,7 @@ async def update_fixtures_data():
         logger.info(f'Fixtures data were updated. Shape: {data.shape}')
 ```
 
-### Flow
+# Flow
 
 The full data workflow will receive the `flow` decorator.
 

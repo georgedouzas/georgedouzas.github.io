@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Introduction to affine spaces and their properties.">
+<meta name="description" content="Introduction to affine spaces.">
 
-<title>Mechanics – Georgios Douzas</title>
+<title>Physical space – Georgios Douzas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -144,7 +178,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Mechanics</h1>
+<h1 class="title">Physical space</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Physics</div>
     <div class="quarto-category">Mechanics</div>
@@ -153,7 +187,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Introduction to affine spaces and their properties.
+    Introduction to affine spaces.
   </div>
 </div>
 
@@ -173,7 +207,7 @@ window.Quarto = {
 <p><img src="featured.png" class="img-fluid"></p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>It’s quite common to think of physical space as <span class="math inline">\(\mathbb{R}^3\)</span>, but this perspective can be misleading, both from a mathematical and a physical standpoint. The main issue is that the structure of <span class="math inline">\(\mathbb{R}^3\)</span> isn’t naturally invariant under displacements or other critical transformations, known as isometries, which are fundamental to Euclidean geometry. Instead, the three-dimensional space we encounter in Classical Physics (and even the four-dimensional spacetime in Special Relativity) is more accurately captured by the concept of affine spaces.</p>
+<p>It’s quite common to think of physical space as <span class="math inline">\(\mathbb{R}^3\)</span>, but this perspective can be misleading, both from a mathematical and a physical standpoint. Instead, the three-dimensional space we encounter in Classical Physics (and even the four-dimensional spacetime in Special Relativity) is more accurately captured by the concept of affine spaces.</p>
 </section>
 <section id="affine-spaces" class="level1">
 <h1>Affine spaces</h1>
@@ -182,143 +216,113 @@ window.Quarto = {
 <li>There’s an associated <span class="math inline">\(n\)</span>-dimensional vector space <span class="math inline">\(V\)</span>, which we call the space of displacements or the space of free vectors.</li>
 <li>A mapping <span class="math inline">\(\mathbb{A}^n \times \mathbb{A}^n \ni (P, Q) \mapsto P - Q \in V\)</span> that respects certain conditions:
 <ul>
-<li>For every point <span class="math inline">\(Q\in \mathbb{A}^n\)</span> and every vector <span class="math inline">\(\mathbf{v} \in V\)</span>, there’s a unique point <span class="math inline">\(P \in \mathbb{A}^n\)</span> such that <span class="math inline">\(P - Q =
-  \mathbf{v}\)</span>.</li>
+<li>For every point <span class="math inline">\(Q\in \mathbb{A}^n\)</span> and every vector <span class="math inline">\(\mathbf{v} \in V\)</span>, there’s a unique point <span class="math inline">\(P \in \mathbb{A}^n\)</span> such that <span class="math inline">\(P - Q =\mathbf{v}\)</span>.</li>
 <li>For any three points <span class="math inline">\(P, Q, R \in \mathbb{A}^n\)</span>, the equation <span class="math inline">\(P - Q + Q - R = P - R\)</span> always holds.</li>
 </ul></li>
 </ul>
-<section id="additional-definitions" class="level3">
-<h3 class="anchored" data-anchor-id="additional-definitions">Additional definitions</h3>
-<p>Let’s define a few useful concepts:</p>
-<ul>
-<li>Given a point <span class="math inline">\(Q \in \mathbb{A}^n\)</span> and a vector <span class="math inline">\(\mathbf{v} \in V\)</span>, the unique point <span class="math inline">\(P \in \mathbb{A}^n\)</span> that satisfies <span class="math inline">\(P - Q
-= \mathbf{v}\)</span> is denoted as <span class="math inline">\(Q + \mathbf{v}\)</span>.</li>
-<li>A line in <span class="math inline">\(\mathbb{A}^n\)</span> originating from a point <span class="math inline">\(P\)</span> with direction given by a vector <span class="math inline">\(\mathbf{v} \in V\)</span> is described by the map <span class="math inline">\(\mathbb{R} \ni t \mapsto P + t\mathbf{v} \in \mathbb{A}^n\)</span>.</li>
-<li>A line segment is simply a restriction of the above map to a specific interval.</li>
-</ul>
 </section>
-<section id="properties" class="level3">
-<h3 class="anchored" data-anchor-id="properties">Properties</h3>
-<p>The following interesting properties hold for any points <span class="math inline">\(P, Q \in \mathbb{A}^n\)</span> and vectors <span class="math inline">\(\mathbf{u}, \mathbf{v} \in V\)</span>:</p>
-<ul>
-<li><span class="math inline">\(P - P = \mathbf{0}\)</span>.</li>
-<li><span class="math inline">\((Q + \mathbf{u}) + \mathbf{v} = Q + (\mathbf{u} + \mathbf{v})\)</span>.</li>
-<li><span class="math inline">\(P - Q = -(Q - P)\)</span>.</li>
-<li><span class="math inline">\(P - Q = (P + \mathbf{u}) - (Q + \mathbf{u})\)</span>.</li>
-</ul>
-<blockquote class="blockquote">
-<p>You can try proving these properties to deepen your understanding.</p>
-</blockquote>
+<section id="trivial-example" class="level1">
+<h1>Trivial example</h1>
+<p>A trivial affine space would be the real affine plane <span class="math inline">\(\mathbb{A}^2 =
+\mathbb{R}^2\)</span> with the displacement space being the vector space <span class="math inline">\(\mathbb{R}^2\)</span>:</p>
+<div id="fef97250" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sage}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="in">A = AffineSpace(2, RR)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">A</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>Affine Space of dimension 2 over Real Field with 53 bits of precision</code></pre>
+</div>
+</div>
+<p>We define two points of the affine space:</p>
+<div id="9e61b09f" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sage}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">R = A.point([3.5, -4.6])</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="in">T = A.point([1.5, 0.6])</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The affine space is not itself a vector space:</p>
+<div id="99ad51ce" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sage}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">try:</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">    R + T</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="in">except TypeError:</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="in">    print('R and T points can not be added.')</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R and T points can not be added.</code></pre>
+</div>
+</div>
+<p>We can displace the point <span class="math inline">\(Q\)</span> to a new point <span class="math inline">\(P\)</span> using the translation <span class="math inline">\(\mathbf{v} \in V\)</span>. Therefore <span class="math inline">\(P = Q + \mathbf{v}\)</span>:</p>
+<div id="e37a9f5a" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sage}</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">Q = A.point([1.0, 2.0])</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">v = vector([-1.0, 1.0])</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">P = A.translation(-v)(Q)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="in">P</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>(0.000000000000000, 3.00000000000000)</code></pre>
+</div>
+</div>
 </section>
-</section>
-<section id="coordinate-systems-on-affine-spaces" class="level1">
-<h1>Coordinate systems on affine spaces</h1>
-<p>Now that we’ve established what an affine space is, let’s discuss how we can introduce coordinate systems on such spaces. A local coordinate system on an affine space <span class="math inline">\(\mathbb{A}^n\)</span> is a map <span class="math inline">\(\psi: U \subset \mathbb{A}^n \rightarrow \mathbb{R}^n\)</span> that satisfies:</p>
-<ul>
-<li>The map <span class="math inline">\(\psi\)</span> is injective.</li>
-<li>The image <span class="math inline">\(\psi(U)\)</span> is an open subset of <span class="math inline">\(\mathbb{R}^n\)</span>.</li>
-</ul>
-<p>If <span class="math inline">\(U = \mathbb{A}^n\)</span>, we call the coordinate system global.</p>
-<section id="cartesian-coordinate-systems" class="level3">
-<h3 class="anchored" data-anchor-id="cartesian-coordinate-systems">Cartesian coordinate systems</h3>
-<p>Every affine space has a family of global coordinate systems known as Cartesian coordinate systems. To define one, we need to:</p>
-<ul>
-<li>Choose a point <span class="math inline">\(O\)</span> (the origin) and a basis <span class="math inline">\(\mathbf{e}_1, \ldots, \mathbf{e}_n\)</span> for the vector space <span class="math inline">\(V\)</span>.</li>
-<li>Define a map <span class="math inline">\(f: \mathbb{A}^n \rightarrow \mathbb{R}^n\)</span> by <span class="math inline">\(f(P) = \left((P - O)^1, \ldots, (P - O)^n\right)\)</span>.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Try proving that this map <span class="math inline">\(f\)</span> is bijective, which will confirm that <span class="math inline">\(f\)</span> is indeed a global coordinate system.</p>
-</blockquote>
-<p>Non-Cartesian local coordinate systems, on the other hand, are referred to as curvilinear coordinate systems.</p>
-</section>
-<section id="properties-of-cartesian-coordinate-systems" class="level3">
-<h3 class="anchored" data-anchor-id="properties-of-cartesian-coordinate-systems">Properties of Cartesian coordinate systems</h3>
-<p>Suppose we have two Cartesian coordinate systems: <span class="math inline">\(\left(\mathbb{A}^n, f\right)\)</span> with coordinates <span class="math inline">\(x^1, \cdots, x^n\)</span>, and another <span class="math inline">\(\left(\mathbb{A}^n, g\right)\)</span> with coordinates <span class="math inline">\(x^{\prime 1}, \cdots, x^{\prime n}\)</span>, origin <span class="math inline">\(O^{\prime}\)</span>, and basis vectors <span class="math inline">\(\mathbf{e}_1^{\prime}, \ldots, \mathbf{e}_n^{\prime}\)</span>. If the relation between the basis vectors is:</p>
-<p><span class="math display">\[
-\mathbf{e}_i = \sum_j B^j{}_i \mathbf{e}_j^{\prime}
-\]</span></p>
-<p>and <span class="math inline">\(O - O^{\prime} = \sum_i b^i \mathbf{e}_i\)</span>, then the following properties hold:</p>
-<ul>
-<li>The transformation map <span class="math inline">\(g \circ f^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> is given by <span class="math inline">\(x^{\prime j} = \sum_{i=1}^n
-B^j{}_i\left(x^i + b^i\right)\)</span>.</li>
-<li>Conversely, the map <span class="math inline">\(f \circ g^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> is expressed as <span class="math inline">\(x^i = -b^i +
-\sum_{j=1}^n\left(B^{-1}\right)^i{}_j x^{\prime j}\)</span>.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Again, try proving these transformations to see how coordinate systems relate to each other.</p>
-</blockquote>
-</section>
-</section>
-<section id="affine-transformations-between-affine-spaces" class="level1">
-<h1>Affine transformations between affine spaces</h1>
-<p>Let’s now explore how we can map one affine space to another. A map <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m\)</span> between two affine spaces, with associated vector spaces <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span>, is called an affine transformation if:</p>
-<ul>
-<li>The map <span class="math inline">\(\psi\)</span> is invariant under displacements, meaning that for any points <span class="math inline">\(P, Q \in \mathbb{A}_1^n\)</span> and any vector <span class="math inline">\(\mathbf{u} \in V_1\)</span>, the equality <span class="math inline">\(\psi(P + \mathbf{u}) - \psi(Q + \mathbf{u}) = \psi(P) - \psi(Q)\)</span> holds.</li>
-<li>The derivative map <span class="math inline">\(d\psi: V_1 \rightarrow V_2\)</span>, defined by <span class="math inline">\(d\psi(P - Q) = \psi(P) - \psi(Q)\)</span>, is a linear transformation between the vector spaces <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span>.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Proving that <span class="math inline">\(d\psi\)</span> is well-defined and linear will help you understand the relationship between these spaces.</p>
-</blockquote>
-<section id="isomorphism-of-affine-spaces" class="level3">
-<h3 class="anchored" data-anchor-id="isomorphism-of-affine-spaces">Isomorphism of affine spaces</h3>
-<p>An affine transformation <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^m\)</span> is called an isomorphism if it is bijective. This concept is particularly important because it tells us when two affine spaces are structurally the same.</p>
-</section>
-<section id="properties-of-affine-transformations" class="level3">
-<h3 class="anchored" data-anchor-id="properties-of-affine-transformations">Properties of affine transformations</h3>
-<p>Affine transformations have several key properties:</p>
-<ul>
-<li>The inverse of an isomorphism is itself an affine transformation, making it an isomorphism as well.</li>
-<li>If <span class="math inline">\(\psi: \mathbb{A}_1^n \rightarrow \mathbb{A}_2^n\)</span> is an isomorphism, then the derivative map <span class="math inline">\(d\psi: V_1 \rightarrow V_2\)</span> is a vector space isomorphism.</li>
-<li>Affine transformations map straight lines to straight lines. Specifically, if <span class="math inline">\(P(t) := P + t \mathbf{u}\)</span> describes a line in <span class="math inline">\(\mathbb{A}_1^n\)</span>, then <span class="math inline">\(\psi(P(t))\)</span> defines a line in <span class="math inline">\(\mathbb{A}_2^m\)</span>.</li>
-<li>Given Cartesian coordinate systems on <span class="math inline">\(\mathbb{A}_1^n\)</span> and <span class="math inline">\(\mathbb{A}_2^m\)</span>, the affine transformation <span class="math inline">\(\psi\)</span> has a particularly simple form in these coordinates: <span class="math inline">\(x_2^i = c^i + \sum_{j=1}^n L^i{}_j x_1^j\)</span>, where the coefficients <span class="math inline">\(L^i{}_j\)</span> and <span class="math inline">\(c^i\)</span> depend on <span class="math inline">\(\psi\)</span> and the chosen coordinate systems.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Proving these properties gives you a clearer view of how affine spaces relate to each other under transformations.</p>
-</blockquote>
-</section>
-</section>
-<section id="group-of-displacements-of-affine-spaces" class="level1">
-<h1>Group of displacements of affine spaces</h1>
-<p>In the context of affine spaces, the concept of displacements is crucial. For a given vector <span class="math inline">\(\mathbf{v} \in V\)</span>, we can define a mapping <span class="math inline">\(T_{\mathbf{v}}: \mathbb{A}^n \rightarrow \mathbb{A}^n\)</span> that shifts every point <span class="math inline">\(P\)</span> in the affine space by <span class="math inline">\(\mathbf{v}\)</span>. Formally, this map is defined as <span class="math inline">\(T_{\mathbf{v}}(P) = P + \mathbf{v}\)</span>. The collection of all such transformations, denoted <span class="math inline">\(\left\{T_{\mathbf{v}}\right\}_{\mathbf{v} \in V}\)</span>, forms what is known as the group of displacements of <span class="math inline">\(\mathbb{A}^n\)</span>. This group operates under the composition of mappings.</p>
-<blockquote class="blockquote">
-<p>To explore this concept further, you can try proving that the set <span class="math inline">\(\left\{T_{\mathbf{v}}\right\}_{\mathbf{v} \in V}\)</span> indeed forms a group under composition.</p>
-</blockquote>
-<section id="properties-1" class="level3">
-<h3 class="anchored" data-anchor-id="properties-1">Properties</h3>
-<p>The group of displacements comes with several interesting properties:</p>
-<ul>
-<li>The group of displacements of <span class="math inline">\(\mathbb{A}^n\)</span> is abelian, meaning that the order in which you apply displacements doesn’t matter; that is, <span class="math inline">\(T_{\mathbf{v}} \circ T_{\mathbf{u}} = T_{\mathbf{u}} \circ T_{\mathbf{v}}\)</span> for any vectors <span class="math inline">\(\mathbf{u}, \mathbf{v} \in
-V\)</span>.</li>
-<li>The map <span class="math inline">\(V \ni \mathbf{v} \mapsto T_{\mathbf{v}}\)</span> is injective, which means that each vector <span class="math inline">\(\mathbf{v}\)</span> corresponds to a unique transformation. Moreover, this mapping is a group isomorphism when <span class="math inline">\(V\)</span> is viewed as an abelian group under vector addition.</li>
-<li>Only the zero vector <span class="math inline">\(\mathbf{v} = \mathbf{0}\)</span> satisfies <span class="math inline">\(T_{\mathbf{v}}(P) = P\)</span> for some <span class="math inline">\(P \in \mathbb{A}^n\)</span>. In fact, this holds for every point <span class="math inline">\(P\)</span>, so the action of the group of displacements is free.</li>
-<li>For any two points <span class="math inline">\(P, Q \in \mathbb{A}^n\)</span>, there exists a displacement <span class="math inline">\(T_{\mathbf{v}}\)</span> such that <span class="math inline">\(T_{\mathbf{v}}(P) = Q\)</span>. This property highlights the fact that the group of displacements acts transitively on the affine space.</li>
-</ul>
-<blockquote class="blockquote">
-<p>These properties are foundational to understanding the structure of affine spaces. You might find it helpful to prove these properties yourself.</p>
-</blockquote>
-</section>
-<section id="group-action" class="level3">
-<h3 class="anchored" data-anchor-id="group-action">Group action</h3>
-<p>To generalize the idea of how a group can interact with a set, we use the concept of a group action. Let’s consider a set <span class="math inline">\(S\)</span> and a group <span class="math inline">\(G\)</span> with a neutral element <span class="math inline">\(e\)</span> and a group operation <span class="math inline">\(\circ\)</span>. A group action is a map <span class="math inline">\(A: G \times S \ni (g, s) \mapsto
-A_g(s) \in S\)</span>, where <span class="math inline">\(A_g \in \mathcal{G}_S\)</span> (the group of bijections on <span class="math inline">\(S\)</span> under composition). For this map to be a valid group action, it must satisfy two key properties:</p>
-<ul>
-<li>The action of the neutral element is the identity: <span class="math inline">\(A_e = \text{id}\)</span>.</li>
-<li>The action respects the group operation: <span class="math inline">\(A_g \circ A_{g^{\prime}} = A_{g \circ g^{\prime}}\)</span> for all <span class="math inline">\(g, g^{\prime} \in G\)</span>.</li>
-</ul>
-<p>There are a few special types of group actions that are worth noting:</p>
-<ul>
-<li>The action is called free if <span class="math inline">\(A_g(s) = s\)</span> for some <span class="math inline">\(s \in S\)</span> implies <span class="math inline">\(g = e\)</span>.</li>
-<li>The action is transitive if for any two elements <span class="math inline">\(s, s^{\prime} \in S\)</span>, there exists a group element <span class="math inline">\(g \in G\)</span> such that <span class="math inline">\(A_g(s)
-= s^{\prime}\)</span>.</li>
-<li>The action is faithful if the map <span class="math inline">\(G \ni g \mapsto A_g \in \mathcal{G}_S\)</span> is injective, meaning that different elements of <span class="math inline">\(G\)</span> induce different bijections on <span class="math inline">\(S\)</span>.</li>
-</ul>
-<p>Whenever we have a group action, it naturally defines a group homomorphism from <span class="math inline">\(G\)</span> to <span class="math inline">\(\mathcal{G}_S\)</span>. The image of this homomorphism, denoted <span class="math inline">\(G_S = \left\{A_g\right\}_{g \in G}\)</span>, is a subgroup of <span class="math inline">\(\mathcal{G}_S\)</span>. If the action is faithful, then this homomorphism is actually an isomorphism between <span class="math inline">\(G\)</span> and <span class="math inline">\(G_S\)</span>.</p>
-<blockquote class="blockquote">
-<p>To deepen your understanding, try proving the property that an action defines a group homomorphism and explore the implications of free, transitive, and faithful actions.</p>
-</blockquote>
+<section id="basic-example" class="level1">
+<h1>Basic example</h1>
+<p>A less trivial example is the system <span class="math inline">\(\begin{cases}x + y + z = 2 \\2x + y - z =
+1\end{cases}\)</span></p>
+<div id="490847c1" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sage}</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="in">a = matrix([[1,1,1], [2,1,-1]])</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="in">b = vector([2, 1])</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The solution space of the system is an affine space <span class="math inline">\(\mathbb{A}^3\)</span>:</p>
+<div id="b7ac78de" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sage}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="in">A = AffineSpace(3, RR)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="in">A</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>Affine Space of dimension 3 over Real Field with 53 bits of precision</code></pre>
+</div>
+</div>
+<p>Additionally, the the solution space of the homogeneous system is the space of displacements <span class="math inline">\(V\)</span>:</p>
+<div id="07e129e2" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sage}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="in">V = VectorSpace(RR, 3).subspace(a.right_kernel().basis())</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="in">V</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>Vector space of degree 3 and dimension 1 over Real Field with 53 bits of precision
+Basis matrix:
+[ 1.00000000000000 -1.50000000000000 0.500000000000000]</code></pre>
+</div>
+</div>
+<p>We can get a particular solution <span class="math inline">\(Q \in \mathbb{A}^3\)</span> and verify that it is indeed a solution:</p>
+<div id="1b35e090" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sage}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="in">Q = A.point(tuple(a.solve_right(b)))</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="in">assert a * vector(Q) == b</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="in">Q</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>(-1.00000000000000, 3.00000000000000, 0.000000000000000)</code></pre>
+</div>
+</div>
+<p>The general solution of the system is given by the displacement of <span class="math inline">\(Q\)</span>. For example another solution <span class="math inline">\(P \in \mathbb{A}^3\)</span> is the following:</p>
+<div id="164cc9c6" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sage}</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="in">v, *_ = V.basis()</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="in">P = A.translation(-v)(Q)</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="in">assert a * vector(P) == b</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="in">P</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>(0.000000000000000, 1.50000000000000, 0.500000000000000)</code></pre>
+</div>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

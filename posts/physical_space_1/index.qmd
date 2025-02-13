@@ -1,0 +1,113 @@
+---
+title: "Physical space"
+description: "Introduction to affine spaces."
+categories: [Physics, Mechanics]
+image: "featured.png"
+jupyter:
+    kernel: SageMath-10.5
+execute: 
+  echo: fenced
+---
+
+![](featured.png)
+
+# Introduction
+
+It’s quite common to think of physical space as $\mathbb{R}^3$, but this
+perspective can be misleading, both from a mathematical and a physical
+standpoint. Instead, the three-dimensional space we encounter in Classical
+Physics (and even the four-dimensional spacetime in Special Relativity) is more
+accurately captured by the concept of affine spaces.
+
+# Affine spaces
+
+To understand this better, let’s dive into what a real affine space is. A real
+affine space of finite dimension $n$, denoted by $\mathbb{A}^n$, is a collection
+of elements known as points, but with some additional structure:
+
+- There’s an associated $n$-dimensional vector space $V$, which we call the space of displacements or the space of free vectors.
+- A mapping $\mathbb{A}^n \times \mathbb{A}^n \ni (P, Q) \mapsto P - Q \in V$ that respects certain conditions:
+    - For every point $Q\in \mathbb{A}^n$ and every vector $\mathbf{v} \in V$, there’s a unique point $P \in \mathbb{A}^n$ such that $P - Q =\mathbf{v}$. 
+    - For any three points $P, Q, R \in \mathbb{A}^n$, the equation $P - Q + Q - R = P - R$ always holds.
+
+# Trivial example
+
+A trivial affine space would be the real affine plane $\mathbb{A}^2 =
+ \mathbb{R}^2$ with the displacement space being the vector space
+ $\mathbb{R}^2$:
+
+```{sage}
+A = AffineSpace(2, RR)
+A
+```
+
+We define two points of the affine space:
+
+```{sage}
+R = A.point([3.5, -4.6])
+T = A.point([1.5, 0.6])
+```
+
+The affine space is not itself a vector space:
+
+```{sage}
+try:
+    R + T
+except TypeError:
+    print('R and T points can not be added.')
+```
+
+We can displace the point $Q$ to a new point $P$ using the translation
+$\mathbf{v} \in V$. Therefore $P = Q + \mathbf{v}$:
+
+```{sage}
+Q = A.point([1.0, 2.0])
+v = vector([-1.0, 1.0])
+P = A.translation(-v)(Q)
+P
+```
+
+# Basic example
+
+A less trivial example is the system $\begin{cases}x + y + z = 2 \\2x + y - z =
+1\end{cases}$
+
+```{sage}
+a = matrix([[1,1,1], [2,1,-1]])
+b = vector([2, 1])
+```
+
+The solution space of the system is an affine space $\mathbb{A}^3$:
+
+```{sage}
+A = AffineSpace(3, RR)
+A
+```
+
+Additionally, the the solution space of the homogeneous system is the space of
+displacements $V$:
+
+```{sage}
+V = VectorSpace(RR, 3).subspace(a.right_kernel().basis())
+V
+```
+
+We can get a particular solution $Q \in \mathbb{A}^3$ and verify that it is
+indeed a solution:
+
+```{sage}
+Q = A.point(tuple(a.solve_right(b)))
+assert a * vector(Q) == b
+Q
+```
+
+The general solution of the system is given by the displacement of $Q$. For
+example another solution $P \in \mathbb{A}^3$ is the following:
+
+```{sage}
+v, *_ = V.basis()
+P = A.translation(-v)(Q)
+assert a * vector(P) == b
+P
+```
+
