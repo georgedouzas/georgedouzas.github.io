@@ -1,0 +1,29 @@
+---
+title: "[G-SOMO: An oversampling approach based on self-organized maps and geometric SMOTE](https://www.sciencedirect.com/science/article/abs/pii/S095741742100662X)"
+author:
+  - name: Georgios Douzas
+    affiliation: NOVA IMS
+  - name: Rene Rauch
+    affiliation: NOVA IMS
+  - name: Fernando Bacao
+    affiliation: NOVA IMS
+abstract: >
+  Traditional supervised machine learning classifiers are challenged to learn
+  highly skewed data distributions as they are designed to expect classes to
+  equally contribute to the minimization of the classifiers cost function.
+  Moreover, the classifiers design expects equal misclassification costs, causing
+  a bias for overrepresented classes. Different strategies have been proposed to
+  correct this issue. The modification of the data set has become a common
+  practice since the procedure is generalizable to all classifiers. Various
+  algorithms to rebalance the data distribution through the creation of synthetic
+  instances were proposed in the past. In this paper, we propose a new
+  oversampling algorithm named G-SOMO. The algorithm identifies optimal areas to
+  create artificial data instances in an informed manner and utilizes a geometric
+  region during the data generation process to increase their variability. Our
+  empirical results on 69 datasets, validated with different classifiers and
+  metrics against a benchmark of commonly used oversampling methods show that
+  G-SOMO consistently outperforms competing oversampling methods. Additionally,
+  the statistical significance of our results is established.
+categories: [Artificial Intelligence, Machine Learning, Imbalanced Data, Publication]
+image: "featured.png"
+---
