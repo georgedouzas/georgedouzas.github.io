@@ -19,7 +19,7 @@ standpoint. Instead, the three-dimensional space we encounter in Classical
 Physics (and even the four-dimensional spacetime in Special Relativity) is more
 accurately captured by the concept of affine spaces.
 
-# Affine spaces
+# Definition
 
 To understand this better, let’s dive into what a real affine space is. A real
 affine space of finite dimension $n$, denoted by $\mathbb{A}^n$, is a collection
@@ -30,47 +30,12 @@ of elements known as points, but with some additional structure:
     - For every point $Q\in \mathbb{A}^n$ and every vector $\mathbf{v} \in V$, there’s a unique point $P \in \mathbb{A}^n$ such that $P - Q =\mathbf{v}$. 
     - For any three points $P, Q, R \in \mathbb{A}^n$, the equation $P - Q + Q - R = P - R$ always holds.
 
-# Trivial example
+# Example
 
-A trivial affine space would be the real affine plane $\mathbb{A}^2 =
- \mathbb{R}^2$ with the displacement space being the vector space
- $\mathbb{R}^2$:
-
-```{sage}
-A = AffineSpace(2, RR)
-A
-```
-
-We define two points of the affine space:
-
-```{sage}
-R = A.point([3.5, -4.6])
-T = A.point([1.5, 0.6])
-```
-
-The affine space is not itself a vector space:
-
-```{sage}
-try:
-    R + T
-except TypeError:
-    print('R and T points can not be added.')
-```
-
-We can displace the point $Q$ to a new point $P$ using the translation
-$\mathbf{v} \in V$. Therefore $P = Q + \mathbf{v}$:
-
-```{sage}
-Q = A.point([1.0, 2.0])
-v = vector([-1.0, 1.0])
-P = A.translation(-v)(Q)
-P
-```
-
-# Basic example
-
-A less trivial example is the system $\begin{cases}x + y + z = 2 \\2x + y - z =
-1\end{cases}$
+A trivial example is the real affine space $\mathbb{A}^n = \mathbb{R}^n$ with
+ the displacement space being the vector space $\mathbb{R}^n$. A more
+ interesting example is the system $\begin{cases}x + y + z = 2 \\2x + y - z =
+ 1\end{cases}$
 
 ```{sage}
 a = matrix([[1,1,1], [2,1,-1]])
