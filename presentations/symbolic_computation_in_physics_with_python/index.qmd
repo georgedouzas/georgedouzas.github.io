@@ -1,0 +1,233 @@
+---
+title: "Symbolic Computation in Theoretical Physics with Python"
+description: "Using SageMath and Open-Source Tools."
+categories: [Physics, Computational Physics]
+image: "images/computational_physics.jpg"
+bibliography: references.bib
+jupyter:
+    kernel: SageMath-10.5
+format: 
+    html:
+        math: true
+        code-line-numbers: true
+---
+
+![](images/computational_physics.jpg)
+
+# Introduction
+
+Symbolic computation simplifies complex equations and models physical systems.
+Python and open-source tools like SageMath make it easier to solve problems in
+quantum field theory, general relativity, and more.
+
+## Main libraries
+
+- [SageMath](https://www.sagemath.org) 
+    A comprehensive system for algebra, calculus, and numerical analysis. It’s widely used for symbolic computation in physics.
+- [Cadabra](https://cadabra.science/index.html) 
+    A tool for tensor calculations, especially in general relativity. It simplifies complex tensor equations.
+- [EinsteinPy](https://docs.einsteinpy.org/en/latest/user_guide.html) 
+    A Python library for general relativity, with tools to work with Einstein’s equations and relativistic phenomena.
+
+## Other libraries
+
+- [PyFeyn](https://pyfeyn2.readthedocs.io/en/latest/_autosummary/feynml.labeled.html) 
+    - A Python library for generating and visualizing Feynman diagrams, used in quantum field theory.
+- [PyRate](https://github.com/LSartore/pyrate/blob/master/doc/Tutorial.ipynb) 
+    - A Python library for lattice field theory and high-energy physics calculations.
+- [munuSSM](https://gitlab.com/thomas.biekoetter/munussm) 
+    - A tool for symbolic matrix manipulations in string theory and quantum gravity.
+- [Wilson](https://wilson-eft.github.io/) 
+    - A framework for effective field theory calculations in lattice gauge theory.
+- [Flavio](https://flav-io.github.io/) 
+    - A Python library focused on flavor physics, studying mesons and baryons.
+
+# SageMath
+
+```{sage}
+#| echo: false
+%display latex
+```
+
+[SageMath](https://www.sagemath.org) (@sagemath) is an open-source system that
+combines many powerful mathematical software packages into one interface. It
+provides tools for symbolic computation, numerical analysis, plotting, and more,
+making it highly useful for both research and education in mathematics, physics,
+and engineering.
+
+## Basics
+
+Fundamental operations, symbolic computation, and core mathematical structures.
+
+### Arithmetic operations
+
+It supports basic arithmetic operations:
+
+```{sage}
+# Basic arithmetic operations
+
+((3 + 5) / 8) - 2.5 ^ 3
+```
+
+###  Symbolic expressions
+
+It supports symbolic expressions:
+
+```{sage}
+# Symbolic variables definition
+
+var('x y')
+```
+
+```{sage}
+# Symbolic expressions simplification
+
+expr = (x^2 + x) / x
+expr.simplify_full()
+```
+
+### Calculus
+
+SageMath provides tools for symbolic calculus such as differentiation and integration. You can compute derivatives and integrals of functions symbolically:
+
+```{sage}
+# Define function
+
+f = x^2 + 3 * x + 2
+f
+```
+
+```{sage}
+# Differentiate with respect to x
+
+diff(f, x)
+```
+
+```{sage}
+# Integrate with respect to x
+
+integrate(f, x)
+```
+
+```{sage}
+# Plot of the function
+
+plot(f, (x, -5, 5))
+```
+
+### Differential equations
+
+SageMath can solve differential equations symbolically:
+
+```{sage}
+# Define a differential equation
+
+y = function('y')(x)
+deqn = (diff(y, x) + y == sin(x))
+deqn
+```
+
+```{sage}
+# Solve the differential equation
+
+desolve(deqn, y)
+```
+
+### Linear algebra
+
+SageMath handles matrix operations, such as addition, multiplication, and finding eigenvalues:
+
+```{sage}
+# Define matrix A
+
+A = Matrix([[1, 2], [3, 4], [5, 6]])  
+A
+```
+
+```{sage}
+# Define matrix B
+
+B = Matrix([[7, 8, 9], [9, 10, 11],])
+B
+```
+
+```{sage}
+# Matrix multiplication
+
+A * B
+```
+
+```{sage}
+# Define matrix C
+
+C = Matrix([[1, 0], [0, 2]])  
+C
+```
+
+```{sage}
+# Eigenvalue equation
+
+C.eigenvectors_right()
+```
+
+
+```{sage}
+# Validation of eigenvalue equation
+
+for eigenvalue, (eigenvector, *_), _ in C.eigenvectors_right():
+    display((C, eigenvector, eigenvalue, C * eigenvector == eigenvalue * eigenvector))
+```
+
+### Group theory
+
+SageMath includes tools for working with groups:
+
+```{sage}
+# Define the symmetric group S3
+
+G = SymmetricGroup(3)
+G
+```
+
+```{sage}
+# Get the order of S3
+
+G.order()
+```
+
+```{sage}
+# List the elements of S3
+
+[g for g in G]
+```
+
+```{sage}
+# Standard representation of S3
+
+[g.matrix() for g in G]
+```
+
+### Differentiable manifolds
+
+SageMath allows for computations in differential geometry, including tangent
+vectors, differential forms, and more:
+
+```{sage}
+# Declare the spacetime manifold M
+
+S2 = manifolds.Sphere(2)
+S2
+```
+
+```{sage}
+# Spherical coordinates
+
+S2.spherical_coordinates()
+```
+
+```{sage}
+# Metric
+
+S2.metric().display()
+```
+
