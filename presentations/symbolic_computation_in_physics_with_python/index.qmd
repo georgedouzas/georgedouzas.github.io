@@ -31,12 +31,12 @@ quantum field theory, general relativity, and more.
 
 ## Other libraries
 
-- [PyFeyn](https://pyfeyn2.readthedocs.io/en/latest/_autosummary/feynml.labeled.html) 
+- [PyFeyn](https://pyfeyn2.readthedocs.io/en/latest/index.html) 
     - A Python library for generating and visualizing Feynman diagrams, used in quantum field theory.
-- [PyRate](https://github.com/LSartore/pyrate/blob/master/doc/Tutorial.ipynb) 
+- [PyRate](https://github.com/LSartore/pyrate) 
     - A Python library for lattice field theory and high-energy physics calculations.
 - [munuSSM](https://gitlab.com/thomas.biekoetter/munussm) 
-    - A tool for symbolic matrix manipulations in string theory and quantum gravity.
+    - A Python package for studying the phenomenology of the μ-from-ν Supersymmetric Standard Model (μνSSM).
 - [Wilson](https://wilson-eft.github.io/) 
     - A framework for effective field theory calculations in lattice gauge theory.
 - [Flavio](https://flav-io.github.io/) 
