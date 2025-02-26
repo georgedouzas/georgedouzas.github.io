@@ -231,3 +231,361 @@ S2.spherical_coordinates()
 S2.metric().display()
 ```
 
+## Advanced
+
+Exploring advanced mathematics in SageMath, including group theory, manifolds,
+Lie groups, and Lie algebras. This section broadly follows
+[@Keski-Vakkuri2022-mx].
+
+### Group theory
+
+We present the list of all groups of finite order $N \leq 8$:
+
+#### Order N = 1
+
+```{sage}
+# Z1
+
+Z1 = CyclicPermutationGroup(1)
+Z1.list()
+```
+
+#### Order N = 2
+
+```{sage}
+# Z2
+
+Z2 = CyclicPermutationGroup(2)
+Z2.list()
+```
+
+```{sage}
+# Z2 Cayley table
+
+print(Z2.cayley_table())
+```
+
+```{sage}
+# S2
+
+S2 = SymmetricGroup(2)
+S2.list()
+```
+
+```{sage}
+# S2 Cayley table
+
+print(S2.cayley_table())
+```
+
+```{sage}
+# Z2, S2 isomorphic
+
+S2.is_isomorphic(Z2)
+```
+
+#### Order N = 3
+
+```{sage}
+# Z3
+
+Z3 = CyclicPermutationGroup(3)
+Z3.list()
+```
+
+```{sage}
+# Z3 Cayley table
+
+print(Z3.cayley_table())
+```
+
+#### Order N = 4
+
+```{sage}
+# Z4
+
+Z4 = CyclicPermutationGroup(4)
+Z4.list()
+```
+
+```{sage}
+# Z4 Cayley table
+
+print(Z4.cayley_table())
+```
+
+```{sage}
+# Z4 cyclic
+
+Z4.is_cyclic()
+```
+
+```{sage}
+# Klein four-group
+
+K4G = direct_product_permgroups([Z2, Z2])
+K4G.list()
+```
+
+```{sage}
+# Klein four-group Cayley table
+
+print(K4G.cayley_table())
+```
+
+```{sage}
+# Klein four-group cyclic
+
+K4G.is_cyclic()
+```
+
+#### Order N = 5
+
+```{sage}
+# Z5
+
+Z5 = CyclicPermutationGroup(5)
+Z5.list()
+```
+
+```{sage}
+# Z5 Cayley table
+
+print(Z5.cayley_table())
+```
+
+#### Order N = 6
+
+```{sage}
+# Z6
+
+Z6 = CyclicPermutationGroup(6)
+Z6.list()
+```
+
+```{sage}
+# Z6 Cayley table
+
+print(Z6.cayley_table())
+```
+
+```{sage}
+# Z2 x Z3
+
+Z2xZ3 = direct_product_permgroups([Z2, Z3])
+Z2xZ3.list()
+```
+
+```{sage}
+# Z2 x Z3 Cayley table
+
+print(Z2xZ3.cayley_table())
+```
+
+```{sage}
+# S3
+
+S3 = SymmetricGroup(3)
+S3.list()
+```
+
+```{sage}
+# S3 Cayley table
+
+print(S3.cayley_table())
+```
+
+```{sage}
+# Z6, Z2 x Z3 isomorphic
+
+Z6.is_isomorphic(Z2xZ3)
+```
+
+```{sage}
+# S3, Z6 non-isomorphic
+
+not S3.is_isomorphic(Z6)
+```
+
+```{sage}
+# S3, Z2 x Z3 non-isomorphic
+
+not S3.is_isomorphic(Z2xZ3)
+```
+
+```{sage}
+# Z6 cyclic
+
+Z6.is_cyclic()
+```
+
+```{sage}
+# Z2 x Z3 cyclic
+
+Z2xZ3.is_cyclic()
+```
+
+```{sage}
+# S3 cyclic
+
+not S3.is_cyclic()
+```
+
+```{sage}
+# Z6 abelian
+
+Z6.is_abelian()
+```
+
+```{sage}
+# Z2 x Z3 abelian
+
+Z2xZ3.is_abelian()
+```
+
+```{sage}
+# S3 non-abelian
+
+not S3.is_abelian()
+```
+
+#### Order N = 7
+
+```{sage}
+# Z7
+
+Z7 = CyclicPermutationGroup(7)
+Z7.list()
+```
+
+```{sage}
+# Z7 Cayley table
+
+print(Z7.cayley_table())
+```
+
+#### Order N = 8
+
+```{sage}
+# Z8
+
+Z8 = CyclicPermutationGroup(8)
+Z8.list()
+```
+
+```{sage}
+# Z8 Cayley table
+
+print(Z8.cayley_table())
+```
+
+```{sage}
+# Z4 x Z2
+
+Z4xZ2 = direct_product_permgroups([Z4, Z2])
+Z4xZ2.list()
+```
+
+```{sage}
+# Z4xZ2 Cayley table
+
+print(Z4xZ2.cayley_table())
+```
+
+```{sage}
+# Z2 x Z2 x Z2
+
+Z2xZ2xZ2 = direct_product_permgroups([Z2, Z2, Z2])
+Z2xZ2xZ2.list()
+```
+
+```{sage}
+# Z2xZ2xZ2 Cayley table
+
+print(Z2xZ2xZ2.cayley_table())
+```
+
+```{sage}
+# D4
+
+D4 = DihedralGroup(4)
+D4.list()
+```
+
+```{sage}
+# D4 Cayley table
+
+print(D4.cayley_table())
+```
+
+```{sage}
+# Q
+
+Q = QuaternionGroup()
+Q.list()
+```
+
+```{sage}
+# Q Cayley table
+
+print(Q.cayley_table())
+```
+
+```{sage}
+# Z8, Z4 x Z2, Z2 x Z2 x Z2, D4, Q  non-isomorphic
+
+from itertools import combinations
+groups = [Z8, Z4xZ2, Z2xZ2xZ2, D4, Q]
+for group1, group2 in combinations(groups, 2):
+    if not group1.is_isomorphic(group2):
+        display(f'{group1}, {group2} are not isomorphic.')
+```
+
+```{sage}
+# Z8 abelian
+
+Z8.is_abelian()
+```
+
+```{sage}
+# Z4 x Z2 abelian
+
+Z4xZ2.is_abelian()
+```
+
+```{sage}
+# Z2 x Z2 x Z2 abelian
+
+Z2xZ2xZ2.is_abelian()
+```
+
+```{sage}
+# D4 non-abelian
+
+not D4.is_abelian()
+```
+
+```{sage}
+# Q non-abelian
+
+not Q.is_abelian()
+```
+
+```{sage}
+# Q subgroups
+
+for G in Q.subgroups():
+    display(G)
+```
+
+```{sage}
+# Q proper subgroups
+
+for G in Q.subgroups():
+    if G.order() == 2:
+        if G.is_isomorphic(Z2) and G.is_normal():
+            display(f'{G} is isomorphic to {Z2} and a normal subgroup of {Q}.')
+    elif G.order() == 4:
+        if G.is_isomorphic(Z4) and G.is_normal():
+            display(f'{G} is isomorphic to {Z4} and a normal subgroup of {Q}.')
+```
