@@ -61,7 +61,7 @@ Fundamental operations, symbolic computation, and core mathematical structures.
 
 ### Arithmetic operations
 
-It supports basic arithmetic operations:
+Support for basic arithmetic operations:
 
 ```{sage}
 # Basic arithmetic operations
@@ -71,7 +71,7 @@ It supports basic arithmetic operations:
 
 ###  Symbolic expressions
 
-It supports symbolic expressions:
+Support for symbolic expressions:
 
 ```{sage}
 # Symbolic variables definition
@@ -88,7 +88,9 @@ expr.simplify_full()
 
 ### Calculus
 
-SageMath provides tools for symbolic calculus such as differentiation and integration. You can compute derivatives and integrals of functions symbolically:
+SageMath provides tools for symbolic calculus such as differentiation and
+integration. You can compute derivatives and integrals of functions
+symbolically:
 
 ```{sage}
 # Define function
@@ -135,7 +137,8 @@ desolve(deqn, y)
 
 ### Linear algebra
 
-SageMath handles matrix operations, such as addition, multiplication, and finding eigenvalues:
+SageMath handles matrix operations, such as addition, multiplication, and
+finding eigenvalues:
 
 ```{sage}
 # Define matrix A
@@ -198,7 +201,7 @@ G.order()
 ```{sage}
 # List the elements of S3
 
-[g for g in G]
+G.list()
 ```
 
 ```{sage}
@@ -239,9 +242,15 @@ Lie groups, and Lie algebras. This section broadly follows
 
 ### Group theory
 
-We present the list of all groups of finite order $N \leq 8$:
+We begin by exploring finite groups, followed by an introduction to Young
+diagrams and an alternative definition of groups via their presentation.
+Finally, we examine continuous groups and group actions.
 
-#### Order N = 1
+#### Smallest finite groups
+
+We present the list of all groups of finite order $N \leq 8$.
+
+##### Order N = 1
 
 ```{sage}
 # Z1
@@ -250,7 +259,7 @@ Z1 = CyclicPermutationGroup(1)
 Z1.list()
 ```
 
-#### Order N = 2
+##### Order N = 2
 
 ```{sage}
 # Z2
@@ -281,10 +290,10 @@ print(S2.cayley_table())
 ```{sage}
 # Z2, S2 isomorphic
 
-S2.is_isomorphic(Z2)
+assert S2.is_isomorphic(Z2)
 ```
 
-#### Order N = 3
+##### Order N = 3
 
 ```{sage}
 # Z3
@@ -299,7 +308,7 @@ Z3.list()
 print(Z3.cayley_table())
 ```
 
-#### Order N = 4
+##### Order N = 4
 
 ```{sage}
 # Z4
@@ -317,7 +326,7 @@ print(Z4.cayley_table())
 ```{sage}
 # Z4 cyclic
 
-Z4.is_cyclic()
+assert Z4.is_cyclic()
 ```
 
 ```{sage}
@@ -336,10 +345,10 @@ print(K4G.cayley_table())
 ```{sage}
 # Klein four-group cyclic
 
-K4G.is_cyclic()
+assert not K4G.is_cyclic()
 ```
 
-#### Order N = 5
+##### Order N = 5
 
 ```{sage}
 # Z5
@@ -354,7 +363,7 @@ Z5.list()
 print(Z5.cayley_table())
 ```
 
-#### Order N = 6
+##### Order N = 6
 
 ```{sage}
 # Z6
@@ -398,58 +407,58 @@ print(S3.cayley_table())
 ```{sage}
 # Z6, Z2 x Z3 isomorphic
 
-Z6.is_isomorphic(Z2xZ3)
+assert Z6.is_isomorphic(Z2xZ3)
 ```
 
 ```{sage}
 # S3, Z6 non-isomorphic
 
-not S3.is_isomorphic(Z6)
+assert not S3.is_isomorphic(Z6)
 ```
 
 ```{sage}
 # S3, Z2 x Z3 non-isomorphic
 
-not S3.is_isomorphic(Z2xZ3)
+assert not S3.is_isomorphic(Z2xZ3)
 ```
 
 ```{sage}
 # Z6 cyclic
 
-Z6.is_cyclic()
+assert Z6.is_cyclic()
 ```
 
 ```{sage}
 # Z2 x Z3 cyclic
 
-Z2xZ3.is_cyclic()
+assert Z2xZ3.is_cyclic()
 ```
 
 ```{sage}
 # S3 cyclic
 
-not S3.is_cyclic()
+assert not S3.is_cyclic()
 ```
 
 ```{sage}
 # Z6 abelian
 
-Z6.is_abelian()
+assert Z6.is_abelian()
 ```
 
 ```{sage}
 # Z2 x Z3 abelian
 
-Z2xZ3.is_abelian()
+assert Z2xZ3.is_abelian()
 ```
 
 ```{sage}
 # S3 non-abelian
 
-not S3.is_abelian()
+assert not S3.is_abelian()
 ```
 
-#### Order N = 7
+##### Order N = 7
 
 ```{sage}
 # Z7
@@ -464,7 +473,7 @@ Z7.list()
 print(Z7.cayley_table())
 ```
 
-#### Order N = 8
+##### Order N = 8
 
 ```{sage}
 # Z8
@@ -544,31 +553,31 @@ for group1, group2 in combinations(groups, 2):
 ```{sage}
 # Z8 abelian
 
-Z8.is_abelian()
+assert Z8.is_abelian()
 ```
 
 ```{sage}
 # Z4 x Z2 abelian
 
-Z4xZ2.is_abelian()
+assert Z4xZ2.is_abelian()
 ```
 
 ```{sage}
 # Z2 x Z2 x Z2 abelian
 
-Z2xZ2xZ2.is_abelian()
+assert Z2xZ2xZ2.is_abelian()
 ```
 
 ```{sage}
 # D4 non-abelian
 
-not D4.is_abelian()
+assert not D4.is_abelian()
 ```
 
 ```{sage}
 # Q non-abelian
 
-not Q.is_abelian()
+assert not Q.is_abelian()
 ```
 
 ```{sage}
@@ -588,4 +597,132 @@ for G in Q.subgroups():
     elif G.order() == 4:
         if G.is_isomorphic(Z4) and G.is_normal():
             display(f'{G} is isomorphic to {Z4} and a normal subgroup of {Q}.')
+```
+
+#### Symmetric groups
+
+We present symmetric groups of different orders along with their properties.
+
+##### Definitions
+
+```{sage}
+# S2 elements
+
+S2 = SymmetricGroup(2)
+S2.list()
+```
+
+```{sage}
+# S3 elements
+
+S3 = SymmetricGroup(3)
+S3.list()
+```
+
+```{sage}
+# S4 elements
+
+S4 = SymmetricGroup(4)
+S4.list()
+```
+
+```{sage}
+# S5 elements
+
+S5 = SymmetricGroup(5)
+S5.list()
+```
+
+```{sage}
+# S6 elements
+
+S6 = SymmetricGroup(6)
+S6.list()
+```
+
+##### Multiplication
+
+```{sage}
+# S4 elements multiplication
+
+P = S4[5]
+Q = S4[12]
+print(f'P = {P}, Q = {Q}')
+print(f'P * Q = {Q * P}')
+```
+
+##### Signature
+
+```{sage}
+# S4 elements signature
+
+P = S4[16]
+Q = S4[2]
+print(f'P = {P}, Q = {Q}')
+print(f'sgn(P) = {P.sign()}')
+print(f'sgn(Q) = {Q.sign()}')
+```
+
+##### Alternating group
+
+```{sage}
+# A4 elements
+
+A4 = AlternatingGroup(4)
+A4.list()
+```
+
+```{sage}
+# A4 subgroup of S4
+
+assert A4.is_subgroup(S4)
+```
+
+```{sage}
+# A4 elements signature
+
+assert all(e.sign() == 1 for e in A4)
+```
+
+```{sage}
+# A4 order
+
+assert A4.order() == S4.order() / 2
+```
+
+##### Cayley's theorem
+
+Every finite group of order $N$ is isomorphic to a subgroup of $S_N$.
+
+```{sage}
+# S2 subgroups
+
+assert Z2.is_subgroup(S2)
+```
+
+```{sage}
+# S3 subgroups
+
+assert Z3.is_subgroup(S3)
+```
+
+```{sage}
+# S4 subgroups
+
+assert Z4.is_subgroup(S4)
+assert K4G.is_subgroup(S4)
+```
+
+```{sage}
+# S5 subgroups
+
+assert Z5.is_subgroup(S5)
+```
+
+```{sage}
+# S6 subgroups
+
+assert Z6.is_subgroup(S6)
+assert Z2xZ3.is_subgroup(S6)
+assert S3.is_subgroup(S6)
 ```

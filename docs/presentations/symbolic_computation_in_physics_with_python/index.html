@@ -273,8 +273,8 @@ window.Quarto = {
 <p>Fundamental operations, symbolic computation, and core mathematical structures.</p>
 <section id="arithmetic-operations" class="level3">
 <h3 class="anchored" data-anchor-id="arithmetic-operations">Arithmetic operations</h3>
-<p>It supports basic arithmetic operations:</p>
-<div id="1538c017" class="cell" data-execution_count="3">
+<p>Support for basic arithmetic operations:</p>
+<div id="1a7d27e6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a># Basic arithmetic operations</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a>((3 + 5) / 8) - 2.5 ^ 3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -285,8 +285,8 @@ window.Quarto = {
 </section>
 <section id="symbolic-expressions" class="level3">
 <h3 class="anchored" data-anchor-id="symbolic-expressions">Symbolic expressions</h3>
-<p>It supports symbolic expressions:</p>
-<div id="5964a25b" class="cell" data-execution_count="4">
+<p>Support for symbolic expressions:</p>
+<div id="9f1667b7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a># Symbolic variables definition</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a>var('x y')</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -294,7 +294,7 @@ window.Quarto = {
 \(\displaystyle \left(x, y\right)\)
 </div>
 </div>
-<div id="06ee1f36" class="cell" data-execution_count="5">
+<div id="2c7a317a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a># Symbolic expressions simplification</span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
 <span id="cb3-3"><a href="#cb3-3"></a>expr = (x^2 + x) / x</span>
@@ -307,7 +307,7 @@ window.Quarto = {
 <section id="calculus" class="level3">
 <h3 class="anchored" data-anchor-id="calculus">Calculus</h3>
 <p>SageMath provides tools for symbolic calculus such as differentiation and integration. You can compute derivatives and integrals of functions symbolically:</p>
-<div id="20592c8d" class="cell" data-execution_count="6">
+<div id="a89b7c90" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a># Define function</span>
 <span id="cb4-2"><a href="#cb4-2"></a></span>
 <span id="cb4-3"><a href="#cb4-3"></a>f = x^2 + 3 * x + 2</span>
@@ -316,7 +316,7 @@ window.Quarto = {
 \(\displaystyle x^{2} + 3 \, x + 2\)
 </div>
 </div>
-<div id="663b1efa" class="cell" data-execution_count="7">
+<div id="0e6069f5" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href="#cb5-1"></a># Differentiate with respect to x</span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a>diff(f, x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -324,7 +324,7 @@ window.Quarto = {
 \(\displaystyle 2 \, x + 3\)
 </div>
 </div>
-<div id="6547ea77" class="cell" data-execution_count="8">
+<div id="7606ba29" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href="#cb6-1"></a># Integrate with respect to x</span>
 <span id="cb6-2"><a href="#cb6-2"></a></span>
 <span id="cb6-3"><a href="#cb6-3"></a>integrate(f, x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -332,7 +332,7 @@ window.Quarto = {
 \(\displaystyle \frac{1}{3} \, x^{3} + \frac{3}{2} \, x^{2} + 2 \, x\)
 </div>
 </div>
-<div id="7cf620ef" class="cell" data-execution_count="9">
+<div id="2030534f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb7-1"><a href="#cb7-1"></a># Plot of the function</span>
 <span id="cb7-2"><a href="#cb7-2"></a></span>
 <span id="cb7-3"><a href="#cb7-3"></a>plot(f, (x, -5, 5))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -348,7 +348,7 @@ window.Quarto = {
 <section id="differential-equations" class="level3">
 <h3 class="anchored" data-anchor-id="differential-equations">Differential equations</h3>
 <p>SageMath can solve differential equations symbolically:</p>
-<div id="f56bf7dc" class="cell" data-execution_count="10">
+<div id="ad7748a7" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href="#cb8-1"></a># Define a differential equation</span>
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a>y = function('y')(x)</span>
@@ -358,7 +358,7 @@ window.Quarto = {
 \(\displaystyle y\left(x\right) + \frac{\partial}{\partial x}y\left(x\right) = \sin\left(x\right)\)
 </div>
 </div>
-<div id="58c2ab68" class="cell" data-execution_count="11">
+<div id="acb72994" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb9-1"><a href="#cb9-1"></a># Solve the differential equation</span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
 <span id="cb9-3"><a href="#cb9-3"></a>desolve(deqn, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -370,7 +370,7 @@ window.Quarto = {
 <section id="linear-algebra" class="level3">
 <h3 class="anchored" data-anchor-id="linear-algebra">Linear algebra</h3>
 <p>SageMath handles matrix operations, such as addition, multiplication, and finding eigenvalues:</p>
-<div id="a29a0a27" class="cell" data-execution_count="12">
+<div id="7526916b" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb10-1"><a href="#cb10-1"></a># Define matrix A</span>
 <span id="cb10-2"><a href="#cb10-2"></a></span>
 <span id="cb10-3"><a href="#cb10-3"></a>A = Matrix([[1, 2], [3, 4], [5, 6]])  </span>
@@ -383,7 +383,7 @@ window.Quarto = {
 \end{array}\right)\)
 </div>
 </div>
-<div id="5c570325" class="cell" data-execution_count="13">
+<div id="c1954744" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb11-1"><a href="#cb11-1"></a># Define matrix B</span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a>B = Matrix([[7, 8, 9], [9, 10, 11],])</span>
@@ -395,7 +395,7 @@ window.Quarto = {
 \end{array}\right)\)
 </div>
 </div>
-<div id="9ea368ca" class="cell" data-execution_count="14">
+<div id="e2b53c5b" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href="#cb12-1"></a># Matrix multiplication</span>
 <span id="cb12-2"><a href="#cb12-2"></a></span>
 <span id="cb12-3"><a href="#cb12-3"></a>A * B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -407,7 +407,7 @@ window.Quarto = {
 \end{array}\right)\)
 </div>
 </div>
-<div id="5f59ec0c" class="cell" data-execution_count="15">
+<div id="0f595d3a" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb13-1"><a href="#cb13-1"></a># Define matrix C</span>
 <span id="cb13-2"><a href="#cb13-2"></a></span>
 <span id="cb13-3"><a href="#cb13-3"></a>C = Matrix([[1, 0], [0, 2]])  </span>
@@ -419,7 +419,7 @@ window.Quarto = {
 \end{array}\right)\)
 </div>
 </div>
-<div id="3bbf9b9c" class="cell" data-execution_count="16">
+<div id="301884b0" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb14-1"><a href="#cb14-1"></a># Eigenvalue equation</span>
 <span id="cb14-2"><a href="#cb14-2"></a></span>
 <span id="cb14-3"><a href="#cb14-3"></a>C.eigenvectors_right()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -427,7 +427,7 @@ window.Quarto = {
 \(\displaystyle \left[\left(2, \left[\left(0,\,1\right)\right], 1\right), \left(1, \left[\left(1,\,0\right)\right], 1\right)\right]\)
 </div>
 </div>
-<div id="348050e2" class="cell" data-execution_count="17">
+<div id="9536aafc" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb15-1"><a href="#cb15-1"></a># Validation of eigenvalue equation</span>
 <span id="cb15-2"><a href="#cb15-2"></a></span>
 <span id="cb15-3"><a href="#cb15-3"></a>for eigenvalue, (eigenvector, *_), _ in C.eigenvectors_right():</span>
@@ -449,7 +449,7 @@ window.Quarto = {
 <section id="group-theory" class="level3">
 <h3 class="anchored" data-anchor-id="group-theory">Group theory</h3>
 <p>SageMath includes tools for working with groups:</p>
-<div id="0fc9a28a" class="cell" data-execution_count="18">
+<div id="2904ce64" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb16-1"><a href="#cb16-1"></a># Define the symmetric group S3</span>
 <span id="cb16-2"><a href="#cb16-2"></a></span>
 <span id="cb16-3"><a href="#cb16-3"></a>G = SymmetricGroup(3)</span>
@@ -458,7 +458,7 @@ window.Quarto = {
 \(\displaystyle \langle (1,2,3), (1,2) \rangle\)
 </div>
 </div>
-<div id="1f097e8a" class="cell" data-execution_count="19">
+<div id="94de0c31" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb17-1"><a href="#cb17-1"></a># Get the order of S3</span>
 <span id="cb17-2"><a href="#cb17-2"></a></span>
 <span id="cb17-3"><a href="#cb17-3"></a>G.order()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -466,15 +466,15 @@ window.Quarto = {
 \(\displaystyle 6\)
 </div>
 </div>
-<div id="df2d1195" class="cell" data-execution_count="20">
+<div id="dde53c7e" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb18-1"><a href="#cb18-1"></a># List the elements of S3</span>
 <span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a>[g for g in G]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-3"><a href="#cb18-3"></a>G.list()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 \(\displaystyle \left[1, (1,3,2), (1,2,3), (2,3), (1,3), (1,2)\right]\)
 </div>
 </div>
-<div id="3352847d" class="cell" data-execution_count="21">
+<div id="e93c7d0d" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb19-1"><a href="#cb19-1"></a># Standard representation of S3</span>
 <span id="cb19-2"><a href="#cb19-2"></a></span>
 <span id="cb19-3"><a href="#cb19-3"></a>[g.matrix() for g in G]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -510,7 +510,7 @@ window.Quarto = {
 <section id="differentiable-manifolds" class="level3">
 <h3 class="anchored" data-anchor-id="differentiable-manifolds">Differentiable manifolds</h3>
 <p>SageMath allows for computations in differential geometry, including tangent vectors, differential forms, and more:</p>
-<div id="2d134efa" class="cell" data-execution_count="22">
+<div id="017156b8" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb20-1"><a href="#cb20-1"></a># Declare the spacetime manifold M</span>
 <span id="cb20-2"><a href="#cb20-2"></a></span>
 <span id="cb20-3"><a href="#cb20-3"></a>S2 = manifolds.Sphere(2)</span>
@@ -519,7 +519,7 @@ window.Quarto = {
 \(\displaystyle \mathbb{S}^{2}\)
 </div>
 </div>
-<div id="b96d27aa" class="cell" data-execution_count="23">
+<div id="a7a68c76" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb21-1"><a href="#cb21-1"></a># Spherical coordinates</span>
 <span id="cb21-2"><a href="#cb21-2"></a></span>
 <span id="cb21-3"><a href="#cb21-3"></a>S2.spherical_coordinates()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -527,7 +527,7 @@ window.Quarto = {
 \(\displaystyle \left(A,(\theta, \phi)\right)\)
 </div>
 </div>
-<div id="016bbb4c" class="cell" data-execution_count="24">
+<div id="20fd97ec" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb22-1"><a href="#cb22-1"></a># Metric</span>
 <span id="cb22-2"><a href="#cb22-2"></a></span>
 <span id="cb22-3"><a href="#cb22-3"></a>S2.metric().display()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -542,10 +542,13 @@ window.Quarto = {
 <p>Exploring advanced mathematics in SageMath, including group theory, manifolds, Lie groups, and Lie algebras. This section broadly follows <span class="citation" data-cites="Keski-Vakkuri2022-mx">(<a href="#ref-Keski-Vakkuri2022-mx" role="doc-biblioref">Keski-Vakkuri, Montonen, and Panero 2022</a>)</span>.</p>
 <section id="group-theory-1" class="level3">
 <h3 class="anchored" data-anchor-id="group-theory-1">Group theory</h3>
-<p>We present the list of all groups of finite order <span class="math inline">\(N \leq 8\)</span>:</p>
-<section id="order-n-1" class="level4">
-<h4 class="anchored" data-anchor-id="order-n-1">Order N = 1</h4>
-<div id="c6fc72e3" class="cell" data-execution_count="25">
+<p>We begin by exploring finite groups, followed by an introduction to Young diagrams and an alternative definition of groups via their presentation. Finally, we examine continuous groups and group actions.</p>
+<section id="smallest-finite-groups" class="level4">
+<h4 class="anchored" data-anchor-id="smallest-finite-groups">Smallest finite groups</h4>
+<p>We present the list of all groups of finite order <span class="math inline">\(N \leq 8\)</span>.</p>
+<section id="order-n-1" class="level5">
+<h5 class="anchored" data-anchor-id="order-n-1">Order N = 1</h5>
+<div id="e364f485" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb23-1"><a href="#cb23-1"></a># Z1</span>
 <span id="cb23-2"><a href="#cb23-2"></a></span>
 <span id="cb23-3"><a href="#cb23-3"></a>Z1 = CyclicPermutationGroup(1)</span>
@@ -555,9 +558,9 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="order-n-2" class="level4">
-<h4 class="anchored" data-anchor-id="order-n-2">Order N = 2</h4>
-<div id="b008db41" class="cell" data-execution_count="26">
+<section id="order-n-2" class="level5">
+<h5 class="anchored" data-anchor-id="order-n-2">Order N = 2</h5>
+<div id="60b119c0" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb24-1"><a href="#cb24-1"></a># Z2</span>
 <span id="cb24-2"><a href="#cb24-2"></a></span>
 <span id="cb24-3"><a href="#cb24-3"></a>Z2 = CyclicPermutationGroup(2)</span>
@@ -566,7 +569,7 @@ window.Quarto = {
 \(\displaystyle \left[1, (1,2)\right]\)
 </div>
 </div>
-<div id="1e887bad" class="cell" data-execution_count="27">
+<div id="422e8a67" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb25-1"><a href="#cb25-1"></a># Z2 Cayley table</span>
 <span id="cb25-2"><a href="#cb25-2"></a></span>
 <span id="cb25-3"><a href="#cb25-3"></a>print(Z2.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -578,7 +581,7 @@ b| b a
 </code></pre>
 </div>
 </div>
-<div id="de15eacc" class="cell" data-execution_count="28">
+<div id="0d17ca8c" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb27-1"><a href="#cb27-1"></a># S2</span>
 <span id="cb27-2"><a href="#cb27-2"></a></span>
 <span id="cb27-3"><a href="#cb27-3"></a>S2 = SymmetricGroup(2)</span>
@@ -587,7 +590,7 @@ b| b a
 \(\displaystyle \left[1, (1,2)\right]\)
 </div>
 </div>
-<div id="83cdd9fd" class="cell" data-execution_count="29">
+<div id="f601ca60" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb28-1"><a href="#cb28-1"></a># S2 Cayley table</span>
 <span id="cb28-2"><a href="#cb28-2"></a></span>
 <span id="cb28-3"><a href="#cb28-3"></a>print(S2.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -599,18 +602,15 @@ b| b a
 </code></pre>
 </div>
 </div>
-<div id="b4f53dd0" class="cell" data-execution_count="30">
+<div id="78cf2bb6" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb30-1"><a href="#cb30-1"></a># Z2, S2 isomorphic</span>
 <span id="cb30-2"><a href="#cb30-2"></a></span>
-<span id="cb30-3"><a href="#cb30-3"></a>S2.is_isomorphic(Z2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
-\(\displaystyle \mathrm{True}\)
-</div>
+<span id="cb30-3"><a href="#cb30-3"></a>assert S2.is_isomorphic(Z2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="order-n-3" class="level4">
-<h4 class="anchored" data-anchor-id="order-n-3">Order N = 3</h4>
-<div id="def37a1d" class="cell" data-execution_count="31">
+<section id="order-n-3" class="level5">
+<h5 class="anchored" data-anchor-id="order-n-3">Order N = 3</h5>
+<div id="be793b32" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb31-1"><a href="#cb31-1"></a># Z3</span>
 <span id="cb31-2"><a href="#cb31-2"></a></span>
 <span id="cb31-3"><a href="#cb31-3"></a>Z3 = CyclicPermutationGroup(3)</span>
@@ -619,7 +619,7 @@ b| b a
 \(\displaystyle \left[1, (1,2,3), (1,3,2)\right]\)
 </div>
 </div>
-<div id="431f9215" class="cell" data-execution_count="32">
+<div id="fabd7023" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb32-1"><a href="#cb32-1"></a># Z3 Cayley table</span>
 <span id="cb32-2"><a href="#cb32-2"></a></span>
 <span id="cb32-3"><a href="#cb32-3"></a>print(Z3.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -633,9 +633,9 @@ c| c a b
 </div>
 </div>
 </section>
-<section id="order-n-4" class="level4">
-<h4 class="anchored" data-anchor-id="order-n-4">Order N = 4</h4>
-<div id="2be2f063" class="cell" data-execution_count="33">
+<section id="order-n-4" class="level5">
+<h5 class="anchored" data-anchor-id="order-n-4">Order N = 4</h5>
+<div id="500e1a79" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb34-1"><a href="#cb34-1"></a># Z4</span>
 <span id="cb34-2"><a href="#cb34-2"></a></span>
 <span id="cb34-3"><a href="#cb34-3"></a>Z4 = CyclicPermutationGroup(4)</span>
@@ -644,7 +644,7 @@ c| c a b
 \(\displaystyle \left[1, (1,2,3,4), (1,3)(2,4), (1,4,3,2)\right]\)
 </div>
 </div>
-<div id="70649ae5" class="cell" data-execution_count="34">
+<div id="df97aeb7" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb35-1"><a href="#cb35-1"></a># Z4 Cayley table</span>
 <span id="cb35-2"><a href="#cb35-2"></a></span>
 <span id="cb35-3"><a href="#cb35-3"></a>print(Z4.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -658,15 +658,12 @@ d| d a b c
 </code></pre>
 </div>
 </div>
-<div id="13d65a55" class="cell" data-execution_count="35">
+<div id="bf0cf442" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb37-1"><a href="#cb37-1"></a># Z4 cyclic</span>
 <span id="cb37-2"><a href="#cb37-2"></a></span>
-<span id="cb37-3"><a href="#cb37-3"></a>Z4.is_cyclic()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="34">
-\(\displaystyle \mathrm{True}\)
+<span id="cb37-3"><a href="#cb37-3"></a>assert Z4.is_cyclic()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="1436ce39" class="cell" data-execution_count="36">
+<div id="1e5656d4" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb38-1"><a href="#cb38-1"></a># Klein four-group</span>
 <span id="cb38-2"><a href="#cb38-2"></a></span>
 <span id="cb38-3"><a href="#cb38-3"></a>K4G = direct_product_permgroups([Z2, Z2])</span>
@@ -675,7 +672,7 @@ d| d a b c
 \(\displaystyle \left[1, (1,2), (3,4), (1,2)(3,4)\right]\)
 </div>
 </div>
-<div id="049a6586" class="cell" data-execution_count="37">
+<div id="93509709" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb39-1"><a href="#cb39-1"></a># Klein four-group Cayley table</span>
 <span id="cb39-2"><a href="#cb39-2"></a></span>
 <span id="cb39-3"><a href="#cb39-3"></a>print(K4G.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -689,18 +686,15 @@ d| d c b a
 </code></pre>
 </div>
 </div>
-<div id="1ffde949" class="cell" data-execution_count="38">
+<div id="44f573c3" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb41-1"><a href="#cb41-1"></a># Klein four-group cyclic</span>
 <span id="cb41-2"><a href="#cb41-2"></a></span>
-<span id="cb41-3"><a href="#cb41-3"></a>K4G.is_cyclic()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="37">
-\(\displaystyle \mathrm{False}\)
-</div>
+<span id="cb41-3"><a href="#cb41-3"></a>assert not K4G.is_cyclic()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="order-n-5" class="level4">
-<h4 class="anchored" data-anchor-id="order-n-5">Order N = 5</h4>
-<div id="227378a7" class="cell" data-execution_count="39">
+<section id="order-n-5" class="level5">
+<h5 class="anchored" data-anchor-id="order-n-5">Order N = 5</h5>
+<div id="01cc42f7" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb42-1"><a href="#cb42-1"></a># Z5</span>
 <span id="cb42-2"><a href="#cb42-2"></a></span>
 <span id="cb42-3"><a href="#cb42-3"></a>Z5 = CyclicPermutationGroup(5)</span>
@@ -709,7 +703,7 @@ d| d c b a
 \(\displaystyle \left[1, (1,2,3,4,5), (1,3,5,2,4), (1,4,2,5,3), (1,5,4,3,2)\right]\)
 </div>
 </div>
-<div id="b9046f82" class="cell" data-execution_count="40">
+<div id="ce7c79fc" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb43-1"><a href="#cb43-1"></a># Z5 Cayley table</span>
 <span id="cb43-2"><a href="#cb43-2"></a></span>
 <span id="cb43-3"><a href="#cb43-3"></a>print(Z5.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -725,9 +719,9 @@ e| e a b c d
 </div>
 </div>
 </section>
-<section id="order-n-6" class="level4">
-<h4 class="anchored" data-anchor-id="order-n-6">Order N = 6</h4>
-<div id="0cb6d6f8" class="cell" data-execution_count="41">
+<section id="order-n-6" class="level5">
+<h5 class="anchored" data-anchor-id="order-n-6">Order N = 6</h5>
+<div id="e6bc2229" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb45-1"><a href="#cb45-1"></a># Z6</span>
 <span id="cb45-2"><a href="#cb45-2"></a></span>
 <span id="cb45-3"><a href="#cb45-3"></a>Z6 = CyclicPermutationGroup(6)</span>
@@ -736,7 +730,7 @@ e| e a b c d
 \(\displaystyle \left[1, (1,2,3,4,5,6), (1,3,5)(2,4,6), (1,4)(2,5)(3,6), (1,5,3)(2,6,4), (1,6,5,4,3,2)\right]\)
 </div>
 </div>
-<div id="aa7ba50e" class="cell" data-execution_count="42">
+<div id="8496884c" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb46-1"><a href="#cb46-1"></a># Z6 Cayley table</span>
 <span id="cb46-2"><a href="#cb46-2"></a></span>
 <span id="cb46-3"><a href="#cb46-3"></a>print(Z6.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -752,7 +746,7 @@ f| f a b c d e
 </code></pre>
 </div>
 </div>
-<div id="125c59d1" class="cell" data-execution_count="43">
+<div id="672216f7" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb48-1"><a href="#cb48-1"></a># Z2 x Z3</span>
 <span id="cb48-2"><a href="#cb48-2"></a></span>
 <span id="cb48-3"><a href="#cb48-3"></a>Z2xZ3 = direct_product_permgroups([Z2, Z3])</span>
@@ -761,7 +755,7 @@ f| f a b c d e
 \(\displaystyle \left[1, (1,2), (3,5,4), (1,2)(3,5,4), (3,4,5), (1,2)(3,4,5)\right]\)
 </div>
 </div>
-<div id="c85bc9ed" class="cell" data-execution_count="44">
+<div id="02a930ac" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb49-1"><a href="#cb49-1"></a># Z2 x Z3 Cayley table</span>
 <span id="cb49-2"><a href="#cb49-2"></a></span>
 <span id="cb49-3"><a href="#cb49-3"></a>print(Z2xZ3.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -777,7 +771,7 @@ f| f d e c a b
 </code></pre>
 </div>
 </div>
-<div id="26f33054" class="cell" data-execution_count="45">
+<div id="81d4632c" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb51-1"><a href="#cb51-1"></a># S3</span>
 <span id="cb51-2"><a href="#cb51-2"></a></span>
 <span id="cb51-3"><a href="#cb51-3"></a>S3 = SymmetricGroup(3)</span>
@@ -786,7 +780,7 @@ f| f d e c a b
 \(\displaystyle \left[1, (1,3,2), (1,2,3), (2,3), (1,3), (1,2)\right]\)
 </div>
 </div>
-<div id="c3846d61" class="cell" data-execution_count="46">
+<div id="5e27f8ed" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb52-1"><a href="#cb52-1"></a># S3 Cayley table</span>
 <span id="cb52-2"><a href="#cb52-2"></a></span>
 <span id="cb52-3"><a href="#cb52-3"></a>print(S3.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -802,82 +796,55 @@ f| f d e b c a
 </code></pre>
 </div>
 </div>
-<div id="64c7b3fa" class="cell" data-execution_count="47">
+<div id="0636e1cd" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb54-1"><a href="#cb54-1"></a># Z6, Z2 x Z3 isomorphic</span>
 <span id="cb54-2"><a href="#cb54-2"></a></span>
-<span id="cb54-3"><a href="#cb54-3"></a>Z6.is_isomorphic(Z2xZ3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="46">
-\(\displaystyle \mathrm{True}\)
+<span id="cb54-3"><a href="#cb54-3"></a>assert Z6.is_isomorphic(Z2xZ3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="8baf119c" class="cell" data-execution_count="48">
+<div id="d3dbc571" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb55-1"><a href="#cb55-1"></a># S3, Z6 non-isomorphic</span>
 <span id="cb55-2"><a href="#cb55-2"></a></span>
-<span id="cb55-3"><a href="#cb55-3"></a>not S3.is_isomorphic(Z6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="47">
-\(\displaystyle \mathrm{True}\)
+<span id="cb55-3"><a href="#cb55-3"></a>assert not S3.is_isomorphic(Z6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="0ccfc3f9" class="cell" data-execution_count="49">
+<div id="02293fdd" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb56-1"><a href="#cb56-1"></a># S3, Z2 x Z3 non-isomorphic</span>
 <span id="cb56-2"><a href="#cb56-2"></a></span>
-<span id="cb56-3"><a href="#cb56-3"></a>not S3.is_isomorphic(Z2xZ3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="48">
-\(\displaystyle \mathrm{True}\)
+<span id="cb56-3"><a href="#cb56-3"></a>assert not S3.is_isomorphic(Z2xZ3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="c26ca2f0" class="cell" data-execution_count="50">
+<div id="6d663e30" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb57-1"><a href="#cb57-1"></a># Z6 cyclic</span>
 <span id="cb57-2"><a href="#cb57-2"></a></span>
-<span id="cb57-3"><a href="#cb57-3"></a>Z6.is_cyclic()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="49">
-\(\displaystyle \mathrm{True}\)
+<span id="cb57-3"><a href="#cb57-3"></a>assert Z6.is_cyclic()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="2b86ff54" class="cell" data-execution_count="51">
+<div id="4a5e6206" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb58-1"><a href="#cb58-1"></a># Z2 x Z3 cyclic</span>
 <span id="cb58-2"><a href="#cb58-2"></a></span>
-<span id="cb58-3"><a href="#cb58-3"></a>Z2xZ3.is_cyclic()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="50">
-\(\displaystyle \mathrm{True}\)
+<span id="cb58-3"><a href="#cb58-3"></a>assert Z2xZ3.is_cyclic()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="9dba4599" class="cell" data-execution_count="52">
+<div id="77cc9c50" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb59-1"><a href="#cb59-1"></a># S3 cyclic</span>
 <span id="cb59-2"><a href="#cb59-2"></a></span>
-<span id="cb59-3"><a href="#cb59-3"></a>not S3.is_cyclic()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="51">
-\(\displaystyle \mathrm{True}\)
+<span id="cb59-3"><a href="#cb59-3"></a>assert not S3.is_cyclic()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="60a768c6" class="cell" data-execution_count="53">
+<div id="f9a4f285" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb60-1"><a href="#cb60-1"></a># Z6 abelian</span>
 <span id="cb60-2"><a href="#cb60-2"></a></span>
-<span id="cb60-3"><a href="#cb60-3"></a>Z6.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="52">
-\(\displaystyle \mathrm{True}\)
+<span id="cb60-3"><a href="#cb60-3"></a>assert Z6.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="77eb59db" class="cell" data-execution_count="54">
+<div id="237f0ca9" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb61-1"><a href="#cb61-1"></a># Z2 x Z3 abelian</span>
 <span id="cb61-2"><a href="#cb61-2"></a></span>
-<span id="cb61-3"><a href="#cb61-3"></a>Z2xZ3.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="53">
-\(\displaystyle \mathrm{True}\)
+<span id="cb61-3"><a href="#cb61-3"></a>assert Z2xZ3.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="e52f78fe" class="cell" data-execution_count="55">
+<div id="bbe58727" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb62-1"><a href="#cb62-1"></a># S3 non-abelian</span>
 <span id="cb62-2"><a href="#cb62-2"></a></span>
-<span id="cb62-3"><a href="#cb62-3"></a>not S3.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="54">
-\(\displaystyle \mathrm{True}\)
-</div>
+<span id="cb62-3"><a href="#cb62-3"></a>assert not S3.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="order-n-7" class="level4">
-<h4 class="anchored" data-anchor-id="order-n-7">Order N = 7</h4>
-<div id="9df5b9c2" class="cell" data-execution_count="56">
+<section id="order-n-7" class="level5">
+<h5 class="anchored" data-anchor-id="order-n-7">Order N = 7</h5>
+<div id="3b7459dd" class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb63-1"><a href="#cb63-1"></a># Z7</span>
 <span id="cb63-2"><a href="#cb63-2"></a></span>
 <span id="cb63-3"><a href="#cb63-3"></a>Z7 = CyclicPermutationGroup(7)</span>
@@ -886,7 +853,7 @@ f| f d e b c a
 \(\displaystyle \left[1, (1,2,3,4,5,6,7), (1,3,5,7,2,4,6), (1,4,7,3,6,2,5), (1,5,2,6,3,7,4), (1,6,4,2,7,5,3), (1,7,6,5,4,3,2)\right]\)
 </div>
 </div>
-<div id="dc8d6001" class="cell" data-execution_count="57">
+<div id="0fd1fb7e" class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb64-1"><a href="#cb64-1"></a># Z7 Cayley table</span>
 <span id="cb64-2"><a href="#cb64-2"></a></span>
 <span id="cb64-3"><a href="#cb64-3"></a>print(Z7.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -904,9 +871,9 @@ g| g a b c d e f
 </div>
 </div>
 </section>
-<section id="order-n-8" class="level4">
-<h4 class="anchored" data-anchor-id="order-n-8">Order N = 8</h4>
-<div id="925beb95" class="cell" data-execution_count="58">
+<section id="order-n-8" class="level5">
+<h5 class="anchored" data-anchor-id="order-n-8">Order N = 8</h5>
+<div id="3427a940" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb66-1"><a href="#cb66-1"></a># Z8</span>
 <span id="cb66-2"><a href="#cb66-2"></a></span>
 <span id="cb66-3"><a href="#cb66-3"></a>Z8 = CyclicPermutationGroup(8)</span>
@@ -915,7 +882,7 @@ g| g a b c d e f
 \(\displaystyle \left[1, (1,2,3,4,5,6,7,8), (1,3,5,7)(2,4,6,8), (1,4,7,2,5,8,3,6), (1,5)(2,6)(3,7)(4,8), (1,6,3,8,5,2,7,4), (1,7,5,3)(2,8,6,4), (1,8,7,6,5,4,3,2)\right]\)
 </div>
 </div>
-<div id="6ba78cdb" class="cell" data-execution_count="59">
+<div id="13ae58a1" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb67-1"><a href="#cb67-1"></a># Z8 Cayley table</span>
 <span id="cb67-2"><a href="#cb67-2"></a></span>
 <span id="cb67-3"><a href="#cb67-3"></a>print(Z8.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -933,7 +900,7 @@ h| h a b c d e f g
 </code></pre>
 </div>
 </div>
-<div id="67365554" class="cell" data-execution_count="60">
+<div id="15a915bc" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb69-1"><a href="#cb69-1"></a># Z4 x Z2</span>
 <span id="cb69-2"><a href="#cb69-2"></a></span>
 <span id="cb69-3"><a href="#cb69-3"></a>Z4xZ2 = direct_product_permgroups([Z4, Z2])</span>
@@ -942,7 +909,7 @@ h| h a b c d e f g
 \(\displaystyle \left[1, (1,3)(2,4), (1,4,3,2), (1,2,3,4), (5,6), (1,3)(2,4)(5,6), (1,4,3,2)(5,6), (1,2,3,4)(5,6)\right]\)
 </div>
 </div>
-<div id="97397249" class="cell" data-execution_count="61">
+<div id="23d1eff3" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb70-1"><a href="#cb70-1"></a># Z4xZ2 Cayley table</span>
 <span id="cb70-2"><a href="#cb70-2"></a></span>
 <span id="cb70-3"><a href="#cb70-3"></a>print(Z4xZ2.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -960,7 +927,7 @@ h| h g b a d c f e
 </code></pre>
 </div>
 </div>
-<div id="2daf2fc8" class="cell" data-execution_count="62">
+<div id="c5ef311c" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb72-1"><a href="#cb72-1"></a># Z2 x Z2 x Z2</span>
 <span id="cb72-2"><a href="#cb72-2"></a></span>
 <span id="cb72-3"><a href="#cb72-3"></a>Z2xZ2xZ2 = direct_product_permgroups([Z2, Z2, Z2])</span>
@@ -969,7 +936,7 @@ h| h g b a d c f e
 \(\displaystyle \left[1, (1,2), (3,4), (1,2)(3,4), (5,6), (1,2)(5,6), (3,4)(5,6), (1,2)(3,4)(5,6)\right]\)
 </div>
 </div>
-<div id="348b1855" class="cell" data-execution_count="63">
+<div id="6d4150be" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb73-1"><a href="#cb73-1"></a># Z2xZ2xZ2 Cayley table</span>
 <span id="cb73-2"><a href="#cb73-2"></a></span>
 <span id="cb73-3"><a href="#cb73-3"></a>print(Z2xZ2xZ2.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -987,7 +954,7 @@ h| h g f e d c b a
 </code></pre>
 </div>
 </div>
-<div id="3c479bfc" class="cell" data-execution_count="64">
+<div id="3dc2ddee" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb75-1"><a href="#cb75-1"></a># D4</span>
 <span id="cb75-2"><a href="#cb75-2"></a></span>
 <span id="cb75-3"><a href="#cb75-3"></a>D4 = DihedralGroup(4)</span>
@@ -996,7 +963,7 @@ h| h g f e d c b a
 \(\displaystyle \left[1, (1,3)(2,4), (1,4,3,2), (1,2,3,4), (2,4), (1,3), (1,4)(2,3), (1,2)(3,4)\right]\)
 </div>
 </div>
-<div id="c4ba8955" class="cell" data-execution_count="65">
+<div id="2d61d6c2" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb76-1"><a href="#cb76-1"></a># D4 Cayley table</span>
 <span id="cb76-2"><a href="#cb76-2"></a></span>
 <span id="cb76-3"><a href="#cb76-3"></a>print(D4.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1014,7 +981,7 @@ h| h d f b g c e a
 </code></pre>
 </div>
 </div>
-<div id="c7fc1495" class="cell" data-execution_count="66">
+<div id="6581542d" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb78-1"><a href="#cb78-1"></a># Q</span>
 <span id="cb78-2"><a href="#cb78-2"></a></span>
 <span id="cb78-3"><a href="#cb78-3"></a>Q = QuaternionGroup()</span>
@@ -1023,7 +990,7 @@ h| h d f b g c e a
 \(\displaystyle \left[1, (1,3)(2,4)(5,7)(6,8), (1,4,3,2)(5,8,7,6), (1,2,3,4)(5,6,7,8), (1,7,3,5)(2,6,4,8), (1,5,3,7)(2,8,4,6), (1,8,3,6)(2,7,4,5), (1,6,3,8)(2,5,4,7)\right]\)
 </div>
 </div>
-<div id="bdd4e6f4" class="cell" data-execution_count="67">
+<div id="6ddd3203" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb79-1"><a href="#cb79-1"></a># Q Cayley table</span>
 <span id="cb79-2"><a href="#cb79-2"></a></span>
 <span id="cb79-3"><a href="#cb79-3"></a>print(Q.cayley_table())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1041,7 +1008,7 @@ h| h e f g d a b c
 </code></pre>
 </div>
 </div>
-<div id="8579e925" class="cell" data-execution_count="68">
+<div id="1582c78f" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb81-1"><a href="#cb81-1"></a># Z8, Z4 x Z2, Z2 x Z2 x Z2, D4, Q  non-isomorphic</span>
 <span id="cb81-2"><a href="#cb81-2"></a></span>
 <span id="cb81-3"><a href="#cb81-3"></a>from itertools import combinations</span>
@@ -1080,47 +1047,32 @@ h| h e f g d a b c
 \(\displaystyle \verb|Dihedral|\verb| |\verb|group|\verb| |\verb|of|\verb| |\verb|order|\verb| |\verb|8|\verb| |\verb|as|\verb| |\verb|a|\verb| |\verb|permutation|\verb| |\verb|group,|\verb| |\verb|Quaternion|\verb| |\verb|group|\verb| |\verb|of|\verb| |\verb|order|\verb| |\verb|8|\verb| |\verb|as|\verb| |\verb|a|\verb| |\verb|permutation|\verb| |\verb|group|\verb| |\verb|are|\verb| |\verb|not|\verb| |\verb|isomorphic.|\)
 </div>
 </div>
-<div id="6385d777" class="cell" data-execution_count="69">
+<div id="e4663c34" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb82-1"><a href="#cb82-1"></a># Z8 abelian</span>
 <span id="cb82-2"><a href="#cb82-2"></a></span>
-<span id="cb82-3"><a href="#cb82-3"></a>Z8.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="68">
-\(\displaystyle \mathrm{True}\)
+<span id="cb82-3"><a href="#cb82-3"></a>assert Z8.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="ca93b623" class="cell" data-execution_count="70">
+<div id="3125518b" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb83-1"><a href="#cb83-1"></a># Z4 x Z2 abelian</span>
 <span id="cb83-2"><a href="#cb83-2"></a></span>
-<span id="cb83-3"><a href="#cb83-3"></a>Z4xZ2.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="69">
-\(\displaystyle \mathrm{True}\)
+<span id="cb83-3"><a href="#cb83-3"></a>assert Z4xZ2.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="8d1de86c" class="cell" data-execution_count="71">
+<div id="36b6f94d" class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb84-1"><a href="#cb84-1"></a># Z2 x Z2 x Z2 abelian</span>
 <span id="cb84-2"><a href="#cb84-2"></a></span>
-<span id="cb84-3"><a href="#cb84-3"></a>Z2xZ2xZ2.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="70">
-\(\displaystyle \mathrm{True}\)
+<span id="cb84-3"><a href="#cb84-3"></a>assert Z2xZ2xZ2.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="a8c463e0" class="cell" data-execution_count="72">
+<div id="bc48e9d4" class="cell" data-execution_count="72">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb85-1"><a href="#cb85-1"></a># D4 non-abelian</span>
 <span id="cb85-2"><a href="#cb85-2"></a></span>
-<span id="cb85-3"><a href="#cb85-3"></a>not D4.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="71">
-\(\displaystyle \mathrm{True}\)
+<span id="cb85-3"><a href="#cb85-3"></a>assert not D4.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="9d759858" class="cell" data-execution_count="73">
+<div id="ce36d79a" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb86-1"><a href="#cb86-1"></a># Q non-abelian</span>
 <span id="cb86-2"><a href="#cb86-2"></a></span>
-<span id="cb86-3"><a href="#cb86-3"></a>not Q.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="72">
-\(\displaystyle \mathrm{True}\)
+<span id="cb86-3"><a href="#cb86-3"></a>assert not Q.is_abelian()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="6b64116b" class="cell" data-execution_count="74">
+<div id="11afd4d6" class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb87-1"><a href="#cb87-1"></a># Q subgroups</span>
 <span id="cb87-2"><a href="#cb87-2"></a></span>
 <span id="cb87-3"><a href="#cb87-3"></a>for G in Q.subgroups():</span>
@@ -1144,7 +1096,7 @@ h| h e f g d a b c
 \(\displaystyle \hbox{Subgroup } \langle (1,3)(2,4)(5,7)(6,8), (1,5,3,7)(2,8,4,6), (1,2,3,4)(5,6,7,8) \rangle \hbox{ of } \langle (1,2,3,4)(5,6,7,8), (1,5,3,7)(2,8,4,6) \rangle\)
 </div>
 </div>
-<div id="753028ad" class="cell" data-execution_count="75">
+<div id="84321c30" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb88-1"><a href="#cb88-1"></a># Q proper subgroups</span>
 <span id="cb88-2"><a href="#cb88-2"></a></span>
 <span id="cb88-3"><a href="#cb88-3"></a>for G in Q.subgroups():</span>
@@ -1167,10 +1119,154 @@ h| h e f g d a b c
 \(\displaystyle \verb|Subgroup|\verb| |\verb|generated|\verb| |\verb|by|\verb| |\verb|[(1,3)(2,4)(5,7)(6,8),|\verb| |\verb|(1,6,3,8)(2,5,4,7)]|\verb| |\verb|of|\verb| |\verb|(Quaternion|\verb| |\verb|group|\verb| |\verb|of|\verb| |\verb|order|\verb| |\verb|8|\verb| |\verb|as|\verb| |\verb|a|\verb| |\verb|permutation|\verb| |\verb|group)|\verb| |\verb|is|\verb| |\verb|isomorphic|\verb| |\verb|to|\verb| |\verb|Cyclic|\verb| |\verb|group|\verb| |\verb|of|\verb| |\verb|order|\verb| |\verb|4|\verb| |\verb|as|\verb| |\verb|a|\verb| |\verb|permutation|\verb| |\verb|group|\verb| |\verb|and|\verb| |\verb|a|\verb| |\verb|normal|\verb| |\verb|subgroup|\verb| |\verb|of|\verb| |\verb|Quaternion|\verb| |\verb|group|\verb| |\verb|of|\verb| |\verb|order|\verb| |\verb|8|\verb| |\verb|as|\verb| |\verb|a|\verb| |\verb|permutation|\verb| |\verb|group.|\)
 </div>
 </div>
+</section>
+</section>
+<section id="symmetric-groups" class="level4">
+<h4 class="anchored" data-anchor-id="symmetric-groups">Symmetric groups</h4>
+<p>We present symmetric groups of different orders along with their properties.</p>
+<section id="definitions" class="level5">
+<h5 class="anchored" data-anchor-id="definitions">Definitions</h5>
+<div id="da9afd99" class="cell" data-execution_count="76">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb89-1"><a href="#cb89-1"></a># S2 elements</span>
+<span id="cb89-2"><a href="#cb89-2"></a></span>
+<span id="cb89-3"><a href="#cb89-3"></a>S2 = SymmetricGroup(2)</span>
+<span id="cb89-4"><a href="#cb89-4"></a>S2.list()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="75">
+\(\displaystyle \left[1, (1,2)\right]\)
+</div>
+</div>
+<div id="6eabc316" class="cell" data-execution_count="77">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb90-1"><a href="#cb90-1"></a># S3 elements</span>
+<span id="cb90-2"><a href="#cb90-2"></a></span>
+<span id="cb90-3"><a href="#cb90-3"></a>S3 = SymmetricGroup(3)</span>
+<span id="cb90-4"><a href="#cb90-4"></a>S3.list()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="76">
+\(\displaystyle \left[1, (1,3,2), (1,2,3), (2,3), (1,3), (1,2)\right]\)
+</div>
+</div>
+<div id="486199b7" class="cell" data-execution_count="78">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb91-1"><a href="#cb91-1"></a># S4 elements</span>
+<span id="cb91-2"><a href="#cb91-2"></a></span>
+<span id="cb91-3"><a href="#cb91-3"></a>S4 = SymmetricGroup(4)</span>
+<span id="cb91-4"><a href="#cb91-4"></a>S4.list()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="77">
+\(\displaystyle \left[1, (1,3)(2,4), (1,4)(2,3), (1,2)(3,4), (2,3,4), (1,3,2), (1,4,3), (1,2,4), (2,4,3), (1,3,4), (1,4,2), (1,2,3), (3,4), (1,3,2,4), (1,4,2,3), (1,2), (2,3), (1,3,4,2), (1,4), (1,2,4,3), (2,4), (1,3), (1,4,3,2), (1,2,3,4)\right]\)
+</div>
+</div>
+<div id="03b75788" class="cell" data-execution_count="79">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb92-1"><a href="#cb92-1"></a># S5 elements</span>
+<span id="cb92-2"><a href="#cb92-2"></a></span>
+<span id="cb92-3"><a href="#cb92-3"></a>S5 = SymmetricGroup(5)</span>
+<span id="cb92-4"><a href="#cb92-4"></a>S5.list()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="78">
+\(\displaystyle \left[1, (1,5,4,3,2), (1,2), (1,4,2,5,3), (1,3,5,2,4), (2,5,4,3), (1,5,3)(2,4), (1,2,5,4,3), (1,4)(2,3,5), (1,3,4,5), (2,4)(3,5), (1,5,2,3,4), (1,2,4)(3,5), (1,4,5), (1,3,2), (2,3,4,5), (1,5), (1,2,3,4,5), (1,4,3,2), (1,3)(2,5,4), (3,4), (1,5,4,2), (1,2)(3,4), (1,4)(2,5,3), (1,3)(2,4,5), (2,5,4), (1,5,3,2,4), (1,2,5,4), (1,4,5,2,3), (1,3,5), (2,4,5,3), (1,5,2,3), (1,2,4,5,3), (1,4,3,5), (1,3,4,2), (2,3,5), (1,5)(3,4), (1,2,3,5), (1,4,2), (1,3,2,5,4), (3,5,4), (1,5,3,4,2), (1,2)(3,5,4), (1,4)(2,5), (1,3,2,4,5), (2,5,3,4), (1,5,2,4), (1,2,5,3,4), (1,4,5)(2,3), (1,3), (2,4,5), (1,5)(2,3), (1,2,4,5), (1,4,3), (1,3,5,4,2), (2,3), (1,5,4,3), (1,2,3), (1,4,2)(3,5), (1,3,4)(2,5), (4,5), (1,5,3,2), (1,2)(4,5), (1,4,3)(2,5), (1,3,5)(2,4), (2,5,3), (1,5,2,4,3), (1,2,5,3), (1,4,2,3,5), (1,3,4), (2,4,3,5), (1,5)(2,3,4), (1,2,4,3,5), (1,4), (1,3,2)(4,5), (2,3,4), (1,5,4), (1,2,3,4), (1,4,5,3,2), (1,3)(2,5), (3,4,5), (1,5,2), (1,2)(3,4,5), (1,4,3,2,5), (1,3)(2,4), (2,5), (1,5)(2,4,3), (1,2,5), (1,4,2,3), (1,3,5,4), (2,4,3), (1,5,4,2,3), (1,2,4,3), (1,4)(3,5), (1,3,4,5,2), (2,3,5,4), (1,5,3,4), (1,2,3,5,4), (1,4,5,2), (1,3,2,5), (3,5), (1,5,2)(3,4), (1,2)(3,5), (1,4,2,5), (1,3,2,4), (2,5)(3,4), (1,5)(2,4), (1,2,5)(3,4), (1,4)(2,3), (1,3)(4,5), (2,4), (1,5,4)(2,3), (1,2,4), (1,4,5,3), (1,3,5,2), (2,3)(4,5), (1,5,3), (1,2,3)(4,5), (1,4,3,5,2), (1,3,4,2,5)\right]\)
+</div>
+</div>
+<div id="08e235ce" class="cell" data-execution_count="80">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb93-1"><a href="#cb93-1"></a># S6 elements</span>
+<span id="cb93-2"><a href="#cb93-2"></a></span>
+<span id="cb93-3"><a href="#cb93-3"></a>S6 = SymmetricGroup(6)</span>
+<span id="cb93-4"><a href="#cb93-4"></a>S6.list()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="79">
+\(\displaystyle \left[1, (1,6,5,4,3,2), (1,2), (1,5,3)(2,6,4), (1,4)(2,5)(3,6), (1,3,5)(2,4,6), (2,6,5,4,3), (1,6,4,2,5,3), (1,2,6,5,4,3), (1,5,2,4)(3,6), (1,4,6,2,3,5), (1,3,4,5,6), (2,5,3,6,4), (1,6,3,5,2,4), (1,2,5,3,6,4), (1,5)(2,3,4,6), (1,4,5,6), (1,3,2), (2,4,6,3,5), (1,6,2,3,4,5), (1,2,4,6,3,5), (1,5,6), (1,4,3,2), (1,3)(2,6,5,4), (2,3,4,5,6), (1,6), (1,2,3,4,5,6), (1,5,4,3,2), (1,4,2,6,5,3), (1,3,6,4)(2,5), (3,4), (1,6,5,4,2), (1,2)(3,4), (1,5,3,2,6,4), (1,4,6,3)(2,5), (1,3,6,2,4,5), (2,6,5,4), (1,6,4)(2,5,3), (1,2,6,5,4), (1,5,2,4,6,3), (1,4,5)(2,3,6), (1,3,5,6), (2,5,3)(4,6), (1,6,3)(2,4,5), (1,2,5,3)(4,6), (1,5)(2,3,6), (1,4,3,5,6), (1,3,4,2), (2,4,5)(3,6), (1,6,2,3,5), (1,2,4,5)(3,6), (1,5,6)(3,4), (1,4,2), (1,3,2,6,5,4), (2,3,5,6), (1,6)(3,4), (1,2,3,5,6), (1,5,4,2), (1,4)(2,6,5,3), (1,3)(2,5)(4,6), (3,5,4), (1,6,5,3,4,2), (1,2)(3,5,4), (1,5,2,6,4), (1,4,6,3,2,5), (1,3)(2,4,5,6), (2,6,5,3,4), (1,6,4)(2,5), (1,2,6,5,3,4), (1,5)(2,4,6,3), (1,4,5,6,2,3), (1,3,6), (2,5)(4,6), (1,6,3,2,4,5), (1,2,5)(4,6), (1,5,6,2,3), (1,4,3,6), (1,3,5,4,2), (2,4,5,6,3), (1,6,2,3), (1,2,4,5,6,3), (1,5,4,3,6), (1,4,2)(3,5), (1,3,4)(2,6,5), (2,3,6), (1,6)(3,5,4), (1,2,3,6), (1,5,3,4,2), (1,4)(2,6,5), (1,3,2,5)(4,6), (3,6,5,4), (1,6,4,2)(3,5), (1,2)(3,6,5,4), (1,5,2,6,3,4), (1,4,6,2,5), (1,3,2,4,5,6), (2,6,4)(3,5), (1,6,3,4)(2,5), (1,2,6,4)(3,5), (1,5)(2,4,6), (1,4,5,6)(2,3), (1,3), (2,5)(3,4,6), (1,6,2,4,5), (1,2,5)(3,4,6), (1,5,6)(2,3), (1,4,3), (1,3,6,5,4,2), (2,4,5,6), (1,6)(2,3), (1,2,4,5,6), (1,5,4,3), (1,4,2)(3,6,5), (1,3,5,2,6,4), (2,3), (1,6,5,4,3), (1,2,3), (1,5,3,6,4,2), (1,4)(2,6,3,5), (1,3,4,6,2,5), (4,5), (1,6,5,3,2), (1,2)(4,5), (1,5,2,6,4,3), (1,4,2,5)(3,6), (1,3,5,6,2,4), (2,6,5,3), (1,6,4,3)(2,5), (1,2,6,5,3), (1,5)(2,4)(3,6), (1,4)(2,3,5,6), (1,3,4,6), (2,5)(3,6,4), (1,6,3,5)(2,4), (1,2,5)(3,6,4), (1,5,6,2,3,4), (1,4,6), (1,3,2)(4,5), (2,4)(3,5,6), (1,6,2,3,4), (1,2,4)(3,5,6), (1,5,4,6), (1,4,5,3,2), (1,3)(2,6,5), (2,3,4,6), (1,6)(4,5), (1,2,3,4,6), (1,5,3,2), (1,4,3)(2,6,5), (1,3,6,4,2,5), (3,4,5), (1,6,5,2), (1,2)(3,4,5), (1,5)(2,6,4,3), (1,4,2,5,6,3), (1,3,6,2,4), (2,6,5), (1,6,4,3,2,5), (1,2,6,5), (1,5,6,3)(2,4), (1,4)(2,3,6), (1,3,5,4,6), (2,5,6,4,3), (1,6,3)(2,4), (1,2,5,6,4,3), (1,5,4)(2,3,6), (1,4,6)(3,5), (1,3,4,5,2), (2,4)(3,6), (1,6,2,3,5,4), (1,2,4)(3,6), (1,5,3,4,6), (1,4,5,2), (1,3,2,6,5), (2,3,5,4,6), (1,6)(3,4,5), (1,2,3,5,4,6), (1,5,2), (1,4,3,2,6,5), (1,3)(2,5,6,4), (3,5), (1,6,5,2)(3,4), (1,2)(3,5), (1,5)(2,6,4), (1,4)(2,5,6,3), (1,3)(2,4,6), (2,6,5)(3,4), (1,6,4,2,5), (1,2,6,5)(3,4), (1,5,6,3,2,4), (1,4,6,2,3), (1,3,6)(4,5), (2,5,6,4), (1,6,3,2,4), (1,2,5,6,4), (1,5,4,6,2,3), (1,4,5,3,6), (1,3,5,2), (2,4,6,3), (1,6,2,3)(4,5), (1,2,4,6,3), (1,5,3,6), (1,4,3,5,2), (1,3,4,2,6,5), (2,3,6)(4,5), (1,6)(3,5), (1,2,3,6)(4,5), (1,5,2)(3,4), (1,4,2,6,5), (1,3,2,5,6,4), (3,6,5), (1,6,4,3,5,2), (1,2)(3,6,5), (1,5)(2,6,3,4), (1,4)(2,5,6), (1,3,2,4,6), (2,6,4,3,5), (1,6,3,4,2,5), (1,2,6,4,3,5), (1,5,6,2,4), (1,4,6)(2,3), (1,3)(4,5), (2,5,6,3,4), (1,6,2,4), (1,2,5,6,3,4), (1,5,4,6)(2,3), (1,4,5,3), (1,3,6,5,2), (2,4,6), (1,6)(2,3)(4,5), (1,2,4,6), (1,5,3), (1,4,3,6,5,2), (1,3,5)(2,6,4), (2,3)(4,5), (1,6,5,3), (1,2,3)(4,5), (1,5,2)(3,6,4), (1,4,2,6,3,5), (1,3,4)(2,5,6), (4,6,5), (1,6,4,5,3,2), (1,2)(4,6,5), (1,5,2,6,3), (1,4,3,6,2,5), (1,3,5,6)(2,4), (2,6,4,5,3), (1,6,3)(2,5), (1,2,6,4,5,3), (1,5)(2,4,3,6), (1,4,2,3,5,6), (1,3,4), (2,5)(3,6), (1,6,2,4,3,5), (1,2,5)(3,6), (1,5,6)(2,3,4), (1,4), (1,3,2)(4,6,5), (2,4,3,5,6), (1,6)(2,3,4), (1,2,4,3,5,6), (1,5,4), (1,4,6,5,3,2), (1,3)(2,6,4,5), (2,3,4), (1,6,5,4), (1,2,3,4), (1,5,3,2)(4,6), (1,4,5,2,6,3), (1,3,6,2,5), (3,4,6,5), (1,6,4,5,2), (1,2)(3,4,6,5), (1,5)(2,6,3), (1,4,3)(2,5,6), (1,3,6)(2,4), (2,6,4,5), (1,6,3,2,5), (1,2,6,4,5), (1,5,6,2,4,3), (1,4,2,3,6), (1,3,5,4), (2,5,6,3), (1,6,2,4,3), (1,2,5,6,3), (1,5,4,2,3,6), (1,4)(3,5), (1,3,4,6,5,2), (2,4,3,6), (1,6)(2,3,5,4), (1,2,4,3,6), (1,5,3,4), (1,4,6,5,2), (1,3,2,6,4,5), (2,3,5,4), (1,6,5,3,4), (1,2,3,5,4), (1,5,2)(4,6), (1,4,5)(2,6,3), (1,3)(2,5,6), (3,5)(4,6), (1,6,3,4,5,2), (1,2)(3,5)(4,6), (1,5)(2,6), (1,4,3,2,5,6), (1,3)(2,4), (2,6,3,4,5), (1,6,2,5), (1,2,6,3,4,5), (1,5,6)(2,4,3), (1,4,2,3), (1,3,6,5,4), (2,5,6), (1,6)(2,4,3), (1,2,5,6), (1,5,4,2,3), (1,4)(3,6,5), (1,3,5,2)(4,6), (2,4,3), (1,6,5,4,2,3), (1,2,4,3), (1,5,3,6,4), (1,4,6,3,5,2), (1,3,4,5)(2,6), (2,3,6,5,4), (1,6,4)(3,5), (1,2,3,6,5,4), (1,5,2)(3,4,6), (1,4,5)(2,6), (1,3,2,5,6), (3,6,4,5), (1,6,3,5,2), (1,2)(3,6,4,5), (1,5)(2,6)(3,4), (1,4,2,5,6), (1,3,2,4), (2,6,3,5), (1,6,2,5)(3,4), (1,2,6,3,5), (1,5,6)(2,4), (1,4)(2,3), (1,3)(4,6,5), (2,5,6)(3,4), (1,6)(2,4), (1,2,5,6)(3,4), (1,5,4)(2,3), (1,4,6,5,3), (1,3,6,4,5,2), (2,4), (1,6,5,4)(2,3), (1,2,4), (1,5,3)(4,6), (1,4,5,2)(3,6), (1,3,5)(2,6), (2,3)(4,6,5), (1,6,4,5,3), (1,2,3)(4,6,5), (1,5,2)(3,6), (1,4,3,5)(2,6), (1,3,4,2,5,6), (5,6), (1,6,4,3,2), (1,2)(5,6), (1,5,4,2,6,3), (1,4)(2,5,3,6), (1,3,5,2,4,6), (2,6,4,3), (1,6,3)(2,5,4), (1,2,6,4,3), (1,5,3,6,2,4), (1,4,6)(2,3,5), (1,3,4,5), (2,5,4)(3,6), (1,6,2,4)(3,5), (1,2,5,4)(3,6), (1,5,2,3,4,6), (1,4,5), (1,3,2)(5,6), (2,4,6)(3,5), (1,6)(2,3,4,5), (1,2,4,6)(3,5), (1,5), (1,4,3,2)(5,6), (1,3)(2,6,4), (2,3,4,5), (1,6,5), (1,2,3,4,5), (1,5,6,4,3,2), (1,4,2,6,3), (1,3,6,2,5,4), (3,4)(5,6), (1,6,4,2), (1,2)(3,4)(5,6), (1,5,4)(2,6,3), (1,4,6,2,5,3), (1,3,6)(2,4,5), (2,6,4), (1,6,3,2,5,4), (1,2,6,4), (1,5,3)(2,4,6), (1,4,5,2,3,6), (1,3,5), (2,5,4,6,3), (1,6,2,4,5,3), (1,2,5,4,6,3), (1,5,2,3,6), (1,4,3,5), (1,3,4,2)(5,6), (2,4,5,3,6), (1,6)(2,3,5), (1,2,4,5,3,6), (1,5)(3,4), (1,4,2)(5,6), (1,3,2,6,4), (2,3,5), (1,6,5)(3,4), (1,2,3,5), (1,5,6,4,2), (1,4)(2,6,3), (1,3)(2,5,4,6), (3,5,6,4), (1,6,3,4,2), (1,2)(3,5,6,4), (1,5,4)(2,6), (1,4,6)(2,5,3), (1,3)(2,4,5), (2,6,3,4), (1,6,2,5,4), (1,2,6,3,4), (1,5,3,2,4,6), (1,4,5,2,3), (1,3,6,5), (2,5,4,6), (1,6)(2,4,5,3), (1,2,5,4,6), (1,5,2,3), (1,4,3,6,5), (1,3,5,6,4,2), (2,4,5,3), (1,6,5,2,3), (1,2,4,5,3), (1,5)(3,6,4), (1,4,2)(3,5,6), (1,3,4)(2,6), (2,3,6,5), (1,6,4,3,5), (1,2,3,6,5), (1,5,6,3,4,2), (1,4)(2,6), (1,3,2,5,4,6), (3,6,4), (1,6,3,5,4,2), (1,2)(3,6,4), (1,5,3,4)(2,6), (1,4,6)(2,5), (1,3,2,4,5), (2,6,3,5,4), (1,6,2,5,3,4), (1,2,6,3,5,4), (1,5,2,4,6), (1,4,5)(2,3), (1,3)(5,6), (2,5,3,4,6), (1,6)(2,4,5), (1,2,5,3,4,6), (1,5)(2,3), (1,4,3)(5,6), (1,3,6,4,2), (2,4,5), (1,6,5)(2,3), (1,2,4,5), (1,5,6,4,3), (1,4,2)(3,6), (1,3,5,4)(2,6), (2,3)(5,6), (1,6,4,3), (1,2,3)(5,6), (1,5,4,2)(3,6), (1,4)(2,6)(3,5), (1,3,4,6)(2,5), (4,5,6), (1,6,3,2), (1,2)(4,5,6), (1,5,4,3)(2,6), (1,4,2,5,3,6), (1,3,5,2,4), (2,6,3), (1,6,2,5,4,3), (1,2,6,3), (1,5,3,6)(2,4), (1,4)(2,3,5), (1,3,4,6,5), (2,5,4,3,6), (1,6)(2,4)(3,5), (1,2,5,4,3,6), (1,5,2,3,4), (1,4,6,5), (1,3,2)(4,5,6), (2,4)(3,5), (1,6,5,2,3,4), (1,2,4)(3,5), (1,5)(4,6), (1,4,5,6,3,2), (1,3)(2,6), (2,3,4,6,5), (1,6,4,5), (1,2,3,4,6,5), (1,5,6,3,2), (1,4,3)(2,6), (1,3,6)(2,5,4), (3,4,5,6), (1,6,2), (1,2)(3,4,5,6), (1,5,4,3,2,6), (1,4,2,5,3), (1,3,6,5,2,4), (2,6), (1,6)(2,5,4,3), (1,2,6), (1,5,3)(2,4), (1,4)(2,3,6,5), (1,3,5)(4,6), (2,5,4,3), (1,6,5,3)(2,4), (1,2,5,4,3), (1,5,2,3,6,4), (1,4,6,3,5), (1,3,4,5,6,2), (2,4)(3,6,5), (1,6,4)(2,3,5), (1,2,4)(3,6,5), (1,5)(3,4,6), (1,4,5,6,2), (1,3,2,6), (2,3,5)(4,6), (1,6,3,4,5), (1,2,3,5)(4,6), (1,5,6,2), (1,4,3,2,6), (1,3)(2,5,4), (3,5,6), (1,6,2)(3,4), (1,2)(3,5,6), (1,5,4,2,6), (1,4)(2,5,3), (1,3)(2,4,6,5), (2,6)(3,4), (1,6)(2,5,4), (1,2,6)(3,4), (1,5,3,2,4), (1,4,6,5,2,3), (1,3,6,4,5), (2,5,4), (1,6,5,3,2,4), (1,2,5,4), (1,5,2,3)(4,6), (1,4,5)(3,6), (1,3,5,6,2), (2,4,6,5,3), (1,6,4,5,2,3), (1,2,4,6,5,3), (1,5)(3,6), (1,4,3,5,6,2), (1,3,4,2,6), (2,3,6,4,5), (1,6,3,5), (1,2,3,6,4,5), (1,5,6,2)(3,4), (1,4,2,6), (1,3,2,5,4), (3,6), (1,6,2)(3,5,4), (1,2)(3,6), (1,5,3,4,2,6), (1,4)(2,5), (1,3,2,4,6,5), (2,6)(3,5,4), (1,6)(2,5,3,4), (1,2,6)(3,5,4), (1,5,2,4), (1,4,6,5)(2,3), (1,3)(4,5,6), (2,5,3,4), (1,6,5,2,4), (1,2,5,3,4), (1,5)(2,3)(4,6), (1,4,5,6,3), (1,3,6,2), (2,4,6,5), (1,6,4,5)(2,3), (1,2,4,6,5), (1,5,6,3), (1,4,3,6,2), (1,3,5,4,2,6), (2,3)(4,5,6), (1,6,3), (1,2,3)(4,5,6), (1,5,4,3,6,2), (1,4,2,6)(3,5), (1,3,4)(2,5), (4,6), (1,6,3,2)(4,5), (1,2)(4,6), (1,5,3)(2,6), (1,4,3,6)(2,5), (1,3,5)(2,4), (2,6,3)(4,5), (1,6,2,5,3), (1,2,6,3)(4,5), (1,5,2,4,3,6), (1,4,2,3,5), (1,3,4)(5,6), (2,5,3,6), (1,6)(2,4,3,5), (1,2,5,3,6), (1,5)(2,3,4), (1,4)(5,6), (1,3,2)(4,6), (2,4,3,5), (1,6,5)(2,3,4), (1,2,4,3,5), (1,5,6,4), (1,4,6,3,2), (1,3)(2,6)(4,5), (2,3,4)(5,6), (1,6,4), (1,2,3,4)(5,6), (1,5,4,6,3,2), (1,4,5,3)(2,6), (1,3,6)(2,5), (3,4,6), (1,6,2)(4,5), (1,2)(3,4,6), (1,5,3,2,6), (1,4,3)(2,5), (1,3,6,5)(2,4), (2,6)(4,5), (1,6)(2,5,3), (1,2,6)(4,5), (1,5,2,4,3), (1,4,2,3,6,5), (1,3,5,6,4), (2,5,3), (1,6,5,2,4,3), (1,2,5,3), (1,5)(2,3,6,4), (1,4)(3,5,6), (1,3,4,6,2), (2,4,3,6,5), (1,6,4,2,3,5), (1,2,4,3,6,5), (1,5,6,3,4), (1,4,6,2), (1,3,2,6)(4,5), (2,3,5,6,4), (1,6,3,4), (1,2,3,5,6,4), (1,5,4,6,2), (1,4,5,3,2,6), (1,3)(2,5), (3,5,4,6), (1,6,2)(3,4,5), (1,2)(3,5,4,6), (1,5,2,6), (1,4,3,2,5), (1,3)(2,4)(5,6), (2,6)(3,4,5), (1,6)(2,5), (1,2,6)(3,4,5), (1,5)(2,4,3), (1,4,2,3)(5,6), (1,3,6,4), (2,5), (1,6,5)(2,4,3), (1,2,5), (1,5,6,4,2,3), (1,4)(3,6), (1,3,5,4,6,2), (2,4,3)(5,6), (1,6,4,2,3), (1,2,4,3)(5,6), (1,5,4)(3,6), (1,4,6,2)(3,5), (1,3,4,5,2,6), (2,3,6,4), (1,6,3,5,4), (1,2,3,6,4), (1,5,3,4,6,2), (1,4,5,2,6), (1,3,2,5), (3,6)(4,5), (1,6,2)(3,5), (1,2)(3,6)(4,5), (1,5,2,6)(3,4), (1,4,2,5), (1,3,2,4)(5,6), (2,6)(3,5), (1,6)(2,5)(3,4), (1,2,6)(3,5), (1,5)(2,4), (1,4)(2,3)(5,6), (1,3)(4,6), (2,5)(3,4), (1,6,5)(2,4), (1,2,5)(3,4), (1,5,6,4)(2,3), (1,4,6,3), (1,3,6,2)(4,5), (2,4)(5,6), (1,6,4)(2,3), (1,2,4)(5,6), (1,5,4,6,3), (1,4,5,3,6,2), (1,3,5,2,6), (2,3)(4,6), (1,6,3)(4,5), (1,2,3)(4,6), (1,5,3,6,2), (1,4,3,5,2,6), (1,3,4,2,5)\right]\)
+</div>
+</div>
+</section>
+<section id="multiplication" class="level5">
+<h5 class="anchored" data-anchor-id="multiplication">Multiplication</h5>
+<div id="310e9058" class="cell" data-execution_count="81">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb94-1"><a href="#cb94-1"></a># S4 elements multiplication</span>
+<span id="cb94-2"><a href="#cb94-2"></a></span>
+<span id="cb94-3"><a href="#cb94-3"></a>P = S4[5]</span>
+<span id="cb94-4"><a href="#cb94-4"></a>Q = S4[12]</span>
+<span id="cb94-5"><a href="#cb94-5"></a>print(f'P = {P}, Q = {Q}')</span>
+<span id="cb94-6"><a href="#cb94-6"></a>print(f'P * Q = {Q * P}')</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P = (1,3,2), Q = (3,4)
+P * Q = (1,3,4,2)</code></pre>
+</div>
+</div>
+</section>
+<section id="signature" class="level5">
+<h5 class="anchored" data-anchor-id="signature">Signature</h5>
+<div id="98303977" class="cell" data-execution_count="82">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb96-1"><a href="#cb96-1"></a># S4 elements signature</span>
+<span id="cb96-2"><a href="#cb96-2"></a></span>
+<span id="cb96-3"><a href="#cb96-3"></a>P = S4[16]</span>
+<span id="cb96-4"><a href="#cb96-4"></a>Q = S4[2]</span>
+<span id="cb96-5"><a href="#cb96-5"></a>print(f'P = {P}, Q = {Q}')</span>
+<span id="cb96-6"><a href="#cb96-6"></a>print(f'sgn(P) = {P.sign()}')</span>
+<span id="cb96-7"><a href="#cb96-7"></a>print(f'sgn(Q) = {Q.sign()}')</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P = (2,3), Q = (1,4)(2,3)
+sgn(P) = -1
+sgn(Q) = 1</code></pre>
+</div>
+</div>
+</section>
+<section id="alternating-group" class="level5">
+<h5 class="anchored" data-anchor-id="alternating-group">Alternating group</h5>
+<div id="87082e88" class="cell" data-execution_count="83">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb98-1"><a href="#cb98-1"></a># A4 elements</span>
+<span id="cb98-2"><a href="#cb98-2"></a></span>
+<span id="cb98-3"><a href="#cb98-3"></a>A4 = AlternatingGroup(4)</span>
+<span id="cb98-4"><a href="#cb98-4"></a>A4.list()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="82">
+\(\displaystyle \left[1, (1,2)(3,4), (1,3)(2,4), (1,4)(2,3), (2,3,4), (1,2,4), (1,3,2), (1,4,3), (2,4,3), (1,2,3), (1,3,4), (1,4,2)\right]\)
+</div>
+</div>
+<div id="c1591cf8" class="cell" data-execution_count="84">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb99-1"><a href="#cb99-1"></a># A4 subgroup of S4</span>
+<span id="cb99-2"><a href="#cb99-2"></a></span>
+<span id="cb99-3"><a href="#cb99-3"></a>assert A4.is_subgroup(S4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0f1c8563" class="cell" data-execution_count="85">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb100-1"><a href="#cb100-1"></a># A4 elements signature</span>
+<span id="cb100-2"><a href="#cb100-2"></a></span>
+<span id="cb100-3"><a href="#cb100-3"></a>assert all(e.sign() == 1 for e in A4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="ee3366ff" class="cell" data-execution_count="86">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb101-1"><a href="#cb101-1"></a># A4 order</span>
+<span id="cb101-2"><a href="#cb101-2"></a></span>
+<span id="cb101-3"><a href="#cb101-3"></a>assert A4.order() == S4.order() / 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cayleys-theorem" class="level5">
+<h5 class="anchored" data-anchor-id="cayleys-theorem">Cayley’s theorem</h5>
+<p>Every finite group of order <span class="math inline">\(N\)</span> is isomorphic to a subgroup of <span class="math inline">\(S_N\)</span>.</p>
+<div id="aff727b1" class="cell" data-execution_count="87">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb102-1"><a href="#cb102-1"></a># S2 subgroups</span>
+<span id="cb102-2"><a href="#cb102-2"></a></span>
+<span id="cb102-3"><a href="#cb102-3"></a>assert Z2.is_subgroup(S2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="5e8c39a7" class="cell" data-execution_count="88">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb103-1"><a href="#cb103-1"></a># S3 subgroups</span>
+<span id="cb103-2"><a href="#cb103-2"></a></span>
+<span id="cb103-3"><a href="#cb103-3"></a>assert Z3.is_subgroup(S3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c61f22d6" class="cell" data-execution_count="89">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb104-1"><a href="#cb104-1"></a># S4 subgroups</span>
+<span id="cb104-2"><a href="#cb104-2"></a></span>
+<span id="cb104-3"><a href="#cb104-3"></a>assert Z4.is_subgroup(S4)</span>
+<span id="cb104-4"><a href="#cb104-4"></a>assert K4G.is_subgroup(S4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="4cf647ed" class="cell" data-execution_count="90">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb105-1"><a href="#cb105-1"></a># S5 subgroups</span>
+<span id="cb105-2"><a href="#cb105-2"></a></span>
+<span id="cb105-3"><a href="#cb105-3"></a>assert Z5.is_subgroup(S5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0ce517d6" class="cell" data-execution_count="91">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb106-1"><a href="#cb106-1"></a># S6 subgroups</span>
+<span id="cb106-2"><a href="#cb106-2"></a></span>
+<span id="cb106-3"><a href="#cb106-3"></a>assert Z6.is_subgroup(S6)</span>
+<span id="cb106-4"><a href="#cb106-4"></a>assert Z2xZ3.is_subgroup(S6)</span>
+<span id="cb106-5"><a href="#cb106-5"></a>assert S3.is_subgroup(S6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 
 
+</section>
 </section>
 </section>
 </section>
