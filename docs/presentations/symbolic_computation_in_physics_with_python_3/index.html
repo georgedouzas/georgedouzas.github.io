@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Introduction to affine spaces">
+<meta name="description" content="Part 3: PyRate">
 
-<title>Physical space – Georgios Douzas</title>
+<title>Symbolic Computation in Theoretical Physics with Python – Georgios Douzas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,35 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -181,16 +152,16 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Physical space</h1>
+<h1 class="title">Symbolic Computation in Theoretical Physics with Python</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Physics</div>
-    <div class="quarto-category">Mechanics</div>
+    <div class="quarto-category">Computational Physics</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Introduction to affine spaces
+    Part 3: PyRate
   </div>
 </div>
 
@@ -208,70 +179,188 @@ window.Quarto = {
 
 
 <p><img src="featured.png" class="img-fluid"></p>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>It’s quite common to think of physical space as <span class="math inline">\(\mathbb{R}^3\)</span>, but this perspective can be misleading, both from a mathematical and a physical standpoint. Instead, the three-dimensional space we encounter in Classical Physics (and even the four-dimensional spacetime in Special Relativity) is more accurately captured by the concept of affine spaces.</p>
-</section>
-<section id="definition" class="level1">
-<h1>Definition</h1>
-<p>To understand this better, let’s dive into what a real affine space is. A real affine space of finite dimension <span class="math inline">\(n\)</span>, denoted by <span class="math inline">\(\mathbb{A}^n\)</span>, is a collection of elements known as points, but with some additional structure:</p>
-<ul>
-<li>There’s an associated <span class="math inline">\(n\)</span>-dimensional vector space <span class="math inline">\(V\)</span>, which we call the space of displacements or the space of free vectors.</li>
-<li>A mapping <span class="math inline">\(\mathbb{A}^n \times \mathbb{A}^n \ni (P, Q) \mapsto P - Q \in V\)</span> that respects certain conditions:
-<ul>
-<li>For every point <span class="math inline">\(Q\in \mathbb{A}^n\)</span> and every vector <span class="math inline">\(\mathbf{v} \in V\)</span>, there’s a unique point <span class="math inline">\(P \in \mathbb{A}^n\)</span> such that <span class="math inline">\(P - Q =\mathbf{v}\)</span>.</li>
-<li>For any three points <span class="math inline">\(P, Q, R \in \mathbb{A}^n\)</span>, the equation <span class="math inline">\(P - Q + Q - R = P - R\)</span> always holds.</li>
-</ul></li>
-</ul>
-</section>
-<section id="example" class="level1">
-<h1>Example</h1>
-<p>A trivial example is the real affine space <span class="math inline">\(\mathbb{A}^n = \mathbb{R}^n\)</span> with the displacement space being the vector space <span class="math inline">\(\mathbb{R}^n\)</span>. A more interesting example is the system <span class="math inline">\(\begin{cases}x + y + z = 2 \\2x + y - z =
-1\end{cases}\)</span></p>
-<div id="4e690d56" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>a = matrix([[1,1,1], [2,1,-1]])</span>
-<span id="cb1-2"><a href="#cb1-2"></a>b = vector([2, 1])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="pyrate" class="level1">
+<h1>PyRate</h1>
+<p><a href="https://github.com/LSartore/pyrate">PyRate</a> is a Python library for the computation of renormalization group equations for general, non-supersymmetric gauge theories.</p>
+<section id="standard-model" class="level2">
+<h2 class="anchored" data-anchor-id="standard-model">Standard model</h2>
+<p>The Standard Model model-file:</p>
+<div id="54f69cd1" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> Path.<span class="bu">open</span>(Path(<span class="st">'models'</span>) <span class="op">/</span> <span class="st">'SM.model'</span>, <span class="st">'rt'</span>) <span class="im">as</span> model_file:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(model_file.read())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># YAML 1.1
+---
+Author: Lohan Sartore
+Date: 08.06.2020
+Name: SM
+Groups: {U1Y: U1, SU2L: SU2, SU3c: SU3}
+
+
+Fermions: {
+    Q : {Gen: 3, Qnb: {U1Y: 1/6, SU2L: 2, SU3c: 3}},
+    L : {Gen: 3, Qnb: {U1Y: -1/2, SU2L: 2}},
+    uR : {Gen: 3, Qnb: {U1Y: 2/3, SU3c: 3}},
+    dR : {Gen: 3, Qnb: {U1Y: -1/3, SU3c: 3}},
+    eR : {Gen: 3, Qnb: {U1Y: -1}},
+}
+
+RealScalars: {
+}
+
+ComplexScalars: {
+    H : {RealFields: [Pi, Sigma], Norm: 1/sqrt(2), Qnb: {U1Y: 1/2, SU2L: 2}},
+}
+
+
+Potential: {
+
+    Definitions: {
+        Htilde[i] : Eps[i,j]*Hbar[j]
+    },
+
+    Yukawas: {
+        Yu : Qbar[i,a] Htilde[i] uR[a],
+        Yd : Qbar[i,a] H[i] dR[a],
+        Ye : Lbar[i] H[i] eR
+    },
+
+    QuarticTerms: {
+        lambda : (Hbar[i] H[i])**2
+    },
+
+    ScalarMasses: {
+        mu : -Hbar[i] H[i]
+    }
+
+}
+
+Vevs: {
+    v: Pi[2]
+}
+
+Substitutions: {
+    # Rename the gauge coupling constants
+    g_U1Y : g1,
+    g_SU2L : g2,
+    g_SU3c : g3,
+
+    # Possibly define GUT normalizations
+    g1 : sqrt(5/3) * g1,
+
+    # Substitutions for Yukawa matrices
+    Yu : [0, 0, 'yt'],
+    Yd : [0, 0, 'yb'],
+    Ye : [0, 0, 'ytau']
+}
+
+Latex: {
+    # Particles
+
+    uR : u_R,
+    dR : d_R,
+    eR : e_R,
+
+    Pi : \Pi,
+    Sigma : \Sigma,
+
+    Htilde : \tilde{H},
+
+    # Couplings
+
+    g1 : g_1,
+    g2 : g_2,
+    g3 : g_3,
+
+    Yu : Y_u,
+    Yd : Y_d,
+    Ye : Y_e,
+
+    lambda : \lambda,
+    mu : \mu,
+
+    yt : y_t,
+    yb : y_b,
+    ytau: y_\tau
+}
+
+</code></pre>
 </div>
-<p>The solution space of the system is an affine space <span class="math inline">\(\mathbb{A}^3\)</span>:</p>
-<div id="e0b28f8d" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>A = AffineSpace(3, RR)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-\(\displaystyle \newcommand{\Bold}[1]{\mathbf{#1}}\mathbf{A}_{\Bold{R}}^{3}\)
+</div>
+<p>Run PyRate to compute the 2-loop RGEs of the Standard Model:</p>
+<div id="668a2fa8" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>run pyR<span class="op">@</span>TE.py <span class="op">--</span>no<span class="op">-</span>MathematicaOutput <span class="op">-</span>m models<span class="op">/</span>SM.model <span class="op">-</span>l <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Solve the RGEs and plot the results:</p>
+<div id="0377f709" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">'results/SM/PythonOutput'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> sqrt, pi</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> SM <span class="im">import</span> RGEsolver</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create solver object</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>rge <span class="op">=</span> RGEsolver(<span class="st">'rge'</span>, tmin<span class="op">=</span><span class="fl">1.9</span>, tmax<span class="op">=</span><span class="dv">20</span>, initialScale<span class="op">=</span><span class="fl">1.9</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Running scheme</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>rge.loops <span class="op">=</span> {<span class="st">'GaugeCouplings'</span>: <span class="dv">2</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>             <span class="st">'Yukawas'</span>: <span class="dv">2</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>             <span class="st">'QuarticTerms'</span>: <span class="dv">2</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>             <span class="st">'ScalarMasses'</span>: <span class="dv">2</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>             <span class="st">'Vevs'</span>: <span class="dv">2</span>}</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Gauge Couplings</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>rge.g1.initialValue <span class="op">=</span> sqrt(<span class="dv">4</span><span class="op">*</span>pi<span class="op">/</span><span class="dv">128</span> <span class="op">/</span> (<span class="dv">1</span><span class="op">-</span><span class="fl">.22</span>)) <span class="op">*</span> sqrt(<span class="dv">5</span><span class="op">/</span><span class="dv">3</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>rge.g2.initialValue <span class="op">=</span> sqrt(<span class="dv">4</span><span class="op">*</span>pi<span class="op">/</span><span class="dv">128</span> <span class="op">/</span> <span class="fl">.22</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>rge.g3.initialValue <span class="op">=</span> sqrt(<span class="dv">4</span><span class="op">*</span>pi<span class="op">*</span><span class="fl">.12</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Yukawa Couplings</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>rge.yt.initialValue <span class="op">=</span> <span class="fl">.9</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>rge.yb.initialValue <span class="op">=</span> <span class="fl">.03</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>rge.ytau.initialValue <span class="op">=</span> <span class="fl">.01</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Quartic Couplings</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>rge.lambda_.initialValue <span class="op">=</span> <span class="fl">0.13</span><span class="op">/</span><span class="dv">2</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Scalar Mass Couplings</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>rge.mu.initialValue <span class="op">=</span> sqrt(<span class="fl">.13</span>) <span class="op">*</span> <span class="dv">246</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Vacuum-expectation values</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>rge.v.initialValue <span class="op">=</span> <span class="dv">246</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose Landau gauge</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>rge.fixGauge(<span class="dv">0</span>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve the system of RGEs </span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>rge.solve(step <span class="op">=</span> <span class="fl">.05</span>)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the results</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>rge.plot(figSize<span class="op">=</span>(<span class="dv">1100</span>, <span class="dv">1000</span>), subPlots<span class="op">=</span><span class="va">True</span>, printLoopLevel<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>System of RGEs solved in 0.011 seconds.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<p>Additionally, the the solution space of the homogeneous system is the space of displacements <span class="math inline">\(V\)</span>:</p>
-<div id="e8657bfc" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>V = VectorSpace(RR, 3).subspace(a.right_kernel().basis())</span>
-<span id="cb3-2"><a href="#cb3-2"></a>V</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-\(\displaystyle \newcommand{\Bold}[1]{\mathbf{#1}}\mathrm{RowSpan}_{\Bold{R}}\left(\begin{array}{rrr}
-1.00000000000000 &amp; -1.50000000000000 &amp; 0.500000000000000
-\end{array}\right)\)
 </div>
-</div>
-<p>We can get a particular solution <span class="math inline">\(Q \in \mathbb{A}^3\)</span> and verify that it is indeed a solution:</p>
-<div id="2417e3f0" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a>Q = A.point(tuple(a.solve_right(b)))</span>
-<span id="cb4-2"><a href="#cb4-2"></a>assert a * vector(Q) == b</span>
-<span id="cb4-3"><a href="#cb4-3"></a>Q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Show the generated PDF containing the model details:</p>
+<div id="512ce4d7" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> IFrame</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>IFrame(<span class="st">"_pyrate/results/SM/SM.pdf"</span>, width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">800</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-\(\displaystyle \left(-1.00000000000000, 3.00000000000000, 0.000000000000000\right)\)
-</div>
-</div>
-<p>The general solution of the system is given by the displacement of <span class="math inline">\(Q\)</span>. For example another solution <span class="math inline">\(P \in \mathbb{A}^3\)</span> is the following:</p>
-<div id="bec95ed9" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href="#cb5-1"></a>v, *_ = V.basis()</span>
-<span id="cb5-2"><a href="#cb5-2"></a>P = A.translation(-v)(Q)</span>
-<span id="cb5-3"><a href="#cb5-3"></a>assert a * vector(P) == b</span>
-<span id="cb5-4"><a href="#cb5-4"></a>P</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-\(\displaystyle \left(0.000000000000000, 1.50000000000000, 0.500000000000000\right)\)
+
+        <iframe width="800" height="800" src="_pyrate/results/SM/SM.pdf" frameborder="0" allowfullscreen=""></iframe>
+        
 </div>
 </div>
 
 
-
+</section>
 </section>
 
 </main> <!-- /main -->

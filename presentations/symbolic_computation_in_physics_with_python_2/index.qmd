@@ -1,8 +1,8 @@
 ---
 title: "Symbolic Computation in Theoretical Physics with Python"
-description: "Using SageMath and Open-Source Tools."
+description: "Part 2: SageMath"
 categories: [Physics, Computational Physics]
-image: "images/computational_physics.jpg"
+image: "featured.png"
 bibliography: references.bib
 jupyter:
     kernel: SageMath-10.5
@@ -12,35 +12,7 @@ format:
         code-line-numbers: true
 ---
 
-![](images/computational_physics.jpg)
-
-# Introduction
-
-Symbolic computation simplifies complex equations and models physical systems.
-Python and open-source tools like SageMath make it easier to solve problems in
-quantum field theory, general relativity, and more.
-
-## Main libraries
-
-- [SageMath](https://www.sagemath.org) 
-    A comprehensive system for algebra, calculus, and numerical analysis. It’s widely used for symbolic computation in physics.
-- [Cadabra](https://cadabra.science/index.html) 
-    A tool for tensor calculations, especially in general relativity. It simplifies complex tensor equations.
-- [EinsteinPy](https://docs.einsteinpy.org/en/latest/user_guide.html) 
-    A Python library for general relativity, with tools to work with Einstein’s equations and relativistic phenomena.
-
-## Other libraries
-
-- [PyFeyn](https://pyfeyn2.readthedocs.io/en/latest/index.html) 
-    - A Python library for generating and visualizing Feynman diagrams, used in quantum field theory.
-- [PyRate](https://github.com/LSartore/pyrate) 
-    - A Python library for lattice field theory and high-energy physics calculations.
-- [munuSSM](https://gitlab.com/thomas.biekoetter/munussm) 
-    - A Python package for studying the phenomenology of the μ-from-ν Supersymmetric Standard Model (μνSSM).
-- [Wilson](https://wilson-eft.github.io/) 
-    - A framework for effective field theory calculations in lattice gauge theory.
-- [Flavio](https://flav-io.github.io/) 
-    - A Python library focused on flavor physics, studying mesons and baryons.
+![](featured.png)
 
 # SageMath
 
@@ -173,7 +145,6 @@ C
 C.eigenvectors_right()
 ```
 
-
 ```{sage}
 # Validation of eigenvalue equation
 
@@ -242,9 +213,8 @@ Lie groups, and Lie algebras. This section broadly follows
 
 ### Group theory
 
-We begin by exploring finite groups, followed by an introduction to Young
-diagrams and an alternative definition of groups via their presentation.
-Finally, we examine continuous groups and group actions.
+We begin by exploring finite groups, followed by an introduction to free groups
+and their presentation. Finally, we examine continuous groups and group actions.
 
 #### Smallest finite groups
 
@@ -663,7 +633,7 @@ print(f'sgn(P) = {P.sign()}')
 print(f'sgn(Q) = {Q.sign()}')
 ```
 
-##### Alternating group
+##### Alternating groups
 
 ```{sage}
 # A4 elements
@@ -726,3 +696,71 @@ assert Z6.is_subgroup(S6)
 assert Z2xZ3.is_subgroup(S6)
 assert S3.is_subgroup(S6)
 ```
+
+#### Free groups
+
+A free group $G$ is defined as follows:
+
+- $X=\left\{g_1, g_2, \ldots, g_n\right\}$ a subset of $G$
+- $g \in G - \{e\}$ can be uniquely written as $g=g_{j_1}^{i_1} g_{j_2}^{i_2} \cdots g_{j_m}^{i_m}$ with $i_k \in \mathbb{Z} \backslash\{0\}$ and $g_{j_i} \neq g_{j_{i+1}}$
+
+A relation $r$ is a constraint $r \equiv g_{j_2}^{i_1} g_{j_2}^{i_2} \cdots g_{j_m}^{i_m}=e$.
+
+The presentation of the group $G$ is defined as $\left\langle g_1, g_2, \ldots, g_n \mid r_1, r_2, \ldots, r_m\right\rangle$.
+
+```{sage}
+# G = <a>
+
+G.<a> = FreeGroup(1)
+G
+```
+
+```{sage}
+# G = <a, b>
+
+G.<a, b> = FreeGroup(2)
+G
+```
+
+```{sage}
+# G = <a|a^n>
+
+n = 3
+F.<a> = FreeGroup(1)
+G = F / [a^n]
+G
+```
+
+```{sage}
+# G, Z3 isomorphism
+
+assert Z3.is_isomorphic(G.as_permutation_group())
+```
+
+```{sage}
+# G = <a,b| a*b*a^(-1)*b^(-1)>
+
+F.<a, b> = FreeGroup(2)
+G = FreeGroup(['a', 'b']) / [a*b*a^(-1)*b^(-1)]
+G
+```
+
+```{sage}
+# G = <r,f| r^4,f^2,rfrf>
+
+F.<r, f> = FreeGroup(2)
+G = F / [r^4, f^2, r*f*r*f]
+G
+```
+
+```{sage}
+# G, D4 ismoorphism
+
+assert D4.is_isomorphic(G.as_permutation_group())
+```
+
+### Lie groups
+
+A Lie group is a continuous group whose group manifold is differentiable. The
+group $\operatorname{GL}(n, \mathbb{C})$ and its subgroups are called matrix Lie
+groups.

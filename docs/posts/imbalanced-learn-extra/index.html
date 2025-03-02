@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Implementation of novel oversampling algorithms.">
+<meta name="description" content="Implementation of novel oversampling algorithms">
 
 <title>imbalanced-learn-extra – Georgios Douzas</title>
 <style>
@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    Implementation of novel oversampling algorithms.
+    Implementation of novel oversampling algorithms
   </div>
 </div>
 
@@ -192,7 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="clustering-based-oversampling" class="level1">
 <h1>Clustering-based oversampling</h1>
 <p>Clustering-based oversampling algorithms deal with the within-classes imbalance issue, since <a href="https://arxiv.org/pdf/1106.1813.pdf">SMOTE</a> and its variants addresses only the between-classes imbalance. To present the API, let’s first load some data:</p>
-<div id="d5ed08b4" class="cell" data-execution_count="2">
+<div id="a6dc8d7a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -200,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> load_breast_cancer(return_X_y<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The data are imbalanced:</p>
-<div id="d6d8087f" class="cell" data-execution_count="3">
+<div id="ec917c20" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -217,7 +217,7 @@ Number of minority class samples: 212.</code></pre>
 </div>
 </div>
 <p>I will use <code>KMeans</code> and <code>SMOTE</code> to create a clustering-based oversampler, but any other combination would work:</p>
-<div id="309db043" class="cell" data-execution_count="4">
+<div id="6c7e8b0f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> imblearn.over_sampling <span class="im">import</span> SMOTE</span>
@@ -231,7 +231,7 @@ Number of minority class samples: 212.</code></pre>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>kmeans_smote <span class="op">=</span> ClusterOverSampler(oversampler<span class="op">=</span>smote, clusterer<span class="op">=</span>kmeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can use the <code>fit_resample</code> method to get the resampled data:</p>
-<div id="3c94a161" class="cell" data-execution_count="5">
+<div id="09538e4b" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>_, y_res <span class="op">=</span> kmeans_smote.fit_resample(X, y)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> Counter(y_res)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
@@ -245,7 +245,7 @@ Number of minority class samples: 357.</code></pre>
 </div>
 </div>
 <p>The clustering-based oversamplers can be used in machine learning pipelines:</p>
-<div id="73e0aee4" class="cell" data-execution_count="6">
+<div id="c0f7e6bb" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
@@ -264,7 +264,7 @@ Number of minority class samples: 357.</code></pre>
 <section id="geometric-smote" class="level1">
 <h1>Geometric SMOTE</h1>
 <p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0020025519305353">Geometric SMOTE</a> is not just another member of the <a href="https://arxiv.org/pdf/1106.1813.pdf">SMOTE</a>’s family since it expands the data generation area and does not just use linear interpolation of existing samples to generate for new samples. To test its performance, let’s first simulate various imbalanced datasets:</p>
-<div id="390a1096" class="cell" data-execution_count="7">
+<div id="190b855f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> ParameterGrid</span>
@@ -289,7 +289,7 @@ Number of minority class samples: 357.</code></pre>
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will also create pipelines of various oversamplers, classifiers and their hyperparameters:</p>
-<div id="7ce4c2b1" class="cell" data-execution_count="8">
+<div id="1ccab87a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
@@ -330,7 +330,7 @@ Number of minority class samples: 357.</code></pre>
 <span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        pipelines.append(GridSearchCV(estimator, param_grid, cv<span class="op">=</span>cv, scoring<span class="op">=</span><span class="st">"f1"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, we will calculate the <a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html">nested cross-validation scores</a> of the above pipelines using F-score as evaluation metric:</p>
-<div id="b6035602" class="cell" data-execution_count="9">
+<div id="97338fb0" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>n_runs <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> []</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> run_id <span class="kw">in</span> <span class="bu">range</span>(n_runs):</span>
@@ -368,7 +368,7 @@ Number of minority class samples: 357.</code></pre>
 <span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>            cv_scores.append((run_id, dataset_id, pipeline_name, scores.mean()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s see the final results of the experiment:</p>
-<div id="1e5bdb48" class="cell" data-execution_count="10">
+<div id="777afbff" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> (</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    pd.DataFrame(cv_scores, columns<span class="op">=</span>[<span class="st">"Run"</span>, <span class="st">"Dataset"</span>, <span class="st">"Pipeline"</span>, <span class="st">"Score"</span>])</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"Dataset"</span>, <span class="st">"Pipeline"</span>])[<span class="st">"Score"</span>]</span>
@@ -589,7 +589,7 @@ Number of minority class samples: 357.</code></pre>
 </div>
 </div>
 <p>The next table shows the pipeline with the highest F-score per dataset:</p>
-<div id="5706cfb7" class="cell" data-execution_count="11">
+<div id="0d080f16" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cv_scores_best <span class="op">=</span> cv_scores.loc[cv_scores.groupby(<span class="st">"Dataset"</span>)[<span class="st">"Score"</span>].idxmax()]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>cv_scores_best</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">

@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Leveraging Reinforcement Learning and LLMs for building smart, adaptive agents.">
+<meta name="description" content="Leveraging Reinforcement Learning and LLMs for building smart, adaptive agents">
 
 <title>Reinforcement Learning and LLM-based Agents – Georgios Douzas</title>
 <style>
@@ -208,7 +208,7 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Leveraging Reinforcement Learning and LLMs for building smart, adaptive agents.
+    Leveraging Reinforcement Learning and LLMs for building smart, adaptive agents
   </div>
 </div>
 
@@ -943,7 +943,7 @@ Example
 <section id="state-transition-probability" class="level4">
 <h4 class="anchored" data-anchor-id="state-transition-probability">State transition probability</h4>
 <p><span class="math display">\[[P]_{(s, a), s^{\prime}}=p\left(s^{\prime} \mid s, a\right)\]</span></p>
-<div id="7a6a4c90" class="cell" data-execution_count="2">
+<div id="c472f1df" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> np.array(</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    [</span>
@@ -974,7 +974,7 @@ Example
 <section id="reward-probability" class="level4">
 <h4 class="anchored" data-anchor-id="reward-probability">Reward probability</h4>
 <p><span class="math display">\[[R]_{(s, a), r}=p\left(r \mid s, a\right)\]</span></p>
-<div id="f566403f" class="cell" data-execution_count="3">
+<div id="90c35d75" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> np.array(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    [</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        [<span class="fl">1.</span>, <span class="fl">0.</span>, <span class="fl">0.</span>],</span>
@@ -1004,7 +1004,7 @@ Example
 <section id="policy-probability" class="level4">
 <h4 class="anchored" data-anchor-id="policy-probability">Policy probability</h4>
 <p><span class="math display">\[[\Pi]_{a, s} = p(a \mid s)\]</span></p>
-<div id="81e5ab39" class="cell" data-execution_count="4">
+<div id="1d3d6fa4" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Pi <span class="op">=</span> np.array([</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>],</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>],</span>
@@ -1018,7 +1018,7 @@ Example
 <h4 class="anchored" data-anchor-id="expected-reward-under-policy">Expected reward under policy</h4>
 <p><span class="math display">\[\left[r_\pi\right]_s = \sum_{a \in \mathscr{A}} \pi(a \mid s) \sum_{r \in \mathscr{R}} p(r \mid s, a) r\]</span></p>
 <p><span class="math display">\[\left[r_\pi\right]_s = \sum_{a \in \mathscr{A}} \big( R \cdot \left[\begin{array}{c}-1 &amp; 1 &amp; 0 \end{array}\right]^T \big)_{s, a} \cdot [\Pi]_{a, s}\]</span></p>
-<div id="e9d3c51d" class="cell" data-execution_count="5">
+<div id="b25e09e7" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>r_space <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>r_p <span class="op">=</span> np.diagonal(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    np.matmul(</span>
@@ -1036,7 +1036,7 @@ Example
 <h4 class="anchored" data-anchor-id="state-transition-probability-under-policy">State transition probability under policy</h4>
 <p><span class="math display">\[\left[P_\pi\right]_{s s^{\prime}} = \sum_{a \in \mathscr{A}} \pi(a \mid s) p\left(s^{\prime} \mid s, a\right)\]</span></p>
 <p><span class="math display">\[\left[P_\pi\right]_{s s^{\prime}} = \sum_{a \in \mathscr{A}} [\Pi^T]_{s, a} [P]_{(s, a), s^{\prime}}\]</span></p>
-<div id="62029435" class="cell" data-execution_count="6">
+<div id="3d9e4269" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>P_p <span class="op">=</span> np.diagonal(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    np.matmul(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        P.T.reshape(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>), </span>
@@ -1055,7 +1055,7 @@ Example
 <section id="implementing-bellman-equation-closed-form-solution" class="level4">
 <h4 class="anchored" data-anchor-id="implementing-bellman-equation-closed-form-solution">Implementing Bellman equation closed-form solution</h4>
 <p><span class="math display">\[v_\pi=\left(I-\gamma P_\pi\right)^{-1} r_\pi\]</span></p>
-<div id="6cd635f5" class="cell" data-execution_count="7">
+<div id="3f5cd788" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> <span class="fl">0.9</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.identity(r_p.size)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>v_cfs <span class="op">=</span> np.dot(np.linalg.inv(I <span class="op">-</span> gamma <span class="op">*</span> P_p), r_p)</span>
@@ -1068,7 +1068,7 @@ Example
 <section id="implementing-bellman-equation-iterative-solution" class="level4">
 <h4 class="anchored" data-anchor-id="implementing-bellman-equation-iterative-solution">Implementing Bellman equation iterative solution</h4>
 <p><span class="math display">\[v_{k+1}=r_\pi+\gamma P_\pi v_k, \quad k=0,1,2, \ldots\]</span></p>
-<div id="be7492b0" class="cell" data-execution_count="8">
+<div id="c91779a8" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tol <span class="op">=</span> <span class="fl">1e-5</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>v_is <span class="op">=</span> np.zeros_like(r_p)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>

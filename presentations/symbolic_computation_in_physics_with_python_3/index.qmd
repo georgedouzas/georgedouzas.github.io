@@ -1,0 +1,92 @@
+---
+title: "Symbolic Computation in Theoretical Physics with Python"
+description: "Part 3: PyRate"
+categories: [Physics, Computational Physics]
+image: "featured.png"
+bibliography: references.bib
+---
+
+![](featured.png)
+
+# PyRate
+
+```{python}
+#| echo: false
+#| output: false
+%cd _pyrate
+```
+
+[PyRate](https://github.com/LSartore/pyrate)  is a Python library for the computation of renormalization
+group equations for general, non-supersymmetric gauge theories.
+
+## Standard model
+
+The Standard Model model-file:
+
+```{python}
+from pathlib import Path
+with Path.open(Path('models') / 'SM.model', 'rt') as model_file:
+    print(model_file.read())
+```
+
+Run PyRate to compute the 2-loop RGEs of the Standard Model:
+
+```{python}
+#| output: false
+%run pyR@TE.py --no-MathematicaOutput -m models/SM.model -l 2
+```
+
+Solve the RGEs and plot the results:
+
+```{python}
+import sys
+sys.path.append('results/SM/PythonOutput')
+
+from numpy import sqrt, pi
+from SM import RGEsolver
+
+# Create solver object
+rge = RGEsolver('rge', tmin=1.9, tmax=20, initialScale=1.9)
+
+# Running scheme
+rge.loops = {'GaugeCouplings': 2,
+             'Yukawas': 2,
+             'QuarticTerms': 2,
+             'ScalarMasses': 2,
+             'Vevs': 2}
+
+# Gauge Couplings
+rge.g1.initialValue = sqrt(4*pi/128 / (1-.22)) * sqrt(5/3)
+rge.g2.initialValue = sqrt(4*pi/128 / .22)
+rge.g3.initialValue = sqrt(4*pi*.12)
+
+# Yukawa Couplings
+rge.yt.initialValue = .9
+rge.yb.initialValue = .03
+rge.ytau.initialValue = .01
+
+# Quartic Couplings
+rge.lambda_.initialValue = 0.13/2
+
+# Scalar Mass Couplings
+rge.mu.initialValue = sqrt(.13) * 246
+
+# Vacuum-expectation values
+rge.v.initialValue = 246
+
+# Choose Landau gauge
+rge.fixGauge(0)
+
+# Solve the system of RGEs 
+rge.solve(step = .05)
+
+# Plot the results
+rge.plot(figSize=(1100, 1000), subPlots=True, printLoopLevel=True)
+```
+
+Show the generated PDF containing the model details:
+
+```{python}
+from IPython.display import IFrame
+IFrame("_pyrate/results/SM/SM.pdf", width=800, height=800)
+```

@@ -1,0 +1,45 @@
+---
+title: "Symbolic Computation in Theoretical Physics with Python"
+description: "Part 1: Open-source libraries"
+categories: [Physics, Computational Physics]
+image: "featured.png"
+bibliography: references.bib
+jupyter:
+    kernel: SageMath-10.5
+format: 
+    html:
+        math: true
+        code-line-numbers: true
+---
+
+![](featured.png)
+
+# Introduction
+
+Symbolic computation simplifies complex equations and helps solve problems in
+various fields. Python and open-source tools like SageMath make it easier to
+work on quantum field theory, general relativity, and beyond.
+
+## Main libraries
+
+- [SageMath](https://www.sagemath.org) 
+    A comprehensive system for algebra, calculus, and numerical analysis. It’s widely used for symbolic computation in physics.
+- [Cadabra](https://cadabra.science/index.html) 
+    A tool for tensor calculations, especially in general relativity. It simplifies complex tensor equations.
+- [EinsteinPy](https://docs.einsteinpy.org/en/latest/user_guide.html) 
+    A Python library for general relativity, with tools to work with Einstein’s equations and relativistic phenomena.
+
+## Other libraries
+
+- [PyRate](https://github.com/LSartore/pyrate) 
+    - A Python library for the computation of renormalization group equations for general, non-supersymmetric gauge theories.
+- [munuSSM](https://gitlab.com/thomas.biekoetter/munussm) 
+    - A Python package for studying the phenomenology of the μ-from-ν Supersymmetric Standard Model (μνSSM).
+- [Wilson](https://wilson-eft.github.io/) 
+    - A framework for effective field theory calculations in lattice gauge theory.
+- [Flavio](https://flav-io.github.io/) 
+    - A Python library focused on flavor physics, studying mesons and baryons.
+- [TorchPhysics](https://boschresearch.github.io/torchphysics/index.html)
+    - A Python library of deep learning methods for solving differential equations.
+- [PyFeyn](https://pyfeyn2.readthedocs.io/en/latest/index.html) 
+    - A Python library for generating and visualizing Feynman diagrams, used in quantum field theory.

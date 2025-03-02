@@ -1,15 +1,22 @@
 ---
 title: "Physical space"
-description: "Introduction to affine spaces."
+description: "Introduction to affine spaces"
 categories: [Physics, Mechanics]
 image: "featured.png"
 jupyter:
     kernel: SageMath-10.5
-execute: 
-  echo: fenced
+format: 
+    html:
+        math: true
+        code-line-numbers: true
 ---
 
 ![](featured.png)
+
+```{sage}
+#| echo: false
+%display latex
+```
 
 # Introduction
 
