@@ -1,0 +1,502 @@
+---
+title: "A Literature Review of Oversampling Techniques for Imbalanced Data Classification"
+author:
+  - name: Georgios Douzas
+    role:
+      - Writing
+    affiliation: NOVA IMS
+bibliography: references.bib
+keywords:
+  - Synthetic Data
+  - Tabular data
+  - Oversampling
+  - Supervised Learning
+abstract: >
+  Synthetic data generation is widely used across machine learning tasks such as anonymization, regularization, oversampling, and
+  semi-supervised learning. Among these, oversampling methods for supervised classification has received considerable attention,
+  particularly as a strategy for addressing class imbalance. Despite the widespread adoption of oversampling in tabular data
+  settings, few reviews offer a structured taxonomy of existing techniques. Much of the literature remains fragmented across
+  domains, with limited efforts to systematically differentiate the underlying generation mechanisms—particularly when both
+  original and latent space approaches are considered. This review provides a structured analysis of oversampling approaches
+  applied to classification tasks. We propose a unified taxonomy that organizes key methods according to their generative
+  principles, distinguish major categories of oversampling strategies, and examine how these methods operate in the input space.
+  In addition, we discuss evaluation metrics for synthetic data quality and highlight open research challenges. Our goal is to
+  support a clearer understanding of current practices and to inform future developments in oversampling for classification tasks.
+categories: [Artificial Intelligence, Machine Learning, Imbalanced Data, Publication]
+---
+
+# Introduction
+
+Tabular data, organized in rows and columns [@yoon2020vime; @fonseca2023tabular], is the main data format in machine learning (ML)
+and real-world applications. A key advantage of this structure is its flexibility—virtually any data modality, including images,
+text, or time series, can be transformed into a fixed-length vector and represented in tabular form. These transformed
+representations often reside in a lower-dimensional latent space, commonly referred to as embeddings, encodings, or feature
+vectors [@kingma2019introduction; @devries2017dataset].
+
+Synthetic data, which is generated to resemble real observations, has become a central component in many ML
+workflows [@assefa2020generating; @wang2024comprehensive]. Among its various uses, one of the most prominent is oversampling for
+handling class imbalance in classification tasks [@fonseca2021improving; @lu2023machine]. By generating additional samples for
+underrepresented classes, synthetic data can help reshape decision boundaries and mitigate bias in the training phase. Although
+oversampling is a primary application in tabular domains, synthetic data is also used for regularization through data
+augmentation [@wang2021regularizing], anonymization for privacy protection [@patki2016synthetic], semi-supervised
+learning [@laine2017temporal], active learning [@kim2021lada], and self-supervised model training [@grill2020bootstrap].
+
+Despite its importance, synthetic data generation for tabular formats remains underdeveloped relative to its practical
+significance [@fakoor2020fast]. Methods often operate either directly in the input space, requiring careful modeling of feature
+relationships, or in the latent space learned via generative models [@kingma2019introduction; @devries2017dataset;
+@figueira2022survey; @strelcenia2023survey]. For oversampling, strict preservation of statistical properties may be less critical,
+as the goal is to improve classifier generalization. However, for tasks such as anonymization or interpretability, maintaining
+these relationships becomes essential. Evaluating the quality of synthetic data adds further complexity, especially in
+high-dimensional spaces where small perceptual differences may lead to large metric discrepancies [@assefa2020generating;
+@theis2016note]. Alternative methods have been proposed based on distributional similarity, distance measures, or precision-recall
+metrics [@chundawat2022tabsyndex; @alaa2022faithful]. @tbl-1 presents an overview of the related literature reviews.
+
+| Reference                   | Data Type   | Domain      | Observations                                                                                                    |
+|-----------------------------|-------------|-------------|-----------------------------------------------------------------------------------------------------------------|
+| [@assefa2020generating]     | Tabular     | Finance     | Applications, and characteristics of synthetic data for anonymization.                                          |
+| [@hernandez2022synthetic]   | Tabular     | Healthcare  | Focuses on the application of GANs for privacy-preserving synthetic data generation.                            |
+| [@raghunathan2021synthetic] | Tabular     | Statistics  | Provides foundational definitions including differential privacy and disclosure control.                        |
+| [@sauber2022use]            | Tabular     | Various     | Explores GAN-based oversampling in cybersecurity and financial datasets.                                        |
+| [@hairani2024addressing]    | Tabular     | Healthcare  | Systematic review of SMOTE variants to address class imbalance in health data.                                  |
+| [@fonseca2023tabular]       | Tabular     | Various     | Reviews tabular and latent space generation methods, proposing a taxonomy.                                      |
+| [@strelcenia2023survey]     | Tabular     | Finance     | Focuses on GAN-based augmentation to address imbalance in credit card fraud detection.                          |
+| [@bayer2021survey]          | Text        | Various     | Categorizes text augmentation methods into functional groups.                                                   |
+| [@shorten2021text]          | Text        | Various     | Provides a review of text data augmentation methods.                                                            |
+| [@chen2021empirical]        | Text        | Various     | Surveys augmentation strategies tailored for limited-data learning scenarios.                                   |
+| [@feng2021survey]           | Text        | Various     | Overviews NLP-specific augmentation techniques and their applications.                                          |
+| [@liu2020survey]            | Text        | Various     | Analyzes real-world uses of NLP data augmentation with focus on input-level methods.                            |
+| [@nalepa2019data]           | Image       | Medicine    | Assesses methods from the 2018 brain-tumor segmentation challenge.                                              |
+| [@sampath2021survey]        | Image       | Various     | Highlights GAN-based strategies for tackling class imbalance in images.                                         |
+| [@yi2019generative]         | Image       | Medicine    | Discusses the role of GANs in medical image data generation.                                                    |
+| [@wang2020survey]           | Image       | Various     | Focuses on generative models for facial image augmentation and regularization.                                  |
+| [@shorten2019survey]        | Image       | Various     | Reviews image augmentation as a regularization method in deep learning.                                         |
+| [@khosla2020enhancing]      | Image       | Various     | Provides a broad overview with emphasis on traditional augmentation methods.                                    |
+| [@khalifa2021comprehensive] | Image       | Various     | Offers a comprehensive review across domains on image augmentation practices.                                   |
+| [@iwana2021empirical]       | Time series | Various     | Proposes a taxonomy of augmentation methods for time-series classification.                                     |
+| [@wen2020time]              | Time series | Various     | Augmentation for time series tasks including classification, anomaly detection, and forecasting.                |
+| [@viana2024synthetic]       | Time series | Various     | Literature review of time series synthetic data generation models.                                              |
+| [@figueira2022survey]       | Various     | Various     | Surveys synthetic data generation using deep learning methods.                                                  |
+| [@wang2024comprehensive]    | Various     | Various     | Provides a comprehensive survey of data augmentation across domains and modalities.                             |
+| [@lu2023machine]            | Various     | Various     | Reviews machine learning methods used for synthetic data generation.                                            |
+| [@zhao2022graph]            | Graph       | Various     | Reviews graph data augmentation for supervised and self-supervised learning.                                    |
+| [@liu2025survey]            | Graph       | Various     | Surveys imbalanced learning on graphs; identifies challenges and future directions.                             |
+
+: {#tbl-1 tbl-colwidths="[20,20,20,40]"}
+
+## Motivation
+
+This review investigates synthetic data generation techniques in the context of imbalanced classification, with particular focus
+on oversampling methods applied to input and latent space representations. While many existing surveys explore domain-specific or
+algorithm-specific applications, they often give limited attention to the underlying generative mechanisms. As a result, the
+broader theoretical understanding of synthetic data generation remains fragmented. Several reviews have addressed specific data
+types or tasks such as time series anonymization [@assefa2020generating; @hernandez2022synthetic], healthcare
+data [@raghunathan2021synthetic; @hairani2024addressing], statistical fidelity [@sauber2022use], cybersecurity [@nalepa2019data],
+text augmentation [@bayer2021survey; @shorten2019survey; @chen2021empirical; @liu2020survey; @sampath2021survey; @feng2021survey],
+medical imaging [@yi2019generative; @wang2020survey], facial data [@khosla2020enhancing; @khalifa2021comprehensive], image
+augmentation [@iwana2021empirical], time series [@wen2020time; @viana2024synthetic], and graph-based data [@zhao2022graph;
+@liu2025survey] but these works tend to focus narrowly on individual applications and offer limited generalizability.
+
+By contrast, this review adopts a broader perspective that cuts across domains and examines how oversampling methods are applied
+in classification involving input and latent spaces representations. We analyze the core mechanisms driving synthetic data
+creation, considering both direct generation in the input space domain and generation within lower-dimensional latent spaces.
+
+Existing taxonomies of synthetic data methods often diverge in terminology and emphasis, reflecting the heterogeneity of
+techniques and research communities. Nevertheless, there is a need to develop a unified taxonomy that captures the diversity of
+methods while offering conceptual clarity. In this review, we present an integrated synthesis of the literature, connecting
+disparate approaches across tasks, algorithms, and domains. Our objective is to provide a clearer understanding of synthetic data
+generation practices and identify promising research directions.
+
+## Retrieval strategy
+
+To construct the reference corpus for this study, a structured approach was adopted to address terminological inconsistencies and
+domain-specific differences. Existing reviews and surveys published since 2019 were first collected to understand naming
+conventions (e.g., “latent space,” “embedding,” “feature space”), explore domain-specific taxonomies, and validate the need for a
+broader, integrative review. These were supplemented with targeted searches focusing on specific domains, classification tasks,
+and data generation mechanisms. Google Scholar served as the primary retrieval tool. Specifically the query (“synthetic data
+generation” OR “oversampling” OR “imbalanced learning” OR “data augmentation”) AND (“literature review” OR “survey”) was used,
+while the search was restricted to articles published since 2019. The initial search was conducted on June 5th, 2025, with
+additional works incorporated as they were identified.
+
+## Structure of the paper
+
+This paper is organized as follows: The **Background** section describes key concepts related to synthetic data generation. The
+**Taxonomy** section presents a classification framework for existing generation methods. The **Generation mechanisms** section
+examines the core data generation strategies underlying these methods. The **Evaluation** section reviews metrics used to assess
+synthetic data quality and performance. The **Discussion** section highlights key insights and practical implications, while the
+**Conclusions** section offers a final summary of this study.
+
+# Background
+
+In this section, we introduce key concepts and motivations related to artificial data creation, focusing on imbalanced learning.
+Synthetic data generation refers to the creation of artificial observations using a variety of approaches, typically to augment
+the training set. In the context of imbalanced classification, this process is used to increase the representation of
+underrepresented classes. It requires access to an existing dataset and a mechanism capable of generating new samples that align
+with the distributional properties of the minority class.
+
+## Formalism
+
+We denote the original labeled dataset as $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^l$, where each $x_i \in \mathbb{R}^d$ is a
+$d$-dimensional input vector, and $y_i$ is the corresponding class label. This dataset serves as the basis for synthetic data
+generation.
+
+The generation process involves a function $f_{\text{gen}}(x; \tau) = x^s$, where $x \in \mathcal{D}$ and $\tau$ represents a set
+of generation parameters (e.g., noise level, neighborhood radius, or model weights). The function outputs a synthetic instance
+$x^s$, and repeated application of this process yields a synthetic dataset $\mathcal{D}^s$.
+
+Evaluating the quality of $\mathcal{D}^s$ can be approached from two complementary perspectives. The first is how closely the
+artificial data resembles the statistical or structural properties of the original dataset. The second is to evaluate how well a
+classifier $f_\theta$ performs when trained on, or augmented with, the synthetic samples.
+
+In the specific context of imbalanced classification, the primary goal of synthetic data generation is to augment the minority
+class. The aim is not necessarily to replicate the full data distribution, but to enrich underrepresented regions of the feature
+space, thereby improving the classifier’s performance on unseen data.
+
+## Imbalanced learning
+
+In many supervised learning tasks, classifiers are trained under the implicit assumption that class distributions are relatively
+balanced. In imbalanced settings, classifiers tend to favor the majority class, resulting in poor generalization for minority
+classes [@douzas2017self]. For instance, in credit card fraud detection, a model that simply predicts every transaction as
+legitimate might yield over 99% accuracy, despite entirely missing fraudulent activity.
+
+To counter such imbalances, oversampling techniques have been introduced as a form of data augmentation [@douzas2019imbalanced].
+These methods aim to equalize class frequencies by generating additional data for underrepresented classes. Formally, given a
+dataset $\mathcal{D} = \bigcup_{i=1}^n C_i$ with $n$ classes, imbalance exists when $|C_{maj}| > |C_{min}|$. Oversampling produces
+synthetic data $\mathcal{D}^s = \bigcup_{i=1}^n C_i^s$, so that the combined dataset $\mathcal{D} \cup \mathcal{D}^s$ becomes
+balanced and can be used to train a classifier $f_\theta$ more effectively.
+
+One of the simplest approaches is Random Oversampling (ROS), which replicates minority class instances with replacement. A
+variation, ROSE, introduces minor noise to these copies to enhance diversity [@menardi2014training]. Nevertheless, ROS-based
+methods are known to overfit due to repeated, nearly identical samples [@krawczyk2016learning].
+
+To deal with this issue, SMOTE (Synthetic Minority Oversampling Technique) generates new samples by interpolating between a
+randomly selected minority sample $x$ and one of its $k$ nearest neighbors $x'$ [@chawla2002smote]. The synthetic sample is
+computed as: $$x^s = \alpha x + (1 - \alpha)x', \quad \alpha \sim \mathcal{U}(0, 1).$$
+
+Although SMOTE avoids exact duplication, it introduces its own challenges [@douzas2019geometric]: vulnerability to noise,
+difficulty distinguishing between minority clusters, and ineffective handling of local imbalances. When the chosen pair of points
+are too close, it may even generate near-duplicates.
+
+Several SMOTE variants attempt to address these issues. Borderline-SMOTE [@han2005borderline] biases sampling toward minority
+instances located near decision boundaries. K-means SMOTE [@douzas2018improving] tackles intra-class imbalance by clustering
+minority data and sampling proportionally within each cluster. Similarly, DBSMOTE [@bunkhumpornpat2012dbsmote] employs DBSCAN to
+find core regions suitable for interpolation.
+
+ADASYN [@he2008adasyn] builds on SMOTE by varying the number of synthetic samples per point according to local class imbalance.
+However, it can amplify noise when misclassified or outlier points dominate. KernelADASYN [@tang2015kerneladasyn] applies Gaussian
+kernel density estimation, while it modulates the generation of synthetic samples based on the local density.
+
+Modifications to SMOTE's data generation mechanism are less common but notable. Safe-level SMOTE [@bunkhumpornpat2009safe] scales
+the interpolation vector depending on how “safe” a region is. Geometric SMOTE (G-SMOTE) [@douzas2019geometric] expands on this
+idea, sampling from a truncated hypersphere centered at $x^c$ to diversify samples while reducing overlap with the majority class.
+A more integrated approach is taken by LR-SMOTE [@liang2020lr], which filters out noisy data, classifies the remaining minority
+points, and chooses interpolation parameters based on the geometric relationship between class labls and points.
+
+Latent space oversampling offers a different perspective. MOKAS [@lin2017minority], for example, utilizes adaptive subspace
+self-organizing maps (ASSOM) [@kohonen1996emergence] to synthesize new samples in a learned lower-dimensional space. Related
+models like SOMO [@douzas2017self] and G-SOMO [@douzas2021g] incorporate self-organizing maps, with the latter using G-SMOTE as
+its data generation mechanism.
+
+Probabilistic models such as Gaussian Mixture Models have also been applied to oversampling. GMM-SENN [@xing2022predict] generates
+synthetic points inversely proportional to mixture weights, pairing this with SMOTEENN to reduce noise. GMF-SMOTE
+[@xu2022synthetic], by contrast, uses GMMs to identify boundary regions before applying SMOTE.
+
+In more recent work, contrastive variational autoencoders (VAEs) have emerged to address the tendency of generative models to
+ignore majority-class information. These models use separate encoders for each class [@dai2019generative; @abid2019contrastive],
+generating new data by sampling latent variables and decoding them back to the original feature space.
+
+Generative Adversarial Networks (GANs) avoid using interpolation altogether. More specifically, Conditional GANs (CGAN)
+[@douzas2018effective] generate class-specific synthetic data that a discriminator cannot distinguish from real data. Extensions
+like k-means CTGAN [@an2021k] incorporate clustering into the training process to better capture internal class structures. While
+powerful, GANs are resource-intensive and can suffer from training instability and mode collapse.
+
+Statistical approaches to oversampling remain relatively underexplored. Techniques such as RACOG and wRACOG [@das2014racog] rely
+on Gibbs sampling, PDFOS [@gao2014pdfos] uses density estimation, and RWO [@zhang2014rwo] employs random walks.
+
+Oversampling in datasets containing categorical or mixed-type features poses additional challenges. SMOTENC [@chawla2002smote]
+modifies distance calculations to account for nominal variables and interpolates only the continuous ones, assigning categorical
+values via majority voting. SMOTEN [@chawla2002smote] is tailored for fully nominal data, creating synthetic samples based on
+nearest-neighbor modes [@cost1993weighted].
+
+# Taxonomy
+
+This paper introduces a taxonomy of oversampling methods for imbalanced classification. While previous taxonomies—particularly in
+image and time-series domains, offer useful distinctions between classical techniques and deep learning-based models,
+[@hernandez2022synthetic; @shorten2019survey; @khalifa2021comprehensive; @iwana2021empirical], they often overlook the specific
+demands of balancing class distributions. In tabular data, existing frameworks like [@hernandez2022synthetic] group methods into
+broad categories without clarifying how these methods address local versus global data structure, a critical distinction in
+oversampling. Generators that rely on local neighborhoods serve different purposes than those informed by the global data
+distribution, especially when aiming to reinforce underrepresented decision boundaries. However, this distinction is frequently
+blurred in the literature, limiting practical guidance. To clarify this landscape, we propose a taxonomy (@fig-taxonomy) that organizes
+generative strategies along three independent dimensions, offering a more structured view of how synthetic data generation aligns
+with the goals of imbalanced learning.
+
+![Taxonomy of oversampling methods proposed in this paper.](taxonomy.png){#fig-taxonomy}
+
+##	Model
+
+This dimension describes the broad category of the generative approach, reflecting how synthetic samples are produced.
+Probability-based methods generate data by sampling from explicitly estimated distributions that approximate the underlying
+data-generating process. Randomized methods introduce stochasticity through interpolation, noise injection, or geometric
+operations, typically without learning a full distribution. Domain-specific methods rely on transformations grounded in the
+knowledge of the data’s characteristics, and are often adjusted for particular applications. Finally, methods based on neural
+networks employ architectures, such as variational autoencoders (VAEs) or generative adversarial networks (GANs), to learn complex
+data representations, often within a latent space, and generate new samples that resemble the original data.
+
+## Scope
+
+The scope dimension defines the extent to which the original dataset is leveraged during synthetic data generation. Global-scope
+methods use properties derived from the entire dataset, such as feature distributions or density estimates to inform the synthesis
+process. While this allows them to capture global patterns, they may overlook finer-grained, localized structures. Conversely,
+local-scope methods generate new samples based on individual observations and their nearby neighbors, typically using
+distance-based heuristics. This localized strategy supports precise and class-targeted sample generation, making it well-suited
+for imbalanced learning, though it may fail to reflect the broader data distribution.
+
+## Space 
+
+This dimension describes the space in which synthetic data generation occurs. Input space methods create new samples directly in
+the initial input space. In contrast, latent space methods generate data within lower-dimensional embedded representations,
+typically learned via encoders. In the context of imbalanced learning, both approaches can incorporate label information, either
+implicitly or explicitly, by conditioning the generation process on the target variable, allowing for class-aware sample synthesis
+regardless of the space in which generation is performed.
+
+# Generation mechanisms
+
+In this section, we provide a comprehensive overview of data generation mechanism for oversampling. Our discussion centers around
+two fundamental assumptions adapted from [@van2020survey]: The smoothness condition requires that if two samples $x_i$ and $x_j$
+are similar, their corresponding labels $y_i$ and $y_j$ are also similar. The manifold hypothesis assumes that real-world data lie
+on a low-dimensional manifold embedded in a higher-dimensional space. Importantly, any generative mechanism satisfying the
+smoothness condition inherently requires data to reside on a manifold, although the converse does not necessarily hold. The
+following subsections describe the primary categories of data generation mechanisms.
+
+## Perturbations
+
+Perturbation-based methods generate synthetic data by injecting noise into existing observations, typically formulated as $x^s =
+x+ \epsilon$, where $\epsilon$ is a noise vector sampled from a predefined distribution. In its simplest form, this noise is drawn
+randomly from a uniform distribution, producing uninformed perturbations that do not consider the underlying data structure. More
+structured variants apply noise drawn from Laplace or Gaussian distributions.
+
+When working with categorical data, direct perturbation is less effective. In these cases, techniques based on n-way marginals are
+often employed to preserve joint distributions and relationships between categorical variables [@gaboardi2014dual]. Another
+variant is masking, where a binary mask vector is sampled from a Bernoulli distribution determining which feature values are
+replaced by noise [@yoon2020vime].
+
+## Probability density functions
+
+PDF-based methods generate synthetic data by sampling from estimated probability distributions. A fundamental example is the
+multivariate Gaussian model, where synthetic samples are drawn as $x^s \sim \mathcal{N}(\mu, \Sigma)$. The probability density
+function is defined as [@chanyaswad2019ron]:
+
+$$
+f(x) = \frac{1}{\sqrt{(2\pi)^d\det(\Sigma)}} \exp\left(-\frac{1}{2}(x - \mu)^T \Sigma^{-1}(x - \mu)\right)
+$$
+
+This approach assumes the data follows a near-Gaussian distribution, an assumption that can be partially justified in
+high-dimensional settings by the Diaconis-Freedman-Meckes effect [@meckes2012projections]. Gaussian Mixture Models (GMMs)
+generalize this concept by modeling the data distribution as a weighted sum of multiple Gaussians, each corresponding to a latent
+subpopulation. The parameters of a GMM are typically estimated using the Expectation-Maximization algorithm. Kernel Density
+Estimation (KDE) methods, in contrast, use kernel functions to estimate the underlying density of the data. A commonly used
+variant is the Gaussian KDE, given by:
+
+$$
+\hat{p}(x) = \frac{1}{N+h} \sum_{i=1}^{N} \frac{1}{(\sqrt{2\pi} h)^d} \exp\left(-\frac{1}{2} \frac{(x - x_i)^T(x - x_i)}{h}\right)
+$$
+
+Once the density function $\hat{p}(x)$ is estimated, synthetic samples can be generated by sampling from this distribution.
+
+## Probabilistic graphical models
+
+Bayesian networks model the joint probability distribution over a set of features using a directed acyclic graph (DAG), where each
+node represents a feature and edges capture conditional dependencies. The joint distribution is factorized according to the
+structure of the DAG as:
+
+$$
+p(x) = \prod_{v \in V} p(x_v \mid x_{\text{pa}(v)})
+$$
+
+where $\text{pa}(v)$ denotes the set of parent nodes of node $v$. Although learning the structure and parameters of a Bayesian
+network can be computationally intensive, it allows for principled synthetic data generation when the conditional dependencies are
+known or can be inferred [@yu2019dag].
+
+In addition to Bayesian networks, other probabilistic methods such as random walks and Gibbs sampling have also been employed for
+data synthesis. Gibbs sampling is a Markov Chain Monte Carlo (MCMC) method that iteratively samples each feature conditioned on
+the current values of all others. Starting from an initial observation $x_0$, new synthetic samples are generated step-by-step by
+drawing from these conditional distributions. It can be viewed as a special case of the Metropolis-Hastings algorithm.
+
+## Linear Transformations
+
+Linear transformation methods synthesize new data points by linearly combining existing observations using a scaling factor
+$\lambda$. The general formulation is:
+
+$$
+x^s = \lambda x + (1 - \lambda) x'
+\label{eq:interpolation}
+$$
+
+In oversampling, this technique is commonly applied within the same class (within-class interpolation), where both $x$ and $x'$
+belong to the minority class. Between-class interpolation, by contrast, selects samples from different classes and may also
+interpolate target labels. Mixup is a well-known example that randomly combines pairs of samples regardless of class membership,
+whereas SMOTE and its variants limit selection to the $k$-nearest neighbors of a sample within the same class.
+
+Extrapolation extends this concept by generating samples outside the convex region defined by existing data. A simple form,
+observation-based extrapolation, is expressed as $x^s = x + \lambda(x - x')$. Another variant, known as hard extrapolation,
+anchors the transformation around the class centroid $\mu^c$, generating $x^s = x + \lambda(x - \mu^c)$. Some methods
+integrate both interpolation and extrapolation by allowing $\lambda$ to take values beyond the $[0,1]$ interval.
+
+A related approach is the difference transform, which takes the form:
+
+$$
+x^s = x + \lambda(x' - x'')
+$$
+
+These strategies are especially common in oversampling scenarios for addressing class imbalance, as well as in regularization
+settings where diversity in the feature space is desired.
+
+## Geometric transformations
+
+Geometric methods generate synthetic samples by constraining them within predefined geometric regions in the input space. One such
+approach is the hypersphere mechanism, which produces samples inside a distorted $n$-dimensional spheroid. The shape and coverage
+of the sampling region are controlled by deformation ($\alpha_{\text{def}}$) and truncation ($\alpha_{\text{trunc}}$) parameters.
+
+Another geometric strategy is the triangular mechanism, where synthetic points are constructed as convex combinations of three
+data points:
+
+$$ x^s = \lambda_i x_i + \lambda_j x_j + (1 - \lambda_i - \lambda_j) x_k $$
+
+with $\lambda_i, \lambda_j \sim \mathcal{U}(0, \alpha)$, ensuring that the resulting sample lies within the triangle formed by
+$x_i$, $x_j$, and $x_k$.
+
+The above geometric mechanisms are predominantly found in oversampling techniques such as Mixup and SMOTE variants, where the goal
+is to create diverse, yet realistic, synthetic data within a bounded region around the original samples.
+
+## Neural networks
+
+Neural network-based generators learn complex data distributions using architectures that support both input and latent spaces.
+Among the most prominent are Generative Adversarial Networks (GANs) and Autoencoders (AEs).
+
+GANs consist of two components, a generator and a discriminator, engaged in a minimax game. The generator synthesizes data samples
+in an attempt to fool the discriminator, which is simultaneously trained to distinguish between real and synthetic data
+[@goodfellow2020generative]. Originally proposed for unsupervised learning, GANs have since been adapted for a variety of tasks,
+including oversampling in imbalanced classification.
+
+Autoencoders (AEs) are composed of an encoder that maps input data to a latent representation and a decoder that reconstructs the
+input from this latent code. Variational Autoencoders (VAEs) extend this framework by introducing probabilistic sampling in the
+latent space[@ackley1985learning].
+
+These neural approaches provide flexible frameworks for synthetic data generation, while their ability to operate in both raw and
+embedded data spaces makes them especially valuable for diverse data types.
+
+# Evaluation
+
+Most synthetic data generation methods are evaluated primarily through their performance in downstream classification tasks.
+However, there remains a notable gap in the literature when it comes to systematically assessing the quality of synthetic data
+beyond common performance indicators for imbalanced datasets such as F1-score or G-mean. One motivation for developing broader
+evaluation metrics is the need to estimate the quality of synthetic data prior to training ML models, which can be computationally
+expensive. Yet, due to the dependency of data utility on dataset characteristics, domain-specific constraints, and the underlying
+ML problem [@chundawat2022tabsyndex], this remains a challenging task. This section reviews the main evaluation strategies
+proposed in the literature, focusing on quality metrics beyond classification accuracy; for a deeper examination of general
+performance metrics, readers may refer to [@dankar2022multi; @theis2016note].
+
+Recent works suggest evaluating synthetic data along three key dimensions: fidelity (synthetic samples and real samples should be
+similar), diversity (they should capture the variability of the original dataset), and generalization (they should not be exact
+replicas of real observations) [@alaa2022faithful]. However, comprehensive evaluations across all three dimensions are relatively
+rare; one of the few studies addressing all three explicitly is [@alaa2022faithful]. It is also important to note that strong
+performance on a particular evaluation metric does not guarantee effectiveness on the imbalanced classification task.
+Consequently, it is often recommended to tailor the evaluation process to the specific use case [@theis2016note].
+
+## Quantitative evaluation
+
+Kullback-Leibler (KL) Divergence and its symmetrical variant, Jensen-Shannon (JS) Divergence, are widely used for evaluating
+generative models. While useful, these metrics can be difficult to interpret in high-dimensional spaces and may fail to detect
+critical failure modes [@alaa2022faithful].
+
+The Wasserstein Distance, originally proposed to improve GAN training [@gulrajani2017improved; @goncalves2020generation], is
+another metric used to assess alignment between real and synthetic distributions.
+
+Propensity Score (pMSE) is another well-established method. A classifier is trained to distinguish between real and synthetic
+samples, and the predicted probabilities (i.e., propensity scores) are used to evaluate indistinguishability. A low pMSE
+[@chundawat2022tabsyndex] suggests synthetic data that is difficult to distinguish from the original.
+
+TabSynDex [@chundawat2022tabsyndex] proposes a unified evaluation metric that includes five components: statistical summary
+errors, correlation matrix discrepancies, pMSE, histogram coverage comparison, and downstream ML performance.
+
+Another comprehensive framework is provided in [@alaa2022faithful], which introduces a three-dimensional evaluation based on:
+
+- $\alpha$-Precision: Measures fidelity  
+- $\beta$-Recall: Measures diversity  
+- Authenticity: Indicates whether a synthetic sample more closely resembles a real sample than any two real samples resemble each
+other
+
+These dimensions allow for sample-level analysis and highlight trade-offs—for example, higher $\alpha$-Precision is often
+associated with lower Authenticity.
+
+Alternative strategies include reproducing known empirical results using synthetic data [@el2020seven; @benaim2020analyzing;
+@rosenblatt2022epistemic], computing average distances to nearest neighbors [@hittmeir2019utility], or using Confidence Interval
+Overlap for regression tasks [@karr2006framework; @khan2022utility].
+
+## Qualitative Evaluation
+
+Qualitative evaluations often rely on visual comparisons between real and synthetic data distributions. Common techniques include
+plotting marginal histograms and correlation matrix heatmaps [@hittmeir2019utility], which can reveal mismatches in structure or
+scale that may not be captured by numerical metrics alone.
+
+Another approach involves the subjective evaluation of individual synthetic data points by domain experts [@el2020seven]. These
+evaluations aim to determine whether experts can distinguish synthetic data from real observations. Their performance can be
+quantified using standard classification metrics, where low classification accuracy suggests that the synthetic data is highly
+realistic and difficult to distinguish from real data.
+
+# Discussion
+
+Research in synthetic data generation remains largely fragmented across specific machine learning problems and domains, with
+imbalanced  classification being one of the most pressing challenges. Despite a growing interest in generation methods, selecting
+appropriate techniques for class imbalance, particularly in tabular datasets, remains highly non-trivial. The difficulty stems
+from multiple interacting factors, such as data and model type, metric preferences, and application-specific constraints. Many
+existing methods are designed in research settings without consideration for deployment feasibility, underscoring the need for
+open-source, out-of-the-box implementations to support practitioners working on imbalanced classification.
+
+Latent space learning holds promise for oversampling, especially when the latent manifold is well-structured, convex, and
+isotropic. In such settings, linear transformations can effectively generate diverse samples without introducing significant
+noise. Yet, the choice of encoder architecture and training protocol is rarely straightforward, especially for tabular data, where
+few studies explore the role of autoencoders in learning usable latent spaces. As a result, latent space methods are often
+underutilized in tabular classification tasks, despite their potential benefits for sample diversity and class separation.
+
+Another open question in oversampling research is which generation mechanisms perform best under different conditions. While no
+single method fits all scenarios, a set of guiding principles could be developed. For example, identifying when local geometric
+methods outperform global probabilistic models, or how feature types and model complexity influence the success of a given
+strategy. Moreover, most evaluation metrics remain detached from downstream task performance. Better linking of synthetic data
+quality measures, such as fidelity, diversity, and authenticity, to classification performance would help close this gap and clarify
+how generation methods contribute to minority class learning.
+
+There is also limited research on the use of ensembles of generation mechanisms for tabular data. While combining multiple
+augmentation methods is common in image and text classification, this practice is almost nonexistent in tabular settings. A
+systematic investigation into how such ensembles affect classification outcomes, particularly in highly imbalanced settings, could
+reveal valuable insights. Similarly, the oversampling of datasets with mixed feature types or non-metric attributes is
+underexplored, despite its relevance in real-world tabular data.
+
+In summary, while synthetic data generation offers significant promise for imbalanced classification, especially in tabular
+formats, key challenges persist across method selection, interpretability and practical implementation. Addressing these gaps
+requires not only better tools and taxonomies but also deeper theoretical insights and benchmark-driven evaluations tailored to
+the unique constraints of class imbalance in supervised learning.
+
+# Conclusions
+
+This literature review explored synthetic data generation techniques for imbalanced classification. While synthetic data is widely
+applied across domains, its role in oversampling underrepresented classes is especially crucial. To address this gap, we proposed
+a taxonomy structured around three core dimensions of oversampling methods: model, scope, and generation space. This framework
+enabled a systematic comparison of algorithms distinguishing, for example, between local and global strategies, input versus
+latent-space generation, and probabilistic versus geometric mechanisms.
+
+Despite the increasing empirical success of oversampling, our review reveals a lack of theoretical grounding and standardized
+evaluation. In many cases, it remains unclear why certain generation approaches succeed under class imbalance, or when they are
+most effective. Evaluation practices tend to rely heavily on downstream classfication metrics such as F1-score or accuracy, which
+do not capture important characteristics of the synthetic data itself. Metrics like pMSE, Wasserstein distance, and authenticity
+offer more informative assessments but are rarely adopted. Furthermore, several research gaps persist, including limited use of
+latent space techniques for tabular oversampling, the absence of ensemble-based generation strategies, and insufficient support
+for mixed-type or high-dimensional features.
+
+In conclusion, synthetic data generation holds significant promise for tackling imbalanced classification problems, but current
+practices fall short of realizing its full potential. Future progress depends on bridging the divide between methodological
+development and practical implementation, through rigorous evaluation protocols, principled model selection, and broader support
+for domain-specific constraints. As the field matures, making oversampling more interpretable, adaptable, and effective will be
+key to enhancing oversampling methods for imbalanced classification.
+
+# References

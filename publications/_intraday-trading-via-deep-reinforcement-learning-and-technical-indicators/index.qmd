@@ -300,7 +300,9 @@ The commission vector $d_{t}$ is incorporated into the immediate reward function
 portfolio value. Consequently, the agent would avoid excessive trading that results in a high commission rate and therefore avoids
 a negative reward:
 
-$$value_{t}=balance_{t} + \sum_i share_{t}^i \cdot \left(price_{t}^i - price_{t-1}^i \cdot d_{t}^i\right)$$
+$$
+value_{t}=balance_{t} + \sum_i share_{t}^i \cdot \left(price_{t}^i - price_{t-1}^i \cdot d_{t}^i\right)
+$$
 
 The action of buying/selling occurred in the previous state and therefore commission should be calculated using the closing prices
 on that state. Therefore in the above equation, the amount paid for the commission is calculated by taking the product of the
