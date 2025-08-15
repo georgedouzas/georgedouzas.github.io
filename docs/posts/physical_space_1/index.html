@@ -228,22 +228,25 @@ window.Quarto = {
 <h1>Example</h1>
 <p>A trivial example is the real affine space <span class="math inline">\(\mathbb{A}^n = \mathbb{R}^n\)</span> with the displacement space being the vector space <span class="math inline">\(\mathbb{R}^n\)</span>. A more interesting example is the system <span class="math inline">\(\begin{cases}x + y + z = 2 \\2x + y - z =
 1\end{cases}\)</span></p>
-<div id="d2e5082c" class="cell" data-execution_count="2">
+<div id="acf0a9a1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>a = matrix([[1,1,1], [2,1,-1]])</span>
 <span id="cb1-2"><a href="#cb1-2"></a>b = vector([2, 1])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The solution space of the system is an affine space <span class="math inline">\(\mathbb{A}^3\)</span>:</p>
-<div id="b85ad80b" class="cell" data-execution_count="3">
+<div id="ccd29436" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>A = AffineSpace(3, RR)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Matplotlib is building the font cache; this may take a moment.</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 \(\displaystyle \newcommand{\Bold}[1]{\mathbf{#1}}\mathbf{A}_{\Bold{R}}^{3}\)
 </div>
 </div>
 <p>Additionally, the the solution space of the homogeneous system is the space of displacements <span class="math inline">\(V\)</span>:</p>
-<div id="afba5661" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>V = VectorSpace(RR, 3).subspace(a.right_kernel().basis())</span>
-<span id="cb3-2"><a href="#cb3-2"></a>V</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f42a6a55" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a>V = VectorSpace(RR, 3).subspace(a.right_kernel().basis())</span>
+<span id="cb4-2"><a href="#cb4-2"></a>V</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 \(\displaystyle \newcommand{\Bold}[1]{\mathbf{#1}}\mathrm{RowSpan}_{\Bold{R}}\left(\begin{array}{rrr}
 1.00000000000000 &amp; -1.50000000000000 &amp; 0.500000000000000
@@ -251,20 +254,20 @@ window.Quarto = {
 </div>
 </div>
 <p>We can get a particular solution <span class="math inline">\(Q \in \mathbb{A}^3\)</span> and verify that it is indeed a solution:</p>
-<div id="97c089ff" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a>Q = A.point(tuple(a.solve_right(b)))</span>
-<span id="cb4-2"><a href="#cb4-2"></a>assert a * vector(Q) == b</span>
-<span id="cb4-3"><a href="#cb4-3"></a>Q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8ef94254" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href="#cb5-1"></a>Q = A.point(tuple(a.solve_right(b)))</span>
+<span id="cb5-2"><a href="#cb5-2"></a>assert a * vector(Q) == b</span>
+<span id="cb5-3"><a href="#cb5-3"></a>Q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 \(\displaystyle \left(-1.00000000000000, 3.00000000000000, 0.000000000000000\right)\)
 </div>
 </div>
 <p>The general solution of the system is given by the displacement of <span class="math inline">\(Q\)</span>. For example another solution <span class="math inline">\(P \in \mathbb{A}^3\)</span> is the following:</p>
-<div id="39e016a6" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href="#cb5-1"></a>v, *_ = V.basis()</span>
-<span id="cb5-2"><a href="#cb5-2"></a>P = A.translation(-v)(Q)</span>
-<span id="cb5-3"><a href="#cb5-3"></a>assert a * vector(P) == b</span>
-<span id="cb5-4"><a href="#cb5-4"></a>P</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="06f0b62f" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource sage number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href="#cb6-1"></a>v, *_ = V.basis()</span>
+<span id="cb6-2"><a href="#cb6-2"></a>P = A.translation(-v)(Q)</span>
+<span id="cb6-3"><a href="#cb6-3"></a>assert a * vector(P) == b</span>
+<span id="cb6-4"><a href="#cb6-4"></a>P</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 \(\displaystyle \left(0.000000000000000, 1.50000000000000, 0.500000000000000\right)\)
 </div>
