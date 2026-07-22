@@ -1,0 +1,1041 @@
+# Unsupervised Learning {#sec-unsupervised-learning}
+
+Unsupervised learning addresses a fundamental challenge: discovering structure in data without the guidance of labels. Unlike
+supervised learning (@sec-supervised-learning) where we have input-output pairs, unsupervised learning works with inputs alone,
+seeking to uncover hidden patterns, groupings, or low-dimensional representations. This paradigm is crucial in practice because
+labeled data is often expensive or impossible to obtain, while unlabeled data is abundant.
+
+The methods in this chapter serve different purposes: clustering (@sec-clustering) groups similar data points together,
+dimensionality reduction (@sec-dimensionality-reduction) finds compact representations that preserve essential structure, and
+generative models (@sec-generative-latent) learn probability distributions that can generate new data. These techniques are
+foundational for exploratory data analysis, data preprocessing, and understanding complex datasets.
+
+## Clustering Methods {#sec-clustering}
+
+Clustering is the task of partitioning data into groups (clusters) such that points within a cluster are more similar to each
+other than to points in other clusters. This is one of the most fundamental problems in unsupervised learning, with applications
+ranging from customer segmentation in marketing to gene expression analysis in biology.
+
+The challenge is that "similarity" is subjective and problem-dependent. Different clustering algorithms make different assumptions
+about cluster structure, leading to different solutions. Understanding these assumptions is crucial for choosing the right
+algorithm.
+
+### K-Means Clustering
+
+K-means is the workhorse of clustering algorithms. Developed in the 1950s, it remains one of the most widely used methods due to
+its simplicity, efficiency, and effectiveness. The algorithm's elegance lies in its iterative refinement: alternately assign
+points to clusters and update cluster centers, guaranteed to converge to a local optimum.
+
+**Problem Formulation:** Given a dataset $\mathcal{X} = \{\mathbf{x}_1, \ldots, \mathbf{x}_n\}$ where $\mathbf{x}_i \in
+\mathbb{R}^d$, we want to partition the data into $K$ clusters. We represent this partition by: - Cluster centers
+$\{\boldsymbol{\mu}_1, \ldots, \boldsymbol{\mu}_K\}$ where $\boldsymbol{\mu}_k \in \mathbb{R}^d$
+- Assignments $\{c_1, \ldots,
+c_n\}$ where $c_i \in \{1, \ldots, K\}$ indicates which cluster contains $\mathbf{x}_i$
+
+**Objective Function:** K-means minimizes the within-cluster sum of squares (WCSS), also called inertia or distortion:
+
+::: {#def-kmeans-objective}
+
+K-Means Objective Function
+
+$$J(\mathbf{C}, \boldsymbol{\mu}) = \sum_{k=1}^K \sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2 = \sum_{i=1}^n \|\mathbf{x}_i - \boldsymbol{\mu}_{c_i}\|^2$$
+:::
+
+where $C_k = \{i : c_i = k\}$ is the set of indices of points assigned to cluster $k$. This objective measures cluster
+compactness: we want points close to their cluster centers.
+
+**Intuition:** Imagine you have customer data and want to identify $K=3$ market segments. K-means finds three "prototype"
+customers (the centers $\boldsymbol{\mu}_k$) and assigns each actual customer to their nearest prototype. The objective ensures
+that customers within a segment are similar (close to the prototype) while segments are distinct.
+
+**Lloyd's Algorithm (Standard K-Means):**
+
+The algorithm alternates between two steps that each decrease the objective:
+
+1. **Initialization:** Choose $K$ initial cluster centers $\boldsymbol{\mu}_1^{(0)}, \ldots, \boldsymbol{\mu}_K^{(0)}$
+(initialization strategies discussed below)
+
+2. **Repeat until convergence:**
+   
+   a. **Assignment Step:** Assign each point to the nearest center: $$c_i^{(t)} = \arg\min_{k \in \{1,\ldots,K\}} \|\mathbf{x}_i -
+   \boldsymbol{\mu}_k^{(t)}\|^2$$
+   
+   This is optimal for fixed centers: each point goes to its closest center, minimizing its contribution to the objective.
+   
+   b. **Update Step:** Recompute cluster centers as the mean of assigned points: $$\boldsymbol{\mu}_k^{(t+1)} =
+   \frac{1}{|C_k^{(t)}|}\sum_{i \in C_k^{(t)}} \mathbf{x}_i$$
+   
+   This is optimal for fixed assignments: the mean minimizes the sum of squared distances (see proof below).
+
+3. **Convergence:** Stop when assignments no longer change or centers move less than a threshold $\epsilon$.
+
+**Example:** Consider 2D data with three natural clusters. Starting with random centers, the algorithm iteratively refines them: -
+Iteration 1: Centers are random, assignments are poor - Iteration 2: Centers move toward cluster means, assignments improve -
+Iteration 3-5: Centers converge to cluster centroids - Convergence: Assignments stabilize, centers no longer move
+
+**Convergence Properties:**
+
+1. **Monotonic Decrease:** Each iteration decreases (or maintains) the objective $J^{(t+1)} \leq J^{(t)}$ because: - Assignment
+   step: Choosing the nearest center minimizes distance for each point - Update step: The mean minimizes sum of squared distances
+   (proven below)
+
+2. **Finite Convergence:** Since there are finitely many possible assignments ($K^n$ possibilities) and the objective strictly
+decreases except at convergence, the algorithm must terminate in finite time.
+
+3. **Local Minimum:** K-means converges to a local minimum, not necessarily the global optimum. The solution depends critically on
+initialization, which is why multiple runs with different initializations are recommended.
+
+**Proof of Update Step Optimality:** For fixed assignments, the optimal center for cluster $k$ minimizes:
+
+$$\boldsymbol{\mu}_k^* = \arg\min_{\boldsymbol{\mu}} \sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}\|^2$$
+
+Taking the derivative with respect to $\boldsymbol{\mu}$ and setting to zero:
+
+$$\frac{\partial}{\partial \boldsymbol{\mu}} \sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}\|^2 = \frac{\partial}{\partial
+\boldsymbol{\mu}} \sum_{i \in C_k} (\mathbf{x}_i - \boldsymbol{\mu})^T(\mathbf{x}_i - \boldsymbol{\mu}) = -2\sum_{i \in C_k}
+(\mathbf{x}_i - \boldsymbol{\mu}) = 0$$
+
+Solving for $\boldsymbol{\mu}$: $$\sum_{i \in C_k} \mathbf{x}_i = |C_k|\boldsymbol{\mu} \implies \boldsymbol{\mu}^* =
+\frac{1}{|C_k|}\sum_{i \in C_k} \mathbf{x}_i$$
+
+This is the sample mean of the cluster, justifying the name "K-means."
+
+**Initialization Methods:**
+
+1. **Random Initialization:** Select $K$ random points as initial centers - Simple but can lead to poor solutions - Highly
+   sensitive to outliers
+
+2. **Forgy Method:** Randomly assign points to clusters, then compute initial centers
+
+3. **Random Partition:** Randomly partition data, compute centers
+
+4. **K-Means++ (Recommended):** Probabilistic initialization that spreads out initial centers:
+   
+   a. Choose first center $\boldsymbol{\mu}_1$ uniformly at random from data
+   
+   b. For $k = 2, \ldots, K$: - For each point $\mathbf{x}_i$, compute distance to nearest existing center: $$D(\mathbf{x}_i) =
+      \min_{j < k} \|\mathbf{x}_i - \boldsymbol{\mu}_j\|^2$$
+- Choose next center $\boldsymbol{\mu}_k$ with probability
+        proportional to $D(\mathbf{x}_i)^2$
+   
+   **Guarantee:** K-means++ initialization ensures that the objective is $O(\log K)$-competitive with the optimal clustering in
+   expectation.
+
+**Computational Complexity:**
+
+- **Per iteration:** $O(nKd)$ for assignment step, $O(nd)$ for update step - **Total:** $O(nKdT)$ where $T$ is the number of
+iterations - **Typical behavior:** $T$ is often small (10-100), but can be large for difficult datasets - **Space:** $O(nd + Kd)$
+to store data and centers
+
+**Choosing the Number of Clusters $K$:**
+
+1. **Elbow Method:** Plot WCSS vs. $K$ and look for an "elbow" where the rate of decrease sharply changes: $$\text{WCSS}(K) =
+   \sum_{k=1}^K \sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2$$ The elbow indicates a good tradeoff between fit and
+   complexity.
+
+2. **Silhouette Analysis:** For each point $i$, compute: $$s_i = \frac{b_i - a_i}{\max(a_i, b_i)}$$ where: - $a_i$: Average
+   distance to points in same cluster - $b_i$: Average distance to points in nearest other cluster
+   
+   The silhouette coefficient ranges from -1 to 1: - $s_i \approx 1$: Well clustered - $s_i \approx 0$: On cluster boundary - $s_i
+   < 0$: Possibly misclassified
+   
+   Choose $K$ that maximizes average silhouette score.
+
+3. **Gap Statistic:** Compare WCSS to expected WCSS under null reference distribution: $$\text{Gap}(K) =
+   \mathbb{E}[\log(\text{WCSS}_0(K))] - \log(\text{WCSS}(K))$$ Choose smallest $K$ such that $\text{Gap}(K) \geq \text{Gap}(K+1) -
+   s_{K+1}$ where $s_{K+1}$ is the standard error.
+
+4. **Cross-Validation:** Use clustering quality metrics on held-out data.
+
+**Assumptions and Limitations:**
+
+1. **Spherical Clusters:** K-means assumes clusters are roughly spherical (isotropic Gaussian) 2. **Similar Sizes:** Works best
+when clusters have similar numbers of points 3. **Similar Variances:** Assumes clusters have similar spread 4. **Convex
+Boundaries:** Cannot capture non-convex cluster shapes 5. **Sensitive to Outliers:** Outliers can significantly affect cluster
+centers 6. **Euclidean Distance:** Assumes Euclidean distance is appropriate
+
+**Variants and Extensions:**
+
+1. **K-Medoids (PAM):** Use actual data points as centers instead of means - More robust to outliers - Works with arbitrary
+   distance metrics - More computationally expensive
+
+2. **K-Means with Different Distances:** Generalize to other distance metrics - Manhattan distance: K-medians - Cosine distance:
+   Spherical K-means
+
+3. **Fuzzy C-Means:** Soft assignments with membership degrees: $$u_{ik} = \frac{1}{\sum_{j=1}^K (\|\mathbf{x}_i -
+   \boldsymbol{\mu}_k\| / \|\mathbf{x}_i - \boldsymbol{\mu}_j\|)^{2/(m-1)}}$$ where $m > 1$ is the fuzziness parameter.
+
+4. **Mini-Batch K-Means:** Use random mini-batches for scalability: - Much faster for large datasets - Slightly lower quality -
+   $O(nKd)$ complexity per epoch
+
+5. **K-Means++:** Improved initialization (described above)
+
+6. **X-Means:** Automatically determines $K$ by splitting clusters
+
+**Practical Considerations:**
+
+1. **Feature Scaling:** Standardize features to have zero mean and unit variance: $$\mathbf{x}_i' = \frac{\mathbf{x}_i -
+   \boldsymbol{\mu}}{\boldsymbol{\sigma}}$$ Otherwise, features with larger scales dominate.
+
+2. **Multiple Runs:** Run K-means multiple times with different initializations and choose the best result (lowest WCSS).
+
+3. **Convergence Criteria:** Stop when: - Assignments don't change - Centers move less than threshold: $\max_k
+   \|\boldsymbol{\mu}_k^{(t+1)} - \boldsymbol{\mu}_k^{(t)}\| < \epsilon$
+- Maximum iterations reached
+
+4. **Empty Clusters:** If a cluster becomes empty: - Reinitialize its center - Split the largest cluster - Remove the empty
+   cluster
+
+5. **High-Dimensional Data:** K-means can struggle in high dimensions due to the curse of dimensionality. Consider dimensionality
+reduction first.
+
+**Applications:** - Image compression (color quantization) - Customer segmentation - Document clustering - Anomaly detection -
+Feature learning (as preprocessing) - Vector quantization
+
+K-means remains one of the most practical and widely used clustering algorithms despite its limitations, particularly when
+combined with good initialization and appropriate preprocessing [@james2023statistical; @shalev2014ml].
+
+### Hierarchical Clustering
+
+Hierarchical clustering builds a hierarchy of clusters, producing a tree structure (dendrogram) that represents nested groupings
+at different scales. Unlike K-means (see @sec-clustering), hierarchical methods don't require specifying the number of clusters in
+advance and provide a complete clustering hierarchy.
+
+**Two Approaches:**
+
+1. **Agglomerative (Bottom-Up):** Start with individual points and merge clusters 2. **Divisive (Top-Down):** Start with all
+points in one cluster and recursively split
+
+Agglomerative methods are more common and computationally tractable.
+
+**Agglomerative Hierarchical Clustering Algorithm:**
+
+``` Input: Data points {x₁, ..., xₙ}, distance metric d, linkage criterion L Initialize: Each point as its own cluster: C = {{x₁},
+{x₂}, ..., {xₙ}}
+
+While |C| > 1: Find pair of closest clusters: (Cᵢ, Cⱼ) = argmin_{Cₐ,Cᵦ∈C, a≠b} L(Cₐ, Cᵦ) Merge clusters: C_new = Cᵢ ∪ Cⱼ C = (C \
+    {Cᵢ, Cⱼ}) ∪ {C_new} Record merge in dendrogram
+
+Return: Dendrogram encoding merge sequence ```
+
+**Linkage Criteria:** The linkage criterion $L(C_i, C_j)$ defines the distance between clusters:
+
+**1. Single Linkage (Minimum Linkage):** $$d_{\text{single}}(C_i, C_j) = \min_{\mathbf{x} \in C_i, \mathbf{x}' \in C_j}
+d(\mathbf{x}, \mathbf{x}')$$
+
+Distance between closest points in the two clusters.
+
+**Properties:** - Can find non-convex clusters - Sensitive to noise and outliers (chaining effect) - Tends to produce elongated
+clusters - Computationally efficient
+
+**2. Complete Linkage (Maximum Linkage):** $$d_{\text{complete}}(C_i, C_j) = \max_{\mathbf{x} \in C_i, \mathbf{x}' \in C_j}
+d(\mathbf{x}, \mathbf{x}')$$
+
+Distance between farthest points in the two clusters.
+
+**Properties:** - Produces compact, spherical clusters - Less sensitive to outliers than single linkage - Breaks large clusters -
+Preferred for well-separated clusters
+
+**3. Average Linkage (UPGMA):** $$d_{\text{average}}(C_i, C_j) = \frac{1}{|C_i||C_j|}\sum_{\mathbf{x} \in C_i}\sum_{\mathbf{x}'
+\in C_j} d(\mathbf{x}, \mathbf{x}')$$
+
+Average distance between all pairs of points.
+
+**Properties:** - Compromise between single and complete linkage - Less sensitive to outliers - Produces relatively balanced
+clusters - Widely used in practice
+
+**4. Centroid Linkage:** $$d_{\text{centroid}}(C_i, C_j) = d(\boldsymbol{\mu}_i, \boldsymbol{\mu}_j)$$
+
+where $\boldsymbol{\mu}_i = \frac{1}{|C_i|}\sum_{\mathbf{x} \in C_i} \mathbf{x}$ is the centroid.
+
+**Properties:** - Intuitive interpretation - Can produce inversions in dendrogram - Similar to K-means distance (see
+@sec-clustering)
+
+**5. Ward's Method (Minimum Variance):**
+
+Minimize increase in total within-cluster variance: $$d_{\text{Ward}}(C_i, C_j) = \frac{|C_i||C_j|}{|C_i| + |C_j|}
+\|\boldsymbol{\mu}_i - \boldsymbol{\mu}_j\|^2$$
+
+Equivalently, minimize: $$\Delta(C_i, C_j) = \sum_{\mathbf{x} \in C_i \cup C_j} \|\mathbf{x} - \boldsymbol{\mu}_{ij}\|^2 -
+\sum_{\mathbf{x} \in C_i} \|\mathbf{x} - \boldsymbol{\mu}_i\|^2 - \sum_{\mathbf{x} \in C_j} \|\mathbf{x} -
+\boldsymbol{\mu}_j\|^2$$
+
+where $\boldsymbol{\mu}_{ij}$ is the centroid of the merged cluster.
+
+**Properties:** - Produces compact, spherical clusters - Minimizes same objective as K-means - Most popular linkage method - Tends
+to create equal-sized clusters
+
+**Dendrograms:** A dendrogram is a tree diagram that records the sequence of merges:
+
+- **Vertical axis:** Distance or dissimilarity at which clusters merge - **Horizontal axis:** Individual data points -
+**Branches:** Connect clusters that merge - **Height:** Indicates merge distance
+
+**Cutting the Dendrogram:** To obtain $k$ clusters, cut the dendrogram at a height that produces $k$ branches:
+
+1. **Fixed number of clusters:** Cut to produce exactly $k$ clusters 2. **Distance threshold:** Cut at height $h$ to get clusters
+with maximum within-cluster distance $\leq h$
+3. **Inconsistency criterion:** Cut where merge distances increase sharply
+
+**Computational Complexity:**
+
+- **Naive implementation:** $O(n^3)$ time, $O(n^2)$ space - $O(n^2)$ to compute all pairwise distances - $O(n)$ iterations, each
+  requiring $O(n^2)$ to find minimum
+
+- **Efficient implementation (SLINK for single linkage):** $O(n^2)$ time
+
+- **Space:** $O(n^2)$ to store distance matrix
+
+**Lance-Williams Update Formula:** For efficient computation, update distances after each merge:
+
+$$d(C_k, C_i \cup C_j) = \alpha_i d(C_k, C_i) + \alpha_j d(C_k, C_j) + \beta d(C_i, C_j) + \gamma |d(C_k, C_i) - d(C_k, C_j)|$$
+
+Different linkage methods correspond to different values of $\alpha_i, \alpha_j, \beta, \gamma$:
+
+- **Single:** $\alpha_i = \alpha_j = 0.5$, $\beta = 0$, $\gamma = -0.5$
+- **Complete:** $\alpha_i = \alpha_j = 0.5$, $\beta = 0$,
+$\gamma = 0.5$
+- **Average:** $\alpha_i = |C_i|/(|C_i|+|C_j|)$, $\alpha_j = |C_j|/(|C_i|+|C_j|)$, $\beta = \gamma = 0$
+-
+**Ward's:** More complex formula involving cluster sizes
+
+**Advantages of Hierarchical Clustering:**
+
+1. **No need to specify $k$:** Produces complete hierarchy 2. **Deterministic:** No random initialization (unlike K-means) 3.
+**Dendrogram visualization:** Provides insight into data structure 4. **Flexible:** Can cut at any level to get different
+granularities 5. **Works with any distance metric:** Not limited to Euclidean distance
+
+**Disadvantages:**
+
+1. **Computational cost:** $O(n^2)$ or $O(n^3)$ time and $O(n^2)$ space 2. **Not scalable:** Impractical for large datasets ($n >
+10,000$) 3. **Greedy:** Merges are irreversible, no global optimization 4. **Sensitive to noise:** Especially single linkage 5.
+**Difficulty with high dimensions:** Distance metrics become less meaningful
+
+**Comparison with K-Means:**
+
+| Aspect | K-Means | Hierarchical | |--------|---------|-------------| | Number of clusters | Must specify | Flexible | |
+Complexity | $O(nkdT)$ | $O(n^2)$ to $O(n^3)$ | | Scalability | Good | Poor | | Cluster shape | Spherical | Flexible (depends on
+linkage) | | Deterministic | No (random init) | Yes | | Visualization | Limited | Dendrogram |
+
+**Practical Considerations:**
+
+1. **Distance metric:** Choice significantly affects results - Euclidean: For continuous features - Manhattan: For mixed features
+   - Cosine: For text data - Correlation: For time series
+
+2. **Feature scaling:** Standardize features to equal importance (see @sec-linear-algebra for normalization)
+
+3. **Linkage selection:** - Ward's: Default choice for most applications - Complete: When clusters are well-separated - Average:
+   Compromise between single and complete - Single: For non-convex clusters (use with caution)
+
+4. **Determining number of clusters:** - Look for large gaps in dendrogram heights - Use silhouette analysis - Domain knowledge
+
+5. **Handling large datasets:** - Sample data first - Use mini-batch hierarchical clustering - Consider BIRCH (Balanced Iterative
+   Reducing and Clustering using Hierarchies)
+
+**Applications:**
+
+- Taxonomy construction in biology - Document organization - Gene expression analysis - Social network analysis - Image
+segmentation
+
+Hierarchical clustering provides a rich representation of data structure at multiple scales, complementing partition-based methods
+like K-means [@james2023statistical; @shalev2014ml].
+
+### Density-Based Clustering
+
+Density-based clustering identifies clusters as regions of high density separated by regions of low density. Unlike K-means (see
+@sec-clustering) which assumes spherical clusters, density-based methods can discover clusters of arbitrary shape and
+automatically identify outliers.
+
+**DBSCAN (Density-Based Spatial Clustering of Applications with Noise):**
+
+DBSCAN is the most widely used density-based clustering algorithm. It groups together points that are closely packed while marking
+points in low-density regions as outliers.
+
+**Key Definitions:**
+
+1. **$\epsilon$-neighborhood:** The set of points within distance $\epsilon$ of a point $\mathbf{x}$: $$N_\epsilon(\mathbf{x}) =
+   \{\mathbf{x}' \in \mathcal{X} : d(\mathbf{x}, \mathbf{x}') \leq \epsilon\}$$
+
+2. **Core point:** A point with at least MinPts neighbors in its $\epsilon$-neighborhood: $$|N_\epsilon(\mathbf{x})| \geq
+   \text{MinPts}$$ Core points are in dense regions.
+
+3. **Border point:** A point that is not a core point but lies in the $\epsilon$-neighborhood of a core point. Border points are
+on the edge of clusters.
+
+4. **Noise point (Outlier):** A point that is neither a core point nor a border point.
+
+5. **Directly density-reachable:** Point $\mathbf{x}'$ is directly density-reachable from $\mathbf{x}$ if: - $\mathbf{x}'$ is in
+   $N_\epsilon(\mathbf{x})$
+- $\mathbf{x}$ is a core point
+   
+   Note: This relation is not symmetric.
+
+6. **Density-reachable:** Point $\mathbf{x}'$ is density-reachable from $\mathbf{x}$ if there exists a chain of points
+$\mathbf{p}_1, \ldots, \mathbf{p}_n$ where $\mathbf{p}_1 = \mathbf{x}$, $\mathbf{p}_n = \mathbf{x}'$, and each $\mathbf{p}_{i+1}$
+is directly density-reachable from $\mathbf{p}_i$.
+
+7. **Density-connected:** Points $\mathbf{x}$ and $\mathbf{x}'$ are density-connected if there exists a point $\mathbf{o}$ such
+that both $\mathbf{x}$ and $\mathbf{x}'$ are density-reachable from $\mathbf{o}$. This relation is symmetric.
+
+**Cluster Definition:** A cluster $C$ satisfies: 1. **Maximality:** If $\mathbf{x} \in C$ and $\mathbf{x}'$ is density-reachable
+from $\mathbf{x}$, then $\mathbf{x}' \in C$
+2. **Connectivity:** All points in $C$ are density-connected
+
+**DBSCAN Algorithm:**
+
+``` Input: Dataset X, parameters ε, MinPts Output: Cluster assignments
+
+Initialize: All points as unvisited Cluster_ID = 0
+
+For each unvisited point x in X: Mark x as visited N = get_neighbors(x, ε)  // Find ε-neighborhood
+    
+    If |N| < MinPts: Mark x as noise Else: Cluster_ID = Cluster_ID + 1 expand_cluster(x, N, Cluster_ID, ε, MinPts)
+
+Function expand_cluster(x, N, Cluster_ID, ε, MinPts): Add x to Cluster_ID
+    
+    For each point x' in N: If x' is unvisited: Mark x' as visited N' = get_neighbors(x', ε) If |N'| ≥ MinPts: N = N ∪ N'  //
+        Expand neighborhood
+        
+        If x' is not yet in any cluster: Add x' to Cluster_ID ```
+
+**Computational Complexity:**
+
+- **Without spatial index:** $O(n^2)$ time - Each point requires checking all other points
+  
+- **With spatial index (R*-tree, KD-tree):** $O(n \log n)$ average case - Neighborhood queries become $O(\log n)$
+  
+- **Space:** $O(n)$ for storing cluster assignments
+
+**Parameter Selection:**
+
+Choosing $\epsilon$ and MinPts is crucial:
+
+**1. MinPts:** - **Rule of thumb:** MinPts $\geq d + 1$ where $d$ is the dimensionality - **Common choice:** MinPts = 4 for 2D
+data, MinPts = 5-10 for higher dimensions - **Larger MinPts:** More robust to noise, but may merge clusters - **Smaller MinPts:**
+More sensitive to noise, may split clusters
+
+**2. $\epsilon$ (k-distance graph method):**
+
+1. For each point, compute distance to its $k$-th nearest neighbor (use $k$ = MinPts) 2. Sort these distances in ascending order
+3. Plot the sorted k-distances 4. Look for an "elbow" or sharp change in the curve 5. Choose $\epsilon$ at the elbow point
+
+**Intuition:** The elbow indicates the transition from dense regions (small k-distances) to sparse regions (large k-distances).
+
+**Advantages of DBSCAN:**
+
+1. **Arbitrary cluster shapes:** Can find non-convex clusters (unlike K-means) 2. **Automatic outlier detection:** Identifies
+noise points naturally 3. **No need to specify number of clusters:** Determined automatically 4. **Robust to outliers:** Outliers
+don't affect cluster formation 5. **Single scan:** Only requires one pass through data 6. **Deterministic:** Same result every
+time (no random initialization)
+
+**Disadvantages:**
+
+1. **Parameter sensitivity:** Results depend heavily on $\epsilon$ and MinPts 2. **Varying densities:** Struggles with clusters of
+different densities 3. **High-dimensional data:** Distance becomes less meaningful (curse of dimensionality, see
+@sec-dimensionality-reduction) 4. **Border point ambiguity:** Border points may be assigned to different clusters 5. **Memory
+requirements:** Spatial index can be memory-intensive
+
+**Variants and Extensions:**
+
+**1. HDBSCAN (Hierarchical DBSCAN):** - Builds hierarchy of clusters at different density levels - Automatically selects optimal
+$\epsilon$ for each cluster - More robust to varying densities - Uses minimum spanning tree approach
+
+**2. OPTICS (Ordering Points To Identify Clustering Structure):** - Produces ordering of points representing density-based
+clustering structure - Creates reachability plot showing cluster hierarchy - Doesn't require explicit $\epsilon$ parameter - Can
+extract clusters at multiple scales
+
+**3. DENCLUE (DENsity-based CLUstEring):** - Uses kernel density estimation - Models clusters as density attractors - Can handle
+arbitrary shapes and noise
+
+**Comparison with Other Methods:**
+
+| Aspect | DBSCAN | K-Means | Hierarchical | |--------|--------|---------|-------------| | Cluster shape | Arbitrary | Spherical |
+Depends on linkage | | Number of clusters | Automatic | Must specify | Flexible | | Outlier handling | Explicit | Assigns all |
+Assigns all | | Complexity | $O(n \log n)$ | $O(nkdT)$ | $O(n^2)$ | | Parameters | $\epsilon$, MinPts | $k$ | Linkage, cut height
+| | Varying density | Poor | Poor | Depends on linkage |
+
+**Practical Considerations:**
+
+1. **Feature scaling:** Standardize features so distances are comparable (see @sec-linear-algebra)
+
+2. **Distance metric:** - Euclidean: Default for continuous features - Manhattan: For mixed feature types - Cosine: For
+   high-dimensional sparse data
+
+3. **Spatial indexing:** Use R*-tree or KD-tree for large datasets
+
+4. **Validation:** - Silhouette score - Davies-Bouldin index - Visual inspection
+
+5. **Handling varying densities:** - Use HDBSCAN instead - Apply DBSCAN to subsets with similar density - Use local density
+   estimates
+
+**Example Application - Anomaly Detection:**
+
+DBSCAN naturally identifies outliers, making it useful for anomaly detection:
+
+1. Run DBSCAN on data 2. Points marked as noise are potential anomalies 3. Can combine with other methods (see
+@sec-supervised-learning for classification approaches)
+
+**Connection to Graph Theory:**
+
+DBSCAN can be viewed as finding connected components in a graph: - **Nodes:** Data points - **Edges:** Connect points within
+$\epsilon$ distance - **Core points:** Nodes with degree $\geq$ MinPts - **Clusters:** Connected components of core points
+
+This perspective connects to spectral clustering (see @sec-clustering) and graph-based methods.
+
+**Applications:**
+
+- Spatial data analysis (GIS) - Anomaly detection in network traffic - Image segmentation - Customer segmentation with outlier
+detection - Astronomical data analysis - Trajectory clustering
+
+DBSCAN provides a powerful alternative to centroid-based methods when clusters have complex shapes or when outlier detection is
+important [@james2023statistical; @shalev2014ml].
+
+### Gaussian Mixture Models (GMMs)
+
+Gaussian Mixture Models provide a probabilistic approach to clustering by modeling the data as a mixture of multiple Gaussian
+distributions. Unlike K-means (see @sec-clustering) which performs hard assignment, GMMs provide soft assignments through
+posterior probabilities, making them more flexible and statistically principled.
+
+**Model Definition:** A GMM represents the data distribution as a weighted sum of $K$ Gaussian components:
+
+$$p(\mathbf{x}) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$$
+
+where: - $\pi_k$ are mixing coefficients (weights) with $\pi_k \geq 0$ and $\sum_{k=1}^K \pi_k = 1$
+- $\boldsymbol{\mu}_k \in
+\mathbb{R}^d$ is the mean of component $k$
+- $\boldsymbol{\Sigma}_k \in \mathbb{R}^{d \times d}$ is the covariance matrix of
+component $k$
+- $\mathcal{N}(\mathbf{x}|\boldsymbol{\mu}, \boldsymbol{\Sigma})$ is the multivariate Gaussian density (see
+@sec-probability-statistics)
+
+**Latent Variable Interpretation:** Introduce latent variable $z_i \in \{1, \ldots, K\}$ indicating which component generated
+$\mathbf{x}_i$:
+
+$$p(z_i = k) = \pi_k$$ $$p(\mathbf{x}_i | z_i = k) = \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$$
+
+The marginal distribution is:
+
+$$p(\mathbf{x}_i) = \sum_{k=1}^K p(z_i = k) p(\mathbf{x}_i | z_i = k) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}_i |
+\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$$
+
+**Maximum Likelihood Estimation:** Given data $\mathcal{X} = \{\mathbf{x}_1, \ldots, \mathbf{x}_n\}$, maximize the log-likelihood:
+
+$$\log p(\mathcal{X} | \boldsymbol{\theta}) = \sum_{i=1}^n \log \left(\sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}_i |
+\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)\right)$$
+
+where $\boldsymbol{\theta} = \{\pi_k, \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k\}_{k=1}^K$ are the parameters.
+
+Direct optimization is difficult due to the sum inside the logarithm. The Expectation-Maximization (EM) algorithm provides an
+iterative solution.
+
+**Expectation-Maximization (EM) Algorithm:**
+
+EM alternates between computing the expected complete-data log-likelihood (E-step) and maximizing it (M-step).
+
+**E-Step (Expectation):** Compute the posterior probability (responsibility) that component $k$ generated point $\mathbf{x}_i$:
+
+$$\gamma_{ik} = p(z_i = k | \mathbf{x}_i, \boldsymbol{\theta}^{(t)}) = \frac{\pi_k^{(t)} \mathcal{N}(\mathbf{x}_i |
+\boldsymbol{\mu}_k^{(t)}, \boldsymbol{\Sigma}_k^{(t)})}{\sum_{j=1}^K \pi_j^{(t)} \mathcal{N}(\mathbf{x}_i |
+\boldsymbol{\mu}_j^{(t)}, \boldsymbol{\Sigma}_j^{(t)})}$$
+
+This follows from Bayes' theorem (see @sec-probability-statistics):
+
+$$p(z_i = k | \mathbf{x}_i) = \frac{p(\mathbf{x}_i | z_i = k) p(z_i = k)}{p(\mathbf{x}_i)} = \frac{p(\mathbf{x}_i | z_i = k) p(z_i
+= k)}{\sum_{j=1}^K p(\mathbf{x}_i | z_i = j) p(z_i = j)}$$
+
+The responsibilities satisfy $\sum_{k=1}^K \gamma_{ik} = 1$ for each $i$.
+
+**M-Step (Maximization):** Update parameters to maximize the expected complete-data log-likelihood:
+
+**Effective number of points assigned to component $k$:** $$N_k = \sum_{i=1}^n \gamma_{ik}$$
+
+**Update mixing coefficients:** $$\pi_k^{(t+1)} = \frac{N_k}{n}$$
+
+**Update means:** $$\boldsymbol{\mu}_k^{(t+1)} = \frac{1}{N_k} \sum_{i=1}^n \gamma_{ik} \mathbf{x}_i$$
+
+**Update covariances:** $$\boldsymbol{\Sigma}_k^{(t+1)} = \frac{1}{N_k} \sum_{i=1}^n \gamma_{ik} (\mathbf{x}_i -
+\boldsymbol{\mu}_k^{(t+1)})(\mathbf{x}_i - \boldsymbol{\mu}_k^{(t+1)})^T$$
+
+**Derivation of M-Step Updates:** The M-step maximizes:
+
+$$Q(\boldsymbol{\theta}, \boldsymbol{\theta}^{(t)}) = \sum_{i=1}^n \sum_{k=1}^K \gamma_{ik} \log[\pi_k \mathcal{N}(\mathbf{x}_i |
+\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)]$$
+
+For $\boldsymbol{\mu}_k$, taking the derivative and setting to zero:
+
+$$\frac{\partial Q}{\partial \boldsymbol{\mu}_k} = \sum_{i=1}^n \gamma_{ik} \boldsymbol{\Sigma}_k^{-1}(\mathbf{x}_i -
+\boldsymbol{\mu}_k) = 0$$
+
+Solving: $\boldsymbol{\mu}_k = \frac{\sum_i \gamma_{ik} \mathbf{x}_i}{\sum_i \gamma_{ik}}$
+
+Similar derivations yield the updates for $\boldsymbol{\Sigma}_k$ and $\pi_k$ (with Lagrange multiplier for the constraint $\sum_k
+\pi_k = 1$).
+
+**Complete EM Algorithm:**
+
+``` Input: Data X = {x₁, ..., xₙ}, number of components K Initialize: πₖ, μₖ, Σₖ for k = 1, ..., K
+
+Repeat until convergence: # E-Step For i = 1 to n: For k = 1 to K: γᵢₖ = πₖ N(xᵢ|μₖ,Σₖ) / Σⱼ πⱼ N(xᵢ|μⱼ,Σⱼ)
+    
+    # M-Step For k = 1 to K: Nₖ = Σᵢ γᵢₖ πₖ = Nₖ / n μₖ = (Σᵢ γᵢₖ xᵢ) / Nₖ Σₖ = (Σᵢ γᵢₖ (xᵢ-μₖ)(xᵢ-μₖ)ᵀ) / Nₖ
+    
+    # Check convergence If change in log-likelihood < threshold: Break
+
+Return: πₖ, μₖ, Σₖ ```
+
+**Convergence Properties:**
+
+1. **Monotonic increase:** EM guarantees that the log-likelihood increases (or stays the same) at each iteration: $$\log
+   p(\mathcal{X} | \boldsymbol{\theta}^{(t+1)}) \geq \log p(\mathcal{X} | \boldsymbol{\theta}^{(t)})$$
+
+2. **Local maximum:** EM converges to a local maximum of the likelihood, not necessarily global
+
+3. **Convergence criterion:** Stop when: - Change in log-likelihood $< \epsilon$
+- Change in parameters $< \epsilon$
+- Maximum
+   iterations reached
+
+**Initialization Strategies:**
+
+1. **K-means initialization:** Run K-means first, use cluster centers as initial means 2. **Random initialization:** Randomly
+select $K$ data points as initial means 3. **Multiple random starts:** Run EM multiple times with different initializations, keep
+best result 4. **Hierarchical clustering:** Use hierarchical clustering to initialize
+
+**Covariance Matrix Constraints:**
+
+To reduce parameters and improve stability:
+
+1. **Full covariance:** $\boldsymbol{\Sigma}_k$ is unconstrained ($d(d+1)/2$ parameters per component) 2. **Diagonal covariance:**
+$\boldsymbol{\Sigma}_k = \text{diag}(\sigma_{k1}^2, \ldots, \sigma_{kd}^2)$ ($d$ parameters) 3. **Spherical covariance:**
+$\boldsymbol{\Sigma}_k = \sigma_k^2 \mathbf{I}$ (1 parameter) 4. **Tied covariance:** All components share the same
+$\boldsymbol{\Sigma}$
+
+**Model Selection:** Choose the number of components $K$:
+
+**1. Bayesian Information Criterion (BIC):** $$\text{BIC} = -2\log p(\mathcal{X} | \hat{\boldsymbol{\theta}}) + p \log n$$
+
+where $p$ is the number of free parameters: - Full covariance: $p = K(1 + d + d(d+1)/2) - 1$
+- Diagonal: $p = K(1 + 2d) - 1$
+-
+Spherical: $p = K(1 + d + 1) - 1$
+
+Choose $K$ that minimizes BIC.
+
+**2. Akaike Information Criterion (AIC):** $$\text{AIC} = -2\log p(\mathcal{X} | \hat{\boldsymbol{\theta}}) + 2p$$
+
+AIC tends to favor more complex models than BIC.
+
+**3. Cross-Validation:** Evaluate held-out log-likelihood
+
+**4. Silhouette Score:** Assign points to most likely component, compute silhouette
+
+**Relationship to K-Means:**
+
+K-means is a special case of GMM: - Set all $\boldsymbol{\Sigma}_k = \sigma^2 \mathbf{I}$ with $\sigma \to 0$
+- Hard assignments:
+$\gamma_{ik} \in \{0, 1\}$
+- K-means objective emerges as limiting case
+
+GMM generalizes K-means by: - Allowing elliptical clusters (full covariance) - Providing soft assignments (probabilities) - Having
+probabilistic interpretation
+
+**Advantages of GMMs:**
+
+1. **Probabilistic framework:** Provides uncertainty estimates 2. **Soft clustering:** Points can belong to multiple clusters 3.
+**Flexible cluster shapes:** Can model elliptical clusters 4. **Generative model:** Can sample new data points 5. **Principled
+model selection:** Use BIC/AIC 6. **Density estimation:** Models full data distribution
+
+**Disadvantages:**
+
+1. **Computational cost:** $O(nKd^2T)$ where $T$ is number of EM iterations 2. **Local optima:** Sensitive to initialization 3.
+**Number of components:** Must specify $K$
+4. **Singularities:** Covariance matrices can become singular 5. **Overfitting:** Can
+overfit with too many components 6. **Assumes Gaussian:** May not fit non-Gaussian data well
+
+**Regularization Techniques:**
+
+1. **Add small constant to diagonal:** $\boldsymbol{\Sigma}_k + \epsilon \mathbf{I}$ to prevent singularities 2. **Minimum
+covariance:** Enforce minimum eigenvalues 3. **Bayesian GMM:** Place priors on parameters (Dirichlet process mixture models) 4.
+**Constrain covariance:** Use diagonal or spherical covariances
+
+**Extensions:**
+
+1. **Variational Bayesian GMM:** Bayesian treatment with variational inference 2. **Dirichlet Process Mixture Models:** Infinite
+mixture models 3. **Student's t-Mixture Models:** More robust to outliers 4. **Factor Analysis:** GMM with low-rank covariance
+structure (see @sec-generative-latent)
+
+**Applications:**
+
+- Image segmentation - Speaker recognition (GMM-UBM) - Anomaly detection - Density estimation - Background subtraction in video -
+Bioinformatics (gene expression clustering)
+
+**Connection to Other Methods:**
+
+- **K-means:** Special case with spherical, equal-variance components - **PCA:** Related through factor analysis (see
+@sec-dimensionality-reduction) - **Hidden Markov Models:** GMMs for emission distributions - **Variational Autoencoders:** Can use
+GMM prior (see @sec-generative-latent)
+
+GMMs provide a flexible, probabilistic framework for clustering and density estimation, bridging the gap between simple methods
+like K-means and more complex generative models [@bishop2024deeplearning; @deisenroth2020mml].
+
+### Spectral Clustering
+
+**Algorithm:** 1. Construct similarity graph with weights $w_{ij} = \exp(-\|\mathbf{x}_i - \mathbf{x}_j\|^2/(2\sigma^2))$
+2.
+Compute graph Laplacian: $\mathbf{L} = \mathbf{D} - \mathbf{W}$ where $D_{ii} = \sum_j w_{ij}$
+3. Compute first $K$ eigenvectors
+of $\mathbf{L}$
+4. Apply K-means to rows of eigenvector matrix
+
+**Normalized Spectral Clustering:** Use normalized Laplacian $\mathbf{L}_{\text{norm}} =
+\mathbf{D}^{-1/2}\mathbf{L}\mathbf{D}^{-1/2}$.
+
+**Advantages:** Can find non-convex clusters by working in spectral space [@james2023statistical; @shalev2014ml].
+
+## Dimensionality Reduction {#sec-dimensionality-reduction}
+
+Dimensionality reduction finds low-dimensional representations of high-dimensional data.
+
+### Principal Component Analysis (PCA)
+
+Principal Component Analysis (PCA) is a fundamental technique for dimensionality reduction that finds a low-dimensional
+representation of data that captures most of the variance. PCA identifies orthogonal directions (principal components) along which
+the data varies most, providing both a method for visualization and a preprocessing step for other algorithms.
+
+**Problem Setup:** Given data $\mathbf{X} = [\mathbf{x}_1, \ldots, \mathbf{x}_n]^T \in \mathbb{R}^{n \times d}$ where each
+$\mathbf{x}_i \in \mathbb{R}^d$, find a lower-dimensional representation $\mathbf{Z} \in \mathbb{R}^{n \times k}$ with $k < d$
+that preserves as much information as possible.
+
+**Two Equivalent Formulations:**
+
+**1. Maximum Variance Formulation:** Find directions that maximize the variance of projected data.
+
+For the first principal component, solve:
+
+$$\max_{\mathbf{w}_1: \|\mathbf{w}_1\|=1} \text{Var}(\mathbf{X}\mathbf{w}_1) = \max_{\mathbf{w}_1: \|\mathbf{w}_1\|=1}
+\mathbf{w}_1^T\mathbf{S}\mathbf{w}_1$$
+
+where $\mathbf{S} = \frac{1}{n}\sum_{i=1}^n (\mathbf{x}_i - \bar{\mathbf{x}})(\mathbf{x}_i - \bar{\mathbf{x}})^T$ is the sample
+covariance matrix and $\bar{\mathbf{x}} = \frac{1}{n}\sum_{i=1}^n \mathbf{x}_i$ is the sample mean.
+
+**Solution via Lagrange Multipliers:** Form the Lagrangian:
+
+$$\mathcal{L}(\mathbf{w}_1, \lambda) = \mathbf{w}_1^T\mathbf{S}\mathbf{w}_1 - \lambda(\mathbf{w}_1^T\mathbf{w}_1 - 1)$$
+
+Taking the derivative and setting to zero:
+
+$$\frac{\partial \mathcal{L}}{\partial \mathbf{w}_1} = 2\mathbf{S}\mathbf{w}_1 - 2\lambda\mathbf{w}_1 = 0$$
+
+This gives the eigenvalue equation:
+
+$$\mathbf{S}\mathbf{w}_1 = \lambda\mathbf{w}_1$$
+
+The variance along $\mathbf{w}_1$ is:
+
+$$\mathbf{w}_1^T\mathbf{S}\mathbf{w}_1 = \mathbf{w}_1^T(\lambda\mathbf{w}_1) = \lambda\mathbf{w}_1^T\mathbf{w}_1 = \lambda$$
+
+To maximize variance, choose $\mathbf{w}_1$ as the eigenvector corresponding to the largest eigenvalue $\lambda_1$.
+
+For subsequent components, maximize variance subject to orthogonality:
+
+$$\max_{\mathbf{w}_j: \|\mathbf{w}_j\|=1, \mathbf{w}_j \perp \mathbf{w}_i \forall i<j} \mathbf{w}_j^T\mathbf{S}\mathbf{w}_j$$
+
+The solution is the eigenvector corresponding to the $j$-th largest eigenvalue.
+
+**2. Minimum Reconstruction Error Formulation:** Find a $k$-dimensional subspace that minimizes reconstruction error.
+
+$$\min_{\mathbf{W}_k, \mathbf{Z}} \sum_{i=1}^n \|\mathbf{x}_i - \bar{\mathbf{x}} - \mathbf{W}_k\mathbf{z}_i\|^2$$
+
+where $\mathbf{W}_k \in \mathbb{R}^{d \times k}$ has orthonormal columns and $\mathbf{z}_i \in \mathbb{R}^k$.
+
+**Solution:** The optimal $\mathbf{W}_k$ consists of the first $k$ eigenvectors of $\mathbf{S}$, and:
+
+$$\mathbf{z}_i = \mathbf{W}_k^T(\mathbf{x}_i - \bar{\mathbf{x}})$$
+
+**Equivalence:** These two formulations are equivalent. Maximizing variance in the projection is equivalent to minimizing
+reconstruction error.
+
+**Algorithm (PCA via Eigendecomposition):**
+
+1. **Center the data:** $\tilde{\mathbf{X}} = \mathbf{X} - \mathbf{1}\bar{\mathbf{x}}^T$ where $\mathbf{1}$ is a vector of ones
+
+2. **Compute covariance matrix:** $\mathbf{S} = \frac{1}{n}\tilde{\mathbf{X}}^T\tilde{\mathbf{X}}$
+
+3. **Eigendecomposition:** Compute eigenvalues and eigenvectors: $$\mathbf{S} = \mathbf{W}\boldsymbol{\Lambda}\mathbf{W}^T$$ where
+   $\boldsymbol{\Lambda} = \text{diag}(\lambda_1, \ldots, \lambda_d)$ with $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_d
+   \geq 0$
+
+4. **Select components:** Choose first $k$ eigenvectors: $\mathbf{W}_k = [\mathbf{w}_1, \ldots, \mathbf{w}_k]$
+
+5. **Project data:** $\mathbf{Z} = \tilde{\mathbf{X}}\mathbf{W}_k$
+
+**Algorithm (PCA via SVD - Preferred):**
+
+For numerical stability and efficiency, use Singular Value Decomposition:
+
+1. **Center the data:** $\tilde{\mathbf{X}} = \mathbf{X} - \mathbf{1}\bar{\mathbf{x}}^T$
+
+2. **SVD:** Compute $\tilde{\mathbf{X}} = \mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^T$
+- $\mathbf{U} \in \mathbb{R}^{n \times n}$:
+   Left singular vectors - $\boldsymbol{\Sigma} \in \mathbb{R}^{n \times d}$: Singular values (diagonal) - $\mathbf{V} \in
+   \mathbb{R}^{d \times d}$: Right singular vectors (principal components)
+
+3. **Principal components:** $\mathbf{W}_k = \mathbf{V}_{:,1:k}$ (first $k$ columns of $\mathbf{V}$)
+
+4. **Eigenvalues:** $\lambda_j = \sigma_j^2 / n$ where $\sigma_j$ are singular values
+
+5. **Project data:** $\mathbf{Z} = \mathbf{U}_{:,1:k}\boldsymbol{\Sigma}_{1:k,1:k} = \tilde{\mathbf{X}}\mathbf{W}_k$
+
+**Advantages of SVD:** - More numerically stable - Avoids forming $\mathbf{S}$ explicitly (saves memory) - Faster for $n \ll d$ or
+$d \ll n$
+- Directly provides principal components
+
+**Dimensionality Reduction and Reconstruction:**
+
+**Projection (Encoding):** $$\mathbf{z}_i = \mathbf{W}_k^T(\mathbf{x}_i - \bar{\mathbf{x}}) \in \mathbb{R}^k$$
+
+**Reconstruction (Decoding):** $$\tilde{\mathbf{x}}_i = \bar{\mathbf{x}} + \mathbf{W}_k\mathbf{z}_i \in \mathbb{R}^d$$
+
+**Reconstruction Error:** $$\text{Error} = \sum_{i=1}^n \|\mathbf{x}_i - \tilde{\mathbf{x}}_i\|^2 = \sum_{j=k+1}^d \lambda_j$$
+
+The reconstruction error equals the sum of discarded eigenvalues.
+
+**Choosing the Number of Components $k$:**
+
+1. **Proportion of Variance Explained (PVE):** $$\text{PVE}(k) = \frac{\sum_{j=1}^k \lambda_j}{\sum_{j=1}^d \lambda_j}$$
+   
+   Choose $k$ such that PVE$(k) \geq 0.9$ (or 0.95, 0.99)
+
+2. **Scree Plot:** Plot eigenvalues vs. component number and look for an "elbow"
+
+3. **Kaiser Criterion:** Keep components with $\lambda_j > \bar{\lambda}$ (average eigenvalue)
+
+4. **Cross-Validation:** Use downstream task performance
+
+5. **Parallel Analysis:** Compare eigenvalues to those from random data
+
+**Geometric Interpretation:**
+
+- PCA finds the best-fitting $k$-dimensional hyperplane through the data - Principal components are orthogonal axes of this
+hyperplane - First PC points in direction of maximum variance - Each subsequent PC is orthogonal and captures maximum remaining
+variance - Data points are projected onto this hyperplane
+
+**Properties of PCA:**
+
+1. **Orthogonality:** Principal components are orthogonal: $\mathbf{w}_i^T\mathbf{w}_j = \delta_{ij}$
+
+2. **Uncorrelated Projections:** Projected data has diagonal covariance: $$\text{Cov}(\mathbf{Z}) = \boldsymbol{\Lambda}_k =
+   \text{diag}(\lambda_1, \ldots, \lambda_k)$$
+
+3. **Optimal Linear Projection:** PCA is optimal among all linear projections for: - Maximizing variance - Minimizing
+   reconstruction error
+
+4. **Rotation Invariant:** PCA is invariant to rotations of the coordinate system
+
+5. **Not Scale Invariant:** Sensitive to feature scales (requires standardization)
+
+**Standardization:** For features with different scales, standardize first:
+
+$$\mathbf{x}_i' = \frac{\mathbf{x}_i - \boldsymbol{\mu}}{\boldsymbol{\sigma}}$$
+
+where $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$ are feature-wise means and standard deviations. This is equivalent to PCA on
+the correlation matrix instead of covariance matrix.
+
+**Computational Complexity:**
+
+- **Covariance matrix:** $O(nd^2)$
+- **Eigendecomposition:** $O(d^3)$
+- **SVD:** $O(\min(nd^2, n^2d))$
+- **Total:** $O(nd^2 +
+d^3)$ for eigendecomposition, $O(\min(nd^2, n^2d))$ for SVD - **Projection:** $O(ndk)$ for projecting $n$ points
+
+**Kernel PCA (Nonlinear Extension):**
+
+For nonlinear dimensionality reduction, apply PCA in a high-dimensional feature space $\phi(\mathbf{x})$ using the kernel trick.
+
+**Kernel Matrix:** $\mathbf{K}_{ij} = k(\mathbf{x}_i, \mathbf{x}_j) = \phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)$
+
+**Centering:** Center the kernel matrix: $$\tilde{\mathbf{K}} = \mathbf{K} - \mathbf{1}_n\mathbf{K} - \mathbf{K}\mathbf{1}_n +
+\mathbf{1}_n\mathbf{K}\mathbf{1}_n$$
+
+where $\mathbf{1}_n = \frac{1}{n}\mathbf{1}\mathbf{1}^T$.
+
+**Eigendecomposition:** Solve $\tilde{\mathbf{K}}\boldsymbol{\alpha} = \lambda\boldsymbol{\alpha}$
+
+**Projection:** For a new point $\mathbf{x}$: $$z_j = \sum_{i=1}^n \alpha_{ij} k(\mathbf{x}_i, \mathbf{x})$$
+
+**Common Kernels:** - **RBF:** $k(\mathbf{x}, \mathbf{x}') = \exp(-\gamma\|\mathbf{x} - \mathbf{x}'\|^2)$
+- **Polynomial:**
+$k(\mathbf{x}, \mathbf{x}') = (\mathbf{x}^T\mathbf{x}' + c)^p$
+
+**Applications of PCA:**
+
+1. **Visualization:** Project high-dimensional data to 2D or 3D 2. **Noise reduction:** Remove components with small eigenvalues
+3. **Feature extraction:** Create uncorrelated features 4. **Preprocessing:** Reduce dimensionality before applying other
+algorithms 5. **Compression:** Reduce storage requirements 6. **Anomaly detection:** Points far from the principal subspace are
+anomalies 7. **Face recognition:** Eigenfaces for face representation
+
+**Limitations:**
+
+1. **Linearity:** Only captures linear relationships 2. **Global Method:** Finds global structure, may miss local patterns 3.
+**Variance ≠ Information:** High variance directions may not be most informative 4. **Interpretability:** Principal components are
+linear combinations, hard to interpret 5. **Outlier Sensitivity:** Sensitive to outliers (use robust PCA variants) 6. **Assumes
+Gaussian:** Implicitly assumes data is Gaussian-distributed
+
+**Practical Tips:**
+
+1. **Always center data:** Essential for PCA 2. **Standardize features:** When features have different scales 3. **Check for
+outliers:** Remove or use robust PCA 4. **Visualize:** Plot first 2-3 components 5. **Validate:** Check if downstream tasks
+improve 6. **Consider alternatives:** t-SNE, UMAP for visualization; autoencoders for nonlinear reduction
+
+PCA remains one of the most fundamental and widely used techniques in machine learning, providing a principled approach to
+dimensionality reduction with strong theoretical foundations [@james2023statistical; @deisenroth2020mml].
+
+### Multidimensional Scaling (MDS)
+
+**Classical MDS:** Find configuration preserving pairwise distances.
+
+Given distance matrix $\mathbf{D}$ with $D_{ij} = d(\mathbf{x}_i, \mathbf{x}_j)$, find $\mathbf{z}_1, \ldots, \mathbf{z}_n \in
+\mathbb{R}^k$ minimizing:
+
+$$\text{Stress} = \sqrt{\sum_{i<j}(d_{ij} - \|\mathbf{z}_i - \mathbf{z}_j\|)^2}$$
+
+**Metric MDS:** Preserve distances exactly (when possible).
+
+**Non-metric MDS:** Preserve rank order of distances.
+
+### Manifold Learning
+
+**Isomap (Isometric Mapping):** 1. Construct $k$-nearest neighbor graph 2. Compute geodesic distances using shortest paths 3.
+Apply classical MDS to geodesic distance matrix
+
+**Locally Linear Embedding (LLE):** 1. Find $k$ nearest neighbors for each point 2. Compute reconstruction weights:
+$\min_{\mathbf{W}} \sum_i \|\mathbf{x}_i - \sum_j W_{ij}\mathbf{x}_j\|^2$
+3. Find low-dimensional embedding preserving weights:
+$\min_{\mathbf{Z}} \sum_i \|\mathbf{z}_i - \sum_j W_{ij}\mathbf{z}_j\|^2$
+
+**t-SNE (t-Distributed Stochastic Neighbor Embedding):**
+
+Define similarity in high-dimensional space:
+
+$$p_{j|i} = \frac{\exp(-\|\mathbf{x}_i - \mathbf{x}_j\|^2/(2\sigma_i^2))}{\sum_{k \neq i}\exp(-\|\mathbf{x}_i -
+\mathbf{x}_k\|^2/(2\sigma_i^2))}$$
+
+Define similarity in low-dimensional space using t-distribution:
+
+$$q_{ij} = \frac{(1 + \|\mathbf{z}_i - \mathbf{z}_j\|^2)^{-1}}{\sum_{k \neq l}(1 + \|\mathbf{z}_k - \mathbf{z}_l\|^2)^{-1}}$$
+
+Minimize KL divergence: $\text{KL}(P||Q) = \sum_{i,j} p_{ij}\log(p_{ij}/q_{ij})$
+
+**UMAP (Uniform Manifold Approximation and Projection):** Based on Riemannian geometry and algebraic topology. Often faster than
+t-SNE with better global structure preservation.
+
+### Random Projections
+
+**Johnson-Lindenstrauss Lemma:** For any $\epsilon \in (0,1)$ and set of $n$ points in $\mathbb{R}^d$, there exists a linear map
+$f: \mathbb{R}^d \to \mathbb{R}^k$ with $k = O(\epsilon^{-2}\log n)$ such that:
+
+$$(1-\epsilon)\|\mathbf{x}_i - \mathbf{x}_j\|^2 \leq \|f(\mathbf{x}_i) - f(\mathbf{x}_j)\|^2 \leq (1+\epsilon)\|\mathbf{x}_i -
+\mathbf{x}_j\|^2$$
+
+**Random Projection Matrix:** Sample entries from $\mathcal{N}(0, 1/k)$ or $\{-1/\sqrt{k}, +1/\sqrt{k}\}$.
+
+**Applications:** Fast approximate nearest neighbor search, compressed sensing [@james2023statistical; @shalev2014ml].
+
+## Generative Models and Latent Variables {#sec-generative-latent}
+
+Generative models learn the data distribution $p(\mathbf{x})$ and can generate new samples.
+
+### Latent Variable Models
+
+**General Framework:** Introduce latent variables $\mathbf{z}$:
+
+$$p(\mathbf{x}) = \int p(\mathbf{x}|\mathbf{z})p(\mathbf{z})d\mathbf{z}$$
+
+### Factor Analysis
+
+**Model:**
+
+$$\mathbf{x} = \mathbf{W}\mathbf{z} + \boldsymbol{\mu} + \boldsymbol{\epsilon}$$
+
+where $\mathbf{z} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$ and $\boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0},
+\boldsymbol{\Psi})$ with $\boldsymbol{\Psi}$ diagonal.
+
+**Marginal Distribution:**
+
+$$p(\mathbf{x}) = \mathcal{N}(\boldsymbol{\mu}, \mathbf{W}\mathbf{W}^T + \boldsymbol{\Psi})$$
+
+**Estimation:** Use EM algorithm or variational methods.
+
+**Difference from PCA:** Factor analysis is probabilistic and models observation noise.
+
+### Autoencoders
+
+**Architecture:** Encoder-decoder network: - **Encoder:** $\mathbf{z} = f_{\text{enc}}(\mathbf{x};
+\boldsymbol{\theta}_{\text{enc}})$
+- **Decoder:** $\hat{\mathbf{x}} = f_{\text{dec}}(\mathbf{z};
+\boldsymbol{\theta}_{\text{dec}})$
+
+**Objective:** Minimize reconstruction error:
+
+$$L = \sum_{i=1}^n \|\mathbf{x}_i - f_{\text{dec}}(f_{\text{enc}}(\mathbf{x}_i))\|^2$$
+
+**Variants:** - **Sparse autoencoders:** Add sparsity penalty on $\mathbf{z}$
+- **Denoising autoencoders:** Reconstruct from
+corrupted input - **Contractive autoencoders:** Penalize sensitivity to input perturbations
+
+### Variational Autoencoders (VAEs)
+
+**Probabilistic Formulation:** - **Prior:** $p(\mathbf{z}) = \mathcal{N}(\mathbf{0}, \mathbf{I})$
+- **Decoder:**
+$p_{\boldsymbol{\theta}}(\mathbf{x}|\mathbf{z}) = \mathcal{N}(\boldsymbol{\mu}_{\boldsymbol{\theta}}(\mathbf{z}),
+\boldsymbol{\sigma}_{\boldsymbol{\theta}}^2(\mathbf{z})\mathbf{I})$
+- **Encoder (recognition model):**
+$q_{\boldsymbol{\phi}}(\mathbf{z}|\mathbf{x}) = \mathcal{N}(\boldsymbol{\mu}_{\boldsymbol{\phi}}(\mathbf{x}),
+\boldsymbol{\sigma}_{\boldsymbol{\phi}}^2(\mathbf{x})\mathbf{I})$
+
+**Evidence Lower Bound (ELBO):**
+
+$$\log p(\mathbf{x}) \geq \mathbb{E}_{q_{\boldsymbol{\phi}}(\mathbf{z}|\mathbf{x})}[\log
+p_{\boldsymbol{\theta}}(\mathbf{x}|\mathbf{z})] - D_{\text{KL}}(q_{\boldsymbol{\phi}}(\mathbf{z}|\mathbf{x}) \| p(\mathbf{z}))$$
+
+**Reparameterization Trick:** Sample $\mathbf{z} = \boldsymbol{\mu}_{\boldsymbol{\phi}}(\mathbf{x}) +
+\boldsymbol{\sigma}_{\boldsymbol{\phi}}(\mathbf{x}) \odot \boldsymbol{\epsilon}$ where $\boldsymbol{\epsilon} \sim
+\mathcal{N}(\mathbf{0}, \mathbf{I})$.
+
+### Generative Adversarial Networks (GANs)
+
+**Framework:** Two networks compete: - **Generator:** $G(\mathbf{z}; \boldsymbol{\theta}_G)$ maps noise to data -
+**Discriminator:** $D(\mathbf{x}; \boldsymbol{\theta}_D)$ distinguishes real from fake
+
+**Objective (Minimax Game):**
+
+$$\min_G \max_D V(D, G) = \mathbb{E}_{\mathbf{x} \sim p_{\text{data}}}[\log D(\mathbf{x})] + \mathbb{E}_{\mathbf{z} \sim
+p(\mathbf{z})}[\log(1 - D(G(\mathbf{z})))]$$
+
+**Training:** 1. Update $D$ to maximize $V(D, G)$
+2. Update $G$ to minimize $V(D, G)$
+
+**Challenges:** - Mode collapse: Generator produces limited variety - Training instability: Difficult to balance $D$ and $G$
+
+**Variants:** - **DCGAN:** Deep convolutional architecture - **Wasserstein GAN:** Uses Wasserstein distance - **StyleGAN:**
+Disentangled style-based generation - **Conditional GAN:** Condition on labels or other information
+
+### Normalizing Flows
+
+**Idea:** Transform simple distribution through invertible mappings.
+
+Given invertible $f: \mathbb{R}^d \to \mathbb{R}^d$:
+
+$$p_{\mathbf{x}}(\mathbf{x}) = p_{\mathbf{z}}(f^{-1}(\mathbf{x}))\left|\det\frac{\partial f^{-1}}{\partial \mathbf{x}}\right|$$
+
+**Composition:** Chain multiple transformations:
+
+$$\mathbf{x} = f_K \circ f_{K-1} \circ \cdots \circ f_1(\mathbf{z})$$
+
+**Requirements:** - Easy to compute $f$ and $f^{-1}$
+- Easy to compute Jacobian determinant
+
+**Examples:** - **RealNVP:** Affine coupling layers - **Glow:** Invertible 1×1 convolutions - **Neural Spline Flows:** Monotonic
+spline transformations
+
+**Advantages:** Exact likelihood computation, stable training [@bishop2024deeplearning; @theodoridis2025ml].

@@ -1,0 +1,1014 @@
+# Mathematical and Statistical Foundations {#sec-math-stat-foundations}
+
+This chapter lays the mathematical and statistical groundwork for the rest of the thesis. A solid understanding of these
+foundational concepts is essential for comprehending the machine learning algorithms and theoretical discussions that follow. We
+will cover key topics in linear algebra, probability and statistics, optimization, and information theory, with a focus on
+providing the formal definitions and mathematical rigor necessary for a deep understanding of the field.
+
+## Notation {#sec-notation}
+
+To ensure clarity and consistency, we will adopt the following notational conventions throughout this chapter and the remainder of
+the thesis. This list is a consolidation of notations used in the primary reference textbooks.
+
+### General Mathematical Notation
+
+- Scalars: Lowercase letters e.g., $a, b, c, \alpha, \beta, \gamma$.
+- Sets: Calligraphic uppercase letters e.g., $\mathcal{X}, \mathcal{Y}, \mathcal{H}$.
+- Sets membership: $a \in \mathcal{A}$.
+- $\mathbb{R}$: Set of real numbers.
+- $\mathbb{C}$: Set of complex numbers.
+- $\mathbb{Z}$: Set of integers.
+- $\mathbb{N}$: Set of natural numbers.
+- Indicator function: $\mathbb{1}_{\cdot}$ with value 1 if its argument is true, and 0 otherwise.
+- Argument minimum and maximum functions: $\arg\min_x f(x)$ and $\arg\max_x f(x)$, respectively.
+- Logarithms: $\log$ is the natural logarithm (base $e$), unless otherwise specified.
+
+### Linear Algebra
+
+- Vectors: Old lowercase letters e.g. $\mathbf{x}, \mathbf{y}, \mathbf{w}$. Vectors are assumed to be column vectors unless
+  otherwise specified. The $i$-th element of a vector $\mathbf{x}$ is denoted by $x_i$.
+- Matrices: Bold uppercase letters e.g. $\mathbf{A}, \mathbf{B}, \mathbf{X}$. The element in the $i$-th row and $j$-th column
+  of matrix $\mathbf{A}$ is denoted $A_{ij}$ or $a_{ij}$.
+- Transpose of a matrix or vector: $\mathbf{A}^T$.
+- Inverse of a square matrix: $\mathbf{A}^{-1}$.
+- Identity matrix: $\mathbf{I}$.
+- Inner product (or dot product) of two vectors $\mathbf{x}$ and $\mathbf{y}$: $\langle\mathbf{x}, \mathbf{y}\rangle$ or
+  $\mathbf{x}^T\mathbf{y}$.
+- Euclidean $\ell_2$ norm: $\|\mathbf{x}\|$ or $\|\mathbf{x}\|_2$.
+- $\ell_p$ norm: $\|\mathbf{x}\|_p$.
+- Trace of a square matrix $\mathbf{A}$: $\text{tr}(\mathbf{A})$.
+- Determinant of square matrix $\mathbf{A}$: $\det(\mathbf{A})$ or $|\mathbf{A}|$.
+- Rank of matrix $\mathbf{A}$: $\text{rk}(\mathbf{A})$.
+- Span of a set of vectors: $\text{span}[\cdot]$.
+
+### Probability & Statistics
+
+- Random variables: Uppercase letters e.g. $X, Y$.
+- Random vectors: Bold uppercase letters e.g. $\mathbf{X}, \mathbf{Y}$).
+- Probability of an event $A$: $P(A)$.
+- Conditional probability of event $A$ given event $B$: $P(A|B)$.
+- Probability Mass Function (PMF) for a discrete random variable: $p(x)$.
+- Probability Density Function (PDF) for a continuous random variable: $p(x)$.
+- Expected value of a random variable $X$: $\mathbb{E}[X]$.
+- Variance of a random variable $X$: $\text{Var}(X)$.
+- Covariance of two random variables $X$ and $Y$: $\text{Cov}(X, Y)$.
+- Sampling $x$ from a distribution $\mathcal{D}$: $x \sim \mathcal{D}$.
+
+### Machine Learning
+
+- Number of data points or observations: $n$.
+- Number of features or dimensions: $p$ or $d$. 
+- Matrix of observations: $\mathbf{X}$.
+- Feature vector for the $i$-th observation$: \mathbf{x}_i$.
+- Response or label for the $i$-th observation: $y_i$.
+- Vector of all $n$ response values: $\mathbf{y}$.
+- Hypothesis class: $\mathcal{H}$.
+- Hypothesis or predictor: $h$.
+- Vector of model parameters: $\boldsymbol{\theta}$ or $\mathbf{w}$.
+- Loss function: $\ell(h, z)$.
+- True error or risk: $L_{\mathcal{D}}(h)$. 
+- Empirical error or risk: $L_{S}(h)$.
+
+## Linear Algebra and Geometry {#sec-linear-algebra}
+
+Linear algebra is the mathematical language of data. In machine learning, we represent data as vectors and collections of data as
+matrices. Linear algebra provides a powerful set of tools for manipulating these objects and understanding their properties. This
+section reviews the fundamental concepts of linear algebra that are essential for understanding machine learning algorithms.
+
+### Systems of Linear Equations
+
+A system of linear equations is a collection of linear equations involving the same set of variables. For a system with $m$
+equations and $n$ unknowns, the general form is:
+
+::: {#def-linear-system-general}
+
+System of Linear Equations General Form
+
+\begin{gather*} 
+a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n = b_1 \\ 
+a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n = b_2 \\ 
+\vdots \\
+a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n = b_m 
+\end{gather*}
+
+where $x_1, x_2, \dots, x_n$ are the unknown variables, $a_{ij}$ are the coefficients of the variables, and $b_i$ are the constant
+terms.
+:::
+
+A solution to the system is an $n$-tuple $(x_1, \dots, x_n)$ that satisfies all $m$ equations simultaneously. This system can be
+expressed more compactly using matrix notation.
+
+::: {#def-linear-system-matrix}
+
+System of Linear Equations Matrix Form
+
+Let $\mathbf{A}$ be the $m \times n$ matrix of coefficients, $\mathbf{x}$ be the $n \times 1$ column vector of unknowns, and
+$\mathbf{b}$ be the $m \times 1$ column vector of constants:
+
+$$ \mathbf{A} = \begin{bmatrix} a_{11} & a_{12} & \dots & a_{1n} \\ a_{21} & a_{22} & \dots & a_{2n} \\ \vdots & \vdots & \ddots &
+\vdots \\ a_{m1} & a_{m2} & \dots & a_{mn} \end{bmatrix}, \quad \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}, \quad \mathbf{b} = \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_m \end{bmatrix} $$
+
+The system of linear equations can then be written as:
+
+$$ \mathbf{Ax} = \mathbf{b} $$
+:::
+
+Geometrically, each linear equation in the system represents a hyperplane in an $n$-dimensional space. For example, in a
+two-dimensional space ($n=2$), each equation represents a line. In a three-dimensional space ($n=3$), each equation represents a
+plane. The solution to the system of equations is the set of points that lie at the intersection of all these hyperplanes. For a
+system of two equations with two variables, the solution is the intersection of two lines, which can be a single point (unique
+solution), a line (infinitely many solutions), or an empty set (no solution) if the lines are parallel [@deisenroth2020mml]. This
+geometric interpretation extends to higher dimensions, where the solution set is the intersection of $m$ hyperplanes in
+$\mathbb{R}^n$.
+
+### Vectors and Vector Spaces
+
+A vector space is a fundamental concept in linear algebra. It is a set of objects called vectors, which can be added together and
+multiplied by scalars. To be a vector space, this set and its operations must satisfy a set of axioms.
+
+::: {#def-vector-space}
+
+Vector Space
+
+A real vector space is a set $\mathcal{V}$ with two operations, vector addition $+$ and scalar multiplication $\cdot$, that
+satisfy the following axioms for all vectors $\mathbf{u}, \mathbf{v}, \mathbf{w} \in \mathcal{V}$ and all scalars $\alpha, \beta
+\in \mathbb{R}$:
+
+- Closure under addition: $\mathbf{u} + \mathbf{v} \in \mathcal{V}$.
+- Commutativity of addition: $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$.
+- Associativity of addition: $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$.
+- Additive identity: There exists a zero vector $\mathbf{0} \in \mathcal{V}$ such that $\mathbf{v} + \mathbf{0} = \mathbf{v}$ for
+  all $\mathbf{v} \in \mathcal{V}$.
+- Additive inverse: For every $\mathbf{v} \in \mathcal{V}$, there exists an additive inverse $-\mathbf{v} \in \mathcal{V}$ such
+  that $\mathbf{v} + (-\mathbf{v}) = \mathbf{0}$.
+- Closure under scalar multiplication: $\alpha \cdot \mathbf{v} \in \mathcal{V}$.
+- Distributivity of scalar multiplication with respect to vector addition: $\alpha \cdot (\mathbf{u} + \mathbf{v}) = \alpha \cdot
+  \mathbf{u} + \alpha \cdot \mathbf{v}$.
+- Distributivity of scalar multiplication with respect to scalar addition: $(\alpha + \beta) \cdot \mathbf{v} = \alpha \cdot
+  \mathbf{v} + \beta \cdot \mathbf{v}$.
+- Compatibility of scalar multiplication: $\alpha(\beta \cdot \mathbf{v}) = (\alpha\beta) \cdot \mathbf{v}$.
+- Identity element of scalar multiplication: $1 \cdot \mathbf{v} = \mathbf{v}$.
+:::
+
+The most common vector space in machine learning is $\mathbb{R}^d$, the space of $d$-dimensional vectors of real numbers. However,
+other sets, such as the set of all $m \times n$ matrices or the set of all polynomials, can also form vector spaces. The abstract
+nature of vector spaces allows us to apply the same linear algebra tools to a wide variety of objects [@deisenroth2020mml].
+
+### Linear Independence, Span, Basis, and Rank
+
+These concepts [@deisenroth2020mml] are central to understanding the structure of vector spaces. A vector $\mathbf{v}$ is a linear
+combination of a set of vectors ${\mathbf{x}_1, \dots, \mathbf{x}_k}$ if it can be expressed as a sum of scalar multiples of these
+vectors: $\mathbf{v} = \sum_{i=1}^k \lambda_i \mathbf{x}_i$, where $\lambda_i$ are scalars.
+
+::: {#def-linear-independence}
+
+Linear Independence
+
+A set of vectors ${\mathbf{x}_1, \dots, \mathbf{x}_k}$ is linearly independent if the only solution to the equation $\sum_{i=1}^k
+\lambda_i \mathbf{x}_i = \mathbf{0}$ is $\lambda_1 = \dots = \lambda_k = 0$. If there is any non-trivial solution (where at least
+one $\lambda_i \neq 0$), the vectors are linearly dependent. In a set of linearly dependent vectors, at least one vector can be
+expressed as a linear combination of the others.
+:::
+
+::: {#def-span}
+
+Span of Vectors
+
+The span of a set of vectors ${\mathbf{x}_1, \dots, \mathbf{x}_k}$ is the set of all possible linear combinations of these
+vectors. The span forms a subspace of the original vector space.
+:::
+
+::: {#def-basis}
+
+Basis of a Vector Space
+
+A basis of a vector space is a set of linearly independent vectors that span the entire space. A basis is a minimal generating set
+for the vector space. While a vector space can have many different bases, the number of vectors in any basis is the same. This
+number is called the dimension of the vector space.
+:::
+
+::: {#def-matrix-rank}
+
+Matrix Rank
+
+The rank of a matrix $\mathbf{A}$ is the dimension of the vector space spanned by its columns (column space). It is also equal to
+the dimension of the space spanned by its rows (row space). The rank represents the number of linearly independent columns (or
+rows) of the matrix. A matrix is said to have full rank if its rank is equal to the maximum possible rank for a matrix of its
+dimensions.
+:::
+
+### Inner Products and Norms
+
+Inner products and norms introduce geometric concepts like length, distance, and angle into vector spaces.
+
+::: {#def-inner-product}
+An inner product is a function that takes two vectors and returns a scalar. For a real vector space, an inner product
+$\langle\cdot, \cdot\rangle$ must satisfy the following properties for all vectors $\mathbf{x}, \mathbf{y}, \mathbf{z}$ and scalar
+$\alpha$:
+
+- Symmetry: $\langle\mathbf{x}, \mathbf{y}\rangle = \langle\mathbf{y}, \mathbf{x}\rangle$.
+- Linearity: $\langle\alpha\mathbf{x} + \mathbf{y}, \mathbf{z}\rangle = \alpha\langle\mathbf{x}, \mathbf{z}\rangle +
+  \langle\mathbf{y}, \mathbf{z}\rangle$.
+- Positive-definiteness: $\langle\mathbf{x}, \mathbf{x}\rangle \ge 0$, with equality if and only if $\mathbf{x} = \mathbf{0}$.
+:::
+
+The most common inner product is the dot product, defined as $\langle\mathbf{x}, \mathbf{y}\rangle = \mathbf{x}^T\mathbf{y} =
+\sum_i x_i y_i$.
+
+::: {#def-norm}
+
+Norm
+
+A norm is a function that assigns a strictly positive length or size to each vector in a vector space, with the zero vector being
+the only vector with a length of zero. A norm $\|\cdot\|$ must satisfy:
+
+- Positive-definiteness: $\|\mathbf{x}\| \ge 0$, with equality if and only if $\mathbf{x} = \mathbf{0}$.
+- Absolute homogeneity: $\|\alpha\mathbf{x}\| = |\alpha| \|\mathbf{x}\|$.
+- Triangle inequality: $\|\mathbf{x} + \mathbf{y}\| \le \|\mathbf{x}\| + \|\mathbf{y}\|$.
+:::
+
+An inner product induces a norm.
+
+::: {#def-inner-product-induced-norm}
+
+Norm Induced by Inner Product
+
+$\|\mathbf{x}\| = \sqrt{\langle\mathbf{x}, \mathbf{x}\rangle}$.
+:::
+
+The angle $\theta$ between two vectors can be defined using the inner product.
+
+::: {#def-vectors-angle}
+
+Angle Between Vectors
+
+$\cos(\theta) = \frac{\langle \mathbf{x}, \mathbf{y} \rangle}{\|\mathbf{x}\| \|\mathbf{y}\|}$.
+:::
+
+A widely used class of norms is the $\ell_p$ norm.
+
+::: {#def-norm-p}
+
+$\ell_p$ Norm
+
+
+$\|\mathbf{x}\|_p = (\sum_{i=1}^d |x_i|^p)^{1/p}$ for $p \ge 1$.
+
+:::
+
+Important special cases include: 
+
+- $p=1$: The $\ell_1$ norm, or Manhattan norm.
+- $p=2$: The $\ell_2$ norm, or Euclidean norm.
+- $p=\infty$: The $\ell_\infty$ norm, or max norm, defined as $\|\mathbf{x}\|_\infty = \max_i |x_i|$.
+
+The geometric shape of the unit ball (the set of all vectors with norm 1) depends on the value of $p$. For $p=2$, it is a sphere;
+for $p=1$, it is a diamond; and for $p=\infty$, it is a square [@deisenroth2020mml].
+
+### Orthogonality and Projections
+
+#### Orthogonality
+
+Two vectors $\mathbf{x}$ and $\mathbf{y}$ are orthogonal if their inner product is zero, i.e., $\langle\mathbf{x},
+\mathbf{y}\rangle = 0$. A set of vectors is orthogonal if every pair of distinct vectors in the set is orthogonal. If, in
+addition, all vectors in the set have a norm of 1, the set is orthonormal.
+
+An orthonormal basis is a basis of a vector space whose vectors are orthonormal. Working with an orthonormal basis simplifies many
+calculations, as the coordinates of a vector can be found by taking the inner product with the basis vectors.
+
+The orthogonal projection of a vector $\mathbf{y}$ onto a subspace $\mathcal{U}$ is the vector in $\mathcal{U}$ that is closest to
+$\mathbf{y}$. If ${\mathbf{u}_1, \dots, \mathbf{u}_n}$ is an orthonormal basis for $\mathcal{U}$, the projection of $\mathbf{y}$
+onto $\mathcal{U}$ is given by:
+
+$$ \text{proj}_{\mathcal{U}}(\mathbf{y}) = \sum_{i=1}^n \langle \mathbf{y}, \mathbf{u}_i \rangle \mathbf{u}_i $$
+
+Projections are fundamental to many machine learning algorithms, including least squares regression, where the goal is to find the
+vector in the column space of a matrix that is closest to a target vector [@deisenroth2020mml].
+
+### Matrix Decompositions
+
+Matrix decompositions are factorizations of a matrix into a product of matrices with specific properties. They are essential for
+understanding the properties of linear transformations and for solving systems of linear equations.
+
+::: {#def-eigenvalue-eigenvector}
+
+Eigenvalue and Eigenvector
+
+For a square matrix $\mathbf{A}$, an eigenvector $\mathbf{v}$ and its corresponding eigenvalue $\lambda$ satisfy:
+
+$$ \mathbf{Av} = \lambda\mathbf{v} $$
+::: This means that when the linear transformation $\mathbf{A}$ is applied to an eigenvector
+$\mathbf{v}$, the result is a scaled version of $\mathbf{v}$. The eigenvectors are the directions that are only stretched or
+compressed by the transformation. If a matrix $\mathbf{A}$ is symmetric, it can be decomposed as:
+
+::: {#def-eigendecomposition}
+
+Eigendecomposition
+
+For a symmetric matrix $\mathbf{A}$:
+
+$$ \mathbf{A} = \mathbf{PDP}^T $$
+
+where $\mathbf{P}$ is an orthogonal matrix whose columns are the eigenvectors of $\mathbf{A}$, and $\mathbf{D}$ is a diagonal matrix whose diagonal entries are the corresponding eigenvalues.
+::: This decomposition is fundamental to Principal Component Analysis
+(PCA), a widely used dimensionality reduction technique [@deisenroth2020mml].
+
+::: {#def-svd}
+
+Singular Value Decomposition (SVD)
+
+The SVD is a generalization of the eigendecomposition to any $m \times n$ matrix $\mathbf{A}$. It is given by:
+
+$$ \mathbf{A} = \mathbf{U\Sigma V}^T $$
+:::
+
+where $\mathbf{U}$ is an $m \times m$ orthogonal matrix, $\mathbf{\Sigma}$ is an $m \times n$ rectangular diagonal matrix of
+singular values, and $\mathbf{V}$ is an $n \times n$ orthogonal matrix. The columns of $\mathbf{U}$ are the left-singular vectors,
+and the columns of $\mathbf{V}$ are the right-singular vectors. The SVD provides a complete geometric characterization of a linear
+transformation: it decomposes the transformation into a rotation ($\mathbf{V}^T$), a scaling along the axes ($\mathbf{\Sigma}$),
+and another rotation ($\mathbf{U}$) [@deisenroth2020mml].
+
+### Linear Algebra in Reinforcement Learning: The Bellman Equation
+
+The Bellman equation is a central component of reinforcement learning. For a given policy $\pi$, the state-value function
+$v_\pi(s)$ is the expected return from state $s$. The Bellman equation expresses this value recursively:
+
+::: {#def-bellman-equation}
+
+Bellman Equation
+
+For a policy $\pi$, the state-value function satisfies:
+
+$$ v_\pi(s) = \mathbb{E}_\pi[R_{t+1} + \gamma v_\pi(S_{t+1}) | S_t = s] $$
+:::
+
+This can be written as a system of linear equations, one for each state. In matrix-vector form, this is:
+
+$$ \mathbf{v}_\pi = \mathbf{r}_\pi + \gamma P_\pi \mathbf{v}_\pi $$
+
+where $\mathbf{v}_\pi$ is the vector of state values, $\mathbf{r}_\pi$ is the vector of expected immediate rewards, and $P_\pi$ is
+the state transition probability matrix. The solution is given by:
+
+$$ \mathbf{v}_\pi = (I - \gamma P_\pi)^{-1} \mathbf{r}_\pi $$
+
+This demonstrates how linear algebra is used to solve for the value function in reinforcement learning [@zhao2025rl].
+
+## Probability and Statistics {#sec-probability-statistics}
+
+Probability theory provides the framework for quantifying uncertainty, which is inherent in most real-world data and in the
+predictions made by machine learning models. Statistics provides the tools for analyzing and interpreting data, and for drawing
+inferences about the underlying processes that generate the data.
+
+### Basic Probability Concepts
+
+Probability theory provides a formal framework for reasoning about uncertainty. The two fundamental rules of probability are the
+sum rule and the product rule.
+
+::: {#def-sum-rule}
+
+Sum Rule of Probability
+
+For any two events $A$ and $B$, the probability that either $A$ or $B$ will occur is given by:
+
+$$ P(A \cup B) = P(A) + P(B) - P(A \cap B) $$
+
+If the events are mutually exclusive, then $P(A \cap B) = 0$, and the rule simplifies to $P(A \cup B) = P(A) + P(B)$. For a
+random variable $X$, the sum rule allows us to compute its marginal probability by summing (or integrating) over all possible
+values of another variable $Y$:
+
+$$ P(X) = \sum_Y P(X, Y) \quad \text{(for discrete Y)} $$$$ p(x) = \int p(x, y) dy \quad \text{(for continuous Y)} $$
+:::
+
+#### Product Rule and Conditional Probability
+
+The joint probability of two events $A$ and $B$ occurring is given by:
+
+$$ P(A \cap B) = P(A|B)P(B) = P(B|A)P(A) $$
+
+where $P(A|B)$ is the conditional probability of $A$ given that $B$ has occurred. This rule is fundamental for connecting joint,
+conditional, and marginal probabilities.
+
+#### Bayes Theorem
+
+Derived from the product rule, Bayes' theorem is a cornerstone of machine learning and inference. It allows us to update our
+beliefs about a hypothesis in light of new evidence:
+
+$$ P(H|E) = \frac{P(E|H)P(H)}{P(E)} $$
+
+In this formula:
+
+- $H$ represents a hypothesis, and $E$ represents the evidence.
+- $P(H)$ is the prior probability of the hypothesis, which is our belief before observing the evidence.
+- $P(H|E)$ is the posterior probability, which is our updated belief after observing the evidence.
+- $P(E|H)$ is the likelihood, which is the probability of observing the evidence given that the hypothesis is true.
+- $P(E)$ is the marginal likelihood or evidence, which is the total probability of observing the evidence. It acts as a
+normalization constant.
+
+Bayes' theorem is central to Bayesian inference, where we treat model parameters as random variables and update their
+distributions as we observe more data [@deisenroth2020mml; @bishop2024deeplearning].
+
+### Common Probability Distributions
+
+Probability distributions are mathematical functions that describe the likelihood of different outcomes in a random experiment. In
+machine learning, we use these distributions to model uncertainty in data, represent prior beliefs about parameters, and
+characterize the behavior of learning algorithms. Understanding these distributions is essential for both theoretical analysis and
+practical implementation of machine learning methods.
+
+#### Bernoulli Distribution
+
+The simplest probability distribution models a single binary outcome, such as a coin flip. Consider an experiment where we observe
+whether an email is spam (1) or not spam (0). If the probability of spam is $p = 0.3$, then the Bernoulli distribution describes
+this random variable:
+
+::: {#def-bernoulli}
+
+Bernoulli Distribution
+
+The Bernoulli distribution for a binary random variable $x \in \{0,1\}$ with success probability $p$:
+
+$$ \text{Bern}(x|p) = p^x (1-p)^{1-x} $$
+::: The Bernoulli distribution has
+mean $\mathbb{E}[x] = p$ and variance $\text{Var}(x) = p(1-p)$. In machine learning, Bernoulli distributions appear in binary
+classification problems and as building blocks for more complex models like naive Bayes classifiers.
+
+When we repeat a Bernoulli trial multiple times independently, the total number of successes follows a binomial distribution. For
+example, if we send 10 emails and each has a 0.3 probability of being spam, the number of spam emails $k$ follows:
+
+::: {#def-binomial}
+
+Binomial Distribution
+
+The binomial distribution for $k$ successes in $n$ independent Bernoulli trials with success probability $p$:
+
+$$ \text{Bin}(k|n, p) = \binom{n}{k} p^k (1-p)^{n-k} $$
+
+where $\binom{n}{k} = \frac{n!}{k!(n-k)!}$.
+:::
+For our email example with $n=10$ and $p=0.3$, the probability of exactly 3 spam emails is $\binom{10}{3}(0.3)^3(0.7)^7 \approx
+0.267$. The binomial distribution has mean $np$ and variance $np(1-p)$. This distribution is fundamental in analyzing the sample
+complexity of learning algorithms, as discussed in [PAC Learning Framework](#sec-pac-learning).
+
+#### Gaussian Distribution
+
+The Gaussian distribution is the most important continuous distribution in statistics and machine learning. Its ubiquity stems
+from the Central Limit Theorem, which states that sums of independent random variables tend toward a Gaussian distribution
+regardless of the original distribution. 
+
+For a single continuous variable $x$, such as a person's height, the univariate Gaussian is:
+
+::: {#def-gaussian-univariate}
+
+Univariate Gaussian Distribution
+
+The univariate Gaussian distribution with mean $\mu$ and variance $\sigma^2$:
+
+$$ \mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}} $$
+::: The factor
+$\frac{1}{\sqrt{2\pi\sigma^2}}$ ensures the distribution integrates to 1. For example, if human heights follow $\mathcal{N}(170,
+100)$ (mean 170cm, standard deviation 10cm), approximately 68% of people have heights between 160cm and 180cm (within one standard
+deviation of the mean).
+
+For multivariate data, such as feature vectors $\mathbf{x} \in \mathbb{R}^d$, we use the multivariate Gaussian:
+
+::: {#def-gaussian-multivariate}
+
+Multivariate Gaussian Distribution
+
+The multivariate Gaussian distribution with mean vector $\boldsymbol{\mu} \in \mathbb{R}^d$ and covariance matrix $\Sigma \in \mathbb{R}^{d \times d}$:
+
+$$ \mathcal{N}(\mathbf{x} | \boldsymbol{\mu}, \Sigma) = \frac{1}{\sqrt{(2\pi)^d |\Sigma|}} e^{-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^T\Sigma^{-1}(\mathbf{x}-\boldsymbol{\mu})} $$
+::: The covariance matrix must be positive
+semidefinite (see [Linear Algebra Recap](#sec-linear-algebra-recap)). The Gaussian distribution is central to linear regression ([Linear Models](#sec-linear-models)),
+Gaussian processes, and many other machine learning models [@deisenroth2020mml; @bishop2024deeplearning].
+
+#### Multinomial Distribution
+
+The multinomial distribution generalizes the binomial to cases with more than two outcomes. Consider rolling a six-sided die $n$
+times: the counts of each face follow a multinomial distribution. If we roll the die 60 times, the expected count for each face is
+10, but the actual counts will vary according to:
+
+::: {#def-multinomial}
+
+Multinomial Distribution
+
+The multinomial distribution for counts $(x_1, \ldots, x_k)$ of $k$ outcomes in $n$ trials with probabilities $(p_1, \ldots, p_k)$:
+
+$$ \text{Mult}(x_1, \ldots, x_k | n, p_1, \ldots, p_k) = \frac{n!}{x_1! \cdots x_k!} p_1^{x_1} \cdots p_k^{x_k} $$
+
+where $\sum_{i=1}^k x_i = n$ and $\sum_{i=1}^k p_i = 1$.
+::: This distribution is fundamental in
+text classification and topic modeling, where we model word counts in documents.
+
+### Stochastic Processes and Markov Decision Processes
+
+#### Stochastic Processes
+
+A stochastic process is a collection of random variables indexed by time, representing the evolution of a system with inherent
+randomness. For example, the daily closing price of a stock, the position of a robot navigating a room, or the state of a game
+being played all constitute stochastic processes. Understanding these processes is crucial for sequential decision-making
+problems, which form the foundation of reinforcement learning ([Reinforcement Learning](#sec-reinforcement-learning)).
+
+#### Markov Property
+
+Many stochastic processes satisfy a special property that greatly simplifies their analysis: the future depends only on the
+present, not on the past. This is called the Markov property or "memorylessness." Formally, for a sequence of states $S_0, S_1,
+S_2, \ldots$:
+
+::: {#def-markov-property}
+
+Markov Property
+
+$$ P(S_{t+1} | S_t, S_{t-1}, \ldots, S_0) = P(S_{t+1} | S_t) $$
+:::
+
+To understand this intuitively, consider a chess game. If we know the current board position (the present state), we can determine
+all legal moves and their consequences without knowing how the game reached this position. The history of moves doesn't
+matter—only the current configuration. This property dramatically reduces the complexity of modeling sequential processes.
+
+As a counterexample, consider predicting tomorrow's weather. If we only know today's weather (sunny), our prediction might be less
+accurate than if we also knew yesterday's weather (rainy). In this case, the Markov property might not hold perfectly, though it
+often serves as a useful approximation.
+
+#### Markov Decision Processes
+
+A Markov Decision Process (MDP) extends the Markov property to include decision-making. An MDP models situations where an agent
+interacts with an environment: the agent observes the current state, chooses an action, receives a reward, and transitions to a
+new state. This framework is fundamental to reinforcement learning ([Reinforcement Learning Foundations](#sec-rl-foundations)).
+
+::: {#def-mdp}
+
+Markov Decision Process (MDP)
+
+A Markov Decision Process (MDP) is a tuple $(\mathcal{S}, \mathcal{A}, P, R, \gamma)$ where:
+:::
+
+- $\mathcal{S}$ is the state space, the set of all possible states the system can be in. For a robot navigating a grid, this might
+be all possible positions.
+
+- $\mathcal{A}$ is the action space, the set of all possible actions. For the robot, this might be {move north, south, east,
+  west}.
+
+- $P(s' | s, a)$ is the state transition probability function, giving the probability of reaching state $s'$ when taking action
+  $a$ in state $s$. For example, if the robot tries to move north, it might succeed with probability 0.9 but slip and move east with
+  probability 0.1 due to wheel slippage.
+
+- $R(s, a, s')$ is the reward function, specifying the immediate reward received after transitioning from state $s$ to state $s'$
+  via action $a$. The robot might receive +10 for reaching a goal location, -1 for each step (to encourage efficiency), and -100 for
+  hitting an obstacle.
+
+- $\gamma \in [0, 1]$ is the discount factor, which determines how much the agent values future rewards compared to immediate
+  ones. With $\gamma = 0$, the agent is myopic and only cares about immediate rewards. With $\gamma$ close to 1, the agent is
+  far-sighted and values future rewards almost as much as immediate ones.
+
+The objective in an MDP is to find a policy $\pi: \mathcal{S} \rightarrow \mathcal{A}$, a mapping from states to actions, that
+maximizes the expected cumulative discounted reward:
+
+$$ \mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t R(S_t, A_t, S_{t+1})\right] $$
+
+This framework provides the mathematical foundation for reinforcement learning algorithms discussed in [Reinforcement Learning](#sec-reinforcement-learning)
+[@zhao2025rl].
+
+### Statistical Concepts
+
+Statistical concepts provide the tools for summarizing, analyzing, and making inferences from data. These concepts are essential
+for understanding how machine learning algorithms learn from finite samples and generalize to new data.
+
+::: {#def-expected-value}
+
+Expected Value
+
+The expected value (or expectation) of a random variable represents its long-run average value. Imagine rolling a fair six-sided
+die many times: while any single roll is unpredictable, the average value converges to 3.5. This is the expected value.
+
+For a discrete random variable $X$ taking values $x_1, x_2, \ldots$ with probabilities $P(x_i)$:
+
+$$ \mathbb{E}[X] = \sum_i x_i P(x_i) $$
+
+For example, if $X$ represents the outcome of rolling a die, $\mathbb{E}[X] = 1 \cdot \frac{1}{6} + 2 \cdot \frac{1}{6} + \cdots +
+6 \cdot \frac{1}{6} = 3.5$.
+
+For a continuous random variable with probability density function $p(x)$:
+
+$$ \mathbb{E}[X] = \int x p(x) dx $$
+:::
+
+The expectation is linear: $\mathbb{E}[aX + bY] = a\mathbb{E}[X] + b\mathbb{E}[Y]$ for any constants $a, b$ and random variables
+$X, Y$. This property is fundamental in analyzing learning algorithms, where we often need to compute expected losses or errors.
+
+While the expected value tells us the center of a distribution, the variance measures its spread. A distribution with high
+variance has values that are typically far from the mean, while low variance indicates values cluster tightly around the mean.
+
+::: {#def-variance}
+
+Variance
+
+The variance is defined as the expected squared deviation from the mean:
+
+$$ \text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 $$
+:::
+
+The second equality provides a computational shortcut: we can compute the variance from the expectation of $X^2$ and the square of
+the expectation of $X$.
+
+For our die example, $\mathbb{E}[X^2] = 1^2 \cdot \frac{1}{6} + 2^2 \cdot \frac{1}{6} + \cdots + 6^2 \cdot \frac{1}{6} = 15.17$,
+so $\text{Var}(X) = 15.17 - 3.5^2 = 2.92$. The standard deviation $\sigma = \sqrt{\text{Var}(X)} \approx 1.71$ provides a measure
+of spread in the same units as $X$.
+
+::: {#def-covariance}
+
+Covariance
+
+The covariance measures how two random variables vary together. If $X$ and $Y$ tend to be large together and small together, their
+covariance is positive. If one tends to be large when the other is small, the covariance is negative. If they vary independently,
+the covariance is zero (though zero covariance doesn't guarantee independence).
+
+$$ \text{Cov}(X, Y) = \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] $$
+:::
+
+For example, consider height $X$ and weight $Y$ in humans. These variables have positive covariance because taller people tend to
+weigh more. The covariance matrix $\Sigma$ for a random vector $\mathbf{X} = [X_1, \ldots, X_d]^T$ has entries $\Sigma_{ij} =
+\text{Cov}(X_i, X_j)$. This matrix appears in the multivariate Gaussian distribution and is central to dimensionality reduction
+techniques like PCA ([Dimensionality Reduction](#sec-dimensionality-reduction)).
+
+#### Bias-Variance Decomposition
+
+Bias-Variance Decomposition. One of the most important concepts in machine learning is the bias-variance decomposition, which
+explains why models fail to generalize. Consider a regression problem where we want to predict $y = f(x) + \epsilon$, where $f(x)$
+is the true function and $\epsilon$ is irreducible noise with $\mathbb{E}[\epsilon] = 0$ and $\text{Var}(\epsilon) = \sigma^2$.
+
+Suppose we train a model $\hat{f}(x)$ on a training set. If we could repeat this process with many different training sets drawn
+from the same distribution, the expected squared error at a point $x$ decomposes as:
+
+$$ \mathbb{E}[(y - \hat{f}(x))^2] = \underbrace{(f(x) - \mathbb{E}[\hat{f}(x)])^2}_{\text{Bias}^2} +
+\underbrace{\mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]}_{\text{Variance}} + \underbrace{\sigma^2}_{\text{Irreducible
+Error}} $$
+
+Let's understand each term through an example. Suppose the true relationship is $f(x) = x^2$, but we fit a linear model
+$\hat{f}(x) = ax + b$:
+
+The bias $(f(x) - \mathbb{E}[\hat{f}(x)])^2$ measures how far the average prediction is from the truth. A linear model cannot
+capture the quadratic relationship, so it will systematically underpredict or overpredict. This is high bias—the model is too
+simple.
+
+- The variance $\mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]$ measures how much the predictions vary across different
+training sets. A linear model has relatively low variance because its predictions don't change dramatically with different
+training data.
+
+This is the noise $\sigma^2$ in the data itself, which no model can eliminate.
+
+Now consider fitting a high-degree polynomial. This flexible model can fit $f(x) = x^2$ well (low bias), but it's sensitive to the
+specific training data and might fit the noise (high variance). The bias-variance trade-off is fundamental: simple models have
+high bias but low variance, while complex models have low bias but high variance. The goal is to find the sweet spot that
+minimizes total error, as discussed in [Foundations of Learning Theory](#sec-learning-theory) [@james2023statistical].
+
+## Optimization Foundations {#sec-optimization}
+
+Optimization is the engine that powers machine learning. Nearly every learning algorithm can be framed as an optimization problem:
+find the parameters $\mathbf{w}$ that minimize a loss function $L(\mathbf{w})$. For example, in linear regression we minimize the
+squared error, in logistic regression we minimize the cross-entropy loss, and in neural networks we minimize task-specific
+objectives. Understanding optimization is therefore essential for both implementing and analyzing machine learning algorithms.
+
+### Gradient-Based Optimization
+
+#### Gradient Descent
+
+Gradient-based optimization is the workhorse of modern machine learning, used to train everything from simple linear models to
+massive neural networks with billions of parameters. The fundamental insight is beautifully simple: if we want to minimize a
+function, we should move in the direction where it decreases most rapidly. The gradient tells us this direction.
+
+::: {#def-gradient}
+
+Gradient
+
+The gradient $\nabla L(\mathbf{w})$ is a vector pointing in the direction of steepest increase of the loss function
+$L(\mathbf{w})$. To minimize the loss, we move in the opposite direction:
+
+$$ \mathbf{w}_{t+1} = \mathbf{w}_t - \eta \nabla L(\mathbf{w}_t) $$
+:::
+
+The learning rate $\eta > 0$ controls the step size. If $\eta$ is too small, we take tiny steps and convergence is painfully
+slow—imagine taking millimeter steps down the mountain. If $\eta$ is too large, we might overshoot the minimum and even
+diverge—like taking such large steps that we leap past the valley and up the other side.
+
+For example, consider minimizing $L(w) = w^2$. The gradient is $\nabla L(w) = 2w$, so the update rule becomes $w_{t+1} = w_t -
+2\eta w_t = (1 - 2\eta)w_t$. Starting from $w_0 = 1$ with $\eta = 0.1$, we get the sequence $1, 0.8, 0.64, 0.512, \ldots$
+converging to 0. But with $\eta = 0.6$, we get $1, -0.2, 0.04, -0.008, \ldots$ which oscillates but still converges. With $\eta =
+1$, we get $1, -1, 1, -1, \ldots$ which oscillates forever.
+
+#### Stochastic Gradient Descent
+
+In machine learning, the loss function typically has the form $L(\mathbf{w}) = \frac{1}{n}\sum_{i=1}^n L_i(\mathbf{w})$, where
+$L_i$ is the loss on the $i$-th training example and $n$ might be millions or billions. Computing the full gradient $\nabla
+L(\mathbf{w}) = \frac{1}{n}\sum_{i=1}^n \nabla L_i(\mathbf{w})$ requires processing the entire dataset at each step—prohibitively
+expensive for large datasets.
+
+::: {#def-sgd}
+Stochastic Gradient Descent (SGD) approximates the gradient using a single randomly selected example:
+
+$$ \mathbf{w}_{t+1} = \mathbf{w}_t - \eta \nabla L_i(\mathbf{w}_t) $$
+:::
+
+This gradient estimate is noisy—sometimes it points in the wrong direction—but it's unbiased: $\mathbb{E}[\nabla L_i(\mathbf{w})]
+= \nabla L(\mathbf{w})$. On average, we're moving in the right direction, and we can take many more steps in the time it would
+take to compute one full gradient. The noise can even be beneficial, helping the algorithm escape shallow local minima.
+
+Mini-batch Gradient Descent strikes a balance between full-batch gradient descent and SGD. Instead of using one example or all
+examples, we use a small random subset (mini-batch) of size $b$ (typically 32, 64, or 256):
+
+::: {#def-minibatch-gd}
+Mini-batch gradient descent uses a subset of size $b$:
+
+$$ \mathbf{w}_{t+1} = \mathbf{w}_t - \eta \frac{1}{b}\sum_{i \in \text{batch}} \nabla L_i(\mathbf{w}_t) $$
+:::
+
+Mini-batches reduce the noise in the gradient estimate while remaining computationally efficient. They also enable efficient
+parallel computation on modern hardware (GPUs), where processing 64 examples simultaneously is nearly as fast as processing one.
+
+#### Advanced Optimizers
+
+Standard gradient descent treats all parameters equally and uses a fixed learning rate. Modern optimizers improve on this in
+various ways:
+
+Momentum adds a velocity term that accumulates gradients over time, helping the optimizer build up speed in consistent directions
+and dampen oscillations. Think of a ball rolling down a hill: it doesn't just respond to the current slope but also has momentum
+from previous motion.
+
+RMSProp and Adam adapt the learning rate for each parameter individually based on the history of gradients. Parameters with large,
+consistent gradients get smaller learning rates (to avoid overshooting), while parameters with small or inconsistent gradients get
+larger learning rates (to make progress). Adam (Adaptive Moment Estimation) combines momentum with adaptive learning rates and has
+become the default optimizer for many deep learning applications.
+
+These advanced optimizers are essential for training deep neural networks ([Neural Networks](#sec-neural-networks)), where the loss landscape can be
+highly non-convex with many saddle points and plateaus [@deisenroth2020mml; @bishop2024deeplearning; @shalev2014ml]. using a small
+random subset (a mini-batch) of the training data. This reduces the noise in the gradient estimate while remaining computationally
+efficient.
+
+Several advanced optimizers have been developed to improve upon standard gradient descent. These include methods like Momentum,
+which helps accelerate gradients vectors in the right direction, thus leading to faster converging, and RMSProp and Adam, which
+adapt the learning rate for each parameter, often leading to faster convergence and better performance [@deisenroth2020mml;
+@bishop2024deeplearning; @shalev2014ml].
+
+### Stochastic Approximation
+
+#### Robbins-Monro Conditions
+
+Stochastic approximation methods are a class of iterative algorithms used to find the root or optimum of a function that can only
+be observed with noise. These methods are fundamental to online learning and are widely used in reinforcement learning for
+updating value functions and policies.
+
+The general form of a stochastic approximation algorithm is:
+
+$$ \mathbf{w}_{k+1} = \mathbf{w}_k - \alpha_k \hat{g}(\mathbf{w}_k) $$
+
+where $\hat{g}(\mathbf{w}_k)$ is a noisy estimate of the gradient of the objective function, and $\{\alpha_k\}$ is a sequence of
+step sizes. For the algorithm to converge, the step sizes must satisfy the Robbins-Monro conditions:
+
+$$ \sum_{k=1}^\infty \alpha_k = \infty \quad \text{and} \quad \sum_{k=1}^\infty \alpha_k^2 < \infty $$
+
+The first condition ensures that the algorithm can reach any point, while the second condition ensures that the noise in the
+gradient estimates eventually cancels out.
+
+Stochastic Gradient Descent (SGD) can be viewed as a special case of stochastic approximation. In reinforcement learning,
+stochastic approximation is used in algorithms like Temporal-Difference (TD) learning to update value function estimates based on
+noisy returns from the environment [@zhao2025rl; @theodoridis2025ml].
+
+### Convex Optimization
+
+Convex optimization is a subfield of optimization that deals with minimizing convex functions over convex sets. A key property of
+convex optimization problems is that any local minimum is also a global minimum, which makes them particularly well-suited for
+efficient optimization algorithms.
+
+::: {#def-convex-set}
+
+Convex Set
+
+A set $\mathcal{C}$ is convex if for any two points $\mathbf{x}, \mathbf{y} \in \mathcal{C}$, the line segment connecting them is
+also in $\mathcal{C}$. That is, for any $\alpha \in [0, 1]$, $\alpha \mathbf{x} + (1-\alpha)\mathbf{y} \in \mathcal{C}$.
+:::
+
+::: {#def-convex-function}
+
+Convex Function
+
+A function $f$ is convex if its domain is a convex set and for any two points $\mathbf{x}, \mathbf{y}$ in its domain and any $\alpha \in [0, 1]$:
+
+$$ f(\alpha \mathbf{x} + (1-\alpha)\mathbf{y}) \le \alpha f(\mathbf{x}) + (1-\alpha)f(\mathbf{y}) $$
+:::
+
+Geometrically, this means that the line segment connecting any two points on the function's graph lies on or above the graph.
+
+#### Applications in Machine Learning
+
+Many machine learning problems can be formulated as convex optimization problems. For example, training a Support Vector Machine
+(SVM) involves minimizing a convex loss function. The efficiency and guarantees of convex optimization make it a powerful tool in
+the machine learning practitioner's toolbox [@shalev2014ml; @deisenroth2020mml].
+
+### Constrained Optimization
+
+Constrained optimization problems involve minimizing or maximizing a function subject to constraints on the variables. A common
+method for solving such problems is the method of Lagrange multipliers.
+
+#### Lagrange Multipliers
+
+For a problem of the form:
+
+minimize $f(\mathbf{x})$ subject to $g(\mathbf{x}) = 0$
+
+we introduce a new variable $\lambda$, called a Lagrange multiplier, and define the Lagrangian function:
+
+::: {#def-lagrangian}
+
+Lagrangian
+
+For a constrained optimization problem with objective $f(\mathbf{x})$ and constraint $g(\mathbf{x}) = 0$, the Lagrangian is:
+
+$$ \mathcal{L}(\mathbf{x}, \lambda) = f(\mathbf{x}) - \lambda g(\mathbf{x}) $$
+
+where $\lambda$ is the Lagrange multiplier.
+:::
+
+The solution to the constrained optimization problem can be found by finding the stationary points of the Lagrangian, which
+involves solving the system of equations:
+
+$$ \nabla_{\mathbf{x}, \lambda} \mathcal{L}(\mathbf{x}, \lambda) = 0 $$
+
+This method can be extended to handle inequality constraints as well, using the Karush-Kuhn-Tucker (KKT) conditions. Constrained
+optimization is used in many machine learning algorithms, such as Support Vector Machines (SVMs) [@deisenroth2020mml].
+
+## Information Theory and Inference {#sec-information-theory}
+
+Information theory provides a mathematical framework for quantifying information.
+
+### Entropy
+
+Entropy is a key concept in information theory that measures the uncertainty of a random variable. It quantifies the average
+amount of information needed to specify the state of a random variable.
+
+For a discrete random variable $X$ with probability mass function $P(x)$, the Shannon entropy is defined as:
+
+$$ H(X) = -\sum_{i=1}^n P(x_i) \log_2 P(x_i) $$
+
+The logarithm is typically base 2, in which case the entropy is measured in bits. A distribution that is sharply peaked around a
+few values will have a low entropy, while a distribution that is spread more evenly across many values will have a higher entropy.
+
+For a continuous random variable with probability density function $p(x)$, the differential entropy is:
+
+$$ h(X) = -\int p(x) \log_2 p(x) dx $$
+
+Unlike Shannon entropy, differential entropy can be negative. The Gaussian distribution has the maximum differential entropy among
+all distributions with the same variance [@theodoridis2025ml; @bishop2024deeplearning].
+
+### Kullback-Leibler (KL) Divergence
+
+The Kullback-Leibler (KL) divergence, also known as relative entropy, is a measure of how one probability distribution diverges
+from a second, expected probability distribution. For two discrete probability distributions $P$ and $Q$, the KL divergence is
+defined as:
+
+$$ D_{KL}(P || Q) = \sum_{i} P(i) \log\left(\frac{P(i)}{Q(i)}\right) $$
+
+For continuous distributions $p(x)$ and $q(x)$, it is:
+
+$$ D_{KL}(p || q) = \int_{-\infty}^{\infty} p(x) \log\left(\frac{p(x)}{q(x)}\right) dx $$
+
+The KL divergence is always non-negative ($D_{KL}(P || Q) \ge 0$) and is zero if and only if $P$ and $Q$ are the same
+distribution. However, it is not a true distance metric because it is not symmetric, i.e., $D_{KL}(P || Q) \neq D_{KL}(Q || P)$.
+In machine learning, the KL divergence is often used as a loss function to measure the dissimilarity between a model's predicted
+distribution and the true data distribution [@bishop2024deeplearning].
+
+### Mutual Information
+
+Mutual information measures the mutual dependence between two random variables. It quantifies the amount of information obtained
+about one random variable through observing the other random variable. The mutual information of two random variables $X$ and $Y$
+is the KL divergence between their joint distribution and the product of their marginal distributions:
+
+$$ I(X; Y) = D_{KL}(P(x,y) || P(x)P(y)) = \sum_{x,y} P(x,y) \log\left(\frac{P(x,y)}{P(x)P(y)}\right) $$
+
+It can also be expressed in terms of entropy:
+
+::: {#def-mutual-information}
+
+Mutual Information
+
+The mutual information between random variables $X$ and $Y$:
+
+$$ I(X; Y) = H(X) - H(X|Y) = H(Y) - H(Y|X) $$
+:::
+
+where $H(X|Y)$ is the conditional entropy of $X$ given $Y$. This shows that the mutual information is the reduction in uncertainty
+about one variable given knowledge of the other. Mutual information is always non-negative and is zero if and only if the two
+variables are independent [@theodoridis2025ml; @bishop2024deeplearning].
+
+### Maximum Likelihood Estimation
+
+Maximum Likelihood Estimation (MLE) is a method for estimating the parameters of a statistical model. Given a set of i.i.d.
+(independent and identically distributed) data points $D = \{x_1, \dots, x_n\}$ drawn from a distribution $P(x|\theta)$
+parameterized by $\theta$, the likelihood function is the probability of observing the data as a function of the parameters:
+
+$$ L(\theta | D) = P(D | \theta) = \prod_{i=1}^n P(x_i | \theta) $$
+
+The principle of Maximum Likelihood Estimation is to choose the parameters $\theta$ that maximize the likelihood function. This is
+equivalent to finding the parameters that make the observed data most probable.
+
+In practice, it is often easier to work with the log-likelihood function, since the logarithm converts the product into a sum and
+does not change the location of the maximum. The Maximum Likelihood Estimate (MLE) of $\theta$ is therefore given by:
+
+$$ \hat{\theta}_{MLE} = \arg\max_{\theta} \log L(\theta | D) = \arg\max_{\theta} \sum_{i=1}^n \log P(x_i | \theta) $$
+
+MLE is a cornerstone of statistical inference and is widely used to train machine learning models [@shalev2014ml;
+@bishop2024deeplearning].
+
+### Maximum A Posteriori Estimation
+
+Maximum A Posteriori (MAP) estimation is a Bayesian alternative to MLE that incorporates prior knowledge about the parameters.
+Using Bayes' theorem, the posterior distribution of the parameters given the data is:
+
+$$ P(\theta | D) = \frac{P(D | \theta) P(\theta)}{P(D)} $$
+
+The MAP estimate is the mode of the posterior distribution:
+
+$$ \hat{\theta}_{MAP} = \arg\max_{\theta} P(\theta | D) = \arg\max_{\theta} P(D | \theta) P(\theta) $$
+
+Since the denominator $P(D)$ does not depend on $\theta$, it can be ignored in the optimization. Taking logarithms, we get:
+
+$$ \hat{\theta}_{MAP} = \arg\max_{\theta} [\log P(D | \theta) + \log P(\theta)] $$
+
+The MAP estimate reduces to the MLE when the prior $P(\theta)$ is uniform (i.e., when we have no prior preference for any
+particular parameter value). The prior allows us to incorporate domain knowledge or regularization into the estimation process.
+For example, a Gaussian prior on the parameters corresponds to $\ell_2$ regularization, while a Laplace prior corresponds to
+$\ell_1$ regularization [@bishop2024deeplearning; @deisenroth2020mml].
+
+### Cross-Entropy
+
+Cross-entropy is a measure from information theory that quantifies the difference between two probability distributions. It is
+widely used as a loss function in classification tasks. For two discrete probability distributions $P$ and $Q$, the cross-entropy
+is defined as:
+
+::: {#def-cross-entropy-discrete}
+
+Cross-Entropy (Discrete)
+
+$$ H(P, Q) = -\sum_{i} P(i) \log Q(i) $$
+:::
+
+For continuous distributions:
+
+::: {#def-cross-entropy-continuous}
+
+Cross-Entropy (Continuous)
+
+$$ H(p, q) = -\int p(x) \log q(x) dx $$
+::: {#def-policy-entropy}
+
+Policy Entropy
+
+
+The cross-entropy can be decomposed as:
+
+$$ H(P, Q) = H(P) + D_{KL}(P || Q) $$
+
+where $H(P)$ is the entropy of $P$ and $D_{KL}(P || Q)$ is the KL divergence from $P$ to $Q$. Since $H(P)$ is constant with
+respect to $Q$, minimizing the cross-entropy is equivalent to minimizing the KL divergence.
+
+In machine learning, particularly in classification problems, we often use cross-entropy as a loss function. For a binary
+classification problem with true labels $y \in \{0, 1\}$ and predicted probabilities $\hat{y}$, the binary cross-entropy loss is:
+
+$$ L = -[y \log \hat{y} + (1-y) \log(1-\hat{y})] $$
+
+For multi-class classification with $K$ classes, the categorical cross-entropy is:
+
+$$ L = -\sum_{k=1}^K y_k \log \hat{y}_k $$
+
+where $y_k$ is 1 if the true class is $k$ and 0 otherwise (one-hot encoding), and $\hat{y}_k$ is the predicted probability for
+class $k$. Cross-entropy loss encourages the model to assign high probability to the correct class [@bishop2024deeplearning;
+@theodoridis2025ml].
+
+### Information Theory in Reinforcement Learning
+
+Information theory concepts play an important role in reinforcement learning, particularly in understanding
+exploration-exploitation trade-offs and in developing entropy-regularized algorithms.
+
+The entropy of a policy $\pi$ measures its randomness or uncertainty. For a discrete action space, the entropy of a policy at
+state $s$ is:
+
+::: {#def-policy-entropy}
+
+Policy Entropy
+
+$$ H(\pi(\cdot|s)) = -\sum_{a \in \mathcal{A}} \pi(a|s) \log \pi(a|s) $$
+:::
+
+A deterministic policy has zero entropy, while a uniform random policy has maximum entropy. Entropy regularization adds an entropy
+bonus to the objective function, encouraging the agent to explore more:
+
+::: {#def-entropy-regularization}
+
+Entropy Regularization
+
+$$ J(\pi) = \mathbb{E}_{\tau \sim \pi}\left[\sum_{t=0}^\infty \gamma^t (R_t + \alpha H(\pi(\cdot|S_t)))\right] $$
+
+where $\alpha$ is a temperature parameter that controls the strength of the entropy regularization.
+:::
+
+This approach is used in modern reinforcement learning algorithms such as Soft Actor-Critic (SAC) and has been shown to improve
+exploration and robustness [@zhao2025rl].
