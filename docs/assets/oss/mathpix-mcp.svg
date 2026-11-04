@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 160" role="img" aria-hidden="true">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#123a6b"/><stop offset="1" stop-color="#0f6b6b"/></linearGradient></defs>
+<rect width="320" height="160" fill="url(#g)"/>
+<g fill="none" stroke="#e8f0ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M52 44V28h18M268 44V28h-18M52 116v16h18M268 116v16h-18" stroke="#ffd27a" stroke-width="4"/>
+<path d="M58 80h204" stroke="#ffd27a" opacity=".55" stroke-dasharray="6 7"/>
+<text x="160" y="96" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="44" stroke="none" fill="#e8f0ff" font-style="italic">∑ xᵢ² = ∫ f</text>
+</g>
+</svg>
