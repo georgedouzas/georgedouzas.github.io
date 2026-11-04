@@ -36,3 +36,6 @@ _*.local
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Unpublished drafts
+posts/_*/
