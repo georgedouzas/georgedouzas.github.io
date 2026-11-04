@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   startParticles(reducedMotion);
   followPointerOnCards();
   filterPostsByTag();
+  refreshStarCounts();
 
   if (!reducedMotion) {
     revealOnScroll();
@@ -80,13 +81,36 @@ function revealOnScroll() {
 }
 
 function followPointerOnCards() {
-  document.querySelectorAll(".oss-card, .quick-card").forEach((card) => {
+  document.querySelectorAll(".quick-card").forEach((card) => {
     card.addEventListener("pointermove", (event) => {
       const box = card.getBoundingClientRect();
       card.style.setProperty("--pointer-x", `${event.clientX - box.left}px`);
       card.style.setProperty("--pointer-y", `${event.clientY - box.top}px`);
     });
   });
+}
+
+// Updates the star counts built into the Open source page. If GitHub does not answer, those counts stay.
+async function refreshStarCounts() {
+  const counts = document.querySelectorAll("[data-repo]");
+  if (counts.length === 0) {
+    return;
+  }
+
+  try {
+    const response = await fetch("https://api.github.com/users/georgedouzas/repos?per_page=100");
+    if (!response.ok) {
+      return;
+    }
+    const repos = new Map((await response.json()).map((repo) => [repo.name, repo.stargazers_count]));
+    counts.forEach((count) => {
+      if (repos.has(count.dataset.repo)) {
+        count.querySelector(".post-row-star-count").textContent = repos.get(count.dataset.repo);
+      }
+    });
+  } catch {
+    // Network failures leave the built-in counts in place.
+  }
 }
 
 // Shows only posts with the tag named in the address, such as posts.html#tag=Physics.
@@ -100,16 +124,12 @@ function filterPostsByTag() {
   const apply = () => {
     const match = window.location.hash.match(/^#tag=(.+)$/);
     const tag = match ? decodeURIComponent(match[1]) : "";
-    let shownOlder = 0;
     let shown = 0;
 
     posts.forEach((post) => {
       const visible = !tag || post.dataset.tags.split("|").includes(tag);
       post.hidden = !visible;
-      if (visible) {
-        shown += 1;
-        shownOlder += post.classList.contains("older-post") ? 1 : 0;
-      }
+      shown += visible ? 1 : 0;
     });
 
     chips.forEach((chip) => {
@@ -122,16 +142,7 @@ function filterPostsByTag() {
       }
     });
 
-    const featured = document.querySelector(".featured-post");
-    const eyebrow = document.querySelector(".landing-section .landing-eyebrow");
-    const olderHeading = document.querySelector(".older-heading");
     const empty = document.querySelector(".tag-empty");
-    if (eyebrow) {
-      eyebrow.hidden = Boolean(tag) || (featured && featured.hidden);
-    }
-    if (olderHeading) {
-      olderHeading.hidden = Boolean(tag) || shownOlder === 0;
-    }
     if (empty) {
       empty.hidden = shown > 0;
     }

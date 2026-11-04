@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Glossary – Georgios Douzas</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../posts/fundamentals-of-mathematics-for-physicists/registry.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-62ab7622601dc1281cac47bf0cf453d3.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c9bb40c08a066f1d1a0f0931099edcc8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Georgios Douzas</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../open-source.html"> 
+<span class="menu-text">Open source</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/georgedouzas"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/gdouzas"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=-A4zUTUAAAAJ&amp;hl=en"> <i class="bi bi-mortarboard-fill" role="img" aria-label="Google Scholar">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/fundamentals-of-mathematics-for-physicists/glossary.html">Glossary</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-01-sets-relations-topology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sets, relations and topology</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-02-linear-algebra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear algebra</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-03-real-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Real analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-04-complex-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Complex analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-05-differential-equations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Differential equations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-06-fourier-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fourier analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-07-hilbert-spaces-operators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-08-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability and statistics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-09-differential-geometry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Differential geometry</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-10-group-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Group theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-11-lie-groups-algebras.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lie groups and Lie algebras</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-12-homogeneous-spaces-bundles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Homogeneous spaces and fibre bundles</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/part-i-13-spinors-dirac-operator.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spinors and the Dirac operator</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/registry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Registry of verified results</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-physicists/glossary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec-glossary-fundamentals-of-mathematics-for-physicists" id="toc-sec-glossary-fundamentals-of-mathematics-for-physicists" class="nav-link active" data-scroll-target="#sec-glossary-fundamentals-of-mathematics-for-physicists">Glossary</a>
+  <ul class="collapse">
+  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a">A</a></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b">B</a></li>
+  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c">C</a></li>
+  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d">D</a></li>
+  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e">E</a></li>
+  <li><a href="#f" id="toc-f" class="nav-link" data-scroll-target="#f">F</a></li>
+  <li><a href="#g" id="toc-g" class="nav-link" data-scroll-target="#g">G</a></li>
+  <li><a href="#h" id="toc-h" class="nav-link" data-scroll-target="#h">H</a></li>
+  <li><a href="#i" id="toc-i" class="nav-link" data-scroll-target="#i">I</a></li>
+  <li><a href="#j" id="toc-j" class="nav-link" data-scroll-target="#j">J</a></li>
+  <li><a href="#k" id="toc-k" class="nav-link" data-scroll-target="#k">K</a></li>
+  <li><a href="#l" id="toc-l" class="nav-link" data-scroll-target="#l">L</a></li>
+  <li><a href="#m" id="toc-m" class="nav-link" data-scroll-target="#m">M</a></li>
+  <li><a href="#n" id="toc-n" class="nav-link" data-scroll-target="#n">N</a></li>
+  <li><a href="#o" id="toc-o" class="nav-link" data-scroll-target="#o">O</a></li>
+  <li><a href="#p" id="toc-p" class="nav-link" data-scroll-target="#p">P</a></li>
+  <li><a href="#q" id="toc-q" class="nav-link" data-scroll-target="#q">Q</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
+  <li><a href="#s" id="toc-s" class="nav-link" data-scroll-target="#s">S</a></li>
+  <li><a href="#t" id="toc-t" class="nav-link" data-scroll-target="#t">T</a></li>
+  <li><a href="#u" id="toc-u" class="nav-link" data-scroll-target="#u">U</a></li>
+  <li><a href="#v" id="toc-v" class="nav-link" data-scroll-target="#v">V</a></li>
+  <li><a href="#w" id="toc-w" class="nav-link" data-scroll-target="#w">W</a></li>
+  <li><a href="#z" id="toc-z" class="nav-link" data-scroll-target="#z">Z</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="sec-glossary-fundamentals-of-mathematics-for-physicists" class="level1">
+<h1>Glossary</h1>
+<p>Every notion this tutorial defines, in alphabetical order, with its definition and chapter.</p>
+<section id="a" class="level2">
+<h2 class="anchored" data-anchor-id="a">A</h2>
+<ul>
+<li><strong>Abelian group</strong>: <a href="part-i-10-group-theory.html#def-abelian-group">Definition 2 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Absolute convergence</strong>: <a href="part-i-03-real-analysis.html#def-absolute-convergence">Definition 5 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Adjoint operator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-adjoint-operator">Definition 18 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Adjoint representation</strong>: <a href="part-i-11-lie-groups-algebras.html#def-adjoint">Definition 9 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Analytic continuation</strong>: <a href="part-i-04-complex-analysis.html#def-analytic-continuation">Definition 17 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Angle between vectors</strong>: <a href="part-i-09-differential-geometry.html#def-angle">Definition 42 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Angular velocity</strong>: <a href="part-i-11-lie-groups-algebras.html#def-lg-angular-velocity">Definition 18 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Antiderivative</strong>: <a href="part-i-03-real-analysis.html#def-antiderivative">Definition 12 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Argument</strong>: <a href="part-i-04-complex-analysis.html#def-argument">Definition 3 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Atlas</strong>: <a href="part-i-09-differential-geometry.html#def-atlas">Definition 3 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+</ul>
+</section>
+<section id="b" class="level2">
+<h2 class="anchored" data-anchor-id="b">B</h2>
+<ul>
+<li><strong>Banach algebra</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-banach-algebra">Definition 40 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Banach space</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-banach-space">Definition 2 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Basis</strong>: <a href="part-i-02-linear-algebra.html#def-basis">Definition 5 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Bessel function</strong>: <a href="part-i-05-differential-equations.html#def-bessel-function">Definition 17 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Beta function</strong>: <a href="part-i-04-complex-analysis.html#def-beta-function">Definition 19 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Bijection</strong>: <a href="part-i-01-sets-relations-topology.html#def-bijection">Definition 5 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Bilinear form</strong>: <a href="part-i-02-linear-algebra.html#def-bilinear-form">Definition 11 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Binomial distribution</strong>: <a href="part-i-08-probability.html#def-binomial-distribution">Definition 10 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Boundary value problem</strong>: <a href="part-i-05-differential-equations.html#def-boundary-value-problem">Definition 12 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Bounded linear map</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-bounded-linear-map">Definition 5 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Bounded operator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-bounded-operator">Definition 17 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Branch</strong>: <a href="part-i-04-complex-analysis.html#def-branch">Definition 6 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Branching rule</strong>: <a href="part-i-11-lie-groups-algebras.html#def-branching-rule">Definition 31 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+</ul>
+</section>
+<section id="c" class="level2">
+<h2 class="anchored" data-anchor-id="c">C</h2>
+<ul>
+<li><strong>C*-algebra</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-c-star-algebra">Definition 42 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Canonical commutation relation</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-canonical-commutation-relation">Definition 30 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Cartan matrix</strong>: <a href="part-i-11-lie-groups-algebras.html#def-cartan-matrix">Definition 29 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Cartan subalgebra</strong>: <a href="part-i-11-lie-groups-algebras.html#def-cartan-subalgebra">Definition 19 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Cartesian product</strong>: <a href="part-i-01-sets-relations-topology.html#def-product">Definition 11 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Cauchy sequence</strong>: <a href="part-i-03-real-analysis.html#def-cauchy-sequence">Definition 3 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Characteristic function</strong>: <a href="part-i-08-probability.html#def-characteristic-function">Definition 8 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Charge-conjugation matrix</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-charge-conjugation-matrix">Definition 4 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Chart</strong>: <a href="part-i-09-differential-geometry.html#def-chart">Definition 1 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Chern character</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-chern-character">Definition 19 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Chern number</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-chern-number">Definition 24 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Chirality matrix</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-chirality-matrix">Definition 3 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Chi-squared statistic</strong>: <a href="part-i-08-probability.html#def-chi-squared-statistic">Definition 16 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Christoffel symbols</strong>: <a href="part-i-09-differential-geometry.html#def-christoffel">Definition 56 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Christoffel symbols of the first kind</strong>: <a href="part-i-09-differential-geometry.html#def-christoffel-first-kind">Definition 58 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Classification of second-order equations</strong>: <a href="part-i-05-differential-equations.html#def-pde-classification">Definition 19 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Clebsch-Gordan decomposition</strong>: <a href="part-i-11-lie-groups-algebras.html#def-clebsch-gordan">Definition 24 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Clifford algebra</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-clifford-algebra">Definition 1 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Closed form</strong>: <a href="part-i-09-differential-geometry.html#def-closed-exact">Definition 36 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Closed operator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-closed-operator">Definition 8 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Commutator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-commutator">Definition 22 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Compact operator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-compact-operator">Definition 25 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Compact operator between Banach spaces</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-compact-banach-operator">Definition 27 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Compact space</strong>: <a href="part-i-01-sets-relations-topology.html#def-compact">Definition 19 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Complex derivative</strong>: <a href="part-i-04-complex-analysis.html#def-complex-derivative">Definition 7 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Complex exponential</strong>: <a href="part-i-04-complex-analysis.html#def-complex-exponential">Definition 4 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Complex logarithm</strong>: <a href="part-i-04-complex-analysis.html#def-complex-logarithm">Definition 5 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Complex number</strong>: <a href="part-i-04-complex-analysis.html#def-complex-number">Definition 1 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Components of a tangent vector</strong>: <a href="part-i-09-differential-geometry.html#def-components">Definition 18 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Components of a tensor</strong>: <a href="part-i-02-linear-algebra.html#def-tensor-components">Definition 19 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Composition of maps</strong>: <a href="part-i-01-sets-relations-topology.html#def-composition">Definition 7 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Conditional probability</strong>: <a href="part-i-08-probability.html#def-conditional-probability">Definition 3 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Confidence interval</strong>: <a href="part-i-08-probability.html#def-confidence-interval">Definition 15 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Conformal map</strong>: <a href="part-i-04-complex-analysis.html#def-conformal">Definition 10 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Conjugation</strong>: <a href="part-i-10-group-theory.html#def-conjugation">Definition 15 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Connected space</strong>: <a href="part-i-01-sets-relations-topology.html#def-connected">Definition 20 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Connection</strong>: <a href="part-i-09-differential-geometry.html#def-connection">Definition 51 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Connection on a principal bundle</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-bundle-connection">Definition 18 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Continuous dual space</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-continuous-dual">Definition 6 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Continuous function</strong>: <a href="part-i-03-real-analysis.html#def-continuity">Definition 9 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Continuous map</strong>: <a href="part-i-01-sets-relations-topology.html#def-continuous-map">Definition 15 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Contour</strong>: <a href="part-i-04-complex-analysis.html#def-contour">Definition 11 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Contour integral</strong>: <a href="part-i-04-complex-analysis.html#def-contour-integral">Definition 12 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Contraction</strong>: <a href="part-i-02-linear-algebra.html#def-contraction">Definition 20 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Contraction of tensor fields</strong>: <a href="part-i-09-differential-geometry.html#def-contraction-fields">Definition 31 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Convergence in probability</strong>: <a href="part-i-08-probability.html#def-convergence-in-probability">Definition 11 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Convolution</strong>: <a href="part-i-06-fourier-analysis.html#def-convolution">Definition 5 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Coordinate basis</strong>: <a href="part-i-09-differential-geometry.html#def-coordinate-basis">Definition 17 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Coordinate curve</strong>: <a href="part-i-09-differential-geometry.html#def-coordinate-curve">Definition 2 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Coordinate differentials</strong>: <a href="part-i-09-differential-geometry.html#def-coordinate-differentials">Definition 25 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Coordinate velocity</strong>: <a href="part-i-09-differential-geometry.html#def-coordinate-velocity">Definition 12 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Coset representative</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-coset-representative">Definition 9 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Coset space</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-coset-space">Definition 2 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Coset structure constants</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-coset-structure-constants">Definition 6 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Coset vielbein</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-coset-vielbein">Definition 10 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Cotangent vector</strong>: <a href="part-i-09-differential-geometry.html#def-cotangent-vector">Definition 24 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Covariant derivative of a tensor field</strong>: <a href="part-i-09-differential-geometry.html#def-covariant-derivative-tensor">Definition 53 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Covariant derivative of a vector field</strong>: <a href="part-i-09-differential-geometry.html#def-covariant-derivative-vector">Definition 52 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Covering homomorphism</strong>: <a href="part-i-11-lie-groups-algebras.html#def-covering-homomorphism">Definition 5 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Curvature of a connection</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-curvature-connection">Definition 21 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Curve</strong>: <a href="part-i-09-differential-geometry.html#def-curve">Definition 9 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+</ul>
+</section>
+<section id="d" class="level2">
+<h2 class="anchored" data-anchor-id="d">D</h2>
+<ul>
+<li><strong>Derivative</strong>: <a href="part-i-03-real-analysis.html#def-derivative">Definition 10 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Diffeomorphism of open sets</strong>: <a href="part-i-03-real-analysis.html#def-diffeomorphism">Definition 17 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Differential form</strong>: <a href="part-i-09-differential-geometry.html#def-differential-form">Definition 33 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Differential of a function</strong>: <a href="part-i-09-differential-geometry.html#def-differential">Definition 26 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Dimension</strong>: <a href="part-i-02-linear-algebra.html#def-dimension">Definition 6 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Dirac delta</strong>: <a href="part-i-05-differential-equations.html#def-dirac-delta">Definition 24 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Dirac operator</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-dirac-operator">Definition 11 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Direct sum of Lie algebras</strong>: <a href="part-i-11-lie-groups-algebras.html#def-direct-sum-algebras">Definition 32 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Direct sum of representations</strong>: <a href="part-i-10-group-theory.html#def-direct-sum-rep">Definition 20 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Discrete Fourier transform</strong>: <a href="part-i-06-fourier-analysis.html#def-fad-dft">Definition 6 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Distribution</strong>: <a href="part-i-06-fourier-analysis.html#def-distribution">Definition 8 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Distributional derivative</strong>: <a href="part-i-06-fourier-analysis.html#def-distributional-derivative">Definition 9 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Dolbeault-Dirac operator</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-dolbeault-dirac">Definition 15 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Dual basis</strong>: <a href="part-i-02-linear-algebra.html#def-dual-basis">Definition 10 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Dual space</strong>: <a href="part-i-02-linear-algebra.html#def-dual-space">Definition 9 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+</ul>
+</section>
+<section id="e" class="level2">
+<h2 class="anchored" data-anchor-id="e">E</h2>
+<ul>
+<li><strong>Eigenvalue</strong>: <a href="part-i-05-differential-equations.html#def-eigenvalue">Definition 7 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Eigenvalue of an operator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-operator-eigenvalue">Definition 23 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Einstein metric</strong>: <a href="part-i-09-differential-geometry.html#def-einstein-metric">Definition 71 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Einstein tensor</strong>: <a href="part-i-09-differential-geometry.html#def-einstein-tensor">Definition 72 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Elementary tensor</strong>: <a href="part-i-02-linear-algebra.html#def-elementary-tensor">Definition 17 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Embedding</strong>: <a href="part-i-09-differential-geometry.html#def-embedding">Definition 13 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Equivalence class</strong>: <a href="part-i-01-sets-relations-topology.html#def-equivalence-class">Definition 9 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Equivalence relation</strong>: <a href="part-i-01-sets-relations-topology.html#def-equivalence-relation">Definition 8 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Equivalent representations</strong>: <a href="part-i-10-group-theory.html#def-equivalent-representations">Definition 19 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Estimator</strong>: <a href="part-i-08-probability.html#def-estimator">Definition 13 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Expectation</strong>: <a href="part-i-08-probability.html#def-expectation">Definition 6 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Exponential map</strong>: <a href="part-i-09-differential-geometry.html#def-geodesic-exponential">Definition 62 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Exponential map of a Lie group</strong>: <a href="part-i-11-lie-groups-algebras.html#def-exponential-map">Definition 13 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Exterior derivative</strong>: <a href="part-i-09-differential-geometry.html#def-exterior-derivative">Definition 35 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+</ul>
+</section>
+<section id="f" class="level2">
+<h2 class="anchored" data-anchor-id="f">F</h2>
+<ul>
+<li><strong>Feynman propagator</strong>: <a href="part-i-05-differential-equations.html#def-feynman-propagator">Definition 28 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Fibre bundle</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-fibre-bundle">Definition 13 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Flat metric</strong>: <a href="part-i-09-differential-geometry.html#def-flat-metric">Definition 47 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Flow of a vector field</strong>: <a href="part-i-09-differential-geometry.html#def-flow">Definition 73 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Fourier coefficient</strong>: <a href="part-i-06-fourier-analysis.html#def-fourier-coefficient">Definition 2 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Fourier transform</strong>: <a href="part-i-06-fourier-analysis.html#def-fourier-transform">Definition 4 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Fourier transform of a distribution</strong>: <a href="part-i-06-fourier-analysis.html#def-distribution-transform">Definition 11 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Frame</strong>: <a href="part-i-09-differential-geometry.html#def-frame">Definition 23 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Fredholm determinant</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-fredholm-determinant">Definition 37 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Fredholm operator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-fredholm-operator">Definition 28 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Functional calculus</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-functional-calculus">Definition 26 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Fundamental solution</strong>: <a href="part-i-05-differential-equations.html#def-fundamental-solution">Definition 25 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+</ul>
+</section>
+<section id="g" class="level2">
+<h2 class="anchored" data-anchor-id="g">G</h2>
+<ul>
+<li><strong>Gamma function</strong>: <a href="part-i-04-complex-analysis.html#def-gamma-function">Definition 18 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Gamma matrices in any signature</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-gamma-matrices-general">Definition 2 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Gauge potential</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-gauge-potential">Definition 19 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Gauge transformation</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-gauge-transformation">Definition 20 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Gauss curvature</strong>: <a href="part-i-09-differential-geometry.html#def-gauss-curvature">Definition 66 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Gaussian distribution</strong>: <a href="part-i-08-probability.html#def-gaussian-distribution">Definition 9 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Gell-Mann basis</strong>: <a href="part-i-11-lie-groups-algebras.html#def-gell-mann">Definition 25 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Generated subgroup</strong>: <a href="part-i-10-group-theory.html#def-generated-subgroup">Definition 5 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Geodesic</strong>: <a href="part-i-09-differential-geometry.html#def-geodesic">Definition 61 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Gram matrix</strong>: <a href="part-i-09-differential-geometry.html#def-gram">Definition 14 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Green’s function</strong>: <a href="part-i-05-differential-equations.html#def-greens-function">Definition 26 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Group</strong>: <a href="part-i-10-group-theory.html#def-group">Definition 1 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Group action</strong>: <a href="part-i-10-group-theory.html#def-group-action">Definition 9 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+</ul>
+</section>
+<section id="h" class="level2">
+<h2 class="anchored" data-anchor-id="h">H</h2>
+<ul>
+<li><strong>Harmonic function</strong>: <a href="part-i-04-complex-analysis.html#def-harmonic">Definition 9 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Harmonic oscillator</strong>: <a href="part-i-05-differential-equations.html#def-harmonic-oscillator">Definition 10 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong><span class="math inline">\hat A</span> genus</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-a-hat-genus">Definition 18 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Hausdorff space</strong>: <a href="part-i-01-sets-relations-topology.html#def-hausdorff">Definition 18 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Heat equation</strong>: <a href="part-i-05-differential-equations.html#def-heat-equation">Definition 21 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Heat kernel</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-heat-kernel">Definition 38 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Highest weight</strong>: <a href="part-i-11-lie-groups-algebras.html#def-highest-weight">Definition 27 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Hilbert space</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-hilbert-space">Definition 14 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Holomorphic function</strong>: <a href="part-i-04-complex-analysis.html#def-holomorphic">Definition 8 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Homeomorphism</strong>: <a href="part-i-01-sets-relations-topology.html#def-homeomorphism">Definition 16 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Homogeneous space</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-homogeneous-space">Definition 1 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Homogeneous spinor bundle</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-homogeneous-spinor-bundle">Definition 14 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Homomorphism</strong>: <a href="part-i-10-group-theory.html#def-homomorphism">Definition 12 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Hopf connection</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-hopf-connection">Definition 23 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Hopf map</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-hopf-map">Definition 22 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+</ul>
+</section>
+<section id="i" class="level2">
+<h2 class="anchored" data-anchor-id="i">I</h2>
+<ul>
+<li><strong>Improper integral</strong>: <a href="part-i-03-real-analysis.html#def-improper-integral">Definition 13 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Independence</strong>: <a href="part-i-08-probability.html#def-independence">Definition 4 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Induced metric</strong>: <a href="part-i-09-differential-geometry.html#def-induced-metric">Definition 46 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Initial value problem</strong>: <a href="part-i-05-differential-equations.html#def-initial-value-problem">Definition 2 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Injective map</strong>: <a href="part-i-01-sets-relations-topology.html#def-injective">Definition 3 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Inner product</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-inner-product">Definition 12 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Integral curve</strong>: <a href="part-i-09-differential-geometry.html#def-integral-curve">Definition 22 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Invariant metric</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-invariant-metric">Definition 4 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Invariant subspace</strong>: <a href="part-i-10-group-theory.html#def-invariant-subspace">Definition 17 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Inverse map</strong>: <a href="part-i-01-sets-relations-topology.html#def-inverse-map">Definition 6 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Inverse metric</strong>: <a href="part-i-09-differential-geometry.html#def-inverse-metric">Definition 40 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Irreducible representation</strong>: <a href="part-i-10-group-theory.html#def-irreducible">Definition 18 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Isolated singularity</strong>: <a href="part-i-04-complex-analysis.html#def-isolated-singularity">Definition 15 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Isometry</strong>: <a href="part-i-09-differential-geometry.html#def-isometry">Definition 49 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Isometry algebra</strong>: <a href="part-i-09-differential-geometry.html#def-isometry-algebra">Definition 78 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Isomorphism</strong>: <a href="part-i-10-group-theory.html#def-isomorphism">Definition 14 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Isotropy charges</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-isotropy-charges">Definition 8 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Isotropy representation</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-isotropy-representation">Definition 3 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+</ul>
+</section>
+<section id="j" class="level2">
+<h2 class="anchored" data-anchor-id="j">J</h2>
+<ul>
+<li><strong>Jacobian matrix</strong>: <a href="part-i-03-real-analysis.html#def-jacobian">Definition 16 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+</ul>
+</section>
+<section id="k" class="level2">
+<h2 class="anchored" data-anchor-id="k">K</h2>
+<ul>
+<li><strong>Kernel</strong>: <a href="part-i-10-group-theory.html#def-kernel">Definition 13 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Killing form</strong>: <a href="part-i-11-lie-groups-algebras.html#def-killing-form">Definition 10 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Killing vector field</strong>: <a href="part-i-09-differential-geometry.html#def-killing">Definition 77 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+</ul>
+</section>
+<section id="l" class="level2">
+<h2 class="anchored" data-anchor-id="l">L</h2>
+<ul>
+<li><strong><span class="math inline">L^2</span> space</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-l2-space">Definition 15 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Ladder operators</strong>: <a href="part-i-11-lie-groups-algebras.html#def-ladder-operators">Definition 21 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Laplace-Beltrami operator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-laplace-beltrami">Definition 32 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Laplace’s equation</strong>: <a href="part-i-05-differential-equations.html#def-laplace-equation">Definition 22 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Laplacian on the sphere</strong>: <a href="part-i-06-fourier-analysis.html#def-spherical-laplacian">Definition 12 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Laurent series</strong>: <a href="part-i-04-complex-analysis.html#def-laurent-series">Definition 14 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Left coset</strong>: <a href="part-i-10-group-theory.html#def-left-coset">Definition 7 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Left-invariant Dirac operator</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-left-invariant-dirac">Definition 13 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Left-invariant one-form</strong>: <a href="part-i-11-lie-groups-algebras.html#def-left-invariant-form">Definition 16 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Left-invariant vector field</strong>: <a href="part-i-11-lie-groups-algebras.html#def-left-invariant-field">Definition 15 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Left translation</strong>: <a href="part-i-11-lie-groups-algebras.html#def-left-translation">Definition 14 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Legendre polynomial</strong>: <a href="part-i-05-differential-equations.html#def-legendre-polynomial">Definition 16 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Length of a curve</strong>: <a href="part-i-09-differential-geometry.html#def-curve-length">Definition 41 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Levi-Civita connection</strong>: <a href="part-i-09-differential-geometry.html#def-levi-civita">Definition 57 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Lie algebra</strong>: <a href="part-i-11-lie-groups-algebras.html#def-lie-algebra">Definition 6 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Lie algebra of a matrix Lie group</strong>: <a href="part-i-11-lie-groups-algebras.html#def-lie-algebra-of-group">Definition 8 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Lie bracket</strong>: <a href="part-i-09-differential-geometry.html#def-lie-bracket">Definition 21 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Lie derivative</strong>: <a href="part-i-09-differential-geometry.html#def-lie-derivative">Definition 76 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Lie group</strong>: <a href="part-i-11-lie-groups-algebras.html#def-lie-group">Definition 1 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Lie subgroup</strong>: <a href="part-i-11-lie-groups-algebras.html#def-lie-subgroup">Definition 3 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Limit of a function</strong>: <a href="part-i-03-real-analysis.html#def-function-limit">Definition 8 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Limit of a sequence</strong>: <a href="part-i-03-real-analysis.html#def-sequence-limit">Definition 2 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Linear combination</strong>: <a href="part-i-02-linear-algebra.html#def-linear-combination">Definition 2 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Linear first-order equation</strong>: <a href="part-i-05-differential-equations.html#def-linear-first-order-equation">Definition 4 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Linear functional</strong>: <a href="part-i-02-linear-algebra.html#def-linear-functional">Definition 8 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Linear independence</strong>: <a href="part-i-02-linear-algebra.html#def-linear-independence">Definition 4 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Linear map</strong>: <a href="part-i-02-linear-algebra.html#def-linear-map">Definition 7 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Linear system</strong>: <a href="part-i-05-differential-equations.html#def-linear-system">Definition 6 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Line element</strong>: <a href="part-i-09-differential-geometry.html#def-line-element">Definition 39 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Lowering an index</strong>: <a href="part-i-09-differential-geometry.html#def-lowering">Definition 43 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong><span class="math inline">L^p</span> space</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-lp-space">Definition 3 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+</ul>
+</section>
+<section id="m" class="level2">
+<h2 class="anchored" data-anchor-id="m">M</h2>
+<ul>
+<li><strong>Majorana spinor</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-majorana-condition">Definition 5 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Map</strong>: <a href="part-i-01-sets-relations-topology.html#def-map">Definition 2 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Matrix coefficient</strong>: <a href="part-i-06-fourier-analysis.html#def-matrix-coefficient">Definition 14 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Matrix exponential</strong>: <a href="part-i-05-differential-equations.html#def-matrix-exp">Definition 8 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Matrix exponential</strong>: <a href="part-i-11-lie-groups-algebras.html#def-matrix-exponential">Definition 11 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Matrix Lie group</strong>: <a href="part-i-11-lie-groups-algebras.html#def-matrix-lie-group">Definition 2 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Maurer-Cartan form</strong>: <a href="part-i-11-lie-groups-algebras.html#def-maurer-cartan-form">Definition 17 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Maximally symmetric space</strong>: <a href="part-i-09-differential-geometry.html#def-maximally-symmetric">Definition 79 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Maximum likelihood estimator</strong>: <a href="part-i-08-probability.html#def-maximum-likelihood">Definition 14 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Meagre set</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-meagre-set">Definition 7 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Metric</strong>: <a href="part-i-09-differential-geometry.html#def-metric">Definition 37 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Metric compatibility</strong>: <a href="part-i-09-differential-geometry.html#def-metric-compatible">Definition 55 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Metric from the vielbein</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-vielbein-metric">Definition 12 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Mixed tensor</strong>: <a href="part-i-02-linear-algebra.html#def-tensor-type">Definition 18 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Mode expansion on a coset space</strong>: <a href="part-i-06-fourier-analysis.html#def-coset-mode-expansion">Definition 15 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Modulus</strong>: <a href="part-i-04-complex-analysis.html#def-modulus">Definition 2 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Monte Carlo estimate</strong>: <a href="part-i-08-probability.html#def-monte-carlo-estimate">Definition 17 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Multilinear map</strong>: <a href="part-i-02-linear-algebra.html#def-multilinear-map">Definition 15 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Multiple integral</strong>: <a href="part-i-03-real-analysis.html#def-multiple-integral">Definition 18 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+</ul>
+</section>
+<section id="n" class="level2">
+<h2 class="anchored" data-anchor-id="n">N</h2>
+<ul>
+<li><strong>Non-degenerate bilinear form</strong>: <a href="part-i-02-linear-algebra.html#def-nondegenerate">Definition 13 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Norm</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-norm">Definition 1 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Normal subgroup</strong>: <a href="part-i-10-group-theory.html#def-normal-subgroup">Definition 6 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+</ul>
+</section>
+<section id="o" class="level2">
+<h2 class="anchored" data-anchor-id="o">O</h2>
+<ul>
+<li><strong>One-form</strong>: <a href="part-i-09-differential-geometry.html#def-one-form">Definition 27 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>One-parameter group of diffeomorphisms</strong>: <a href="part-i-09-differential-geometry.html#def-one-parameter-group">Definition 74 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>One-parameter subgroup</strong>: <a href="part-i-11-lie-groups-algebras.html#def-one-parameter-subgroup">Definition 12 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Open set in <span class="math inline">\mathbb{R}^n</span></strong>: <a href="part-i-01-sets-relations-topology.html#def-open-set">Definition 12 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Orbifold projection</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-orbifold-projection">Definition 16 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Orbit</strong>: <a href="part-i-10-group-theory.html#def-orbit">Definition 10 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Order</strong>: <a href="part-i-10-group-theory.html#def-order">Definition 3 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Ordinary differential equation</strong>: <a href="part-i-05-differential-equations.html#def-ode">Definition 1 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Orthogonal functions</strong>: <a href="part-i-05-differential-equations.html#def-orthogonal-functions">Definition 14 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Orthogonal projection</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-orthogonal-projection">Definition 21 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Orthonormal basis</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-orthonormal-basis">Definition 16 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Orthonormal system</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-orthonormal-system">Definition 13 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+</ul>
+</section>
+<section id="p" class="level2">
+<h2 class="anchored" data-anchor-id="p">P</h2>
+<ul>
+<li><strong>Parallel transport</strong>: <a href="part-i-09-differential-geometry.html#def-parallel-transport">Definition 60 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Parallel vector field along a curve</strong>: <a href="part-i-09-differential-geometry.html#def-parallel-field">Definition 59 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Parametrisation</strong>: <a href="part-i-09-differential-geometry.html#def-parametrisation">Definition 11 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Partial derivative</strong>: <a href="part-i-03-real-analysis.html#def-partial-derivative">Definition 14 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Partial differential equation</strong>: <a href="part-i-05-differential-equations.html#def-pde">Definition 18 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Partial Fourier sum</strong>: <a href="part-i-06-fourier-analysis.html#def-fourier-partial-sum">Definition 3 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Path-connected space</strong>: <a href="part-i-01-sets-relations-topology.html#def-path-connected">Definition 21 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Periodic function</strong>: <a href="part-i-06-fourier-analysis.html#def-periodic-function">Definition 1 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Phase portrait</strong>: <a href="part-i-05-differential-equations.html#def-phase-portrait">Definition 5 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Poincaré half-plane</strong>: <a href="part-i-09-differential-geometry.html#def-hyp-half-plane">Definition 50 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Power series</strong>: <a href="part-i-03-real-analysis.html#def-power-series">Definition 6 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Principal bundle</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-principal-bundle">Definition 16 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Principal value</strong>: <a href="part-i-06-fourier-analysis.html#def-principal-value">Definition 10 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Probability measure</strong>: <a href="part-i-08-probability.html#def-probability-measure">Definition 2 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Product manifold</strong>: <a href="part-i-09-differential-geometry.html#def-product-manifold">Definition 10 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Product metric</strong>: <a href="part-i-09-differential-geometry.html#def-product-metric">Definition 48 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Pullback of a tensor field</strong>: <a href="part-i-09-differential-geometry.html#def-pullback">Definition 75 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+</ul>
+</section>
+<section id="q" class="level2">
+<h2 class="anchored" data-anchor-id="q">Q</h2>
+<ul>
+<li><strong>Quotient group</strong>: <a href="part-i-10-group-theory.html#def-quotient-group">Definition 8 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Quotient set</strong>: <a href="part-i-01-sets-relations-topology.html#def-quotient-set">Definition 10 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Quotient topology</strong>: <a href="part-i-01-sets-relations-topology.html#def-quotient-topology">Definition 17 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+</ul>
+</section>
+<section id="r" class="level2">
+<h2 class="anchored" data-anchor-id="r">R</h2>
+<ul>
+<li><strong>Radius of convergence</strong>: <a href="part-i-03-real-analysis.html#def-radius-of-convergence">Definition 7 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Raising an index</strong>: <a href="part-i-09-differential-geometry.html#def-raising">Definition 44 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Random variable</strong>: <a href="part-i-08-probability.html#def-random-variable">Definition 5 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Random walk</strong>: <a href="part-i-08-probability.html#def-random-walk">Definition 12 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong><span class="math inline">R</span>-connection</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-r-connection">Definition 11 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Reductive decomposition</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-reductive-decomposition">Definition 5 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Reflexive space</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-reflexive-space">Definition 11 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Regular singular point</strong>: <a href="part-i-05-differential-equations.html#def-regular-singular-point">Definition 15 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Representation</strong>: <a href="part-i-10-group-theory.html#def-representation">Definition 16 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Residue</strong>: <a href="part-i-04-complex-analysis.html#def-residue">Definition 16 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Resonance</strong>: <a href="part-i-05-differential-equations.html#def-resonance">Definition 11 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Restriction of a representation</strong>: <a href="part-i-11-lie-groups-algebras.html#def-restriction">Definition 30 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Retarded Green’s function</strong>: <a href="part-i-05-differential-equations.html#def-retarded-greens-function">Definition 27 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Ricci tensor</strong>: <a href="part-i-09-differential-geometry.html#def-ricci-tensor">Definition 69 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Riemann integral</strong>: <a href="part-i-03-real-analysis.html#def-riemann-integral">Definition 11 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Riemann tensor</strong>: <a href="part-i-09-differential-geometry.html#def-riemann">Definition 63 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Riemann tensor with all indices down</strong>: <a href="part-i-09-differential-geometry.html#def-riemann-lowered">Definition 64 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Root</strong>: <a href="part-i-11-lie-groups-algebras.html#def-root">Definition 26 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Rotation matrices of spin <span class="math inline">j</span></strong>: <a href="part-i-11-lie-groups-algebras.html#def-lrep-rotation-matrix">Definition 23 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+</ul>
+</section>
+<section id="s" class="level2">
+<h2 class="anchored" data-anchor-id="s">S</h2>
+<ul>
+<li><strong>Sample space</strong>: <a href="part-i-08-probability.html#def-sample-space">Definition 1 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Scalar curvature</strong>: <a href="part-i-09-differential-geometry.html#def-scalar-curvature">Definition 70 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Second fundamental form</strong>: <a href="part-i-09-differential-geometry.html#def-sff-second-form">Definition 67 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Section</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-section">Definition 14 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Sectional curvature</strong>: <a href="part-i-09-differential-geometry.html#def-sectional-curvature">Definition 65 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Self-adjoint extension</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-self-adjoint-extension">Definition 31 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Self-adjoint operator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-self-adjoint-operator">Definition 19 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Separable equation</strong>: <a href="part-i-05-differential-equations.html#def-separable-equation">Definition 3 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Separation of variables</strong>: <a href="part-i-05-differential-equations.html#def-separation-of-variables">Definition 23 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Series</strong>: <a href="part-i-03-real-analysis.html#def-series">Definition 4 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Set</strong>: <a href="part-i-01-sets-relations-topology.html#def-set">Definition 1 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Shape operator</strong>: <a href="part-i-09-differential-geometry.html#def-sff-shape-operator">Definition 68 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Signature</strong>: <a href="part-i-02-linear-algebra.html#def-signature">Definition 14 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Signature of a metric</strong>: <a href="part-i-09-differential-geometry.html#def-signature-metric">Definition 38 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Simple roots</strong>: <a href="part-i-11-lie-groups-algebras.html#def-simple-roots">Definition 28 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Smooth action</strong>: <a href="part-i-11-lie-groups-algebras.html#def-smooth-action">Definition 4 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Smooth atlas</strong>: <a href="part-i-09-differential-geometry.html#def-smooth-atlas">Definition 5 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Smooth function on a manifold</strong>: <a href="part-i-09-differential-geometry.html#def-smooth-function">Definition 7 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Smooth manifold</strong>: <a href="part-i-09-differential-geometry.html#def-manifold">Definition 6 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Smooth map</strong>: <a href="part-i-03-real-analysis.html#def-smooth-map">Definition 15 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Smooth map between manifolds</strong>: <a href="part-i-09-differential-geometry.html#def-smooth-map-manifolds">Definition 8 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Sobolev space on <span class="math inline">\mathbb{R}^n</span></strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-sobolev-space-rn">Definition 35 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Sobolev space on the torus</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-sobolev-torus">Definition 34 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Space of continuous functions</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-continuous-function-space">Definition 4 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Span</strong>: <a href="part-i-02-linear-algebra.html#def-span">Definition 3 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Spectrum</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-spectrum">Definition 24 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Spectrum in a Banach algebra</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-algebra-spectrum">Definition 41 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Spherical harmonic</strong>: <a href="part-i-06-fourier-analysis.html#def-spherical-harmonic">Definition 13 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Spin connection</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-spin-connection">Definition 9 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Spin-c structure</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-spinc-structure">Definition 10 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Spin group</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-spin-group">Definition 6 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Spin-<span class="math inline">j</span> representation</strong>: <a href="part-i-11-lie-groups-algebras.html#def-spin-j">Definition 22 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Spin structure</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-spin-structure">Definition 8 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Stabiliser</strong>: <a href="part-i-10-group-theory.html#def-stabiliser">Definition 11 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Stability</strong>: <a href="part-i-05-differential-equations.html#def-stability">Definition 9 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Structure constants</strong>: <a href="part-i-11-lie-groups-algebras.html#def-structure-constants">Definition 7 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Sturm-Liouville problem</strong>: <a href="part-i-05-differential-equations.html#def-sturm-liouville-problem">Definition 13 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Subgroup</strong>: <a href="part-i-10-group-theory.html#def-subgroup">Definition 4 of Group theory</a> (<a href="part-i-10-group-theory.html#sec-group-theory">Group theory</a>)</li>
+<li><strong>Subspace topology</strong>: <a href="part-i-01-sets-relations-topology.html#def-subspace-topology">Definition 14 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Supremum</strong>: <a href="part-i-03-real-analysis.html#def-supremum">Definition 1 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Surjective map</strong>: <a href="part-i-01-sets-relations-topology.html#def-surjective">Definition 4 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Symmetric bilinear form</strong>: <a href="part-i-02-linear-algebra.html#def-symmetric-form">Definition 12 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Symmetric coset</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-symmetric-coset">Definition 7 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Symmetric tensor field</strong>: <a href="part-i-09-differential-geometry.html#def-symmetric-tensor-field">Definition 32 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+</ul>
+</section>
+<section id="t" class="level2">
+<h2 class="anchored" data-anchor-id="t">T</h2>
+<ul>
+<li><strong>Tangent space</strong>: <a href="part-i-09-differential-geometry.html#def-tangent-space">Definition 19 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Tangent vector</strong>: <a href="part-i-09-differential-geometry.html#def-tangent-vector">Definition 15 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Taylor series</strong>: <a href="part-i-04-complex-analysis.html#def-taylor-series">Definition 13 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Tensor field</strong>: <a href="part-i-09-differential-geometry.html#def-tensor-field">Definition 28 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Tensor product of tensor fields</strong>: <a href="part-i-09-differential-geometry.html#def-tensor-product-fields">Definition 30 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Tensor product space</strong>: <a href="part-i-02-linear-algebra.html#def-tensor-product-space">Definition 16 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Tensor transformation law</strong>: <a href="part-i-09-differential-geometry.html#def-tensor-transformation">Definition 29 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Test function</strong>: <a href="part-i-06-fourier-analysis.html#def-test-function">Definition 7 of Fourier analysis</a> (<a href="part-i-06-fourier-analysis.html#sec-fourier-analysis">Fourier analysis</a>)</li>
+<li><strong>Topological space</strong>: <a href="part-i-01-sets-relations-topology.html#def-topological-space">Definition 13 of Sets, relations and topology</a> (<a href="part-i-01-sets-relations-topology.html#sec-sets-relations-topology">Sets, relations and topology</a>)</li>
+<li><strong>Torsion</strong>: <a href="part-i-09-differential-geometry.html#def-torsion">Definition 54 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Trace class</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-trace-class">Definition 36 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Transition function</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-transition-function">Definition 15 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Transition map</strong>: <a href="part-i-09-differential-geometry.html#def-transition-map">Definition 4 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Twisted boundary condition</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-scherk-schwarz-twist">Definition 12 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Twisted Dirac operator</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-twisted-dirac-operator">Definition 17 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+</ul>
+</section>
+<section id="u" class="level2">
+<h2 class="anchored" data-anchor-id="u">U</h2>
+<ul>
+<li><strong>Unbounded operator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-unbounded-operator">Definition 29 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Uniform convergence</strong>: <a href="part-i-03-real-analysis.html#def-uniform-convergence">Definition 19 of Real analysis</a> (<a href="part-i-03-real-analysis.html#sec-real-analysis">Real analysis</a>)</li>
+<li><strong>Unitary operator</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-unitary-operator">Definition 20 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+</ul>
+</section>
+<section id="v" class="level2">
+<h2 class="anchored" data-anchor-id="v">V</h2>
+<ul>
+<li><strong>Variance</strong>: <a href="part-i-08-probability.html#def-variance">Definition 7 of Probability and statistics</a> (<a href="part-i-08-probability.html#sec-probability">Probability and statistics</a>)</li>
+<li><strong>Vector bundle</strong>: <a href="part-i-12-homogeneous-spaces-bundles.html#def-vector-bundle">Definition 17 of Homogeneous spaces and fibre bundles</a> (<a href="part-i-12-homogeneous-spaces-bundles.html#sec-homogeneous-bundles">Homogeneous spaces and fibre bundles</a>)</li>
+<li><strong>Vector field</strong>: <a href="part-i-09-differential-geometry.html#def-vector-field">Definition 20 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Vector space</strong>: <a href="part-i-02-linear-algebra.html#def-vector-space">Definition 1 of Linear algebra</a> (<a href="part-i-02-linear-algebra.html#sec-linear-algebra">Linear algebra</a>)</li>
+<li><strong>Velocity of a curve</strong>: <a href="part-i-09-differential-geometry.html#def-velocity">Definition 16 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Volume element</strong>: <a href="part-i-09-differential-geometry.html#def-volume-element">Definition 45 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+</ul>
+</section>
+<section id="w" class="level2">
+<h2 class="anchored" data-anchor-id="w">W</h2>
+<ul>
+<li><strong>Wave equation</strong>: <a href="part-i-05-differential-equations.html#def-wave-equation">Definition 20 of Differential equations</a> (<a href="part-i-05-differential-equations.html#sec-differential-equations">Differential equations</a>)</li>
+<li><strong>Weak convergence</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-weak-convergence">Definition 9 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Weak-* convergence</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-weak-star-convergence">Definition 10 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Weak derivative</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-weak-derivative">Definition 33 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+<li><strong>Wedge product</strong>: <a href="part-i-09-differential-geometry.html#def-wedge-product">Definition 34 of Differential geometry</a> (<a href="part-i-09-differential-geometry.html#sec-differential-geometry">Differential geometry</a>)</li>
+<li><strong>Weight</strong>: <a href="part-i-11-lie-groups-algebras.html#def-weight">Definition 20 of Lie groups and Lie algebras</a> (<a href="part-i-11-lie-groups-algebras.html#sec-lie-theory">Lie groups and Lie algebras</a>)</li>
+<li><strong>Weyl spinor</strong>: <a href="part-i-13-spinors-dirac-operator.html#def-weyl-representation">Definition 7 of Spinors and the Dirac operator</a> (<a href="part-i-13-spinors-dirac-operator.html#sec-spinors-dirac-operator">Spinors and the Dirac operator</a>)</li>
+<li><strong>Wick rotation</strong>: <a href="part-i-04-complex-analysis.html#def-wick-rotation">Definition 21 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+</ul>
+</section>
+<section id="z" class="level2">
+<h2 class="anchored" data-anchor-id="z">Z</h2>
+<ul>
+<li><strong>Zeta function</strong>: <a href="part-i-04-complex-analysis.html#def-zeta-function">Definition 20 of Complex analysis</a> (<a href="part-i-04-complex-analysis.html#sec-complex-analysis">Complex analysis</a>)</li>
+<li><strong>Zeta regularisation</strong>: <a href="part-i-07-hilbert-spaces-operators.html#def-zeta-regularisation">Definition 39 of Functional analysis</a> (<a href="part-i-07-hilbert-spaces-operators.html#sec-hilbert-spaces-operators">Functional analysis</a>)</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+// Turns the tags on a post page into links to the filtered Posts page.
+document.addEventListener("DOMContentLoaded", () => {
+  const postsLink = document.querySelector('.navbar a[href$="posts.html"]');
+  if (!postsLink) {
+    return;
+  }
+  const postsPage = postsLink.getAttribute("href");
+  document.querySelectorAll(".quarto-categories .quarto-category").forEach((tag) => {
+    const link = document.createElement("a");
+    link.className = "tag-chip";
+    link.textContent = tag.textContent;
+    link.href = `${postsPage}#tag=${encodeURIComponent(tag.textContent.trim())}`;
+    tag.replaceWith(link);
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../../posts/fundamentals-of-mathematics-for-physicists/registry.html" class="pagination-link" aria-label="Registry of verified results">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Registry of verified results</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

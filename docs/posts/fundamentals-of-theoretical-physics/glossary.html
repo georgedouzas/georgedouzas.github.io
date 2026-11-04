@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Glossary – Georgios Douzas</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../posts/fundamentals-of-theoretical-physics/registry.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-62ab7622601dc1281cac47bf0cf453d3.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c9bb40c08a066f1d1a0f0931099edcc8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Georgios Douzas</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../open-source.html"> 
+<span class="menu-text">Open source</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/georgedouzas"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/gdouzas"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=-A4zUTUAAAAJ&amp;hl=en"> <i class="bi bi-mortarboard-fill" role="img" aria-label="Google Scholar">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/fundamentals-of-theoretical-physics/glossary.html">Glossary</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-01-classical-mechanics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical mechanics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-01b-electromagnetism.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical electromagnetism</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-02-thermodynamics-statistical-mechanics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Thermodynamics and statistical mechanics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-03-quantum-mechanics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum mechanics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-04-classical-field-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classical field theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-05-dirac-equation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Dirac equation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-07-quantum-field-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum field theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-06-gauge-theories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gauge theories</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-08-renormalisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Renormalisation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-08b-special-relativity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special relativity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-09-general-relativity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General relativity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/part-ii-10-supersymmetry-supergravity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supersymmetry and supergravity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/registry.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Registry of verified results</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-theoretical-physics/glossary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Glossary</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec-glossary-fundamentals-of-theoretical-physics" id="toc-sec-glossary-fundamentals-of-theoretical-physics" class="nav-link active" data-scroll-target="#sec-glossary-fundamentals-of-theoretical-physics">Glossary</a>
+  <ul class="collapse">
+  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a">A</a></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b">B</a></li>
+  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c">C</a></li>
+  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d">D</a></li>
+  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e">E</a></li>
+  <li><a href="#f" id="toc-f" class="nav-link" data-scroll-target="#f">F</a></li>
+  <li><a href="#g" id="toc-g" class="nav-link" data-scroll-target="#g">G</a></li>
+  <li><a href="#h" id="toc-h" class="nav-link" data-scroll-target="#h">H</a></li>
+  <li><a href="#i" id="toc-i" class="nav-link" data-scroll-target="#i">I</a></li>
+  <li><a href="#k" id="toc-k" class="nav-link" data-scroll-target="#k">K</a></li>
+  <li><a href="#l" id="toc-l" class="nav-link" data-scroll-target="#l">L</a></li>
+  <li><a href="#m" id="toc-m" class="nav-link" data-scroll-target="#m">M</a></li>
+  <li><a href="#n" id="toc-n" class="nav-link" data-scroll-target="#n">N</a></li>
+  <li><a href="#o" id="toc-o" class="nav-link" data-scroll-target="#o">O</a></li>
+  <li><a href="#p" id="toc-p" class="nav-link" data-scroll-target="#p">P</a></li>
+  <li><a href="#q" id="toc-q" class="nav-link" data-scroll-target="#q">Q</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
+  <li><a href="#s" id="toc-s" class="nav-link" data-scroll-target="#s">S</a></li>
+  <li><a href="#t" id="toc-t" class="nav-link" data-scroll-target="#t">T</a></li>
+  <li><a href="#u" id="toc-u" class="nav-link" data-scroll-target="#u">U</a></li>
+  <li><a href="#v" id="toc-v" class="nav-link" data-scroll-target="#v">V</a></li>
+  <li><a href="#w" id="toc-w" class="nav-link" data-scroll-target="#w">W</a></li>
+  <li><a href="#y" id="toc-y" class="nav-link" data-scroll-target="#y">Y</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="sec-glossary-fundamentals-of-theoretical-physics" class="level1">
+<h1>Glossary</h1>
+<p>Every notion this tutorial defines, in alphabetical order, with its definition and chapter.</p>
+<section id="a" class="level2">
+<h2 class="anchored" data-anchor-id="a">A</h2>
+<ul>
+<li><strong>Abelian gauge field</strong>: <a href="part-ii-06-gauge-theories.html#def-gauge-field-u1">Definition 2 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Action</strong>: <a href="part-ii-01-classical-mechanics.html#def-action">Definition 6 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Action of a field theory</strong>: <a href="part-ii-04-classical-field-theory.html#def-field-action">Definition 14 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Angular momentum operator</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-angular-momentum">Definition 14 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Annihilation operator</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-annihilation-operator">Definition 11 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Anomalous dimension</strong>: <a href="part-ii-08-renormalisation.html#def-ren-anomalous-dimension">Definition 13 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Anomaly</strong>: <a href="part-ii-07-quantum-field-theory.html#def-anomaly">Definition 4 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Anomaly coefficient</strong>: <a href="part-ii-06-gauge-theories.html#def-gth-anomaly-coefficient">Definition 9 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Area law</strong>: <a href="part-ii-06-gauge-theories.html#def-lgt-area-law">Definition 24 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Auxiliary field</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-auxiliary-field">Definition 7 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+</ul>
+</section>
+<section id="b" class="level2">
+<h2 class="anchored" data-anchor-id="b">B</h2>
+<ul>
+<li><strong>Bilinear covariant</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-bilinear-covariant">Definition 2 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Blackbody radiation</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-blackbody-radiation">Definition 14 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Born rule</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-born-rule">Definition 5 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Bose-Einstein condensation</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-bose-einstein-condensation">Definition 15 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Bose-Einstein distribution</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-bose-einstein-distribution">Definition 12 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+</ul>
+</section>
+<section id="c" class="level2">
+<h2 class="anchored" data-anchor-id="c">C</h2>
+<ul>
+<li><strong>Canonical ensemble</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-canonical-ensemble">Definition 6 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Canonical momentum</strong>: <a href="part-ii-01-classical-mechanics.html#def-canonical-momentum">Definition 8 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Canonical quantisation</strong>: <a href="part-ii-07-quantum-field-theory.html#def-canonical-quantisation">Definition 1 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Canonical transformation</strong>: <a href="part-ii-01-classical-mechanics.html#def-clm-canonical-transformation">Definition 13 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Capacitance</strong>: <a href="part-ii-01b-electromagnetism.html#def-ems-capacitance">Definition 4 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Causal character</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-causal-character">Definition 4 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Central force</strong>: <a href="part-ii-01-classical-mechanics.html#def-clm-central-force">Definition 3 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Charge-conjugate spinor</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-charge-conjugate">Definition 13 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Chiral anomaly</strong>: <a href="part-ii-07-quantum-field-theory.html#def-chiral-anomaly">Definition 23 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Chiral multiplet</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-chiral-multiplet">Definition 6 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Chiral superfield</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-ssg-chiral-superfield">Definition 11 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Classical limit</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-classical-limit">Definition 24 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Classical partition function</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-classical-partition-function">Definition 11 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Classical solutions</strong>: <a href="part-ii-04-classical-field-theory.html#def-field-equations-solutions">Definition 16 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Coherent state</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-coherent-state">Definition 13 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Compact <span class="math inline">U(1)</span> gauge theory</strong>: <a href="part-ii-06-gauge-theories.html#def-lgt-compact-u1">Definition 21 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Complex scalar field</strong>: <a href="part-ii-04-classical-field-theory.html#def-complex-scalar">Definition 5 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Conductor</strong>: <a href="part-ii-01b-electromagnetism.html#def-ems-conductor">Definition 3 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Configuration space</strong>: <a href="part-ii-01-classical-mechanics.html#def-configuration-space">Definition 4 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Conservative force</strong>: <a href="part-ii-01-classical-mechanics.html#def-clm-conservative-force">Definition 2 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Conserved quantity</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-conserved-quantity">Definition 19 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Continuous symmetry of a field theory</strong>: <a href="part-ii-04-classical-field-theory.html#def-continuous-symmetry-fields">Definition 17 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Continuous transformation</strong>: <a href="part-ii-01-classical-mechanics.html#def-continuous-transformation">Definition 16 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Coproduct of Feynman graphs</strong>: <a href="part-ii-08-renormalisation.html#def-ren-coproduct">Definition 11 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Correlation length</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-correlation-length">Definition 21 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Cosmological constant</strong>: <a href="part-ii-09-general-relativity.html#def-cosmological-constant">Definition 8 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Counterterm</strong>: <a href="part-ii-08-renormalisation.html#def-ren-counterterm">Definition 7 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Counting preserved supercharges</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-supercharge-counting">Definition 28 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Covariant derivative</strong>: <a href="part-ii-06-gauge-theories.html#def-covariant-derivative-u1">Definition 3 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Covariant derivative in a representation</strong>: <a href="part-ii-06-gauge-theories.html#def-covariant-derivative-nonabelian">Definition 6 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Critical exponent</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-critical-exponent">Definition 20 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+</ul>
+</section>
+<section id="d" class="level2">
+<h2 class="anchored" data-anchor-id="d">D</h2>
+<ul>
+<li><strong>Dimensional regularisation</strong>: <a href="part-ii-08-renormalisation.html#def-ren-dimensional-regularisation">Definition 2 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Dirac current</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-dirac-current">Definition 3 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Dirac equation</strong>: <a href="part-ii-04-classical-field-theory.html#def-dirac-equation">Definition 12 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Dirac Hamiltonian</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-dirac-hamiltonian">Definition 1 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Dirac sea</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-dirac-sea">Definition 19 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Dirac’s operator <span class="math inline">K</span></strong>: <a href="part-ii-05-dirac-equation.html#def-dq-k-operator">Definition 11 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Dirac spinors</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-dirac-spinors">Definition 4 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Dispersion relation</strong>: <a href="part-ii-04-classical-field-theory.html#def-dispersion-relation">Definition 4 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Drude-Lorentz model</strong>: <a href="part-ii-01b-electromagnetism.html#def-emx-drude-lorentz">Definition 19 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>D-term potential</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-d-term-potential">Definition 15 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Dyson-Schwinger equation</strong>: <a href="part-ii-08-renormalisation.html#def-ren-dyson-schwinger">Definition 15 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+</ul>
+</section>
+<section id="e" class="level2">
+<h2 class="anchored" data-anchor-id="e">E</h2>
+<ul>
+<li><strong>Effective field theory</strong>: <a href="part-ii-07-quantum-field-theory.html#def-effective-field-theory">Definition 22 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Einstein equations</strong>: <a href="part-ii-09-general-relativity.html#def-einstein-equations">Definition 7 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Einstein-Hilbert action</strong>: <a href="part-ii-09-general-relativity.html#def-einstein-hilbert-action">Definition 4 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Electric field</strong>: <a href="part-ii-01b-electromagnetism.html#def-ems-electric-field">Definition 1 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Electromagnetic potentials</strong>: <a href="part-ii-01b-electromagnetism.html#def-emm-potentials">Definition 10 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Electrostatic potential</strong>: <a href="part-ii-01b-electromagnetism.html#def-ems-electrostatic-potential">Definition 2 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Eleven-dimensional supergravity action</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-sugra11-action">Definition 25 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Energy-momentum tensor</strong>: <a href="part-ii-04-classical-field-theory.html#def-energy-momentum-tensor">Definition 19 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Energy projector</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-energy-projector">Definition 5 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Entropy</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-entropy">Definition 3 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Equilibrium</strong>: <a href="part-ii-01-classical-mechanics.html#def-clm-equilibrium">Definition 19 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Equivalence principle</strong>: <a href="part-ii-09-general-relativity.html#def-equivalence-principle">Definition 2 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Euclidean correlator</strong>: <a href="part-ii-07-quantum-field-theory.html#def-euclidean-correlator">Definition 11 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Euclidean time</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-euclidean-time">Definition 22 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Euler-Lagrange equations</strong>: <a href="part-ii-01-classical-mechanics.html#def-euler-lagrange">Definition 7 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Euler-Lagrange equations of a field</strong>: <a href="part-ii-04-classical-field-theory.html#def-euler-lagrange-fields">Definition 15 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Even operator</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-even-odd">Definition 9 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Event horizon</strong>: <a href="part-ii-09-general-relativity.html#def-gr-event-horizon">Definition 11 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Expectation value</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-expectation-value">Definition 4 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+</ul>
+</section>
+<section id="f" class="level2">
+<h2 class="anchored" data-anchor-id="f">F</h2>
+<ul>
+<li><strong>Fermi-Dirac distribution</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-fermi-dirac-distribution">Definition 13 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Feynman rule</strong>: <a href="part-ii-07-quantum-field-theory.html#def-feynman-rule">Definition 18 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Field</strong>: <a href="part-ii-04-classical-field-theory.html#def-field">Definition 1 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Field operator</strong>: <a href="part-ii-07-quantum-field-theory.html#def-field-operator">Definition 6 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Field strength of a vector field</strong>: <a href="part-ii-04-classical-field-theory.html#def-field-strength-abelian">Definition 8 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>First law of thermodynamics</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-first-law">Definition 2 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Fixed point</strong>: <a href="part-ii-08-renormalisation.html#def-ren-fixed-point">Definition 17 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>FLRW metric</strong>: <a href="part-ii-09-general-relativity.html#def-gr-flrw-metric">Definition 12 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Fock space</strong>: <a href="part-ii-07-quantum-field-theory.html#def-fock-space">Definition 8 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Foldy-Wouthuysen transformation</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-fw-transformation">Definition 10 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Forest</strong>: <a href="part-ii-08-renormalisation.html#def-ren-forest">Definition 10 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Four-force</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-four-force">Definition 24 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Four-momentum</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-four-momentum">Definition 20 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Four-velocity</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-four-velocity">Definition 19 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Freund-Rubin ansatz</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-freund-rubin-ansatz">Definition 27 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Friedmann equations</strong>: <a href="part-ii-09-general-relativity.html#def-gr-friedmann-equations">Definition 13 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>F-term potential</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-f-term-potential">Definition 13 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+</ul>
+</section>
+<section id="g" class="level2">
+<h2 class="anchored" data-anchor-id="g">G</h2>
+<ul>
+<li><strong>Gamma matrices</strong>: <a href="part-ii-04-classical-field-theory.html#def-gamma-matrices">Definition 9 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Gauged scalar model</strong>: <a href="part-ii-06-gauge-theories.html#def-gauged-scalar-model">Definition 14 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Gauge multiplet</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-gauge-multiplet">Definition 14 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Gauge transformation</strong>: <a href="part-ii-01b-electromagnetism.html#def-emm-gauge-transformation">Definition 11 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Gaussian path integral</strong>: <a href="part-ii-07-quantum-field-theory.html#def-gaussian-path-integral">Definition 13 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Generating function</strong>: <a href="part-ii-01-classical-mechanics.html#def-clm-generating-function">Definition 14 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Generating functional</strong>: <a href="part-ii-07-quantum-field-theory.html#def-generating-functional">Definition 12 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Goldstone boson</strong>: <a href="part-ii-06-gauge-theories.html#def-goldstone-boson">Definition 13 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Grand-canonical ensemble</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-grand-canonical-ensemble">Definition 8 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Grassmann variable</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-grassmann-variable">Definition 1 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Gravitino</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-gravitino">Definition 20 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+</ul>
+</section>
+<section id="h" class="level2">
+<h2 class="anchored" data-anchor-id="h">H</h2>
+<ul>
+<li><strong>Hamiltonian</strong>: <a href="part-ii-01-classical-mechanics.html#def-hamiltonian">Definition 9 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Hamilton-Jacobi equation</strong>: <a href="part-ii-01-classical-mechanics.html#def-clm-hamilton-jacobi">Definition 15 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Hamilton’s equations</strong>: <a href="part-ii-01-classical-mechanics.html#def-hamilton-equations">Definition 10 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Heat-bath update</strong>: <a href="part-ii-06-gauge-theories.html#def-lgt-heat-bath">Definition 26 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Helicity</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-helicity">Definition 6 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Higgs mechanism</strong>: <a href="part-ii-06-gauge-theories.html#def-higgs-mechanism">Definition 16 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+</ul>
+</section>
+<section id="i" class="level2">
+<h2 class="anchored" data-anchor-id="i">I</h2>
+<ul>
+<li><strong>Induction</strong>: <a href="part-ii-01b-electromagnetism.html#def-emm-induction">Definition 8 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Inertial frame</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-inertial-frame">Definition 1 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Invariant mass</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-invariant-mass">Definition 21 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+</ul>
+</section>
+<section id="k" class="level2">
+<h2 class="anchored" data-anchor-id="k">K</h2>
+<ul>
+<li><strong>Kähler potential</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-ssg-kahler-potential">Definition 23 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Klein-Gordon equation</strong>: <a href="part-ii-04-classical-field-theory.html#def-klein-gordon">Definition 2 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Klein step</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-klein-step">Definition 18 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+</ul>
+</section>
+<section id="l" class="level2">
+<h2 class="anchored" data-anchor-id="l">L</h2>
+<ul>
+<li><strong>Lagrangian</strong>: <a href="part-ii-01-classical-mechanics.html#def-lagrangian">Definition 5 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Lagrangian density</strong>: <a href="part-ii-04-classical-field-theory.html#def-lagrangian-density">Definition 13 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Lambda parameter</strong>: <a href="part-ii-08-renormalisation.html#def-ren-lambda-parameter">Definition 14 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Landau free energy</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-landau-free-energy">Definition 17 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Lattice regularisation</strong>: <a href="part-ii-08-renormalisation.html#def-ren-lattice-regularisation">Definition 4 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Linear medium</strong>: <a href="part-ii-01b-electromagnetism.html#def-emx-linear-medium">Definition 18 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Link variable</strong>: <a href="part-ii-06-gauge-theories.html#def-lgt-link-variable">Definition 17 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Little group</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-little-group">Definition 18 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Local supersymmetry</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-local-supersymmetry">Definition 19 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Local supersymmetry of the eleven-dimensional theory</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-sugra11-transformation">Definition 26 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Local symmetry</strong>: <a href="part-ii-06-gauge-theories.html#def-global-local-symmetry">Definition 1 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Lorentz algebra</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-lorentz-algebra">Definition 13 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Lorentz generators on spinors</strong>: <a href="part-ii-04-classical-field-theory.html#def-lorentz-generators">Definition 10 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Lorentz group</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-lorentz-group">Definition 11 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Lorentz tensor</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-lorentz-tensor">Definition 9 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+</ul>
+</section>
+<section id="m" class="level2">
+<h2 class="anchored" data-anchor-id="m">M</h2>
+<ul>
+<li><strong>Magnetic dipole moment</strong>: <a href="part-ii-01b-electromagnetism.html#def-ems-magnetic-dipole">Definition 7 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Magnetic field</strong>: <a href="part-ii-01b-electromagnetism.html#def-ems-magnetic-field">Definition 5 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Magnetisation</strong>: <a href="part-ii-01b-electromagnetism.html#def-emx-magnetisation">Definition 17 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Majorana fermion</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-majorana-fermion">Definition 17 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Majorana spinor</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-majorana-spinor">Definition 18 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Mandelstam variables</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-mandelstam">Definition 22 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Matching</strong>: <a href="part-ii-08-renormalisation.html#def-ren-matching">Definition 19 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong><span class="math inline">\mathbb{Z}_2</span> gauge theory</strong>: <a href="part-ii-06-gauge-theories.html#def-lgt-z2">Definition 20 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Matsubara frequency</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-matsubara-frequency">Definition 24 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Maximal supergravity</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-maximal-supergravity">Definition 24 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Maxwell action</strong>: <a href="part-ii-06-gauge-theories.html#def-field-strength-u1">Definition 4 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Maxwell’s equations</strong>: <a href="part-ii-01b-electromagnetism.html#def-emm-maxwell-equations">Definition 9 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Mean field approximation</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-mean-field-theory">Definition 19 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Metropolis sampling</strong>: <a href="part-ii-07-quantum-field-theory.html#def-fpi-metropolis">Definition 16 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Microcanonical ensemble</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-microcanonical-ensemble">Definition 5 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Minimal coupling</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-minimal-coupling">Definition 7 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Minimal coupling of a charged particle</strong>: <a href="part-ii-01b-electromagnetism.html#def-emm-minimal-coupling">Definition 12 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Minkowski spacetime</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-minkowski-spacetime">Definition 3 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Mode expansion</strong>: <a href="part-ii-07-quantum-field-theory.html#def-mode-expansion">Definition 7 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Momentum</strong>: <a href="part-ii-01-classical-mechanics.html#def-clm-momentum">Definition 1 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+</ul>
+</section>
+<section id="n" class="level2">
+<h2 class="anchored" data-anchor-id="n">N</h2>
+<ul>
+<li><strong>Newtonian limit</strong>: <a href="part-ii-09-general-relativity.html#def-newtonian-limit">Definition 3 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Noether charge</strong>: <a href="part-ii-01-classical-mechanics.html#def-noether-charge">Definition 18 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Noether current</strong>: <a href="part-ii-04-classical-field-theory.html#def-noether-current">Definition 18 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Non-abelian field strength</strong>: <a href="part-ii-06-gauge-theories.html#def-nonabelian-field-strength">Definition 7 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Non-abelian gauge field</strong>: <a href="part-ii-06-gauge-theories.html#def-nonabelian-gauge-field">Definition 5 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Normal mode</strong>: <a href="part-ii-01-classical-mechanics.html#def-clm-normal-mode">Definition 20 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Number state</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-number-state">Definition 12 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+</ul>
+</section>
+<section id="o" class="level2">
+<h2 class="anchored" data-anchor-id="o">O</h2>
+<ul>
+<li><strong>Observable</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-observable">Definition 3 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Off-shell closure</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-off-shell-closure">Definition 9 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Order parameter</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-order-parameter">Definition 16 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+</ul>
+</section>
+<section id="p" class="level2">
+<h2 class="anchored" data-anchor-id="p">P</h2>
+<ul>
+<li><strong>Parity transformation</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-parity">Definition 14 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Particles as quanta of modes</strong>: <a href="part-ii-07-quantum-field-theory.html#def-particle-states">Definition 2 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Partition function</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-partition-function">Definition 7 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Passive transformation</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-passive-active">Definition 8 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Path integral</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-path-integral">Definition 23 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Pauli equation</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-pauli-equation">Definition 8 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Pauli-Lubanski vector</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-pauli-lubanski">Definition 17 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Pauli-Villars regularisation</strong>: <a href="part-ii-08-renormalisation.html#def-ren-pauli-villars">Definition 1 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Perturbation series</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-perturbation-series">Definition 21 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Phase rotation</strong>: <a href="part-ii-04-classical-field-theory.html#def-phase-rotation">Definition 6 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Phase space</strong>: <a href="part-ii-01-classical-mechanics.html#def-phase-space">Definition 11 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Plane wave</strong>: <a href="part-ii-01b-electromagnetism.html#def-emw-plane-wave">Definition 13 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Plane wave</strong>: <a href="part-ii-04-classical-field-theory.html#def-plane-wave">Definition 3 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Plaquette</strong>: <a href="part-ii-06-gauge-theories.html#def-lgt-plaquette">Definition 18 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Poincaré group</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-poincare-group">Definition 16 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Poisson bracket</strong>: <a href="part-ii-01-classical-mechanics.html#def-poisson-bracket">Definition 12 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+<li><strong>Polarisation</strong>: <a href="part-ii-01b-electromagnetism.html#def-emw-polarisation">Definition 14 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Polarisation</strong>: <a href="part-ii-01b-electromagnetism.html#def-emx-polarisation">Definition 16 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Progressive integration</strong>: <a href="part-ii-08-renormalisation.html#def-ren-progressive-integration">Definition 18 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Projection postulate</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-projection-postulate">Definition 6 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Propagator</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-propagator">Definition 22 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Proper acceleration</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-proper-acceleration">Definition 25 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Proper time</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-proper-time">Definition 6 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Proper-time regularisation</strong>: <a href="part-ii-08-renormalisation.html#def-ren-proper-time">Definition 3 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Pure boost</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-pure-boost">Definition 12 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+</ul>
+</section>
+<section id="q" class="level2">
+<h2 class="anchored" data-anchor-id="q">Q</h2>
+<ul>
+<li><strong>Quantum consistency of massive vectors</strong>: <a href="part-ii-07-quantum-field-theory.html#def-higgs-consistency">Definition 5 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Quantum harmonic oscillator</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-quantum-oscillator">Definition 10 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Quartic interaction</strong>: <a href="part-ii-07-quantum-field-theory.html#def-quartic-interaction">Definition 17 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+</ul>
+</section>
+<section id="r" class="level2">
+<h2 class="anchored" data-anchor-id="r">R</h2>
+<ul>
+<li><strong>Radiation zones</strong>: <a href="part-ii-01b-electromagnetism.html#def-emw-radiation-zones">Definition 15 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+<li><strong>Rapidity</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-rapidity">Definition 2 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Regularisation</strong>: <a href="part-ii-07-quantum-field-theory.html#def-regularisation">Definition 20 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Renormalisable theory</strong>: <a href="part-ii-08-renormalisation.html#def-ren-renormalisable">Definition 6 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Renormalisation</strong>: <a href="part-ii-07-quantum-field-theory.html#def-renormalisation">Definition 3 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Renormalisation group transformation</strong>: <a href="part-ii-08-renormalisation.html#def-ren-rg-map">Definition 16 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Renormalisation scheme</strong>: <a href="part-ii-08-renormalisation.html#def-ren-scheme">Definition 9 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Representation labelled by two spins</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-j1j2">Definition 14 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Rindler coordinates</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-rindler">Definition 26 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>R-symmetry</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-ssg-r-symmetry">Definition 17 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Runge-Lenz vector</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-runge-lenz">Definition 20 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Running coupling</strong>: <a href="part-ii-07-quantum-field-theory.html#def-running-coupling">Definition 21 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+</ul>
+</section>
+<section id="s" class="level2">
+<h2 class="anchored" data-anchor-id="s">S</h2>
+<ul>
+<li><strong>Schrödinger equation</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-schroedinger-equation">Definition 8 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Schwarzschild metric</strong>: <a href="part-ii-09-general-relativity.html#def-gr-schwarzschild-metric">Definition 10 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Space of states</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-state-space">Definition 2 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Spacetime</strong>: <a href="part-ii-09-general-relativity.html#def-spacetime">Definition 1 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Spin</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-spin">Definition 15 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Spin one-half</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-spin-half">Definition 16 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Spinor field</strong>: <a href="part-ii-04-classical-field-theory.html#def-spinor-field">Definition 11 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Spinor spherical harmonic</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-spinor-harmonics">Definition 12 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Spontaneously broken symmetry</strong>: <a href="part-ii-06-gauge-theories.html#def-spontaneous-breaking">Definition 11 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Spontaneous supersymmetry breaking</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-susy-breaking">Definition 16 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Spontaneous symmetry breaking</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-ssb-landau">Definition 18 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Staple</strong>: <a href="part-ii-06-gauge-theories.html#def-lgt-staple">Definition 25 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>State vector</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-state-vector">Definition 1 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Stationary state</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-stationary-state">Definition 9 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Stress tensor</strong>: <a href="part-ii-09-general-relativity.html#def-stress-tensor">Definition 6 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Strong-coupling scale</strong>: <a href="part-ii-08-renormalisation.html#def-ren-strong-coupling-scale">Definition 20 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong><span class="math inline">SU(2)</span> lattice gauge theory</strong>: <a href="part-ii-06-gauge-theories.html#def-lgt-su2">Definition 22 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Subdivergence</strong>: <a href="part-ii-08-renormalisation.html#def-ren-subdivergence">Definition 8 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Supercharge</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-supercharge">Definition 3 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Supercurrent</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-supercurrent">Definition 10 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Superficial degree of divergence</strong>: <a href="part-ii-08-renormalisation.html#def-ren-superficial-degree">Definition 5 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Supergravity multiplet</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-supergravity-multiplet">Definition 21 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Super-Higgs mechanism</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-super-higgs">Definition 22 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Supermultiplet</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-supermultiplet">Definition 5 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Superpotential</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-superpotential">Definition 12 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Supersymmetry algebra</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-superalgebra">Definition 4 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Supersymmetry transformation of the chiral multiplet</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-susy-transformation">Definition 8 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Symmetry factor</strong>: <a href="part-ii-07-quantum-field-theory.html#def-symmetry-factor">Definition 19 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Symmetry of a Lagrangian</strong>: <a href="part-ii-01-classical-mechanics.html#def-symmetry-lagrangian">Definition 17 of Classical mechanics</a> (<a href="part-ii-01-classical-mechanics.html#sec-classical-mechanics">Classical mechanics</a>)</li>
+</ul>
+</section>
+<section id="t" class="level2">
+<h2 class="anchored" data-anchor-id="t">T</h2>
+<ul>
+<li><strong>The Lorentz group in two dimensions</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-o11">Definition 7 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Thermal circle</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-thermal-circle">Definition 23 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Thermal oscillator</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-thermal-oscillator">Definition 10 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Thermal propagator</strong>: <a href="part-ii-07-quantum-field-theory.html#def-thermal-propagator">Definition 15 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Thermodynamic potential</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-thermodynamic-potential">Definition 4 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Thermodynamic state</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-thermodynamic-state">Definition 1 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Threshold correction</strong>: <a href="part-ii-08-renormalisation.html#def-ren-threshold-correction">Definition 21 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Time-evolution operator</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-time-evolution">Definition 7 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Time-ordered product</strong>: <a href="part-ii-07-quantum-field-theory.html#def-time-ordered-product">Definition 10 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Time reversal</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-time-reversal">Definition 15 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Total angular momentum</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-total-angular-momentum">Definition 17 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+<li><strong>Transformation of a field</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-field-transformation">Definition 10 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Two-component Weyl spinor</strong>: <a href="part-ii-10-supersymmetry-supergravity.html#def-weyl-spinor">Definition 2 of Supersymmetry and supergravity</a> (<a href="part-ii-10-supersymmetry-supergravity.html#sec-susy-sugra">Supersymmetry and supergravity</a>)</li>
+<li><strong>Two-level system</strong>: <a href="part-ii-02-thermodynamics-statistical-mechanics.html#def-two-level-system">Definition 9 of Thermodynamics and statistical mechanics</a> (<a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermodynamics-statistical-mechanics">Thermodynamics and statistical mechanics</a>)</li>
+<li><strong>Two-point function</strong>: <a href="part-ii-07-quantum-field-theory.html#def-wightman-function">Definition 9 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+</ul>
+</section>
+<section id="u" class="level2">
+<h2 class="anchored" data-anchor-id="u">U</h2>
+<ul>
+<li><strong>Unbroken subgroup</strong>: <a href="part-ii-06-gauge-theories.html#def-unbroken-subgroup">Definition 12 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Unitary gauge</strong>: <a href="part-ii-06-gauge-theories.html#def-unitary-gauge">Definition 15 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Unitary representation</strong>: <a href="part-ii-03-quantum-mechanics.html#def-qm-unitary-representation">Definition 18 of Quantum mechanics</a> (<a href="part-ii-03-quantum-mechanics.html#sec-quantum-mechanics">Quantum mechanics</a>)</li>
+</ul>
+</section>
+<section id="v" class="level2">
+<h2 class="anchored" data-anchor-id="v">V</h2>
+<ul>
+<li><strong>Vacuum</strong>: <a href="part-ii-06-gauge-theories.html#def-vacuum">Definition 10 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Vacuum polarisation</strong>: <a href="part-ii-08-renormalisation.html#def-ren-vacuum-polarisation">Definition 12 of Renormalisation</a> (<a href="part-ii-08-renormalisation.html#sec-renormalisation-theory">Renormalisation</a>)</li>
+<li><strong>Vacuum solution</strong>: <a href="part-ii-09-general-relativity.html#def-vacuum-solution">Definition 9 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Variation of the metric</strong>: <a href="part-ii-09-general-relativity.html#def-metric-variation">Definition 5 of General relativity</a> (<a href="part-ii-09-general-relativity.html#sec-general-relativity">General relativity</a>)</li>
+<li><strong>Vector field on spacetime</strong>: <a href="part-ii-04-classical-field-theory.html#def-vector-field-spacetime">Definition 7 of Classical field theory</a> (<a href="part-ii-04-classical-field-theory.html#sec-classical-field-theory">Classical field theory</a>)</li>
+<li><strong>Vector potential</strong>: <a href="part-ii-01b-electromagnetism.html#def-ems-vector-potential">Definition 6 of Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a>)</li>
+</ul>
+</section>
+<section id="w" class="level2">
+<h2 class="anchored" data-anchor-id="w">W</h2>
+<ul>
+<li><strong>Wave four-vector</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-wave-vector">Definition 23 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Weyl equation</strong>: <a href="part-ii-05-dirac-equation.html#def-dq-weyl-equation">Definition 16 of The Dirac equation</a> (<a href="part-ii-05-dirac-equation.html#sec-dirac-equation">The Dirac equation</a>)</li>
+<li><strong>Wick contraction</strong>: <a href="part-ii-07-quantum-field-theory.html#def-wick-contraction">Definition 14 of Quantum field theory</a> (<a href="part-ii-07-quantum-field-theory.html#sec-quantum-field-theory">Quantum field theory</a>)</li>
+<li><strong>Wigner rotation</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-wigner-rotation">Definition 15 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+<li><strong>Wilson action</strong>: <a href="part-ii-06-gauge-theories.html#def-lgt-wilson-action">Definition 19 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Wilson loop</strong>: <a href="part-ii-06-gauge-theories.html#def-lgt-wilson-loop">Definition 23 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+<li><strong>Worldline</strong>: <a href="part-ii-08b-special-relativity.html#def-sr-worldline">Definition 5 of Special relativity</a> (<a href="part-ii-08b-special-relativity.html#sec-special-relativity">Special relativity</a>)</li>
+</ul>
+</section>
+<section id="y" class="level2">
+<h2 class="anchored" data-anchor-id="y">Y</h2>
+<ul>
+<li><strong>Yang-Mills action</strong>: <a href="part-ii-06-gauge-theories.html#def-yang-mills-action">Definition 8 of Gauge theories</a> (<a href="part-ii-06-gauge-theories.html#sec-gauge-theories-chapter">Gauge theories</a>)</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+// Turns the tags on a post page into links to the filtered Posts page.
+document.addEventListener("DOMContentLoaded", () => {
+  const postsLink = document.querySelector('.navbar a[href$="posts.html"]');
+  if (!postsLink) {
+    return;
+  }
+  const postsPage = postsLink.getAttribute("href");
+  document.querySelectorAll(".quarto-categories .quarto-category").forEach((tag) => {
+    const link = document.createElement("a");
+    link.className = "tag-chip";
+    link.textContent = tag.textContent;
+    link.href = `${postsPage}#tag=${encodeURIComponent(tag.textContent.trim())}`;
+    tag.replaceWith(link);
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../../posts/fundamentals-of-theoretical-physics/registry.html" class="pagination-link" aria-label="Registry of verified results">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Registry of verified results</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
