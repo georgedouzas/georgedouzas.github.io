@@ -1,0 +1,5 @@
+eigenvalue 0 with eigenvector (1, 1)
+eigenvalue -2 with eigenvector (1, -1)
+x(0) = (3, 1) = 2 * (1, 1) + 1 * (1, -1)
+x(t) = (e^(-2*t) + 2, -e^(-2*t) + 2)
+solves x' = A x: True

@@ -1,0 +1,5 @@
+Q_1 = -cos(ph(s))*cos(th(s))*sin(th(s))*diff(ph(s), s) - sin(ph(s))*diff(th(s), s);  dQ_1/ds on geodesics = 0
+Q_2 = -cos(th(s))*sin(ph(s))*sin(th(s))*diff(ph(s), s) + cos(ph(s))*diff(th(s), s);  dQ_2/ds on geodesics = 0
+Q_3 = sin(th(s))^2*diff(ph(s), s);  dQ_3/ds on geodesics = 0
+Q_a = (x cross x')_a for any curve: True
+great circle with tilt pi/3: Q = [0, -1/2*sqrt(3), 1/2] (constant, normal to its plane)

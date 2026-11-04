@@ -1,0 +1,11 @@
+velocity of g exp(t E12) in (x, y, z): (1, 0, 0)
+velocity of g exp(t E23) in (x, y, z): (0, 1, x)
+velocity of g exp(t E13) in (x, y, z): (0, 0, 1)
+[E12, E23] = E13: True
+[X, Y] = [X,Y] = ∂/∂z ; [X, Z] = [X,Z] = 0 ; [Y, Z] = [Y,Z] = 0
+Jacobian of L_h: [1 0 0]
+[0 1 0]
+[0 a 1]
+dL_h(X) at g = X at hg: True
+dL_h(Y) at g = Y at hg: True
+dL_h(Z) at g = Z at hg: True

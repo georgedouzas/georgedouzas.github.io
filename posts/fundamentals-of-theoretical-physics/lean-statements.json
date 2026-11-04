@@ -1,0 +1,230 @@
+{
+"KaluzaKlein.Mechanics.osc_deriv": {
+"doc": "/-- `ẋ = −A ω sin (ω t)`. -/",
+"file": "KaluzaKlein/Foundations/Mechanics.lean",
+"namespace": "KaluzaKlein.Mechanics",
+"statement": "theorem osc_deriv (A ω t : ℝ) : deriv (osc A ω) t = -(A * ω * Real.sin (ω * t))"
+},
+"KaluzaKlein.Mechanics.osc_hamilton": {
+"doc": "/-- Hamilton's equations for the oscillator: `q̇ = p` and `ṗ = −ω² q` on `q = A cos (ω t)`, `p = q̇`. -/",
+"file": "KaluzaKlein/Foundations/Mechanics.lean",
+"namespace": "KaluzaKlein.Mechanics",
+"statement": "theorem osc_hamilton (A ω t : ℝ) :\n    deriv (osc A ω) t = deriv (osc A ω) t ∧ deriv (deriv (osc A ω)) t = -(ω ^ 2 * osc A ω t)"
+},
+"KaluzaKlein.Mechanics.angular_momentum_conserved": {
+"doc": "/-- Angular momentum `L = x p_y − y p_x` is conserved for a central force: with `ẋ = p_x`, `ẏ = p_y`,\n`ṗ_x = −x f`, `ṗ_y = −y f` (force along the radius), `dL/dt = ẋ p_y + x ṗ_y − ẏ p_x − y ṗ_x = 0`. -/",
+"file": "KaluzaKlein/Foundations/Mechanics.lean",
+"namespace": "KaluzaKlein.Mechanics",
+"statement": "theorem angular_momentum_conserved (x y px py f : ℝ) :\n    px * py + x * (-(y * f)) - py * px - y * (-(x * f)) = 0"
+},
+"KaluzaKlein.Mechanics.osc_euler_lagrange": {
+"doc": "/-- The Euler-Lagrange equation `ẍ + ω² x = 0` holds for `x = A cos (ω t)`. -/",
+"file": "KaluzaKlein/Foundations/Mechanics.lean",
+"namespace": "KaluzaKlein.Mechanics",
+"statement": "theorem osc_euler_lagrange (A ω t : ℝ) : deriv (deriv (osc A ω)) t + ω ^ 2 * osc A ω t = 0"
+},
+"KaluzaKlein.Mechanics.poisson_canonical": {
+"doc": "/-- `{q, p} = 1`, `{p, q} = −1`, `{q, q} = 0`. -/",
+"file": "KaluzaKlein/Foundations/Mechanics.lean",
+"namespace": "KaluzaKlein.Mechanics",
+"statement": "theorem poisson_canonical : poisson 1 0 0 1 = 1 ∧ poisson 0 1 1 0 = -1 ∧ poisson 1 0 1 0 = 0"
+},
+"KaluzaKlein.Mechanics.osc_energy": {
+"doc": "/-- The energy `½ ẋ² + ½ ω² x²` of the oscillator solution is the constant `½ A² ω²`. -/",
+"file": "KaluzaKlein/Foundations/Mechanics.lean",
+"namespace": "KaluzaKlein.Mechanics",
+"statement": "theorem osc_energy (A ω t : ℝ) :\n    (1 / 2) * (deriv (osc A ω) t) ^ 2 + (1 / 2) * ω ^ 2 * (osc A ω t) ^ 2 = (1 / 2) * A ^ 2 * ω ^ 2"
+},
+"KaluzaKlein.Mechanics.poisson_antisymm": {
+"doc": "/-- The Poisson bracket is antisymmetric. -/",
+"file": "KaluzaKlein/Foundations/Mechanics.lean",
+"namespace": "KaluzaKlein.Mechanics",
+"statement": "theorem poisson_antisymm (fq fp gq gp : ℝ) : poisson gq gp fq fp = -poisson fq fp gq gp"
+},
+"KaluzaKlein.Mechanics.free_action_stationary": {
+"doc": "/-- Stationary action for the free particle: for the varied path `x(t) = v t + ε η(t)` with `η(0) = η(T) = 0`,\nthe action `∫₀ᵀ ½ ẋ² dt = ½ v² T + ε v (η(T) − η(0)) + ε² ∫ ½ η̇²` has no term linear in `ε`.\nStated as the vanishing of the linear coefficient, with the integral of `η̇` evaluated by the boundary values. -/",
+"file": "KaluzaKlein/Foundations/Mechanics.lean",
+"namespace": "KaluzaKlein.Mechanics",
+"statement": "theorem free_action_stationary (v T ε : ℝ) (η : ℝ → ℝ) (hη : ∀ t, HasDerivAt η (deriv η t) t)\n    (hint : IntervalIntegrable (deriv η) MeasureTheory.volume 0 T) (h0 : η 0 = 0) (hT : η T = 0) :\n    ∫ t in (0 : ℝ)..T, v * (ε * deriv η t) = 0"
+},
+"KaluzaKlein.Fields.planeWave_xx": {
+"doc": "/-- `∂²_x cos (k x − ω t) = −k² cos (k x − ω t)`. -/",
+"file": "KaluzaKlein/Foundations/Fields.lean",
+"namespace": "KaluzaKlein.Fields",
+"statement": "theorem planeWave_xx (k ω t x : ℝ) :\n    deriv (deriv (fun x => planeWave k ω t x)) x = -k ^ 2 * planeWave k ω t x"
+},
+"KaluzaKlein.Actions.energy_momentum_divergence_x": {
+"doc": "/-- The same for `ν = x`: `∂_t T^{tx} + ∂_x T^{xx} = (□p + m² p) ∂^x p` with `∂^x p = −px`, `T^{tx} = −pt px` and\n`T^{xx} = ½ pt² + ½ px² − ½ m² p²`. -/",
+"file": "KaluzaKlein/Foundations/Actions.lean",
+"namespace": "KaluzaKlein.Actions",
+"statement": "theorem energy_momentum_divergence_x (m p pt px ptt ptx pxx : ℝ) :\n    (-(ptt * px) - pt * ptx) + (pt * ptx + px * pxx - m ^ 2 * p * px) = ((ptt - pxx) + m ^ 2 * p) * (-px)"
+},
+"KaluzaKlein.Actions.energy_momentum_divergence_t": {
+"doc": "/-- The canonical energy-momentum tensor of the scalar in `1 + 1` dimensions, `T^{μν} = ∂^μ p ∂^ν p − η^{μν} L`,\nwith `η = diag(1, −1)`: its divergence `∂_μ T^{μν}` equals `(□p + m² p) ∂^ν p` identically in the jet variables\n(`ptx` is the mixed second derivative, symmetric), hence vanishes on the field equation. Stated for `ν = t`, where\n`∂^t p = pt`. -/",
+"file": "KaluzaKlein/Foundations/Actions.lean",
+"namespace": "KaluzaKlein.Actions",
+"statement": "theorem energy_momentum_divergence_t (m p pt px ptt ptx pxx : ℝ) :\n    -- ∂_t T^{tt} + ∂_x T^{xt}, with T^{tt} = ½ pt² + ½ px² + ½ m² p² and T^{xt} = −pt px\n    (pt * ptt + px * ptx + m ^ 2 * p * pt) + (-(ptx * px) - pt * pxx) = ((ptt - pxx) + m ^ 2 * p) * pt"
+},
+"KaluzaKlein.Fields.planeWave_klein_gordon": {
+"doc": "/-- The Klein-Gordon operator `□ + m² = ∂²_t − ∂²_x + m²` (signature `(+, −)`) annihilates the plane wave exactly\nwhen `ω² = k² + m²`. -/",
+"file": "KaluzaKlein/Foundations/Fields.lean",
+"namespace": "KaluzaKlein.Fields",
+"statement": "theorem planeWave_klein_gordon (k ω m t x : ℝ) (h : ω ^ 2 = k ^ 2 + m ^ 2) :\n    deriv (deriv (fun t => planeWave k ω t x)) t - deriv (deriv (fun x => planeWave k ω t x)) x\n      + m ^ 2 * planeWave k ω t x = 0"
+},
+"KaluzaKlein.Actions.dL_dpt_dpx": {
+"doc": "/-- `∂L/∂pt = pt` and `∂L/∂px = −px`. -/",
+"file": "KaluzaKlein/Foundations/Actions.lean",
+"namespace": "KaluzaKlein.Actions",
+"statement": "theorem dL_dpt_dpx (m p pt px : ℝ) :\n    deriv (fun pt => lagrangian m p pt px) pt = pt ∧ deriv (fun px => lagrangian m p pt px) px = -px"
+},
+"KaluzaKlein.FieldTheory.noether_conserved": {
+"doc": "/-- On the Klein-Gordon equation `□u = −m² u`, `□v = −m² v` the divergence vanishes. -/",
+"file": "KaluzaKlein/Foundations/FieldTheory.lean",
+"namespace": "KaluzaKlein.FieldTheory",
+"statement": "theorem noether_conserved (u v m : ℝ) (boxu boxv : ℝ) (hu : boxu = -m ^ 2 * u) (hv : boxv = -m ^ 2 * v) :\n    u * boxv - v * boxu = 0"
+},
+"KaluzaKlein.Fields.phase_rotation_normSq": {
+"doc": "/-- The phase rotation `φ ↦ e^{iα} φ` preserves `|φ|²`. -/",
+"file": "KaluzaKlein/Foundations/Fields.lean",
+"namespace": "KaluzaKlein.Fields",
+"statement": "theorem phase_rotation_normSq (φ : ℂ) (α : ℝ) :\n    Complex.normSq (Complex.exp (α * Complex.I) * φ) = Complex.normSq φ"
+},
+"KaluzaKlein.Fields.planeWave_tt": {
+"doc": "/-- `∂²_t cos (k x − ω t) = −ω² cos (k x − ω t)`. -/",
+"file": "KaluzaKlein/Foundations/Fields.lean",
+"namespace": "KaluzaKlein.Fields",
+"statement": "theorem planeWave_tt (k ω t x : ℝ) :\n    deriv (deriv (fun t => planeWave k ω t x)) t = -ω ^ 2 * planeWave k ω t x"
+},
+"KaluzaKlein.FieldTheory.noether_divergence": {
+"doc": "/-- Real and imaginary parts of `φ`, its gradient and its d'Alembertian are independent jet variables; the\ndivergence of `j^μ = i(φ̄ ∂^μ φ − φ ∂^μ φ̄) = 2 (v ∂^μ u − u ∂^μ v)`, written below up to its overall sign as\n`2 (u ∂^μ v − v ∂^μ u)`, is `2 (u □v − v □u)`: the gradient terms cancel. Here `du dv : Fin 4 → ℝ` are the gradients,\n`ddu ddv : Fin 4 → Fin 4 → ℝ` the Hessians and `η` the diagonal of the inverse metric, `diag(1, −1, −1, −1)`. -/",
+"file": "KaluzaKlein/Foundations/FieldTheory.lean",
+"namespace": "KaluzaKlein.FieldTheory",
+"statement": "theorem noether_divergence (u v : ℝ) (du dv : Fin 4 → ℝ) (ddu ddv : Fin 4 → Fin 4 → ℝ) (η : Fin 4 → ℝ) :\n    ∑ μ, η μ * (du μ * dv μ + u * ddv μ μ - dv μ * du μ - v * ddu μ μ) =\n      u * ∑ μ, η μ * ddv μ μ - v * ∑ μ, η μ * ddu μ μ"
+},
+"KaluzaKlein.Actions.dL_dp": {
+"doc": "/-- `∂L/∂p = −m² p`. -/",
+"file": "KaluzaKlein/Foundations/Actions.lean",
+"namespace": "KaluzaKlein.Actions",
+"statement": "theorem dL_dp (m p pt px : ℝ) : deriv (fun p => lagrangian m p pt px) p = -m ^ 2 * p"
+},
+"KaluzaKlein.Actions.euler_lagrange_kg": {
+"doc": "/-- The Euler-Lagrange expression `∂_t(∂L/∂pt) + ∂_x(∂L/∂px) − ∂L/∂p`, with the second derivatives `ptt`, `pxx`\nof the field substituted, is `ptt − pxx + m² p = (□ + m²) p` with `□ = ∂²_t − ∂²_x` (signature `(+, −)`): the\nKlein-Gordon equation. -/",
+"file": "KaluzaKlein/Foundations/Actions.lean",
+"namespace": "KaluzaKlein.Actions",
+"statement": "theorem euler_lagrange_kg (m p ptt pxx : ℝ) : ptt + (-pxx) - (-m ^ 2 * p) = (ptt - pxx) + m ^ 2 * p"
+},
+"KaluzaKlein.Fields.clifford": {
+"doc": "/-- The Clifford relations `γ^μ γ^ν + γ^ν γ^μ = 2 η^{μν} 1`, checked entry by entry. -/",
+"file": "KaluzaKlein/Foundations/Fields.lean",
+"namespace": "KaluzaKlein.Fields",
+"statement": "theorem clifford (μ ν : Fin 4) : gamma μ * gamma ν + gamma ν * gamma μ = (2 * etaC μ ν) • (1 : Matrix (Fin 4) (Fin 4) ℂ)"
+},
+"KaluzaKlein.FieldTheory.su2_bianchi": {
+"doc": "/-- The Bianchi identity `D_ρ F_{μν} + D_μ F_{νρ} + D_ν F_{ρμ} = 0`, for every gauge field and every coupling. -/",
+"file": "KaluzaKlein/Foundations/FieldTheory.lean",
+"namespace": "KaluzaKlein.FieldTheory",
+"statement": "theorem su2_bianchi (g : ℝ) (J : Jets) (a : Fin 3) (ρ μ ν : Fin 4) :\n    DF g J ρ a μ ν + DF g J μ a ν ρ + DF g J ν a ρ μ = 0"
+},
+"KaluzaKlein.Higgs.su2_higgs_mass_matrix": {
+"doc": "/-- For the doublet vacuum `φ₀ = (0, v)` the vector `T_a φ₀` has components `(T_a)_{i1} v`, so\n`(T_a φ₀)† (T_b φ₀) = Σ_i conj((T_a)_{i1} v) (T_b)_{i1} v`; its real part is `(v²/4) δ_ab`: the `SU(2)` gauge-boson\nmass matrix is proportional to the identity. -/",
+"file": "KaluzaKlein/Foundations/Higgs.lean",
+"namespace": "KaluzaKlein.Higgs",
+"statement": "theorem su2_higgs_mass_matrix (v : ℝ) (a b : Fin 3) :\n    (∑ i, star ((T a) i 1 * (v : ℂ)) * ((T b) i 1 * (v : ℂ))).re = if a = b then v ^ 2 / 4 else 0"
+},
+"KaluzaKlein.FieldTheory.abelian_F_invariant": {
+"doc": "/-- `F_{μν} = ∂_μ A_ν − ∂_ν A_μ` is invariant under `A_ν → A_ν + ∂_ν ε` when `∂_μ ∂_ν ε = ∂_ν ∂_μ ε`. -/",
+"file": "KaluzaKlein/Foundations/FieldTheory.lean",
+"namespace": "KaluzaKlein.FieldTheory",
+"statement": "theorem abelian_F_invariant (dA : Fin 4 → Fin 4 → ℝ) (ddε : Fin 4 → Fin 4 → ℝ) (hsymm : ∀ μ ν, ddε μ ν = ddε ν μ)\n    (μ ν : Fin 4) : (dA μ ν + ddε μ ν) - (dA ν μ + ddε ν μ) = dA μ ν - dA ν μ"
+},
+"KaluzaKlein.Higgs.abelian_higgs_expansion": {
+"doc": "/-- Expanding around the vacuum, `V(μ + h) = λμ² h² + λμ h³ + (λ/4) h⁴`. -/",
+"file": "KaluzaKlein/Foundations/Higgs.lean",
+"namespace": "KaluzaKlein.Higgs",
+"statement": "theorem abelian_higgs_expansion (lam μ h : ℝ) :\n    lam / 4 * ((μ + h) ^ 2 - μ ^ 2) ^ 2 = lam * μ ^ 2 * h ^ 2 + lam * μ * h ^ 3 + lam / 4 * h ^ 4"
+},
+"KaluzaKlein.Higgs.abelian_gauge_mass": {
+"doc": "/-- `|D_μ φ|²` with `D_μ = ∂_μ − i e A_μ` on the constant vacuum `φ = μ` (real): the derivative term vanishes and\n`|−i e A_μ μ|² = e² μ² A_μ A^μ` (written with the components and the inverse metric `η`). -/",
+"file": "KaluzaKlein/Foundations/Higgs.lean",
+"namespace": "KaluzaKlein.Higgs",
+"statement": "theorem abelian_gauge_mass (e μ : ℝ) (A η : Fin 4 → ℝ) :\n    ∑ ν, η ν * ((e * A ν * μ) * (e * A ν * μ)) = e ^ 2 * μ ^ 2 * ∑ ν, η ν * A ν * A ν"
+},
+"KaluzaKlein.FieldTheory.su2_field_strength": {
+"doc": "/-- On the constant configuration only the commutator term survives: `F³₁₂ = g c₁ c₂ = −F³₂₁`. -/",
+"file": "KaluzaKlein/Foundations/FieldTheory.lean",
+"namespace": "KaluzaKlein.FieldTheory",
+"statement": "theorem su2_field_strength (g c₁ c₂ : ℝ) :\n    F g (constantJets c₁ c₂) 2 1 2 = g * c₁ * c₂ ∧ F g (constantJets c₁ c₂) 2 2 1 = -(g * c₁ * c₂) ∧\n      F g (constantJets c₁ c₂) 0 1 2 = 0 ∧ F g (constantJets c₁ c₂) 1 1 2 = 0 ∧ F g (constantJets c₁ c₂) 2 0 3 = 0"
+},
+"KaluzaKlein.Higgs.abelian_higgs_min": {
+"doc": "/-- The Mexican-hat potential is non-negative and vanishes on the vacuum circle `r² = μ²`. -/",
+"file": "KaluzaKlein/Foundations/Higgs.lean",
+"namespace": "KaluzaKlein.Higgs",
+"statement": "theorem abelian_higgs_min (lam μ r : ℝ) (hlam : 0 < lam) :\n    0 ≤ lam / 4 * (r ^ 2 - μ ^ 2) ^ 2 ∧ (lam / 4 * (r ^ 2 - μ ^ 2) ^ 2 = 0 ↔ r ^ 2 = μ ^ 2)"
+},
+"KaluzaKlein.Relativity.dS3_einstein": {
+"doc": "/-- The Einstein equation with cosmological constant `Λ = H²` in the signature `(+, −, −)`:\n`G_ij − Λ g_ij = R_ij − ½ R g_ij − H² g_ij = 0`. -/",
+"file": "KaluzaKlein/Foundations/Relativity.lean",
+"namespace": "KaluzaKlein.Relativity",
+"statement": "theorem dS3_einstein (H : ℝ) (i j : Fin 3) (x : Fin 3 → ℝ) :\n    ricci (dS3 H) i j x - 1 / 2 * scalarCurvature (dS3 H) x * dS3 H i j x - H ^ 2 * dS3 H i j x = 0"
+},
+"KaluzaKlein.Relativity.sphere_einstein_zero": {
+"doc": "/-- `G_ij = R_ij − ½ R g_ij = 0` on the unit sphere (the Einstein tensor of any two-dimensional metric vanishes). -/",
+"file": "KaluzaKlein/Foundations/Relativity.lean",
+"namespace": "KaluzaKlein.Relativity",
+"statement": "theorem sphere_einstein_zero (i j : Fin 2) (x : Fin 2 → ℝ) (h : Real.sin (x 0) ≠ 0) :\n    ricci Geometry.sphere i j x - 1 / 2 * scalarCurvature Geometry.sphere x * Geometry.sphere i j x = 0"
+},
+"KaluzaKlein.Supergravity.levi_contraction": {
+"doc": "/-- `ε_{μαβγ} ε_ν{}^{αβγ} = -6 η_{μν}` in Lorentzian signature (indices raised with `η`); the value depends only on\n`det η = -1`, so it is the same in both signature conventions. -/",
+"file": "KaluzaKlein/Foundations/Supergravity.lean",
+"namespace": "KaluzaKlein.Supergravity",
+"statement": "theorem levi_contraction (μ ν : Fin 4) :\n    (∑ a : Fin 4, ∑ b : Fin 4, ∑ c : Fin 4,\n      levi μ a b c * levi ν a b c * etaZ a a * etaZ b b * etaZ c c) = -6 * etaZ μ ν"
+},
+"KaluzaKlein.Supersymmetry.oraifeartaigh_no_susy_vacuum": {
+"doc": "/-- The O'Raifeartaigh model `W = -k Φ₁ + m Φ₂ Φ₃ + ½ y Φ₁ Φ₃²` (Martin eq. 7.3.1): the equations\n`F_1 = F_2 = F_3 = 0`, that is `k - ½ y φ₃² = 0`, `m φ₃ = 0`, `m φ₂ + y φ₁ φ₃ = 0`, have no common solution when\n`k ≠ 0` and `m ≠ 0`, so supersymmetry is spontaneously broken. -/",
+"file": "KaluzaKlein/Foundations/Supersymmetry.lean",
+"namespace": "KaluzaKlein.Supersymmetry",
+"statement": "theorem oraifeartaigh_no_susy_vacuum (k m y : ℂ) (hk : k ≠ 0) (hm : m ≠ 0) :\n    ¬ ∃ φ₁ φ₂ φ₃ : ℂ, k - y / 2 * φ₃ ^ 2 = 0 ∧ m * φ₃ = 0 ∧ m * φ₂ + y * φ₁ * φ₃ = 0"
+},
+"KaluzaKlein.Supergravity.C_gamma": {
+"doc": "/-- `C γ^μ = -(γ^μ)ᵀ C`, the defining property of the charge-conjugation matrix (Tanii eq. 2.1). -/",
+"file": "KaluzaKlein/Foundations/Supergravity.lean",
+"namespace": "KaluzaKlein.Supergravity",
+"statement": "theorem C_gamma (μ : Fin 4) : C * Fields.gamma μ = -((Fields.gamma μ)ᵀ * C)"
+},
+"KaluzaKlein.Supergravity.rarita_schwinger_gauge": {
+"doc": "/-- Gauge invariance of the Rarita-Schwinger operator: for `ψ_ρ = ∂_ρ ε` the operator `γ^{μνρ} ∂_ν ψ_ρ` acts on\nthe symmetric second derivatives `s ν ρ = ∂_ν ∂_ρ ε` and vanishes, `Σ_{νρ} γ^{μνρ} s_{νρ} = 0`. -/",
+"file": "KaluzaKlein/Foundations/Supergravity.lean",
+"namespace": "KaluzaKlein.Supergravity",
+"statement": "theorem rarita_schwinger_gauge (μ : Fin 4) (s : Fin 4 → Fin 4 → (Fin 4 → ℂ)) (hs : ∀ ν ρ, s ν ρ = s ρ ν) :\n    (∑ ν : Fin 4, ∑ ρ : Fin 4, (gamma3 μ ν ρ).mulVec (s ν ρ)) = 0"
+},
+"KaluzaKlein.Supersymmetry.sigma_fierz": {
+"doc": "/-- `(σ^μ)_{α α̇} (σ̄_μ)^{β̇ β} = 2 δ_α^β δ_α̇^β̇`, the index `μ` lowered with `η` (Martin eq. (2.21) reads `-2` in\nthe mostly-plus metric). -/",
+"file": "KaluzaKlein/Foundations/Supersymmetry.lean",
+"namespace": "KaluzaKlein.Supersymmetry",
+"statement": "theorem sigma_fierz (a b c d : Fin 2) :\n    (∑ μ : Fin 4, eta μ μ * (sigma μ a b * sigmaBar μ c d)) =\n      2 * (if a = d then 1 else 0) * (if b = c then 1 else 0)"
+},
+"KaluzaKlein.Supersymmetry.sigma_clifford": {
+"doc": "/-- `σ^μ σ̄^ν + σ^ν σ̄^μ = 2 η^{μν}` (Martin eq. (2.24) reads `-2 η^{μν}` in the mostly-plus metric). -/",
+"file": "KaluzaKlein/Foundations/Supersymmetry.lean",
+"namespace": "KaluzaKlein.Supersymmetry",
+"statement": "theorem sigma_clifford (μ ν : Fin 4) :\n    sigma μ * sigmaBar ν + sigma ν * sigmaBar μ = (2 * eta μ ν) • (1 : Matrix (Fin 2) (Fin 2) ℂ)"
+},
+"KaluzaKlein.Supergravity.fr_ricci_spacetime": {
+"doc": "/-- Spacetime components: `R_μν = T_μν + ½ R g_μν = 12 m² g_μν`, anti-de Sitter in the mostly-minus metric\n(`-12 m² g_μν` in the mostly-plus metric of DNP eq. 10). -/",
+"file": "KaluzaKlein/Foundations/Supergravity.lean",
+"namespace": "KaluzaKlein.Supergravity",
+"statement": "theorem fr_ricci_spacetime (m g : ℝ) :\n    -(1 / 3 : ℝ) * ((-54 * m ^ 2 * g) - (1 / 8) * g * (-216 * m ^ 2)) + (1 / 2) * g * (6 * m ^ 2)\n      = 12 * m ^ 2 * g"
+},
+"KaluzaKlein.Supersymmetry.auxiliary_complete_square": {
+"doc": "/-- Completing the square for the auxiliary field: `F* F + w F + w̄ F̄ = |F + w̄|² - |w|²`, so the Lagrangian is\nmaximised at `F = -w̄` and the eliminated auxiliary field leaves the potential `-|w|²` with `w = ∂W/∂φ`. -/",
+"file": "KaluzaKlein/Foundations/Supersymmetry.lean",
+"namespace": "KaluzaKlein.Supersymmetry",
+"statement": "theorem auxiliary_complete_square (w F : ℂ) :\n    (normSq F : ℂ) + w * F + (starRingEnd ℂ) w * (starRingEnd ℂ) F =\n      (normSq (F + (starRingEnd ℂ) w) : ℂ) - normSq w"
+},
+"KaluzaKlein.Supersymmetry.wz_vacua": {
+"doc": "/-- The F-term potential of `W = ½ m φ² + ⅙ y φ³`, `V = |m φ + ½ y φ²|²`, vanishes exactly at the two\nsupersymmetric vacua `φ = 0` and `φ = -2m/y`. -/",
+"file": "KaluzaKlein/Foundations/Supersymmetry.lean",
+"namespace": "KaluzaKlein.Supersymmetry",
+"statement": "theorem wz_vacua (m y φ : ℂ) (hy : y ≠ 0) :\n    normSq (m * φ + y / 2 * φ ^ 2) = 0 ↔ φ = 0 ∨ φ = -2 * m / y"
+}
+}

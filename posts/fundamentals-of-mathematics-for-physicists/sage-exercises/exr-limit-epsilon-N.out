@@ -1,0 +1,4 @@
+limit: 2 ; |a_n - 2| simplifies to 5/abs(n + 3) = 5/(n + 3)
+epsilon = 1/10 : N = 48 (5/(n+3) < eps iff n > 5/eps - 3); checked: True
+epsilon = 1/100 : N = 498 (5/(n+3) < eps iff n > 5/eps - 3); checked: True
+epsilon = 1/1000 : N = 4998 (5/(n+3) < eps iff n > 5/eps - 3); checked: True

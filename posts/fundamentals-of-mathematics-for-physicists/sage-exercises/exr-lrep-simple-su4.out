@@ -1,0 +1,12 @@
+simple roots (ambient): [(1, -1, 0, 0), (0, 1, -1, 0), (0, 0, 1, -1)]
+positive root alpha[1] = (1, -1, 0, 0)
+positive root alpha[2] = (0, 1, -1, 0)
+positive root alpha[3] = (0, 0, 1, -1)
+positive root alpha[1] + alpha[2] = (1, 0, -1, 0)
+positive root alpha[2] + alpha[3] = (0, 1, 0, -1)
+positive root alpha[1] + alpha[2] + alpha[3] = (1, 0, 0, -1)
+number of positive roots: 6 = binomial(4, 2) = 6
+Cartan matrix:
+[ 2 -1  0]
+[-1  2 -1]
+[ 0 -1  2]

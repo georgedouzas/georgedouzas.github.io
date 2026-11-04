@@ -1,0 +1,2 @@
+near zone, leading terms in k: E_theta -> 1/4*p0*sin(theta)/(pi*r^3) ; B_phi -> -1/4*I*k*p0*sin(theta)/(pi*r^2)
+far zone: E_theta exp(-ikr) r -> -1/4*k^2*p0*sin(theta)/pi ; B_phi exp(-ikr) r -> -1/4*k^2*p0*sin(theta)/pi

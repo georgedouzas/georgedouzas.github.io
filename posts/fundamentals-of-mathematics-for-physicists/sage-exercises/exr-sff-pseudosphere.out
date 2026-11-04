@@ -1,0 +1,6 @@
+induced metric g = [cos(s)^2/sin(s)^2, 0, 0, sin(s)^2] = cot^2 s ds^2 + sin^2 s dph^2: True
+unit normal n = [-cos(ph)*cos(s), -cos(s)*sin(ph), sin(s)]
+h = [-cos(s)/sin(s), 0, 0, cos(s)*sin(s)] : h_ss = -cot s: True , h_phph = sin s cos s: True
+shape operator S = [-sin(s)/cos(s), 0, 0, cos(s)/sin(s)] : principal curvatures -tan s and cot s: True
+K = det S = -1
+at the rim s -> pi/2: n -> [0, 0, 1] , -tan s -> -Infinity (the cuspidal edge)

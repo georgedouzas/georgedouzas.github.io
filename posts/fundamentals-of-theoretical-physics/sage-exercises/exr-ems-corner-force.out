@@ -1,0 +1,4 @@
+F = (1/16*(a^3*q^2 - (a^2 + b^2)^(3/2)*q^2)/((pi*a^4 + pi*a^2*b^2)*sqrt(a^2 + b^2)), 1/16*(b^3*q^2 - (a^2 + b^2)^(3/2)*q^2)/((pi*a^2*b^2 + pi*b^4)*sqrt(a^2 + b^2)))
+component along the diagonal at (t, t): 1/64*sqrt(2)*q^2*(sqrt(2) - 4)/(pi*t^2) ; equals -q^2 (2 sqrt2 - 1)/(32 pi t^2): True
+work to bring the charge from infinity to (a, a): 1/32*q^2*(sqrt(2) - 4)/(pi*a)
+half the charge times the images' potential: 1/32*q^2*(sqrt(2) - 4)/(pi*a) ; equal: True

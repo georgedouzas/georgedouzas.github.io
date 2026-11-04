@@ -1,0 +1,7 @@
+oscillator flow: J Omega J^T == Omega: True
+rotate q and p together: canonical: True
+rotate q only: J Omega J^T =
+[      0       0  cos(a) -sin(a)]
+[      0       0  sin(a)  cos(a)]
+[-cos(a) -sin(a)       0       0]
+[ sin(a) -cos(a)       0       0]

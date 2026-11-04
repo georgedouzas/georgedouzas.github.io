@@ -1,0 +1,4 @@
+psi_M = [a + I*b, c + I*d, -c + I*d, a - I*b]
+i gamma^2 psi_M^* = psi_M: True
+i gamma^2 (e^{i alpha} psi_M)^* - e^{i alpha} psi_M = [-2*I*a*sin(alpha) + 2*b*sin(alpha), -2*I*c*sin(alpha) + 2*d*sin(alpha), 2*I*c*sin(alpha) + 2*d*sin(alpha), -2*I*a*sin(alpha) - 2*b*sin(alpha)]
+= -2 i sin(alpha) psi_M: True

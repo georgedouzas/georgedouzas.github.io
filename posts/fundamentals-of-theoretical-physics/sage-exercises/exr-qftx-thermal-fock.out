@@ -1,0 +1,5 @@
+tau = 0.0  trace = 1.081976706869   G_beta = 1.081976706869
+tau = 0.3  trace = 0.978771776357   G_beta = 0.978771776357
+tau = 0.5  trace = 0.959517375667   G_beta = 0.959517375667
+tau = 0.9  trace = 1.037307725133   G_beta = 1.037307725133
+((1+n_B) e^{-w tau} + n_B e^{w tau})/(2w) = cosh(w(b/2 - tau))/(2 w sinh(b w/2)): True

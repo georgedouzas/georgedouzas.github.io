@@ -1,0 +1,9 @@
+dA = d(f x dy) = (dA_y/dx) dx^dy with dA_y/dx = f
+A(x + L1) - A(x) = L1*f = d/dy of L1*f*y
+periodicity of exp(i q f L1 y) under y -> y + L2 requires q f L1 L2 in 2 pi Z
+N = -2 : f = -4*pi/(L1*L2*q) , flux int F = -4*pi/q , transition single valued: True
+N = -1 : f = -2*pi/(L1*L2*q) , flux int F = -2*pi/q , transition single valued: True
+N = 0 : f = 0 , flux int F = 0 , transition single valued: True
+N = 1 : f = 2*pi/(L1*L2*q) , flux int F = 2*pi/q , transition single valued: True
+N = 2 : f = 4*pi/(L1*L2*q) , flux int F = 4*pi/q , transition single valued: True
+half-integer N = 1/2: exp(i q f L1 L2) = -1 : not allowed

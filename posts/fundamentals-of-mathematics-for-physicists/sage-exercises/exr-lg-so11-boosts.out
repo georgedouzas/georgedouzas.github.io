@@ -1,0 +1,6 @@
+B(v) B(w) - B(v + w) = [0, 0, 0, 0]
+B^T eta B - eta = [0, 0, 0, 0]
+det B = 1 ; B B^T = 1? False (not orthogonal)
+tr B(w) = 2 cosh w, equal to 2 only at w = 0: [
+w == 0
+]

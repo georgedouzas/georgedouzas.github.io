@@ -1,0 +1,10 @@
+# Exercise exr-emw-lw-retarded-time: retarded time and kappa R for a charge moving uniformly along e_x.
+t, x, y, z, v, tr = var('t x y z v tr'); assume(v > 0, v < 1)
+sols = solve((t - tr)^2 == (x - v * tr)^2 + y^2 + z^2, tr)
+for s in sols: print('root:', s.rhs().simplify_full())
+g2 = 1 / (1 - v^2)
+trr = g2 * (t - v * x - sqrt((x - v * t)^2 + (1 - v^2) * (y^2 + z^2)))
+print('this root solves the equation:', bool(((t - trr)^2 - (x - v * trr)^2 - y^2 - z^2).simplify_full() == 0))
+R = t - trr; Rvec = vector([x - v * trr, y, z]); kR = (R - v * Rvec[0]).simplify_full()
+print('kappa R =', kR, '; equals sqrt((x - v t)^2 + (1 - v^2)(y^2 + z^2)):', bool((kR - sqrt((x - v*t)^2 + (1 - v^2)*(y^2 + z^2))).simplify_full() == 0))
+print('numeric check at t=1, x=0.3, y=0.5, z=0.2, v=0.6: t - t_r = %.6f, |x - v t_r| = %.6f' % (R.subs(t=1, x=0.3, y=0.5, z=0.2, v=0.6).n(), Rvec.norm().subs(t=1, x=0.3, y=0.5, z=0.2, v=0.6).n()))

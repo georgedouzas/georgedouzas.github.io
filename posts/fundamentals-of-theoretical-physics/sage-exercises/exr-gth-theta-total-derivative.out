@@ -1,0 +1,3 @@
+degree of eps Tr(F F) for these potentials: 5
+[PASS] eps^{mu nu rho sigma} Tr(F_{mu nu} F_{rho sigma}) = d_mu K^mu with K^mu = 4 eps Tr(A dA + 2/3 A A A): True
+[PASS] dropping the 2/3 A^3 term breaks the identity (it is needed when [A, A] != 0): True

@@ -1,0 +1,2 @@
+R5 = 1/2*(B^2*phi(x)^3 + 4*diff(phi(x), x, x))/phi(x)
+[PASS] R5 = phi^2 B^2/2 + 2 phi''/phi = (1/4) phi^2 F^2 - (2/phi) Box phi: True

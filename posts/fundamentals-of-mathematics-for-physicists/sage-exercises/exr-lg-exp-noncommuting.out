@@ -1,0 +1,5 @@
+e^X e^Y = [2, 1, 1, 1]
+e^(X+Y) = [1/2*(e^2 + 1)*e^(-1), 1/2*(e^2 - 1)*e^(-1), 1/2*(e^2 - 1)*e^(-1), 1/2*(e^2 + 1)*e^(-1)] ; equals cosh(1) 1 + sinh(1)(X + Y): True
+(X + Y)^2 = [1, 0, 0, 1] ; [X, Y] = [1, 0, 0, -1]
+e^{sX} e^{sY} to order s^2 = [s^2 + 1, s, s, 1]
+agrees with exp(s(X+Y) + s^2/2 [X,Y]) to order s^2: True ; with exp(s(X+Y)): False

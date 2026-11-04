@@ -1,0 +1,4 @@
+check of the moment formula at s = 1.4, lambda = 0.7: True
+<r> = 1/2*(2*g + 1)/lam ; equals (2 gamma + 1)/(2 lambda): True
+Z = 1: gamma = 0.999973, <r>/a_Z = 1.499973, relative difference from 3/2: -1.78e-05
+Z = 92: gamma = 0.741135, <r>/a_Z = 1.241135, relative difference from 3/2: -0.173

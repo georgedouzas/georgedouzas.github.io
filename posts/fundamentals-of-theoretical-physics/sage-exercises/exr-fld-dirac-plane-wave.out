@@ -1,0 +1,6 @@
+det(gamma^mu k_mu - m) = (m^2 + p^2 - w^2)^2
+rank on the mass shell: 2 -> two independent spinors
+they are the square roots: True True
+xi = (1, 0) : u = (sqrt(m)*e^(-1/2*eta), 0, sqrt(m)*e^(1/2*eta), 0) ; (gamma.k - m) u = 0: True
+xi = (0, 1) : u = (0, sqrt(m)*e^(1/2*eta), 0, sqrt(m)*e^(-1/2*eta)) ; (gamma.k - m) u = 0: True
+at rest (eta = 0) both blocks equal sqrt(m) xi: gamma^0 u = u

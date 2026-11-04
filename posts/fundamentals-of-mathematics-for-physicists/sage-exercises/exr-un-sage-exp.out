@@ -1,0 +1,11 @@
+U(theta) =
+[ cos(theta)  sin(theta)]
+[-sin(theta)  cos(theta)]
+U^dagger U = 1: True
+U(theta) U(phi) = U(theta + phi): True
+F =
+[   1/2    1/2    1/2    1/2]
+[   1/2  1/2*I   -1/2 -1/2*I]
+[   1/2   -1/2    1/2   -1/2]
+[   1/2 -1/2*I   -1/2  1/2*I]
+F unitary: True ; F^4 = 1: True

@@ -1,0 +1,3 @@
+orbit solves m x'' = q B y', m y'' = -q B x': True True
+symmetric gauge: p_y = -1/2*B*R*q*cos(B*q*t/m) + 1/2*B*X0*q (oscillates); p_y + qBx/2 = B*X0*q
+Landau gauge: p_y = B*X0*q = q B X0

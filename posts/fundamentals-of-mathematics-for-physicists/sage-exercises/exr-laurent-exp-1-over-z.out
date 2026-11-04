@@ -1,0 +1,7 @@
+f = e^(1/z)
+   Laurent series (terms to w^6): 1/z + 1/2/z^2 + 1/6/z^3 + 1/24/z^4 + 1/120/z^5 + 1/720/z^6 + 1
+   coefficient of 1/z (residue): 1
+f = z^2*e^(1/z)
+   Laurent series (terms to w^6): z^2 + z + 1/6/z + 1/24/z^2 + 1/120/z^3 + 1/720/z^4 + 1/2
+   coefficient of 1/z (residue): 1/6
+warning: Sage's exp(1/z).residue(z == 0) returns 0 (wrong; the series above shows 1)

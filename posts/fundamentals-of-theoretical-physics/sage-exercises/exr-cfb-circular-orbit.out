@@ -1,0 +1,5 @@
+time-averaged dP/dOmega = 1/32*(cos(th)^2 + 1)*a^2*q^2*w^4/(pi^2*c^3*e0)
+proportional to (1 + cos^2 th)/2: True
+total power: 1/6*a^2*q^2*w^4/(pi*c^3*e0)  = q^2 a^2 w^4/(6 pi eps0 c^3): True
+field seen along z (transverse part of ddot d): [-a*q*w^2*cos(t*w), -a*q*w^2*sin(t*w), 0]
+field seen along y in the plane: [-a*q*w^2*cos(t*w), 0, 0]

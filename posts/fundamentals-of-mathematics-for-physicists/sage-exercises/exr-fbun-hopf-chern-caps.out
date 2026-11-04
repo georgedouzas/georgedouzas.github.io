@@ -1,0 +1,4 @@
+int_north F = -2*pi ; oint_equator A_+ = -2*pi
+int_south F = -2*pi ; -oint_equator A_- = -2*pi
+total: -4*pi = oint (A_+ - A_-) = -4*pi ; c_1 = -2
+flux through the cap theta < theta0: -2*pi + 2*pi*cos(th0) = oint A_+ on its boundary: True

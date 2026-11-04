@@ -1,0 +1,4 @@
+in spherical coordinates: X = -sin(th) ∂/∂th
+in stereographic coordinates: X = u ∂/∂u + v ∂/∂v
+components (X^u, X^v) in terms of (theta, phi): [-cos(ph)*sin(th)/(cos(th) - 1), -sin(ph)*sin(th)/(cos(th) - 1)]
+(X^u, X^v) = (u, v): True

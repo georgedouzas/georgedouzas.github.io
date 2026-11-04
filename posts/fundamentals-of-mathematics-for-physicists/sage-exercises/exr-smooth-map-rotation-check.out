@@ -1,0 +1,4 @@
+E o rot = R_z(alpha) o E: True
+Jacobian determinant of rot: 1
+rot(-alpha) o rot(alpha) is the identity of the chart: [u, v]
+the south pole (u, v) = (0, 0) is fixed: 0 0

@@ -1,0 +1,5 @@
+[PASS] ghat = L^T diag(g, h) L: True
+[PASS] det L = 1, hence det ghat = det g det h: True
+[PASS] L^{-1} = [[1, 0], [-B, 1]]: True
+[PASS] L^{-1} diag(g^{-1}, h^{-1}) L^{-T} is the block inverse of @prp-nonabelian-inverse: True
+[PASS] and it inverts ghat: True

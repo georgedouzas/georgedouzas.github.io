@@ -1,0 +1,4 @@
+components of u: in e [1, 2, 3] , in f [1, 1, 3]
+components of a: in e [1, 0, -1] , in f [1, 0, -1]
+a(u) = a_i u^i in e: -2 ; in f: -2 ; a(u) = -2
+A = [(1, 0, 0), (1, 1, 0), (0, 0, 1)] ; u_f = A^-1 u_e: True ; a_f = a_e A (row times A): True

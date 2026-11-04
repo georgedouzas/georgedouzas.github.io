@@ -1,0 +1,7 @@
+check: Villain <cos theta> at beta_V = 0.5 is 0.36787944, exp(-1/(2 beta_V)) = 0.36787944
+check: Villain <cos theta> at beta_V = 1.5 is 0.71653131, exp(-1/(2 beta_V)) = 0.71653131
+beta =  0.5: beta_V = 0.3529, beta - 1/2 = 0.0000
+beta =  1.0: beta_V = 0.6199, beta - 1/2 = 0.5000
+beta =  2.0: beta_V = 1.3894, beta - 1/2 = 1.5000
+beta =  4.0: beta_V = 3.4075, beta - 1/2 = 3.5000
+beta = 10.0: beta_V = 9.4754, beta - 1/2 = 9.5000

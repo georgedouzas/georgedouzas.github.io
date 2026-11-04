@@ -1,0 +1,4 @@
+B = [(1, 2), (-1, 0)]
+B(v, w) = v^T B w = -6 ; by the formula v1 w1 + 2 v1 w2 - v2 w1 = -6
+B(w, v) = 15 ; symmetric: False
+components: B(e1, e1), B(e1, e2), B(e2, e1), B(e2, e2) = [1, 2, -1, 0]

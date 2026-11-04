@@ -1,0 +1,11 @@
+polar -> Cartesian: x = r*cos(ph)
+y = r*sin(ph)
+Cartesian -> polar: r = sqrt(x^2 + y^2)
+ph = pi + arctan2(-y, -x)
+Jacobian matrix: [   cos(ph) -r*sin(ph)]
+[   sin(ph)  r*cos(ph)]
+Jacobian determinant: r  (SageManifolds: r )
+non-zero on the domain r > 0: the two charts are compatible
+check of the inverse at (x, y) = (-1, -1): (r, phi) = (sqrt(2), 5/4*pi) and back: (-1, -1)
+the inverse formula gives phi = atan2(1, 1) + pi = 5/4*pi
+atlas of P: [Chart (P, (x, y)), Chart (P, (r, ph))]

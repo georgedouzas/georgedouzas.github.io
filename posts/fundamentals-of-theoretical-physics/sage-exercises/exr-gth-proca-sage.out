@@ -1,0 +1,4 @@
+[PASS] the Proca operator on the plane wave is (M eps) exp(-i k.x): True
+[PASS] det M = m^2 (m^2 - k^2)^3: True
+rest frame k = (m, 0, 0, 0): M = [m^2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[PASS] on shell in the rest frame the solutions are eps = (0, e1, e2, e3): three polarisations: True

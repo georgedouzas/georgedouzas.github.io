@@ -1,0 +1,7 @@
+n = 1: E X^ 2 = sigma^2 ; (2n-1)!! = 1 ; recursion (2n-1) sigma^2 E X^{2n-2} holds: True ; pairings of 2 points: 1
+n = 2: E X^ 4 = 3*sigma^4 ; (2n-1)!! = 3 ; recursion (2n-1) sigma^2 E X^{2n-2} holds: True ; pairings of 4 points: 3
+n = 3: E X^ 6 = 15*sigma^6 ; (2n-1)!! = 15 ; recursion (2n-1) sigma^2 E X^{2n-2} holds: True ; pairings of 6 points: 15
+n = 4: E X^ 8 = 105*sigma^8 ; (2n-1)!! = 105 ; recursion (2n-1) sigma^2 E X^{2n-2} holds: True ; pairings of 8 points: 105
+n = 5: E X^10 = 945*sigma^10 ; (2n-1)!! = 945 ; recursion (2n-1) sigma^2 E X^{2n-2} holds: True ; pairings of 10 points: 945
+n = 6: E X^12 = 10395*sigma^12 ; (2n-1)!! = 10395 ; recursion (2n-1) sigma^2 E X^{2n-2} holds: True ; pairings of 12 points: 10395
+odd moments E X^1, E X^3, E X^5: [0, 0, 0]

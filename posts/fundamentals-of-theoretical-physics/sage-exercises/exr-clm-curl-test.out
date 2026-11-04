@@ -1,0 +1,5 @@
+curl F1 = (0, 0, 0)
+curl F2 = (0, 0, -2)
+curl F3 = (0, 0, 0)
+-grad V1 == F1: True ; -grad V3 == F3: True
+work of F2 around the unit circle: -2*pi

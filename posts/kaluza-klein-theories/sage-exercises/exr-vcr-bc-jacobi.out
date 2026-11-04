@@ -1,0 +1,13 @@
+distinct Jacobi expressions: [-2*a*n1, 0, 2*a*n1]
+tr ad(t_1), tr ad(t_2), tr ad(t_3) = [2*a, 0, 0]
+I      Jacobi True, traces [0, 0, 0], class A
+II     Jacobi True, traces [0, 0, 0], class A
+VII_0  Jacobi True, traces [0, 0, 0], class A
+VI_0   Jacobi True, traces [0, 0, 0], class A
+IX     Jacobi True, traces [0, 0, 0], class A
+VIII   Jacobi True, traces [0, 0, 0], class A
+V      Jacobi True, traces [2, 0, 0], class B (a != 0)
+IV     Jacobi True, traces [2, 0, 0], class B (a != 0)
+VII_h  Jacobi True, traces [2*a, 0, 0], class B (a != 0)
+VI_h   Jacobi True, traces [2*a, 0, 0], class B (a != 0)
+III    Jacobi True, traces [2, 0, 0], class B (a != 0)

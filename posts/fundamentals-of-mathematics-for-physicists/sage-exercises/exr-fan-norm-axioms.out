@@ -1,0 +1,4 @@
+N(1,0) = 1  N(0,1) = 1  N(1,1) = 4  > N(1,0) + N(0,1): True
+homogeneity N(-3 x) = 3 N(x) at x = (2, 5): True
+triangle inequality for the 1-norm and the sup-norm on 100 random pairs in C^4: True
+midpoint of (1,0) and (0,1) has N = 2 > 1: the set N <= 1 is not convex

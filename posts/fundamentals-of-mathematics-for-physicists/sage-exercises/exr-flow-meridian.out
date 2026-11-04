@@ -1,0 +1,6 @@
+Phi_t(theta0) = 2*arctan(e^(-t)*tan(1/2*th0))
+solves d(theta)/dt = -sin(theta): True
+Phi_0 = id: True
+Phi_s(Phi_t(theta0)) = Phi_{s+t}(theta0): True
+from the equator (theta0 = pi/2): theta(t) = 2*arctan(e^(-t)) ; theta(1) = 2*arctan(exp(-1)) = 0.705027
+limit t -> +oo: 0 (north pole);  limit t -> -oo: pi (south pole)

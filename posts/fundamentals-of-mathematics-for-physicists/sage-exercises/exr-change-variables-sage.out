@@ -1,0 +1,3 @@
+Jacobians: linear map a*b ; elliptic polar a*b*r
+area of the ellipse: ab * (area of unit disc) = pi*a*b ; by elliptic polar coordinates: pi*a*b
+spherical Jacobian: r^2*sin(theta) ; volume of the unit ball: 4/3*pi

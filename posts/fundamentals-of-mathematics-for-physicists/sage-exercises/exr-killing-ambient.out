@@ -1,0 +1,3 @@
+K_1 = (-sin(ph)) d_theta + (-cos(ph)*cot(th)) d_phi ;  tangent to the sphere: True
+K_2 = (cos(ph)) d_theta + (-cot(th)*sin(ph)) d_phi ;  tangent to the sphere: True
+K_3 = (0) d_theta + (1) d_phi ;  tangent to the sphere: True

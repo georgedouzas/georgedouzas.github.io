@@ -1,0 +1,7 @@
+E_u = 4*lam*u(t, x)^3 + 4*lam*u(t, x)*v(t, x)^2 + 2*m^2*u(t, x) + 2*diff(u(t, x), t, t) - 2*diff(u(t, x), x, x)
+d_mu j^mu = v E_u - u E_v identically: True
+nu = t: d_mu T^{mu nu} = E_u d^nu u + E_v d^nu v identically: True
+nu = x: d_mu T^{mu nu} = E_u d^nu u + E_v d^nu v identically: True
+T^{tt} = lam*u(t, x)^4 + 2*lam*u(t, x)^2*v(t, x)^2 + lam*v(t, x)^4 + m^2*u(t, x)^2 + m^2*v(t, x)^2 + diff(u(t, x), t)^2 + diff(u(t, x), x)^2 + diff(v(t, x), t)^2 + diff(v(t, x), x)^2  (a sum of squares plus V >= 0)
+for phi = A exp(-i w t): E_u = 2*(2*A^2*lam + m^2 - w^2)*A*cos(t*w)   vanishes iff w^2 = m^2 + 2 lam A^2
+its charge density j^0 = 2*A^2*w (constant), and T^{tt} = A^4*lam + A^2*m^2 + A^2*w^2

@@ -1,0 +1,4 @@
+lim (3*n^2 + 1)/(n^2 - 5) = 3 ; expected 3 : True
+lim n*sin(1/n) = 1 ; expected 1 : True
+lim -n + sqrt(n^2 + n) = 1/2 ; expected 1/2 : True
+lim factorial(n)^(1/n)/n = e^(-1) ; expected e^(-1) : True

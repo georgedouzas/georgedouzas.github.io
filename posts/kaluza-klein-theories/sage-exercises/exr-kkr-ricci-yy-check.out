@@ -1,0 +1,4 @@
+R_yy for eta - phi(t,x)^2 dy^2: phi(t, x)*diff(phi(t, x), t, t) - phi(t, x)*diff(phi(t, x), x, x)
+[PASS] R_yy = phi Box phi for A = 0: True
+R_yy for the electric field: -1/2*B^2
+[PASS] R_yy = (1/4) F^2 = -B^2/2 for phi = 1, F_{tx} = B: True

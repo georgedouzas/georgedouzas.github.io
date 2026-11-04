@@ -1,0 +1,18 @@
+bibliography: references.bib
+sidebar: fundamentals-of-theoretical-physics
+page-navigation: true
+toc: true
+toc-depth: 3
+number-sections: false
+html-math-method:
+  method: katex
+  url: https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/
+css: styles.css
+code-copy: true
+shortcodes:
+  - lean.lua
+  - exercise.lua
+  - interactive.lua
+filters:
+  - at: pre-ast
+    path: cross-references.lua

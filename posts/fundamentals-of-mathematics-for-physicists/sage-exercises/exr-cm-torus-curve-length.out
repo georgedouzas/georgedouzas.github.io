@@ -1,0 +1,7 @@
+Gram matrix: [1, 0, 0, cos(a)^2 + 4*cos(a) + 4]
+length of a tube circle, integral of sqrt(G_aa) over a in (0, 2 pi): 2*pi
+axis circles at a = 0 (outer equator) and a = pi (inner equator): 6*pi 2*pi
+speed squared along (t, 2t): 4*cos(t)^2 + 16*cos(t) + 17
+agrees with |dE/dt|^2 computed in R^3: True
+length of the closed curve (t, 2t): 26.01350893229216  (error estimate 2.888079656792293e-13 )
+bounds 2 pi sqrt(1 + 4 (R - r)^2) <= L <= 2 pi sqrt(1 + 4 (R + r)^2): 14.0496294620815 <= 26.01350893229216 <= 38.2191241574323

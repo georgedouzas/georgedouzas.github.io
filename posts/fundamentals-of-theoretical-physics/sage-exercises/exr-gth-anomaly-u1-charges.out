@@ -1,0 +1,5 @@
+n = 5: 2 chiral anomaly-free sets, e.g. [(-9, -5, -1, 7, 8), (-8, -7, 1, 5, 9)]
+[PASS] no chiral anomaly-free set exists with 2, 3 or 4 fermions of charges |q| <= 9: True
+[PASS] (1, 5, -7, -8, 9) is a chiral anomaly-free set of five fermions: True
+    sum q = 0   sum q^3 = 0
+[PASS] for three charges summing to zero, sum q^3 = 3 q1 q2 q3, which vanishes only if a charge is zero: True

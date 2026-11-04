@@ -1,0 +1,7 @@
+critical points: [
+r == -sqrt(1/2)*m/sqrt(lam),
+r == sqrt(1/2)*m/sqrt(lam),
+r == 0
+]
+minimum at r0 = m/sqrt(2 lam); V(r0) = -1/4*m^4/lam ; second derivative: 4*m^2
+completed square: V = lam (r^2 - mu^2)^2 - lam mu^4 with mu^2 = m^2/(2 lam): True

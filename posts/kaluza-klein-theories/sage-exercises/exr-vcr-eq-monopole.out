@@ -1,0 +1,4 @@
+a_p = -I*p*x2/(x1^2 + x2^2 + 1) dx1 + I*p*x1/(x1^2 + x2^2 + 1) dx2
+f_p = d a_p = 2*I*p/(x1^4 + x2^4 + 2*(x1^2 + 1)*x2^2 + 2*x1^2 + 1) dx1∧dx2
+integral of f_p over the plane (orientation dx1 ^ dx2) = 2*I*pi*p ; (i/2 pi) times it = -p
+f_p = -p/(1 + y ybar)^2 dy ^ dybar: True

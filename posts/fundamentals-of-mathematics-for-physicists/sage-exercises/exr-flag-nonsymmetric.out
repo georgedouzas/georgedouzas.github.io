@@ -1,0 +1,5 @@
+[r, r] in r: True
+[r, k] in k (reductive): True
+[k, k] in r (symmetric)? False
+[lambda_1, lambda_4] = i lambda_7: True  -> a coset direction: the coset is not symmetric
+for the sphere SO(3)/SO(2), by contrast, [L_1, L_2] = L_3 lies in r: symmetric

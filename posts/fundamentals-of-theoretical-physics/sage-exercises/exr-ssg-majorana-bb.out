@@ -1,0 +1,13 @@
+d =  2 (d mod 8 = 2): (sign s, B^* B) = [(-1, 1), (1, 1)]
+d =  3 (d mod 8 = 3): (sign s, B^* B) = [(-1, 1)]
+d =  4 (d mod 8 = 4): (sign s, B^* B) = [(-1, 1), (1, -1)]
+d =  5 (d mod 8 = 5): (sign s, B^* B) = [(1, -1)]
+d =  6 (d mod 8 = 6): (sign s, B^* B) = [(-1, -1), (1, -1)]
+d =  7 (d mod 8 = 7): (sign s, B^* B) = [(-1, -1)]
+d =  8 (d mod 8 = 0): (sign s, B^* B) = [(-1, -1), (1, 1)]
+d =  9 (d mod 8 = 1): (sign s, B^* B) = [(1, 1)]
+d = 10 (d mod 8 = 2): (sign s, B^* B) = [(-1, 1), (1, 1)]
+d = 11 (d mod 8 = 3): (sign s, B^* B) = [(-1, 1)]
+dimensions with B^* B = +1 for some B, so that a Majorana condition exists: [2, 3, 4, 8, 9, 10, 11]
+[PASS] Majorana spinors exist exactly for d = 2, 3, 4, 8, 9, 10, 11 among d = 2..11 (d mod 8 in {0, 1, 2, 3, 4}): True
+[PASS] in d = 4, 10, 11 a B with B^* B = +1 exists (four-dimensional Majorana, ten-dimensional Majorana-Weyl, eleven-dimensional Majorana): True

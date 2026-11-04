@@ -1,0 +1,3 @@
+non-zero first-kind symbols Gamma_kij (i <= j): {('th', 'ph', 'ps'): 1/8*sin(th), ('ph', 'th', 'ps'): -1/8*sin(th), ('ps', 'th', 'ph'): -1/8*sin(th)}
+Gamma_th,ph,ps = sin(th)/8: True
+Gamma_kij + Gamma_ikj = d_j g_ik for all 27 index triples: True

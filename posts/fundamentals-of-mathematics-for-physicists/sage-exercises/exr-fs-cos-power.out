@@ -1,0 +1,4 @@
+cos^4 x = 1/8*cos(4*x) + 1/2*cos(2*x) + 3/8
+sin^3 x = -1/4*sin(3*x) + 3/4*sin(x)
+cos^4 x = 3/8 + cos(2x)/2 + cos(4x)/8: True
+sin^3 x = 3 sin(x)/4 - sin(3x)/4: True

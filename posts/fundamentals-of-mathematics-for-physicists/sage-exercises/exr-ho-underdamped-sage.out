@@ -1,0 +1,4 @@
+desolve: 1/19*(sqrt(19)*sin(1/2*sqrt(19)*t) + 19*cos(1/2*sqrt(19)*t))*e^(-1/2*t)
+gamma = 1/2, omega_d = sqrt(5 - 1/4) = 1/2*sqrt(19)
+desolve's solution equals the claimed closed form: True
+claimed form satisfies the equation and the initial data: True True True

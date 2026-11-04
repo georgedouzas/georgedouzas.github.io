@@ -1,0 +1,7 @@
+Jacobian:
+[ 2*b1  2*b2  2*a1  2*a2]
+[-2*b2  2*b1  2*a2 -2*a1]
+[ 2*a1  2*a2 -2*b1 -2*b2]
+J (fibre direction) = 0 everywhere: True
+J (radial direction) = 2 P(a, b), twice the image point, normal to S^2: True
+rank of J on the tangent space of S^3 at 20 random points: {2}

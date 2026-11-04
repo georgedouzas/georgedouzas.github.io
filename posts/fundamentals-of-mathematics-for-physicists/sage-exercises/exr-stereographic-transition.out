@@ -1,0 +1,7 @@
+transition map: up = u/(u^2 + v^2)
+vp = v/(u^2 + v^2)
+its inverse is the same formula: u = up/(up^2 + vp^2)
+v = vp/(up^2 + vp^2)
+Jacobian determinant: -1/(u^2 + v^2)^2
+the inverse north chart lands on the sphere, X^2 + Y^2 + Z^2 = 1: True
+and the south-chart coordinates of that point, (X, Y)/(1 + Z), are the inversion: True

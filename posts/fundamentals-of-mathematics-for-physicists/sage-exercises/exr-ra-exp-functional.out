@@ -1,0 +1,4 @@
+E_N(x + y) - E_N(x) E_N(y) has no terms of total degree <= N: True (the mismatch is only in the truncated tail)
+derivative of the truncation: E_N'(x) - E_{N-1}(x) = 0 (equal up to the dropped term)
+exact: the Cauchy product coefficient sum_{i+j=n} 1/(i! j!) = 2^n/n! for n = 0..6: [True, True, True, True, True, True, True]
+so E(1)^2 = sum 2^n/n! = E(2) = e^2: True

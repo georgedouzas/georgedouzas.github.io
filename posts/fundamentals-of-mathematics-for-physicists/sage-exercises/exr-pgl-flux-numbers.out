@@ -1,0 +1,6 @@
+inward flux through the sphere of radius R: (R + 1)*e^(-R)
+R = 1/10 : flux = 0.995321159839556 | Coulomb flux = 1
+R = 1 : flux = 0.735758882342885 | Coulomb flux = 1
+R = 5 : flux = 0.0404276819945128 | Coulomb flux = 1
+screening charge within R: -(R - e^R + 1)*e^(-R)
+flux + screening charge = 1: True

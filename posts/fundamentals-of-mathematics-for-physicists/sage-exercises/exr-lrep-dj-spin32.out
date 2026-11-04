@@ -1,0 +1,17 @@
+j = 3/2: amplitudes <m|d(theta)|j>, m = [3/2, 1/2, -1/2, -3/2]:
+    3/2 : 1/4*cos(3/2*th) + 3/4*cos(1/2*th)
+    1/2 : -1/4*I*sqrt(3)*sin(3/2*th) - 1/4*I*sqrt(3)*sin(1/2*th)
+    -1/2 : 1/4*sqrt(3)*cos(3/2*th) - 1/4*sqrt(3)*cos(1/2*th)
+    -3/2 : -1/4*I*sin(3/2*th) + 3/4*I*sin(1/2*th)
+   probabilities = binomial(2j, j-m) cos^{2(j+m)} sin^{2(j-m)}: True ; they sum to 1: True
+    amplitude at theta = 2 pi: [-1, 0, 0, 0] ; at 4 pi: [1, 0, 0, 0]
+    probabilities at theta = pi/2: [1/8, 3/8, 3/8, 1/8] ; at pi: [0, 0, 0, 1]
+j = 2: amplitudes <m|d(theta)|j>, m = [2, 1, 0, -1, -2]:
+    2 : 1/4*cos(th)^2 + 1/2*cos(th) + 1/4
+    1 : -1/2*(I*cos(th) + I)*sin(th)
+    0 : -1/4*sqrt(6)*sin(th)^2
+    -1 : -1/2*(I*cos(th) - I)*sin(th)
+    -2 : 1/4*cos(th)^2 - 1/2*cos(th) + 1/4
+   probabilities = binomial(2j, j-m) cos^{2(j+m)} sin^{2(j-m)}: True ; they sum to 1: True
+    amplitude at theta = 2 pi: [1, 0, 0, 0, 0] ; at 4 pi: [1, 0, 0, 0, 0]
+    probabilities at theta = pi/2: [1/16, 1/4, 3/8, 1/4, 1/16] ; at pi: [0, 0, 0, 0, 1]

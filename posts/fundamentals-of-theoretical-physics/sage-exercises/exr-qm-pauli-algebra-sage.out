@@ -1,0 +1,3 @@
+sigma_i sigma_j = delta_ij + i eps_ijk sigma_k for all i, j: True
+(a.sigma)(b.sigma) - a.b - i (a x b).sigma = [0, 0, 0, 0]
+traces: [0, 0, 0]  determinants: [-1, -1, -1]

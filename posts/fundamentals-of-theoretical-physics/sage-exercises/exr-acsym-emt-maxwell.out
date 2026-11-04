@@ -1,0 +1,4 @@
+T^{00} = (E^2 + B^2)/2: True
+T^{0i} = (E x B)_i, the Poynting vector: True
+T^{ij} = -E_i E_j - B_i B_j + delta_ij (E^2 + B^2)/2, the Maxwell stress: True
+symmetric: True ; traceless, eta_{mu nu} T^{mu nu} = 0

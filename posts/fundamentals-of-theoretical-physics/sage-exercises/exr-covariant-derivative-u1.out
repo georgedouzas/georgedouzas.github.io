@@ -1,0 +1,4 @@
+D_mu phi transforms covariantly: True
+the kinetic Lagrangian (D phi)-bar . D phi is gauge invariant: True
+the coefficient of A_mu in the expanded Lagrangian (the current coupled to A): [-2*v(t, x)*diff(u(t, x), t) + 2*u(t, x)*diff(v(t, x), t), 2*v(t, x)*diff(u(t, x), x) - 2*u(t, x)*diff(v(t, x), x)]
+it is -j^mu with j^mu the Noether current i(phibar d^mu phi - phi d^mu phibar) = 2(v d^mu u - u d^mu v): True ; the A^2 'seagull' term is left over

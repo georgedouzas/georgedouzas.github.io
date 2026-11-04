@@ -1,0 +1,6 @@
+J =
+ [ cos(y)*e^x -e^x*sin(y)]
+[ e^x*sin(y)  cos(y)*e^x]
+det J = e^(2*x)
+J^T J = e^(2x) * identity: True
+J == e^x * rotation(y): True

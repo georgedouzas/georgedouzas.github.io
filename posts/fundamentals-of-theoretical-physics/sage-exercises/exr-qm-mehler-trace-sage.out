@@ -1,0 +1,3 @@
+trace = 1/2*sqrt(2)*sqrt(pi)*sqrt(m*w/(pi*hbar*sinh(tau*w)))/sqrt((m*w*e^(tau*w) - m*w)/(hbar*e^(tau*w) + hbar))
+trace * 2 sinh(w tau/2) = 1
+(-hbar K_tau - H K)/K = 0

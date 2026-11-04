@@ -1,0 +1,2 @@
+Euler-Lagrange expression: m^2*phi(t, x, y, z) + diff(phi(t, x, y, z), t, t) - diff(phi(t, x, y, z), x, x) - diff(phi(t, x, y, z), y, y) - diff(phi(t, x, y, z), z, z)
+equals (box phi + m^2 phi), the Klein-Gordon equation (Box + m^2) phi = 0: True

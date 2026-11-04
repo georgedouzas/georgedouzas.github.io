@@ -1,0 +1,5 @@
+Jacobian matrix: [(cos(ph), -r*sin(ph)), (sin(ph), r*cos(ph))]
+det J = r  -> nonzero exactly for r != 0
+inverse Jacobian at (r, ph) = (2, pi/3): [(1/2, 1/2*sqrt(3)), (-1/4*sqrt(3), 1/4)]
+chain rule: J_G(F(r,ph)) J_F(r,ph) = identity (for r > 0): True
+so J_G at F(r, ph) is the inverse Jacobian: [(cos(ph), sin(ph)), (-sin(ph)/r, cos(ph)/r)]

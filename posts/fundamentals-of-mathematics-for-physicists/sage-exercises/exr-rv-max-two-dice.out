@@ -1,0 +1,6 @@
+pmf of the maximum: {1: 1/36, 2: 1/12, 3: 5/36, 4: 7/36, 5: 1/4, 6: 11/36}
+matches (2m - 1)/36: True
+distribution function: {1: 1/36, 2: 1/9, 3: 1/4, 4: 4/9, 5: 25/36, 6: 1}
+matches m^2/36: True
+P(M = 6) = 11/36 ; P(S = 7) = 1/6
+E[M] = 161/36

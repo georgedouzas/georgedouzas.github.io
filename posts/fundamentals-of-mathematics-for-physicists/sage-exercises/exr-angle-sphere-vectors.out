@@ -1,0 +1,8 @@
+cos of the angle between X and Y: cos(th)^2/(sin(th)^2 + 1)
+|X| = |Y| = sqrt(sin(th)^2 + 1)
+theta = 1/6*pi : cos = 3/5 ; angle = 0.92729 rad
+theta = 1/4*pi : cos = 1/3 ; angle = 1.2310 rad
+theta = 1/2*pi : cos = 0 ; angle = 1.5708 rad
+orthogonal exactly where the numerator cos(theta)^2 vanishes: [
+th == 1/2*pi
+]

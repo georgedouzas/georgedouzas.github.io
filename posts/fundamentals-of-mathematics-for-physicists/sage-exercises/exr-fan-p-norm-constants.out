@@ -1,0 +1,3 @@
+p = 1, q = 2: constant sqrt(3); |x|_p = 3, c |x|_q = 3
+p = 2, q = +Infinity: constant sqrt(3); |x|_p = sqrt(3), c |x|_q = sqrt(3)
+both inequalities on 500 random vectors and four pairs (p, q): True

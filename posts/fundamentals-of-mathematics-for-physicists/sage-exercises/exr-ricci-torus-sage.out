@@ -1,0 +1,4 @@
+Ricci tensor: Ric(g) = r*cos(a)/(r*cos(a) + R) da⊗da + (r*cos(a)^2 + R*cos(a))/r db⊗db
+R_aa = r^2 K: True ; R_bb = (R + r cos a)^2 K: True ; R_ab = 0: True
+Ric = K g: True
+Ric is not a constant multiple of g: K at a = 0 is 1/((R + r)*r) and at a = pi it is -1/((R - r)*r)

@@ -1,0 +1,5 @@
+-d_i d_j Phi at (r, 0, 0) = [2*G*M/r^3         0         0]
+[        0  -G*M/r^3         0]
+[        0         0  -G*M/r^3]
+equals G M / r^3 diag(2, -1, -1): True ; trace (Laplacian, zero in vacuum): 0
+tidal stretch over 2 m at 400 km altitude: 5.14e-06 m/s^2

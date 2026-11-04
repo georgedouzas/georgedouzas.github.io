@@ -1,0 +1,7 @@
+sqrt(det G_euler) = sin(theta)/8 on 0 < theta < pi: True
+volume from the Euler angles: 2*pi^2
+Gram matrix of the stereographic chart of S^3 is 4/(1 + rho^2)^2 times the identity: True
+det G = 64/(u^2 + v^2 + w^2 + 1)^6
+sqrt(det G) = 8/(1 + rho^2)^3: True
+volume from the stereographic chart: 2*pi^2
+the two charts agree, vol(S^3) = 2 pi^2: True

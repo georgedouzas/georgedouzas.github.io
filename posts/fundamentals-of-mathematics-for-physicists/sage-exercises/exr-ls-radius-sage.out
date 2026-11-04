@@ -1,0 +1,7 @@
+sphere metric: g = R^2 dth⊗dth + R^2*sin(th)^2 dph⊗dph
+l = 0: Laplacian of Y_l0 = 0 ; = -l(l+1)/R^2 Y_lm for all m: True
+l = 1: Laplacian of Y_l0 = -sqrt(3)*cos(th)/(sqrt(pi)*R^2) ; = -l(l+1)/R^2 Y_lm for all m: True
+l = 2: Laplacian of Y_l0 = 3/2*(3*sqrt(5)*sin(th)^2 - 2*sqrt(5))/(sqrt(pi)*R^2) ; = -l(l+1)/R^2 Y_lm for all m: True
+torus metric: g = R1^2 da⊗da + R2^2 db⊗db
+Laplacian of e^{i(2 theta + 3 phi)} = -(9*R1^2 + 4*R2^2)*e^(2*I*a + 3*I*b)/(R1^2*R2^2)
+= -(m^2/R1^2 + n^2/R2^2) e^{i(m theta + n phi)} for |m|, |n| <= 3: True

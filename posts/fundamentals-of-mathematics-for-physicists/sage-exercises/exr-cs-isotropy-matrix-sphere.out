@@ -1,0 +1,5 @@
+dh_o on T_o S^2 in the basis (e_1, e_2): [(cos(t), -sin(t)), (sin(t), cos(t))]
+Ad_h on k in the basis (L_1, L_2): [(cos(t), -sin(t)), (sin(t), cos(t))]
+L_1 . o = [0, -1, 0]  L_2 . o = [1, 0, 0]
+h (X . o) = (Ad_h X) . o for X = L_1, L_2: True
+both matrices are rotations by the angle t (determinant 1): True

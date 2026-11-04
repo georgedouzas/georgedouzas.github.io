@@ -1,0 +1,8 @@
+spherical coordinates: g = drho⊗drho + rho^2 dth⊗dth + rho^2*sin(th)^2 dph⊗dph
+matrix:
+[              1               0               0]
+[              0           rho^2               0]
+[              0               0 rho^2*sin(th)^2]
+determinant: rho^4*sin(th)^2  -> volume element rho^2 sin(theta)
+inverse metric: inv_g = ∂/∂rho⊗∂/∂rho + rho^(-2) ∂/∂th⊗∂/∂th + 1/(rho^2*sin(th)^2) ∂/∂ph⊗∂/∂ph
+cylindrical coordinates: g = dr⊗dr + r^2 dph⊗dph + dz⊗dz ; det = r^2 ; inverse: inv_g = ∂/∂r⊗∂/∂r + r^(-2) ∂/∂ph⊗∂/∂ph + ∂/∂z⊗∂/∂z

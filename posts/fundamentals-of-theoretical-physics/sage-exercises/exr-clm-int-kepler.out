@@ -1,0 +1,6 @@
+E: initial -0.680000, spread 2.4e-10
+L: initial 0.800000, spread 1.4e-10
+A: initial (-0.360000, -0.000000), spread 2.8e-10
+e = |A| = 0.360000, p = L^2 = 0.640000, e^2 = 1 + 2 E L^2: True
+max |r (1 + e cos(phi - pi)) - p| along the orbit: 2.5e-10
+semi-major axis p/(1 - e^2) = 0.735294, 1/(2|E|) = 0.735294

@@ -1,0 +1,3 @@
+phi(z) = -1/2*sigma*z + 1/2*sqrt(a^2 + z^2)*sigma
+phi at the centre: 1/2*a*sigma
+-dphi/dz equals sigma/2 (1 - z/sqrt(z^2+a^2)): True

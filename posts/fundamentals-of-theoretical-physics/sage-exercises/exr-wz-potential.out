@@ -1,0 +1,6 @@
+auxiliary field equations: F = -1/2*phis^2*y - m*phis , F* = -1/2*phi^2*y - m*phi
+scalar potential V = -L_aux on the solution = 1/4*(phi*y + 2*m)*(phis*y + 2*m)*phi*phis
+[PASS] F = -W'^* and V = |W'|^2 = |m phi + y phi^2/2|^2: True
+[PASS] V vanishes at phi = 0 and phi = -2m/y, the supersymmetric vacua: True
+[PASS] the scalar mass squared (coefficient of |phi|^2 in V) equals the fermion mass squared |W''(0)|^2 = m^2: True
+Yukawa coupling W'''(phi) = y, the same y that appears in the quartic |y phi^2/2|^2 term of V: y

@@ -1,0 +1,11 @@
+each product sigma_A sigma_B is +sigma_C or -sigma_C: True
+            1      s1      s2      s3     s12     s13     s23    s123
+1          +1     +s1     +s2     +s3    +s12    +s13    +s23   +s123
+s1        +s1      +1    +s12    +s13     +s2     +s3   +s123    +s23
+s2        +s2    -s12      +1    +s23     -s1   -s123     +s3    -s13
+s3        +s3    -s13    -s23      +1   +s123     -s1     -s2    +s12
+s12      +s12     -s2     +s1   +s123      -1    -s23    +s13     -s3
+s13      +s13     -s3   -s123     +s1    +s23      -1    -s12     +s2
+s23      +s23   +s123     -s3     +s2    -s13    +s12      -1     -s1
+s123    +s123    +s23    -s13    +s12     -s3     +s2     -s1      -1
+central basis elements: ['1', 's123'] ; s1 s2 s3 = [I, 0, 0, I]

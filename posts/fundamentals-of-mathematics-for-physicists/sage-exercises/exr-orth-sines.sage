@@ -1,0 +1,10 @@
+# Exercise exr-orth-sines: the Gram matrices <sin mx, sin nx> (m, n = 1..4) and <cos mx, cos nx> (m, n = 0..3) on [0, pi].
+x = var("x")
+S = matrix(SR, 4, 4, lambda i, j: integrate(sin((i + 1) * x) * sin((j + 1) * x), x, 0, pi))
+C = matrix(SR, 4, 4, lambda i, j: integrate(cos(i * x) * cos(j * x), x, 0, pi))
+print("sine Gram matrix:")
+print(S)
+print("cosine Gram matrix (m, n = 0..3):")
+print(C)
+print("sine matrix is (pi/2) times the identity:", bool(S == pi / 2 * identity_matrix(4)))
+print("cosine matrix is diagonal with <1, 1> = pi and the rest pi/2:", bool(C == diagonal_matrix([pi, pi / 2, pi / 2, pi / 2])))

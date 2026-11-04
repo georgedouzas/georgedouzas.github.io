@@ -1,0 +1,4 @@
+x =  0.5: <cos theta> = 0.2425, I_1/I_0 = 0.2425; acceptance 0.6447, exp(-x) I_0(x) = 0.6450
+x =  2.0: <cos theta> = 0.6983, I_1/I_0 = 0.6978; acceptance 0.3074, exp(-x) I_0(x) = 0.3085
+x = 10.0: <cos theta> = 0.9488, I_1/I_0 = 0.9486; acceptance 0.1273, exp(-x) I_0(x) = 0.1278
+numpy von Mises draw at x = 10: <cos> = 0.9482

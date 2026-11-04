@@ -1,0 +1,3 @@
+n = 0 : transform = sqrt(2)*sqrt(pi)*e^(-1/2*k^2) ; equals sqrt(2 pi) (-i)^n h(k): True
+n = 1 : transform = -I*sqrt(2)*sqrt(pi)*k*e^(-1/2*k^2) ; equals sqrt(2 pi) (-i)^n h(k): True
+n = 2 : transform = -sqrt(pi)*(2*sqrt(2)*k^2 - sqrt(2))*e^(-1/2*k^2) ; equals sqrt(2 pi) (-i)^n h(k): True

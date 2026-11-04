@@ -1,0 +1,4 @@
+circular orbit: L^2 = -m*r0^2/(3*m - r0)
+(T_r/T_phi)^2 = -r0/(6*m - r0)   equals 1/(1 - 6m/r0): True
+perihelion advance per orbit to first order in m/r0: 6*pi*m/r0
+Mercury: 6 pi GM/(c^2 a) per orbit = 4.807e-07 rad (a = 5.79e10 m)

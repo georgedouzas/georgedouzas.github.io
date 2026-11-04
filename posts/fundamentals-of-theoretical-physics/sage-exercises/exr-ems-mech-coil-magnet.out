@@ -1,0 +1,7 @@
+F_z = -3/2*I*a^2*m*z/((a^4 + 2*a^2*z^2 + z^4)*sqrt(a^2 + z^2))
+extremum at [
+z == 1/2*a,
+z == -I*a,
+z == I*a
+]
+F_z(a/2) = -24/125*sqrt(5)*I*m/a^2 ; equals -24 m I/(25 sqrt5 a^2): True

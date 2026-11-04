@@ -1,0 +1,3 @@
+T^{tt} = 1/2*diff(phi(t, x), t)^2 + 1/2*diff(phi(t, x), x)^2 + V(phi(t, x))
+nu = t: d_mu T^{mu nu} = (Box phi + V'(phi)) d^nu phi: True
+nu = x: d_mu T^{mu nu} = (Box phi + V'(phi)) d^nu phi: True

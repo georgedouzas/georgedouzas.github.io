@@ -1,0 +1,8 @@
+3 x 3 x 3 = A2(0,0) + 2*A2(1,1) + A2(3,0)  (A2(3,0) = 10, A2(1,1) = 8, A2(0,0) = 1)
+weights of 10 (each multiplicity {1} ): [(3, sqrt(3)), (1, sqrt(3)), (-1, sqrt(3)), (-3, sqrt(3)), (2, 0), (0, 0), (-2, 0), (1, -sqrt(3)), (-1, -sqrt(3)), (0, -2*sqrt(3))]
+highest weight (3, sqrt(3)) = 3 omega_1 = 3 (1, 1/sqrt3): True
+  lambda_8 = sqrt(3): lambda_3 weights [3, 1, -1, -3] -> spin 3/2
+  lambda_8 = 0: lambda_3 weights [2, 0, -2] -> spin 1
+  lambda_8 = -sqrt(3): lambda_3 weights [1, -1] -> spin 1/2
+  lambda_8 = -2*sqrt(3): lambda_3 weights [0] -> spin 0
+Sage levi branching of 10: A1(0) + A1(1) + A1(2) + A1(3)

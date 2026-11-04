@@ -1,0 +1,4 @@
+[PASS] Q |n-1, 1> = sqrt(n omega) |n, 0> for n = 1..5: True
+[PASS] Q |n, 0> = 0 and Q^dag |n, 1> = 0 for every n: True
+[PASS] Q^dag Q |n-1, 1> = H |n-1, 1> = n omega |n-1, 1>: True
+[PASS] Q Q^dag |n, 0> = H |n, 0> = n omega |n, 0> below the truncation: True

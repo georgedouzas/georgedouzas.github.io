@@ -1,0 +1,8 @@
+Faraday dz Ex + dt By = 0: True
+divergences vanish: Ex depends on z only, By depends on z only
+Ampere-Maxwell residual: (epsilon*mu*omega^2 - k^2)*(cos(k*z)*sin(omega*t) - cos(omega*t)*sin(k*z))*E0/(mu*omega)
+condition: [
+k == -sqrt(epsilon*mu)*omega,
+k == sqrt(epsilon*mu)*omega,
+sin(k*z) == cos(k*z)*sin(omega*t)/cos(omega*t)
+]

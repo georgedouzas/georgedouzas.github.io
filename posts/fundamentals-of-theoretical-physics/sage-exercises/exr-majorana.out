@@ -1,0 +1,10 @@
+[PASS] {gamma^mu, gamma^nu} = 2 eta^{mu nu} with eta = diag(1, -1, -1, -1): True
+C = gamma^0 gamma^2 =
+[ 0  I  0  0]
+[-I  0  0  0]
+[ 0  0  0 -I]
+[ 0  0  I  0]
+[PASS] C gamma^mu C^{-1} = -(gamma^mu)^T for mu = 0, 1, 2, 3: True
+[PASS] C^T = -C: True
+[PASS] gamma^{mu nu rho} is totally antisymmetric and gamma^{012} = gamma^0 gamma^1 gamma^2: True
+[PASS] gamma^{mu nu rho} d_nu d_rho eps = 0 for every mu (gauge invariance of the Rarita-Schwinger operator): True

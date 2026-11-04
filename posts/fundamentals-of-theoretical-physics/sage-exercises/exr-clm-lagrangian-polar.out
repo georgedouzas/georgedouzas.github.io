@@ -1,0 +1,2 @@
+L = 1/2*m*r(t)^2*diff(phi(t), t)^2 + 1/2*m*diff(r(t), t)^2 - V(r(t))
+L == m/2 (r'^2 + r^2 phi'^2) - V(r): True

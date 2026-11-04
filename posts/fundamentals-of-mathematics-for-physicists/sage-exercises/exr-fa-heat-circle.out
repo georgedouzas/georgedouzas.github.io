@@ -1,0 +1,6 @@
+t = 0.100000000000000 x = 0 : Fourier = 0.892062058076 ; images = 0.892062058076 ; agree: True ; error of 7 Fourier terms 0.10 ; of 3 images 0.00
+t = 0.100000000000000 x = 1 : Fourier = 0.0732249128097 ; images = 0.0732249128096 ; agree: True ; error of 7 Fourier terms 0.025 ; of 3 images 0.00
+t = 0.100000000000000 x = 3 : Fourier = 1.52680845490e-10 ; images = 1.50927794290e-10 ; agree: True ; error of 7 Fourier terms 0.039 ; of 3 images 0.00
+t = 1 x = 0 : Fourier = 0.282123973457 ; images = 0.282123973457 ; agree: True ; error of 7 Fourier terms 3.6e-8 ; of 3 images 0.00
+t = 1 x = 1 : Fourier = 0.219959091781 ; images = 0.219959091781 ; agree: True ; error of 7 Fourier terms 2.3e-8 ; of 3 images 0.00
+t = 1 x = 3 : Fourier = 0.0487892337662 ; images = 0.0487892337662 ; agree: True ; error of 7 Fourier terms 3.0e-8 ; of 3 images 3.3e-11

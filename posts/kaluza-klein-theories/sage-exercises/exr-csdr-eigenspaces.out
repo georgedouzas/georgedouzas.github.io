@@ -1,0 +1,10 @@
+eigenvalue +i: free entries [x02, x12]
+eigenvalue -i: free entries [x20, x21]
+eigenvalue 0: free entries [x00, x01, x10, x11, x22]
+[PASS] the +i eigenspace is spanned by E_13, E_23: True
+[PASS] the kernel (the centraliser algebra) is block diagonal, 5 complex entries = 4 real dimensions in su(3): True
+phi_+ = phi_1 - i phi_2 on the solution:
+[       0        0 -2*I*r18]
+[       0        0    2*r17]
+[       0        0        0]
+[PASS] phi_+ has only the entries (1,3) and (2,3): a complex doublet: True

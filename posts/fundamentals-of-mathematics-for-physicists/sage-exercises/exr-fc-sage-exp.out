@@ -1,0 +1,8 @@
+e^{iA} from U diag(e^{i lambda}) U^T =
+[1/2*cos(3) + 1/2*cos(1) + 1/2*I*sin(3) + 1/2*I*sin(1) 1/2*cos(3) - 1/2*cos(1) + 1/2*I*sin(3) - 1/2*I*sin(1)]
+[1/2*cos(3) - 1/2*cos(1) + 1/2*I*sin(3) - 1/2*I*sin(1) 1/2*cos(3) + 1/2*cos(1) + 1/2*I*sin(3) + 1/2*I*sin(1)]
+agrees with the matrix exponential: True
+unitary: True ; det(e^{iA} - e^{3i}) and det(e^{iA} - e^{i}) vanish: [True, True]
+e^{itA} = e^{2it}(cos t + i sin t sigma_1) for symbolic t: True
+det e^{iA} = e^{4i} = e^{i tr A}: True
+(sqrt A)^2 = A: True ; sqrt A positive (eigenvalues): [sqrt(3), 1]

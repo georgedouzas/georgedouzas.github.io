@@ -1,0 +1,5 @@
+exp(t L_3) o = [0, 0, 1]  -> the pole is fixed: the isotropy group contains all rotations about Z
+exp(phi L_3) exp(theta L_1) o = [sin(ph)*sin(th), -cos(ph)*sin(th), cos(th)]
+= (sin th sin ph?, ...) matches a point of the sphere with colatitude theta: True
+every point of the sphere is reached (transitive): choose theta, phi as its spherical coordinates
+the coset of g is {g h : h = exp(t L_3)}: all these send o to the same point: True

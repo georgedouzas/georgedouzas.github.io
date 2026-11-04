@@ -1,0 +1,6 @@
+Z_12/<4>: 4 cosets with representatives [0, 1, 2, 3] ; product well defined: True
+   the coset of 1 has order 4 in the quotient
+Z_12/<6>: 6 cosets with representatives [0, 1, 2, 3, 4, 5] ; product well defined: True
+   the coset of 1 has order 6 in the quotient
+Sage: C_12/<g^4> has order 4, cyclic: True
+Sage: C_12/<g^6> has order 6, cyclic: True

@@ -1,0 +1,4 @@
+integrate: (1/2*I + 1/2)*sqrt(2)*sqrt(pi) = 1.25331413731550 + 1.25331413731550*I
+rotation e^{i pi/4} sqrt(pi) = (1/2*I + 1/2)*sqrt(2)*sqrt(pi) = 1.25331413731550 + 1.25331413731550*I
+agree: True
+real and imaginary parts (the Fresnel integrals of cos t^2 and sin t^2): 1/2*sqrt(2)*sqrt(pi) 1/2*sqrt(2)*sqrt(pi)

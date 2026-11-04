@@ -1,0 +1,4 @@
+Taylor |z|<1       at z = 0.500000000000000: partial sum 1.33333237965917, f = 1.33333333333333, error 9.54e-07
+annulus 1<|z|<2    at z = 1.50000000000000*I: partial sum -0.0129710423520302 + 0.222160754560811*I, f = -0.0123076923076923 + 0.221538461538462*I, error 9.10e-04
+outer |z|>2        at z = 3: partial sum 0.499699271483577, f = 0.500000000000000, error 3.01e-04
+Taylor series used at z = 3 (outside its disc): 5.23017161411490e9  while f(3) = 1/2

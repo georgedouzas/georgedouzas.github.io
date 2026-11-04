@@ -1,0 +1,9 @@
+M is Hermitian: True
+<u, M u> = 2*u1*conjugate(u1) + I*u2*conjugate(u1) - I*u1*conjugate(u2) + 2*u2*conjugate(u2) + I*u3*conjugate(u2) - I*u2*conjugate(u3) + 2*u3*conjugate(u3) ; imaginary part: 0
+B =
+[  1 5/2]
+[5/2   0]
+C =
+[     0  1/2*I]
+[-1/2*I      4]
+B, C Hermitian: True True ; B + iC = N: True

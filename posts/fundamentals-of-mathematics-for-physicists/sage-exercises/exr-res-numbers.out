@@ -1,0 +1,7 @@
+resonance frequency omega_r = 1/2*sqrt(7/2) = 0.935414346693485
+A(omega_r) = 8/15*sqrt(5)*sqrt(3) = 2.06559111797729
+A(omega_0) = 2 = 1/(2 gamma omega_0): True
+the derivative of A^2 vanishes at omega_r: True
+phase lag at omega = 1/2 : arctan(1/3) = 0.321750554396642
+phase lag at omega = 1 : 1/2*pi = 1.57079632679490
+phase lag at omega = 2 : pi - arctan(1/3) = 2.81984209919315

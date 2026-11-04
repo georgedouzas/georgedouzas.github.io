@@ -1,0 +1,5 @@
+a_0 = 2/3*pi^2 ; a_n = 4*(-1)^n/n^2 ; b_n = 0
+a_n = 4 (-1)^n / n^2 for n = 1..4: [-4, 1, -4/9, 1/4]
+series at x = pi: pi^2 = pi^2: True so zeta(2) = (pi^2 - pi^2/3)/4 = 1/6*pi^2
+Parseval: (1/pi) int x^4 = 2/5*pi^4 ; a_0^2/2 + sum a_n^2 = 2/5*pi^4 ; equal: True
+hence zeta(4) = (2 pi^4/5 - 2 pi^4/9)/16 = 1/90*pi^4 = pi^4/90: True

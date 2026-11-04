@@ -1,0 +1,3 @@
+Delta S = C*log(1/4*(T_1 + T_2)^2/(T_1*T_2)) ; exp(Delta S/C) - 1 = 1/4*(T_1 - T_2)^2/(T_1*T_2)
+numerical check T_1 = 300, T_2 = 400, C = 1: 0.0206192872027357
+Delta S_mix = -N*(x - 1)*log(-1/(x - 1)) + N*x*log(1/x) ; at x = 1/2: N*log(2) ; dS/dx = -N*log(x) + N*log(-x + 1) vanishes at x = 1/2: True ; d2S/dx2 = N/(x^2 - x)

@@ -1,0 +1,5 @@
+[J+_a, J-_b] = 0 for all a, b: True
+[J+_a, J+_b] = -1 * eps_abc J+_c
+[J-_a, J-_b] = -1 * eps_abc J-_c
+J+_a + J-_a = (1/2) eps_abc M_bc (in r): True
+J+_a - J-_a = M_a3 (in k): True

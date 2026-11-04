@@ -1,0 +1,5 @@
+C gamma^mu C^-1 = -(gamma^mu)^T: True ; C^T = -C: True ; C^dag = C^-1: True
+psi^c = C bar(psi)^T: True
+(psi^c)^c = psi: True
+bar(psi^c) psi^c = -bar(psi) psi: True
+bar(psi^c) gamma^mu psi^c = bar(psi) gamma^mu psi: True

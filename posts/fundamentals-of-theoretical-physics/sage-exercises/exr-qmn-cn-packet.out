@@ -1,0 +1,8 @@
+t = 0.025 Euler: norm 1.001e+00
+t = 0.100 Euler: norm 1.002e+00
+t = 0.300 Euler: norm 9.701e+40
+t =  7.0  Crank-Nicolson: norm 1.0000000000, <x> = 38.9752 (exact 39.0000), width 2.6515 (exact 2.6575)
+t = 10.0  Crank-Nicolson: norm 1.0000000000, <x> = 44.9645 (exact 45.0000), width 3.1914 (exact 3.2016)
+t = 20.0  Crank-Nicolson: norm 1.0000000000, <x> = 64.9291 (exact 65.0000), width 5.3610 (exact 5.3852)
+on the grid the group velocity of p0 = 2 is sin(p0 dx)/dx = 1.9967, so <x> lags by 0.067 at t = 20
+Euler growth factor per step for the highest grid mode, sqrt(1 + (E dt)^2) with E = 2/dx^2: 4.123106

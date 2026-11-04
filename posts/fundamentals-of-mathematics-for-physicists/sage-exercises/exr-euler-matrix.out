@@ -1,0 +1,7 @@
+g(theta, phi, psi) =
+[                      1/2*(e^(I*th) + 1)*e^(-1/2*I*ph - 1/2*I*ps - 1/2*I*th)            1/2*(e^(1/2*I*ps) - e^(1/2*I*ps + I*th))*e^(-1/2*I*ph - 1/2*I*th)]
+[           1/2*(e^(1/2*I*ph) - e^(1/2*I*ph + I*th))*e^(-1/2*I*ps - 1/2*I*th) 1/2*(e^(1/2*I*ph + 1/2*I*ps + I*th) + e^(1/2*I*ph + 1/2*I*ps))*e^(-1/2*I*th)]
+a = cos(theta/2) e^{-i(phi+psi)/2}: True
+b = -i sin(theta/2) e^{i(phi-psi)/2}: True
+|a|^2 + |b|^2 = 1: True ; det g = 1: True
+at theta = 0, g depends only on phi + psi: True

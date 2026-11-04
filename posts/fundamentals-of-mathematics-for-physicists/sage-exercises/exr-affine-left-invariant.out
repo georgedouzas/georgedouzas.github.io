@@ -1,0 +1,4 @@
+(a0, b0) * (a, b) = [a*a0, a0*b + b0, 0, 1]  -> (a0 a, a0 b + b0)
+[X, Y] = [0, 1, 0, 0] = Y: True
+exp(t X) = [e^t, 0, 0, 1] ; exp(t Y) = [1, t, 0, 1]  (the one-parameter subgroups of dilations and translations)
+the Lie algebra is two-dimensional and not abelian; the left-invariant fields at (a, b) are a d/da and a d/db

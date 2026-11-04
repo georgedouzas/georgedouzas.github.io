@@ -1,0 +1,2 @@
+time-averaged energy density: E0^2*sin(alpha)^2 - 2*(E0^2*sin(alpha)^2 - E0^2)*cos(k*y*sin(alpha))^2
+equals E0^2 (1 + cos(alpha)^2 cos(2 k y sin(alpha))): True

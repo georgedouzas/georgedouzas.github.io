@@ -1,0 +1,3 @@
+R_6 = -1/2*c^2*sin(th)^2 - 2
+[PASS] R_6 = -2 - (c^2/2) sin^2 th: True
+[PASS] its average over the sphere is -2 - c^2/3, the same as for A^1_x = c t: True

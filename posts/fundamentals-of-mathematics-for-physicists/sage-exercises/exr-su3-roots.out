@@ -1,0 +1,7 @@
+roots (lambda_3, lambda_8 charges): {'E12+': (2, 0), 'E12-': (-2, 0), 'E45+': (1, sqrt(3)), 'E45-': (-1, -sqrt(3)), 'E67+': (-1, sqrt(3)), 'E67-': (1, -sqrt(3))}
+simple roots alpha_1, alpha_2 = (2, 0) (-1, sqrt(3)) ; alpha_1 + alpha_2 = (1, sqrt(3)) = root of E45+: True
+Cartan matrix A_ij = 2 (alpha_i . alpha_j)/(alpha_j . alpha_j):
+[ 2 -1]
+[-1  2]
+branching of 8 under su(2) x u(1)_8: lambda_8 charges of (lambda_1, lambda_2, lambda_3), lambda_8, E45+-, E67+-: [0, 0, 0] 0 sqrt(3) -sqrt(3) sqrt(3) -sqrt(3)
+-> 8 = 3_0 + 1_0 + 2_{sqrt3} + 2_{-sqrt3}; under u(1) x u(1): two zero weights and the six roots

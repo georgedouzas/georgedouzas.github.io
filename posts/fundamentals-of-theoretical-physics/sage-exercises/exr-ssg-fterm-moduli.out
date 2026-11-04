@@ -1,0 +1,7 @@
+W^i = [-mu^2 + p1*p2, p0*p2, p0*p1]
+solutions of W^i = 0: [{p0: 0, p1: mu^2/r1, p2: r1}]
+[PASS] every point phi_0 = 0, phi_1 = t, phi_2 = mu^2/t (t != 0) is a supersymmetric vacuum: True
+[PASS] phi_0 != 0 is never a vacuum (W^1 = phi_0 phi_2 and W^2 = phi_0 phi_1 force phi_1 = phi_2 = 0, then W^0 = -mu^2): True
+W^{ij} at (0, mu, mu): [0, mu, mu, mu, 0, 0, mu, 0, 0]  rank 2  eigenvalues of M^T M: [2*mu^2, 2*mu^2, 0]
+[PASS] rank 2: masses squared 2 mu^2, 2 mu^2 and one massless multiplet, the modulus: True
+[PASS] the null vector of W^{ij} is (0, 1, -1), the tangent to phi_1 phi_2 = mu^2 at (mu, mu): True

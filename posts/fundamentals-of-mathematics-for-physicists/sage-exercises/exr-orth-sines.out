@@ -1,0 +1,12 @@
+sine Gram matrix:
+[1/2*pi      0      0      0]
+[     0 1/2*pi      0      0]
+[     0      0 1/2*pi      0]
+[     0      0      0 1/2*pi]
+cosine Gram matrix (m, n = 0..3):
+[    pi      0      0      0]
+[     0 1/2*pi      0      0]
+[     0      0 1/2*pi      0]
+[     0      0      0 1/2*pi]
+sine matrix is (pi/2) times the identity: True
+cosine matrix is diagonal with <1, 1> = pi and the rest pi/2: True

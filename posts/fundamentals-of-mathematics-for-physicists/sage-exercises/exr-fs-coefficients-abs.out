@@ -1,0 +1,7 @@
+a_0 = pi
+n = 1 : a_n = -4/pi  b_n = 0  a_n = -4/(pi n^2) for odd n, 0 for even: True
+n = 2 : a_n = 0  b_n = 0  a_n = -4/(pi n^2) for odd n, 0 for even: True
+n = 3 : a_n = -4/9/pi  b_n = 0  a_n = -4/(pi n^2) for odd n, 0 for even: True
+n = 4 : a_n = 0  b_n = 0  a_n = -4/(pi n^2) for odd n, 0 for even: True
+n = 5 : a_n = -4/25/pi  b_n = 0  a_n = -4/(pi n^2) for odd n, 0 for even: True
+n = 6 : a_n = 0  b_n = 0  a_n = -4/(pi n^2) for odd n, 0 for even: True

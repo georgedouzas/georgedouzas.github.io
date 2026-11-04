@@ -1,0 +1,10 @@
+[r, r] = 0: True
+[r, k] in k (reductive): True
+[k, k] in r (symmetric): True
+ad_{M_01} on k: [(0, 0, 1, 0), (0, 0, 0, 1), (-1, 0, 0, 0), (0, -1, 0, 0)]
+ad_{M_23} on k: [(0, 1, 0, 0), (-1, 0, 0, 0), (0, 0, 0, 1), (0, 0, -1, 0)]
+ad_{M_01} and ad_{M_23} commute: True
+joint eigenvalues (ad_{M_01}, ad_{M_23}) = [1*I, 1*I]  charges [1, 1]
+joint eigenvalues (ad_{M_01}, ad_{M_23}) = [-1*I, 1*I]  charges [-1, 1]
+joint eigenvalues (ad_{M_01}, ad_{M_23}) = [1*I, -1*I]  charges [1, -1]
+joint eigenvalues (ad_{M_01}, ad_{M_23}) = [-1*I, -1*I]  charges [-1, -1]

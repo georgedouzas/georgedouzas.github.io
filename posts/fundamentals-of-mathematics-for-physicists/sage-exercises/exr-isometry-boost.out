@@ -1,0 +1,4 @@
+boost by rapidity xi : diagonal of Lambda^T eta Lambda = [1, -1, -1, -1] ; isometry: True
+rotation by al about z : diagonal of Lambda^T eta Lambda = [1, -1, -1, -1] ; isometry: True
+dilation by lam : diagonal of Lambda^T eta Lambda = [lam^2, -lam^2, -lam^2, -lam^2] ; isometry: False
+the boost sends the unit timelike vector (1, 0, 0, 0) to (cosh(xi), sinh(xi), 0, 0) with eta-norm 1  (still timelike, unit)

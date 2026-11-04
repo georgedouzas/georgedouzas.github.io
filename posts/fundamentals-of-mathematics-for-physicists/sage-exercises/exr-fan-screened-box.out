@@ -1,0 +1,7 @@
+u inside = -1/2*(e^(2*x) - 2*e^(x + 1) + 1)*e^(-x - 1) ; equals 1 - e^-1 cosh x: True
+u outside (x >= 1) = 1/2*(e^2 - 1)*e^(-x - 1) ; equals sinh(1) e^-x: True
+u - u'' inside = 1 , outside = 0
+derivative 0 at x = 1: inside 1/2*(e^2 - 1)*e^(-2), outside 1/2*(e^2 - 1)*e^(-2)
+derivative 1 at x = 1: inside -1/2*(e^2 - 1)*e^(-2), outside -1/2*(e^2 - 1)*e^(-2)
+derivative 2 at x = 1: inside -1/2*(e^2 + 1)*e^(-2), outside 1/2*(e^2 - 1)*e^(-2)
+jump of u'' at 1: 1

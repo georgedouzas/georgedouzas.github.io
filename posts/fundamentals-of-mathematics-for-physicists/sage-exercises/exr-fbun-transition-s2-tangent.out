@@ -1,0 +1,6 @@
+Jacobian of z -> 1/z:
+[-(x^2 - y^2)/(x^4 + 2*x^2*y^2 + y^4)       -2*x*y/(x^4 + 2*x^2*y^2 + y^4)]
+[       2*x*y/(x^4 + 2*x^2*y^2 + y^4) -(x^2 - y^2)/(x^4 + 2*x^2*y^2 + y^4)]
+determinant: 1/(x^4 + 2*x^2*y^2 + y^4) (positive: the charts have the same orientation)
+J is multiplication by dw/dz = -1/z^2 (Cauchy-Riemann form): True
+winding number of the transition function around the equator: -2

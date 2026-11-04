@@ -1,0 +1,5 @@
+limit of n log cos(t/sqrt n): -1/2*t^2
+n log cos(t/sqrt n) =  -1/12*t^4*u^2 - 1/2*t^2  with u = 1/sqrt n
+standardised die: n log phi(t/sqrt n) =  -37/700*t^4*u^2 - 1/2*t^2
+E Y^4 for a standardised die = 303/175 = 1.731 ; excess kurtosis E Y^4 - 3 = -222/175 = -1.269
+predicted t^4 coefficient (E Y^4 - 3)/24 = -37/700 ; found: -37/700*u^2

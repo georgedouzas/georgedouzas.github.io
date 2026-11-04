@@ -1,0 +1,4 @@
+pulled back to (theta, phi): [1, 0, 0, sin(th)^2]
+Gauss curvature K = 1
+u = tan s, v = 0 solves the geodesic equation: True ; Gamma^v_uu on v = 0: 0
+on a line v = b: Gamma^v_uu = 0 everywhere, so the v-equation holds; the u-equation is the ODE -(2*lam(s)*diff(lam(s), s)^2 - (b^2 + lam(s)^2 + 1)*diff(lam(s), s, s))/(b^2 + lam(s)^2 + 1) = 0

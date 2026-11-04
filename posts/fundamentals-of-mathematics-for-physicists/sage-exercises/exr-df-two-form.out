@@ -1,0 +1,6 @@
+beta = beta = z dx∧dy + x dy∧dz
+components beta_ij:
+[ 0  z  0]
+[-z  0  x]
+[ 0 -x  0]
+beta(X, Y) = x ; beta(Y, X) = -x ; beta(X, X) = 0

@@ -1,0 +1,7 @@
+R_1(s) = [(1, 0, 0), (0, cos(s), -sin(s)), (0, sin(s), cos(s))]
+[PASS] R_a(s) = exp(s L_a): d/ds R_a = L_a R_a and R_a(0) = 1: True
+commutator to second order: [   1 -s*t    0]
+[ s*t    1    0]
+[   0    0    1]
+[PASS] R_1(s) R_2(t) R_1(-s) R_2(-t) = 1 + s t [L_1, L_2] + O(3): True
+[PASS] [L_1, L_2] = L_3, the matrix commutator (the vector fields L_a x have the opposite bracket -eps_abc): True

@@ -1,0 +1,5 @@
+Gam^th_ph,ph = -cos(th)*sin(th) 
+Gam^ph_th,ph = cos(th)/sin(th) 
+Gam^ph_ph,th = cos(th)/sin(th) 
+coefficients of the connection = Christoffel symbols of the metric: True
+torsion-free: True   metric-compatible (nabla g = 0): True

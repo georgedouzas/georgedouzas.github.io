@@ -1,0 +1,4 @@
+pure gauge A = g^{-1} dg with g = exp(f(t,x) T_3): A_mu = [[-1/2*I*diff(f(t, x), t), 0, 0, 1/2*I*diff(f(t, x), t)], [-1/2*I*diff(f(t, x), x), 0, 0, 1/2*I*diff(f(t, x), x)]]
+its field strength vanishes: True
+constant potential A_t = c1 T_1, A_x = c2 T_2: F_tx = [-1/2*I*c1*c2, 0, 0, 1/2*I*c1*c2] = c1 c2 T_3: True
+Yang-Mills equations D_mu F^{mu nu} for the constant potential: [[0, -1/2*I*c1*c2^2, -1/2*I*c1*c2^2, 0], [0, -1/2*c1^2*c2, 1/2*c1^2*c2, 0]]  -> not zero: a constant non-abelian potential is not a solution unless c1 c2 = 0

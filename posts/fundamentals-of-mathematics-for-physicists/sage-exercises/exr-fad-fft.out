@@ -1,0 +1,6 @@
+N =   8: FFT multiplications    12 = (N/2) log2 N, direct N^2 =     64, max |FFT - DFT| = 7.4e-15
+N =  64: FFT multiplications   192 = (N/2) log2 N, direct N^2 =   4096, max |FFT - DFT| = 3.9e-13
+N = 512: FFT multiplications  2304 = (N/2) log2 N, direct N^2 = 262144
+N = 8: F_m/N for m = 0..4: [1.266066076964, 0.565160708729, 0.135770158704, 0.022439888093, 0.005474240443]
+       I_m(1)  for m = 0..4: [1.266065877752, 0.565159103992, 0.135747669767, 0.022168424924, 0.002737120221]
+       F_1/N - I_1(1) = 1.605e-06, I_7(1) + I_9(1) = 1.605e-06 (aliasing, prp-fad-sampling)

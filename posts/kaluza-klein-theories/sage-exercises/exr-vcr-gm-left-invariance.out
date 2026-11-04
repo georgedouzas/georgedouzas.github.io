@@ -1,0 +1,4 @@
+sigma_y = dy   pulled back: h^*(sigma_y) = dy   invariant: True
+sigma_1 = dz1 + m*y dz2   pulled back: h^*(sigma_1) = dz1 + m*y dz2   invariant: True
+sigma_2 = dz2   pulled back: h^*(sigma_2) = dz2   invariant: True
+the naive form dz1 is not invariant: dz1 - alpha*m dz2

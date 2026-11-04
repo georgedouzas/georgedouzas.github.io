@@ -1,0 +1,7 @@
+q = 2: eigenvalues [e^(K*b) + 1, e^(K*b) - 1]  multiplicities [1, 1]
+q = 3: eigenvalues [e^(K*b) + 2, e^(K*b) - 1]  multiplicities [1, 2]
+q = 4: eigenvalues [e^(K*b) + 3, e^(K*b) - 1]  multiplicities [1, 3]
+open chain q = 3, L = 6, bK = 0.7: Z = q (e^{bK} + q - 1)^(L-1): True
+r = 1: brute force 0.1683798648, formula 0.1683798648
+r = 2: brute force 0.0425276683, formula 0.0425276683
+r = 4: brute force 0.0027129039, formula 0.0027129039

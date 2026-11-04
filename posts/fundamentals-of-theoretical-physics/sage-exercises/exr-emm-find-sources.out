@@ -1,0 +1,2 @@
+rho = t ; J = (x^2 - x, -2*x*y, 0)
+div B = 0 ; curl E + dB/dt = (0, 0, 0) ; continuity: 0

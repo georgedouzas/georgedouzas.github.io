@@ -1,0 +1,8 @@
+n = 5 : P(shared birthday) = 0.02714
+n = 10 : P(shared birthday) = 0.1169
+n = 20 : P(shared birthday) = 0.4114
+n = 22 : P(shared birthday) = 0.4757
+n = 23 : P(shared birthday) = 0.5073
+n = 30 : P(shared birthday) = 0.7063
+n = 50 : P(shared birthday) = 0.9704
+smallest n with probability above 1/2: 23 ; its value 0.507297 (an exact rational with 53-digit numerator and denominator)

@@ -1,0 +1,3 @@
+(Box_5 Phi) e^{-i n y/R} = (R^2*phi^3*diff(f(t), t, t) + n^2*f(t))/(R^2*phi^2)
+[PASS] Box_5 Phi = 0 is phi (f'' + n^2/(R^2 phi^3) f) = 0: Einstein-frame mass |n|/(R phi^{3/2}): True
+[PASS] in the Jordan frame g = phi^{-1} eta (proper time t_J = t/sqrt(phi)) m^2 = phi m_E^2 = n^2/(R phi)^2, the mass is |n|/(R phi): True

@@ -1,0 +1,7 @@
+lies on the ellipsoid X^2/A^2 + Y^2/B^2 + Z^2/C^2 = 1: True
+E = diag(A, B, C) S with S the spherical parametrisation: True
+det diag(A, B, C) = A*B*C  -> invertible when A B C != 0, so E is injective exactly where S is
+d_theta E = (A*cos(ph)*cos(th), B*cos(th)*sin(ph), -C*sin(th))
+d_phi E = (-A*sin(ph)*sin(th), B*cos(ph)*sin(th), 0)
+|d_phi E|^2 = (B^2*cos(ph)^2 + A^2*sin(ph)^2)*sin(th)^2  vanishes exactly at the poles sin theta = 0
+the Jacobian columns are orthogonal only if A = B: -(A + B)*(A - B)*cos(ph)*cos(th)*sin(ph)*sin(th)

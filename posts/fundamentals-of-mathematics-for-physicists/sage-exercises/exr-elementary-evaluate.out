@@ -1,0 +1,4 @@
+(u (x) v)(a, b) = 2 ; a(u) b(v) = 2 ; equal: True
+components u^i v^j: [ 1  0 -1]
+[ 2  0 -2]
+[ 3  0 -3] ; rank of the component matrix: 1

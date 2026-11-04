@@ -1,0 +1,5 @@
+H = 2*(p_theta^2*sin(theta)^2 - 2*p_phi*p_psi*cos(theta) + p_phi^2 + p_psi^2)/sin(theta)^2
+H == 2 (p_theta^2 + (p_phi^2 - 2 cos(theta) p_phi p_psi + p_psi^2)/sin^2(theta)): True
+momenta along the curve (theta0, phi0 + t, psi0): (0, 1/4, 1/4*cos(theta))
+q' = dH/dp = [0, 1, 0] ; p' = -dH/dq = [0, 0, 0]
+Hamilton's equations hold for every theta0 in (0, pi): True

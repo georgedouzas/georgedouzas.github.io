@@ -1,0 +1,8 @@
+eigenvalues of A: [1*I, 0, -1*I]
+exp(tA) =
+[          1      sin(t) -cos(t) + 1]
+[          0      cos(t)      sin(t)]
+[          0     -sin(t)      cos(t)]
+d/dt exp(tA) = A exp(tA): True
+y(t) from the first row: -y2*(cos(t) - 1) + y1*sin(t) + y0
+y''' + y' = 0: True

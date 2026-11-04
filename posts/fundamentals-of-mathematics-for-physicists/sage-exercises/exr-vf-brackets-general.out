@@ -1,0 +1,4 @@
+[d_phi, f d_theta] = 0 : True
+[d_theta, f d_phi] = d(f)/dth ∂/∂ph
+equals f'(theta) d_phi: True
+f = -sin(theta) and f = sin(theta) recover the proposition: True True

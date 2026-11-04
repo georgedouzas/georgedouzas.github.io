@@ -1,0 +1,4 @@
+cylinder: induced metric g1 = dz⊗dz + R0^2 dph⊗dph ; Christoffel symbols all zero: True ; K = R/2 = 0
+cone: induced metric g2 = drho⊗drho + rho^2*sin(alpha)^2 dph⊗dph
+cone: Gamma^rho_phph = -rho*sin(alpha)^2 , Gamma^ph_rhoph = 1/rho ; K = R/2 = 0
+both surfaces are flat: True

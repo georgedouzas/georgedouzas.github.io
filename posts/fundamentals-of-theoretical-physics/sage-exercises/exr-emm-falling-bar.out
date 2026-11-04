@@ -1,0 +1,3 @@
+v(t) = (R*g*m*e^(B^2*l^2*t/(R*m)) - R*g*m)*e^(-B^2*l^2*t/(R*m))/(B^2*l^2)
+terminal speed: R*g*m/(B^2*l^2)
+power of gravity m g v_t = R*g^2*m^2/(B^2*l^2) ; Joule power I^2 R = R*g^2*m^2/(B^2*l^2)

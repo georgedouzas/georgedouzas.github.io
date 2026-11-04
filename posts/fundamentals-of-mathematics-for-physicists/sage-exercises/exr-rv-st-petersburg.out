@@ -1,0 +1,4 @@
+E K = 2
+E K^2 = 6
+E 2^K: the terms 2^k 2^-k are all 1 so the series diverges
+expected payoff capped at 2^30 (tail truncated at k = 200): 31.00000000 -> 31

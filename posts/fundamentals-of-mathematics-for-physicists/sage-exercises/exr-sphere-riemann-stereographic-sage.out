@@ -1,0 +1,4 @@
+R^u_vuv = 4/(u^2 + v^2 + 1)^2    R_uvuv = 16/(u^2 + v^2 + 1)^4
+R_uvuv = det g = 16/(1 + u^2 + v^2)^4: True
+Gauss curvature K = R_uvuv / det g = 1 ; at the pole u = v = 0: 16 / 16
+K = 1 everywhere, pole included: True

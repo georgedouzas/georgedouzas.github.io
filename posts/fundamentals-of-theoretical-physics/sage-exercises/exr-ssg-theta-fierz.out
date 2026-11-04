@@ -1,0 +1,6 @@
+theta theta = -2*th1*th2    thetadagger thetadagger = 2*tb1*tb2
+[PASS] theta^a theta^b = -1/2 eps^{ab} theta theta: True
+[PASS] thetadagger^a thetadagger^b = +1/2 eps^{ab} thetadagger thetadagger: True
+[PASS] (theta sigma^mu thetadagger)(theta sigma^nu thetadagger) = 1/2 eta^{mu nu} theta theta thetadagger thetadagger, all 16 pairs: True
+[PASS] the second-order term is -1/4 theta theta thetadagger thetadagger box phi (box = d_mu d^mu): True
+[PASS] (theta sigma^mu thetadagger)(theta chi) = -1/2 theta theta (chi sigma^mu thetadagger) for a Grassmann spinor chi: True

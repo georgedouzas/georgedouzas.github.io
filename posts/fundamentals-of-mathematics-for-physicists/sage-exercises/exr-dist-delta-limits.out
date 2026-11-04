@@ -1,0 +1,6 @@
+int g_eps * x^2 + 1 = 1/2*epsilon^2 + 1 ; limit eps -> 0: 1
+int g_eps * e^x = e^(1/4*epsilon^2) ; limit eps -> 0: 1
+int g_eps * cos 2x = e^(-epsilon^2) ; limit eps -> 0: 1
+int delta_L cos 2x for L > 2: 1
+int delta_L cos 2x for 0 < L < 2: 0
+int delta_L cos 2x at L = 2: 1/2

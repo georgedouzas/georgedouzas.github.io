@@ -1,0 +1,7 @@
+N = 8: mean = N/2 + (N/2)(1 - 2/N)^t exactly for t = 1..40: True
+        binomial distribution is stationary: True; relative fluctuation sqrt(N/4)/(N/2) = 0.3536
+        n changes parity at every step (period 2): after 4N steps P(n even) = 1.0000
+N = 64: mean = N/2 + (N/2)(1 - 2/N)^t exactly for t = 1..40: True
+        binomial distribution is stationary: True; relative fluctuation sqrt(N/4)/(N/2) = 0.1250
+        n changes parity at every step (period 2): after 4N steps P(n even) = 1.0000
+one run, N = 400: n(200), n(400) = 280, 212 (mean 273.4, 226.9); time average after t = 5000 202.4, relative fluctuation 0.0471 (1/sqrt(N) = 0.0500)

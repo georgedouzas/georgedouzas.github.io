@@ -1,0 +1,4 @@
+formula: u = e^(2*x)
+Neumann series sum 2^n x^n/n! = e^(2*x)
+check u - 2 int_0^x u = 1: True
+partial sums at x = 1 (N = 2, 5, 10) vs e^2: [3.0000000, 7.0000000, 7.3887125] 7.3890561

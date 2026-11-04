@@ -1,0 +1,3 @@
+E_eps = 1/480*pi^3*epsilon^2/L^3 - 1/24*pi/L + 1/2*L/(pi*epsilon^2)
+Gaussian cutoff eps = 0.100: E - pi/(4 eps^2) = -0.131030906355 ; -pi/24 = -0.130899693900
+Gaussian cutoff eps = 0.0500: E - pi/(4 eps^2) = -0.130932438319 ; -pi/24 = -0.130899693900

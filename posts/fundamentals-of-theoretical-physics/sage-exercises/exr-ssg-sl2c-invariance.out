@@ -1,0 +1,6 @@
+[PASS] M^T eps M = det(M) eps for a general 2x2 matrix, so the product is invariant iff det M = 1: True
+[PASS] the boost matrix has unit determinant: True
+det X = x0^2 - x1^2 - x2^2 - x3^2 (the Minkowski norm)
+[PASS] det X = x0^2 - x1^2 - x2^2 - x3^2 is preserved: True
+t' = 1/2*(x0*(e^(2*r) + 1) + x3*(e^(2*r) - 1))*e^(-r)  z' = 1/2*(x3*(e^(2*r) + 1) + x0*(e^(2*r) - 1))*e^(-r)
+[PASS] the transformation is the boost t' = cosh(r) t + sinh(r) z, z' = sinh(r) t + cosh(r) z: True

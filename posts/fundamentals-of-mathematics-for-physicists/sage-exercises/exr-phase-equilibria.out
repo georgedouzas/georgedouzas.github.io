@@ -1,0 +1,4 @@
+equilibria: [(0, 0), (1, 1)]
+Jacobian at (0, 0) : [1, 0, 0, -1] | eigenvalues: [-1, 1]
+Jacobian at (1, 1) : [0, -1, 1, 0] | eigenvalues: [-I, I]
+dH/dt along the flow: 0 -> conserved: True

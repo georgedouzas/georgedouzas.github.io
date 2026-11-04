@@ -1,0 +1,6 @@
+||cos theta||^2 = 4/3*pi ; ||sin theta e^{i phi}||^2 = 8/3*pi ; <cos theta, sin theta e^{i phi}> = 0
+Gram matrix of Y_{1,-1}, Y_{10}, Y_{11}:
+[1 0 0]
+[0 1 0]
+[0 0 1]
+agrees with Sage's spherical_harmonic: True

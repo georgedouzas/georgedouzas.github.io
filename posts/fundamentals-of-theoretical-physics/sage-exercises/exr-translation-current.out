@@ -1,0 +1,6 @@
+translation along t: J^mu_nu = [1/2*m^2*phi(t, x)^2 + 1/2*diff(phi(t, x), t)^2 + 1/2*diff(phi(t, x), x)^2, -diff(phi(t, x), t)*diff(phi(t, x), x)]
+   J^{mu nu} is the energy-momentum tensor T^{mu nu} (T^{tt} the energy density): True
+   d_mu J^mu_nu = (Box phi + m^2 phi) d_nu phi, vanishing on the field equation: True
+translation along x: J^mu_nu = [diff(phi(t, x), t)*diff(phi(t, x), x), 1/2*m^2*phi(t, x)^2 - 1/2*diff(phi(t, x), t)^2 - 1/2*diff(phi(t, x), x)^2]
+   J^{mu nu} is the energy-momentum tensor T^{mu nu} (T^{tt} the energy density): True
+   d_mu J^mu_nu = (Box phi + m^2 phi) d_nu phi, vanishing on the field equation: True

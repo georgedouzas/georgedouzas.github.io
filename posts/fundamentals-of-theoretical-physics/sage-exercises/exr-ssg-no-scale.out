@@ -1,0 +1,6 @@
+K = -3 log(T + Tbar): K_{T Tbar} = 3/(T + Tb)^2   D_T W = -3*W0/(T + Tb)   V = 0
+[PASS] the no-scale potential vanishes for every T: True
+[PASS] D_T W = -3 W0/(T + Tbar) is non-zero, so supersymmetry is broken with zero vacuum energy: True
+[PASS] the gravitino mass e^{K/2}|W0| = |W0|/(T + Tbar)^{3/2} depends on the flat direction T: True
+K = -n log(T + Tbar): V = W0*W0b*(n - 3)/(T + Tb)^n
+[PASS] among the potentials K = -n log(T + Tbar), W = W0, only n = 3 gives V = 0: True

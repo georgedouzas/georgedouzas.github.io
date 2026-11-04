@@ -1,0 +1,3 @@
+integral equals (1/16 pi^2)(log((L^2+D)/D) + D/(L^2+D) - 1): True
+limit of 16 pi^2 I - log(Lambda^2/Delta) as Lambda -> oo: -1
+next term: Lambda^2 (16 pi^2 I - log(Lambda^2/Delta) + 1) -> 2*Delta

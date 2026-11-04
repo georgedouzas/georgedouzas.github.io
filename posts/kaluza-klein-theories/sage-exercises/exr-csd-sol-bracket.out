@@ -1,0 +1,11 @@
+[phi_+, phi_-] =
+[      -p*pb       -p*qb           0]
+[      -pb*q       -q*qb           0]
+[          0           0 p*pb + q*qb]
+[phi_1, phi_2] =
+[              1/2*I*p*pb               1/2*I*p*qb                        0]
+[              1/2*I*pb*q               1/2*I*q*qb                        0]
+[                       0                        0 -1/2*I*p*pb - 1/2*I*q*qb]
+[PASS] [phi_1, phi_2] = -(i/2) [phi_+, phi_-]: True
+[PASS] both commutators commute with tau (they lie in h, as the grading predicts): True
+[PASS] [phi_1, phi_2] = (i/2) diag-block(Phi Phi^dagger, -|Phi|^2): True

@@ -1,0 +1,4 @@
+[PASS] the left-handed generators satisfy the Lorentz algebra with eta = diag(1, -1, -1, -1): True
+[PASS] so do the right-handed generators built from sigmabar sigma: True
+[PASS] rotations S^{12} = sigma_3/2 (Hermitian), boosts S^{03} = -i sigma_3/2 (anti-Hermitian): True
+[PASS] the boosts have opposite signs on the two chiralities, the rotations agree: True

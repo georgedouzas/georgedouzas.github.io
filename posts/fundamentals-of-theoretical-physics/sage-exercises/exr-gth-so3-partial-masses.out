@@ -1,0 +1,8 @@
+[PASS] [L_1, L_2] = L_3 (so(3) with f = eps): True
+mass matrix:
+[a^2*g^2       0       0]
+[      0 a^2*g^2       0]
+[      0       0       0]
+[PASS] eigenvalues g^2 a^2, g^2 a^2, 0 (the gauge boson of the unbroken SO(2) stays massless): True
+[PASS] the Higgs (radial) mass^2 is 2 lam a^2: True
+degrees of freedom: before 3 + 3*2 = 9 ; after 1 (Higgs) + 2*3 (massive) + 1*2 (massless) = 9

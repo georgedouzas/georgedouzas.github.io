@@ -1,0 +1,4 @@
+same parity    reflexive True symmetric True transitive True
+a <= b         reflexive True symmetric False transitive True
+|a - b| <= 1   reflexive True symmetric True transitive False
+[PASS] only 'same parity' is an equivalence relation: True

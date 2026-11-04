@@ -1,0 +1,3 @@
+e^y raised: [0, 0, 0, 0, -1/phi^2]
+[PASS] G^{AB} (e^y)_B = -phi^{-2} (d_y)^A: True
+[PASS] G^{AB} (dx^mu)_B = g^{mu nu} h_nu with h_nu = d_nu - A_nu d_y: True

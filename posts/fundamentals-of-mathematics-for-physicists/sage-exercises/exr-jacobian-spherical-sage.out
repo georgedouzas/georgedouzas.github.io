@@ -1,0 +1,4 @@
+J = [(cos(phi)*sin(theta), r*cos(phi)*cos(theta), -r*sin(phi)*sin(theta)), (sin(phi)*sin(theta), r*cos(theta)*sin(phi), r*cos(phi)*sin(theta)), (cos(theta), -r*sin(theta), 0)]
+det J = r^2*sin(theta) ; vanishes where r = 0 or sin(theta) = 0 (the poles): [[r == 0, theta == r1]]
+J^-1 J = 1: True
+first row of J^-1 (the gradient of r = sqrt(x^2+y^2+z^2) in spherical coordinates): (cos(phi)*sin(theta), sin(phi)*sin(theta), cos(theta))

@@ -1,0 +1,4 @@
+V(1 + rho) = 2*rho^2 + 1/6 + O(rho^3);  m_H^2 = B/A = 2/R^2
+gauge boson masses^2: [0, 1/2/R^2, 1/2/R^2, 2/R^2]
+[PASS] m_H^2 = 2/R^2, M_W^2 = 1/(2 R^2), M_Z^2 = 2/R^2: m_H = 2 M_W = M_Z, independent of g and R: True
+[PASS] with H = Phi/(g R): v^2 = 2/(g^2 R^2), lambda = g^2/2, m_H^2 = 2 lambda v^2 and M_W^2 = g^2 v^2/4 reproduce the values above: True

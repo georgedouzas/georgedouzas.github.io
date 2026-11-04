@@ -1,0 +1,10 @@
+zeta(2) = 1/6*pi^2
+zeta(4) = 1/90*pi^4
+zeta(6) = 1/945*pi^6
+zeta(0) = -1/2
+zeta(-1) = -1/12
+zeta(-3) = 1/120
+zeta(-2) = 0
+n = 1: Bernoulli formula gives 1/6*pi^2, zeta(2n) = 1/6*pi^2, equal: True
+n = 2: Bernoulli formula gives 1/90*pi^4, zeta(2n) = 1/90*pi^4, equal: True
+n = 3: Bernoulli formula gives 1/945*pi^6, zeta(2n) = 1/945*pi^6, equal: True

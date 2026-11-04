@@ -1,0 +1,5 @@
+speed^2 = 25*a^2*t^2
+four-velocity = [1/sqrt(-25*a^2*t^2 + 1), 3*a*t/sqrt(-25*a^2*t^2 + 1), 4*a*t/sqrt(-25*a^2*t^2 + 1), 0]
+dF/dt0 - sqrt(1 - 25 a^2 t0^2) = 0   F(0) = 0
+F(1/(5a)) = 1/20*pi/a
+numerical check a = 1, t0 = 0.15: 0.134414044980609 0.1344140449806092

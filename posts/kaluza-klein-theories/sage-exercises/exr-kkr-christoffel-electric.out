@@ -1,0 +1,5 @@
+Gamma^t_{x y} = 1/2*B ; Gamma^x_{t y} = 1/2*B
+[PASS] Gamma^l_{mu y} = -(1/2) F_mu^l: True
+[PASS] Gamma^l_{yy} = phi d^l phi = 0: True
+[PASS] Gamma^l_{mu nu} = -(1/2)(A_mu F_nu^l + A_nu F_mu^l) (Gamma4 = 0, phi = 1): True
+[PASS] Gamma^y_{mu y} = d_mu phi/phi - A_l Gamma^l_{mu y} with phi = 1: True

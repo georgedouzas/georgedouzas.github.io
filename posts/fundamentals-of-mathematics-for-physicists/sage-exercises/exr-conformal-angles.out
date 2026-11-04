@@ -1,0 +1,4 @@
+image tangents: 2*I + 2 , 2*I - 2
+orthogonal (dot product 0): 0 == 0
+f'(z0) = 2*I + 2  |f'| = 2*sqrt(2)  arg f' = 1/4*pi
+T1 == f'(z0) * 1 and T2 == f'(z0) * i: True

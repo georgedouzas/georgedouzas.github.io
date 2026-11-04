@@ -1,0 +1,7 @@
+(Box + m^2) phi / phi = k1^2 + k2^2 + k3^2 + m^2 - w^2
+dispersion relation: [
+w == -sqrt(k1^2 + k2^2 + k3^2 + m^2),
+w == sqrt(k1^2 + k2^2 + k3^2 + m^2)
+]
+phase velocity omega/k = sqrt(k^2 + m^2)/k  > 1 ; group velocity d omega/dk = k/sqrt(k^2 + m^2)  < 1 (the particle velocity)
+product of the two velocities: 1  ; massless limit: both tend to 1

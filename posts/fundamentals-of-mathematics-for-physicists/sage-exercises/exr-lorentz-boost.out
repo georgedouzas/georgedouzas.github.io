@@ -1,0 +1,4 @@
+Lambda^T eta Lambda - eta = True (all 16 entries vanish by cosh^2 - sinh^2 = 1)
+v = (1, 0, 0, 0) : eta(v, v) = 1 ; eta(Lambda v, Lambda v) = 1
+v = (1, 1, 0, 0) : eta(v, v) = 0 ; eta(Lambda v, Lambda v) = 0
+v = (2, 1, 0, 3) : eta(v, v) = -6 ; eta(Lambda v, Lambda v) = -6

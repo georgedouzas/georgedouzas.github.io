@@ -1,0 +1,8 @@
+S_R(b_1) = -1/e + O(1/eps)
+S_R(b_2) = 1/2/e^2 + O(1/eps)
+S_R(b_3) = -1/6/e^3 + O(1/eps)
+S_R(b_4) = 1/24/e^4 + O(1/eps)
+F_R(b_1) at eps = 0: -L
+F_R(b_2) at eps = 0: 1/2*L^2
+F_R(b_3) at eps = 0: -1/6*pi^2*L - 1/6*L^3
+F_R(b_4) at eps = 0: 1/6*pi^2*L^2 + 1/24*L^4

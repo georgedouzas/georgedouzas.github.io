@@ -1,0 +1,5 @@
+total probability: 1
+mean: lam
+E[k(k-1)]: lam^2
+E k^2: lam^2 + lam ; variance: lam
+characteristic function: e^(lam*e^(I*t) - lam) ; equals exp(lam (e^{it} - 1)): True

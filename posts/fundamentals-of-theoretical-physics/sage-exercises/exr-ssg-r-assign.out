@@ -1,0 +1,8 @@
+c1 Phi1 + c2 Phi2^2 + c3 Phi3^3        R = (2, 1, 2/3) + span[]
+[PASS] Nath's example: R(Phi1, Phi2, Phi3) = (2, 1, 2/3), uniquely: True
+O'Raifeartaigh                         R = (2, 2, 0) + span[]
+[PASS] O'Raifeartaigh: R(Phi1, Phi2, Phi3) = (2, 2, 0), uniquely: True
+Wess-Zumino m Phi^2 + y Phi^3          no R-charge assignment
+[PASS] the massive interacting Wess-Zumino model has no R-symmetry: True
+m Phi+ Phi-                            R = (2, 0) + span[(1, -1)]
+[PASS] W = m Phi+ Phi- leaves a one-parameter family (R-symmetry times the ordinary U(1) with charges (1, -1)): True

@@ -1,0 +1,4 @@
+T = [(0, I, 0, 0), (-I, 0, 0, 0), (0, 0, 0, I), (0, 0, -I, 0)]
+T gamma^0* T^-1 = gamma^0: True ; T gamma^k* T^-1 = -gamma^k: True
+T T^* = -1: True ; T gamma_5 = gamma_5 T: True
+T Sigma_k^* T^-1 = -Sigma_k: True

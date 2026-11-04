@@ -1,0 +1,4 @@
+integral of g_eps: 1
+f = cos(x) : integral = e^(-1/4*eps^2) | limit eps -> 0: 1 | f(0) = 1
+f = x^2 : integral = 1/2*eps^2 | limit eps -> 0: 0 | f(0) = 0
+f = e^x : integral = e^(1/4*eps^2) | limit eps -> 0: 1 | f(0) = 1

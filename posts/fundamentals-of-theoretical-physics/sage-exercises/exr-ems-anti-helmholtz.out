@@ -1,0 +1,8 @@
+B(0) = 0
+dB/dz at 0 = 3*I*a^2*b/((a^4 + 2*a^2*b^2 + b^4)*sqrt(a^2 + b^2)) ; equals 3 I a^2 b/(a^2+b^2)^(5/2): True
+third derivative at 0: -15*(3*a^2 - 4*b^2)*I*a^2*b/(a^2 + b^2)^(9/2)
+b with vanishing third derivative: [
+b == 1/2*sqrt(3)*a,
+b == -I*a,
+b == I*a
+]

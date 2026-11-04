@@ -1,0 +1,8 @@
+Z_4        element orders {1: 1, 2: 1, 4: 2}
+Z_2 x Z_2  element orders {1: 1, 2: 3}
+Z_6        element orders {1: 1, 2: 1, 3: 2, 6: 2}
+Z_2 x Z_3  element orders {1: 1, 2: 1, 3: 2, 6: 2}
+S_3        element orders {1: 1, 2: 3, 3: 2}
+Z_4 = Z_2 x Z_2 ? False
+Z_6 = Z_2 x Z_3 ? True
+Z_6 = S_3 ? False

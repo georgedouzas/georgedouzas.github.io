@@ -1,0 +1,4 @@
+s = +1: F_tx = (0, -a*c*t, a*b + c)
+[PASS] R_6 = -2 - (1/2) K_a . K_b F^a_tx F^b_tx with s = +1: True
+s = -1: F_tx = (0, a*c*t, -a*b + c)
+R_6 = -2 - (1/2) K_a . K_b F^a_tx F^b_tx with s = -1 (expected False): False

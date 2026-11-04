@@ -1,0 +1,6 @@
+N = 4 : non-zero entries of {Q, Q^dag} - H at (state index, value): [(7, -4)] ; off-diagonal zero: True
+[PASS] N = 4: the defect is -N on the top fermionic state |N-1, 1> only: True
+N = 6 : non-zero entries of {Q, Q^dag} - H at (state index, value): [(11, -6)] ; off-diagonal zero: True
+[PASS] N = 6: the defect is -N on the top fermionic state |N-1, 1> only: True
+N = 8 : non-zero entries of {Q, Q^dag} - H at (state index, value): [(15, -8)] ; off-diagonal zero: True
+[PASS] N = 8: the defect is -N on the top fermionic state |N-1, 1> only: True

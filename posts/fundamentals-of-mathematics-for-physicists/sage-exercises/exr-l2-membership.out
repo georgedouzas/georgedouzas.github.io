@@ -1,0 +1,5 @@
+int_R |f|^2 for f = 1/(x^2 + 1) : 1/2*pi
+int_R |f|^2 for f = 1/sqrt(x^2 + 1) : pi
+int_R |f|^2 for f = sin(x)/x : pi
+int_0^1 |f|^2 for f = x^(-1/3) : 3
+int_0^1 |f|^2 for f = 1/sqrt(x) : divergent ( Integral is divergent. )

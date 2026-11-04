@@ -1,0 +1,5 @@
+[PASS] F^*F + wF + w^*F^* = |F + w^*|^2 - |w|^2: True
+[PASS] L_aux is real: True
+stationary point: {a: -u, b: v}
+[PASS] the stationary point is F = -w^* (a = -u, b = v): True
+[PASS] the Hessian is 2 * identity: a minimum of L_aux with value -|w|^2: True

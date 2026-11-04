@@ -1,0 +1,4 @@
+radial Fourier integral: 1/2*pi*e^(-m*r)
+G_0(r) = 1/4*e^(-m*r)/(pi*r) | equals e^(-mr)/(4 pi r): True
+(-Laplacian + m^2) G_0 = 0 for r > 0: True
+massless limit is the Coulomb Green's function 1/(4 pi r): True

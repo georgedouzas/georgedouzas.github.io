@@ -1,0 +1,7 @@
+Levi-Civita coefficients: Gam^r_ph,ph = -r 
+Gam^ph_r,ph = 1/r 
+Gam^ph_ph,r = 1/r 
+nabla g = 0 for the Levi-Civita connection: True
+nabla g for the zero connection of the polar chart: nabla0(g) = 2*r dph⊗dph⊗dr
+the only non-zero component is nabla_r g_phph = 2r: True
+the zero connection is torsion-free: True and flat: True

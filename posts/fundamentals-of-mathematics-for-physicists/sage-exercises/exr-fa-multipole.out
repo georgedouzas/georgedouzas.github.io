@@ -1,0 +1,4 @@
+1/|x - x'| = 0.279699880376
+Legendre sum, l <= 3: 0.280744841613 ; spherical-harmonic sum, l <= 3: 0.280744841613 (imaginary part 1.2e-19 )
+the two truncations agree: True ; error of the truncation 0.0010 ; next term bound (r</r>)^4/r> = 0.0041
+generating function: coefficients of t^l are P_l(cos gamma) for l <= 3: True

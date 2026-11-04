@@ -1,0 +1,4 @@
+(a,b,c) injective: True
+(a,a,b) injective: False
+(d,c,b) injective: True
+[PASS] injective maps from 3 to 4 elements: 4*3*2 = 24: True 24

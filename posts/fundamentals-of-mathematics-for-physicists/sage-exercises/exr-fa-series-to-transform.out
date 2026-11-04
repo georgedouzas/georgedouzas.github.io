@@ -1,0 +1,6 @@
+L = 3 : |2L c_n - fhat(pi n/L)| for n = 0..3: [0.00659, 0.00623, 0.00502, 0.00370] ; bound exp(-L^2/2) = 0.0111
+  max |S_10 - f| at sample points: 0.000168
+  2L sum |c_n|^2 = 1.7724144 vs int f^2 = sqrt(pi) = 1.7724539
+L = 6 : |2L c_n - fhat(pi n/L)| for n = 0..3: [0.000, 0.000, 0.000, 0.000] ; bound exp(-L^2/2) = 1.52e-8
+  max |S_10 - f| at sample points: 2.75e-8
+  2L sum |c_n|^2 = 1.7724538 vs int f^2 = sqrt(pi) = 1.7724539

@@ -1,0 +1,3 @@
+dual(sigma^{mu nu}) = c sigma^{mu nu} with c = [-I] ; dual(sigmabar^{mu nu}) = c sigmabar^{mu nu} with c = [I]
+[PASS] sigma^{mu nu} and sigmabar^{mu nu} are eigenvectors of the Hodge dual with opposite eigenvalues -+ i: True
+[PASS] the six sigma^{mu nu} span a three-dimensional space (the traceless 2x2 matrices): True

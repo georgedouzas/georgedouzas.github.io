@@ -1,0 +1,4 @@
+Hessian of cos(theta): nabla_g(df) = -cos(th) dth⊗dth - cos(th)*sin(th)^2 dph⊗dph
+symmetric: True
+Hess f = -f g: True
+Laplacian g^{ij} nabla_i nabla_j f = -2 f: True

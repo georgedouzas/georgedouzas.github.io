@@ -1,0 +1,3 @@
+phi_n for n = -5..5: [2/5*I/pi, 0, 2/3*I/pi, 0, 2*I/pi, 0, -2*I/pi, 0, -2/3*I/pi, 0, -2/5*I/pi]
+[PASS] phi_n = 2/(i pi n) for odd n and 0 for even n (no zero mode): True
+[PASS] Parseval: sum over odd n of |2/(pi n)|^2 = 1 = (1/2 pi R) int |Phi|^2: True

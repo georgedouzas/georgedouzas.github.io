@@ -1,0 +1,6 @@
+sample mean -0.0084 +- 0.0395 (exact 0)
+sample variance 2.0287 +- 0.0690 (exact 2)
+sample kurtosis m4/s^4 = 2.505 (exact 2.5 for the mixture, 3 for a Gaussian)
+bin counts under the fitted Gaussian (expected 500 each): [530, 574, 486, 463, 438, 424, 463, 518, 572, 532]
+chi^2 = 50.92 with 7 degrees of freedom; 95% quantile 14.07; p-value 9.51e-09
+single Gaussian rejected at the 5% level: True

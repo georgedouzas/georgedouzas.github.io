@@ -1,0 +1,4 @@
+eigenvalues of H: [-sqrt(B^2 + B_x^2)*mu, sqrt(B^2 + B_x^2)*mu]
+tr e^{-beta H} = (e^(2*sqrt(B^2 + B_x^2)*beta*mu) + 1)*e^(-sqrt(B^2 + B_x^2)*beta*mu) ; equals e^{beta E} + e^{-beta E} = 2 cosh(beta E), E = mu sqrt(B^2 + B_x^2): True
+<sigma_3> = tr(rho sigma_3) = sqrt(B^2 + B_x^2)*(B*e^(2*sqrt(B^2 + B_x^2)*beta*mu) - B)/(B^2 + B_x^2 + (B^2 + B_x^2)*e^(2*sqrt(B^2 + B_x^2)*beta*mu))
+check against (B/sqrt(B^2 + B_x^2)) tanh(beta mu sqrt(B^2 + B_x^2)): True

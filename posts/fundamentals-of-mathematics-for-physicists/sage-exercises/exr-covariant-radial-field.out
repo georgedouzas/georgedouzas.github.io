@@ -1,0 +1,4 @@
+nabla V = nabla_g(V) = ∂/∂r⊗dr + ∂/∂ph⊗dph
+nabla_i V^k = delta^k_i: True
+nabla W = nabla_g(W) = -r ∂/∂r⊗dph + 1/r ∂/∂ph⊗dr
+nabla_r W^ph = 1/r and nabla_ph W^r = -r: True

@@ -1,0 +1,4 @@
+c_k (k != 0) = ((-1)^k - 1)/(pi*k^2) ; c_0 = 1/2*pi
+2 pi sum |c_k|^2 = 20.670851 vs 2 pi^3/3 = 20.670851
+2 pi sum k^2 |c_k|^2 = 6.282549 vs 2 pi = 6.283185 (partial sum up to |k| = 4000)
+exact sums over odd k > 0: sum 1/k^2 = 1/8*pi^2 , sum 1/k^4 = 1/96*pi^4

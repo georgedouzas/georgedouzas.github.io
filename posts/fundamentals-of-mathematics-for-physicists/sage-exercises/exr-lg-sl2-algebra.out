@@ -1,0 +1,5 @@
+[H, E] = 2E: True ; [H, F] = -2F: True ; [E, F] = H: True
+exp(t H) = [e^t, 0, 0, e^(-t)] ; det = 1
+exp(t E) = [1, t, 0, 1] ; det = 1
+exp(t F) = [1, 0, t, 1] ; det = 1
+det exp(xH + yE + zF) = exp(tr) = 1 since tr(xH + yE + zF) = 0

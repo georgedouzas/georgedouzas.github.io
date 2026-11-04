@@ -1,0 +1,3 @@
+[J,J] = eps J, [J,K] = eps K, [K,K] = -eps J: True
+M^{mu nu} relations: True
+J_i = (1/2) eps_ijk M^{jk} and K_i = M^{0i}: True

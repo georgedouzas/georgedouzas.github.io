@@ -1,0 +1,8 @@
+E_12: weight (T_3, Y_n) = (1, 0) , tau-charge 0
+E_13: weight (T_3, Y_n) = (1/2, 1/2*sqrt(3)) , tau-charge 1
+E_21: weight (T_3, Y_n) = (-1, 0) , tau-charge 0
+E_23: weight (T_3, Y_n) = (-1/2, 1/2*sqrt(3)) , tau-charge 1
+E_31: weight (T_3, Y_n) = (-1/2, -1/2*sqrt(3)) , tau-charge -1
+E_32: weight (T_3, Y_n) = (1/2, -1/2*sqrt(3)) , tau-charge -1
+{0: [-1, 0, 0, 1], 1: [-1/2, 1/2], -1: [-1/2, 1/2]}
+[PASS] the roots have length 1 and the charges are 0 (T_3 = -1, 0, 0, 1: a triplet and a singlet), +1 (T_3 = +-1/2) and -1 (T_3 = +-1/2): True

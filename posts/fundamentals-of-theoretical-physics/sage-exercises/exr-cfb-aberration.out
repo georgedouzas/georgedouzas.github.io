@@ -1,0 +1,7 @@
+lab frequency w = -sqrt(-b^2 + 1)*(b*cos(tp) + 1)*w0/(b^2 - 1) ; null: True
+cos t = (cos t' + b)/(1 + b cos t'): True
+w = w0/(gamma (1 - b cos t)): True
+emitted at t' = pi/2 -> cos t = b , sin t = 1/gamma: True
+beta = 0.50: half-angle of the forward cone 60.00 deg, transverse Doppler w/w0 at t = 90 deg: 0.8660
+beta = 0.90: half-angle of the forward cone 25.84 deg, transverse Doppler w/w0 at t = 90 deg: 0.4359
+beta = 0.99: half-angle of the forward cone 8.11 deg, transverse Doppler w/w0 at t = 90 deg: 0.1411

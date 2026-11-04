@@ -1,0 +1,5 @@
+theta equation: -cos(TH(t))*sin(TH(t))*diff(PH(t), t)^2 + diff(TH(t), t, t) = 0
+phi equation: 2*cos(TH(t))*sin(TH(t))*diff(PH(t), t)*diff(TH(t), t) + sin(TH(t))^2*diff(PH(t), t, t) = 0
+theta geodesic equation equals the EL equation: True
+phi geodesic equation equals the EL equation divided by sin^2(theta): True
+the momentum conjugate to phi, p_phi = sin^2(theta) phi', is conserved (phi is cyclic): dL/dphi = 0

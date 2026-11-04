@@ -1,0 +1,9 @@
+sphere: V' = A V with A = [                 0  cos(th0)*sin(th0)]
+[-cos(th0)/sin(th0)                  0] ; eigenvalues [-I*cos(th0), I*cos(th0)]
+  the vector turns at the rate cos(th0) relative to the chart frame, so after one turn the holonomy angle is 2 pi (1 - cos th0)
+  K = R0^(-2) ; integral of K dA over the cap = 2*pi - 2*pi*cos(th0) ; equal to 2 pi (1 - cos th0): True
+  independent of R0: the area grows as R0^2 and K falls as 1/R0^2
+torus: V' = B V with B = [[0, -(r*cos(a0)*sin(a0) + Rr*sin(a0))/r], [r*sin(a0)/(r*cos(a0) + Rr), 0]] ; eigenvalues [-I*sin(a0), I*sin(a0)]
+  rotation rate sin(a0) relative to the frame: holonomy angle 2 pi (1 - sin a0) after one turn (mod 2 pi)
+  integral of K dA over the band a0 < a < pi/2 up to the top circle (itself a geodesic, holonomy 0): 2*pi - 2*pi*sin(a0) ; equal to 2 pi (1 - sin a0): True
+  outer equator a0 = 0 is a geodesic: holonomy angle 2 pi = 0 mod 2 pi, the band a in (0, pi/2) has total curvature 2*pi

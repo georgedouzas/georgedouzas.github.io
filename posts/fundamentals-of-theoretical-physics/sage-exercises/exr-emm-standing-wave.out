@@ -1,0 +1,3 @@
+div E, div B: 0 0 ; curl E + dB/dt = (0, 0, 0) ; curl B - dE/dt = (0, 0, 0)
+S = (0, 0, -E0^2*cos(t)*cos(z)*sin(t)*sin(z)) ; du/dt + div S = 0
+time average of S_z: 0

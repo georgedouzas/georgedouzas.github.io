@@ -1,0 +1,4 @@
+components of F_xy in (T_1, T_2, T_3): [-1, 1, x*y]
+F_xy = T_2 - T_1 + x y T_3: True
+F' = g^{-1} F g for constant g: True
+tr(F_xy^2) = -1/2*x^2*y^2 - 1 ; gauge invariant: True

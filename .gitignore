@@ -39,3 +39,17 @@ _*.local
 
 # Unpublished drafts
 posts/_*/
+
+# Book build output and local files
+**/tutorial/_book/
+**/tutorial/_old/
+**/tutorial/_drafts/
+**/tutorial/*.log
+**/tutorial/*.aux
+**/tutorial/*.toc
+**/tutorial/site_libs/
+.env
+.coverage
+
+# Copyrighted reference PDFs and reading notes kept beside each tutorial
+posts/*/_references/

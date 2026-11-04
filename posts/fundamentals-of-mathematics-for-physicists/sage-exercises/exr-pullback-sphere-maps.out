@@ -1,0 +1,3 @@
+rotation (th, ph) -> (th, ph + c):  F^* g = F^*(g) = dth⊗dth + (-1/2*cos(2*th) + 1/2) dph⊗dph   isometry: True
+antipodal (th, ph) -> (pi - th, ph + pi):  F^* g = F^*(g) = dth⊗dth + (-1/2*cos(2*th) + 1/2) dph⊗dph   isometry: True
+halving (th, ph) -> (th/2, ph):  F^* g = F^*(g) = 1/4 dth⊗dth + (-1/2*cos(th) + 1/2) dph⊗dph   isometry: False

@@ -1,0 +1,6 @@
+Ad(exp(t T3)) in the basis T_a =
+[ cos(t) -sin(t)       0]
+[ sin(t)  cos(t)       0]
+[      0       0       1]
+rotation by t about the third axis: True
+exp(2 pi T3) = -1: True   Ad(exp(2 pi T3)) = 1: True

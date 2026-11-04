@@ -1,0 +1,6 @@
+lim_{N->oo} <m> at h > 0: m0 ; then h -> 0+: m0
+lim_{h->0} <m> at finite N: 0 ; then N -> oo: 0
+N =    10, beta = m0 = 1, h = 0.001: <m> = 0.0100
+N =   100, beta = m0 = 1, h = 0.001: <m> = 0.0997
+N =  1000, beta = m0 = 1, h = 0.001: <m> = 0.7616
+N = 10000, beta = m0 = 1, h = 0.001: <m> = 1.0000

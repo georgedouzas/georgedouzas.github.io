@@ -1,0 +1,6 @@
+R5 = 2*diff(phi(x), x, x)/phi(x)
+[PASS] R5 = 2 phi''/phi = -(2/phi) Box phi with Box phi = -phi'': True
+det g5 = phi(x)^2 (positive: four spacelike directions)
+[PASS] det g5 = phi^2 (so sqrt|g5| = phi for phi > 0): True
+sqrt|g5| R5 = phi R5 = 2*diff(phi(x), x, x)
+[PASS] sqrt|g5| R5 = 2 phi'' is a total x-derivative, so the dilaton term drops out of the action: True

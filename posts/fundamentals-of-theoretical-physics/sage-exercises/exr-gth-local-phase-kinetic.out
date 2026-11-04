@@ -1,0 +1,4 @@
+change of the Lagrangian under the local rotation:
+u(t, x)^2*diff(al(t, x), t)^2 + v(t, x)^2*diff(al(t, x), t)^2 - u(t, x)^2*diff(al(t, x), x)^2 - v(t, x)^2*diff(al(t, x), x)^2 - 2*v(t, x)*diff(al(t, x), t)*diff(u(t, x), t) + 2*v(t, x)*diff(al(t, x), x)*diff(u(t, x), x) + 2*u(t, x)*diff(al(t, x), t)*diff(v(t, x), t) - 2*u(t, x)*diff(al(t, x), x)*diff(v(t, x), x)
+[PASS] delta L = -d_mu alpha j^mu + (d_mu alpha d^mu alpha) |phi|^2: True
+[PASS] the mass term m^2 |phi|^2 does not change (only derivatives see alpha(x)): True

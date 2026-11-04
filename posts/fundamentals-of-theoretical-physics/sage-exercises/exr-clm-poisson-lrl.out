@@ -1,0 +1,3 @@
+{A_i, H} = 0: True
+{L_i, A_j} = eps_ijk A_k: True
+{A_i, A_j} = -2 m H eps_ijk L_k: True

@@ -1,0 +1,5 @@
+Laplacian inside : 0
+Laplacian outside: 0
+continuity at r = a: True
+jump of -d_r phi: P*cos(theta) ; equals P cos(theta): True
+E inside, z component: -d_z(P z/3) = -1/3*P

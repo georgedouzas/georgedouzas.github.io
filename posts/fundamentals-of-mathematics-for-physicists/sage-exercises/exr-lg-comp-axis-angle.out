@@ -1,0 +1,6 @@
+cos(t/2) = 1/2 ; sin(t/2) n = (1/2, 1/2, 1/2) ; angle t = 2/3*pi ; axis n = (1/3*sqrt(3), 1/3*sqrt(3), 1/3*sqrt(3))
+eigenvalues of g: [1/2*I*sqrt(3) + 1/2, -1/2*I*sqrt(3) + 1/2] ; e^{-i t/2} = -1/2*I*sqrt(3) + 1/2
+axis xi^dagger sigma xi from the eigenvector of e^{-i t/2}: [sqrt(1/3), sqrt(1/3), sqrt(1/3)]
+R_1(pi/2) R_2(pi/2) = [0, 0, 1, 1, 0, 0, 0, 1, 0] (e_1 -> e_2 -> e_3 -> e_1)
+Ad(g1 g2) = R_1(pi/2) R_2(pi/2): True ; = rotation by 2 pi/3 about (1,1,1)/sqrt3: True
+reversed order, Ad(g2 g1) = rotation by 2 pi/3 about (1,1,-1)/sqrt3: True

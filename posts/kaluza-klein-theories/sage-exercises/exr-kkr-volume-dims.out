@@ -1,0 +1,5 @@
+d = 1: det G + phi^2 det g = 0: True
+d = 2: det G + phi^2 det g = 0: True
+d = 3: det G + phi^2 det g = 0: True
+d = 4: det G + phi^2 det g = 0: True
+[PASS] det G = -phi^2 det g for d = 1, 2, 3, 4: True

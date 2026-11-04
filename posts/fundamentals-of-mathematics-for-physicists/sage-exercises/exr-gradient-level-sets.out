@@ -1,0 +1,4 @@
+grad f = (2*x, 8*y) ; at (2, 1): (4, 8)
+f on the level curve is constant: 8
+grad f . tangent along the level curve = 0 (orthogonal everywhere)
+directional derivative at (2, 1) along the unit vector (3, 4)/5: 44/5 ; maximal along grad f/|grad f|: 4*sqrt(5)

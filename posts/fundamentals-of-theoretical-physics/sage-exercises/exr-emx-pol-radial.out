@@ -1,0 +1,4 @@
+rho_b = -3*k
+sigma_b = R*k
+total volume charge: -4*pi*R^3*k ; total surface charge: 4*pi*R^3*k ; sum: 0
+E_r inside (Gauss): -k*r ; E outside: 0 since the total charge vanishes

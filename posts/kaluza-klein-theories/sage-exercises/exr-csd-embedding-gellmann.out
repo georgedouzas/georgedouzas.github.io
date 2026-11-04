@@ -1,0 +1,13 @@
+ad tau in the basis i lambda_k:
+[ 0  0  0  0  0  0  0  0]
+[ 0  0  0  0  0  0  0  0]
+[ 0  0  0  0  0  0  0  0]
+[ 0  0  0  0  1  0  0  0]
+[ 0  0  0 -1  0  0  0  0]
+[ 0  0  0  0  0  0  1  0]
+[ 0  0  0  0  0 -1  0  0]
+[ 0  0  0  0  0  0  0  0]
+eigenvalues: [-I, -I, I, I, 0, 0, 0, 0]
+[PASS] ad tau rotates (i lambda_4, i lambda_5) and (i lambda_6, i lambda_7) and kills i lambda_1,2,3,8; eigenvalues 0 (x4), +i (x2), -i (x2): True
+Tr tau^2 = -2/3 , Tr T_3^2 = -1/2
+[PASS] tau = (2/sqrt 3) (i lambda_8 / 2) and Tr tau^2 = -2/3 = (4/3) Tr T_3^2: True

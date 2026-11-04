@@ -1,0 +1,6 @@
+K(cos(x)) = pi*cos(x)
+K(sin(x)) = pi*sin(x)
+K(cos(2*x)) = 0
+K(-pi + x) = -2*pi*sin(x)
+K(1) = 0
+largest eigenvalues of the discretised operator: [3.141593, 3.141593, 0.0, 0.0]  pi = 3.141593

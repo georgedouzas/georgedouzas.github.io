@@ -1,0 +1,4 @@
+g_uu == 4/(1 + u^2 + v^2)^2: True ; g_uv == 0: True ; g_vv == g_uu: True
+determinant: 16/(u^2 + v^2 + 1)^4
+inverse metric component g^uu: 1/4*(u^2 + v^2 + 1)^2 ; g^uv: 0
+at u = v = 0 (the south pole (0, 0, -1), where the spherical chart fails) the matrix is [4, 0, 0, 4] with determinant 16

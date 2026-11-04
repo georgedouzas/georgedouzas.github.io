@@ -1,0 +1,7 @@
+induced metric: g = 16/25 da⊗da + (16/25*cos(a)^2 + 16/5*cos(a) + 4) db⊗db
+at the outer equator a = 0 the matrix is [16/25, 0, 0, 196/25] with signature (p, q, z) = (2, 0, 0)
+determinant: 64/625*(2*cos(a) + 5)^2 ; inverse: inv_g = 25/16 ∂/∂a⊗∂/∂a + 25/4/(4*cos(a)^2 + 20*cos(a) + 25) ∂/∂b⊗∂/∂b
+lowering d_b: (16/25*cos(a)^2 + 16/5*cos(a) + 4) db
+gradient of the height z = r sin a: 5/4*cos(a) ∂/∂a ; |grad z| = abs(cos(a))
+cos of the angle between d_a + d_b and d_b at the outer equator: 7/53*sqrt(53) = 0.96152 ; on the inner equator: 3/13*sqrt(13)
+sqrt(det g) = r (R + r cos a): True ; area 4 pi^2 R r = 32/5*pi^2

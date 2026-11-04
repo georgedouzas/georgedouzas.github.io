@@ -1,0 +1,5 @@
+origin: F = (k, 0, 0)  W^{ij} F_j = (0, 0, 0)
+[PASS] at the origin F = (k, 0, 0) and W^{ij} F_j = 0: the goldstino is psi_1: True
+shifted minimum: F = [m^2/y, -sqrt(-2*m^2 + 2*k*y)*m/y, 0]  W^{ij} F_j = (0, 0, 0)
+[PASS] at the shifted minimum (m^2 < yk) W^{ij} F_j = 0 as well: a massless goldstino along F: True
+[PASS] the F-vector there is non-zero, (m^2/y, -m x3, 0) up to sign: supersymmetry is still broken: True

@@ -1,0 +1,7 @@
+induced metric: g = ((c^2 - 1)*sin(th)^2 + 1) dth⊗dth + sin(th)^2 dph⊗dph
+scalar curvature R(theta) = 2*c^2/(c^2*sin(th)^2 - sin(th)^2 + 1)^2
+R = 2 for c = 1: True
+poles (theta -> 0): R = 2*c^2 ; equator (theta = pi/2): R = 2/c^2
+prolate c = 2: R(pole) = 8.000 > R(equator) = 0.500: True
+oblate c = 1/2: R(pole) = 0.500 < R(equator) = 8.000: True
+Gauss-Bonnet for c = 2: integral of K dA = 4*pi

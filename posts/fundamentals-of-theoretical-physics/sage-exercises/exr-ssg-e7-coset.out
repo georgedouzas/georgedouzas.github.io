@@ -1,0 +1,6 @@
+dim E7 = 133 , dim SU(8) = 63 , dim E6 = 78 , dim USp(8) = 36
+[PASS] dim E_7(7)/SU(8) = 133 - 63 = 70, the scalars of four-dimensional N = 8 supergravity: True
+[PASS] dim E_6(6)/USp(8) = 78 - 36 = 42, the scalars of five-dimensional N = 8 supergravity: True
+dimensions of the fundamental representations of E7: [56, 133, 912, 1539, 8645, 27664, 365750]
+[PASS] the smallest representation of E7 is the 56 = 28 + 28 (electric and magnetic charges of the 28 vectors): True
+[PASS] the noncompact part 133 - 63 = 70 equals binomial(8, 4), the fourth exterior power of the 8 of SU(8): True

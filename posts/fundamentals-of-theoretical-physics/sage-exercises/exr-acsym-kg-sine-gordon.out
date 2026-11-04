@@ -1,0 +1,6 @@
+dL/dp = -sin(p) ; dL/dpt = pt ; dL/dpx = -px
+Euler-Lagrange expression: sin(f(t, x)) + diff(f(t, x), t, t) - diff(f(t, x), x, x)
+sin(4 arctan w) = 4w(1 - w^2)/(1 + w^2)^2 by the multiple-angle formulas: True
+static kink: phi'' = sin(phi): True
+boosted kink: phi_tt - phi_xx + sin(phi) = 0: True
+topological charge (phi(+oo) - phi(-oo))/(2 pi) = 1

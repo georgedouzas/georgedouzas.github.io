@@ -1,0 +1,4 @@
+derivative at the stated cosine: ((3*cos(alpha)^2 - 5)*v*sin(alpha) + 2*cos(alpha)*sin(alpha))/(v^6*cos(alpha)^6 - 6*v^5*cos(alpha)^5 + 15*v^4*cos(alpha)^4 - 20*v^3*cos(alpha)^3 + 15*v^2*cos(alpha)^2 - 6*v*cos(alpha) + 1)
+v = 0.50: alpha_max = 38.16 deg, 1/(2 gamma) = 24.81 deg
+v = 0.90: alpha_max = 13.42 deg, 1/(2 gamma) = 12.49 deg
+v = 0.99: alpha_max = 4.07 deg, 1/(2 gamma) = 4.04 deg

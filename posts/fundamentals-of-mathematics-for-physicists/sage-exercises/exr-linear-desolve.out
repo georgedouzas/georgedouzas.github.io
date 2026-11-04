@@ -1,0 +1,4 @@
+equation y' + (1/x) y = x: solution y = 1/3*(x^3 + 3*_C)/x | integrating factor mu = x
+   mu' = p mu, so (mu y)' = mu (y' + p y): True | residual of the solution zero: True
+equation y' + (-2*x) y = x: solution y = 1/2*(2*_C - e^(-x^2))*e^(x^2) | integrating factor mu = e^(-x^2)
+   mu' = p mu, so (mu y)' = mu (y' + p y): True | residual of the solution zero: True

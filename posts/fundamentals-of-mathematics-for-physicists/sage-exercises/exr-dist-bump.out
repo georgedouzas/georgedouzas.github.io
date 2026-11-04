@@ -1,0 +1,5 @@
+h^(1)(t) = e^(-1/t)/t^2 ; limit at 0+: 0
+h^(2)(t) = -(2*t - 1)*e^(-1/t)/t^4 ; limit at 0+: 0
+h^(3)(t) = (6*t^2 - 6*t + 1)*e^(-1/t)/t^6 ; limit at 0+: 0
+the bump e^{-1/(1 - x^2)} and its first two derivatives at x -> 1-:
+[0, 0, 0]

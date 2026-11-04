@@ -1,0 +1,6 @@
+S^{01} = -(1/2) diag(sigma_1, -sigma_1): True ; (2 S^{01})^2 = 1: True
+exp(w S^{01}) = cosh(w/2) + 2 S^{01} sinh(w/2): True
+Lambda_s^dagger Lambda_s = cosh(w) 1 + 2 sinh(w) S^{01}: True (not 1: boosts are not unitary)
+Lambda_s^{-1} = exp(-w S^{01}): True
+Lambda_s^{-1} gamma^mu Lambda_s = Lambda^mu_nu gamma^nu: True
+the vector boost preserves eta: True

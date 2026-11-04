@@ -1,0 +1,4 @@
+Ricci tensor: Ric(g) = 1/2 dth⊗dth + 1/2 dph⊗dph + 1/2*cos(th) dph⊗dps + 1/2*cos(th) dps⊗dph + 1/2 dps⊗dps
+R_thth = R_phph = R_psps = 1/2, R_phps = cos(th)/2, R_thph = R_thps = 0: True
+Ric = 2 g: True ; scalar curvature R = 6 = n (n - 1) for n = 3: True
+sectional curvatures of the three coordinate planes: [1, 1, 1] -> all equal to 1: True

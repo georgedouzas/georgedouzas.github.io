@@ -1,16 +1,10 @@
-<% const post = items[0]; %>
-<% if (post) { %>
 ```{=html}
-<article class="quick-card">
-<div class="quick-thumb"><% if (post.image) { %><img src="<%- post.image %>" alt=""><% } %></div>
+<a class="quick-card" href="posts.html">
+<div class="quick-thumb"><img src="assets/posts.svg" alt=""></div>
 <div class="quick-body">
 <p class="quick-label">Posts <span aria-hidden="true">→</span></p>
-<h2><a class="quick-link" href="posts.html"><%= post.title %></a></h2>
-<p class="quick-text"><%= post.description %></p>
-<div class="quick-tags">
-<% for (const tag of (post.categories || []).slice(0, 3)) { %><a class="tag-chip" href="posts.html#tag=<%- encodeURIComponent(tag) %>"><%= tag %></a><% } %>
+<h2>Tutorials and notes</h2>
+<p class="quick-text">On mathematics, physics and my open-source tools.</p>
 </div>
-</div>
-</article>
+</a>
 ```
-<% } %>

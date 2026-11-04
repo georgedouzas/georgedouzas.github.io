@@ -1,0 +1,4 @@
+R e_3 = (sin(ph)*sin(th), -cos(ph)*sin(th), cos(th)) = (sin th cos(ph - pi/2), sin th sin(ph - pi/2), cos th): True
+l = 1: column m' = 0 independent of psi: True; equals Y_lm(theta, phi - pi/2) for m = [1, 0, -1]: [True, True, True]
+l = 2: column m' = 0 independent of psi: True; equals Y_lm(theta, phi - pi/2) for m = [2, 1, 0, -1, -2]: [True, True, True, True, True]
+l = 3: column m' = 0 independent of psi: True; equals Y_lm(theta, phi - pi/2) for m = [3, 2, 1, 0, -1, -2, -3]: [True, True, True, True, True, True, True]

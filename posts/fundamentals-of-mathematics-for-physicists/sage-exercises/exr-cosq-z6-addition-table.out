@@ -1,0 +1,6 @@
+H = [0, 2, 4]: cosets [[0, 2, 4], [1, 3, 5]]
+   table of indices: [[0, 1], [1, 0]] ; the coset of a sum depends only on the cosets: True
+   the table is addition modulo 2 : True
+H = [0, 3]: cosets [[0, 3], [1, 4], [2, 5]]
+   table of indices: [[0, 1, 2], [1, 2, 0], [2, 0, 1]] ; the coset of a sum depends only on the cosets: True
+   the table is addition modulo 3 : True

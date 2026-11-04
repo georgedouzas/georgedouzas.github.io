@@ -1,0 +1,7 @@
+chi(omega) = -Delta/(I*omega - 1)
+Re = Delta/(omega^2 + 1) ; Im = Delta*omega/(omega^2 + 1)
+Im maximal where d/dw Im = 0: [
+omega == 1
+]
+Kramers-Kronig at omega tau0 = 0.5: 0.80000000 ; exact Re/Delta: 0.80000000
+water, tau0 = 8 ps: f_max = 1/(2 pi tau0) = 19.9 GHz

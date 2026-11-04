@@ -1,0 +1,3 @@
+kernel of ad tau in Gell-Mann coordinates (x_1 .. x_8): [[1, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1]]
+[PASS] the centraliser is spanned by i lambda_1, i lambda_2, i lambda_3, i lambda_8 (real dimension 4): True
+[PASS] [T_a, T_b] = -eps_abc T_c for T_a = (i/2) lambda_a, and i lambda_8 commutes with them: su(2) + u(1): True

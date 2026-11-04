@@ -1,0 +1,4 @@
+Box Phi = (R*e^(2*t/R)*diff(Phi(t, x), t, t) + e^(2*t/R)*diff(Phi(t, x), t) - R*diff(Phi(t, x), x, x))*e^(-2*t/R)/R
+Box Phi = Phi_tt + Phi_t/R - exp(-2t/R) Phi_xx: True
+homogeneous solutions A + B exp(-t/R): True
+exp(i k (x - eta)) solves the wave equation: True

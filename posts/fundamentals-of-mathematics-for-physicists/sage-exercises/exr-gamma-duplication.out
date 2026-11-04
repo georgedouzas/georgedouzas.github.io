@@ -1,0 +1,6 @@
+z = 1 : 1/2*sqrt(pi) == 1/2*sqrt(pi) : True
+z = 2 : 3/4*sqrt(pi) == 3/4*sqrt(pi) : True
+z = 3 : 15/4*sqrt(pi) == 15/4*sqrt(pi) : True
+z = 7/2 : 45/4*sqrt(pi) == 45/4*sqrt(pi) : True
+z = 0.3 + 0.7 i (numerically): True
+Gamma(1/4) Gamma(3/4) by duplication at z = 1/4: 2^(1/2) sqrt(pi) Gamma(1/2) = sqrt(2)*pi   numerically 4.44288293815837 4.44288293815837

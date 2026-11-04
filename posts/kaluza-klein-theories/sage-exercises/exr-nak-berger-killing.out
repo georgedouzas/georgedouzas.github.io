@@ -1,0 +1,6 @@
+[PASS] the right-invariant fields xi_a are Killing for every a, b: True
+[PASS] e_3 = d_ps is Killing, e_1 is not for a != b: True
+xi_1 . xi_1 = -a^2*sin(ph)^2*sin(th)^2 + b^2*sin(ph)^2*sin(th)^2 + a^2
+[PASS] <xi_a . xi_b> = ((2 a^2 + b^2)/3) delta_ab: True
+[PASS] for a = b the inner products are constant, a^2 delta_ab: True
+[PASS] e_3 . e_3 = b^2 is constant: True

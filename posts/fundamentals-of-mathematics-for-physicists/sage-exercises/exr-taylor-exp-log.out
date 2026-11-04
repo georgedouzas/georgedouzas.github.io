@@ -1,0 +1,5 @@
+f = e^z :   1/720*z^6 + 1/120*z^5 + 1/24*z^4 + 1/6*z^3 + 1/2*z^2 + z + 1
+f = log(z + 1) :   -1/6*z^6 + 1/5*z^5 - 1/4*z^4 + 1/3*z^3 - 1/2*z^2 + z
+f = 1/(z^2 + 1) :   -z^6 + z^4 - z^2 + 1
+1/(1 + z^2): coefficients (-1)^n z^{2n}, |a_n|^{1/n} -> 1, radius 1 (poles at +-i): [-1*I, 1*I]
+e^z: ratio of coefficients a_{n+1}/a_n = 1/(n+1) -> 0, radius infinite: [1, 1/2, 1/3, 1/4, 1/5]

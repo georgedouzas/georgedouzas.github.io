@@ -1,0 +1,5 @@
+Poisson cumulants kappa_1..kappa_5: [lam, lam, lam, lam, lam]
+die cumulants kappa_1..kappa_4: [7/2, 35/12, 0, -259/24]
+kappa_2 = 35/12: True ; kappa_4 = E(X - 7/2)^4 - 3 sigma^4 = 707/48 - 1225/48: True
+Gaussian cumulants kappa_1..kappa_5: [mu, sigma^2, 0, 0, 0]
+Gaussian E e^{sX} =  e^(1/2*s^2*sigma^2 + mu*s) ; log is quadratic: True

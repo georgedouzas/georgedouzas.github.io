@@ -1,0 +1,5 @@
+Z_bosons = e^(beta*omega)/(e^(beta*omega) - 1)   Z_fermions = 1/(e^(beta*omega) - 1)
+[PASS] Tr (-1)^F e^{-beta H} = Z_B - Z_F = 1, independent of beta: True
+[PASS] Tr e^{-beta H} = (1 + q)/(1 - q): True
+truncated index at beta omega = 1: 0.99999999999999999575165
+[PASS] the truncated index equals 1 - e^{-40}, the unpaired top fermion of the cut-off: True

@@ -1,0 +1,9 @@
+inverse metric: inv_g = 4 ∂/∂th⊗∂/∂th + 4/sin(th)^2 ∂/∂ph⊗∂/∂ph - 4*cos(th)/sin(th)^2 ∂/∂ph⊗∂/∂ps - 4*cos(th)/sin(th)^2 ∂/∂ps⊗∂/∂ph + 4/sin(th)^2 ∂/∂ps⊗∂/∂ps
+non-zero Christoffel symbols Gamma^k_ij (i <= j):
+   ('th', 'ph', 'ps') = 1/2*sin(th)
+   ('ph', 'th', 'ph') = 1/2*cos(th)/sin(th)
+   ('ph', 'th', 'ps') = -1/2/sin(th)
+   ('ps', 'th', 'ph') = -1/2/sin(th)
+   ('ps', 'th', 'ps') = 1/2*cos(th)/sin(th)
+exactly five non-zero symbols, with the values of the proposition: True
+the psi-circles are geodesics, Gamma^k_psps = 0 for all k: True

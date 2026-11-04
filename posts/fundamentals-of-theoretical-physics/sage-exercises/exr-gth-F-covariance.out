@@ -1,0 +1,3 @@
+[PASS] F'_{tx} = g^{-1} F_{tx} g: True
+[PASS] F itself changes (it is not gauge invariant): True
+[PASS] Tr(F_{tx} F_{tx}) is gauge invariant: True

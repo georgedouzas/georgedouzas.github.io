@@ -1,0 +1,5 @@
+dZ = dZ = -sin(th) dth  -> gradient (index raised): -sin(th) ∂/∂th
+length of the gradient: sin(th)
+lowering d/dphi: sin(th)^2 dph
+raising then lowering d/dphi returns it: True
+the inverse metric: inv_g = ∂/∂th⊗∂/∂th + sin(th)^(-2) ∂/∂ph⊗∂/∂ph

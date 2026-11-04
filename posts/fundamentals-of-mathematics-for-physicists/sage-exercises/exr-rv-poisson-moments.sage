@@ -1,0 +1,15 @@
+# Exercise exr-rv-poisson-moments: Poisson(lambda) sums by symbolic summation: total probability 1, mean lambda,
+# E[k(k - 1)] = lambda^2, variance lambda, characteristic function exp(lambda (e^{it} - 1)).
+k, lam, t = var("k lam t")
+assume(k, "integer"); assume(lam > 0)
+pk = exp(-lam) * lam ** k / factorial(k)
+tot = SR(sum(pk, k, 0, oo)).simplify_full()
+m1 = SR(sum(k * pk, k, 0, oo)).simplify_full()
+fact2 = SR(sum(k * (k - 1) * pk, k, 0, oo)).simplify_full()
+m2 = SR(sum(k ** 2 * pk, k, 0, oo)).simplify_full()
+cf = SR(sum(exp(I * t * k) * pk, k, 0, oo)).simplify_full()
+print("total probability:", tot)
+print("mean:", m1)
+print("E[k(k-1)]:", fact2)
+print("E k^2:", m2, "; variance:", (m2 - m1 ** 2).simplify_full())
+print("characteristic function:", cf, "; equals exp(lam (e^{it} - 1)):", bool((cf - exp(lam * (exp(I * t) - 1))).simplify_full() == 0))

@@ -1,0 +1,6 @@
+|a|^2 + |b|^2 = 1
+pi(s(theta, phi)) = (sin th cos ph, sin th sin ph, cos th): True
+s at the north pole theta = 0: (1, 0) (independent of phi)
+s at the south pole theta = pi: (0, e^(-I*ph)) (depends on phi: no continuous extension)
+s' = (cos(th/2) e^{i ph}, sin(th/2)) is also a section: True
+s' = e^{i phi} s on the overlap, the transition function: True

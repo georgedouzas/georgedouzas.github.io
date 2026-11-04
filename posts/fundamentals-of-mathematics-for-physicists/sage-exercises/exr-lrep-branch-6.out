@@ -1,0 +1,5 @@
+lambda_8-charge 2/3*sqrt(3): states ['uu', 'ud', 'dd'], lambda_3-weights [2, 0, -2] -> su(2) multiplet of dimension 3
+lambda_8-charge -1/3*sqrt(3): states ['us', 'ds'], lambda_3-weights [1, -1] -> su(2) multiplet of dimension 2
+lambda_8-charge -4/3*sqrt(3): states ['ss'], lambda_3-weights [0] -> su(2) multiplet of dimension 1
+Sage levi branching of A2(2,0) = 6: A1(0) + A1(1) + A1(2)
+sum of the charges vanishes: True

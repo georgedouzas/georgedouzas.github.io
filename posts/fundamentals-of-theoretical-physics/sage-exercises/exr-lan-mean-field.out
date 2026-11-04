@@ -1,0 +1,7 @@
+T/T_c = 0.20: m = 0.999909, near-T_c form 0.309839, low-T form 0.999909
+T/T_c = 0.30: m = 0.997414, near-T_c form 0.434741, low-T form 0.997455
+T/T_c = 0.50: m = 0.957504, near-T_c form 0.612372, low-T form 0.963369
+T/T_c = 0.70: m = 0.828635, near-T_c form 0.664078, low-T form 0.885135
+T/T_c = 0.90: m = 0.525430, near-T_c form 0.492950, low-T form 0.783264
+T/T_c = 0.99: m = 0.172511, near-T_c form 0.171473, low-T form 0.734743
+series check: tanh(x/t) - x = -(t - 1)*x/t - 1/3*x^3/t^3

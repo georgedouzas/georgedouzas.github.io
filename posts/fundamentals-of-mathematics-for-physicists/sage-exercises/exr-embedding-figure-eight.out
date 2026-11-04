@@ -1,0 +1,9 @@
+velocity: (2*cos(2*t), cos(t))
+if cos t = 0 then cos 2t = 2 cos^2 t - 1 = -1  != 0, so the velocity never vanishes: rank one everywhere
+on the branch s = pi - t: sin 2s + sin 2t = 0  so E(s) = E(t) needs sin 2t = 0
+  t = 1/2*pi : partner s = pi - t mod 2 pi = 1/2*pi ; same parameter: True ; partner inside (0, 2 pi): True
+  t = pi : partner s = pi - t mod 2 pi = 2*pi ; same parameter: False ; partner inside (0, 2 pi): False
+  t = 3/2*pi : partner s = pi - t mod 2 pi = 3/2*pi ; same parameter: True ; partner inside (0, 2 pi): True
+hence E is injective on (0, 2 pi)
+limits at the two ends of the interval: (0, 0) (0, 0)  both equal E(pi) = (0, 0)
+so the inverse E^{-1} is not continuous at (0, 0): points near the origin on the image have parameters near 0, near pi and near 2 pi

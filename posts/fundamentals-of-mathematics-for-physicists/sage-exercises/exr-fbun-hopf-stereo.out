@@ -1,0 +1,4 @@
+(X + iY)/(1 + Z) = conj(b)/conj(a) on S^3: True
+X^2 + Y^2 + Z^2 = (|a|^2 + |b|^2)^2: True
+the ratio conj(b)/conj(a) is unchanged by (a, b) -> e^{it}(a, b): True
+the north pole Z = 1 is b = 0 (ratio 0); the south pole Z = -1 is a = 0 (ratio infinite)

@@ -1,0 +1,9 @@
+d = 11: bosons = 44 + 84 = 128 ; fermions = 128
+[PASS] d = 11: 128 + 128: True
+d = 10 (1,1): bosons = 128 ; fermions = 128
+[PASS] d = 10 type IIA: 128 + 128: True
+d = 5 N = 8: bosons = 128 ; fermions = 128
+[PASS] d = 5, N = 8: 128 + 128: True
+d = 4 N = 8: bosons = 128 ; fermions = 128
+[PASS] d = 4, N = 8: 128 + 128: True
+[PASS] reduction of the 3-form and the metric on T^7: 21 + 7 = 28 vectors, 35 + 28 + 7 (dualised 2-forms) = 70 scalars: True

@@ -1,0 +1,3 @@
+change of L under the rotation: 1/2*(sin(a)*u(t, x)^2 + 2*cos(a)*u(t, x)*v(t, x) - sin(a)*v(t, x)^2)*(m1 + m2)*(m1 - m2)*sin(a)
+it vanishes for m1 = m2: True
+for m1 = m2 = m: L = d phibar d phi - m^2 |phi|^2: True

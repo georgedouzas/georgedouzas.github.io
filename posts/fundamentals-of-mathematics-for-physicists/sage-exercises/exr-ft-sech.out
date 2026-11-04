@@ -1,0 +1,5 @@
+k = 0 : int sech(x) cos(kx) dx = 3.1415926536 ; pi sech(pi k/2) = 3.1415926536 ; agree to 1e-8: True
+k = 1/2 : int sech(x) cos(kx) dx = 2.3717130428 ; pi sech(pi k/2) = 2.3717130428 ; agree to 1e-8: True
+k = 1 : int sech(x) cos(kx) dx = 1.2520403313 ; pi sech(pi k/2) = 1.2520403313 ; agree to 1e-8: True
+k = 2 : int sech(x) cos(kx) dx = 0.2710149514 ; pi sech(pi k/2) = 0.2710149514 ; agree to 1e-8: True
+k = 3 : int sech(x) cos(kx) dx = 0.0564391275 ; pi sech(pi k/2) = 0.0564391275 ; agree to 1e-8: True

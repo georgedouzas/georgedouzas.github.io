@@ -1,0 +1,4 @@
+scalar curvature of S^2(p) x S^2(q): 2*(p^2 + q^2)/(p^2*q^2) : True
+Ricci tensor: Ric(g) = dth1⊗dth1 + sin(th1)^2 dph1⊗dph1 + dth2⊗dth2 + sin(th2)^2 dph2⊗dph2
+mixed components R_{th1 th2}, R_{ph1 ph2} vanish: True
+for p = q = 1: R = 4 = 2 + 2, twice the value of one unit sphere: True

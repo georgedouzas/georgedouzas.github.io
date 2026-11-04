@@ -1,0 +1,6 @@
+int_0^{pi R} f_0^2 dy = 1
+fraction within R/10 = (e^(1/5*M*R) - 1)*e^(2*pi*M*R)/(e^(2*pi*M*R + 1/5*M*R) - e^(1/5*M*R))
+  M R = 1: 0.181608
+  M R = 10: 0.864665
+  M R = 100: 1.000000
+limit M -> 0 of f_0^2 = 1/(pi*R) = 1/(pi R)

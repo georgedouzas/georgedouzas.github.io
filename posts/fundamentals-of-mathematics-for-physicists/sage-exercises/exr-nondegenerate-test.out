@@ -1,0 +1,6 @@
+diag(1, -1, -1, -1) : det = -1 ; non-degenerate: True 
+[[1, 2], [2, 4]] : det = 0 ; non-degenerate: False ; kernel basis [
+(1, -1/2)
+]
+[[2, 1, 0], [1, 2, 1], [0, 1, 2]] : det = 4 ; non-degenerate: True 
+the kernel vector (1, -1/2) pairs to zero with e1 and e2: [0, 0]

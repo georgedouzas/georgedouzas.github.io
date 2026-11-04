@@ -1,0 +1,7 @@
+-i f_n' = (n + alpha/2pi) f_n for n = -2..2: True
+f_n(2 pi) = e^{i alpha} f_n(0): True
+Gram matrix of f_{-1}, f_0, f_1 on (0, 2 pi):
+[2*pi    0    0]
+[   0 2*pi    0]
+[   0    0 2*pi]
+spectrum for alpha = pi: [-5/2, -3/2, -1/2, 1/2, 3/2, 5/2, 7/2]

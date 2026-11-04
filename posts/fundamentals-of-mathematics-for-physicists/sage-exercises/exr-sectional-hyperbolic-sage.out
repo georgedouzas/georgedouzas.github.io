@@ -1,0 +1,4 @@
+Christoffel symbols: {('x', 'x', 'y'): -1/y, ('y', 'x', 'x'): 1/y, ('y', 'y', 'y'): -1/y}
+sectional curvature K = R_xyxy / det g = -1/A^2 : True
+Ricci tensor = K g: True ; scalar curvature R = 2K = -2/A^2
+for A = 1: K = -1, the hyperbolic plane; the unit sphere has K = +1 and the plane K = 0

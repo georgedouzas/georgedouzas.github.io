@@ -1,0 +1,4 @@
+generator d/dt|0 Phi_t = J K_1 (the ambient field xi_1 = (0, -z, y)): True
+group law Phi_s o Phi_t = Phi_{s+t} (R_X(s) R_X(t) = R_X(s+t)): True
+Phi_t^* delta = Phi_t^*(g) = dth⊗dth + sin(th)^2 dph⊗dph  = g for every t: True
+conformal flow: Psi_t^* g == g: False ;  ratio of the theta-theta components: e^(2*t)/(cos(1/2*th)^2*e^(2*t) - cos(1/2*th)^2 + 1)^2

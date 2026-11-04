@@ -1,0 +1,4 @@
+Phi_t(x0, y0) = (x0*cos(t) - y0*sin(t), y0*cos(t) + x0*sin(t))
+group property Phi_s o Phi_t = Phi_{s+t}: True
+Phi_0 is the identity: True
+flow of d/dphi on the sphere: (theta, phi) -> (th0, ph0 + t)  a rotation about the Z-axis by the angle t

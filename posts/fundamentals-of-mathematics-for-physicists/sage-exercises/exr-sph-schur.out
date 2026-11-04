@@ -1,0 +1,3 @@
+non-zero integrals int D_ij conj(D_kl) dg for spin 1/2: {(0, 0, 0, 0): 1/2, (0, 1, 0, 1): 1/2, (1, 0, 1, 0): 1/2, (1, 1, 1, 1): 1/2}
+all equal to delta_ik delta_jl / 2: True
+integrals between spin 1/2 and spin 1 for five index choices: [0, 0, 0, 0, 0]

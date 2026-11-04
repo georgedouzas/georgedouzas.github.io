@@ -1,0 +1,5 @@
+massive at rest: {Q, Q^dag} = [2*M, 0, 0, 2*M] ; massless along z: [0, 0, 0, 4*E]
+[PASS] at rest {Q_a, Q^dag_b} = 2M delta_ab: True
+[PASS] massless: {Q_1, Q_1^dag} = 0 and {Q_2, Q_2^dag} = 4E: True
+eigenvalues for a general momentum: [2*sqrt(M^2 + px^2 + py^2 + pz^2) - 2*sqrt(px^2 + py^2 + pz^2), 2*sqrt(M^2 + px^2 + py^2 + pz^2) + 2*sqrt(px^2 + py^2 + pz^2)]
+[PASS] det = 4 M^2 and trace = 4E, so both eigenvalues are positive for M > 0: True

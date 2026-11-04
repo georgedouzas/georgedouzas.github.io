@@ -1,0 +1,6 @@
+a_0 = 0 ; a_n for n = 1..5: [4/pi, 0, 4/9/pi, 0, 4/25/pi]
+N = 1 : max error = 0.2976 ; N times the error = 0.298 ; tail bound 4/pi sum_{odd n > N} 1/n^2 = 0.2974
+N = 3 : max error = 0.1561 ; N times the error = 0.468 ; tail bound 4/pi sum_{odd n > N} 1/n^2 = 0.1559
+N = 9 : max error = 0.06345 ; N times the error = 0.571 ; tail bound 4/pi sum_{odd n > N} 1/n^2 = 0.06329
+N = 29 : max error = 0.02121 ; N times the error = 0.615 ; tail bound 4/pi sum_{odd n > N} 1/n^2 = 0.02105
+the partial sums never exceed the maximum pi/2 of the function (no overshoot): True

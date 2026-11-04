@@ -1,0 +1,3 @@
+series: -1/16*euler_gamma/pi^2 + 1/8*log(2)/pi^2 + 1/16*log(pi)/pi^2 - 1/16*log(Delta)/pi^2 + 1/8*log(mu)/pi^2 + 1/8/(pi^2*ep)
+agrees: True
+d/d log mu of the finite part: 1/8/pi^2

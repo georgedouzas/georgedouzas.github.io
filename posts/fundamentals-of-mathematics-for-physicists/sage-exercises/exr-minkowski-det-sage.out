@@ -1,0 +1,4 @@
+det eta = -1 ; signature (p, q, z) = (1, 3, 0)
+boost: Lambda^T eta Lambda == eta: True ; det Lambda = 1 ; det of the boosted metric = -1
+five-dimensional diag(1, -1, -1, -1, -R^2): det = R^2  (positive); sqrt|det| = R
+its signature (p, q, z) = (1, 4, 0)

@@ -1,0 +1,4 @@
+R_6 = 1/2*c^2*cos(ph6)^2*sin(th6)^2 - 1/2*c^2 - 2
+[PASS] R_6 = -2 - (c^2/2) K_1 . K_1 (flat spacetime, R_h = -R_{S^2} = -2, F^2 = -2 c^2): True
+average of R_6 over the sphere: -1/3*c^2 - 2
+[PASS] the average is -2 - c^2/3, i.e. -2 + (1/4)(2/3) F^2 with F^2 = -2 c^2: True

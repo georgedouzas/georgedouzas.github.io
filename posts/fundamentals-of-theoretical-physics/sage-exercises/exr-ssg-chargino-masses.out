@@ -1,0 +1,6 @@
+tr(M M^T) = M2^2 + 2*MW^2 + mu^2    det(M M^T) = (2*MW^2*cos(beta)*sin(beta) - M2*mu)^2
+[PASS] tr = M2^2 + mu^2 + 2 MW^2: True
+[PASS] det = (M2 mu - MW^2 sin 2beta)^2: True
+[PASS] m^2 = 1/2[(M2^2 + mu^2 + 2MW^2) -+ sqrt((M2^2 + mu^2 + 2MW^2)^2 - 4(M2 mu - MW^2 sin 2beta)^2)] are the roots of the characteristic polynomial: True
+M2 = 200 GeV, mu = 300 GeV, tan(beta) = 10: chargino masses 175.3 GeV and 335.0 GeV
+[PASS] the singular values agree with the closed form: True

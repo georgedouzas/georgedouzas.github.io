@@ -1,0 +1,152 @@
+---
+pagetitle: "Glossary"
+---
+
+# Glossary {#sec-glossary-kaluza-klein-theories}
+
+Every notion this tutorial defines, in alphabetical order, with its definition and chapter.
+
+
+## B
+
+
+## C
+
+- **Calabi-Yau manifold**: @def-vcp-calabi-yau (@sec-vi-compactifications)
+- **Charge quantisation**: @def-charge-quantisation (@sec-kk-gauge-tower)
+- **Christoffel symbols of the ansatz**: @def-kk-christoffel-patterns (@sec-kk-reduction-group)
+- **Consistency problem**: @def-consistency-problem (@sec-nonabelian-reduced)
+- **Consistent sphere truncation**: @def-vcr-consistent-sphere-truncation (@sec-vi-consistent-reductions)
+- **CSDR rules**: @def-csdr-rules (@sec-csdr-symmetric-fields)
+- **Curvature under a Weyl rescaling**: @def-weyl-curvature-formula (@sec-kk-reduction-group)
+- **Cylinder condition**: @def-cylinder-condition (@sec-kk-reduction-group)
+
+## D
+
+- **Diffeomorphism along the Killing vectors**: @def-killing-diffeomorphism (@sec-nonabelian-isometries)
+- **Dilaton**: @def-dilaton (@sec-kk-reduction-group)
+
+## E
+
+- **Eigenspaces of $\operatorname{ad}\tau$**: @def-adjoint-eigenspaces (@sec-csdr-symmetric-fields)
+- **Einstein frame**: @def-einstein-frame (@sec-kk-reduction-group)
+- **Electric charge**: @def-csd-electric-charge (@sec-csdr-four-dimensional)
+- **Embedding of $R$ in $G$**: @def-csdr-embedding (@sec-csdr-symmetric-fields)
+- **Equivariance equations**: @def-csd-equivariance-equations (@sec-csdr-four-dimensional)
+- **Equivariant dimensional reduction**: @def-vcr-equivariant-reduction (@sec-vi-consistent-reductions)
+
+## F
+
+- **Fermion tower**: @def-kkf-fermion-tower (@sec-kk-gauge-tower)
+- **Five-dimensional Dirac operator**: @def-kkf-five-dirac (@sec-kk-gauge-tower)
+- **Flux landscape**: @def-vcp-landscape (@sec-vi-compactifications)
+- **Flux potential**: @def-vcp-flux-potential (@sec-vi-compactifications)
+- **Flux quantum**: @def-vcp-flux-quantum (@sec-vi-compactifications)
+- **Fourier modes on the circle**: @def-fourier-modes (@sec-kk-gauge-tower)
+- **Fuzzy sphere**: @def-vcr-fuzzy-sphere (@sec-vi-consistent-reductions)
+
+## G
+
+- **$G_2$ manifold**: @def-vcp-g2-manifold (@sec-vi-compactifications)
+- **Gauged supergravity**: @def-vcr-gauged-supergravity (@sec-vi-consistent-reductions)
+- **Geometric fermion mass**: @def-cff-geometric-mass (@sec-vi-compactifications)
+- **Graviton zero mode**: @def-vcp-graviton-zero-mode (@sec-vi-compactifications)
+- **Group-manifold reduction**: @def-vcr-group-manifold-reduction (@sec-vi-consistent-reductions)
+
+## H
+
+- **Higgs doublet**: @def-csd-higgs-doublet (@sec-csdr-four-dimensional)
+- **Higgs potential**: @def-csd-higgs-potential (@sec-csdr-four-dimensional)
+- **Hodge number**: @def-vcp-hodge-number (@sec-vi-compactifications)
+- **Holonomy group**: @def-vcp-holonomy-group (@sec-vi-compactifications)
+
+## I
+
+- **Internal field strength**: @def-csd-internal-field-strength (@sec-csdr-four-dimensional)
+- **Internal space with isometries**: @def-internal-isometries (@sec-nonabelian-isometries)
+- **Inverse of the ansatz metric**: @def-kk-inverse-metric (@sec-kk-reduction-group)
+- **Inverse of the non-abelian ansatz**: @def-nonabelian-inverse (@sec-nonabelian-isometries)
+- **Isometries of a group manifold**: @def-nak-group-manifold-isometries (@sec-nonabelian-reduced)
+
+## J
+
+- **Jacobian of the shift**: @def-kk-jacobian (@sec-kk-gauge-tower)
+- **Jet variables**: @def-jet-variables (@sec-kk-reduction-group)
+- **Jordan frame**: @def-jordan-frame (@sec-kk-reduction-group)
+
+## K
+
+- **Kaluza-Klein ansatz**: @def-kk-ansatz (@sec-kk-reduction-group)
+- **Kaluza-Klein mass**: @def-kk-mass (@sec-kk-gauge-tower)
+- **Killing inner products**: @def-killing-inner-products (@sec-nonabelian-reduced)
+
+## L
+
+- **Large extra dimensions**: @def-vcp-large-extra-dimensions (@sec-vi-compactifications)
+
+## M
+
+- **Modulus**: @def-vcp-modulus (@sec-vi-compactifications)
+
+## N
+
+- **Nearly-Kähler manifold**: @def-vcp-nearly-kahler (@sec-vi-compactifications)
+- **Non-abelian Kaluza-Klein ansatz**: @def-nonabelian-ansatz (@sec-nonabelian-isometries)
+- **Number of gauge bosons**: @def-nak-gauge-boson-count (@sec-nonabelian-reduced)
+
+## P
+
+
+## R
+
+- **Radius-coupling relation**: @def-planck-radius-relation (@sec-kk-gauge-tower)
+- **Randall-Sundrum metric**: @def-vcp-rs-metric (@sec-vi-compactifications)
+- **Reduced curvature scalar**: @def-nonabelian-reduced-scalar (@sec-nonabelian-reduced)
+- **Reduced fields**: @def-csdr-reduced-fields (@sec-csdr-symmetric-fields)
+- **Reduced Lagrangian**: @def-csd-reduced-lagrangian (@sec-csdr-four-dimensional)
+- **Reparametrisation of the circle**: @def-circle-reparametrisation (@sec-kk-gauge-tower)
+- **Ricci tensor of the ansatz**: @def-kk-ricci-components (@sec-kk-reduction-group)
+
+## S
+
+- **Scherk-Schwarz twist**: @def-vcr-scherk-schwarz-twist (@sec-vi-consistent-reductions)
+- **Spontaneous compactification**: @def-vcr-spontaneous-compactification (@sec-vi-consistent-reductions)
+- **Structure constants of the gauge group**: @def-structure-constants-from-killing (@sec-nonabelian-isometries)
+- **Symmetric-field reduction**: @def-vcr-symmetric-field-scheme (@sec-vi-consistent-reductions)
+- **Symmetric gauge field**: @def-symmetric-gauge-field (@sec-csdr-symmetric-fields)
+- **Symmetric spinor field**: @def-csf-symmetric-spinor (@sec-csdr-four-dimensional)
+
+## T
+
+- **The centraliser**: @def-csdr-centraliser (@sec-csdr-symmetric-fields)
+- **The circle isometry**: @def-isometry-u1 (@sec-kk-gauge-tower)
+- **The CSDR constraints**: @def-csdr-constraints (@sec-csdr-symmetric-fields)
+- **The induced gauge transformation**: @def-nonabelian-kk-gauge-transformation (@sec-nonabelian-isometries)
+- **The Kaluza-Klein fields**: @def-kk-fields (@sec-kk-reduction-group)
+- **The Kaluza-Klein gauge transformation**: @def-kk-gauge-transformation (@sec-kk-gauge-tower)
+- **The reduced action**: @def-reduced-action (@sec-kk-reduction-group)
+- **The reduced curvature scalar**: @def-kk-curvature-scalar (@sec-kk-reduction-group)
+- **Toroidal orbifold**: @def-vcp-toroidal-orbifold (@sec-vi-compactifications)
+- **Toroidal reduction**: @def-vcr-torus-reduction (@sec-vi-consistent-reductions)
+
+## U
+
+- **Unimodular Lie algebra**: @def-vcr-unimodular (@sec-vi-consistent-reductions)
+
+## V
+
+- **Vacuum manifold**: @def-csd-vacuum-manifold (@sec-csdr-four-dimensional)
+- **Volume factor**: @def-kk-volume-factor (@sec-kk-reduction-group)
+
+## W
+
+- **Weinberg angle**: @def-csd-weinberg-angle (@sec-csdr-four-dimensional)
+- **Weyl rescaling**: @def-weyl-rescaling (@sec-kk-reduction-group)
+
+## Y
+
+- **Yang-Mills from gravity**: @def-yang-mills-from-gravity (@sec-nonabelian-reduced)
+
+## Z
+
+- **Zero-mode truncation**: @def-zero-mode-truncation (@sec-kk-gauge-tower)

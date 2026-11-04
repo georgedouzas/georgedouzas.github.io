@@ -1,0 +1,7 @@
+Euler            det = tau^2*w^2 + 1, trace = 2
+Euler-Cromer     det = 1, trace = -tau^2*w^2 + 2
+velocity Verlet  det = 1, trace = -tau^2*w^2 + 2
+Euler-Cromer conserves Q = v^2 + w^2 x^2 - w^2 tau x v: True
+Euler multiplies v^2 + w^2 x^2 by tau^2*w^2 + 1
+theta/tau = (2/tau) arcsin(w tau/2) = 3/640*s^4*w^5 + 1/24*s^2*w^3 + w
+w = 3: tau = 0.001, 0.005, 0.01 -> numerical frequency [3.000001, 3.000028, 3.000113] | Euler amplitude factor after t = 20: [1.094, 1.568, 2.459]

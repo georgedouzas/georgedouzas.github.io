@@ -1,0 +1,4 @@
+[PASS] (delta_2 delta_1 - delta_1 delta_2) phi = i(-eps_1 sigma^mu eps_2^dag + eps_2 sigma^mu eps_1^dag) d_mu phi: True
+[PASS] the same commutator on the auxiliary field F, off-shell (eq. 3.1.16): True
+[PASS] the same commutator on psi_alpha, off-shell thanks to F (eq. 3.1.16): True
+sage sage/exercises/exr-wz-closure.sage  4.10s user 0.24s system 95% cpu 4.532 total

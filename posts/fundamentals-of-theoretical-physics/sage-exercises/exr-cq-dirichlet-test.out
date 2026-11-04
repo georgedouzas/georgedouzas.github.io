@@ -1,0 +1,6 @@
+N =  1  integral = 0.886751345948129   1 - integral = 1.132e-01   predicted error = 1.132e-01
+N =  2  integral = 0.969655114602890   1 - integral = 3.034e-02   predicted error = 3.034e-02
+N =  5  integral = 0.999416228539881   1 - integral = 5.838e-04   predicted error = 5.838e-04
+N = 10  integral = 0.999999193684291   1 - integral = 8.063e-07   predicted error = 8.063e-07
+N = 20  integral = 0.999999999998463   1 - integral = 1.537e-12   predicted error = 1.538e-12
+Fourier coefficient c_3 = (1/2pi) int f e^{-3is}: 0.0111069989302698  vs r^3/sqrt(3) = 0.0111069989302699

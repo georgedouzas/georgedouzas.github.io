@@ -1,0 +1,5 @@
+Riemann tensor: Riem(g) = (r*cos(a)^2 + R*cos(a))/r ∂/∂a⊗db⊗da⊗db - (r*cos(a)^2 + R*cos(a))/r ∂/∂a⊗db⊗db⊗da - r*cos(a)/(r*cos(a) + R) ∂/∂b⊗da⊗da⊗db + r*cos(a)/(r*cos(a) + R) ∂/∂b⊗da⊗db⊗da
+R^a_bab = (r*cos(a) + R)*cos(a)/r : True
+R^b_aab = -r*cos(a)/(r*cos(a) + R) = -g_aa R^a_bab / g_bb: True
+non-zero components (rho, sigma, mu, nu): [(0, 1, 0, 1), (0, 1, 1, 0), (1, 0, 0, 1), (1, 0, 1, 0)]
+vanishes on the top and bottom circles a = pi/2, 3pi/2: True

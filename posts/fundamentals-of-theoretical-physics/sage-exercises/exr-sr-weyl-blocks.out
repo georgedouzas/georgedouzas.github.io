@@ -1,0 +1,4 @@
+gamma_5 diagonal: [-1, -1, 1, 1]
+boost: upper block = (A^dag)^-1: True   lower block = A: True
+rotation: both blocks = exp(-i theta sigma_3/2): True
+S^-1 gamma^mu S = Lambda^mu_nu gamma^nu: True

@@ -1,0 +1,4 @@
+P(t) = 1/6*l^2*q^2*w^4*cos(t*w)^2/(pi*c^3*e0)   = ddot(d)^2/(6 pi eps0 c^3): True
+time average: 1/12*l^2*q^2*w^4/(pi*c^3*e0)
+numbers: <P> = 2.311e-12 W, energy hbar w = 3.164e-19 J, photons per second ~ 7.31e+06
+fraction of the power within 30 deg of the equator: 0.6875

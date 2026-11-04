@@ -1,0 +1,4 @@
+R^rho_sigma nu mu = -R^rho_sigma mu nu: True
+R^rho_sigma mu mu = 0: True
+lowered tensor antisymmetric in the first pair (needs metric compatibility): True
+orthogonal chart dx^2 + f(x)^2 dy^2: K = R_xyxy / det g = -diff(f(x), x, x)/f(x) = -f''/f: True

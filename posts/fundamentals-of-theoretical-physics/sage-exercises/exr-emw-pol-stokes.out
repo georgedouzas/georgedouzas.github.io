@@ -1,0 +1,4 @@
+linear at 30 deg : [1, 1/2, 1/2*sqrt(3), 0] ; s0^2 - s1^2 - s2^2 - s3^2 = 0
+positive helicity : [1, 0, 0, 1] ; s0^2 - s1^2 - s2^2 - s3^2 = 0
+negative helicity : [1, 0, 0, -1] ; s0^2 - s1^2 - s2^2 - s3^2 = 0
+e_x + exp(i pi/3) e_y/2 : [5/4, 3/4, 1/2, 1/2*sqrt(3)] ; s0^2 - s1^2 - s2^2 - s3^2 = 0

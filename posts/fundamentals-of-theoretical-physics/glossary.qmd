@@ -1,0 +1,340 @@
+---
+pagetitle: "Glossary"
+---
+
+# Glossary {#sec-glossary-fundamentals-of-theoretical-physics}
+
+Every notion this tutorial defines, in alphabetical order, with its definition and chapter.
+
+
+## A
+
+- **Abelian gauge field**: @def-gauge-field-u1 (@sec-gauge-theories-chapter)
+- **Action**: @def-action (@sec-classical-mechanics)
+- **Action of a field theory**: @def-field-action (@sec-classical-field-theory)
+- **Angular momentum operator**: @def-qm-angular-momentum (@sec-quantum-mechanics)
+- **Annihilation operator**: @def-qm-annihilation-operator (@sec-quantum-mechanics)
+- **Anomalous dimension**: @def-ren-anomalous-dimension (@sec-renormalisation-theory)
+- **Anomaly**: @def-anomaly (@sec-quantum-field-theory)
+- **Anomaly coefficient**: @def-gth-anomaly-coefficient (@sec-gauge-theories-chapter)
+- **Area law**: @def-lgt-area-law (@sec-gauge-theories-chapter)
+- **Auxiliary field**: @def-auxiliary-field (@sec-susy-sugra)
+
+## B
+
+- **Bilinear covariant**: @def-dq-bilinear-covariant (@sec-dirac-equation)
+- **Blackbody radiation**: @def-blackbody-radiation (@sec-thermodynamics-statistical-mechanics)
+- **Born rule**: @def-qm-born-rule (@sec-quantum-mechanics)
+- **Bose-Einstein condensation**: @def-bose-einstein-condensation (@sec-thermodynamics-statistical-mechanics)
+- **Bose-Einstein distribution**: @def-bose-einstein-distribution (@sec-thermodynamics-statistical-mechanics)
+
+## C
+
+- **Canonical ensemble**: @def-canonical-ensemble (@sec-thermodynamics-statistical-mechanics)
+- **Canonical momentum**: @def-canonical-momentum (@sec-classical-mechanics)
+- **Canonical quantisation**: @def-canonical-quantisation (@sec-quantum-field-theory)
+- **Canonical transformation**: @def-clm-canonical-transformation (@sec-classical-mechanics)
+- **Capacitance**: @def-ems-capacitance (@sec-electromagnetism)
+- **Causal character**: @def-sr-causal-character (@sec-special-relativity)
+- **Central force**: @def-clm-central-force (@sec-classical-mechanics)
+- **Charge-conjugate spinor**: @def-dq-charge-conjugate (@sec-dirac-equation)
+- **Chiral anomaly**: @def-chiral-anomaly (@sec-quantum-field-theory)
+- **Chiral multiplet**: @def-chiral-multiplet (@sec-susy-sugra)
+- **Chiral superfield**: @def-ssg-chiral-superfield (@sec-susy-sugra)
+- **Classical limit**: @def-qm-classical-limit (@sec-quantum-mechanics)
+- **Classical partition function**: @def-classical-partition-function (@sec-thermodynamics-statistical-mechanics)
+- **Classical solutions**: @def-field-equations-solutions (@sec-classical-field-theory)
+- **Coherent state**: @def-qm-coherent-state (@sec-quantum-mechanics)
+- **Compact $U(1)$ gauge theory**: @def-lgt-compact-u1 (@sec-gauge-theories-chapter)
+- **Complex scalar field**: @def-complex-scalar (@sec-classical-field-theory)
+- **Conductor**: @def-ems-conductor (@sec-electromagnetism)
+- **Configuration space**: @def-configuration-space (@sec-classical-mechanics)
+- **Conservative force**: @def-clm-conservative-force (@sec-classical-mechanics)
+- **Conserved quantity**: @def-qm-conserved-quantity (@sec-quantum-mechanics)
+- **Continuous symmetry of a field theory**: @def-continuous-symmetry-fields (@sec-classical-field-theory)
+- **Continuous transformation**: @def-continuous-transformation (@sec-classical-mechanics)
+- **Coproduct of Feynman graphs**: @def-ren-coproduct (@sec-renormalisation-theory)
+- **Correlation length**: @def-correlation-length (@sec-thermodynamics-statistical-mechanics)
+- **Cosmological constant**: @def-cosmological-constant (@sec-general-relativity)
+- **Counterterm**: @def-ren-counterterm (@sec-renormalisation-theory)
+- **Counting preserved supercharges**: @def-supercharge-counting (@sec-susy-sugra)
+- **Covariant derivative**: @def-covariant-derivative-u1 (@sec-gauge-theories-chapter)
+- **Covariant derivative in a representation**: @def-covariant-derivative-nonabelian (@sec-gauge-theories-chapter)
+- **Critical exponent**: @def-critical-exponent (@sec-thermodynamics-statistical-mechanics)
+
+## D
+
+- **Dimensional regularisation**: @def-ren-dimensional-regularisation (@sec-renormalisation-theory)
+- **Dirac current**: @def-dq-dirac-current (@sec-dirac-equation)
+- **Dirac equation**: @def-dirac-equation (@sec-classical-field-theory)
+- **Dirac Hamiltonian**: @def-dq-dirac-hamiltonian (@sec-dirac-equation)
+- **Dirac sea**: @def-dq-dirac-sea (@sec-dirac-equation)
+- **Dirac's operator $K$**: @def-dq-k-operator (@sec-dirac-equation)
+- **Dirac spinors**: @def-dq-dirac-spinors (@sec-dirac-equation)
+- **Dispersion relation**: @def-dispersion-relation (@sec-classical-field-theory)
+- **Drude-Lorentz model**: @def-emx-drude-lorentz (@sec-electromagnetism)
+- **D-term potential**: @def-d-term-potential (@sec-susy-sugra)
+- **Dyson-Schwinger equation**: @def-ren-dyson-schwinger (@sec-renormalisation-theory)
+
+## E
+
+- **Effective field theory**: @def-effective-field-theory (@sec-quantum-field-theory)
+- **Einstein equations**: @def-einstein-equations (@sec-general-relativity)
+- **Einstein-Hilbert action**: @def-einstein-hilbert-action (@sec-general-relativity)
+- **Electric field**: @def-ems-electric-field (@sec-electromagnetism)
+- **Electromagnetic potentials**: @def-emm-potentials (@sec-electromagnetism)
+- **Electrostatic potential**: @def-ems-electrostatic-potential (@sec-electromagnetism)
+- **Eleven-dimensional supergravity action**: @def-sugra11-action (@sec-susy-sugra)
+- **Energy-momentum tensor**: @def-energy-momentum-tensor (@sec-classical-field-theory)
+- **Energy projector**: @def-dq-energy-projector (@sec-dirac-equation)
+- **Entropy**: @def-entropy (@sec-thermodynamics-statistical-mechanics)
+- **Equilibrium**: @def-clm-equilibrium (@sec-classical-mechanics)
+- **Equivalence principle**: @def-equivalence-principle (@sec-general-relativity)
+- **Euclidean correlator**: @def-euclidean-correlator (@sec-quantum-field-theory)
+- **Euclidean time**: @def-euclidean-time (@sec-thermodynamics-statistical-mechanics)
+- **Euler-Lagrange equations**: @def-euler-lagrange (@sec-classical-mechanics)
+- **Euler-Lagrange equations of a field**: @def-euler-lagrange-fields (@sec-classical-field-theory)
+- **Even operator**: @def-dq-even-odd (@sec-dirac-equation)
+- **Event horizon**: @def-gr-event-horizon (@sec-general-relativity)
+- **Expectation value**: @def-qm-expectation-value (@sec-quantum-mechanics)
+
+## F
+
+- **Fermi-Dirac distribution**: @def-fermi-dirac-distribution (@sec-thermodynamics-statistical-mechanics)
+- **Feynman rule**: @def-feynman-rule (@sec-quantum-field-theory)
+- **Field**: @def-field (@sec-classical-field-theory)
+- **Field operator**: @def-field-operator (@sec-quantum-field-theory)
+- **Field strength of a vector field**: @def-field-strength-abelian (@sec-classical-field-theory)
+- **First law of thermodynamics**: @def-first-law (@sec-thermodynamics-statistical-mechanics)
+- **Fixed point**: @def-ren-fixed-point (@sec-renormalisation-theory)
+- **FLRW metric**: @def-gr-flrw-metric (@sec-general-relativity)
+- **Fock space**: @def-fock-space (@sec-quantum-field-theory)
+- **Foldy-Wouthuysen transformation**: @def-dq-fw-transformation (@sec-dirac-equation)
+- **Forest**: @def-ren-forest (@sec-renormalisation-theory)
+- **Four-force**: @def-sr-four-force (@sec-special-relativity)
+- **Four-momentum**: @def-sr-four-momentum (@sec-special-relativity)
+- **Four-velocity**: @def-sr-four-velocity (@sec-special-relativity)
+- **Freund-Rubin ansatz**: @def-freund-rubin-ansatz (@sec-susy-sugra)
+- **Friedmann equations**: @def-gr-friedmann-equations (@sec-general-relativity)
+- **F-term potential**: @def-f-term-potential (@sec-susy-sugra)
+
+## G
+
+- **Gamma matrices**: @def-gamma-matrices (@sec-classical-field-theory)
+- **Gauged scalar model**: @def-gauged-scalar-model (@sec-gauge-theories-chapter)
+- **Gauge multiplet**: @def-gauge-multiplet (@sec-susy-sugra)
+- **Gauge transformation**: @def-emm-gauge-transformation (@sec-electromagnetism)
+- **Gaussian path integral**: @def-gaussian-path-integral (@sec-quantum-field-theory)
+- **Generating function**: @def-clm-generating-function (@sec-classical-mechanics)
+- **Generating functional**: @def-generating-functional (@sec-quantum-field-theory)
+- **Goldstone boson**: @def-goldstone-boson (@sec-gauge-theories-chapter)
+- **Grand-canonical ensemble**: @def-grand-canonical-ensemble (@sec-thermodynamics-statistical-mechanics)
+- **Grassmann variable**: @def-grassmann-variable (@sec-susy-sugra)
+- **Gravitino**: @def-gravitino (@sec-susy-sugra)
+
+## H
+
+- **Hamiltonian**: @def-hamiltonian (@sec-classical-mechanics)
+- **Hamilton-Jacobi equation**: @def-clm-hamilton-jacobi (@sec-classical-mechanics)
+- **Hamilton's equations**: @def-hamilton-equations (@sec-classical-mechanics)
+- **Heat-bath update**: @def-lgt-heat-bath (@sec-gauge-theories-chapter)
+- **Helicity**: @def-dq-helicity (@sec-dirac-equation)
+- **Higgs mechanism**: @def-higgs-mechanism (@sec-gauge-theories-chapter)
+
+## I
+
+- **Induction**: @def-emm-induction (@sec-electromagnetism)
+- **Inertial frame**: @def-sr-inertial-frame (@sec-special-relativity)
+- **Invariant mass**: @def-sr-invariant-mass (@sec-special-relativity)
+
+## K
+
+- **Kähler potential**: @def-ssg-kahler-potential (@sec-susy-sugra)
+- **Klein-Gordon equation**: @def-klein-gordon (@sec-classical-field-theory)
+- **Klein step**: @def-dq-klein-step (@sec-dirac-equation)
+
+## L
+
+- **Lagrangian**: @def-lagrangian (@sec-classical-mechanics)
+- **Lagrangian density**: @def-lagrangian-density (@sec-classical-field-theory)
+- **Lambda parameter**: @def-ren-lambda-parameter (@sec-renormalisation-theory)
+- **Landau free energy**: @def-landau-free-energy (@sec-thermodynamics-statistical-mechanics)
+- **Lattice regularisation**: @def-ren-lattice-regularisation (@sec-renormalisation-theory)
+- **Linear medium**: @def-emx-linear-medium (@sec-electromagnetism)
+- **Link variable**: @def-lgt-link-variable (@sec-gauge-theories-chapter)
+- **Little group**: @def-sr-little-group (@sec-special-relativity)
+- **Local supersymmetry**: @def-local-supersymmetry (@sec-susy-sugra)
+- **Local supersymmetry of the eleven-dimensional theory**: @def-sugra11-transformation (@sec-susy-sugra)
+- **Local symmetry**: @def-global-local-symmetry (@sec-gauge-theories-chapter)
+- **Lorentz algebra**: @def-sr-lorentz-algebra (@sec-special-relativity)
+- **Lorentz generators on spinors**: @def-lorentz-generators (@sec-classical-field-theory)
+- **Lorentz group**: @def-sr-lorentz-group (@sec-special-relativity)
+- **Lorentz tensor**: @def-sr-lorentz-tensor (@sec-special-relativity)
+
+## M
+
+- **Magnetic dipole moment**: @def-ems-magnetic-dipole (@sec-electromagnetism)
+- **Magnetic field**: @def-ems-magnetic-field (@sec-electromagnetism)
+- **Magnetisation**: @def-emx-magnetisation (@sec-electromagnetism)
+- **Majorana fermion**: @def-dq-majorana-fermion (@sec-dirac-equation)
+- **Majorana spinor**: @def-majorana-spinor (@sec-susy-sugra)
+- **Mandelstam variables**: @def-sr-mandelstam (@sec-special-relativity)
+- **Matching**: @def-ren-matching (@sec-renormalisation-theory)
+- **$\mathbb{Z}_2$ gauge theory**: @def-lgt-z2 (@sec-gauge-theories-chapter)
+- **Matsubara frequency**: @def-matsubara-frequency (@sec-thermodynamics-statistical-mechanics)
+- **Maximal supergravity**: @def-maximal-supergravity (@sec-susy-sugra)
+- **Maxwell action**: @def-field-strength-u1 (@sec-gauge-theories-chapter)
+- **Maxwell's equations**: @def-emm-maxwell-equations (@sec-electromagnetism)
+- **Mean field approximation**: @def-mean-field-theory (@sec-thermodynamics-statistical-mechanics)
+- **Metropolis sampling**: @def-fpi-metropolis (@sec-quantum-field-theory)
+- **Microcanonical ensemble**: @def-microcanonical-ensemble (@sec-thermodynamics-statistical-mechanics)
+- **Minimal coupling**: @def-dq-minimal-coupling (@sec-dirac-equation)
+- **Minimal coupling of a charged particle**: @def-emm-minimal-coupling (@sec-electromagnetism)
+- **Minkowski spacetime**: @def-sr-minkowski-spacetime (@sec-special-relativity)
+- **Mode expansion**: @def-mode-expansion (@sec-quantum-field-theory)
+- **Momentum**: @def-clm-momentum (@sec-classical-mechanics)
+
+## N
+
+- **Newtonian limit**: @def-newtonian-limit (@sec-general-relativity)
+- **Noether charge**: @def-noether-charge (@sec-classical-mechanics)
+- **Noether current**: @def-noether-current (@sec-classical-field-theory)
+- **Non-abelian field strength**: @def-nonabelian-field-strength (@sec-gauge-theories-chapter)
+- **Non-abelian gauge field**: @def-nonabelian-gauge-field (@sec-gauge-theories-chapter)
+- **Normal mode**: @def-clm-normal-mode (@sec-classical-mechanics)
+- **Number state**: @def-qm-number-state (@sec-quantum-mechanics)
+
+## O
+
+- **Observable**: @def-qm-observable (@sec-quantum-mechanics)
+- **Off-shell closure**: @def-off-shell-closure (@sec-susy-sugra)
+- **Order parameter**: @def-order-parameter (@sec-thermodynamics-statistical-mechanics)
+
+## P
+
+- **Parity transformation**: @def-dq-parity (@sec-dirac-equation)
+- **Particles as quanta of modes**: @def-particle-states (@sec-quantum-field-theory)
+- **Partition function**: @def-partition-function (@sec-thermodynamics-statistical-mechanics)
+- **Passive transformation**: @def-sr-passive-active (@sec-special-relativity)
+- **Path integral**: @def-qm-path-integral (@sec-quantum-mechanics)
+- **Pauli equation**: @def-dq-pauli-equation (@sec-dirac-equation)
+- **Pauli-Lubanski vector**: @def-sr-pauli-lubanski (@sec-special-relativity)
+- **Pauli-Villars regularisation**: @def-ren-pauli-villars (@sec-renormalisation-theory)
+- **Perturbation series**: @def-qm-perturbation-series (@sec-quantum-mechanics)
+- **Phase rotation**: @def-phase-rotation (@sec-classical-field-theory)
+- **Phase space**: @def-phase-space (@sec-classical-mechanics)
+- **Plane wave**: @def-emw-plane-wave (@sec-electromagnetism)
+- **Plane wave**: @def-plane-wave (@sec-classical-field-theory)
+- **Plaquette**: @def-lgt-plaquette (@sec-gauge-theories-chapter)
+- **Poincaré group**: @def-sr-poincare-group (@sec-special-relativity)
+- **Poisson bracket**: @def-poisson-bracket (@sec-classical-mechanics)
+- **Polarisation**: @def-emw-polarisation (@sec-electromagnetism)
+- **Polarisation**: @def-emx-polarisation (@sec-electromagnetism)
+- **Progressive integration**: @def-ren-progressive-integration (@sec-renormalisation-theory)
+- **Projection postulate**: @def-qm-projection-postulate (@sec-quantum-mechanics)
+- **Propagator**: @def-qm-propagator (@sec-quantum-mechanics)
+- **Proper acceleration**: @def-sr-proper-acceleration (@sec-special-relativity)
+- **Proper time**: @def-sr-proper-time (@sec-special-relativity)
+- **Proper-time regularisation**: @def-ren-proper-time (@sec-renormalisation-theory)
+- **Pure boost**: @def-sr-pure-boost (@sec-special-relativity)
+
+## Q
+
+- **Quantum consistency of massive vectors**: @def-higgs-consistency (@sec-quantum-field-theory)
+- **Quantum harmonic oscillator**: @def-qm-quantum-oscillator (@sec-quantum-mechanics)
+- **Quartic interaction**: @def-quartic-interaction (@sec-quantum-field-theory)
+
+## R
+
+- **Radiation zones**: @def-emw-radiation-zones (@sec-electromagnetism)
+- **Rapidity**: @def-sr-rapidity (@sec-special-relativity)
+- **Regularisation**: @def-regularisation (@sec-quantum-field-theory)
+- **Renormalisable theory**: @def-ren-renormalisable (@sec-renormalisation-theory)
+- **Renormalisation**: @def-renormalisation (@sec-quantum-field-theory)
+- **Renormalisation group transformation**: @def-ren-rg-map (@sec-renormalisation-theory)
+- **Renormalisation scheme**: @def-ren-scheme (@sec-renormalisation-theory)
+- **Representation labelled by two spins**: @def-sr-j1j2 (@sec-special-relativity)
+- **Rindler coordinates**: @def-sr-rindler (@sec-special-relativity)
+- **R-symmetry**: @def-ssg-r-symmetry (@sec-susy-sugra)
+- **Runge-Lenz vector**: @def-qm-runge-lenz (@sec-quantum-mechanics)
+- **Running coupling**: @def-running-coupling (@sec-quantum-field-theory)
+
+## S
+
+- **Schrödinger equation**: @def-qm-schroedinger-equation (@sec-quantum-mechanics)
+- **Schwarzschild metric**: @def-gr-schwarzschild-metric (@sec-general-relativity)
+- **Space of states**: @def-qm-state-space (@sec-quantum-mechanics)
+- **Spacetime**: @def-spacetime (@sec-general-relativity)
+- **Spin**: @def-qm-spin (@sec-quantum-mechanics)
+- **Spin one-half**: @def-qm-spin-half (@sec-quantum-mechanics)
+- **Spinor field**: @def-spinor-field (@sec-classical-field-theory)
+- **Spinor spherical harmonic**: @def-dq-spinor-harmonics (@sec-dirac-equation)
+- **Spontaneously broken symmetry**: @def-spontaneous-breaking (@sec-gauge-theories-chapter)
+- **Spontaneous supersymmetry breaking**: @def-susy-breaking (@sec-susy-sugra)
+- **Spontaneous symmetry breaking**: @def-ssb-landau (@sec-thermodynamics-statistical-mechanics)
+- **Staple**: @def-lgt-staple (@sec-gauge-theories-chapter)
+- **State vector**: @def-qm-state-vector (@sec-quantum-mechanics)
+- **Stationary state**: @def-qm-stationary-state (@sec-quantum-mechanics)
+- **Stress tensor**: @def-stress-tensor (@sec-general-relativity)
+- **Strong-coupling scale**: @def-ren-strong-coupling-scale (@sec-renormalisation-theory)
+- **$SU(2)$ lattice gauge theory**: @def-lgt-su2 (@sec-gauge-theories-chapter)
+- **Subdivergence**: @def-ren-subdivergence (@sec-renormalisation-theory)
+- **Supercharge**: @def-supercharge (@sec-susy-sugra)
+- **Supercurrent**: @def-supercurrent (@sec-susy-sugra)
+- **Superficial degree of divergence**: @def-ren-superficial-degree (@sec-renormalisation-theory)
+- **Supergravity multiplet**: @def-supergravity-multiplet (@sec-susy-sugra)
+- **Super-Higgs mechanism**: @def-super-higgs (@sec-susy-sugra)
+- **Supermultiplet**: @def-supermultiplet (@sec-susy-sugra)
+- **Superpotential**: @def-superpotential (@sec-susy-sugra)
+- **Supersymmetry algebra**: @def-superalgebra (@sec-susy-sugra)
+- **Supersymmetry transformation of the chiral multiplet**: @def-susy-transformation (@sec-susy-sugra)
+- **Symmetry factor**: @def-symmetry-factor (@sec-quantum-field-theory)
+- **Symmetry of a Lagrangian**: @def-symmetry-lagrangian (@sec-classical-mechanics)
+
+## T
+
+- **The Lorentz group in two dimensions**: @def-sr-o11 (@sec-special-relativity)
+- **Thermal circle**: @def-thermal-circle (@sec-thermodynamics-statistical-mechanics)
+- **Thermal oscillator**: @def-thermal-oscillator (@sec-thermodynamics-statistical-mechanics)
+- **Thermal propagator**: @def-thermal-propagator (@sec-quantum-field-theory)
+- **Thermodynamic potential**: @def-thermodynamic-potential (@sec-thermodynamics-statistical-mechanics)
+- **Thermodynamic state**: @def-thermodynamic-state (@sec-thermodynamics-statistical-mechanics)
+- **Threshold correction**: @def-ren-threshold-correction (@sec-renormalisation-theory)
+- **Time-evolution operator**: @def-qm-time-evolution (@sec-quantum-mechanics)
+- **Time-ordered product**: @def-time-ordered-product (@sec-quantum-field-theory)
+- **Time reversal**: @def-dq-time-reversal (@sec-dirac-equation)
+- **Total angular momentum**: @def-qm-total-angular-momentum (@sec-quantum-mechanics)
+- **Transformation of a field**: @def-sr-field-transformation (@sec-special-relativity)
+- **Two-component Weyl spinor**: @def-weyl-spinor (@sec-susy-sugra)
+- **Two-level system**: @def-two-level-system (@sec-thermodynamics-statistical-mechanics)
+- **Two-point function**: @def-wightman-function (@sec-quantum-field-theory)
+
+## U
+
+- **Unbroken subgroup**: @def-unbroken-subgroup (@sec-gauge-theories-chapter)
+- **Unitary gauge**: @def-unitary-gauge (@sec-gauge-theories-chapter)
+- **Unitary representation**: @def-qm-unitary-representation (@sec-quantum-mechanics)
+
+## V
+
+- **Vacuum**: @def-vacuum (@sec-gauge-theories-chapter)
+- **Vacuum polarisation**: @def-ren-vacuum-polarisation (@sec-renormalisation-theory)
+- **Vacuum solution**: @def-vacuum-solution (@sec-general-relativity)
+- **Variation of the metric**: @def-metric-variation (@sec-general-relativity)
+- **Vector field on spacetime**: @def-vector-field-spacetime (@sec-classical-field-theory)
+- **Vector potential**: @def-ems-vector-potential (@sec-electromagnetism)
+
+## W
+
+- **Wave four-vector**: @def-sr-wave-vector (@sec-special-relativity)
+- **Weyl equation**: @def-dq-weyl-equation (@sec-dirac-equation)
+- **Wick contraction**: @def-wick-contraction (@sec-quantum-field-theory)
+- **Wigner rotation**: @def-sr-wigner-rotation (@sec-special-relativity)
+- **Wilson action**: @def-lgt-wilson-action (@sec-gauge-theories-chapter)
+- **Wilson loop**: @def-lgt-wilson-loop (@sec-gauge-theories-chapter)
+- **Worldline**: @def-sr-worldline (@sec-special-relativity)
+
+## Y
+
+- **Yang-Mills action**: @def-yang-mills-action (@sec-gauge-theories-chapter)
+

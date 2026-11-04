@@ -1,0 +1,2 @@
+R_E = -6*(diff(a(t), t)^2 + a(t)*diff(a(t), t, t))/a(t)^2
+[PASS] phi^{-1} R[g] = R_E + 3 Box_E ln phi - (3/2)(d ln phi)^2 on the FRW metric: True

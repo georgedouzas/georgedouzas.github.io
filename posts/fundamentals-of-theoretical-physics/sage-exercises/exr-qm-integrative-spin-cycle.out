@@ -1,0 +1,4 @@
+(a) Bloch vector: [cos(t*w), sin(t*w), 0]
+(b) Prob(S_x = +hbar/2) - cos(w t/2)^2 = 0
+(c) (Delta s1)^2 (Delta s2)^2 - <s3>^2 = -1/8*cos(4*t*w) + 1/8 (>= 0)
+(d) N = 1, 10, 100, 1000 with w T = pi: [0.00000, 0.78054, 0.97569, 0.99809] ; limit: 1

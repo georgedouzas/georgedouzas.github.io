@@ -1,0 +1,6 @@
+gamma^5 = [-1, -1, 1, 1]
+{'1': {'antisymmetric'}, 'gamma^5': {'antisymmetric'}, 'gamma^mu gamma^5': {'antisymmetric'}, 'gamma^mu': {'symmetric'}, 'gamma^{mu nu}': {'symmetric'}}
+[PASS] C, C gamma^5, C gamma^mu gamma^5 are antisymmetric; C gamma^mu and C gamma^{mu nu} are symmetric: True
+[PASS] counting: 6 antisymmetric (1 + 1 + 4) and 10 symmetric (4 + 6) of the 16 = 6 + 10 matrices C Gamma: True
+flip signs psibar_1 Gamma psi_2 = (sign) psibar_2 Gamma psi_1: {'1': {'+'}, 'gamma^5': {'+'}, 'gamma^mu gamma^5': {'+'}, 'gamma^mu': {'-'}, 'gamma^{mu nu}': {'-'}}
+[PASS] Majorana flip: + for 1, gamma^5, gamma^mu gamma^5 and - for gamma^mu, gamma^{mu nu} (anticommuting components): True

@@ -1,0 +1,4 @@
+induced metric (Gram matrix):
+g = r^2 da⊗da + (r^2*cos(a)^2 + 2*R*r*cos(a) + R^2) db⊗db
+determinant: (r*cos(a) + R)^2*r^2
+J^T J agrees with the pullback metric: True

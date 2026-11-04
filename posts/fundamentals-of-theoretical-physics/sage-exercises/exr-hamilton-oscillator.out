@@ -1,0 +1,5 @@
+canonical momentum p = dL/dqdot = m*qd
+Hamiltonian H = p qdot - L = 1/2*(m^2*q^2*w^2 + p^2)/m
+Hamilton's equations: qdot = p/m , pdot = -m*q*w^2
+solution with Q(0) = A, P(0) = 0: [A*cos(t*w), -A*m*w*sin(t*w)]
+H along the solution: 1/2*A^2*m*w^2  (constant)

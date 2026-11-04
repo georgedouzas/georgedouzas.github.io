@@ -1,0 +1,6 @@
+n = 1  j = 0  (j, j) restricted: A1(0)  = l in [0] : True  dimension 1 = n^2: True
+n = 2  j = 1/2  (j, j) restricted: A1(0) + A1(2)  = l in [0, 1] : True  dimension 4 = n^2: True
+n = 3  j = 1  (j, j) restricted: A1(0) + A1(2) + A1(4)  = l in [0, 1, 2] : True  dimension 9 = n^2: True
+n = 4  j = 3/2  (j, j) restricted: A1(0) + A1(2) + A1(4) + A1(6)  = l in [0, 1, 2, 3] : True  dimension 16 = n^2: True
+n = 5  j = 2  (j, j) restricted: A1(0) + A1(2) + A1(4) + A1(6) + A1(8)  = l in [0, 1, 2, 3, 4] : True  dimension 25 = n^2: True
+n = 6  j = 5/2  (j, j) restricted: A1(0) + A1(2) + A1(4) + A1(6) + A1(8) + A1(10)  = l in [0, 1, 2, 3, 4, 5] : True  dimension 36 = n^2: True

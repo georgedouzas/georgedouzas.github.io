@@ -1,0 +1,8 @@
+a = 0.100000000000000 numerical 0.01650234   closed form 0.01650234
+a = 1      numerical 0.15204470   closed form 0.15204470
+a = 10     numerical 0.93187748   closed form 0.93187748
+a = 1000   numerical 4.92355800   closed form 4.92355800
+small a: -1/60*a^2 + 1/6*a
+large a = 1e+03: integral - (log a - 2) = 1.58e-02
+large a = 1e+05: integral - (log a - 2) = 2.50e-04
+large a = 1e+07: integral - (log a - 2) = 3.43e-06

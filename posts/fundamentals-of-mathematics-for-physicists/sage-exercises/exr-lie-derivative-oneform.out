@@ -1,0 +1,5 @@
+L_rot df = (3*x^2 - 2*y^2) dx - 4*x*y dy   equals d(rot(f)): True
+L_rad df = 6*x*y dx + 3*x^2 dy   equals d(rad(f)): True
+L_rot dx = -dy ;  L_rot dy = dx
+L_rad dx = dx ;  L_rad dy = dy
+(L_rot w)(Y) = rot(w(Y)) - w([rot, Y]): True

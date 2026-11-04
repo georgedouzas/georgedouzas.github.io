@@ -1,0 +1,8 @@
+V = 1/(4 g^2 R^4) - (|phi1|^2 + |phi2|^2)/(2R^2) + g^2 (|phi1|^4 - |phi1|^2 |phi2|^2 + |phi2|^4): True
+V at the vacuum: 0 ; gradient: [0, 0, 0, 0]
+mass-squared matrix in (h1, h2, c1, c2):
+[ 2/R^2 -1/R^2      0      0]
+[-1/R^2  2/R^2      0      0]
+[     0      0      0      0]
+[     0      0      0      0]
+eigenvalues: [R^(-2), 3/R^2, 0, 0]  -> Higgs masses sqrt(3)/R and 1/R, two Goldstone bosons

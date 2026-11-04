@@ -1,0 +1,8 @@
+|f(x)|^2 for real x: 1
+inverse: -(I*w + I)/(w - 1)
+f(inverse(w)) == w: True
+f(I) = 0
+f(0) = -1
+f(1) = -I
+limit at infinity: 1
+Im inverse(w) for w = 1/2: 3  > 0

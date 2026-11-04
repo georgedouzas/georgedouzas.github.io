@@ -1,0 +1,8 @@
+K_{T Tbar} = 3/(T + Tb)^2
+metric: h = 3/4/x^2 dx⊗dx + 3/4/x^2 dy⊗dy
+scalar curvature = -8/3   Gaussian curvature = -4/3
+[PASS] the no-scale field space has constant Gaussian curvature -4/3: True
+    K = -1 log(T + Tbar): Gaussian curvature -4
+    K = -2 log(T + Tbar): Gaussian curvature -2
+    K = -3 log(T + Tbar): Gaussian curvature -4/3
+[PASS] K = -n log(T + Tbar) gives curvature -4/n, so the curvature measures n: True

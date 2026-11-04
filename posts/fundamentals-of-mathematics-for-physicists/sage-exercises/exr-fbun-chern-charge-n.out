@@ -1,0 +1,4 @@
+n = 1: F = -1/2*sin(th) dth^dph, c_1 = -1, winding of the transition = -1, same curvature from both patches: True
+n = 2: F = -sin(th) dth^dph, c_1 = -2, winding of the transition = -2, same curvature from both patches: True
+n = 3: F = -3/2*sin(th) dth^dph, c_1 = -3, winding of the transition = -3, same curvature from both patches: True
+n = -1: F = 1/2*sin(th) dth^dph, c_1 = 1, winding of the transition = 1, same curvature from both patches: True

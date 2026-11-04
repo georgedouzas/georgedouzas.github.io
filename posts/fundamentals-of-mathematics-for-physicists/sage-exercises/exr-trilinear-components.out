@@ -1,0 +1,3 @@
+non-zero components T_ijk (indices from 0): {(0, 1, 2): 1, (1, 0, 2): -1} ; number of components: 3^3 = 27
+T(u, v, w) = 1 ; by the formula u1 v2 w3 - u2 v1 w3 = 1
+linearity in the first slot: T(2u + v, v, w) = 2 T(u, v, w) + T(v, v, w): True

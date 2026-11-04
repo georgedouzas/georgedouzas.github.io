@@ -1,0 +1,15 @@
+D_4 character table (rows: irreducible characters, columns: conjugacy classes):
+[ 1  1  1  1  1]
+[ 1 -1 -1  1  1]
+[ 1 -1  1 -1  1]
+[ 1  1 -1 -1  1]
+[ 2  0  0  0 -2]
+  dimensions [1, 1, 1, 1, 2] ; sum of squares 8 = |G| = 8 ; number of classes 5
+Q_8 character table (rows: irreducible characters, columns: conjugacy classes):
+[ 1  1  1  1  1]
+[ 1 -1  1 -1  1]
+[ 1 -1  1  1 -1]
+[ 1  1  1 -1 -1]
+[ 2  0 -2  0  0]
+  dimensions [1, 1, 1, 1, 2] ; sum of squares 8 = |G| = 8 ; number of classes 5
+D_4 and Q_8 are isomorphic: False ; their tables agree after reordering rows and columns: True

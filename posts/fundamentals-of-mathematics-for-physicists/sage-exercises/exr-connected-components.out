@@ -1,0 +1,4 @@
+connected: False ; components: [['A', 'B', 'C'], ['D', 'E']]
+the 6-cycle (a discrete circle) is connected: True
+removing one vertex leaves it connected: True
+removing two opposite vertices gives 2 components (like removing two points from a circle)

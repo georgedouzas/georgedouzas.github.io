@@ -1,0 +1,5 @@
+solutions of u^4 = 1 + u^2: [
+u == sqrt(1/2*sqrt(5) + 1/2),
+u == -sqrt(-1/2*sqrt(5) + 1/2),
+u == sqrt(-1/2*sqrt(5) + 1/2)
+] ; numerically 1.272019649514069

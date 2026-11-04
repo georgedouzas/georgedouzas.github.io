@@ -1,0 +1,2 @@
+div E, div B: 0 0
+curl E + dB/dt = (0, -E0*v*cos(z)*sin(t*v - t) - E0*v*cos(t*v - t)*sin(z), 0) ; curl B - dE/dt = (E0*v*cos(z)*sin(t*v - t) + E0*v*cos(t*v - t)*sin(z), 0, 0)

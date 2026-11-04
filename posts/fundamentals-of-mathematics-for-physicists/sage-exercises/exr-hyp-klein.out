@@ -1,0 +1,5 @@
+pulled back to (psi, phi): [1, 0, 0, sinh(psi)^2] = d psi^2 + sinh^2 psi d phi^2: True
+Gauss curvature K = -1
+u = tanh s, v = 0 solves the geodesic equation: True
+Gamma^v_uu = 0 ; Gamma^v_uv on v = b: -u/(b^2 + u^2 - 1) (multiplies v' = 0)
+on v = b the u-equation is the ODE -(2*lam(s)*diff(lam(s), s)^2 - (b^2 + lam(s)^2 - 1)*diff(lam(s), s, s))/(b^2 + lam(s)^2 - 1) = 0, solvable for lam: every chord is a geodesic

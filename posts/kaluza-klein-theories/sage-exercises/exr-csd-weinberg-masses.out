@@ -1,0 +1,10 @@
+M^2 =
+[         1/2            0            0            0]
+[           0          1/2            0            0]
+[           0            0          1/2 -1/2*sqrt(3)]
+[           0            0 -1/2*sqrt(3)          3/2]
+eigenvalue 1/2 eigenvectors [(1, 0, 0, 0), (0, 1, 0, 0)]
+eigenvalue 0 eigenvectors [(0, 0, 1, 1/3*sqrt(3))]
+eigenvalue 2 eigenvectors [(0, 0, 1, -sqrt(3))]
+[PASS] eigenvalues 1/2, 1/2 (W_1, W_2), 2 (Z = cos th T_3 - sin th T_8), 0 (photon = sin th T_3 + cos th T_8) with tan th = sqrt 3: True
+[PASS] th = 60 degrees, sin^2 th = 3/4, and M_W^2 / M_Z^2 = 1/4 = cos^2 th: True

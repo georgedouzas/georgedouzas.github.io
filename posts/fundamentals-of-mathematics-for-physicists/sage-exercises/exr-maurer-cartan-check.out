@@ -1,0 +1,6 @@
+d sigma^1 = dsigma1 = cos(th)*sin(ps) dth∧dph + sin(ps) dth∧dps - cos(ps)*sin(th) dph∧dps ;  -sigma^2 ^ sigma^3 = -sigma2∧sigma3 = cos(th)*sin(ps) dth∧dph + sin(ps) dth∧dps - cos(ps)*sin(th) dph∧dps ; equal: True
+d sigma^2 = dsigma2 = cos(ps)*cos(th) dth∧dph + cos(ps) dth∧dps + sin(ps)*sin(th) dph∧dps ;  -sigma^3 ^ sigma^1 = -sigma3∧sigma1 = cos(ps)*cos(th) dth∧dph + cos(ps) dth∧dps + sin(ps)*sin(th) dph∧dps ; equal: True
+d sigma^3 = dsigma3 = -sin(th) dth∧dph ;  -sigma^1 ^ sigma^2 = -sigma1∧sigma2 = -sin(th) dth∧dph ; equal: True
+(1/4) sum sigma^a (x) sigma^a has components (theta, phi, psi): [        1/4           0           0]
+[          0         1/4 1/4*cos(th)]
+[          0 1/4*cos(th)         1/4]

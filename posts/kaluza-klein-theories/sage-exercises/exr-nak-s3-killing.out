@@ -1,0 +1,5 @@
+[J+_1, J+_2] = -J+_3
+[PASS] the matrices J+_a and J-_a commute with each other: True
+[PASS] each set closes into su(2): [J_a, J_b] = - eps_abc J_c for both: True
+[PASS] the six rotation fields are linearly independent (rank 6 = 3 * 4 / 2): True
+[PASS] every field is tangent to S^3 (x . M x = 0): True

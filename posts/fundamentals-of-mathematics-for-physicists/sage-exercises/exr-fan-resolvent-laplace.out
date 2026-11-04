@@ -1,0 +1,2 @@
+A = [1, 0, 0, -1] : Laplace transform equals the resolvent: True ; resolvent [1/(lam - 1), 0, 0, 1/(lam + 1)]
+A = [0, 1, -2, 1] : Laplace transform equals the resolvent: True ; resolvent [(lam - 1)/(lam^2 - lam + 2), 1/(lam^2 - lam + 2), -2/(lam^2 - lam + 2), lam/(lam^2 - lam + 2)]

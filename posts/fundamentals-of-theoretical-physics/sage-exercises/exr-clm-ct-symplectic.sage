@@ -1,0 +1,11 @@
+# Exercise exr-clm-ct-symplectic: the condition J Omega J^T = Omega for the oscillator flow and for rotations in R^4.
+t, a = var("t a", domain="real")
+O2 = matrix([[0, 1], [-1, 0]])
+J = matrix([[cos(t), sin(t)], [-sin(t), cos(t)]])
+print("oscillator flow: J Omega J^T == Omega:", bool((J * O2 * J.transpose()).simplify_full() == O2))
+Z, E2 = zero_matrix(2), identity_matrix(2)
+O4 = block_matrix([[Z, E2], [-E2, Z]])
+R = matrix([[cos(a), -sin(a)], [sin(a), cos(a)]])
+both = block_matrix([[R, Z], [Z, R]]); qonly = block_matrix([[R, Z], [Z, E2]])
+print("rotate q and p together: canonical:", bool((both * O4 * both.transpose()).simplify_full() == O4))
+print("rotate q only: J Omega J^T ="); print((qonly * O4 * qonly.transpose()).simplify_full())

@@ -1,0 +1,4 @@
+cloud charge: -e
+cloud potential at the proton: -1/4*e/(pi*a) ; interaction energy e phi0 = -1/4*e^2/(pi*a)
+self-energy of the cloud: 5/64*e^2/(pi*a) = (5/16) e^2/(4 pi a): True
+numbers with e^2/(4 pi eps0 a0) = 27.211 eV: interaction -27.21 eV, self-energy 8.50 eV

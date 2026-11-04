@@ -1,0 +1,9 @@
+type (1, 0) : tensor module of rank 3 = 3^ 1
+type (0, 1) : tensor module of rank 3 = 3^ 1
+type (0, 2) : tensor module of rank 9 = 3^ 2
+type (1, 1) : tensor module of rank 9 = 3^ 2
+type (1, 2) : tensor module of rank 27 = 3^ 3
+type (2, 2) : tensor module of rank 81 = 3^ 4
+the identity map has type (1, 1) and components [1 0 0]
+[0 1 0]
+[0 0 1]

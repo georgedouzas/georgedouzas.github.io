@@ -1,0 +1,5 @@
+Phi = (3/5, 4/5*I) : |Phi|^2 = 1 , eigenvalues of F_12: [-0.3333333333333334?*I, 0.1666666666666667?*I] multiplicities [1, 2] , V = 1/6
+Phi = (1/2*I + 1/2, -1/2*I + 1/2) : |Phi|^2 = 1 , eigenvalues of F_12: [-0.3333333333333334?*I, 0.1666666666666667?*I] multiplicities [1, 2] , V = 1/6
+Phi = (1, 0) : |Phi|^2 = 1 , eigenvalues of F_12: [-0.3333333333333334?*I, 0.1666666666666667?*I] multiplicities [1, 2] , V = 1/6
+Phi = (5/13*I, -12/13) : |Phi|^2 = 1 , eigenvalues of F_12: [-0.3333333333333334?*I, 0.1666666666666667?*I] multiplicities [1, 2] , V = 1/6
+[PASS] on every sampled vacuum F_12 has eigenvalues (i/6)(-2, 1, 1), the spectrum of -Q_em/2, and V = 1/6: True

@@ -1,0 +1,6 @@
+L_(d/dt) eta = 0  -> Killing: True
+L_(d/dx) eta = 0  -> Killing: True
+L_(boost x d/dt + t d/dx) eta = 0  -> Killing: True
+L_(x d/dt - t d/dx) eta = 2 dt⊗dx + 2 dx⊗dt  -> Killing: False
+boost flow solves d/dw (t, x) = (x, t): True
+t^2 - x^2 is preserved: True

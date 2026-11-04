@@ -1,0 +1,13 @@
+mass matrix:
+[  1/2*g^2*v^2             0             0             0]
+[            0   1/2*g^2*v^2             0             0]
+[            0             0   1/2*g^2*v^2 -1/2*g*gp*v^2]
+[            0             0 -1/2*g*gp*v^2  1/2*gp^2*v^2]
+eigenvalues: [1/2*(g^2 + gp^2)*v^2, 1/2*g^2*v^2, 1/2*g^2*v^2, 0]
+[PASS] eigenvalues g^2 v^2/2 (twice), (g^2 + g'^2) v^2/2 and 0: True
+massless combination (A^3, B) direction: [
+(0, 0, 1, g/gp)
+]
+[PASS] the photon is proportional to g' A^3 + g B, i.e. sin(theta_W) A^3 + cos(theta_W) B with tan(theta_W) = g'/g: True
+[PASS] in Hermitian form the charge Q = sigma_3/2 + 1/2 (T_3 plus hypercharge 1/2) annihilates the vacuum: True
+m_Z / m_W = sqrt(g^2 + g'^2)/g = 1/cos(theta_W)

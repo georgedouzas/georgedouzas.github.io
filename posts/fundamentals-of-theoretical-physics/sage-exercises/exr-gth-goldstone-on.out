@@ -1,0 +1,5 @@
+[PASS] a n is a critical point with V = 0: True
+[PASS] the Hessian is 2 lam a^2 n n^T: True
+eigenvalues: [2*a^2*lam, 0, 0, 0, 0]
+[PASS] four zero eigenvalues (Goldstone bosons) and one 2 lam a^2: True
+dim O(5) - dim O(4) = 4

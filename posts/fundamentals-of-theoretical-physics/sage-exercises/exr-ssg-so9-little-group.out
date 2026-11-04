@@ -1,0 +1,6 @@
+dims: vector 9 spinor 16 graviton 44 3-form 84 gravitino 128
+[PASS] graviton 44 = 9*10/2 - 1, three-form 84 = binomial(9, 3), gravitino 128 = 9*16 - 16: True
+[PASS] vector x spinor = gravitino + spinor (the gamma-trace removes one spinor): True
+Sym^2(vector) = B4(0,0,0,0) + B4(2,0,0,0) ; Lambda^3(vector) = B4(0,0,1,0)
+[PASS] Sym^2(vector) = graviton + singlet and Lambda^3(vector) = 3-form: 45 = 44 + 1, 84: True
+[PASS] bosons 44 + 84 = 128 = fermions: True

@@ -1,0 +1,4 @@
+[PASS] the auxiliary field equations are solved by F* = -(W' + xi1* phi*), F = -(W'* + xi1 phi): True
+soft part of V = 1/3*phi^3*x1*y + 1/3*phib^3*x1b*yb + phi*phib*x1*x1b + 1/2*phi^2*x1*m + 1/2*phib^2*x1b*mb - phi*phib*x2
+[PASS] V = |W'|^2 + (|xi1|^2 - xi2)|phi|^2 + [xi1 (phi W' - W) + c.c.]: True
+[PASS] B and A terms: xi1 (phi W' - W) = xi1 (m/2 phi^2 + 2 * y/6 phi^3), so A0 = 2 B0 = 2 xi1: True

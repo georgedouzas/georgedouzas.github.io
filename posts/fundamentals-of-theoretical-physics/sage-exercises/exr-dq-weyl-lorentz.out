@@ -1,0 +1,3 @@
+M^dag sigma-bar^mu M = Lambda^mu_nu sigma-bar^nu: True
+M^-1 sigma^mu (M^dag)^-1 = Lambda^mu_nu sigma^nu: True
+S = diag(M, (M^dag)^-1) equals exp(w S^{03}) = cosh(w/2) + 2 S^{03} sinh(w/2): True

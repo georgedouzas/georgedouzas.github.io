@@ -1,0 +1,6 @@
+gamma in the chart: (-cos(t)/(sin(t) - 1), 0)
+the chart point lies back on (cos t, 0, sin t): True
+velocity (du/dt, dv/dt) = (-1/(sin(t) - 1), 0)  and du/dt = 1/(1 - sin t): True
+chain rule (du/dt) dZ/du + (dv/dt) dZ/dv = cos t = dZ/dt: True
+du/dt blows up as t -> pi/2, where the curve leaves the chart through the north pole: +Infinity
+at t = -pi/2 the curve passes the south pole, u = 0  with speed du/dt = 1/2

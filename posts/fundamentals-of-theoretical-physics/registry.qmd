@@ -1,0 +1,26 @@
+---
+pagetitle: "Registry of verified results"
+---
+
+# Registry of verified results {#sec-registry-fundamentals-of-theoretical-physics}
+
+Every claim of the book with its Lean declaration and its verification level. A **certificate** is a proof whose data a Veriphy recipe found in Sage and whose proof the Lean kernel checked. A **kernel-checked test** is a check of the claim's Lean statement at instances chosen by Sage, each checked by the kernel by computation alone, used where no certificate is feasible. An **oracle test** is an evaluation of the claim at instances in exact or interval arithmetic by Sage. A **pending** claim is proved in Lean and awaits its certificate or test. Chapters whose claims are not yet formalised are listed with their number of blocks.
+
+## Claims by level
+
+| Chapter | Blocks | certificate | kernel-checked test | oracle test | pending |
+|---|---|---|---|---|---|
+| @sec-classical-mechanics | 257 blocks, not yet formalised | | | | |
+| @sec-electromagnetism | 862 blocks, not yet formalised | | | | |
+| @sec-thermodynamics-statistical-mechanics | 285 blocks, not yet formalised | | | | |
+| @sec-quantum-mechanics | 286 blocks, not yet formalised | | | | |
+| @sec-classical-field-theory | 218 blocks, not yet formalised | | | | |
+| @sec-dirac-equation | 268 blocks, not yet formalised | | | | |
+| @sec-gauge-theories-chapter | 473 blocks, not yet formalised | | | | |
+| @sec-quantum-field-theory | 220 blocks, not yet formalised | | | | |
+| @sec-renormalisation-theory | 331 blocks, not yet formalised | | | | |
+| @sec-special-relativity | 458 blocks, not yet formalised | | | | |
+| @sec-general-relativity | 167 blocks, not yet formalised | | | | |
+| @sec-susy-sugra | 334 blocks, not yet formalised | | | | |
+
+

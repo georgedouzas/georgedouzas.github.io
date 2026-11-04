@@ -1,0 +1,139 @@
+---
+pagetitle: "Prerequisites and conventions"
+---
+
+# Prerequisites and conventions {#sec-conventions}
+
+## Who these lectures are for
+
+The reader is assumed to know calculus of one and several variables and linear algebra at the level of a first
+university course, and to have met Newtonian mechanics. Nothing else is assumed: the foundations of mathematics
+(Part I) develop set theory and topology, linear algebra, real and complex analysis, differential equations, Fourier
+analysis, Hilbert spaces and operator theory, probability, differential geometry, Lie groups and their
+representations, coset spaces and fibre bundles on explicit examples, and the foundations of physics (Part II)
+develop, in this order, classical mechanics, classical electromagnetism, thermodynamics and statistical mechanics,
+quantum mechanics, classical field theory, the Dirac equation, quantum field theory, gauge theories and symmetry
+breaking, renormalisation, special and general relativity, supersymmetry and supergravity, each from its definitions. A reader who knows a chapter can skim its definitions and try its exercises.
+
+## How the verification works
+
+Every claim of the book, in a definition, a theorem, an example or the answer to an exercise, is a theorem of a Lean
+library built on mathlib [@mathlib2020; @demoura2021]. The computational core of each proof is a Veriphy certificate
+[@veriphy2026]: SageMath [@sagemath] finds the data of the certificate (coefficients, witnesses, closed forms,
+eigenvectors), the Lean kernel checks the proof built from it, and only the Sage-free proof is committed, so the
+library builds without Sage and contains no `sorry`. Physical laws are formalised as explicit mathematical models
+(states and observables on Hilbert spaces, ensembles as probability measures, time-sliced path integrals, regularised
+integrals and their flow equations) and the book's statements are theorems of those models.
+
+The verification never interrupts the text. Below a block, a collapsed box labelled **Verification** opens like the
+solution of an exercise. It always has the same shape: a **Veriphy** line names the recipe and the certificate, and the
+certificate splits into its two halves, the **Lean** statement that the kernel checks and the **Sage** computation that
+found the certificate's data. For the symmetry of the Christoffel symbols it reads:
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Recipe `calc_derivation`; certificate `christoffel_symm`.
+
+**Lean.**
+
+{{< lean KaluzaKlein.christoffel_symm >}}
+
+**Sage.** Pending.
+:::
+
+The Lean part reproduces the docstring and the statement of the theorem, extracted from the Lean source when the book
+is rendered. A part marked *Pending* belongs to a claim whose certificate is still being produced. @sec-registry-kaluza-klein-theories lists every claim with its Lean theorem and its recipe.
+
+## Reading the blocks {#sec-conventions-blocks}
+
+Every numbered block of the book is one of three kinds, told apart by the colour of its title. **Statements**, that
+is, definitions, theorems, lemmas, propositions and corollaries, have a red title and stand in a light red box, which
+also holds the statement's collapsed Verification box; each definition introduces exactly one notion. **Examples**
+have a green title; every statement is followed by a run of them, of increasing complexity, which carry the figures
+and their interactive versions. **Exercises** have a blue title; every statement is followed by a run of them, of
+increasing difficulty, each with a folded solution, and every chapter ends with exercises that draw on all of its
+sections. To keep the line of the argument visible, the examples of a statement are folded into one collapsed
+**Examples** box placed right after it, and its exercises, with their solutions, into one collapsed **Exercises**
+box; open them to work through the material. Solutions that use Sage show the committed script and its recorded
+output.
+
+## Coordinates, indices and signature {#sec-conventions-indices}
+
+Spacetime is four-dimensional with coordinates $x^\mu$, $\mu = 0, 1, 2, 3$, and metric signature
+$(+, -, -, -)$: $\eta_{\mu\nu} = \operatorname{diag}(1, -1, -1, -1)$, timelike vectors have $\eta(v, v) > 0$ and
+spacelike ones $\eta(v, v) < 0$. Internal (compact) coordinates are $y^m$, and the full higher-dimensional
+coordinates are $z^M = (x^\mu, y^m)$. Internal metrics are **negative definite**, so that the full metric
+$\hat g_{MN}$ has signature $(+, -, \dots, -)$: the Kaluza-Klein ansatz reads $d\hat s^2 = g_{\mu\nu}dx^\mu dx^\nu -
+\phi^2(dy + A_\mu dx^\mu)^2$ on the circle and $g_{\mu\nu}dx^\mu dx^\nu - R^2(d\theta^2 + \sin^2\theta\,d\varphi^2)$
+on the sphere, and we write $h_{mn} = -\gamma_{mn}$ with $\gamma_{mn}$ the positive-definite round metric when the
+internal geometry is discussed on its own (Part I treats Riemannian metrics, which are positive definite). Indices
+are summed when repeated once up and once down.
+
+The signature fixes the signs of the field-theory formulas: the Klein-Gordon equation is $(\Box + m^2)\phi = 0$
+with $\Box = \eta^{\mu\nu}\partial_\mu\partial_\nu = \partial_t^2 - \nabla^2$, the scalar Lagrangian is
+$\tfrac12\eta^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi - V(\phi)$, the Maxwell and Yang-Mills Lagrangians are
+$-\tfrac14F_{\mu\nu}F^{\mu\nu}$ (unchanged by the signature, two indices being raised), the Dirac equation is
+$(i\gamma^\mu\partial_\mu - m)\psi = 0$ with $\{\gamma^\mu, \gamma^\nu\} = 2\eta^{\mu\nu}$, $(\gamma^0)^2 = 1$,
+$(\gamma^i)^2 = -1$, and the Einstein-Hilbert Lagrangian is $-\tfrac{1}{16\pi G}\sqrt{-g}\,R$ with the curvature
+conventions of @sec-conventions-curvature (the curvature scalar changes sign with the signature while the Riemann
+and Ricci tensors do not). Under the ansatz above the circle reduction gives $\hat R = R + \tfrac14\phi^2
+F_{\mu\nu}F^{\mu\nu} - 2\phi^{-1}\Box\phi$ (Part III).
+
+The Kaluza-Klein literature is split on the signature: @overduin1998 [Sec. 3], @tanii1998 and the CSDR reviews
+[@manolakos2016, eq. 9; @manousselis2000] use $(+,-,-,-)$ as we do, while @duff1994 [p. 2], @duff2025 and
+@martin1997 use $(-,+,+,+)$. Where we quote a formula from a source with the other signature, we say so and
+convert: the rule is $g_{MN} \to -g_{MN}$, which leaves $\Gamma$, $R^\rho{}_{\sigma\mu\nu}$, $R_{\mu\nu}$ and
+$F_{\mu\nu}F^{\mu\nu}$ unchanged and flips the signs of $R$, of $\Box$, of every $\eta^{\mu\nu}$ contraction with
+an odd number of inverse metrics, and of the $\eta$ in the Clifford relation.
+
+In the Lean library a chart is $\mathbb{R}^n$, written `Fin n → ℝ`, and a metric is the family of its components
+$g_{ij}(x)$. The chart hypotheses (for instance $\sin\theta \neq 0$ on the sphere) exclude the points where the
+coordinates degenerate; every statement holds on the chart domain.
+
+## Connection and curvature {#sec-conventions-curvature}
+
+The Levi-Civita connection has Christoffel symbols
+$$
+\Gamma^k_{ij} = \tfrac12 g^{kl} \left( \partial_i g_{lj} + \partial_j g_{li} - \partial_l g_{ij} \right),
+$$ {#eq-christoffel-def}
+the Riemann tensor is
+$$
+R^\rho{}_{\sigma\mu\nu} = \partial_\mu \Gamma^\rho_{\nu\sigma} - \partial_\nu \Gamma^\rho_{\mu\sigma}
+  + \Gamma^\rho_{\mu\lambda} \Gamma^\lambda_{\nu\sigma} - \Gamma^\rho_{\nu\lambda} \Gamma^\lambda_{\mu\sigma},
+$$ {#eq-riemann-def}
+the Ricci tensor is $R_{\sigma\nu} = R^\rho{}_{\sigma\rho\nu}$ and the scalar curvature is
+$R = g^{\sigma\nu} R_{\sigma\nu}$. With these signs the round unit sphere has $R = +2$ and the Einstein-Hilbert
+action of general relativity is $S = \frac{1}{2\kappa^2} \int d^4x \sqrt{-g}\, R$ with $\kappa^2 = 8\pi G$. These
+are the definitions coded in the Lean library (`CoordinateGeometry.christoffel`, `riemann`, `ricci`,
+`scalarCurvature`), so every curvature statement is verified with exactly these signs.
+
+## Lie algebras and gauge fields {#sec-conventions-lie}
+
+Lie algebra generators are anti-Hermitian matrices $T_A$ with real structure constants,
+$$
+[T_A, T_B] = f_{AB}{}^C\, T_C .
+$$ {#eq-structure-constants}
+For $\mathfrak{so}(3) \cong \mathfrak{su}(2)$ the generators are the real matrices $(L_a)_{bc} = -\epsilon_{abc}$,
+or equivalently $T_a = -\tfrac{i}{2}\sigma_a$ with the Pauli matrices, and $f_{ab}{}^c = \epsilon_{abc}$. This is
+the convention of the CSDR literature [@kubyshin2003, Sec. 1; @chatzistavrakidis2007consistency, eq. 2.4], in which
+the generators of a coset $S/R$ are split into $Q_i$ spanning $\mathfrak{r}$ and $Q_a$ spanning its complement.
+
+A gauge field is a Lie-algebra-valued one-form $A = A_M\, dz^M$ with anti-Hermitian components, the covariant
+derivative is $D_M = \partial_M + A_M$, and the field strength is
+$$
+F_{MN} = \partial_M A_N - \partial_N A_M + [A_M, A_N], \qquad F = dA + A \wedge A .
+$$ {#eq-field-strength}
+The Yang-Mills action is $S = \frac{1}{2 g^2} \int d^Dz \sqrt{|g|}\, \operatorname{Tr}(F_{MN} F^{MN})$ with the trace
+in the fundamental representation and a positive coupling $g$. With $F_{MN} = F^a_{MN}T_a$ and
+$\operatorname{Tr}(T_aT_b) = -\tfrac12\delta_{ab}$ this is $S = -\frac{1}{4g^2}\int d^Dz\sqrt{|g|}\,F^a_{MN}F^{a\,MN}$,
+whose electric part $\tfrac{1}{2g^2}F^a_{0i}F^a_{0i}$ enters with the positive sign of a kinetic energy in the
+signature $(+, -, \dots, -)$. @manolakos2016 and @manousselis2000 write $F_{MN} = \partial_M A_N - \partial_N A_M - [A_M, A_N]$ with
+$D_M = \partial_M - A_M$, which is the same convention after $A \to -A$; @kubyshin2003 prints the commutator with a
+minus sign in his eq. (9) but uses $F = dA + A\wedge A$ in his example (see the reading note). We never need a
+gauge coupling inside the internal space, since CSDR fixes the internal components of $A$ in units of the coset
+radius.
+
+## Units
+
+$\hbar = c = 1$. The five-dimensional gravitational coupling is $\hat\kappa^2 = 8\pi \hat G$; the circle has
+circumference $2\pi R$. Lie algebra generators are normalised by $\operatorname{Tr}(T_a T_b) = -\tfrac12 \delta_{ab}$
+in the fundamental representation of $SU(2)$ and $SU(3)$.

@@ -1,0 +1,6 @@
+gamma^1 : even part block diagonal True , odd part block off-diagonal True ; even part zero: True , odd part zero: False
+gamma_5 : even part block diagonal True , odd part block off-diagonal True ; even part zero: True , odd part zero: False
+gamma^0 gamma_5 : even part block diagonal True , odd part block off-diagonal True ; even part zero: True , odd part zero: False
+Sigma_3 : even part block diagonal True , odd part block off-diagonal True ; even part zero: False , odd part zero: True
+H : even part block diagonal True , odd part block off-diagonal True ; even part zero: False , odd part zero: False
+odd part of H = [0, 0, p, 0, 0, 0, 0, -p, p, 0, 0, 0, 0, -p, 0, 0]

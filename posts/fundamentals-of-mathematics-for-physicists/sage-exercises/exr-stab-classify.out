@@ -1,0 +1,6 @@
+A1 : tr = -6 , det = 8 , eigenvalues [-2, -4] -> asymptotically stable node
+    all real parts negative: True | matches the trace-determinant criterion: True
+A2 : tr = 1 , det = -6 , eigenvalues [3, -2] -> unstable saddle
+    all real parts negative: False | matches the trace-determinant criterion: True
+A3 : tr = -1 , det = 4 , eigenvalues [-0.50000000000000000? + 1.936491673103709?*I, -0.50000000000000000? - 1.936491673103709?*I] -> asymptotically stable spiral
+    all real parts negative: True | matches the trace-determinant criterion: True

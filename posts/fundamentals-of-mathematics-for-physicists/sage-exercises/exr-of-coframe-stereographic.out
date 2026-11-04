@@ -1,0 +1,3 @@
+dphi = dph = -v/(u^2 + v^2) du + u/(u^2 + v^2) dv
+dtheta = dth = -2*u/((u^2 + v^2 + 1)*sqrt(u^2 + v^2)) du - 2*v/((u^2 + v^2 + 1)*sqrt(u^2 + v^2)) dv
+dphi(d_phi) = 1 ; dtheta(d_phi) = 0

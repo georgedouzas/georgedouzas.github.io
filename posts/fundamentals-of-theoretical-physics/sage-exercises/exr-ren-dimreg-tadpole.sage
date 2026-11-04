@@ -1,0 +1,12 @@
+# Exercise exr-ren-dimreg-tadpole: the dimensionally regularised tadpole mu^eps Gamma(-1 + eps/2) (4 pi)^(-2 + eps/2)
+# (m^2)^(1 - eps/2) expanded in eps = 4 - d, and the coefficient of m^2 log m^2 (times 16 pi^2).
+var('eps q'); var('m mu', domain='positive')
+T = mu^eps * gamma(-1 + eps / 2) * (4 * pi)^(-2 + eps / 2) * (m^2)^(1 - eps / 2)
+s = T.series(eps, 1).truncate().expand()
+claim = -m^2 / (16 * pi^2) * (2 / eps - euler_gamma + log(4 * pi) + 1 + log(mu^2 / m^2))
+print("series:", s.simplify_log())
+print("series - claim = 0:", bool((s - claim.expand()).simplify_log().simplify_full() == 0))
+finite = (16 * pi^2 * (s - s.coefficient(eps, -1) / eps)).subs(m=sqrt(q)).simplify_log()
+print("16 pi^2 x coefficient of q log q (q = m^2), dimensional:", limit(q * diff(finite, q, 2), q=0))
+cut = var('L')^2 - q * log((L^2 + q) / q)
+print("16 pi^2 x coefficient of q log q, cutoff:", limit(q * diff(cut, q, 2), q=0))

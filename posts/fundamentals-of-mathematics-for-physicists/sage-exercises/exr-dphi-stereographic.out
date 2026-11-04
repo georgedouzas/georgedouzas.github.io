@@ -1,0 +1,3 @@
+in spherical coordinates: X = ∂/∂ph
+in stereographic coordinates: X = -v ∂/∂u + u ∂/∂v
+components (X^u, X^v) = (-v, u), checked in spherical coordinates: True

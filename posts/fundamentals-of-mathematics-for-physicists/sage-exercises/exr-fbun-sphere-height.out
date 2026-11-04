@@ -1,0 +1,9 @@
+Jacobian of (theta, phi) -> (cos theta, phi):
+[-sin(th)        0]
+[       0        1]
+determinant: -sin(th) ; nonzero for 0 < theta < pi: True
+inverse map z -> theta = arccos z is smooth on (-1, 1); derivative: -1/sqrt(-z^2 + 1)
+Phi followed by the projection (z, phi) -> z is the height cos(theta): cos(th)
+fibre of the height over z = 1 on the full sphere: theta = 0, a single point; over z = 1/2: [
+th == 1/3*pi
+] with phi arbitrary, a circle

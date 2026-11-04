@@ -1,0 +1,92 @@
+{
+"KaluzaKlein.christoffel_symm": {
+"doc": "/-- For a symmetric metric the Christoffel symbols are symmetric in the lower indices. -/",
+"file": "KaluzaKlein/Conventions.lean",
+"namespace": "KaluzaKlein",
+"statement": "theorem christoffel_symm {n : ℕ} (g : Fin n → Fin n → (Fin n → ℝ) → ℝ) (hg : ∀ i j, g i j = g j i)\n    (k i j : Fin n) (x : Fin n → ℝ) :\n    christoffel g k i j x = christoffel g k j i x"
+},
+"KaluzaKlein.AbelianKK.Weyl.weyl_scalar": {
+"doc": "/-- `R[Ω² g] = Ω⁻² R[g] - 6 Ω⁻³ □Ω` for a diagonal four-dimensional metric with arbitrary functions. -/",
+"file": "KaluzaKlein/AbelianKK/Weyl.lean",
+"namespace": "KaluzaKlein.AbelianKK.Weyl",
+"statement": "theorem weyl_scalar (gd : Fin 4 → ℝ) (dgd : Fin 4 → Fin 4 → ℝ) (ddgd : Fin 4 → Fin 4 → Fin 4 → ℝ)\n    (W : ℝ) (dW : Fin 4 → ℝ) (ddW : Fin 4 → Fin 4 → ℝ) (hg : ∀ μ, gd μ ≠ 0) (hW : W ≠ 0) :\n    (weylJets gd dgd ddgd W dW ddW).R4 =\n      W⁻¹ ^ 2 * (diagJets gd dgd ddgd W dW ddW).R4 - 6 * W⁻¹ ^ 3 * (diagJets gd dgd ddgd W dW ddW).boxφ"
+},
+"KaluzaKlein.AbelianKK.Jets.Ric5_yy": {
+"doc": "/-- `R_{yy} = φ □φ + ¼φ⁴ F_{μν}F^{μν}`. -/",
+"file": "KaluzaKlein/AbelianKK/Jets.lean",
+"namespace": "KaluzaKlein.AbelianKK.Jets",
+"statement": "theorem Ric5_yy (hφ : J.φ ≠ 0) : J.Ric5 (inr ()) (inr ()) = J.φ * J.boxφ + J.φ ^ 4 / 4 * J.F2"
+},
+"KaluzaKlein.AbelianKK.Jets.R5_eq": {
+"doc": "/-- `R_5 = R_4 + ¼φ² F_{μν}F^{μν} - 2φ⁻¹ □φ` (`□ = g^{μν}∇_μ∂_ν` with the mostly-minus `g`). -/",
+"file": "KaluzaKlein/AbelianKK/Jets.lean",
+"namespace": "KaluzaKlein.AbelianKK.Jets",
+"statement": "theorem R5_eq (hφ : J.φ ≠ 0) : J.R5 = J.R4 + J.φ ^ 2 / 4 * J.F2 - 2 * J.φ⁻¹ * J.boxφ"
+},
+"KaluzaKlein.AbelianKK.Gauge.det_ansatz": {
+"doc": "/-- `det G = -φ² det g`: the volume factor `√|G| = φ √(-g)` (`det g < 0` for a Lorentzian `g`, so `det G > 0`). -/",
+"file": "KaluzaKlein/AbelianKK/Gauge.lean",
+"namespace": "KaluzaKlein.AbelianKK.Gauge",
+"statement": "theorem det_ansatz (g : Matrix (Fin 4) (Fin 4) ℝ) (A : Fin 4 → ℝ) (φ : ℝ) (hφ : φ ≠ 0) :\n    (ansatz g A φ).det = -(φ ^ 2) * g.det"
+},
+"KaluzaKlein.AbelianKK.Jets.Γ5_lll": {
+"doc": "/-- `Γ^λ_{μν} = Γ4^λ_{μν} - ½φ²(A_μ F_ν{}^λ + A_ν F_μ{}^λ) + φ A_μ A_ν ∂^λφ`. -/",
+"file": "KaluzaKlein/AbelianKK/Jets.lean",
+"namespace": "KaluzaKlein.AbelianKK.Jets",
+"statement": "theorem Γ5_lll (k μ ν : Fin 4) :\n    J.Γ5 (inl k) (inl μ) (inl ν) =\n      J.Γ4 k μ ν - J.φ ^ 2 / 2 * (J.A μ * J.Fup ν k + J.A ν * J.Fup μ k) + J.φ * J.A μ * J.A ν * J.dφup k"
+},
+"KaluzaKlein.AbelianKK.Tower.deriv2_mode": {
+"doc": "/-- `∂_y² e^{i n y/R} = -(n/R)² e^{i n y/R}`: the mode is an eigenfunction of `∂_y²`. -/",
+"file": "KaluzaKlein/AbelianKK/Tower.lean",
+"namespace": "KaluzaKlein.AbelianKK.Tower",
+"statement": "theorem deriv2_mode (n R y : ℝ) :\n    deriv (deriv (mode n R)) y = -((n / R : ℂ) ^ 2) * mode n R y"
+},
+"KaluzaKlein.AbelianKK.Tower.periodic_iff_int": {
+"doc": "/-- Periodicity: `e^{i n (y + 2πR)/R} = e^{i n y/R}` holds for every `y` exactly when `n` is an integer\n(`R ≠ 0`): Klein's quantisation of the fifth-momentum. -/",
+"file": "KaluzaKlein/AbelianKK/Tower.lean",
+"namespace": "KaluzaKlein.AbelianKK.Tower",
+"statement": "theorem periodic_iff_int (n R y : ℝ) (hR : R ≠ 0) :\n    mode n R (y + 2 * Real.pi * R) = mode n R y ↔ ∃ k : ℤ, (n : ℂ) = k"
+},
+"KaluzaKlein.AbelianKK.Tower.klein_gordon_mode": {
+"doc": "/-- The massless five-dimensional Klein-Gordon operator `□₅ = □₄ - ∂_y²` (mostly-minus signature, the circle\ndirection spacelike) on a product mode `φ(x) e^{i n y/R}` gives the four-dimensional operator with mass squared\n`(n/R)²`: if `□₄ φ = c` then `(□₄ - ∂_y²)(φ e^{iny/R}) = (c + (n/R)² φ) e^{iny/R}`, so `□₅ Φ = 0` is\n`(□₄ + (n/R)²) φ = 0` mode by mode. -/",
+"file": "KaluzaKlein/AbelianKK/Tower.lean",
+"namespace": "KaluzaKlein.AbelianKK.Tower",
+"statement": "theorem klein_gordon_mode (n R y : ℝ) (φ c : ℂ) :\n    c * mode n R y - φ * deriv (deriv (mode n R)) y = (c + (n / R : ℂ) ^ 2 * φ) * mode n R y"
+},
+"KaluzaKlein.AbelianKK.Gauge.gauge_shift": {
+"doc": "/-- The coordinate change `y ↦ y + ε(x)` maps the ansatz with `A` to the ansatz with `A - ∂ε`:\n`Jᵀ G J = G'`. The abelian gauge transformation `δA_μ = -∂_μ ε` is a coordinate transformation of the circle. -/",
+"file": "KaluzaKlein/AbelianKK/Gauge.lean",
+"namespace": "KaluzaKlein.AbelianKK.Gauge",
+"statement": "theorem gauge_shift (g : Matrix (Fin 4) (Fin 4) ℝ) (A dε : Fin 4 → ℝ) (φ : ℝ) :\n    (jacobian dε)ᵀ * ansatz g A φ * jacobian dε = ansatz g (fun μ => A μ - dε μ) φ"
+},
+"KaluzaKlein.NonAbelianKK.ansatz_mul_inv": {
+"doc": "/-- `G G⁻¹ = 1` whenever `g ginv = 1` and `h hinv = 1`: the block inverse of the non-abelian ansatz. -/",
+"file": "KaluzaKlein/NonAbelianKK/Ansatz.lean",
+"namespace": "KaluzaKlein.NonAbelianKK",
+"statement": "theorem ansatz_mul_inv (g ginv : Matrix μ μ ℝ) (h hinv : Matrix m m ℝ) (B : Matrix m μ ℝ)\n    (hg : g * ginv = 1) (hh : h * hinv = 1) :\n    ansatz g h B * ansatzInv ginv hinv B = 1"
+},
+"KaluzaKlein.NonAbelianKK.Gauge.gauge_transformation": {
+"doc": "/-- `δĝ_{μm} = Σ_c h_{mn} K^n_c (∂_μ ε^c + ε_{abc} A^a_μ ε^b)`: the transformed metric is the ansatz for\n`A + δA` with `δA^c = ∂_μ ε^c + ε_{abc} A^a ε^b`. -/",
+"file": "KaluzaKlein/NonAbelianKK/Gauge.lean",
+"namespace": "KaluzaKlein.NonAbelianKK.Gauge",
+"statement": "theorem gauge_transformation (A ε dε : Fin 3 → ℝ) (m : Fin 2) (y : Fin 2 → ℝ) (h : Real.sin (y 0) ≠ 0) :\n    deltaMixed A ε dε m y =\n      ∑ c, (∑ n, sphere m n y * K c n y) * (dε c + ∑ a, ∑ b, levi a b c * A a * ε b)"
+},
+"KaluzaKlein.NonAbelianKK.inv_mul_ansatz": {
+"doc": "/-- Also `G⁻¹ G = 1`, given `ginv g = 1` and `hinv h = 1`. -/",
+"file": "KaluzaKlein/NonAbelianKK/Ansatz.lean",
+"namespace": "KaluzaKlein.NonAbelianKK",
+"statement": "theorem inv_mul_ansatz (g ginv : Matrix μ μ ℝ) (h hinv : Matrix m m ℝ) (B : Matrix m μ ℝ)\n    (hg : ginv * g = 1) (hh : hinv * h = 1) :\n    ansatzInv ginv hinv B * ansatz g h B = 1"
+},
+"KaluzaKlein.CSDR.eigenspace_plus_i": {
+"doc": "/-- The `+i` eigenspace of `ad τ` is exactly the span of `E₁₃` and `E₂₃`: `[τ, X] = i X` holds if and only if every\nentry of `X` other than `X₁₃`, `X₂₃` vanishes. -/",
+"file": "KaluzaKlein/CSDR/Embedding.lean",
+"namespace": "KaluzaKlein.CSDR",
+"statement": "theorem eigenspace_plus_i (X : Matrix (Fin 3) (Fin 3) ℂ) :\n    ⁅τ, X⁆ = I • X ↔ X 0 0 = 0 ∧ X 0 1 = 0 ∧ X 1 0 = 0 ∧ X 1 1 = 0 ∧ X 2 0 = 0 ∧ X 2 1 = 0 ∧ X 2 2 = 0"
+},
+"KaluzaKlein.CSDR.centraliser": {
+"doc": "/-- The kernel of `ad τ`, the Lie algebra of the centraliser `H`: `[τ, X] = 0` if and only if `X` is block\ndiagonal, `X₁₃ = X₂₃ = X₃₁ = X₃₂ = 0`. With `X ∈ su(3)` this is `s(u(2) ⊕ u(1))`, the algebra of `SU(2) × U(1)`. -/",
+"file": "KaluzaKlein/CSDR/Embedding.lean",
+"namespace": "KaluzaKlein.CSDR",
+"statement": "theorem centraliser (X : Matrix (Fin 3) (Fin 3) ℂ) :\n    ⁅τ, X⁆ = 0 ↔ X 0 2 = 0 ∧ X 1 2 = 0 ∧ X 2 0 = 0 ∧ X 2 1 = 0"
+}
+}

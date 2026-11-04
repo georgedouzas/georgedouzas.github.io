@@ -1,0 +1,10 @@
+A =
+[ 1  I  0  0]
+[-I  1  I  0]
+[ 0 -I  1  I]
+[ 0  0 -I  1]
+Hermitian: True
+eigenvalues: [-1/2*sqrt(5) + 1/2, 1/2*sqrt(5) + 1/2, -1/2*sqrt(5) + 3/2, 1/2*sqrt(5) + 3/2]
+equal to {1 + phi, 1 + 1/phi, 1 - 1/phi, 1 - phi}: True ; = 1 + 2 cos(k pi/5): True
+U^dagger U = 1: True ; A = U D U^dagger: True
+tr e^{iA} = 0.8296872575 + 1.292161344*I ; sum e^{i lambda_k} = 0.8296872575 + 1.292161344*I ; via Sage's exp: 0.8296872574 + 1.292161344*I

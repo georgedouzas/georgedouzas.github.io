@@ -1,0 +1,5 @@
+x0 = -4 : sqrt above - sqrt below = 4.00000000000003*I   Log above - Log below = 6.28318480717959*I
+x0 = 4 : sqrt above - sqrt below = 4.99999999999996e-7*I   Log above - Log below = 4.99999999999990e-7*I
+jump of sqrt across the cut is 4i (to 1e-5): True
+jump of Log across the cut is 2 pi i (to 1e-5): abs(-2*I*pi + 6.28318480717959*I) < 0.0000100000000000000
+no jump across the positive axis (to 1e-5): True

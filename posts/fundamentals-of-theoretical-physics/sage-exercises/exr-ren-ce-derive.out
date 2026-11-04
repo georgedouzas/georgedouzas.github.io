@@ -1,0 +1,4 @@
+u* = 3/(n + 8) * eps + 9*(3*n + 14)/(n + 8)^3 * eps^2
+nu: eps coefficient 1/4*(n + 2)/(n + 8)   eps^2 coefficient 1/8*(n + 20)*(n + 3)*(n + 2)/(n + 8)^3
+eta = 1/2*e^2*(n + 2)/(n + 8)^2    omega = -3*e^2*(3*n + 14)/(n^2 + 16*n + 64) + e
+n = 1: nu = 7/162*e^2 + 1/12*e + 1/2   eta = 1/54*e^2

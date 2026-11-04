@@ -1,0 +1,7 @@
+n = 1  (Delta x)^2 = 1/12*(pi^2 - 6)*L^2/pi^2  Delta p = pi*hbar/L  Delta x Delta p / hbar = 1/6*sqrt(3)*sqrt(pi^2 - 6) = 0.56786  matches (1/2) sqrt(n^2 pi^2/3 - 2): True
+n = 2  (Delta x)^2 = 1/24*(2*pi^2 - 3)*L^2/pi^2  Delta p = 2*pi*hbar/L  Delta x Delta p / hbar = 1/6*sqrt(6)*sqrt(2*pi^2 - 3) = 1.6703  matches (1/2) sqrt(n^2 pi^2/3 - 2): True
+n = 3  (Delta x)^2 = 1/36*(3*pi^2 - 2)*L^2/pi^2  Delta p = 3*pi*hbar/L  Delta x Delta p / hbar = 1/2*sqrt(3*pi^2 - 2) = 2.6272  matches (1/2) sqrt(n^2 pi^2/3 - 2): True
+n = 4  (Delta x)^2 = 1/96*(8*pi^2 - 3)*L^2/pi^2  Delta p = 4*pi*hbar/L  Delta x Delta p / hbar = 1/6*sqrt(6)*sqrt(8*pi^2 - 3) = 3.5580  matches (1/2) sqrt(n^2 pi^2/3 - 2): True
+n = 5  (Delta x)^2 = 1/300*(25*pi^2 - 6)*L^2/pi^2  Delta p = 5*pi*hbar/L  Delta x Delta p / hbar = 1/6*sqrt(3)*sqrt(25*pi^2 - 6) = 4.4790  matches (1/2) sqrt(n^2 pi^2/3 - 2): True
+n = 6  (Delta x)^2 = 1/72*(6*pi^2 - 1)*L^2/pi^2  Delta p = 6*pi*hbar/L  Delta x Delta p / hbar = 1/2*sqrt(2)*sqrt(6*pi^2 - 1) = 5.3953  matches (1/2) sqrt(n^2 pi^2/3 - 2): True
+limit of (Delta x/L)^2 as n -> oo: 1/12

@@ -1,0 +1,5 @@
+series n! x^n : R = lim |a_n/a_{n+1}| = 0
+series x^n/n^2 : R = lim |a_n/a_{n+1}| = 1
+series 2^n x^n : R = lim |a_n/a_{n+1}| = 1/2
+series x^n/n! : R = lim |a_n/a_{n+1}| = +Infinity
+check: sum x^n/n^2 at x = 1 is pi^2/6 (converges on the boundary): 1/6*pi^2 ; sum 2^n x^n at x = 1/2 is the divergent sum of 1s

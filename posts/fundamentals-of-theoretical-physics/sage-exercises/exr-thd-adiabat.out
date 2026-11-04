@@ -1,0 +1,4 @@
+T(V) = T_1*V_1^(2/3)/V^(2/3)
+T V^(2/3) is constant: True ; p V^(5/3) = N*T_1*V_1^(2/3)
+the solution equals T_1 (V_1/V)^(2/3): True
+W = int p dV = -3/2*(N*T_1*V_1^(2/3) - N*T_1*V_2^(2/3))/V_2^(2/3) ; W - (3/2) N (T_1 - T_2) = 0

@@ -1,0 +1,6 @@
+p1 = l1*l2*m2*w2*cos(q1 - q2) + l1^2*(m1 + m2)*w1
+p2 = l1*l2*m2*w1*cos(q1 - q2) + l2^2*m2*w2
+M =
+[       l1^2*(m1 + m2) l1*l2*m2*cos(q1 - q2)]
+[l1*l2*m2*cos(q1 - q2)               l2^2*m2]
+det M == m2 l1^2 l2^2 (m1 + m2 sin^2(q1 - q2)): True

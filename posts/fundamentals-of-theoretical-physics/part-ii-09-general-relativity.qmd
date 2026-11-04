@@ -1,0 +1,3217 @@
+---
+pagetitle: "General relativity"
+---
+
+# General relativity {#sec-general-relativity}
+
+General relativity is the theory of gravitation in which the metric of spacetime is itself the dynamical field:
+matter tells spacetime how to curve, through the Einstein equations, and spacetime tells matter how to move, along
+its geodesics. Newton's law of gravitation is recovered for weak fields and slow motion, and the corrections to it
+are the classic tests of the theory: the advance of the perihelion of Mercury, the bending of light by the Sun and
+the gravitational redshift. This chapter has three sections. The Einstein-Hilbert action introduces spacetime and the
+equivalence principle, shows how the geodesic equation reproduces Newton's law, and defines the action of the
+gravitational field together with the formulas needed to vary it. The Einstein equations carries out the variation,
+defines the stress tensor and the cosmological constant, and studies the maximally symmetric vacuum solutions, de
+Sitter and anti-de Sitter space. Black holes and cosmology solves the equations in the two settings where they are
+used most: the Schwarzschild solution outside a spherical mass, with its horizon and its orbits, and the expanding
+homogeneous universe of Friedmann, Lemaître, Robertson and Walker. We use the signature $(+, -, -, -)$ of
+@sec-conventions-indices throughout, in which the scalar curvature of a sphere-like (de Sitter) spacetime is negative
+and the action carries an overall minus sign. Minkowski spacetime, the flat spacetime of special relativity on which every spacetime is modelled
+locally, and the Rindler frame of uniformly accelerated observers, whose clocks behave as clocks in a gravitational field,
+are developed in @sec-special-relativity (@sec-sr-minkowski, @sec-sr-dynamics). Every statement is followed by three examples and three exercises with
+hidden solutions.
+
+## The Einstein-Hilbert action {#sec-einstein-hilbert}
+
+Kaluza-Klein theory is general relativity in more than four dimensions, so its input is the action of general
+relativity, and Part III consists of evaluating that action on a five-dimensional metric. This section defines
+spacetime, states the equivalence principle, shows how the geodesic equation of Part I reproduces Newton's law,
+and introduces the Einstein-Hilbert action together with the two variational formulas its variation needs. Our
+source is @carroll1997, who uses the signature $(-, +, +, +)$; we convert to our $(+, -, -, -)$ with the rule of
+@sec-conventions-indices, which flips the signs of $R$ and of the gravitational Lagrangian but not those of
+$\Gamma$, $R^\rho{}_{\sigma\mu\nu}$ and $R_{\mu\nu}$, and we note his different normalisation of the action where it
+matters.
+
+### Spacetime and the equivalence principle
+
+The arena of general relativity is a manifold with a metric, exactly as in the geometry of @sec-metrics, except that
+the metric is not positive definite. The sign of $g(v, v)$ then sorts tangent vectors, and curves, into three
+classes with different physical meanings.
+
+:::: {.statement-box}
+::: {#def-spacetime}
+#### Spacetime
+
+A **spacetime** is a four-dimensional manifold (@def-manifold) with a metric $g_{\mu\nu}$ of Lorentzian signature
+$(+, -, -, -)$ (@def-signature-metric). Curves with $g_{\mu\nu}\dot x^\mu\dot x^\nu > 0$ are **timelike**, the possible
+worldlines of massive particles; those with $g_{\mu\nu}\dot x^\mu\dot x^\nu = 0$ are **null**, the worldlines of
+light; the remaining ones are **spacelike**.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The first example is the spacetime of special relativity, flat and with the largest possible symmetry group. Every
+other spacetime looks like it in a small enough neighbourhood of any point, which is the content of the equivalence
+principle below.
+
+::: {#exm-spacetime-minkowski}
+#### Minkowski spacetime
+
+$\mathbb{R}^4$ with $\eta = \operatorname{diag}(1, -1, -1, -1)$ (@exm-metric-minkowski), the spacetime of special
+relativity. Its Christoffel symbols vanish (@exm-christoffel-constant), so it is flat, and its isometry group is
+the Poincaré group of translations and Lorentz transformations, of dimension $10 = 4 \cdot 5/2$, the maximum
+(@def-maximally-symmetric).
+:::
+
+The second example is curved and expanding. It reappears throughout the chapter: as a vacuum solution with a
+cosmological constant in @sec-einstein-equations and as a cosmological model in @sec-schwarzschild-flrw.
+
+::: {#exm-spacetime-de-sitter}
+#### De Sitter space
+
+$ds^2 = dt^2 - e^{2Ht}(dx^2 + dy^2 + dz^2)$ with constant $H > 0$ describes an exponentially expanding universe:
+**de Sitter space** in flat slicing, the Lorentzian analogue of the sphere, maximally symmetric with positive
+curvature, whose curvature is computed in @sec-einstein-equations.
+:::
+
+Spacetimes need not be four-dimensional; the definition makes sense in any dimension with one time and several space
+directions. Higher-dimensional products are the starting point of the reductions studied in the main theme.
+
+::: {#exm-spacetime-product}
+#### Product spacetimes
+
+$M_4 \times S^1$ with $ds^2 = \eta_{\mu\nu}dx^\mu dx^\nu - R^2dy^2$ (@def-product-metric with the sign of the
+internal metric reversed), the spacetime of Part III, is a five-dimensional Lorentzian manifold; $M_4 \times S/R$
+with minus the invariant metric of @def-invariant-metric on the coset is the spacetime of Part V. Both have the
+signature $(+, -, \dots, -)$.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The causal character of a vector depends only on the sign of its norm, and this sign is computed with the metric.
+The first exercise does this for a few vectors and a family of worldlines in Minkowski space.
+
+::: {#exr-gr-causal-character}
+#### Timelike, null and spacelike
+
+Classify the vectors $(1, 0, 0, 0)$, $(1, 1, 0, 0)$, $(1, 2, 0, 0)$ and $(0, 0, 1, 0)$ of Minkowski space, and show
+that the worldline $x^\mu(t) = (t, vt, 0, 0)$ is timelike exactly when $|v| < 1$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $\eta = \operatorname{diag}(1, -1, -1, -1)$ the norms are $1$, $0$, $-3$ and $-1$: timelike, null, spacelike,
+spacelike. The tangent of the worldline is $(1, v, 0, 0)$ with norm $1 - v^2$, positive exactly when $|v| < 1$: a
+massive particle moves slower than light, and $|v| = 1$ is a light ray.
+:::
+
+A metric that looks curved may be flat space in unusual coordinates; only the Riemann tensor decides. The Rindler
+metric of a uniformly accelerated observer is the standard example, and the exercise computes its curvature with
+SageManifolds.
+
+::: {#exr-gr-rindler}
+#### Rindler space
+
+Show that $ds^2 = x^2dt^2 - dx^2 - dy^2 - dz^2$ on $x > 0$ has non-zero Christoffel symbols but vanishing Riemann
+tensor, and find the coordinate change to Minkowski space.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The non-zero symbols are $\Gamma^x_{tt} = x$ and $\Gamma^t_{tx} = 1/x$; the Riemann tensor vanishes, so the space is
+flat (@def-riemann). Indeed $T = x\sinh t$, $X = x\cosh t$ give $dT^2 - dX^2 = x^2dt^2 - dx^2$: the Rindler wedge
+$X > |T|$ of Minkowski space, whose observers at fixed $x$ have constant proper acceleration $1/x$.
+
+{{< sage exr-gr-rindler >}}
+:::
+
+The length of a timelike curve is the time shown by a clock carried along it. The third exercise computes it for a
+circular worldline, the relativistic version of the twin paradox.
+
+::: {#exr-gr-proper-time}
+#### Proper time on a circle
+
+The **proper time** along a timelike curve is $\tau = \int\sqrt{g_{\mu\nu}\dot x^\mu\dot x^\nu}\,dt$. Compute it for
+$x^\mu(t) = (t, R\cos\omega t, R\sin\omega t, 0)$, $0 \leq t \leq T$, in Minkowski space, and compare with the
+proper time $T$ of an observer at rest.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The tangent is $(1, -R\omega\sin\omega t, R\omega\cos\omega t, 0)$ with norm $1 - R^2\omega^2$, constant and positive
+for $R\omega < 1$; hence $\tau = T\sqrt{1 - R^2\omega^2} < T$. The travelling clock is younger: among timelike curves
+between two events the straight one, a geodesic, has the largest proper time, the Lorentzian opposite of the
+shortest-path property of Riemannian geodesics.
+:::
+::::
+
+Special relativity knows nothing of gravity, and the step to general relativity is a physical principle rather
+than a theorem. Its content is that a gravitational field can be removed locally by free fall, so that gravity
+becomes a property of the metric instead of a force.
+
+:::: {.statement-box}
+::: {#def-equivalence-principle}
+#### Equivalence principle
+
+The **equivalence principle** is the statement that in a freely falling frame the laws of physics are locally
+those of special relativity: gravity is not a force but the curvature of spacetime, and free particles move on
+geodesics (@def-geodesic) of $g_{\mu\nu}$. Mathematically it is the existence, at every point, of coordinates in
+which $g_{\mu\nu} = \eta_{\mu\nu}$ and $\partial_\rho g_{\mu\nu} = 0$ (Riemann normal coordinates); the second
+derivatives, the curvature of @sec-riemann, cannot be transformed away.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The most familiar illustration is a freely falling laboratory. Inside it gravity disappears at a point, and only its
+variation across the laboratory survives.
+
+::: {#exm-equivalence-elevator}
+#### The falling elevator
+
+Inside a freely falling box no local experiment detects the gravitational field: objects released at rest stay
+at rest relative to the box. Only the relative acceleration of two separated objects, the geodesic deviation
+governed by the Riemann tensor (@def-riemann), reveals gravity.
+:::
+
+The geodesics of a metric are the candidate trajectories of free particles. Two spaces from earlier in the book
+illustrate this, the sphere and de Sitter space.
+
+::: {#exm-equivalence-geodesics}
+#### Free fall as geodesic motion
+
+On the sphere, great circles are the geodesics (@exr-sphere-geodesic); in de Sitter space in flat slicing, curves
+of constant $(x, y, z)$ are timelike geodesics, the comoving observers, since $\Gamma^i_{tt} = 0$
+(@prp-de-sitter). The equivalence principle makes such curves the trajectories of freely falling bodies.
+:::
+
+The principle also says how matter feels gravity, by a mechanical replacement rule. This rule is used for every
+matter field of the book.
+
+::: {#exm-equivalence-coupling}
+#### Minimal coupling
+
+The equivalence principle fixes how matter couples to gravity: take the special-relativistic action of
+@sec-actions, replace $\eta_{\mu\nu}$ by $g_{\mu\nu}$, $\partial_\mu$ by $\nabla_\mu$ (@def-covariant-derivative-vector)
+and $d^4x$ by $\sqrt{-g}\,d^4x$ (@def-volume-element). For a scalar, $S = \int d^4x\sqrt{-g}\,(\tfrac12g^{\mu\nu}
+\partial_\mu\phi\partial_\nu\phi - V)$, the form used throughout Parts III to V.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The equivalence principle fixes the metric and its first derivatives at a point, and the following counting argument
+shows that exactly the curvature is left over. It is the standard argument of @carroll1997 [section 2.9].
+
+::: {#exr-gr-normal-coordinates}
+#### Counting the curvature
+
+At a point $p$ of a four-dimensional spacetime, count the Taylor coefficients of $g_{\mu\nu}$ of order zero, one and
+two, and the coefficients of a coordinate change $x \mapsto x'$ available to set them to their flat values. Show
+that $20$ second-order coefficients survive, and compare with the number of independent components of the Riemann
+tensor.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$g_{\mu\nu}$ is symmetric: $10$ values at $p$, $10 \cdot 4 = 40$ first derivatives and $10 \cdot 10 = 100$ second
+derivatives. A change of coordinates has $16$ first derivatives $\partial x'/\partial x$, $4 \cdot 10 = 40$ second
+derivatives and $4 \cdot 20 = 80$ third derivatives. The $16$ are enough to set $g_{\mu\nu}(p) = \eta_{\mu\nu}$ with
+$6$ left over, the Lorentz group; the $40$ set $\partial g(p) = 0$ exactly; of the $100$ second derivatives only $80$
+can be removed, and $20$ remain. This is the number of independent components of the Riemann tensor in four
+dimensions, $n^2(n^2 - 1)/12 = 20$ (@def-riemann-lowered).
+:::
+
+The falling elevator of the examples feels the variation of the field across it. In the Newtonian limit this
+variation is the second derivative of the potential, and the next exercise computes it for a point mass.
+
+::: {#exr-gr-tidal}
+#### Tidal forces
+
+Two freely falling particles at $\vec x$ and $\vec x + \vec\xi$ in a Newtonian potential $\Phi$ have relative
+acceleration $\ddot\xi^i = -(\partial_i\partial_j\Phi)\xi^j$ to first order in $\xi$. Compute the tidal matrix
+$-\partial_i\partial_j\Phi$ for $\Phi = -GM/r$ at the point $(r, 0, 0)$, and estimate the tidal acceleration across a
+body of height $2\,$m at $400\,$km above the Earth.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The matrix is $\tfrac{GM}{r^3}\operatorname{diag}(2, -1, -1)$: stretching along the radius and compression across it,
+with zero trace because $\nabla^2\Phi = 0$ in vacuum. In general relativity this matrix is $R^i{}_{tjt}$, the
+geodesic deviation of @exm-equivalence-elevator. Over $2\,$m in low Earth orbit the stretching is about
+$5 \times 10^{-6}\,\mathrm{m/s^2}$, imperceptible; near a stellar black hole it tears bodies apart.
+
+{{< sage exr-gr-tidal >}}
+:::
+
+Minimal coupling turns a special-relativistic action into a generally covariant one. The last exercise applies the
+rule to the electromagnetic field and finds that the field strength needs no Christoffel symbols at all.
+
+::: {#exr-gr-minimal-maxwell}
+#### Minimal coupling of the Maxwell field
+
+Apply the rule of @exm-equivalence-coupling to the Maxwell action $-\tfrac14\int d^4x\,F_{\mu\nu}F^{\mu\nu}$ with
+$F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$. Show that $\nabla_\mu A_\nu - \nabla_\nu A_\mu = \partial_\mu A_\nu -
+\partial_\nu A_\mu$ and write the resulting action.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\nabla_\mu A_\nu = \partial_\mu A_\nu - \Gamma^\rho_{\mu\nu}A_\rho$ (@def-covariant-derivative-tensor), and the
+Christoffel term is symmetric in $\mu\nu$ (@def-torsion: the Levi-Civita connection is torsion free), so it cancels in
+the antisymmetric combination. The covariant action is $S = -\tfrac14\int d^4x\sqrt{-g}\,g^{\mu\rho}g^{\nu\sigma}
+F_{\mu\nu}F_{\rho\sigma}$: the metric enters only through the contractions and the volume element, which is where the
+stress tensor of @exm-stress-maxwell comes from.
+:::
+
+The equivalence principle says that inertial forces are gravitational fields of a kind. The next exercise makes this
+concrete for a rotating frame in flat spacetime, where the Christoffel symbols turn out to be the centrifugal and
+Coriolis forces.
+
+::: {#exr-grb-rotating-frame}
+#### Centrifugal and Coriolis forces as Christoffel symbols
+
+In Minkowski space with cylindrical coordinates, pass to a frame rotating with angular velocity $\omega$ about the $z$-axis,
+$\phi = \phi' + \omega t$. Write the metric in $(t, r, \phi', z)$, compute its non-zero Christoffel symbols, and show that in the
+non-relativistic limit $d\tau \approx dt$ the geodesic equations become $\ddot r - r\dot\phi'^2 = \omega^2r + 2\omega r\dot\phi'$ and
+$r\ddot\phi' + 2\dot r\dot\phi' = -2\omega\dot r$. Identify the forces. Where does $g_{tt}$ vanish? [@blennow2022relativity, Problem 2.115]
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$ds^2 = (1 - \omega^2r^2)dt^2 - 2\omega r^2\,dt\,d\phi' - dr^2 - r^2d\phi'^2 - dz^2$. The non-zero symbols are $\Gamma^r_{tt} = -\omega^2r$,
+$\Gamma^r_{t\phi'} = -\omega r$, $\Gamma^r_{\phi'\phi'} = -r$, $\Gamma^{\phi'}_{tr} = \omega/r$ and $\Gamma^{\phi'}_{r\phi'} = 1/r$ (with their symmetric
+partners). The geodesic equations $\ddot x^\mu = -\Gamma^\mu_{\nu\rho}\dot x^\nu\dot x^\rho$ with $\dot t = 1$ give $\ddot r = \omega^2r + 2\omega r\dot\phi' + r\dot\phi'^2$
+and $\ddot\phi' = -2(\omega + \dot\phi')\dot r/r$, the stated equations; they are the free motion $\ddot r = r\dot\phi^2$, $(r^2\dot\phi)^\cdot = 0$ of
+the inertial frame rewritten with $\dot\phi = \dot\phi' + \omega$. The term $\omega^2r$ is the centrifugal acceleration and $2\omega r\dot\phi'$,
+$-2\omega\dot r/r$ are the components of the Coriolis acceleration $-2\vec\omega\times\vec v$. $g_{tt} = 0$ at $\omega r = 1$: beyond this
+"light cylinder" a point at rest in the rotating frame would move faster than light, and no observer can be at rest there.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+### The Newtonian limit
+
+Newton's theory works extremely well in the solar system, so general relativity must reduce to it when fields are
+weak and velocities small. The following definition makes this regime precise and identifies the Newtonian potential
+inside the metric.
+
+:::: {.statement-box}
+::: {#def-newtonian-limit}
+#### Newtonian limit
+
+The **Newtonian limit** of a metric is the regime of a weak static field, $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$
+with $|h| \ll 1$ and $\partial_th = 0$, and slowly moving particles, $|\dot x^i| \ll 1$. In it the geodesic equation
+@eq-geodesic reduces to $\ddot x^i = -\Gamma^i_{tt}$, and with $h_{tt} = 2\Phi$ the Christoffel symbol is
+$\Gamma^i_{tt} = \tfrac12 g^{ii}(-\partial_i g_{tt}) = \partial_i\Phi$ to first order, so $\ddot x^i = -\partial_i\Phi$:
+Newton's law with $\Phi$ the gravitational potential [@carroll1997, eqs. 4.19-4.21, where $h_{tt} = -2\Phi$ in his
+signature] (@prp-newtonian-limit, @fig-newtonian-limit).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The first example is the field of a point mass. It anticipates the exact solution of @sec-schwarzschild-flrw, whose
+time component it reproduces at large distance.
+
+::: {#exm-newtonian-point-mass}
+#### A point mass
+
+$\Phi = -GM/r$ gives $g_{tt} = 1 - 2GM/r$: the first term of the Schwarzschild metric, and the orbits of the
+weak-field geodesics are Kepler's ellipses up to a slow precession of the perihelion, the first post-Newtonian
+correction (@fig-newtonian-limit).
+:::
+
+The metric component $g_{tt}$ also governs the rate of clocks. This gives the first effect of gravity on time,
+measured to high precision on the Earth and essential for satellite navigation.
+
+::: {#exm-newtonian-redshift}
+#### Gravitational redshift
+
+A clock at rest measures proper time $d\tau = \sqrt{g_{tt}}\,dt = (1 + \Phi)dt$: clocks deeper in the potential
+run slower, and light climbing out of a potential well is redshifted by $\Delta\nu/\nu = -\Delta\Phi$, the first
+confirmed consequence of the equivalence principle.
+:::
+
+Weak-field limits also organise the extra fields of higher-dimensional theories. The scalar of the five-dimensional
+theory is the simplest case.
+
+::: {#exm-newtonian-kk}
+#### The Kaluza-Klein scalar as a Newtonian field
+
+In Part III the fifth-dimension component $g_{55} = \phi^2$ enters the four-dimensional action as a scalar field;
+its weak-field limit is a Brans-Dicke-type correction to Newton's law, which is why the radius of the fifth
+dimension must be stabilised.
+:::
+
+The redshift of @exm-newtonian-redshift was first measured in a laboratory, over the height of a building. The next
+example puts in the numbers of that experiment, which show how small the effect is near the Earth.
+
+::: {#exm-grb-pound-rebka}
+#### The Pound-Rebka experiment
+
+Near the surface of the Earth $\Phi = gz$ up to a constant, so light sent down a tower of height $h$ arrives blueshifted by
+$\Delta\nu/\nu = gh/c^2$. For $h = 22.5\,$m, $\Delta\nu/\nu = 9.81 \times 22.5/(3.00 \times 10^8)^2 = 2.45 \times 10^{-15}$, the shift measured by
+Pound and Rebka in 1960 with the Mössbauer effect. By the equivalence principle the same shift is the Doppler shift seen in a
+frame accelerating upwards with $g$: during the travel time $h/c$ the receiver gains the speed $gh/c$ towards the
+source [@blennow2022relativity, Problem 2.113].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+How weak is the gravitational field of familiar bodies? The dimensionless number $\Phi/c^2$ at the surface answers
+this, and the first exercise compares it for four kinds of objects.
+
+::: {#exr-gr-surface-potential}
+#### How weak is weak
+
+Evaluate $|\Phi|/c^2 = GM/(Rc^2)$ at the surface of the Earth ($GM = 3.99 \times 10^{14}\,\mathrm{m^3/s^2}$, $R = 6371\,$km),
+the Sun ($GM = 1.33 \times 10^{20}\,\mathrm{m^3/s^2}$, $R = 6.96 \times 10^5\,$km), a white dwarf ($0.6$ solar masses,
+$R = 7000\,$km) and a neutron star ($1.4$ solar masses, $R = 12\,$km). Where does the Newtonian limit fail?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $c^2 = 8.99 \times 10^{16}\,\mathrm{m^2/s^2}$: Earth $7 \times 10^{-10}$, Sun $2.1 \times 10^{-6}$, white dwarf
+$1.3 \times 10^{-4}$, neutron star $0.17$. The first three are deep in the Newtonian regime, with relativistic
+corrections of the order of these numbers; for a neutron star the corrections are of order one, and its structure
+needs the full Einstein equations.
+:::
+
+Clocks on navigation satellites are higher in the potential and move faster than clocks on the ground, and the two
+effects have opposite signs. The second exercise computes both for the GPS orbit.
+
+::: {#exr-gr-gps-clock}
+#### The GPS clocks
+
+A clock in the weak field moving with speed $v$ runs at $d\tau = (1 + \Phi/c^2 - v^2/2c^2)\,dt$ to first order.
+Compare a GPS satellite on a circular orbit of radius $26\,561\,$km with a clock on the surface of the Earth (ignore
+the Earth's rotation), over one day.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The higher potential makes the satellite clock gain $GM(1/R_E - 1/r)/c^2 \times 1\,\text{day} = 45.7\,\mu$s; its
+orbital speed, $v^2 = GM/r$, makes it lose $7.2\,\mu$s. The net gain of $38.5\,\mu$s per day would, uncorrected,
+shift positions by about $11\,$km per day, so the satellite clocks are deliberately detuned before launch.
+
+{{< sage exr-gr-gps-clock >}}
+:::
+
+Newton's law is not the only thing the weak-field geodesic equation knows; the time component gives the conservation
+of energy. The third exercise derives the Newtonian energy from the conserved quantity of a static metric.
+
+::: {#exr-gr-nl-energy}
+#### Energy conservation in the Newtonian limit
+
+For a static metric, $E = g_{tt}\,dt/d\tau$ is constant along geodesics (it is the conserved quantity of the Killing
+vector $\partial_t$, @def-killing). Show that for $g_{tt} = 1 + 2\Phi$, $g_{ij} = -(1 - 2\Phi)\delta_{ij}$ and a slow
+particle, $E = 1 + \tfrac12v^2 + \Phi$ to first order in $\Phi$ and $v^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+From $d\tau^2 = (1 + 2\Phi)dt^2 - (1 - 2\Phi)d\vec x^2$, $dt/d\tau = (1 + 2\Phi - (1 - 2\Phi)v^2)^{-1/2} \approx 1 - \Phi +
+\tfrac12v^2$. Then $E = (1 + 2\Phi)(1 - \Phi + \tfrac12v^2) \approx 1 + \Phi + \tfrac12v^2$: the rest energy plus the
+Newtonian energy per unit mass, which is therefore conserved.
+:::
+::::
+
+The Newtonian limit has two sides: the connection of the weak-field metric reduces at first order to the gradient
+of the potential, and its geodesics follow Newton's orbits. The proposition records both facts, which are shown in
+@fig-newtonian-limit.
+
+:::: {.statement-box}
+::: {#prp-newtonian-limit}
+#### The Newtonian limit of the Christoffel symbols
+
+For $g_{tt} = 1 + 2\Phi$, $g_{ij} = -(1 - 2\Phi)\delta_{ij}$ with $\Phi = -M/r$, the Levi-Civita connection has
+$\Gamma^i_{tt} = \partial_i\Phi + O(\Phi^2)$ for $i = x, y, z$, and the geodesic of the weak-field metric with $M =
+10^{-3}$ stays within $0.05$ of the Newtonian orbit over about two periods.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Computed with SageManifolds (`figures/newtonian_limit.sage`): the identity $\Gamma^i_{tt} = \partial_i\Phi$ is exact
+to first order in $\Phi$, and the orbit comparison is numerical.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+![The Newtonian limit. Left: the equipotentials of $\Phi = -M/r$ and the acceleration field $-\nabla\Phi$ in the
+plane $z = 0$. Right: for the weak-field metric $g_{tt} = 1 + 2\Phi$, $g_{ij} = -(1 - 2\Phi)\delta_{ij}$ with
+$M = 10^{-3}$, the geodesic (red, dashed) and the Newtonian orbit (blue) with the same initial data coincide to the
+resolution of the plot. Generated
+by `figures/newtonian_limit.sage`.](figures/newtonian_limit.svg){#fig-newtonian-limit width=90%}
+
+The orbit in @fig-newtonian-limit starts at $(1, 0)$ with a speed below that of a circular orbit. This makes the
+starting point the aphelion of an ellipse.
+
+::: {#exm-gr-nl-orbit-data}
+#### The orbit of the figure
+
+With $M = 10^{-3}$ the circular speed at $r = 1$ is $\sqrt{M/r} \approx 0.0316$; the initial speed $0.028$ is smaller,
+so the orbit is an ellipse with aphelion at $x = 1$. Its angular momentum $0.028$ gives the semi-latus rectum $p = 0.
+028^2/M = 0.784$, hence eccentricity $e = 1 - p = 0.216$, semi-major axis $a = p/(1 - e^2) = 0.82$ and perihelion
+$0.64$ (@prp-clm-kepler-orbits); along it $|\Phi| \leq 1.6 \times 10^{-3}$, deep in the weak-field regime of
+@def-newtonian-limit.
+:::
+
+The proposition keeps only the first order in $\Phi$. The exact symbols differ by factors of $1 \pm 2\Phi$, which
+the next example displays.
+
+::: {#exm-gr-nl-exact}
+#### The exact symbols
+
+For the weak-field metric the exact symbols are $\Gamma^i_{tt} = \partial_i\Phi/(1 - 2\Phi)$ and $\Gamma^t_{ti} =
+\partial_i\Phi/(1 + 2\Phi)$ (@exr-gr-nl-exact-christoffel): the corrections are of relative size $\Phi \sim 10^{-3}$ on
+the orbit of the figure, and they produce the slow precession seen in the deviation of the two curves.
+:::
+
+The geodesic equation also has spatial Christoffel symbols $\Gamma^i_{jk}$ from $g_{ij}$. They multiply two powers
+of the velocity and so drop out for slow particles, but not for light.
+
+::: {#exm-gr-nl-velocity-terms}
+#### Terms that need speed
+
+$\Gamma^x_{yy} = \partial_x\Phi/(1 - 2\Phi)$ enters the geodesic equation as $\Gamma^x_{yy}\dot y^2$, of order $\Phi v^2$:
+negligible against $\Gamma^x_{tt} \sim \Phi$ when $v \ll 1$, but of the same order for light, $v = 1$. This is why
+the deflection of light is twice the Newtonian value (@exr-gr-nl-light).
+:::
+
+The weak-field metric also predicts the colour of light from the Sun. The next example evaluates the shift of a solar
+spectral line as seen from the Earth, where two potentials enter.
+
+::: {#exm-grb-solar-lines}
+#### Spectral lines from the Sun
+
+A line emitted at the solar surface $R$ and received at the distance $d$ of the Earth is shifted by $\Delta\nu/\nu =
+\Phi(R) - \Phi(d) = -\tfrac{GM}{c^2}\bigl(\tfrac1R - \tfrac1d\bigr)$, to first order in $\Phi$. With $GM/c^2 = 1.49\,$km, $R = 7.8 \times 10^8\,$m and
+$d = 1.5 \times 10^{11}\,$m this is $-1.91 \times 10^{-6} + 0.01 \times 10^{-6} = -1.90 \times 10^{-6}$: a redshift, dominated by the solar
+potential, the potential of the Sun at the Earth correcting it by half a percent [@blennow2022relativity, Problem 2.125].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+A circular orbit is the simplest check of the proposition. The first exercise compares its speed and period in the
+weak-field metric with Newton's.
+
+::: {#exr-gr-nl-circular}
+#### A circular orbit
+
+Using $\ddot x^i = -\partial_i\Phi$ with $\Phi = -M/r$, find the speed and period of a circular orbit of radius $r$, and
+evaluate them for $M = 10^{-3}$, $r = 1$. How many revolutions of the plotted ellipse (@exm-gr-nl-orbit-data) fit into
+the time span $300$ of @fig-newtonian-limit?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$v^2/r = M/r^2$ gives $v = \sqrt{M/r} = 0.0316$ and $T = 2\pi r/v = 2\pi r^{3/2}/\sqrt M \approx 199$. The plotted
+ellipse has aphelion $1$ and semi-major axis $a = 0.82$; by Kepler's third law (@prp-clm-kepler-orbits) its period is
+$2\pi a^{3/2}/\sqrt M \approx 148$, so the time $300$ covers about two revolutions.
+:::
+
+The exact Christoffel symbols of the weak-field metric can be found for an arbitrary potential. The second exercise
+does this with SageManifolds.
+
+::: {#exr-gr-nl-exact-christoffel}
+#### The exact Christoffel symbols
+
+For $g_{tt} = 1 + 2\Phi$, $g_{ij} = -(1 - 2\Phi)\delta_{ij}$ with an arbitrary static $\Phi(x, y, z)$, compute
+$\Gamma^i_{tt}$, $\Gamma^t_{ti}$ and $\Gamma^x_{yy}$ exactly.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\Gamma^i_{tt} = -\tfrac12g^{ii}\partial_ig_{tt} = \partial_i\Phi/(1 - 2\Phi)$, $\Gamma^t_{ti} = \tfrac12g^{tt}\partial_ig_{tt} =
+\partial_i\Phi/(1 + 2\Phi)$ and $\Gamma^x_{yy} = -\tfrac12g^{xx}\partial_xg_{yy} = \partial_x\Phi/(1 - 2\Phi)$; to first order
+the first two are $\partial_i\Phi$, as in @prp-newtonian-limit.
+
+{{< sage exr-gr-nl-exact-christoffel >}}
+:::
+
+Light is never slow, so the Newtonian limit does not apply to it directly. The third exercise compares the
+deflection of a light ray computed in two ways.
+
+::: {#exr-gr-nl-light}
+#### Light in a weak field
+
+A Newtonian particle passing a mass $M$ at speed $1$ and impact parameter $b$ is deflected by $2GM/b$. Using
+@exm-gr-nl-velocity-terms, explain why the deflection of light in the weak-field metric is twice this.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+For the Newtonian particle the transverse acceleration is $-\partial_\perp\Phi$ and $\int\partial_\perp\Phi\,dt = 2GM/b$
+along the straight line. For light, $\dot x^2 = 1$ and the spatial symbols contribute $\Gamma^\perp_{xx}\dot x^2 =
+\partial_\perp\Phi$ as well, an equal amount: the time and space parts of the metric bend the ray equally, and the
+total deflection is $4GM/b$. In terms of the metric, light feels $g_{tt}$ and $g_{ij}$ together, the slow particle only
+$g_{tt}$. The full Schwarzschild computation is @prp-gr-schwarzschild.
+:::
+
+Real signals are shifted by gravity and by motion at once. The next exercise compares the two effects for a signal from a
+rocket, using the book's data, and asks which one dominates.
+
+::: {#exr-grb-rocket-signal}
+#### A signal from a rising rocket
+
+A spaceship rising radially at $v = 0.1\,$km/s at an altitude of $1000\,$km sends a light signal to the ground. With Sage, compute the
+gravitational and the Doppler shifts to lowest order, with $GM_\oplus = 6.67 \times 10^{-11} \times 5.98 \times 10^{24}\,\mathrm{m^3/s^2}$ and $R_\oplus =
+6.3 \times 10^3\,$km. Which effect dominates? [@blennow2022relativity, Problem 2.126]
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The light falls from $R_\oplus + h$ to $R_\oplus$ and is blueshifted by $\tfrac{GM}{c^2}\bigl(\tfrac{1}{R_\oplus} - \tfrac{1}{R_\oplus + h}\bigr)$; the source recedes, which
+redshifts it by $v/c$:
+
+{{< sage exr-grb-rocket-signal >}}
+
+The Doppler shift is larger by a factor of about $3500$: a rocket would have to rise at about $3\,$cm/s for the two to cancel.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+### The action
+
+The dynamics of the metric itself comes from an action, as for every field of @sec-actions. Coordinate invariance
+and the requirement of at most two derivatives leave essentially one candidate, the integral of the scalar curvature.
+
+:::: {.statement-box}
+::: {#def-einstein-hilbert-action}
+#### Einstein-Hilbert action
+
+The **Einstein-Hilbert action** is
+$$
+S_{\mathrm{EH}}[g] = -\frac{1}{2\kappa^2}\int d^4x\,\sqrt{-g}\,R, \qquad \kappa^2 = 8\pi G,
+$$ {#eq-einstein-hilbert}
+with $R$ the scalar curvature (@def-scalar-curvature) and $\sqrt{-g}\,d^4x$ the volume element
+(@def-volume-element); the overall sign is the one that makes the kinetic energy of the graviton positive in our
+signature $(+, -, -, -)$, in which $R$ has the opposite sign to the mostly-plus $R$ of @carroll1997
+(@sec-conventions-indices). It is the only action built from the metric alone with at most two derivatives, up to
+the addition of a constant, the cosmological term $-\tfrac{1}{\kappa^2}\int\sqrt{-g}\,\Lambda$, whose sign is the
+same in both signatures [@carroll1997, eqs. 4.54-4.55 and 4.73]. @carroll1997 writes $S = \tfrac{1}{8\pi G}S_H +
+S_M$ with $S_H = \int\sqrt{-g}R$ [eq. 4.68] in his signature; after conversion this is a factor $2$ different from
+@eq-einstein-hilbert, compensated in his definition of the stress tensor.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+In two dimensions the action is special: it does not depend on the metric at all. The sphere shows this most
+directly.
+
+::: {#exm-eh-sphere}
+#### The action of a sphere
+
+For the unit sphere, $R = 2$ (@prp-sphere-riemann) and $\int\sqrt g\,d^2x = 4\pi$, so $\int\sqrt gR = 8\pi = 4\pi\chi$:
+in two dimensions the Einstein-Hilbert action is the topological invariant of the Gauss-Bonnet theorem
+(@exr-gauss-bonnet) and has no equations of motion, which is why the Einstein tensor vanishes identically there
+(@exm-einstein-tensor-2d).
+:::
+
+The same action in five dimensions is the starting point of the main theme. Its evaluation on a product metric is a
+long but purely geometric computation.
+
+::: {#exm-eh-kk}
+#### The action of Kaluza-Klein theory
+
+Part III starts from @eq-einstein-hilbert in five dimensions, $S = -\tfrac{1}{2\hat\kappa^2}\int d^5x\sqrt{-\hat g}\,
+\hat R$, and shows that for a metric of the product form $M_4 \times S^1$ it equals the four-dimensional
+Einstein-Hilbert action plus Maxwell's action @eq-maxwell-action plus a scalar's: everything in that computation
+is the geometry of Part I applied to a $5 \times 5$ metric.
+:::
+
+Other invariants of the curvature exist, but they bring more derivatives. They are the first corrections of an
+effective theory rather than part of classical general relativity.
+
+::: {#exm-eh-higher-derivative}
+#### Higher-derivative actions
+
+$\int\sqrt{-g}\,R^2$ and $\int\sqrt{-g}\,R_{\mu\nu}R^{\mu\nu}$ are also coordinate invariant but contain four
+derivatives of the metric; they are suppressed by inverse powers of a high scale in the effective theories of
+@def-renormalisation and are absent from the classical reductions of Parts III to V.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The action contains Newton's constant, which has dimensions in natural units. The first exercise works out these
+dimensions and the mass scale they define.
+
+::: {#exr-gr-eh-dimension}
+#### The Planck mass
+
+In units $\hbar = c = 1$, find the mass dimension of $G$ from the requirement that @eq-einstein-hilbert be
+dimensionless, define the Planck mass $M_P = G^{-1/2}$ and evaluate it in GeV using $G = 6.71 \times
+10^{-39}\,\mathrm{GeV^{-2}}$. What is the dimension of $G$ in $n$ spacetime dimensions?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$d^4x$ has mass dimension $-4$ and $R$, two derivatives of the dimensionless metric, has dimension $2$; so $1/G$
+must have dimension $2$, $[G] = -2$. Then $M_P = (6.71 \times 10^{-39})^{-1/2}\,\mathrm{GeV} = 1.22 \times 10^{19}\,
+\mathrm{GeV}$, the scale at which quantum gravity becomes strong. In $n$ dimensions $d^nx\,R$ has dimension $2 - n$,
+so $[G_n] = 2 - n$; this is why a higher-dimensional Newton constant is related to the four-dimensional one by a volume.
+:::
+
+The second exercise, from the old version of this section, confirms that the two-dimensional action is
+topological. It uses the Gauss-Bonnet theorem of @sec-ricci.
+
+::: {#exr-eh-topological}
+#### Two dimensions
+
+Compute $\int\sqrt g\,R$ for the torus of @exm-riemann-torus and for the sphere of radius $a$, and explain why the
+result does not depend on $a$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+For the sphere of radius $a$, $R = 2/a^2$ and the area is $4\pi a^2$, so $\int\sqrt gR = 8\pi$, independent of $a$;
+for the torus the integral of the Gaussian curvature vanishes (@prp-gauss-bonnet-examples), so $\int\sqrt gR = 0$.
+Both are $4\pi\chi$ by the Gauss-Bonnet theorem: in two dimensions the Einstein-Hilbert action is a topological
+invariant, with no dependence on the metric and hence no equations of motion.
+:::
+
+On a solution of the equations with cosmological constant the integrand of the action takes a definite value. The
+third exercise evaluates it on de Sitter space with SageManifolds.
+
+::: {#exr-gr-eh-de-sitter-density}
+#### The action density of de Sitter space
+
+For $ds^2 = dt^2 - e^{2Ht}d\vec x^2$ in four dimensions compute $\sqrt{-g}$, $R$ and the Lagrangian density
+$\sqrt{-g}\,(R + 2\Lambda)$ of the action of @def-cosmological-constant at $\Lambda = 3H^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\sqrt{-g} = e^{3Ht}$, $R = -12H^2$ (@exr-de-sitter-4d), so $\sqrt{-g}\,(R + 2\Lambda) = -6H^2e^{3Ht}$. On a vacuum solution
+in four dimensions $R = -4\Lambda$ (@exr-gr-vacuum-trace), so the density is always $-2\Lambda\sqrt{-g}$: the on-shell
+action is minus twice the cosmological term, proportional to the spacetime volume.
+
+{{< sage exr-gr-eh-de-sitter-density >}}
+:::
+::::
+
+To derive equations of motion from @eq-einstein-hilbert we must vary the metric, and both the volume element and
+the curvature respond. The next definition fixes what a variation is and records the two identities that compute
+the response.
+
+:::: {.statement-box}
+::: {#def-metric-variation}
+#### Variation of the metric
+
+A **variation of the metric** is a one-parameter family $g_{\mu\nu} + \epsilon\,\delta g_{\mu\nu}$, equivalently
+$g^{\mu\nu} + \epsilon\,\delta g^{\mu\nu}$ with $\delta g^{\mu\nu} = -g^{\mu\rho}g^{\nu\sigma}\delta g_{\rho\sigma}$
+(because $\delta(g^{\mu\nu}g_{\nu\rho}) = 0$). Two identities govern how the action responds: for the determinant,
+$$
+\delta\sqrt{-g} = -\tfrac12\sqrt{-g}\,g_{\mu\nu}\,\delta g^{\mu\nu}
+$$ {#eq-delta-sqrt-g}
+from $\delta\det M = \det M\operatorname{tr}(M^{-1}\delta M)$ [@carroll1997, eqs. 4.62-4.65; @exr-eh-variation], and for
+the curvature the **Palatini identity**
+$$
+\delta R^\rho{}_{\sigma\mu\nu} = \nabla_\mu(\delta\Gamma^\rho_{\nu\sigma}) - \nabla_\nu(\delta\Gamma^\rho_{\mu\sigma}),
+\qquad
+\delta R_{\mu\nu} = \nabla_\rho(\delta\Gamma^\rho_{\nu\mu}) - \nabla_\nu(\delta\Gamma^\rho_{\rho\mu}),
+$$ {#eq-palatini}
+which holds because $\delta\Gamma$, the difference of two connections, is a tensor [@carroll1997, eqs. 4.59-4.60;
+@exr-palatini].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+For a diagonal metric the determinant identity can be checked by hand. The example does this; the general case is
+the subject of @exr-eh-variation.
+
+::: {#exm-variation-diagonal}
+#### A diagonal metric
+
+For $g = \operatorname{diag}(g_0, g_1, g_2, g_3)$, $\sqrt{-g} = \sqrt{-g_0g_1g_2g_3}$ and varying $g^{\mu\mu} \to g^{\mu\mu} +
+\epsilon d_\mu$ gives $\tfrac{d}{d\epsilon}\sqrt{-g} = -\tfrac12\sqrt{-g}\sum_\mu g_\mu d_\mu$, which is
+@eq-delta-sqrt-g; the same holds for a non-diagonal metric (@exr-eh-variation).
+:::
+
+A variation proportional to the metric itself is a change of scale. It shows how the dimension of spacetime enters
+the variation of the volume.
+
+::: {#exm-variation-conformal}
+#### A conformal rescaling
+
+$\delta g_{\mu\nu} = 2\sigma g_{\mu\nu}$ gives $\delta g^{\mu\nu} = -2\sigma g^{\mu\nu}$ and $\delta\sqrt{-g} =
+4\sigma\sqrt{-g}$ in four dimensions: the volume element scales with the fourth power of the length scale, as it
+must. In $n$ dimensions the factor is $n\sigma$, which is how the dimension enters the reductions of Part III.
+:::
+
+The variation of the Ricci tensor enters the action contracted with the inverse metric. The contraction turns it
+into a total derivative, which is the key step of the derivation of the Einstein equations.
+
+::: {#exm-variation-divergence}
+#### The curvature variation is a divergence
+
+Contracting @eq-palatini with $g^{\mu\nu}$, which commutes with $\nabla$ by @eq-metric-compatibility, gives
+$g^{\mu\nu}\delta R_{\mu\nu} = \nabla_\sigma V^\sigma$ with $V^\sigma = g^{\mu\nu}\delta\Gamma^\sigma_{\nu\mu} -
+g^{\mu\sigma}\delta\Gamma^\rho_{\rho\mu}$, and $\int\sqrt{-g}\,\nabla_\sigma V^\sigma = \int\partial_\sigma(\sqrt{-g}V^\sigma)$
+vanishes for variations that vanish at infinity [@carroll1997, eq. 4.61]: this term contributes nothing to the
+equations of motion, which is what makes them second order.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The inverse metric varies with a minus sign and two metric factors. The first exercise checks this rule on a general
+symmetric matrix.
+
+::: {#exr-gr-variation-inverse}
+#### Varying the inverse
+
+Show that $\delta g^{\mu\nu} = -g^{\mu\rho}g^{\nu\sigma}\delta g_{\rho\sigma}$ by differentiating $(g + \epsilon\,\delta g)^{-1}$ at
+$\epsilon = 0$, and check it for a general symmetric $3 \times 3$ matrix.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Differentiating $(g + \epsilon\,\delta g)(g + \epsilon\,\delta g)^{-1} = 1$ gives $\delta g\,g^{-1} + g\,\delta(g^{-1}) = 0$, so
+$\delta(g^{-1}) = -g^{-1}\,\delta g\,g^{-1}$, which in components is the stated formula. In Sage, with all six entries of
+$g$ and of $\delta g$ symbolic:
+
+{{< sage exr-gr-variation-inverse >}}
+:::
+
+The determinant identity is the second piece of the variation. The second exercise, kept from the old version of the
+section, checks it first on a diagonal metric and then in general.
+
+::: {#exr-eh-variation}
+#### The variation of the determinant
+
+Verify @eq-delta-sqrt-g on a diagonal metric by differentiating $\sqrt{-\det g}$ with respect to a variation of
+the inverse metric, then on a general symmetric $2 \times 2$ metric.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+For $g = \operatorname{diag}(g_0, g_1, g_2, g_3)$, $g^{\mu\mu} = 1/g_\mu$; varying $g^{\mu\mu} \to g^{\mu\mu} + \epsilon
+d_\mu$ changes $g_\mu$ to $1/(1/g_\mu + \epsilon d_\mu)$, and differentiating at $\epsilon = 0$ gives
+$-\tfrac12\sqrt{-g}\sum_\mu g_\mu d_\mu$. For a general metric, $g_{\mu\nu}\delta g^{\mu\nu} = \operatorname{tr}(g\,\delta
+g^{-1})$. In Sage:
+
+{{< sage exr-eh-variation >}}
+:::
+
+The Palatini identity rests on the fact that the difference of two connections is a tensor. The third exercise
+proves this and derives the identity.
+
+::: {#exr-palatini}
+#### The variation of the connection is a tensor
+
+Show that $\delta\Gamma^\rho_{\mu\nu}$ transforms as a tensor although $\Gamma^\rho_{\mu\nu}$ does not, and derive
+the first formula of @eq-palatini.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Under a coordinate change the Christoffel symbols @eq-christoffel transform with an inhomogeneous term
+$\tfrac{\partial x^\rho}{\partial x'^\lambda}\tfrac{\partial^2x'^\lambda}{\partial x^\mu\partial x^\nu}$ that does not depend on
+the metric; the difference of the symbols of $g + \epsilon\delta g$ and of $g$ has this term cancel, so
+$\delta\Gamma$ is a tensor. Varying @eq-riemann, $\delta R^\rho{}_{\sigma\mu\nu} = \partial_\mu\delta\Gamma^\rho_{\nu\sigma} -
+\partial_\nu\delta\Gamma^\rho_{\mu\sigma} + \delta\Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma} + \Gamma^\rho_{\mu\lambda}
+\delta\Gamma^\lambda_{\nu\sigma} - (\mu \leftrightarrow \nu)$; writing out $\nabla_\mu(\delta\Gamma^\rho_{\nu\sigma}) -
+\nabla_\nu(\delta\Gamma^\rho_{\mu\sigma})$ with the covariant derivative of a $(1, 2)$ tensor
+(@def-covariant-derivative-tensor) reproduces exactly these terms, the $\Gamma\delta\Gamma$ terms with the lower
+index $\lambda$ cancelling by the symmetry of $\Gamma^\lambda_{\mu\nu}$.
+:::
+::::
+
+## The Einstein equations {#sec-einstein-equations}
+
+Varying the Einstein-Hilbert action with the two identities of @sec-einstein-hilbert gives the Einstein tensor,
+and adding matter gives the Einstein equations. This section carries the variation out in full, defines the
+stress tensor and the cosmological constant, and checks the equations on two explicit metrics: the sphere, where
+the Einstein tensor vanishes identically, and de Sitter space, the simplest curved solution, computed in full in
+three dimensions and, in an exercise, in four. Both return in Part VI, where internal spheres and de Sitter or anti-de
+Sitter spacetimes are the vacua of supergravity compactifications.
+
+### The variation of the action
+
+Matter enters the Einstein equations through a single symmetric tensor. It is defined as the response of the matter
+action to a change of the metric, which makes it automatically covariant.
+
+:::: {.statement-box}
+::: {#def-stress-tensor}
+#### Stress tensor
+
+The **stress tensor** (energy-momentum tensor) of matter with action $S_M[g, \text{fields}]$ is
+$$
+T_{\mu\nu} = \frac{2}{\sqrt{-g}}\frac{\delta S_M}{\delta g^{\mu\nu}},
+$$ {#eq-stress-tensor}
+a symmetric tensor field conserved on the matter equations of motion, $\nabla^\mu T_{\mu\nu} = 0$; on flat space
+it agrees with the Noether current of translations (@prp-energy-momentum) up to terms that do not change the
+conserved charges [@carroll1997, eq. 4.70, with his normalisation and the opposite overall sign, which comes with
+his signature]. The sign is fixed by requiring $T_{tt} \geq 0$ for a scalar field (@exm-stress-scalar).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The scalar field is the simplest matter, and its stress tensor shows the general pattern. The time component is the
+familiar energy density.
+
+::: {#exm-stress-scalar}
+#### A scalar field
+
+For $S_M = \int\sqrt{-g}\,(\tfrac12g^{\mu\nu}\partial_\mu\phi\partial_\nu\phi - V)$, @eq-delta-sqrt-g gives
+$T_{\mu\nu} = \partial_\mu\phi\partial_\nu\phi - g_{\mu\nu}(\tfrac12(\partial\phi)^2 - V)$, whose $tt$ component is the energy
+density $\tfrac12\dot\phi^2 + \tfrac12(\nabla\phi)^2 + V$ (@exr-stress-scalar).
+:::
+
+The electromagnetic field is the classic example of a traceless stress tensor. Its energy density and its
+momentum density, the Poynting vector, follow from the same formula (@exr-gr-maxwell-stress).
+
+::: {#exm-stress-maxwell}
+#### The electromagnetic field
+
+For the Maxwell action @eq-maxwell-action, $T_{\mu\nu} = F_{\mu\rho}F^\rho{}_\nu + \tfrac14g_{\mu\nu}F_{\rho\sigma}F^{\rho\sigma}$,
+traceless in four dimensions, with $T_{tt} = \tfrac12(\vec E^2 + \vec B^2)$: the energy density of the field.
+:::
+
+On large scales matter is described by a density and a pressure rather than by individual fields. The perfect fluid
+packages them into a tensor and is the source used in cosmology.
+
+::: {#exm-stress-fluid}
+#### A perfect fluid
+
+$T_{\mu\nu} = (\rho + p)u_\mu u_\nu - pg_{\mu\nu}$ with four-velocity $u^\mu$ ($u_\mu u^\mu = 1$), density $\rho$ and pressure $p$ is the
+stress tensor of cosmology; static dust has $p = 0$ and $T_{tt} = \rho$, the source of the Newtonian limit
+(@exr-newton-constant).
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The trace of the stress tensor appears in the trace-reversed Einstein equations. The first exercise computes it for
+the perfect fluid and its standard special cases.
+
+::: {#exr-gr-fluid-trace}
+#### The trace of a perfect fluid
+
+Compute $T = g^{\mu\nu}T_{\mu\nu}$ for the perfect fluid of @exm-stress-fluid. For which equation of state $p = w\rho$ does
+it vanish, and which of the examples of this section has that equation of state?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$T = (\rho + p)u_\mu u^\mu - 4p = \rho - 3p$. It vanishes for $w = \tfrac13$, radiation, consistent with the traceless
+Maxwell tensor of @exm-stress-maxwell: a gas of photons is a perfect fluid with $p = \rho/3$. Dust has $T = \rho$ and a
+cosmological constant ($w = -1$) has $T = 4\rho$.
+:::
+
+The second exercise, from the old version of this section, derives the scalar stress tensor from @eq-stress-tensor
+and compares it with the Noether tensor of flat space. The two agree, which justifies calling @eq-stress-tensor the
+energy-momentum tensor.
+
+::: {#exr-stress-scalar}
+#### The stress tensor of a scalar
+
+Derive $T_{\mu\nu}$ for $S_M = \int\sqrt{-g}\,(\tfrac12g^{\mu\nu}\partial_\mu\phi\partial_\nu\phi - V)$ from
+@eq-stress-tensor and compare with the Noether tensor of @prp-energy-momentum on flat space.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\delta S_M = \int\sqrt{-g}\,[\tfrac12\partial_\mu\phi\partial_\nu\phi\,\delta g^{\mu\nu}] + \int\delta\sqrt{-g}\,\mathcal{L}$ with
+$\delta\sqrt{-g} = -\tfrac12\sqrt{-g}g_{\mu\nu}\delta g^{\mu\nu}$, so $T_{\mu\nu} = \tfrac{2}{\sqrt{-g}}\tfrac{\delta S_M}
+{\delta g^{\mu\nu}} = \partial_\mu\phi\partial_\nu\phi - g_{\mu\nu}\mathcal{L}$. On flat space with $V = \tfrac12m^2\phi^2$ this
+is exactly $T^{\mu\nu} = \partial^\mu\phi\partial^\nu\phi - \eta^{\mu\nu}\mathcal{L}$ of @prp-energy-momentum.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** The divergence of the flat-space tensor is the Lean-verified statement of @prp-energy-momentum (see its
+Verification box).
+
+**Sage.** Pending.
+:::
+
+The Maxwell stress tensor can be checked component by component. The third exercise does this in Sage for an
+arbitrary electric and magnetic field.
+
+::: {#exr-gr-maxwell-stress}
+#### The Maxwell stress tensor in components
+
+On flat space put $F_{0i} = E_i$ and $F_{ij} = -\epsilon_{ijk}B_k$. Show that $F_{\mu\nu}F^{\mu\nu} = 2(\vec B^2 - \vec E^2)$ and
+that the tensor of @exm-stress-maxwell has $T_{00} = \tfrac12(\vec E^2 + \vec B^2)$, $T^{0i} = (\vec E \times \vec B)_i$ and zero
+trace.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$F_{\mu\nu}F^{\mu\nu} = 2F_{0i}F^{0i} + F_{ij}F^{ij} = -2\vec E^2 + 2\vec B^2$ since raising one time and one space index
+gives a minus sign. Then $T_{00} = F_{0i}F^i{}_0 + \tfrac14F^2 = \vec E^2 + \tfrac12(\vec B^2 - \vec E^2)$, the energy
+density; the mixed components give the Poynting vector, and the trace $F_{\mu\rho}F^{\rho\mu} + F^2 = -F^2 + F^2 = 0$.
+
+{{< sage exr-gr-maxwell-stress >}}
+:::
+
+Conservation of the stress tensor is the relativistic form of the equations of fluid dynamics. The next exercise
+recovers the Newtonian continuity and Euler equations from it, gravity included.
+
+::: {#exr-grb-newtonian-fluid}
+#### The Euler equations from $\nabla_\mu T^{\mu\nu} = 0$
+
+For the perfect fluid $T^{\mu\nu} = (\rho + p)u^\mu u^\nu - pg^{\mu\nu}$ in the weak-field metric of @def-newtonian-limit, with $u^\mu \approx (1, \vec v)$,
+$|\vec v| \ll 1$ and $p \ll \rho$, show that the $\nu = t$ component of $\nabla_\mu T^{\mu\nu} = 0$ is the continuity equation $\partial_t\rho +
+\nabla\cdot(\rho\vec v) = 0$ and the spatial components are the Euler equation $\rho(\partial_t + \vec v\cdot\nabla)\vec v = -\nabla p - \rho\nabla\Phi$
+[@plebanski2024introduction, Sec. 12.19, Exercises 1-2].
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\nabla_\mu T^{\mu\nu} = \partial_\mu T^{\mu\nu} + \Gamma^\mu_{\mu\lambda}T^{\lambda\nu} + \Gamma^\nu_{\mu\lambda}T^{\mu\lambda}$. To lowest order $T^{tt} = \rho$, $T^{ti} = \rho v^i$, $T^{ij} =
+\rho v^iv^j + p\delta^{ij}$ (since $g^{ij} \approx -\delta^{ij}$), and the only Christoffel symbol multiplying the large component $T^{tt}$ is
+$\Gamma^i_{tt} = \partial_i\Phi$ (@prp-newtonian-limit); the others are of order $\Phi$ and multiply small terms. For $\nu = t$:
+$\partial_t\rho + \partial_i(\rho v^i) = 0$. For $\nu = i$: $\partial_t(\rho v^i) + \partial_j(\rho v^iv^j) + \partial_ip + \rho\partial_i\Phi = 0$; subtracting $v^i$ times
+the continuity equation leaves $\rho(\partial_tv^i + v^j\partial_jv^i) = -\partial_ip - \rho\partial_i\Phi$. For dust, $p = 0$, this is the geodesic equation of
+@exr-gr-dust-geodesic in Newtonian form.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+With the stress tensor in hand the field equations can be stated. They equate the Einstein tensor of
+@def-einstein-tensor, built from the curvature, to the stress tensor of the matter.
+
+:::: {.statement-box}
+::: {#def-einstein-equations}
+#### Einstein equations
+
+The **Einstein equations** are the equations of motion of $S_{\mathrm{EH}} + S_M$ under variations of the
+metric,
+$$
+G_{\mu\nu} = \kappa^2T_{\mu\nu}, \qquad G_{\mu\nu} = R_{\mu\nu} - \tfrac12R\,g_{\mu\nu},
+$$ {#eq-einstein-equations}
+with $G_{\mu\nu}$ the Einstein tensor of @def-einstein-tensor and $\kappa^2 = 8\pi G$ fixed by the Newtonian limit
+(@prp-eh-variation-text). Their trace, $-R = \kappa^2T$ in four dimensions, gives the **trace-reversed form**
+$R_{\mu\nu} = \kappa^2(T_{\mu\nu} - \tfrac12Tg_{\mu\nu})$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The first check of the equations is that they contain Newton's law of gravitation. This also fixes the constant
+$\kappa$.
+
+::: {#exm-einstein-newton}
+#### The Newtonian limit of the equations
+
+For static dust with $T_{tt} = \rho$, $T = \rho$, the trace-reversed equation gives $R_{tt} = \tfrac12\kappa^2\rho$;
+with $R_{tt} = \nabla^2\Phi$ in the weak-field metric this is Poisson's equation $\nabla^2\Phi = 4\pi G\rho$ exactly
+when $\kappa^2 = 8\pi G$ [@carroll1997, eqs. 4.46-4.52] (@exr-newton-constant).
+:::
+
+In two dimensions the Einstein tensor vanishes for every metric. The equations then say nothing at all, in line
+with the topological action.
+
+::: {#exm-einstein-two-dimensions}
+#### Two dimensions
+
+In two dimensions $G_{ij} \equiv 0$ for every metric (@exm-einstein-tensor-2d, @prp-einstein-2d): the Einstein
+equations are empty, consistent with the action being topological (@exr-eh-topological), and two-dimensional
+gravity needs a different action.
+:::
+
+In five dimensions the equations contain more than gravity. This observation, that one geometric equation contains
+several four-dimensional field equations, is what starts the main theme.
+
+::: {#exm-einstein-kk}
+#### The Kaluza-Klein equations
+
+The five-dimensional vacuum Einstein equations $\hat G_{MN} = 0$ on $M_4 \times S^1$ split, in Part III, into the
+four-dimensional Einstein equations sourced by the Maxwell stress tensor of @exm-stress-maxwell and a scalar,
+Maxwell's equations, and the equation of the scalar: gravity in five dimensions is gravity plus electromagnetism
+in four.
+:::
+
+In vacuum the linearised equations of the weak-field exercise become a wave equation, and its solutions are
+gravitational waves. The next example counts their physical components, which shows that a gravitational wave, like
+light, has two polarisations.
+
+::: {#exm-grb-gw-polarisations}
+#### Two polarisations
+
+Write $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$ with $|h_{\mu\nu}| \ll 1$. Of the ten components of $h_{\mu\nu}$, a coordinate change $x^\mu \to x^\mu + \chi^\mu$ removes
+four, and in vacuum the residual freedom of the Lorenz gauge removes four more. In the transverse traceless gauge $h_{0\mu} = 0$,
+$\eta^{\mu\nu}h_{\mu\nu} = 0$, $\partial_jh_{ij} = 0$, a wave travelling along $z$ has only
+$$
+h_{xx} = -h_{yy} = h_+, \qquad h_{xy} = h_{yx} = h_\times ,
+$$
+two independent components, the plus and cross polarisations, rotated into each other by $45°$ rotations about $z$
+[@blennow2022relativity, Problem 2.133].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The polarisations act on matter by changing proper distances. The second example computes the change for two free
+particles on the $x$-axis, the effect that interferometric detectors measure.
+
+::: {#exm-grb-gw-ruler}
+#### A wave stretches a ruler
+
+Let $h_+ = h_0\sin(2\pi f(t - z))$, $h_\times = 0$, and let two free particles sit at $x = 0$ and $x = L$ on the $x$-axis. In the transverse
+traceless gauge free particles initially at rest keep their coordinates, and the proper distance between them at time $t$ is
+$$
+d = \int_0^L\sqrt{-g_{xx}}\,dx = \sqrt{1 - h_+}\,L \approx \Bigl(1 - \tfrac12h_0\sin(2\pi ft)\Bigr)L ,
+$$
+oscillating with relative amplitude $h_0/2$, while distances along $y$ oscillate in antiphase. For $h_0 = 10^{-21}$ and $L = 4\,$km
+the change is $2 \times 10^{-18}\,$m, a thousandth of a proton radius [@blennow2022relativity, Problem 2.133].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The trace-reversed form is often the more convenient one, especially in vacuum. The first exercise derives it in
+any dimension.
+
+::: {#exr-gr-trace-reversed}
+#### The trace-reversed equations
+
+Show that in $n \geq 3$ dimensions $G_{\mu\nu} = \kappa^2T_{\mu\nu}$ is equivalent to $R_{\mu\nu} = \kappa^2\bigl(T_{\mu\nu} -
+\tfrac{1}{n - 2}T\,g_{\mu\nu}\bigr)$, and deduce that the vacuum equations are $R_{\mu\nu} = 0$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The trace of $R_{\mu\nu} - \tfrac12Rg_{\mu\nu} = \kappa^2T_{\mu\nu}$ is $R(1 - n/2) = \kappa^2T$, so $R = -2\kappa^2T/(n - 2)$.
+Substituting, $R_{\mu\nu} = \kappa^2T_{\mu\nu} + \tfrac12Rg_{\mu\nu} = \kappa^2(T_{\mu\nu} - Tg_{\mu\nu}/(n - 2))$; the steps reverse.
+For $T_{\mu\nu} = 0$ this is $R_{\mu\nu} = 0$, Ricci flatness. For $n = 2$ the trace equation reads $0 = \kappa^2T$ and
+the argument fails, as it must (@exm-einstein-two-dimensions).
+:::
+
+The second exercise, from the old version of this section, fixes $\kappa$ by the Newtonian limit. It uses the
+trace-reversed equation with a dust source.
+
+::: {#exr-newton-constant}
+#### Fixing $\kappa$
+
+Using $g_{tt} = 1 + 2\Phi$, $R_{tt} \approx \tfrac12\nabla^2h_{tt}$ and the trace-reversed Einstein equation with
+$T_{tt} = \rho$, show that Poisson's equation $\nabla^2\Phi = 4\pi G\rho$ requires $\kappa^2 = 8\pi G$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+For static dust, $T = g^{tt}T_{tt} = \rho$ and $T_{tt} - \tfrac12Tg_{tt} \approx \tfrac12\rho$, so $R_{tt} = \tfrac12\kappa^2\rho$.
+With $h_{tt} = 2\Phi$, $R_{tt} \approx \partial_i\Gamma^i_{tt} = \tfrac12\nabla^2h_{tt} = \nabla^2\Phi$, hence $\nabla^2\Phi =
+\tfrac12\kappa^2\rho$, and comparison with Poisson's equation gives $\kappa^2 = 8\pi G$ [@carroll1997, eqs. 4.46-4.52,
+in his signature].
+:::
+
+The approximation $R_{tt} \approx \nabla^2\Phi$ used above deserves a direct test. The third exercise computes the
+Einstein tensor of the weak-field metric to first order.
+
+::: {#exr-gr-einstein-weak-field}
+#### The weak-field Einstein tensor
+
+For $g_{tt} = 1 + 2\Phi$, $g_{ij} = -(1 - 2\Phi)\delta_{ij}$ with static $\Phi$, compute $R_{tt}$ and $G_{tt}$ to first order in
+$\Phi$, and show that $G_{tt} = \kappa^2\rho$ is Poisson's equation.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+To first order $R_{tt} = \nabla^2\Phi$ and $G_{tt} = 2\nabla^2\Phi$ (the spatial part of the metric contributes to
+$G_{tt}$ through $R$). With $T_{tt} = \rho$, $2\nabla^2\Phi = \kappa^2\rho = 8\pi G\rho$, which is Poisson's equation
+$\nabla^2\Phi = 4\pi G\rho$, in agreement with @exr-newton-constant.
+
+{{< sage exr-gr-einstein-weak-field >}}
+:::
+
+The linearised theory has a gauge symmetry inherited from coordinate changes. The next exercise derives it and the
+wave equation that it leads to, which underlies the two examples on gravitational waves.
+
+::: {#exr-grb-linearised-gauge}
+#### Linearised gauge symmetry
+
+For $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$, (a) show that to first order $R_{\mu\nu} = \tfrac12(\partial_\rho\partial_\mu h^\rho{}_\nu + \partial_\rho\partial_\nu h^\rho{}_\mu - \Box h_{\mu\nu} -
+\partial_\mu\partial_\nu h)$, indices raised with $\eta$; (b) show that $x^\mu \to x^\mu + \chi^\mu$ with small $\chi$ changes $h_{\mu\nu}$ to $h_{\mu\nu} - \partial_\mu\chi_\nu -
+\partial_\nu\chi_\mu$ and leaves $R_{\mu\nu}$ unchanged; (c) show that in the Lorenz gauge $\partial^\mu\bar h_{\mu\nu} = 0$, $\bar h_{\mu\nu} = h_{\mu\nu} -
+\tfrac12\eta_{\mu\nu}h$, the vacuum equations are $\Box\bar h_{\mu\nu} = 0$ [@blennow2022relativity, Problem 2.112].
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+(a) To first order $\Gamma^\rho_{\nu\sigma} = \tfrac12(\partial_\nu h^\rho{}_\sigma + \partial_\sigma h^\rho{}_\nu - \partial^\rho h_{\nu\sigma})$ and the $\Gamma\Gamma$ terms of @eq-riemann-def are of
+second order, so $R_{\sigma\nu} = \partial_\rho\Gamma^\rho_{\nu\sigma} - \partial_\nu\Gamma^\rho_{\rho\sigma}$ with $\Gamma^\rho_{\rho\sigma} = \tfrac12\partial_\sigma h$ gives the formula. (b) The
+metric transforms as a tensor; to first order $g'_{\mu\nu}(x) = g_{\mu\nu}(x) - \partial_\mu\chi_\nu - \partial_\nu\chi_\mu$. Substituting $h \to h - 2\partial\cdot\chi$
+in (a), the terms $\partial_\rho\partial_\mu\partial^\rho\chi_\nu$ cancel against those of $\Box$, and the remaining $\partial_\mu\partial_\nu\partial\cdot\chi$ cancel between the first,
+second and fourth terms. (c) The gauge condition reads $\partial_\rho h^\rho{}_\nu = \tfrac12\partial_\nu h$, so the first two terms of (a) give
+$\partial_\mu\partial_\nu h$, which cancels the last: $R_{\mu\nu} = -\tfrac12\Box h_{\mu\nu}$. In vacuum $R_{\mu\nu} = 0$, so $\Box h_{\mu\nu} = 0$, and taking the
+trace $\Box h = 0$ and $\Box\bar h_{\mu\nu} = 0$. The gauge condition can always be reached by a $\chi$ with $\Box\chi_\nu = \partial^\mu\bar h_{\mu\nu}$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+The Einstein equations were stated as a definition; the next proposition shows that they are the equations of motion
+of the action. The computation combines the two identities of @def-metric-variation and drops a total derivative.
+
+:::: {.statement-box}
+::: {#prp-eh-variation-text}
+#### The Einstein equations from the action
+
+Combining @eq-delta-sqrt-g, @eq-palatini and the vanishing of the divergence term (@exm-variation-divergence),
+$$
+\delta S_{\mathrm{EH}} = -\frac{1}{2\kappa^2}\int d^4x\,\sqrt{-g}\left(R_{\mu\nu} - \tfrac12R\,g_{\mu\nu}\right)\delta g^{\mu\nu},
+$$ {#eq-eh-variation}
+and stationarity of $S_{\mathrm{EH}} + S_M$ gives @eq-einstein-equations with the stress tensor @eq-stress-tensor.
+The derivation follows @carroll1997 [eqs. 4.56-4.67]; the determinant identity is derived in @exr-eh-variation, and the
+consistency $\nabla^\mu G_{\mu\nu} = 0 = \nabla^\mu T_{\mu\nu}$ follows from the contracted Bianchi identity of
+@def-einstein-tensor.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending; the derivation is argued in the text (level `text`).
+
+**Sage.** The determinant identity is checked symbolically in the solution of @exr-eh-variation.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The cosmological term varies only through the volume element. Its contribution is the first example of the
+proposition at work.
+
+::: {#exm-gr-variation-lambda}
+#### Varying the cosmological term
+
+With @eq-delta-sqrt-g, $\delta\int\sqrt{-g}\,2\Lambda = -\int\sqrt{-g}\,\Lambda g_{\mu\nu}\delta g^{\mu\nu}$, so the action
+$-\tfrac{1}{2\kappa^2}\int\sqrt{-g}\,(R + 2\Lambda)$ varies into $-\tfrac{1}{2\kappa^2}\int\sqrt{-g}\,(G_{\mu\nu} - \Lambda g_{\mu\nu})
+\delta g^{\mu\nu}$: the left-hand side of @def-cosmological-constant.
+:::
+
+The equations are consistent only if matter is conserved, because the Einstein tensor is divergence free. For the
+scalar field the conservation is a consequence of its own equation of motion.
+
+::: {#exm-gr-variation-bianchi}
+#### Conservation from the field equation
+
+For the scalar of @exm-stress-scalar, $\nabla^\mu T_{\mu\nu} = (\Box\phi + V'(\phi))\,\partial_\nu\phi$ with $\Box = \nabla^\mu\nabla_\mu$:
+it vanishes when $\phi$ obeys its equation of motion $\Box\phi + V'(\phi) = 0$, so the contracted Bianchi identity
+$\nabla^\mu G_{\mu\nu} = 0$ is respected.
+:::
+
+The derivation assumed that variations vanish at the boundary. On a manifold with boundary an extra term is needed,
+which leaves the equations unchanged.
+
+::: {#exm-gr-variation-boundary}
+#### The boundary term
+
+The total derivative of @exm-variation-divergence contains normal derivatives of $\delta g$, which do not vanish
+when only $\delta g$ itself is fixed on the boundary. Adding the Gibbons-Hawking-York term, the integral over the
+boundary of its extrinsic curvature, cancels them; it changes the value of the action, which matters in black hole
+thermodynamics, but not the Einstein equations.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The relative sign of the gravitational and the matter actions decides whether gravity attracts. The first exercise
+traces it through the variation.
+
+::: {#exr-gr-variation-sign}
+#### The sign of the coupling
+
+Using @eq-eh-variation and $\delta S_M = \tfrac12\int\sqrt{-g}\,T_{\mu\nu}\delta g^{\mu\nu}$, derive $G_{\mu\nu} = \kappa^2T_{\mu\nu}$.
+What equation would the opposite overall sign of @eq-einstein-hilbert give, and why is it unphysical?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\delta(S_{\mathrm{EH}} + S_M) = \int\sqrt{-g}\,\bigl(-\tfrac{1}{2\kappa^2}G_{\mu\nu} + \tfrac12T_{\mu\nu}\bigr)\delta g^{\mu\nu} = 0$ for
+all $\delta g^{\mu\nu}$ gives $G_{\mu\nu} = \kappa^2T_{\mu\nu}$. With the opposite sign one would get $G_{\mu\nu} = -
+\kappa^2T_{\mu\nu}$, whose Newtonian limit is $\nabla^2\Phi = -4\pi G\rho$: masses would repel, and the graviton would
+have negative kinetic energy.
+:::
+
+Conservation of the stress tensor carries dynamical information. For dust it is the equation of motion of the dust
+particles, as the second exercise shows.
+
+::: {#exr-gr-dust-geodesic}
+#### Dust moves on geodesics
+
+For dust, $T^{\mu\nu} = \rho u^\mu u^\nu$ with $u_\mu u^\mu = 1$. Show that $\nabla_\mu T^{\mu\nu} = 0$ implies
+$\nabla_\mu(\rho u^\mu) = 0$ and $u^\mu\nabla_\mu u^\nu = 0$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\nabla_\mu T^{\mu\nu} = u^\nu\nabla_\mu(\rho u^\mu) + \rho u^\mu\nabla_\mu u^\nu$. Differentiating $u_\nu u^\nu = 1$ gives
+$u_\nu u^\mu\nabla_\mu u^\nu = 0$, so contracting with $u_\nu$ leaves $\nabla_\mu(\rho u^\mu) = 0$, the conservation of
+mass; the remaining term then gives $\rho u^\mu\nabla_\mu u^\nu = 0$, the geodesic equation (@def-geodesic). In general
+relativity the motion of matter is not an extra postulate: it follows from the field equations through the Bianchi
+identity.
+:::
+
+The action can be evaluated on a restricted family of metrics and varied within it. For a homogeneous universe this
+gives the Friedmann equation directly, which the third exercise checks with SageManifolds.
+
+::: {#exr-gr-variation-minisuperspace}
+#### Minisuperspace
+
+On $ds^2 = N(t)^2dt^2 - a(t)^2d\vec x^2$ take $S = -\tfrac{1}{2\kappa^2}\int\sqrt{-g}\,R - \int\sqrt{-g}\,\rho$ with dust,
+$\rho a^3 = \rho_0$ constant. Vary with respect to the lapse $N$, set $N = 1$, and compare with
+@def-gr-friedmann-equations.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Per unit coordinate volume the Lagrangian is $L = -\tfrac{1}{2\kappa^2}Na^3R - N\rho_0$. Its Euler-Lagrange derivative
+with respect to $N$ at $N = 1$ is $3a\dot a^2/\kappa^2 - \rho_0$, so $\dot a^2/a^2 = \kappa^2\rho/3 = 8\pi G\rho/3$, the first
+Friedmann equation. The lapse is the time-time component of the metric, and its equation is the $tt$ Einstein
+equation, a constraint without second time derivatives.
+
+{{< sage exr-gr-variation-minisuperspace >}}
+:::
+::::
+
+### The cosmological constant and vacuum solutions
+
+The action of @def-einstein-hilbert-action may contain a constant besides the curvature. This constant behaves like
+an energy density of empty space, and it is the simplest explanation of the accelerated expansion of the universe.
+
+:::: {.statement-box}
+::: {#def-cosmological-constant}
+#### Cosmological constant
+
+The **cosmological constant** $\Lambda$ is the coefficient of the volume term in the action, $S = -\tfrac{1}{2\kappa^2}
+\int\sqrt{-g}\,(R + 2\Lambda)$; it enters the equations as $G_{\mu\nu} - \Lambda g_{\mu\nu} = \kappa^2T_{\mu\nu}$, that
+is as a stress tensor $T_{\mu\nu} = \tfrac{\Lambda}{\kappa^2}g_{\mu\nu}$ of constant energy density $T_{tt} =
+\Lambda/\kappa^2$ and negative pressure [@carroll1997, eq. 8.29 and p. 125, in the signature $(-, +, +, +)$, where the
+same $\Lambda$ appears as $G_{\mu\nu} + \Lambda g_{\mu\nu}$].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+A constant potential energy of a field is indistinguishable from a cosmological constant. The example identifies the
+two and relates their normalisations.
+
+::: {#exm-lambda-vacuum-energy}
+#### Vacuum energy
+
+A constant potential $V_0$ in a scalar action contributes $T_{\mu\nu} = V_0g_{\mu\nu}$ by @exm-stress-scalar: a
+cosmological constant $\Lambda = \kappa^2V_0$. The minimum value of the Higgs potential of @sec-higgs is of this
+kind, which is why it is normalised to zero there.
+:::
+
+Compactified theories produce cosmological constants from the geometry of the internal space. The sign of the
+contribution is opposite to the sign of the internal curvature.
+
+::: {#exm-lambda-reduction}
+#### Cosmological constants from reduction
+
+Compactifying on a curved internal space produces a four-dimensional cosmological constant from the internal
+curvature, $\Lambda \propto -R_{\text{int}}$ with $R_{\text{int}}$ the scalar curvature of the positive-definite
+internal metric, which must be cancelled or compensated by fluxes (Part VI): the positive curvature of a sphere
+alone gives a negative contribution.
+:::
+
+The sign of $\Lambda$ decides the large-scale geometry of the vacuum. The three cases have different names and
+different physics.
+
+::: {#exm-lambda-sign}
+#### The three signs
+
+$\Lambda > 0$ accelerates the expansion of the universe, as observed today; $\Lambda < 0$ gives anti-de Sitter
+space, the setting of the AdS/CFT correspondence; $\Lambda = 0$ gives Minkowski space as the maximally symmetric
+vacuum.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+A cosmological constant is a perfect fluid of a special kind, the same in every frame. The first exercise identifies
+its pressure and its equation of state.
+
+::: {#exr-gr-lambda-pressure}
+#### Negative pressure
+
+Write $T_{\mu\nu} = \tfrac{\Lambda}{\kappa^2}g_{\mu\nu}$ in the form of @exm-stress-fluid and find $\rho$ and $p$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Comparing $(\rho + p)u_\mu u_\nu - pg_{\mu\nu}$ with $\tfrac{\Lambda}{\kappa^2}g_{\mu\nu}$ for every $u$ requires $\rho + p = 0$ and
+$-p = \Lambda/\kappa^2$: $\rho = \Lambda/\kappa^2$ and $p = -\rho$, the equation of state $w = -1$. The stress tensor is
+the same in every frame, as the energy of empty space must be.
+:::
+
+The observed value of $\Lambda$ is tiny in natural units. The second exercise converts it to an energy density and
+compares it with the Planck scale.
+
+::: {#exr-gr-lambda-value}
+#### The observed cosmological constant
+
+With $\Lambda = 1.1 \times 10^{-52}\,\mathrm{m^{-2}}$, compute $\rho_\Lambda c^2 = \Lambda c^4/(8\pi G)$ in $\mathrm{J/m^3}$ and
+in $\mathrm{eV^4}$ (using $\hbar c = 1.973 \times 10^{-7}\,\mathrm{eV\,m}$), and compare with the fourth power of the reduced
+Planck mass $2.4 \times 10^{27}\,$eV.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\rho_\Lambda c^2 = 5.3 \times 10^{-10}\,\mathrm{J/m^3} = (2.3 \times 10^{-3}\,\mathrm{eV})^4$, about $7 \times 10^{-121}$ of the Planck
+density: the cosmological constant problem, the mismatch between this value and any natural estimate of the vacuum
+energy.
+
+{{< sage exr-gr-lambda-value >}}
+:::
+
+The cosmological constant modifies the Newtonian limit as well. The third exercise finds the extra force it
+produces on a test particle near a point mass.
+
+::: {#exr-gr-lambda-newtonian}
+#### A repulsive force
+
+Show that with a cosmological constant the trace-reversed equations read $R_{\mu\nu} = \kappa^2(T_{\mu\nu} - \tfrac12Tg_{\mu\nu}) -
+\Lambda g_{\mu\nu}$ in four dimensions, deduce $\nabla^2\Phi = 4\pi G\rho - \Lambda$, and find the potential of a point
+mass.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The trace of $G_{\mu\nu} - \Lambda g_{\mu\nu} = \kappa^2T_{\mu\nu}$ gives $R = -\kappa^2T - 4\Lambda$, and then $R_{\mu\nu} =
+\kappa^2T_{\mu\nu} + \Lambda g_{\mu\nu} + \tfrac12Rg_{\mu\nu}$ is the stated form. Its $tt$ component in the weak field is
+$\nabla^2\Phi = 4\pi G\rho - \Lambda$, solved outside a point mass by $\Phi = -GM/r - \Lambda r^2/6$: an attraction
+plus a repulsion $\Lambda r/3$ growing with distance. Indeed $g_{tt} = 1 + 2\Phi = 1 - 2GM/r - \Lambda r^2/3$ is the
+exact solution of @exr-gr-schwarzschild-de-sitter.
+:::
+::::
+
+Without matter the Einstein equations still have many solutions, and those of highest symmetry serve as vacua. The
+definition records the vacuum equations in their trace-reversed form, which says that the metric is an Einstein
+metric.
+
+:::: {.statement-box}
+::: {#def-vacuum-solution}
+#### Vacuum solution
+
+A **vacuum solution** of the Einstein equations has $T_{\mu\nu} = 0$: $G_{\mu\nu} - \Lambda g_{\mu\nu} = 0$, equivalently
+$R_{\mu\nu} = -\tfrac{2\Lambda}{n - 2}g_{\mu\nu}$ in $n$ dimensions (the sign is that of our signature, in which
+$g_{tt} > 0$), so that a vacuum solution is an Einstein metric
+(@def-einstein-metric). The maximally symmetric vacuum solutions are Minkowski space ($\Lambda = 0$), de Sitter
+space ($\Lambda > 0$) and anti-de Sitter space ($\Lambda < 0$) [@carroll1997, p. 235].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+De Sitter space is the vacuum with positive cosmological constant. Its curvature is computed in three and in four
+dimensions.
+
+::: {#exm-vacuum-de-sitter}
+#### De Sitter space
+
+In three dimensions, with the Christoffel symbols $\Gamma^t_{xx} = \Gamma^t_{yy} = He^{2Ht}$, $\Gamma^x_{tx} =
+\Gamma^y_{ty} = H$ (all others zero) one computes, as in @sec-ricci, $R_{\mu\nu} = -2H^2g_{\mu\nu}$ and $R = -6H^2$, hence
+$G_{\mu\nu} - H^2g_{\mu\nu} = 0$: de Sitter space is the vacuum solution with $\Lambda = H^2$ (@prp-de-sitter). In
+four dimensions, $R_{\mu\nu} = -3H^2g_{\mu\nu}$, $R = -12H^2$ and $\Lambda = 3H^2$ (@exr-de-sitter-4d): the Hubble rate of
+the expansion is set by the cosmological constant.
+:::
+
+The three- and four-dimensional cases are instances of a single formula. The next example gives it in any dimension
+$n$ for a metric of constant curvature.
+
+::: {#exm-vacuum-einstein-n}
+#### Einstein metrics in $n$ dimensions
+
+For $R_{\mu\nu} = -(n - 1)H^2g_{\mu\nu}$ one has $R = -n(n - 1)H^2$ and $G_{\mu\nu} = \tfrac12(n - 1)(n - 2)H^2g_{\mu\nu}$:
+for $n = 3$, $G_{\mu\nu} = H^2g_{\mu\nu}$, and for $n = 4$, $G_{\mu\nu} = 3H^2g_{\mu\nu}$, in agreement with the two
+computations of @exm-vacuum-de-sitter.
+:::
+
+The same equations with the opposite sign of the curvature describe internal spheres. This is the mechanism behind
+the compactifications of the last part.
+
+::: {#exm-vacuum-sphere-internal}
+#### A sphere as internal space
+
+In Part VI the internal sphere of a compactification is an Einstein space with $R_{mn} = (n - 1)R_0^{-2}\gamma_{mn}$
+for the positive-definite round metric $\gamma_{mn}$ (@exm-einstein-spheres), that is $R_{mn} = -(n - 1)R_0^{-2}g_{mn}$
+for the internal metric $g_{mn} = -\gamma_{mn}$ of our signature, and the Einstein equations relate its radius $R_0$
+to the flux or cosmological constant
+that supports it (the Freund-Rubin mechanism): the same computation as for de Sitter space with the sign of the
+curvature reversed.
+:::
+
+Anti-de Sitter space, met in @exr-gr-anti-de-sitter in the Poincaré coordinates, is also a hyperboloid, in a flat space
+with two times. The next example gives its global coordinates, which show its unusual causal structure.
+
+::: {#exm-grb-ads-global}
+#### Global anti-de Sitter space
+
+Four-dimensional anti-de Sitter space of unit radius is the quadric $U^2 + V^2 - X^2 - Y^2 - Z^2 = 1$ in the flat space with metric
+$dU^2 + dV^2 - dX^2 - dY^2 - dZ^2$. With $U = \cosh\lambda\cos\alpha$, $V = \cosh\lambda\sin\alpha$ and $(X, Y, Z) = \sinh\lambda\,\hat n$,
+$$
+ds^2 = \cosh^2\lambda\,d\alpha^2 - d\lambda^2 - \sinh^2\lambda\,d\Omega^2 .
+$$
+The time $\alpha$ is periodic, so the quadric has closed timelike curves, and one passes to its universal cover, $\alpha \in \mathbb{R}$. A
+radial light ray has $d\lambda = \cosh\lambda\,d\alpha$, so $\alpha = 2\arctan(\tanh(\lambda/2))$: it reaches $\lambda = \infty$ after the finite
+time $\alpha = \pi/2$. The boundary at infinity is at a finite distance for light, the property on which the AdS/CFT
+correspondence is built [@blennow2022relativity, Problem 2.86].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The vacuum equations fix the scalar curvature in terms of $\Lambda$. The first exercise works this out in four
+dimensions.
+
+::: {#exr-gr-vacuum-trace}
+#### The curvature of a vacuum
+
+Show that a four-dimensional vacuum solution has $R = -4\Lambda$ and $R_{\mu\nu} = -\Lambda g_{\mu\nu}$, and check these for
+de Sitter space with $\Lambda = 3H^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The trace of $R_{\mu\nu} - \tfrac12Rg_{\mu\nu} = \Lambda g_{\mu\nu}$ is $-R = 4\Lambda$; substituting back, $R_{\mu\nu} = \Lambda g_{\mu\nu} +
+\tfrac12Rg_{\mu\nu} = -\Lambda g_{\mu\nu}$, the case $n = 4$ of @def-vacuum-solution. For de Sitter space $R = -12H^2 =
+-4\Lambda$ and $R_{\mu\nu} = -3H^2g_{\mu\nu}$, in agreement (@exr-de-sitter-4d).
+:::
+
+Anti-de Sitter space is the vacuum with negative cosmological constant. The second exercise computes its curvature
+in Poincaré coordinates with SageManifolds.
+
+::: {#exr-gr-anti-de-sitter}
+#### Anti-de Sitter space
+
+Show that $ds^2 = \tfrac{\ell^2}{z^2}(dt^2 - dx^2 - dy^2 - dz^2)$ on $z > 0$ has $R_{\mu\nu} = \tfrac{3}{\ell^2}g_{\mu\nu}$ and solves
+the vacuum equations with $\Lambda = -3/\ell^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The metric is conformally flat, and SageManifolds gives $R_{\mu\nu} = 3\ell^{-2}g_{\mu\nu}$, $R = 12/\ell^2$. By
+@exr-gr-vacuum-trace, $R_{\mu\nu} = -\Lambda g_{\mu\nu}$ with $\Lambda = -3/\ell^2 < 0$: the curvature has the opposite sign to
+de Sitter space, as for the hyperbolic plane compared with the sphere.
+
+{{< sage exr-gr-anti-de-sitter >}}
+:::
+
+Vacuum solutions need not be maximally symmetric. The third exercise checks a black hole in a universe with a
+cosmological constant, combining this section with @sec-schwarzschild-flrw.
+
+::: {#exr-gr-schwarzschild-de-sitter}
+#### Schwarzschild-de Sitter
+
+Show that $ds^2 = f\,dt^2 - f^{-1}dr^2 - r^2d\Omega^2$ with $f = 1 - 2m/r - \Lambda r^2/3$ satisfies $R_{\mu\nu} = -\Lambda g_{\mu\nu}$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+SageManifolds gives $R_{\mu\nu} + \Lambda g_{\mu\nu} = 0$ and $R = -4\Lambda$. For $\Lambda = 0$ this is the Schwarzschild metric of
+@def-gr-schwarzschild-metric, for $m = 0$ the static patch of de Sitter space (@exr-gr-int-de-sitter-three-ways); the
+weak-field reading of $f$ is the potential of @exr-gr-lambda-newtonian.
+
+{{< sage exr-gr-schwarzschild-de-sitter >}}
+:::
+
+The embedding of the previous example makes the light rays of anti-de Sitter space simple. The next exercise shows
+that they are straight lines of the flat ambient space, by a Lagrange multiplier argument.
+
+::: {#exr-grb-ads-null}
+#### Light rays are straight lines
+
+Show that the geodesics of the quadric $X\cdot X = 1$ of @exm-grb-ads-global, with $X\cdot Y = \eta_{ab}X^aY^b$ the ambient metric, are the
+extremals of $\int\bigl(\tfrac12\dot X\cdot\dot X + \lambda(X\cdot X - 1)\bigr)d\sigma$, that $\dot X\cdot\dot X$ is constant along them, and that the null ones obey
+$\ddot X^a = 0$: they are straight lines $X = A + \sigma B$ with $A\cdot A = 1$, $A\cdot B = 0$, $B\cdot B = 0$
+[@blennow2022relativity, Problem 2.86].
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The multiplier enforces the constraint, and the extremals of the constrained energy functional are the geodesics of the
+induced metric. The Euler-Lagrange equation is $\ddot X^a = 2\lambda X^a$. Differentiating $X\cdot X = 1$ twice gives $X\cdot\dot X = 0$ and $\dot X\cdot\dot X +
+X\cdot\ddot X = 0$, so $2\lambda = -\dot X\cdot\dot X$; and $\tfrac{d}{d\sigma}(\dot X\cdot\dot X) = 2\dot X\cdot\ddot X = 4\lambda X\cdot\dot X = 0$. For a null geodesic $\dot X\cdot\dot X = 0$,
+hence $\lambda = 0$ and $\ddot X = 0$. The line $A + \sigma B$ stays on the quadric for all $\sigma$ iff $A\cdot A = 1$, $A\cdot B = 0$ and $B\cdot B = 0$. Timelike
+geodesics, with $\dot X\cdot\dot X = 1$, obey $\ddot X = -X$ instead: they are ellipses $A\cos\sigma + B\sin\sigma$, all returning to their starting
+point after $\sigma = 2\pi$, which is why anti-de Sitter space acts like a box for massive particles.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+In two dimensions the Einstein tensor vanishes because the Ricci tensor and half the scalar curvature times the metric
+cancel exactly. The proposition states this on the unit sphere, and @exr-einstein-2d proves it for every metric.
+
+:::: {.statement-box}
+::: {#prp-einstein-2d}
+#### The Einstein tensor vanishes in two dimensions
+
+On the unit sphere $R_{ij} - \tfrac12R\,g_{ij} = 0$ on the chart domain. The same holds for an arbitrary
+two-dimensional metric (@exr-einstein-2d).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** `KaluzaKlein.Relativity.sphere_einstein_zero`.
+
+{{< lean KaluzaKlein.Relativity.sphere_einstein_zero >}}
+
+
+**Sage.** The statement for an arbitrary two-dimensional metric is checked by exact computation with SageManifolds in
+the solution of @exr-einstein-2d.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+A flat two-dimensional metric satisfies the proposition trivially, since every curvature tensor vanishes. The flat torus
+is the compact example in two dimensions.
+
+::: {#exm-gr-2d-torus}
+#### The flat torus
+
+On the flat torus of @exm-riemann-torus all curvature vanishes, $R_{ij} = 0$ and $R = 0$, so $G_{ij} = 0$ without any
+cancellation; the Gauss-Bonnet integral is $4\pi\chi = 0$ (@exr-eh-topological).
+:::
+
+The interesting cases are curved metrics, where $R_{ij}$ and $\tfrac12Rg_{ij}$ are both non-zero and cancel. The radius
+of a sphere shows that the vacuum equations cannot even fix the size of a two-dimensional space.
+
+::: {#exm-gr-2d-sphere-radius}
+#### A sphere of any radius
+
+For the round sphere of radius $a$, $R_{ij} = a^{-2}g_{ij}$ and $R = 2/a^2$ (@exm-sphere-curvature-radius), so $G_{ij} =
+a^{-2}g_{ij} - a^{-2}g_{ij} = 0$ for every $a$: no equation selects the radius.
+:::
+
+Two-dimensional de Sitter space, drawn in @fig-de-sitter, is a Lorentzian example. It is curved but has zero
+Einstein tensor, as computed in @exr-gr-2d-ds2.
+
+::: {#exm-gr-2d-ds2}
+#### Two-dimensional de Sitter space
+
+$ds^2 = dt^2 - e^{2Ht}dx^2$ has $R_{\mu\nu} = -H^2g_{\mu\nu}$ and $R = -2H^2$, the case $n = 2$ of
+@exm-vacuum-einstein-n, whose formula $G_{\mu\nu} = \tfrac12(n - 1)(n - 2)H^2g_{\mu\nu}$ indeed vanishes at $n = 2$.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise checks the Lorentzian example with SageManifolds. It confirms the values of the Ricci tensor and
+the scalar curvature quoted in the last example.
+
+::: {#exr-gr-2d-ds2}
+#### De Sitter space in two dimensions
+
+Compute the Ricci tensor, the scalar curvature and the Einstein tensor of $ds^2 = dt^2 - e^{2Ht}dx^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The only non-zero Christoffel symbols are $\Gamma^t_{xx} = He^{2Ht}$ and $\Gamma^x_{tx} = H$; the Ricci tensor is $-H^2g$, the
+scalar curvature $-2H^2$ and the Einstein tensor zero.
+
+{{< sage exr-gr-2d-ds2 >}}
+:::
+
+The second exercise, from the old version of this section, proves the statement for every two-dimensional metric.
+Its solution uses the single independent component of the Riemann tensor and computes a generic metric explicitly.
+
+::: {#exr-einstein-2d}
+#### Two dimensions
+
+Show that the Einstein tensor of an arbitrary two-dimensional metric vanishes.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+In two dimensions the Riemann tensor has one independent component and $R_{ijkl} = \tfrac12R(g_{ik}g_{jl} -
+g_{il}g_{jk})$ (@sec-riemann); contracting, $R_{jl} = \tfrac12R\,g_{jl}$, so $G_{jl} = 0$. In Sage, for a generic
+symmetric metric with three arbitrary functions, built as a SageManifolds metric:
+
+{{< sage exr-einstein-2d >}}
+
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** The sphere case is `KaluzaKlein.Relativity.sphere_einstein_zero` of @prp-einstein-2d.
+
+**Sage.** The generic metric is checked by exact computation with SageManifolds in the solution.
+:::
+
+Three dimensions are the next special case: there the Einstein equations have content, but no gravitational waves.
+The third exercise explains why by counting components.
+
+::: {#exr-gr-3d-flat}
+#### Three-dimensional gravity
+
+Show that in three dimensions the Riemann tensor has as many independent components as the Ricci tensor, and deduce
+that every solution of the vacuum equations with $\Lambda = 0$ is flat.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The Riemann tensor has $n^2(n^2 - 1)/12 = 6$ components for $n = 3$, and the symmetric Ricci tensor has $n(n + 1)/2 =
+6$. In fact $R_{\mu\nu\rho\sigma}$ is a linear combination of $R_{\mu\rho}g_{\nu\sigma}$-type terms and $Rg_{\mu\rho}g_{\nu\sigma}$-type
+terms. In vacuum with $\Lambda = 0$, $R_{\mu\nu} = 0$ (@exr-gr-trace-reversed), hence $R_{\mu\nu\rho\sigma} = 0$: the metric is flat
+locally, and gravity in three dimensions has no local degrees of freedom. Massive objects only produce a conical
+deficit angle.
+:::
+::::
+
+De Sitter space in three dimensions is small enough to be computed completely, from the metric to the field
+equation. The proposition records the inverse metric, the connection, the curvature and the vacuum equation.
+
+:::: {.statement-box}
+::: {#prp-de-sitter}
+#### Curvature of three-dimensional de Sitter space
+
+For $ds^2 = dt^2 - e^{2Ht}(dx^2 + dy^2)$: the inverse metric is $\operatorname{diag}(1, -e^{-2Ht}, -e^{-2Ht})$, the
+Christoffel symbols are as stated in @exm-vacuum-de-sitter, $R_{\mu\nu} = -2H^2g_{\mu\nu}$, $R = -6H^2$ and $G_{\mu\nu} -
+H^2g_{\mu\nu} = 0$, everywhere, since $e^{2Ht} \neq 0$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** `KaluzaKlein.Relativity.dS3_invMetric`, `KaluzaKlein.Relativity.dS3_christoffel_fun`,
+`KaluzaKlein.Relativity.dS3_ricci_eq`, `KaluzaKlein.Relativity.dS3_scalarCurvature` and
+`KaluzaKlein.Relativity.dS3_einstein`, without any chart hypothesis.
+
+{{< lean KaluzaKlein.Relativity.dS3_einstein >}}
+
+
+**Sage.** The embedding as a hyperboloid is checked in Sage (`figures/de_sitter.sage`).
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The coordinate $t$ of de Sitter space is the proper time of the comoving observers. Their separation grows
+exponentially at a constant rate.
+
+::: {#exm-gr-ds-hubble}
+#### A constant Hubble rate
+
+Two comoving observers at fixed $x$ and $x + \Delta x$ are at physical distance $d = e^{Ht}\Delta x$ at time $t$, so $\dot d
+= Hd$: they recede at a speed proportional to their distance, with the constant Hubble rate $H = \dot a/a$ and
+$a = e^{Ht}$ (@def-gr-flrw-metric).
+:::
+
+Exponential expansion hides part of the universe from every observer. The light rays of the flat slicing make this
+explicit.
+
+::: {#exm-gr-ds-horizon}
+#### The cosmological horizon
+
+A light ray $dx/dt = e^{-Ht}$ sent at time $t$ from $x = 0$ reaches at most the comoving coordinate $\int_t^\infty
+e^{-Ht'}dt' = e^{-Ht}/H$, the physical distance $1/H$. Events farther away than $1/H$ can never be influenced by the
+observer: de Sitter space has a horizon, which in static coordinates is the surface $r = 1/H$ of
+@exr-gr-int-de-sitter-three-ways.
+:::
+
+The flat slicing covers only half of de Sitter space. The full space is the hyperboloid of @fig-de-sitter, on which
+the symmetry is manifest.
+
+![Two-dimensional de Sitter space as the hyperboloid $X_0^2 - X_1^2 - X_2^2 = -1/H^2$ in three-dimensional
+Minkowski space, with the flat-slicing coordinates: surfaces of constant $t$ (red circles, growing like $e^{Ht}$)
+and lines of constant $x$ (blue). The induced metric is $dt^2 - e^{2Ht}dx^2$. Generated by
+`figures/de_sitter.sage`.](figures/de_sitter.png){#fig-de-sitter width=55%}
+
+::: {#exm-gr-ds-hyperboloid}
+#### The hyperboloid
+
+$n$-dimensional de Sitter space is the hyperboloid $X_0^2 - X_1^2 - \dots - X_n^2 = -1/H^2$ in $(n + 1)$-dimensional
+Minkowski space, and the Lorentz group $SO(1, n)$ of the ambient space acts on it by isometries: dimension $n(n + 1)/2$,
+the maximum (@def-maximally-symmetric). The flat slicing covers the half $X_0 + X_n > 0$, as @fig-de-sitter shows for
+$n = 2$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** The case $n = 2$ is computed in Sage (`figures/de_sitter.sage`).
+:::
+
+In the flat slicing the geodesics of de Sitter space are simple too. The next example shows that free particles and
+light move on straight lines of the comoving coordinates, the expansion acting only on the speed.
+
+::: {#exm-grb-ds-straight}
+#### Straight comoving paths
+
+For $ds^2 = dt^2 - e^{2t/R}(dx^2 + dy^2 + dz^2)$ the metric does not depend on $\vec x$, so $e^{2t/R}\,d\vec x/d\tau = \vec p$ is constant along
+a geodesic. The direction of $d\vec x/d\tau$ is fixed: free particles and photons move on straight lines in the comoving
+coordinates. A photon sent from $x = X$ towards the origin at $t = 0$ has $dx/dt = -e^{-t/R}$ and arrives at $t = -R\ln(1 - X/R)$ if
+$X < R$, never if $X \geq R$, the horizon of @exm-gr-ds-horizon [@blennow2022relativity, Problem 2.83].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+Global coordinates on the hyperboloid show the same horizon from another angle. The next example follows light on the
+two-dimensional de Sitter space, where the whole spacetime can be drawn.
+
+::: {#exm-grb-ds2-global}
+#### Light on the two-dimensional hyperboloid
+
+On $x_0^2 - x_1^2 - x_2^2 = -1$ in three-dimensional Minkowski space, $x_0 = \sinh\tau$, $x_1 = \cosh\tau\cos\phi$, $x_2 = \cosh\tau\sin\phi$ give
+$ds^2 = d\tau^2 - \cosh^2\tau\,d\phi^2$. A light ray has $d\phi = d\tau/\cosh\tau$, so $\phi(\tau) - \phi(\tau_0) = \operatorname{gd}\tau - \operatorname{gd}\tau_0$ with the
+Gudermannian $\operatorname{gd}\tau = 2\arctan(\tanh(\tau/2))$, which runs from $-\pi/2$ to $\pi/2$. Over the whole history of the universe a
+ray covers half the circle; sent at $x_0 = 0$ from $\phi = 0$ it reaches $\phi = \pi/2$ only as $x_0 \to \infty$, and the antipodal half
+of the circle never receives it [@blennow2022relativity, Problem 2.79].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise, from the old version of this section, extends the computation of @prp-de-sitter to four dimensions.
+It gives the value $\Lambda = 3H^2$ used in cosmology.
+
+::: {#exr-de-sitter-4d}
+#### Four-dimensional de Sitter space
+
+Compute the Ricci tensor and scalar curvature of $ds^2 = dt^2 - e^{2Ht}d\vec x^2$ in four dimensions and find
+$\Lambda$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The non-zero symbols are $\Gamma^t_{ij} = He^{2Ht}\delta_{ij}$ and $\Gamma^i_{tj} = H\delta^i_j$; the Ricci tensor is
+$-3H^2g_{\mu\nu}$, $R = -12H^2$, $G_{\mu\nu} = 3H^2g_{\mu\nu}$ and $\Lambda = 3H^2$. In Sage:
+
+{{< sage exr-de-sitter-4d >}}
+:::
+
+Geodesics of de Sitter space other than the comoving ones slow down. The second exercise shows that the momentum of
+a free particle decays like $1/a$.
+
+::: {#exr-gr-ds-peculiar}
+#### Peculiar velocities decay
+
+For a geodesic of $ds^2 = dt^2 - a(t)^2d\vec x^2$, show that $a^2\,dx^i/d\tau$ is constant, using that $g$ does not depend on
+$x^i$. Deduce that the momentum measured by comoving observers, $p = ma\,|d\vec x/d\tau|$, decreases as $1/a$; what does this
+mean for de Sitter space?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\partial_i$ is a Killing vector, so $g(\partial_i, u) = -a^2\,dx^i/d\tau$ is conserved along geodesics (as for $E$ in
+@exr-gr-nl-energy). Hence $a\,|d\vec x/d\tau| \propto 1/a$ and $p \propto 1/a$. In de Sitter space $a = e^{Ht}$, so any
+initial motion relative to the comoving observers dies away exponentially, and the comoving geodesics of
+@exm-equivalence-geodesics are attractors. For light the same law is the cosmological redshift (@exr-gr-flrw-redshift).
+:::
+
+Translations in time are not obviously symmetries of the flat slicing, because the metric depends on $t$. The third
+exercise finds the Killing vector that combines a time translation with a dilation.
+
+::: {#exr-gr-ds-killing}
+#### A hidden time translation
+
+Show that $\xi = \partial_t - H(x\partial_x + y\partial_y + z\partial_z)$ is a Killing vector of four-dimensional de Sitter space in
+flat slicing (@def-killing), while $\partial_t$ is not.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The finite transformation $t \mapsto t + c$, $\vec x \mapsto e^{-Hc}\vec x$ maps $e^{2Ht}d\vec x^2$ to $e^{2H(t + c)}e^{-2Hc}d\vec x^2$,
+an isometry; $\xi$ is its generator. SageManifolds gives $\mathcal{L}_\xi g = 0$ and $\mathcal{L}_{\partial_t}g = -2He^{2Ht}d\vec x^2 \neq
+0$.
+
+{{< sage exr-gr-ds-killing >}}
+:::
+
+Redshifts between comoving observers measure the expansion. The next exercise computes the redshift in two-dimensional
+de Sitter space exactly, including the horizon beyond which no signal arrives.
+
+::: {#exr-grb-ds2-redshift}
+#### Redshift in de Sitter space
+
+In $ds^2 = dt^2 - e^{2t/R}dx^2$ a comoving observer at $x_0$ emits light at time $t_e$ towards a comoving observer at $x_1 = x_0 + d$. With
+Sage, find the arrival time and show that $1 + z = \bigl(1 - de^{t_e/R}/R\bigr)^{-1}$. What happens when $de^{t_e/R} \geq R$, and what is
+$z$ for small $d$? [@blennow2022relativity, Problem 2.139]
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Along the ray $dx/dt = e^{-t/R}$, and the frequency scales as $1/a$ (@exr-gr-flrw-redshift):
+
+{{< sage exr-grb-ds2-redshift >}}
+
+For $de^{t_e/R} \geq R$ the light never arrives: the receiver is beyond the horizon of the emission event. For small $d$, $z =
+He^{t_e/R}d$ with $H = 1/R$, Hubble's law with the proper distance $e^{t_e/R}d$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A field on de Sitter space feels the expansion as friction. The next exercise computes the wave operator and finds its
+simplest solutions, which show the damping explicitly.
+
+::: {#exr-grb-ds2-wave}
+#### Waves on two-dimensional de Sitter space
+
+With Sage, compute $\Box\Phi = g^{\mu\nu}\nabla_\mu\nabla_\nu\Phi$ for $ds^2 = dt^2 - e^{2t/R}dx^2$. Find the solutions that do not depend on $x$, and
+show that $e^{ik(x - \eta)}$ with the conformal time $\eta = -Re^{-t/R}$ is a solution. [@blennow2022relativity, Problem 2.140]
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+SageManifolds gives the operator, and the two families of solutions are checked by substitution:
+
+{{< sage exr-grb-ds2-wave >}}
+
+The term $\Phi_t/R = H\Phi_t$ is Hubble friction: homogeneous solutions settle to a constant, $A + Be^{-t/R}$. In conformal time
+$ds^2 = e^{2t/R}(d\eta^2 - dx^2)$ is conformally flat, and in two dimensions $\sqrt{|g|}g^{\mu\nu}$ is conformally invariant, so the
+massless wave equation is the flat one, $\partial_\eta^2\Phi - \partial_x^2\Phi = 0$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+## Black holes and cosmology {#sec-schwarzschild-flrw}
+
+The Einstein equations are non-linear, and exact solutions exist only under strong symmetry assumptions. Two of them
+carry most of the observable content of the theory. Outside a spherically symmetric mass the solution is unique, the
+Schwarzschild metric; it contains a horizon, describes black holes, and its geodesics give the perihelion advance of
+Mercury and the bending of light. A homogeneous and isotropic universe is described by the FLRW metric, whose single
+function $a(t)$ obeys the Friedmann equations. In this section we keep $G$ explicit in the definitions and set $G = c
+= 1$ in computations, writing $m = GM$ for the mass in units of length.
+
+### The Schwarzschild solution
+
+The simplest source of gravity is a single spherical body, and the simplest region to study is the empty space
+around it. There the vacuum equations $R_{\mu\nu} = 0$ must hold, and spherical symmetry reduces them to ordinary
+differential equations whose solution was found by Schwarzschild in 1916.
+
+:::: {.statement-box}
+::: {#def-gr-schwarzschild-metric}
+#### Schwarzschild metric
+
+The **Schwarzschild metric** of mass $M > 0$ is
+$$
+ds^2 = \Bigl(1 - \frac{2GM}{r}\Bigr)dt^2 - \Bigl(1 - \frac{2GM}{r}\Bigr)^{-1}dr^2 - r^2\bigl(d\theta^2 + \sin^2\theta\,d\phi^2\bigr),
+$$ {#eq-gr-schwarzschild}
+on $r > 2GM$, where $r$ is defined by the area $4\pi r^2$ of the spheres of constant $t$ and $r$. It is a vacuum solution,
+$R_{\mu\nu} = 0$ (@prp-gr-schwarzschild), and by **Birkhoff's theorem** it is the only spherically symmetric one: the
+gravitational field outside any spherical body is @eq-gr-schwarzschild [@carroll1997, ch. 7, with the overall sign of
+our signature]. The radius $r_s = 2GM$ is the **Schwarzschild radius**.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+Far from the mass the metric must reduce to the weak field of @def-newtonian-limit. The time component does so
+directly.
+
+::: {#exm-gr-schw-newtonian}
+#### The Newtonian potential
+
+At large $r$, $g_{tt} = 1 - 2GM/r = 1 + 2\Phi$ with $\Phi = -GM/r$, the Newtonian potential of a point mass
+(@exm-newtonian-point-mass). The radial component $g_{rr} = -(1 + 2GM/r + \dots)$ differs from the $-(1 - 2\Phi)$ of
+@prp-newtonian-limit only by the choice of radial coordinate, as @exr-gr-schw-isotropic shows.
+:::
+
+The Schwarzschild radius is small for ordinary bodies. Comparing it with their actual radii shows why the horizon plays
+no role in the solar system.
+
+::: {#exm-gr-schw-radius}
+#### Schwarzschild radii
+
+With $GM_\odot/c^2 = 1.48\,$km, the Sun has $r_s = 2.95\,$km, far inside its radius of $696\,000\,$km where the vacuum
+solution does not apply; the Earth has $r_s = 8.9\,$mm. Only bodies compressed below $r_s$, black holes, have the
+surface $r = 2GM$ outside them.
+:::
+
+Birkhoff's theorem has a striking consequence for dynamics. Whatever a spherical star does internally, its exterior
+gravitational field cannot change at all.
+
+::: {#exm-gr-schw-birkhoff}
+#### No spherical waves
+
+A spherically symmetric star that pulsates or collapses keeps the exterior metric @eq-gr-schwarzschild with constant $M$:
+there is no spherically symmetric gravitational radiation, just as there is no monopole electromagnetic radiation.
+Gravitational waves need a changing quadrupole moment.
+:::
+
+The Schwarzschild metric is curved, yet it can be drawn as a surface in a flat space of higher dimension. The next
+example gives Fronsdal's embedding into six-dimensional Minkowski space.
+
+::: {#exm-grb-fronsdal}
+#### An embedding in six dimensions
+
+With $r_s = 2GM$, set $Z_1 = 2r_s\sinh\frac{t}{2r_s}f(r)$, $Z_2 = 2r_s\cosh\frac{t}{2r_s}f(r)$, $Z_3 = g(r)$ and $(Z_4, Z_5, Z_6) = r\,\hat n(\theta, \phi)$
+in the space with metric $dZ_1^2 - dZ_2^2 - \dots - dZ_6^2$. Then $dZ_1^2 - dZ_2^2 = f^2dt^2 - 4r_s^2f'^2dr^2$, and @eq-gr-schwarzschild is reproduced
+by $f = \sqrt{1 - r_s/r}$ and
+$$
+g'(r)^2 = \frac{r_s}{r}\Bigl(1 + \frac{r_s}{r} + \frac{r_s^2}{r^2}\Bigr),
+$$
+since then $4r_s^2f'^2 + g'^2 + 1 = (1 - r_s/r)^{-1}$. The embedding is regular at $r = r_s$, where $f = 0$: the horizon is the
+intersection with $Z_1 = \pm Z_2$, a first sign that it is not a singularity [@blennow2022relativity, Problem 2.77].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The size of a black hole of given mass follows from the definition. The first exercise computes a few, from stellar
+to galactic masses.
+
+::: {#exr-gr-schw-radius-numbers}
+#### Black holes of different masses
+
+Compute $r_s = 2GM/c^2$ for a black hole of $10$ solar masses and for Sagittarius A$^*$, the black hole at the centre of
+the Galaxy, of $4.3 \times 10^6$ solar masses, and compare the latter with the radius of the Earth's orbit, $1.5 \times
+10^8\,$km. What is the mean density inside $r_s$, as a function of $M$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$r_s = 2.95\,$km per solar mass: $29.5\,$km and $1.27 \times 10^7\,$km, about $0.085$ of the Earth-Sun distance. The mean
+density $M/(\tfrac43\pi r_s^3) = 3c^6/(32\pi G^3M^2)$ decreases as $M^{-2}$: a stellar black hole is denser than a nucleus,
+while one of $10^8$ solar masses has the density of water.
+:::
+
+That $R_{\mu\nu} = 0$ does not mean that space is flat: the Riemann tensor carries the tidal field. The second
+exercise computes one component with SageManifolds.
+
+::: {#exr-gr-schw-ricci-flat}
+#### Ricci flat but curved
+
+Compute the Ricci tensor of @eq-gr-schwarzschild (with $G = 1$, $m = M$) and the component $R^r{}_{trt}$ of the Riemann
+tensor, and compare the latter with the radial tidal acceleration of @exr-gr-tidal.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$R_{\mu\nu} = 0$ and $R = 0$, but $R^r{}_{trt} = -2m(r - 2m)/r^4 = -\tfrac{2m}{r^3}(1 - 2m/r)$. For a particle momentarily at
+rest, $u^t = (1 - 2m/r)^{-1/2}$, and geodesic deviation in the radial direction gives $\ddot\xi^r = R^r{}_{ttr}(u^t)^2\xi^r = -
+R^r{}_{trt}(u^t)^2\xi^r = \tfrac{2m}{r^3}\xi^r$: the radial stretching $2GM/r^3$ of @exr-gr-tidal.
+
+{{< sage exr-gr-schw-ricci-flat >}}
+:::
+
+Different radial coordinates can make the metric look different. The third exercise finds isotropic coordinates, in
+which the spatial part is conformally flat and the weak-field form of @def-newtonian-limit appears exactly.
+
+::: {#exr-gr-schw-isotropic}
+#### Isotropic coordinates
+
+Substitute $r = \rho(1 + m/2\rho)^2$ in @eq-gr-schwarzschild and show that the metric becomes $\bigl(\tfrac{1 - m/2\rho}{1 +
+m/2\rho}\bigr)^2dt^2 - (1 + m/2\rho)^4(d\rho^2 + \rho^2d\Omega^2)$. Expand to first order in $m$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$1 - 2m/r = \bigl(\tfrac{1 - m/2\rho}{1 + m/2\rho}\bigr)^2$, $dr/d\rho = (1 - m/2\rho)(1 + m/2\rho)$, so $g_{\rho\rho} = -(1 + m/2\rho)^4$, and
+$r^2 = \rho^2(1 + m/2\rho)^4$ gives the same factor on the sphere. To first order: $g_{tt} = 1 - 2m/\rho$ and $g_{ij} = -(1 +
+2m/\rho)\delta_{ij}$, which is exactly the weak-field metric of @prp-newtonian-limit with $\Phi = -m/\rho$.
+
+{{< sage exr-gr-schw-isotropic >}}
+:::
+
+The Kretschmann scalar of @prp-gr-schwarzschild is finite at $r = 2m$, but a single invariant can hide divergent
+components. The next exercise computes all the curvature components that an observer measures, which are the tidal
+accelerations.
+
+::: {#exr-grb-frame-curvature}
+#### Curvature in the observer's frame
+
+With Sage, compute the components $R_{(abab)}$ of the Riemann tensor of @eq-gr-schwarzschild ($G = 1$, $m = M$) in the orthonormal frame
+$e_{(t)} = (1 - 2m/r)^{-1/2}\partial_t$, $e_{(r)} = (1 - 2m/r)^{1/2}\partial_r$, $e_{(\theta)} = r^{-1}\partial_\theta$, $e_{(\phi)} = (r\sin\theta)^{-1}\partial_\phi$, and check
+the Kretschmann scalar. Are they finite at $r = 2m$? What do they mean for a falling body?
+[@plebanski2024introduction, Sec. 14.17, Exercise 7; @blennow2022relativity, Problem 2.110]
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Dividing the coordinate components by the norms of the coordinate vectors:
+
+{{< sage exr-grb-frame-curvature >}}
+
+All components are $\pm2m/r^3$ or $\pm m/r^3$, finite at $r = 2m$ and divergent only at $r = 0$; the frame itself is singular at the
+horizon, but the components in the frame of a radially falling observer are the same, since radial boosts leave these
+components unchanged. By the geodesic deviation equation a body is stretched radially with tidal acceleration $2m/r^3$ per
+unit length and compressed sideways with $m/r^3$, as in Newtonian gravity (@exr-gr-tidal); at $r = 0$ the stretching becomes
+infinite.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+The coefficient $g_{rr}$ blows up at $r = 2GM$. This is not a singularity of spacetime but of the coordinates, and the
+surface $r = 2GM$ has a physical meaning of its own: nothing that crosses it inwards can come back.
+
+:::: {.statement-box}
+::: {#def-gr-event-horizon}
+#### Event horizon
+
+The **event horizon** of the Schwarzschild spacetime is the surface $r = 2GM$. In the ingoing Eddington-Finkelstein
+coordinate $v = t + r_*$, with the tortoise coordinate $r_* = r + 2GM\log|r/2GM - 1|$, the metric reads
+$$
+ds^2 = \Bigl(1 - \frac{2GM}{r}\Bigr)dv^2 - 2\,dv\,dr - r^2d\Omega^2,
+$$ {#eq-gr-eddington-finkelstein}
+which is regular at $r = 2GM$ and extends the spacetime to $0 < r < 2GM$. Inside the horizon every future-directed
+timelike or null curve has decreasing $r$; the region $r < 2GM$ is a **black hole**, and its boundary is the boundary of
+the set of events from which signals can reach infinity [@carroll1997, ch. 7]. The curvature singularity is at
+$r = 0$, where $R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma} = 48G^2M^2/r^6$ diverges (@prp-gr-schwarzschild).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The light cones in the Eddington-Finkelstein coordinates show the horizon at work. They are drawn in the left panel
+of @fig-schwarzschild.
+
+::: {#exm-gr-horizon-cones}
+#### Tilting light cones
+
+In the coordinates $(r, \tilde t = v - r)$ radial light rays have slopes $d\tilde t/dr = -1$ (ingoing) and $(1 + 2m/r)/(1 -
+2m/r)$ (outgoing). Outside the horizon the outgoing slope is positive; at $r = 2m$ it is infinite, the ray stays at
+$r = 2m$; inside it is negative, so both rays move to smaller $r$. The cones tilt inwards as the horizon is crossed.
+:::
+
+In Schwarzschild coordinates the approach to the horizon takes forever. The tortoise coordinate measures how, and
+makes the radial light rays straight.
+
+::: {#exm-gr-horizon-tortoise}
+#### The tortoise coordinate
+
+Radial light rays obey $dt = \pm dr/(1 - 2m/r) = \pm dr_*$, and $r_* \to -\infty$ as $r \to 2m$: a light ray needs infinite
+coordinate time $t$ to reach the horizon. Since $t$ is the time of a distant observer, the infall is never seen to
+complete, although it takes finite proper time (@exr-gr-horizon-infall-time).
+:::
+
+The horizon is also a surface of infinite redshift. Static clocks near it run arbitrarily slowly compared with
+clocks far away.
+
+::: {#exm-gr-horizon-redshift}
+#### Infinite redshift
+
+A static source at radius $r$ emitting at frequency $\nu$ is received at infinity at $\nu_\infty = \nu\sqrt{1 - 2m/r}$
+(@exm-newtonian-redshift, now exact). As $r \to 2m$ the ratio tends to zero: an object falling in appears to freeze and
+fade at the horizon.
+:::
+
+Staying at a fixed radius near a black hole requires a rocket. The next example computes the acceleration that the
+rocket must provide, which grows without bound at the horizon.
+
+::: {#exm-grb-static-acceleration}
+#### Hovering above a black hole
+
+A static observer at radius $r$ has $u = (1 - 2m/r)^{-1/2}\partial_t$, and its four-acceleration $a^\mu = u^\nu\nabla_\nu u^\mu$ has the only component
+$a^r = \Gamma^r_{tt}(u^t)^2 = m/r^2$, so the proper acceleration is
+$$
+\alpha = \sqrt{-g_{rr}}\,a^r = \frac{m}{r^2\sqrt{1 - 2m/r}} .
+$$
+For $r \gg m$ this is Newton's $GM/r^2$; it diverges at $r = 2m$, where no observer can stay at rest. The redshifted value
+$\sqrt{1 - 2m/r}\,\alpha \to 1/(4m)$ is the surface gravity of @exr-gr-horizon-temperature [@blennow2022relativity, Problems 2.94 and 2.100].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+Inside the horizon every observer reaches $r = 0$ in a finite proper time. The next example computes the longest
+possible time, for a fall from rest.
+
+::: {#exm-grb-max-proper-time}
+#### The longest fall
+
+Radial free fall from rest at $r_0$ has $E^2 = 1 - 2m/r_0$ and $\dot r^2 = 2m/r - 2m/r_0$, solved by the cycloid $r = \tfrac{r_0}{2}(1 + \cos\eta)$,
+$\tau = \sqrt{r_0^3/8m}\,(\eta + \sin\eta)$: the singularity $\eta = \pi$ is reached after $\tau = \pi\sqrt{r_0^3/8m}$, the Newtonian free-fall time. From
+the horizon, $r_0 = 2m$, this is $\tau = \pi m = \pi GM/c^3$, about $1.5 \times 10^{-4}\,$s for ten solar masses; any other motion inside
+reaches $r = 0$ sooner, so firing a rocket only shortens the remaining time [@blennow2022relativity, Problems 2.91 and 2.96].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The Eddington-Finkelstein form follows from the Schwarzschild form by a change of coordinate. The first exercise
+carries it out and identifies the ingoing light rays.
+
+::: {#exr-gr-horizon-ef}
+#### Eddington-Finkelstein coordinates
+
+Show that $dr_*/dr = (1 - 2m/r)^{-1}$, substitute $dt = dv - dr/(1 - 2m/r)$ in @eq-gr-schwarzschild, and obtain
+@eq-gr-eddington-finkelstein. Which curves are the ingoing light rays?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\tfrac{d}{dr}\bigl(r + 2m\log|r/2m - 1|\bigr) = 1 + \tfrac{2m}{r - 2m} = \tfrac{r}{r - 2m}$. With $f = 1 - 2m/r$, $f(dv - dr/f)^2 - dr^2/f =
+f\,dv^2 - 2dv\,dr$: the $dr^2$ terms cancel, and the metric coefficients are smooth at $f = 0$. Ingoing radial light
+rays are the lines $v = \text{constant}$, since then $ds^2 = 0$ with $d\Omega = 0$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Exact computation (`figures/schwarzschild.sage`).
+:::
+
+A falling observer reaches the horizon and the centre in finite proper time. The second exercise computes it for a
+fall from rest at infinity.
+
+::: {#exr-gr-horizon-infall-time}
+#### Falling in
+
+For radial free fall from rest at infinity, $E = 1$ and $L = 0$, show that $(dr/d\tau)^2 = 2m/r$ and compute the proper
+time from $r = 2m$ to $r = 0$. Show that the coordinate time $t$ diverges near $r = 2m$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The normalisation $g(u, u) = 1$ with $E = (1 - 2m/r)\dot t$ gives $\dot r^2 = E^2 - (1 - 2m/r) = 2m/r$, exactly the
+Newtonian energy equation. Then $\tau = \int_0^{2m}\sqrt{r/2m}\,dr = 4m/3$: about $66\,\mu$s for a black hole of ten solar
+masses. Near $r = 2m(1 + \epsilon)$, $|dt/dr| \approx 1/\epsilon + \tfrac32$, and with $dr = 2m\,d\epsilon$ the coordinate time grows like
+$t \approx -2m\log\epsilon \to \infty$.
+
+{{< sage exr-gr-horizon-infall-time >}}
+:::
+
+Black holes are not completely black once quantum mechanics is included. The third exercise quotes the result and
+relates it to the redshift at the horizon.
+
+::: {#exr-gr-horizon-temperature}
+#### Surface gravity and temperature
+
+The **surface gravity** $\kappa_s$ is the redshifted acceleration needed to hold a static observer at the horizon,
+$\kappa_s = \tfrac12f'(r_s)$ for $f = 1 - 2m/r$. Compute it, and evaluate Hawking's temperature $T_H = \kappa_s/2\pi$ (in units
+$\hbar = c = k_B = G = 1$, quoted, not derived here) for a black hole of one solar mass, using $T_H = 6.2 \times
+10^{-8}\,\mathrm{K}\,(M_\odot/M)$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$f'(r) = 2m/r^2$, so $\kappa_s = m/r_s^2 = 1/(4m)$ and $T_H = 1/(8\pi m)$: larger black holes are colder. For one solar mass
+$T_H = 6.2 \times 10^{-8}\,$K, far below the $2.7\,$K of the cosmic microwave background, so astrophysical black holes
+absorb more than they radiate.
+:::
+
+The Kruskal coordinates cover the interior as well as the exterior. The next exercise uses them to show that nothing
+leaves the black-hole region, which is the content of the word horizon.
+
+::: {#exr-grb-kruskal-trapped}
+#### No way out
+
+In the Kruskal-Szekeres coordinates $ds^2 = \tfrac{16m^2}{r}e^{(2m - r)/2m}\,du\,dv - r^2d\Omega^2$ with $uv = (2m - r)e^{(r - 2m)/2m}$ and
+$t = 2m\ln(-v/u)$ outside, show that future-directed causal curves have $\dot u \geq 0$, $\dot v \geq 0$, that $uv$ is a decreasing function of $r$,
+and conclude that a curve entering the region $u > 0$, $v > 0$ never returns to $r > 2m$ [@blennow2022relativity, Problems 2.107-2.108].
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+A causal curve has $\tfrac{16m^2}{r}e^{(2m - r)/2m}\dot u\dot v \geq r^2\dot\Omega^2 \geq 0$, so $\dot u$ and $\dot v$ have the same sign (or one vanishes); in the
+exterior $u < 0 < v$, increasing $t$ at fixed $r$ means $-v/u$ increasing at fixed $uv$, that is $u$ and $v$ increasing, which fixes
+the future direction everywhere by continuity. $\tfrac{d}{dr}\bigl[(2m - r)e^{(r - 2m)/2m}\bigr] = -\tfrac{r}{2m}e^{(r - 2m)/2m} < 0$. In the region $u, v > 0$,
+$\tfrac{d}{d\sigma}(uv) = \dot uv + u\dot v \geq 0$, so $uv$ does not decrease and $r$ does not increase along the curve; since $r > 2m$ would need
+$uv < 0$, the curve stays at $r < 2m$, and reaches $r = 0$ at $uv = 2m/e$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+The geometry of the solution and the motion in it fit in one proposition. It collects the exact statements on
+curvature, light cones and geodesics, and the two classic effects, the perihelion advance and light deflection.
+
+:::: {.statement-box}
+::: {#prp-gr-schwarzschild}
+#### Geodesics of the Schwarzschild metric
+
+With $G = 1$ and $m = M$: (a) @eq-gr-schwarzschild is Ricci flat and its Kretschmann scalar is
+$R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma} = 48m^2/r^6$; (b) radial light rays have $dr/dt = \pm(1 - 2m/r)$, the metric in $(v, r)$ is
+@eq-gr-eddington-finkelstein, and the outgoing slope $(1 + 2m/r)/(1 - 2m/r)$ in the $(r, v - r)$ plane is negative inside
+$r = 2m$; (c) for a geodesic in the plane $\theta = \pi/2$ with conserved $E = (1 - 2m/r)\dot t$ and $L = r^2\dot\phi$, the radial
+equation is $\ddot r = -\tfrac12V'(r)$ with
+$$
+V(r) = \Bigl(1 - \frac{2m}{r}\Bigr)\Bigl(1 + \frac{L^2}{r^2}\Bigr), \qquad \dot r^2 = E^2 - V(r),
+$$ {#eq-gr-schwarzschild-potential}
+circular orbits satisfy $mr^2 - L^2r + 3mL^2 = 0$, the innermost stable one is at $r = 6m$ with $L^2 = 12m^2$, and $u = 1/r$
+obeys the orbit equation $u'' + u = m/L^2 + 3mu^2$; (d) numerically, the perihelion advances per revolution by
+$6\pi m/p$, $p = L^2/m$, to within $3\%$ for $p = 300m$, $1000m$, $3000m$, and light passing at impact parameter $b$ is deflected
+by $4m/b$ to within $5\%$ for $b = 200m$, $1000m$, $5000m$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Exact computation (`figures/schwarzschild.sage`), with SageManifolds for (a)-(c); (d) is
+numerical.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+![The Schwarzschild solution ($G = 1$). Left: radial light cones in the ingoing Eddington-Finkelstein plane $(r, v -
+r)$; outside the horizon (blue) the outgoing edge points to larger $r$, at $r = 2m$ it is vertical, and inside (red) both
+edges point to smaller $r$. Centre: a bound geodesic with turning points $p/(1 \pm e)$, $p = 40m$, $e = 0.5$, over four
+revolutions (red), precessing about the ellipse with the same turning points (blue, dashed). Right: light rays with
+impact parameters $6m$ to $20m$, bent by the mass; the ray at $b = 6m$, just above the critical $3\sqrt3\,m$, swings
+around the hole. The interactive version varies $p$. Generated by
+`figures/schwarzschild.sage`.](figures/schwarzschild.svg){#fig-schwarzschild width=100%}
+
+{{< interactive schwarzschild 460 >}}
+
+The perihelion advance of Mercury was the first success of the theory. The example evaluates the formula of the
+proposition with the orbit of Mercury.
+
+::: {#exm-gr-mercury}
+#### The perihelion of Mercury
+
+Restoring units, the advance per orbit is $6\pi GM_\odot/(c^2a(1 - e^2))$ with $a = 5.79 \times 10^{10}\,$m and $e = 0.206$:
+$5.0 \times 10^{-7}\,$rad. Mercury completes $415$ orbits per century, giving $2.1 \times 10^{-4}\,$rad $= 43''$ per
+century, the anomaly that Newtonian perturbations by the other planets could not explain.
+:::
+
+The deflection of light by the Sun was measured during the eclipse of 1919. The formula of the proposition gives the
+value for a ray grazing the solar surface.
+
+::: {#exm-gr-light-bending}
+#### Light bending by the Sun
+
+For $b = R_\odot = 6.96 \times 10^8\,$m, $4GM_\odot/(c^2R_\odot) = 4 \times 1476\,\mathrm{m}/6.96 \times 10^8\,\mathrm{m} = 8.5 \times
+10^{-6}\,$rad $= 1.75''$, twice the Newtonian value (@exr-gr-nl-light), as confirmed by the eclipse expedition and by
+radio interferometry to better than $10^{-3}$.
+:::
+
+Close to the hole the orbits behave differently from Kepler's. Two radii mark the change, the innermost stable orbit
+and the photon sphere.
+
+::: {#exm-gr-isco}
+#### The innermost stable orbit
+
+Circular orbits exist down to $r = 3m$ and are stable only for $r \geq 6m$, where the two roots of $mr^2 - L^2r + 3mL^2 =
+0$ merge. Matter in an accretion disc spirals in through stable orbits and plunges from $r = 6m$, having radiated the
+fraction $1 - \sqrt{8/9} = 5.7\%$ of its rest energy (@exr-gr-isco-energy), far more than nuclear fusion releases.
+:::
+
+Kepler's third law survives in the Schwarzschild metric in a surprisingly exact form. The next example derives it and
+the proper time of the orbiting body, which is not given by the same law.
+
+::: {#exm-grb-kepler-exact}
+#### Kepler's third law in Schwarzschild coordinates
+
+For a circular geodesic $r = r_0$, $\ddot r = 0$ and the $r$-component of the geodesic equation reduces to $\Gamma^r_{tt}\dot t^2 + \Gamma^r_{\phi\phi}\dot\phi^2 = 0$,
+that is $(m/r_0^2)(1 - 2m/r_0)\dot t^2 = r_0(1 - 2m/r_0)\dot\phi^2$. Hence $(d\phi/dt)^2 = m/r_0^3$ exactly, and the coordinate period is
+$T = 2\pi\sqrt{r_0^3/GM}$, Kepler's law with no correction. The proper period is shorter: $d\tau^2 = (1 - 2m/r_0 - r_0^2\Omega^2)dt^2$ gives
+$\tau = T\sqrt{1 - 3m/r_0}$, real only above the photon sphere $r_0 = 3m$ [@blennow2022relativity, Problem 2.72].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The photon sphere also sets the size of the black hole as seen from far away. The next example converts the critical
+impact parameter of @exr-gr-photon-sphere into a cross-section.
+
+::: {#exm-grb-capture}
+#### The optical size of a black hole
+
+Light from infinity with impact parameter $b < b_c = 3\sqrt3\,m$ is captured, and light with $b > b_c$ escapes. A black hole
+therefore absorbs a beam over the area $\sigma = \pi b_c^2 = 27\pi G^2M^2/c^4$, and looks like a dark disc of radius $b_c \approx 2.6r_s$, larger
+than its horizon by the lensing of rays that pass close to it. For the black hole M87* with $M = 6.5 \times 10^9M_\odot$ at $16.8\,$Mpc this
+radius subtends about $20\,\mu$as, the scale of the shadow imaged in 2019 [@blennow2022relativity, Problem 2.76].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+Light has its own effective potential, obtained from @eq-gr-schwarzschild-potential by dropping the rest mass. The
+first exercise finds its maximum.
+
+::: {#exr-gr-photon-sphere}
+#### The photon sphere
+
+For null geodesics $\dot r^2 = E^2 - (1 - 2m/r)L^2/r^2$. Find the radius of the unstable circular light orbit and the
+critical impact parameter $b_c = L/E$ below which light is captured.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$W(r) = (1 - 2m/r)/r^2$ has $W' = 0$ at $r = 3m$, a maximum with $W(3m) = 1/(27m^2)$. A ray with $1/b^2 = E^2/L^2 >
+1/(27m^2)$ passes over the barrier and falls in, so $b_c = 3\sqrt3\,m \approx 5.2m$; this is the size of the shadow of a black
+hole as imaged by the Event Horizon Telescope.
+
+{{< sage exr-gr-photon-sphere >}}
+:::
+
+The energy and angular momentum of circular orbits follow from @eq-gr-schwarzschild-potential. The second exercise
+computes them and the binding energy at the innermost stable orbit.
+
+::: {#exr-gr-isco-energy}
+#### Energy of circular orbits
+
+Show that a circular geodesic of radius $r > 3m$ has $L^2 = mr^2/(r - 3m)$ and $E^2 = (1 - 2m/r)^2/(1 - 3m/r)$, evaluate $E$
+at $r = 6m$, and expand $E - 1$ at large $r$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$V'(r) = 0$ is linear in $L^2$ and gives $L^2 = mr^2/(r - 3m)$; then $E^2 = V(r)$ simplifies to $(1 - 2m/r)^2/(1 - 3m/r)$. At
+$r = 6m$, $E = \sqrt{8/9} = 0.943$; at large $r$, $E - 1 \approx -m/(2r)$, the Newtonian energy of a circular orbit per unit
+mass.
+
+{{< sage exr-gr-isco-energy >}}
+:::
+
+The precession can also be found by perturbation theory instead of numerics. The third exercise derives the
+coefficient $6\pi m/p$.
+
+::: {#exr-gr-perihelion-perturbative}
+#### The perihelion advance by perturbation theory
+
+Write the orbit equation as $u'' + u = 1/p + 3mu^2$ with $p = L^2/m$ and treat $3mu^2$ as small. Show that $u = \tfrac1p(1 +
+e\cos((1 - \epsilon)\phi))$ solves it to first order in $m/p$ and in $e$, with $\epsilon = 3m/p$, and deduce the advance $6\pi m/p$
+per revolution.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Substituting, $u'' + u = \tfrac1p + \tfrac ep(1 - (1 - \epsilon)^2)\cos((1 - \epsilon)\phi) \approx \tfrac1p + \tfrac{2\epsilon e}{p}\cos(\dots)$, while
+$3mu^2 \approx \tfrac{3m}{p^2}(1 + 2e\cos(\dots))$. The cosine terms match for $2\epsilon = 6m/p$, and the constant $3m/p^2$ only
+shifts $p$ slightly. Perihelia ($u$ maximal) occur at $(1 - \epsilon)\phi = 2\pi k$, i.e. every $2\pi/(1 - \epsilon) \approx 2\pi(1 +
+\epsilon)$: the advance per revolution is $2\pi\epsilon = 6\pi m/p$, the value checked numerically in @prp-gr-schwarzschild.
+:::
+
+Clocks on circular orbits run differently from clocks at rest at the same radius. The next exercise compares them for
+an orbit like that of the GPS satellites, with Sage.
+
+::: {#exr-grb-orbit-vs-static}
+#### An orbiting clock and a static clock
+
+At radius $r_0$ in the Schwarzschild metric ($G = c = 1$, $r_s = 2m$) a satellite moves on a circular geodesic and a static observer hovers.
+With Sage: (a) write the satellite's four-velocity as $U = \alpha\partial_t + \beta\partial_\phi$ and find $\alpha$, $\beta$; (b) find their relative speed from
+$\gamma = g(U, V)$; (c) find the ratio of the times that their clocks show between two meetings; (d) evaluate for $r_s = 8.87\,$mm and
+$r_0 = 26\,560\,$km [@blennow2022relativity, Problems 2.99 and 2.100].
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $\Omega = d\phi/dt = \sqrt{m/r_0^3}$ from @exm-grb-kepler-exact, $\alpha = (1 - 3r_s/2r_0)^{-1/2}$ and $\beta = \alpha\Omega$:
+
+{{< sage exr-grb-orbit-vs-static >}}
+
+The relative speed is $v = \sqrt{r_s/2(r_0 - r_s)}$, the Newtonian orbital speed corrected by the static observer's clock, and the
+orbiting clock falls behind by the factor $1/\gamma$: $8 \times 10^{-11}$, about $7\,\mu$s per day, the special-relativistic part of the GPS
+correction of @exr-gr-gps-clock.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A slightly perturbed circular orbit oscillates radially, and the oscillation is slower than the orbit. The next
+exercise computes the ratio of the two periods, which is the perihelion advance in another form.
+
+::: {#exr-grb-epicycles}
+#### Radial oscillations about a circular orbit
+
+For a geodesic close to the circular orbit $r = r_0$, write $r = r_0 + \rho$ and use @eq-gr-schwarzschild-potential to show with Sage that $\rho$ oscillates
+with $\omega_r^2 = \tfrac12V''(r_0)$, and that the ratio of the radial period to the orbital period is $(1 - 6m/r_0)^{-1/2}$. Deduce the perihelion
+advance per orbit for $r_0 \gg m$ [@blennow2022relativity, Problem 2.75].
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Differentiating $\dot r^2 = E^2 - V$ gives $\ddot\rho = -\tfrac12V''(r_0)\rho$; both frequencies are taken in proper time, so their ratio is
+independent of the time used:
+
+{{< sage exr-grb-epicycles >}}
+
+The radial period exceeds the orbital one, so the perihelion comes back after the angle $2\pi(1 - 6m/r_0)^{-1/2} \approx 2\pi + 6\pi m/r_0$,
+the advance of @exm-gr-mercury for a circular orbit. At $r_0 = 6m$ the radial frequency vanishes: the innermost stable orbit.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+### Cosmology
+
+On the largest scales the universe looks the same in every direction and, as far as we can tell, at every place.
+The metrics with this symmetry have spatial sections of constant curvature, and all their time dependence sits in a
+single scale factor.
+
+:::: {.statement-box}
+::: {#def-gr-flrw-metric}
+#### FLRW metric
+
+The **Friedmann-Lemaître-Robertson-Walker (FLRW) metric** is
+$$
+ds^2 = dt^2 - a(t)^2\Bigl(\frac{dr^2}{1 - kr^2} + r^2d\theta^2 + r^2\sin^2\theta\,d\phi^2\Bigr), \qquad k \in \{1, 0, -1\},
+$$ {#eq-gr-flrw}
+with **scale factor** $a(t) > 0$. Its spatial sections $t = \text{const}$ are maximally symmetric (@def-maximally-symmetric):
+a three-sphere for $k = 1$, flat space for $k = 0$ and hyperbolic space for $k = -1$. The curves of constant $(r, \theta,
+\phi)$ are the geodesics of **comoving** observers, whose proper time is $t$, and $H = \dot a/a$ is the **Hubble rate**
+[@carroll1997, ch. 8, with the overall sign of our signature].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+De Sitter space in flat slicing is an FLRW metric. It is the simplest one with a non-constant scale factor.
+
+::: {#exm-gr-flrw-de-sitter}
+#### De Sitter space
+
+$k = 0$ and $a = e^{Ht}$ give the metric of @exm-spacetime-de-sitter, with constant Hubble rate $H$
+(@exm-gr-ds-hubble). Minkowski space is $k = 0$, $a = 1$.
+:::
+
+The scale factor converts comoving coordinate distances into physical distances. Its rate of change gives Hubble's
+law, the linear relation between distance and recession speed.
+
+::: {#exm-gr-flrw-hubble-law}
+#### Hubble's law
+
+Two comoving galaxies at coordinate separation $\Delta r$ (with $k = 0$) are at physical distance $d = a\,\Delta r$, so $\dot d
+= Hd$. The measured value today, $H_0 \approx 70\,\mathrm{km\,s^{-1}\,Mpc^{-1}}$, gives the Hubble time $1/H_0 \approx 14 \times
+10^9$ years, the time scale of the expansion.
+:::
+
+The three values of $k$ are three different spatial geometries. The case $k = 1$ is a sphere in disguise.
+
+::: {#exm-gr-flrw-closed}
+#### The closed universe
+
+For $k = 1$ put $r = \sin\chi$: then $dr^2/(1 - r^2) + r^2d\Omega^2 = d\chi^2 + \sin^2\chi\,d\Omega^2$, the round metric of the
+unit three-sphere, and the universe has finite volume $2\pi^2a^3$. For $k = -1$, $r = \sinh\chi$ gives the hyperbolic metric
+$d\chi^2 + \sinh^2\chi\,d\Omega^2$.
+:::
+
+An FLRW metric need not describe a curved spacetime. The next example is an expanding universe that is flat Minkowski
+space in disguise, the Milne universe.
+
+::: {#exm-grb-milne}
+#### A universe that is flat spacetime
+
+In $1 + 1$ dimensions let $a = Ht$. With $T = t\cosh(Hx)$, $X = t\sinh(Hx)$, $dT^2 - dX^2 = dt^2 - t^2H^2dx^2$: the metric is the interior of the future
+light cone $T > |X|$ of Minkowski space, and the comoving observers are the straight lines through the origin, moving apart
+at constant speeds. Light obeys $H\,dx = dt/t$, so $x = H^{-1}\ln(t/t_0)$ grows without bound and there is no horizon. The same
+holds in $3 + 1$ dimensions for $k = -1$ and $a = t$ [@blennow2022relativity, Problem 2.137].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+Light travelling through an expanding universe is stretched with it. The first exercise derives the cosmological
+redshift from the null geodesics of the metric.
+
+::: {#exr-gr-flrw-redshift}
+#### The cosmological redshift
+
+A radial light ray obeys $dt/a(t) = dr/\sqrt{1 - kr^2}$. Two wave crests emitted at $t_e$ and $t_e + \delta t_e$ by a comoving
+source arrive at a comoving observer at $t_o$ and $t_o + \delta t_o$. Show that $\delta t_o/\delta t_e = a(t_o)/a(t_e)$, so that the
+redshift is $1 + z = a(t_o)/a(t_e)$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The comoving distance $\int dr/\sqrt{1 - kr^2}$ between source and observer is fixed, so $\int_{t_e}^{t_o}dt/a =
+\int_{t_e + \delta t_e}^{t_o + \delta t_o}dt/a$, which for short intervals gives $\delta t_o/a(t_o) = \delta t_e/a(t_e)$. Frequencies scale
+inversely: $\nu_o/\nu_e = a(t_e)/a(t_o)$, and wavelengths grow with the universe. This is the photon case of the $1/a$
+law of @exr-gr-ds-peculiar.
+:::
+
+The spatial sections were claimed to have constant curvature. The second exercise checks this with SageManifolds for
+all three values of $k$ at once.
+
+::: {#exr-gr-flrw-spatial-curvature}
+#### Constant spatial curvature
+
+Compute the Ricci tensor and scalar curvature of the positive-definite metric $\gamma = dr^2/(1 - kr^2) + r^2d\Omega^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$R_{ij} = 2k\gamma_{ij}$ and $R = 6k$: the Einstein metric of a space of constant sectional curvature $k$, the three-sphere of
+unit radius for $k = 1$ (@exm-einstein-spheres) and its flat and hyperbolic analogues.
+
+{{< sage exr-gr-flrw-spatial-curvature >}}
+:::
+
+Changing the time coordinate can make an FLRW metric conformally flat. The third exercise does this for de Sitter
+space.
+
+::: {#exr-gr-flrw-conformal}
+#### Conformal time
+
+For $k = 0$ define the **conformal time** $\eta$ by $d\eta = dt/a$, so that $ds^2 = a(\eta)^2(d\eta^2 - d\vec x^2)$. For $a = e^{Ht}$
+find $\eta(t)$ and $a(\eta)$, and verify that $(d\eta^2 - d\vec x^2)/(H\eta)^2$ has $R_{\mu\nu} = -3H^2g_{\mu\nu}$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\eta = -e^{-Ht}/H$, which runs over $(-\infty, 0)$ as $t$ runs over $\mathbb{R}$, and $a = -1/(H\eta)$. The metric
+$(H\eta)^{-2}(d\eta^2 - d\vec x^2)$ is conformal to Minkowski space and is again de Sitter space, with the curvature of
+@exr-de-sitter-4d. Light rays are the lines $|d\vec x| = d\eta$, so the horizon of @exm-gr-ds-horizon is the finite range
+of $\eta$.
+
+{{< sage exr-gr-flrw-conformal >}}
+:::
+
+Light rays sent radially stay radial in an FLRW universe, which the redshift computations always assume. The next
+exercise proves it from the geodesic equations.
+
+::: {#exr-grb-radial-null}
+#### Radial rays stay radial
+
+Write the $\theta$ and $\phi$ components of the geodesic equation of @eq-gr-flrw and show that a geodesic with $\dot\theta = \dot\phi = 0$ at one point
+has constant $\theta$ and $\phi$. Why does this not depend on where the origin $r = 0$ is put? [@plebanski2024introduction, Sec. 17.17,
+Exercise 2]
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\ddot\theta + 2\tfrac{\dot a}{a}\dot t\dot\theta + \tfrac2r\dot r\dot\theta - \sin\theta\cos\theta\,\dot\phi^2 = 0$ and $\ddot\phi + 2\tfrac{\dot a}{a}\dot t\dot\phi + \tfrac2r\dot r\dot\phi + 2\cot\theta\,\dot\theta\dot\phi = 0$. Both
+are satisfied by constant $\theta$, $\phi$ whatever $t(\sigma)$ and $r(\sigma)$ are, and the remaining $t$ and $r$ equations then have a solution for
+the given initial data; by uniqueness of solutions of the geodesic equation it is the geodesic. Every point of an FLRW space is
+equivalent to every other (the spatial sections are homogeneous), so the origin can be put at the emitter, and "radial" means
+"through the origin" in any choice.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A closed one-dimensional universe lets a traveller go around it, if the expansion allows. The next exercise uses the
+decay of peculiar momenta of @exr-gr-ds-peculiar to decide when.
+
+::: {#exr-grb-circle-universe}
+#### Around a circular universe
+
+In $ds^2 = dt^2 - a(t)^2d\phi^2$ with $\phi \sim \phi + 2\pi$, an object leaves a comoving observer at $t_0$ with speed $v_0$ relative to it. Find its speed
+$v(t)$ relative to the comoving observers and the condition for it to come back to the starting observer from the other side
+[@blennow2022relativity, Problem 2.146].
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$P = a^2\,d\phi/d\tau$ is conserved; the speed relative to comoving observers is $v = a\,d\phi/dt$ and $\gamma v = a\,d\phi/d\tau = P/a$, with $P =
+a(t_0)\gamma_0v_0$. Hence $v(t) = P/\sqrt{a^2 + P^2}$, decreasing as $a$ grows. It completes the lap iff
+$$
+\int_{t_0}^\infty\frac{P\,dt}{a\sqrt{a^2 + P^2}} \geq 2\pi .
+$$
+For light ($P \to \infty$) the condition is $\int_{t_0}^\infty dt/a \geq 2\pi$; in de Sitter expansion $a = e^{Ht}$ the integral is finite, and a slow enough
+universe (for example $a \propto t^{1/2}$) lets everything come back.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+The Einstein equations turn the scale factor into a dynamical variable. With a perfect fluid as source they become
+two ordinary differential equations, the Friedmann equations.
+
+:::: {.statement-box}
+::: {#def-gr-friedmann-equations}
+#### Friedmann equations
+
+For the FLRW metric @eq-gr-flrw with a perfect fluid at rest (@exm-stress-fluid, $u = \partial_t$) of density $\rho(t)$ and
+pressure $p(t)$, the **Friedmann equations** are
+$$
+H^2 = \Bigl(\frac{\dot a}{a}\Bigr)^2 = \frac{8\pi G}{3}\rho - \frac{k}{a^2}, \qquad \frac{\ddot a}{a} = -\frac{4\pi G}{3}(\rho + 3p),
+$$ {#eq-gr-friedmann}
+and they imply the **continuity equation** $\dot\rho + 3H(\rho + p) = 0$. For an equation of state $p = w\rho$ with
+constant $w$ this gives $\rho \propto a^{-3(1 + w)}$. The **critical density** $\rho_c = 3H^2/(8\pi G)$ is the density of a
+flat universe, and $\Omega = \rho/\rho_c$ is the **density parameter** [@carroll1997, ch. 8].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+Ordinary matter at late times is pressureless dust, galaxies moving slowly relative to the comoving frame. Its
+density dilutes with the volume.
+
+::: {#exm-gr-friedmann-matter}
+#### A matter-dominated universe
+
+For dust, $w = 0$ and $\rho \propto a^{-3}$. With $k = 0$ the first equation is $\dot a^2 \propto 1/a$, solved by $a \propto t^{2/3}$:
+the expansion decelerates, and the age of the universe is $t_0 = 2/(3H_0)$.
+:::
+
+In the early universe radiation dominates. Its energy density falls faster than that of matter because each photon is
+also redshifted.
+
+::: {#exm-gr-friedmann-radiation}
+#### A radiation-dominated universe
+
+For radiation, $w = \tfrac13$ (@exr-gr-fluid-trace) and $\rho \propto a^{-4}$: $a^{-3}$ from the volume and $a^{-1}$ from the
+redshift of each photon (@exr-gr-flrw-redshift). With $k = 0$, $\dot a^2 \propto a^{-2}$ and $a \propto t^{1/2}$.
+:::
+
+A cosmological constant has $w = -1$, so its density does not dilute. The Friedmann equation then gives exponential
+expansion, recovering de Sitter space.
+
+::: {#exm-gr-friedmann-lambda}
+#### A cosmological constant
+
+With $\rho = \rho_\Lambda = \Lambda/(8\pi G)$ constant (@exr-gr-lambda-pressure) and $k = 0$, $H^2 = \Lambda/3$ is constant and $a =
+e^{Ht}$: the vacuum solution of @exm-vacuum-de-sitter with $\Lambda = 3H^2$, now read as a cosmology. Since $\rho + 3p = -2\rho
+< 0$, $\ddot a > 0$: the expansion accelerates.
+:::
+
+A cosmological constant drives the universe towards flatness. The next example quantifies this, the argument by which
+inflation explains why the universe is so close to flat today.
+
+::: {#exm-grb-inflation-flatness}
+#### Inflation flattens the universe
+
+The first Friedmann equation can be written $\Omega - 1 = k/\dot a^2$. During a phase dominated by a constant density, $a \propto e^{Ht}$ and
+$\dot a = Ha$ grows exponentially, so $|\Omega - 1| \propto e^{-2Ht}$. After $N$ e-folds of expansion $|\Omega - 1|$ is reduced by $e^{-2N}$:
+$N = 60$ gives $e^{-120} \approx 10^{-52}$, enough to make any initial curvature negligible, whereas during radiation or matter domination
+$|\Omega - 1|$ grows like $t$ or $t^{2/3}$ [@blennow2022relativity, Problem 2.143].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The critical density sets the scale of cosmological densities. The first exercise evaluates it for the measured Hubble
+rate and compares it with ordinary matter.
+
+::: {#exr-gr-friedmann-critical-density}
+#### The critical density
+
+Evaluate $\rho_c = 3H_0^2/(8\pi G)$ for $H_0 = 70\,\mathrm{km\,s^{-1}\,Mpc^{-1}}$ ($1\,\mathrm{Mpc} = 3.086 \times 10^{22}\,$m) in
+$\mathrm{kg/m^3}$ and in hydrogen atoms per cubic metre ($m_H = 1.67 \times 10^{-27}\,$kg), and compare with the density of
+@exr-gr-lambda-value.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$H_0 = 2.27 \times 10^{-18}\,\mathrm{s^{-1}}$, so $\rho_c = 3(2.27 \times 10^{-18})^2/(8\pi \cdot 6.67 \times 10^{-11}) = 9.2 \times 10^{-27}\,
+\mathrm{kg/m^3}$, about $5.5$ hydrogen atoms per cubic metre. The cosmological constant has $5.9 \times 10^{-27}\,\mathrm{kg/m^3}$,
+$\Omega_\Lambda \approx 0.64$ for this $H_0$: most of the energy of the universe is in the vacuum.
+:::
+
+The three examples are special cases of a single power law. The second exercise derives it for any $w > -1$.
+
+::: {#exr-gr-friedmann-w}
+#### A general equation of state
+
+For $k = 0$ and $p = w\rho$ with $w > -1$, show that $a = t^{2/(3(1 + w))}$ solves both Friedmann equations with $\rho =
+1/(6\pi G(1 + w)^2t^2)$, and that $\rho a^{3(1 + w)}$ is constant.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$H = \tfrac{2}{3(1 + w)t}$, so $H^2 = \tfrac{4}{9(1 + w)^2t^2} = \tfrac{8\pi G}{3}\rho$; the second equation follows similarly, and
+$\rho a^{3(1 + w)} = 1/(6\pi G(1 + w)^2)$. The cases $w = 0$ and $w = \tfrac13$ are @exm-gr-friedmann-matter and
+@exm-gr-friedmann-radiation; as $w \to -1$ the exponent diverges, the limit being the exponential of
+@exm-gr-friedmann-lambda.
+
+{{< sage exr-gr-friedmann-w >}}
+:::
+
+With positive curvature a matter-dominated universe recollapses. The third exercise solves the Friedmann equation in
+that case in parametric form.
+
+::: {#exr-gr-friedmann-closed}
+#### The closed matter universe
+
+For $k = 1$ and dust, the first Friedmann equation is $\dot a^2 + 1 = 2A/a$ with the constant $2A = \tfrac{8\pi G}{3}\rho a^3$.
+Show that $a = A(1 - \cos\eta)$, $t = A(\eta - \sin\eta)$ solves it, and find the maximal size and the lifetime.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\dot a = \tfrac{da/d\eta}{dt/d\eta} = \tfrac{\sin\eta}{1 - \cos\eta}$, so $\dot a^2 + 1 = \tfrac{2}{1 - \cos\eta} = \tfrac{2A}{a}$: the curve
+is a cycloid. The universe expands from $a = 0$ to $a_{\max} = 2A$ at $\eta = \pi$ and recollapses to a big crunch at $\eta = 2\pi$,
+$t = 2\pi A$. Here $\eta$ is the conformal time of @exr-gr-flrw-conformal, since $dt/d\eta = a$.
+
+{{< sage exr-gr-friedmann-closed >}}
+:::
+
+The previous example rests on the sign of $\ddot a$. The next exercise turns it into the condition on the equation of
+state under which the curvature becomes less important with time.
+
+::: {#exr-grb-flatness}
+#### When the curvature fades
+
+For an expanding FLRW universe with $p = w\rho$, show that $\Omega_k = -k/(aH)^2 = -k/\dot a^2$ decreases in magnitude iff $w < -\tfrac13$. Explain
+the flatness problem in this language [@blennow2022relativity, Problems 2.143 and 2.148].
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$|\Omega_k| = |k|/\dot a^2$ decreases iff $\dot a^2$ increases, iff $\ddot a > 0$ (with $\dot a > 0$), and by @eq-gr-friedmann iff $\rho + 3p = (1 + 3w)\rho < 0$, that is
+$w < -\tfrac13$. Radiation ($w = \tfrac13$) and matter ($w = 0$) make $|\Omega_k|$ grow, so a universe with $|\Omega_k| \lesssim 0.01$ today had
+$|\Omega_k| \lesssim 10^{-60}$ at the Planck time: an unexplained fine tuning unless a phase with $w < -\tfrac13$, inflation, came first.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+That the Friedmann equations follow from the Einstein equations is a computation with the curvature of
+@eq-gr-flrw. SageManifolds performs it for arbitrary $a(t)$ and $k$; the proposition also records the exact solutions
+plotted in @fig-flrw-scale-factor.
+
+:::: {.statement-box}
+::: {#prp-gr-friedmann}
+#### Friedmann equations from the Einstein equations
+
+For @eq-gr-flrw the Einstein tensor is diagonal with $G_{tt} = 3(\dot a^2 + k)/a^2$ and $G_{ij} = -(2a\ddot a + \dot a^2 +
+k)\gamma_{ij}$, where $g_{ij} = -a^2\gamma_{ij}$, and $R = -6(a\ddot a + \dot a^2 + k)/a^2$. With the perfect fluid at rest,
+$G_{\mu\nu} = 8\pi GT_{\mu\nu}$ is equivalent to @eq-gr-friedmann, whose two equations imply the continuity equation. For
+$k = 0$, $a \propto t^{2/3}$ ($p = 0$), $a \propto t^{1/2}$ ($p = \rho/3$) and $a \propto e^{Ht}$ ($p = -\rho$) are solutions, and with
+matter and a cosmological constant, $\Omega_m + \Omega_\Lambda = 1$,
+$$
+a(t) = \Bigl(\frac{\Omega_m}{\Omega_\Lambda}\Bigr)^{1/3}\sinh^{2/3}\Bigl(\tfrac32\sqrt{\Omega_\Lambda}\,H_0t\Bigr)
+$$ {#eq-gr-lcdm}
+solves $H^2 = H_0^2(\Omega_ma^{-3} + \Omega_\Lambda)$; its age is $H_0t_0 = \tfrac{2}{3\sqrt{\Omega_\Lambda}}\operatorname{arcsinh}\sqrt{\Omega_\Lambda/
+\Omega_m} = 0.964$ for $\Omega_m = 0.3$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Exact computation (`figures/flrw_scale_factor.sage`), with SageManifolds for the curvature.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+![The scale factor of a flat universe, normalised to $a(t_0) = 1$ and $\dot a(t_0) = H_0$ today, against $\tau = H_0(t -
+t_0)$: radiation $a = (1 + 2\tau)^{1/2}$, matter $a = (1 + 3\tau/2)^{2/3}$, a cosmological constant $a = e^\tau$, and the mixture
+$\Omega_m = 0.3$, $\Omega_\Lambda = 0.7$ of @eq-gr-lcdm, which starts like matter and ends like $\Lambda$. The big bang $a = 0$ is
+at $\tau = -1/2$, $-2/3$ and $-0.964$; the de Sitter universe has none. The interactive version varies $\Omega_\Lambda$.
+Generated by `figures/flrw_scale_factor.sage`.](figures/flrw_scale_factor.svg){#fig-flrw-scale-factor width=75%}
+
+{{< interactive flrw_scale_factor 460 >}}
+
+The age of the universe follows from @eq-gr-lcdm and the measured $H_0$. The first example compares it with the
+matter-only value.
+
+::: {#exm-gr-age}
+#### The age of the universe
+
+With $1/H_0 = 13.97 \times 10^9$ years ($H_0 = 70\,\mathrm{km\,s^{-1}\,Mpc^{-1}}$), a matter-only flat universe would be $9.3$
+billion years old, younger than the oldest stars; with $\Omega_\Lambda = 0.7$ the age is $0.964/H_0 = 13.5$ billion years
+(@exr-gr-lcdm-age), one of the arguments for the cosmological constant.
+:::
+
+Whether the expansion speeds up or slows down is decided by the second Friedmann equation. Only a negative enough
+pressure accelerates it.
+
+::: {#exm-gr-acceleration}
+#### Acceleration
+
+$\ddot a > 0$ requires $\rho + 3p < 0$, i.e. $w < -\tfrac13$. Matter and radiation decelerate the expansion; the cosmological
+constant accelerates it. For the mixture of @eq-gr-lcdm the deceleration parameter $q = -a\ddot a/\dot a^2$ is today
+$q_0 = \tfrac12\Omega_m - \Omega_\Lambda = -0.55$ (@exr-gr-deceleration): the expansion is accelerating, as observed with distant
+supernovae in 1998.
+:::
+
+The two components of @eq-gr-lcdm dominate at different times. Their densities are equal at a definite moment, and
+acceleration starts somewhat earlier.
+
+::: {#exm-gr-equality}
+#### Matter-$\Lambda$ equality
+
+$\rho_m \propto a^{-3}$ equals the constant $\rho_\Lambda$ at $a = (\Omega_m/\Omega_\Lambda)^{1/3} = 0.75$, redshift $z = 0.33$. The
+acceleration $\ddot a > 0$ begins when $\rho_m = 2\rho_\Lambda$, at $a = (\Omega_m/2\Omega_\Lambda)^{1/3} = 0.60$, $z = 0.67$: this is the
+inflection point of the black curve in @fig-flrw-scale-factor.
+:::
+
+Radiation dominated the early universe and matter took over later. The next example locates the change with today's
+density parameters, as @exm-gr-equality did for matter and the cosmological constant.
+
+::: {#exm-grb-radiation-equality}
+#### Matter-radiation equality
+
+$\rho_r \propto a^{-4}$ and $\rho_m \propto a^{-3}$ are equal at $a_{\mathrm{eq}} = \Omega_r/\Omega_m$. With $\Omega_m = 0.3$ and $\Omega_r = 10^{-4}$ this is $a_{\mathrm{eq}} =
+3.3 \times 10^{-4}$, the redshift $z_{\mathrm{eq}} = \Omega_m/\Omega_r - 1 \approx 3000$. The cosmic microwave background was released at $z \approx 1100$,
+after equality, in a matter-dominated universe; the temperature at equality was $T_0(1 + z_{\mathrm{eq}}) \approx 8000\,$K
+[@blennow2022relativity, Problem 2.144].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The deceleration parameter summarises the second Friedmann equation in one number. The first exercise computes it for
+a single fluid and for a mixture.
+
+::: {#exr-gr-deceleration}
+#### The deceleration parameter
+
+Show that for $k = 0$ and a single fluid with $p = w\rho$, $q = -a\ddot a/\dot a^2 = \tfrac12(1 + 3w)$, and that for matter plus a
+cosmological constant $q = \tfrac12\Omega_m - \Omega_\Lambda$ with the density parameters at the same time.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Dividing the second Friedmann equation by $H^2 = 8\pi G\rho/3$: $q = \tfrac{4\pi G(\rho + 3p)}{3H^2} = \tfrac12(1 + 3w)$; matter has
+$q = \tfrac12$, radiation $q = 1$, $\Lambda$ $q = -1$. For a mixture the contributions add with weights $\Omega_i = \rho_i/\rho_c$:
+$q = \sum_i\tfrac12(1 + 3w_i)\Omega_i = \tfrac12\Omega_m - \Omega_\Lambda$, which is $-0.55$ for $\Omega_m = 0.3$.
+:::
+
+The closed form of the age can be checked against direct numerical integration. The second exercise does both in
+Sage.
+
+::: {#exr-gr-lcdm-age}
+#### The age by integration
+
+Show that $t_0 = \int_0^1\frac{da}{aH(a)}$ and evaluate it numerically for $H = H_0\sqrt{\Omega_ma^{-3} + \Omega_\Lambda}$ with $\Omega_m = 0.
+3$; compare with the closed form of @prp-gr-friedmann and convert to years.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$dt = da/\dot a = da/(aH)$. Both the integral and the closed form give $H_0t_0 = 0.9641$, i.e. $13.5$ billion years for
+$1/H_0 = 13.97$ billion years, against $9.3$ for matter alone.
+
+{{< sage exr-gr-lcdm-age >}}
+:::
+
+The early universe contained both radiation and matter. The third exercise solves the Friedmann equation exactly for
+the mixture, using the conformal time of @exr-gr-flrw-conformal.
+
+::: {#exr-gr-radiation-matter}
+#### Radiation and matter
+
+For $k = 0$ with radiation and dust, show that in conformal time the first Friedmann equation is $(da/d\eta)^2 = C_r +
+C_ma$ with constants $C_r = \tfrac{8\pi G}{3}\rho_ra^4$, $C_m = \tfrac{8\pi G}{3}\rho_ma^3$, and that $a = \sqrt{C_r}\,\eta +
+\tfrac14C_m\eta^2$ solves it. Recover the two power laws of the examples as limits, and find $\eta$ at equality $\rho_r = \rho_m$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\dot a = a^{-1}da/d\eta$, so $\dot a^2/a^2 = \tfrac{8\pi G}{3}(\rho_r + \rho_m)$ becomes $(da/d\eta)^2 = C_r + C_ma$, and the quadratic
+solves it identically. With $t = \int a\,d\eta = \tfrac12\sqrt{C_r}\eta^2 + \tfrac1{12}C_m\eta^3$: for small $\eta$, $a \approx
+(2\sqrt{C_r}\,t)^{1/2}$, radiation-like; for large $\eta$, $a \propto \eta^2 \propto t^{2/3}$, matter-like. Equality, $a = C_r/C_m$, is at
+$\eta = 2(\sqrt2 - 1)\sqrt{C_r}/C_m$.
+
+{{< sage exr-gr-radiation-matter >}}
+:::
+
+The time since equality follows from an integral that can be done in closed form. The next exercise evaluates it with
+Sage for a flat universe of matter and radiation.
+
+::: {#exr-grb-equality-time}
+#### The time since equality
+
+For a flat universe with $\Omega_r = x \ll 1$ and $\Omega_m = 1 - x$ today, compute $H_0t(a) = \int_0^a a'\,da'/\sqrt{x + (1 - x)a'}$ with Sage and the
+time $t_0 - t_{\mathrm{eq}}$ elapsed since equality. Evaluate for $x = 10^{-3}$, $10^{-4}$ and $8.5 \times 10^{-5}$ [@blennow2022relativity, Problem 2.147].
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$dt = da/(aH)$ with $H = H_0\sqrt{xa^{-4} + (1 - x)a^{-3}}$ gives the integrand; Sage finds the closed form and the numbers:
+
+{{< sage exr-grb-equality-time >}}
+
+The result is $\tfrac{2}{3H_0}$ up to corrections of order $x$: equality happened so early (about $3 \times 10^{-7}/H_0$, a few thousand years in this model)
+that the elapsed time is the age of a pure matter universe.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The Friedmann equations used only the diagonal components of the Einstein tensor. The next exercise checks with Sage that
+the others vanish, in two of the coordinate systems used for the FLRW metric.
+
+::: {#exr-grb-rw-einstein}
+#### The Einstein tensor of the FLRW metric
+
+With Sage, compute the Einstein tensor of @eq-gr-flrw and of the $k = 1$ metric $dt^2 - a^2\bigl(d\chi^2 + \sin^2\chi\,d\Omega^2\bigr)$, show that it is diagonal in
+both, and find $G_{tt}$ and $G^r{}_r$. Why must it be diagonal? [@plebanski2024introduction, Sec. 17.17, Exercise 1]
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+SageManifolds gives the components:
+
+{{< sage exr-grb-rw-einstein >}}
+
+$G_{tt} = 3(\dot a^2 + k)/a^2$ and $G^r{}_r = (\dot a^2 + 2a\ddot a + k)/a^2$ are the two Friedmann equations of @def-gr-friedmann-equations once $G_{\mu\nu} =
+8\pi GT_{\mu\nu}$ is imposed with a perfect fluid at rest. The tensor must be diagonal because the spatial sections are isotropic: a
+component $G_{ti}$ would be a preferred spatial vector, and $G_{ij} \propto g_{ij}$ is the only symmetric tensor invariant under rotations.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+## Exercises {#sec-general-relativity-exercises}
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The three exercises below combine the sections of the chapter. The first follows a test particle from the
+symmetries of the Schwarzschild metric to Kepler's problem and its relativistic correction.
+
+::: {#exr-gr-int-particle-orbits}
+#### From symmetries to orbits
+
+(a) Show that $\partial_t$ and $\partial_\phi$ are Killing vectors of @eq-gr-schwarzschild (@def-killing), and that $E =
+g(\partial_t, u)$ and $L = -g(\partial_\phi, u)$ are conserved along geodesics. (b) Use $g(u, u) = 1$ to derive
+@eq-gr-schwarzschild-potential. (c) Write $\tfrac12(V - 1)$ as the Newtonian effective potential of
+@eq-effective-potential (per unit mass, $k = m$) plus a correction, and explain which term produces the perihelion advance
+of @exr-gr-perihelion-perturbative.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+(a) The metric components do not depend on $t$ or $\phi$, so $\mathcal{L}_{\partial_t}g = \mathcal{L}_{\partial_\phi}g = 0$; for a Killing
+vector $\xi$ and a geodesic, $\tfrac{d}{d\tau}g(\xi, u) = \nabla_{(\mu}\xi_{\nu)}u^\mu u^\nu = 0$. Explicitly $E = (1 - 2m/r)\dot t$ and
+$L = r^2\sin^2\theta\,\dot\phi$, and a rotation puts the orbit in the plane $\theta = \pi/2$. (b) $g(u, u) = (1 - 2m/r)\dot t^2 - (1 -
+2m/r)^{-1}\dot r^2 - r^2\dot\phi^2 = 1$ becomes $E^2 - \dot r^2 = (1 - 2m/r)(1 + L^2/r^2)$ after multiplying by $1 - 2m/r$.
+(c) $\tfrac12(V - 1) = -\tfrac mr + \tfrac{L^2}{2r^2} - \tfrac{mL^2}{r^3}$: Newton's $-k/r + L^2/2r^2$ plus an attractive $r^{-3}$ term.
+It is the $r^{-3}$ term that becomes $3mu^2$ in the orbit equation and spoils the closure of the Kepler ellipses; the
+energy equation $\tfrac12\dot r^2 + \tfrac12(V - 1) = \tfrac12(E^2 - 1)$ is otherwise Newton's, as in @exr-gr-nl-energy.
+
+{{< sage exr-gr-int-particle-orbits >}}
+:::
+
+The second exercise looks at de Sitter space from the three points of view of the chapter. It appears as a maximally
+symmetric vacuum, as a cosmology and as a static spacetime with a horizon.
+
+::: {#exr-gr-int-de-sitter-three-ways}
+#### De Sitter space three ways
+
+(a) Show that the vacuum equations with $\Lambda > 0$ are solved by $ds^2 = dt^2 - e^{2Ht}d\vec x^2$ with $H^2 = \Lambda/3$
+(@exr-de-sitter-4d). (b) Derive the same relation from the Friedmann equation with the density $\rho_\Lambda$ of
+@exr-gr-lambda-pressure. (c) Show that the static metric $(1 - H^2r^2)dt^2 - (1 - H^2r^2)^{-1}dr^2 - r^2d\Omega^2$ also has $R_{\mu\nu} = -
+3H^2g_{\mu\nu}$, and compare its horizon at $r = 1/H$ with that of @exm-gr-ds-horizon and with the Schwarzschild horizon.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+(a) @exr-de-sitter-4d gives $R_{\mu\nu} = -3H^2g_{\mu\nu}$, i.e. $\Lambda = 3H^2$ by @exr-gr-vacuum-trace. (b) $\rho_\Lambda = \Lambda/(8\pi G)$ in
+$H^2 = 8\pi G\rho/3$ gives $H^2 = \Lambda/3$ again (@exm-gr-friedmann-lambda). (c) SageManifolds gives $R_{\mu\nu} + 3H^2g_{\mu\nu} =
+0$: it is the case $m = 0$ of @exr-gr-schwarzschild-de-sitter. Here $g_{tt}$ vanishes at $r = 1/H$, the physical distance
+of @exm-gr-ds-horizon; unlike the Schwarzschild horizon it surrounds the observer, and every observer has their own.
+The three metrics are coordinate patches of the same hyperboloid (@exm-gr-ds-hyperboloid).
+
+{{< sage exr-gr-int-de-sitter-three-ways >}}
+:::
+
+The third exercise couples a scalar field to an expanding universe. It uses the stress tensor of
+@sec-einstein-equations and the Friedmann equations of @sec-schwarzschild-flrw, and leads to the idea of inflation.
+
+::: {#exr-gr-int-scalar-cosmology}
+#### A scalar field in an expanding universe
+
+Let $\phi(t)$ be a homogeneous scalar in flat FLRW. (a) From @exm-stress-scalar, show that it is a perfect fluid with $\rho =
+\tfrac12\dot\phi^2 + V$ and $p = \tfrac12\dot\phi^2 - V$. (b) Show that $\Box\phi = \ddot\phi + 3H\dot\phi$ and that the continuity equation
+of @def-gr-friedmann-equations is $\dot\phi$ times the field equation $\ddot\phi + 3H\dot\phi + V'(\phi) = 0$. (c) If $\dot\phi^2 \ll
+V$, what is $w$, and how does $a(t)$ behave?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+(a) With $\partial_i\phi = 0$, $T_{tt} = \dot\phi^2 - (\tfrac12\dot\phi^2 - V) = \tfrac12\dot\phi^2 + V$ and $T_{ij} = -g_{ij}(\tfrac12\dot\phi^2 - V)$,
+which is $-pg_{ij}$ with $p = \tfrac12\dot\phi^2 - V$. (b) SageManifolds gives $\Box\phi = g^{\mu\nu}\nabla_\mu\nabla_\nu\phi = \ddot\phi +
+3H\dot\phi$, the friction term coming from $\Gamma^i_{ti} = H$; and $\dot\rho + 3H(\rho + p) = \dot\phi(\ddot\phi + V'(\phi)) +
+3H\dot\phi^2$, as stated (@exm-gr-variation-bianchi). (c) Then $p \approx -\rho$, $w \approx -1$, and the field acts as a slowly
+varying cosmological constant: $H^2 \approx 8\pi GV/3$ and $a$ grows almost exponentially. This is **inflation**, the
+accelerated expansion postulated for the very early universe.
+
+{{< sage exr-gr-int-scalar-cosmology >}}
+:::
+::::

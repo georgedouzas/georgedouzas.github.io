@@ -1,0 +1,4 @@
+[PASS] the commutator terms vanish: F = (d_mu a_nu - d_nu a_mu) T_3: True
+[PASS] D_mu F^{mu nu} = 0 for r != 0 (Laplace's equation for Q/r): True
+the electric field E^i = F^{i0} along T_3: [Q*x/(x^2 + y^2 + z^2)^(3/2), Q*y/(x^2 + y^2 + z^2)^(3/2), Q*z/(x^2 + y^2 + z^2)^(3/2)]
+D_mu on a doublet: d_mu + a_mu T_3 = d_mu + i q a_mu with q = [-1/2, 1/2]

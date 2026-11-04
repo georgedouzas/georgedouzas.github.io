@@ -1,0 +1,4 @@
+tau' charges q of e1, e2, e3: [1/2, -1/2, 0]
+psi_R = e1 component: (1/2, 1)  psi_L = e2 component: (-1/2, 1)
+scalar f in E_12 has (t, y) = (1, 0)
+bar psi_L psi_R has (t, y) = (1, 0) ; f^* bar psi_L psi_R invariant: True

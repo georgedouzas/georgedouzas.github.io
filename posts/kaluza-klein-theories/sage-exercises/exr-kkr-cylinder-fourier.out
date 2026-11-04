@@ -1,0 +1,4 @@
+[PASS] the product of two zero modes has only the n = 0 coefficient: True
+coefficients of e^{iy} e^{-iy} for n = -2..2: [0, 0, 1, 0, 0]
+[PASS] the modes n = 1 and n = -1 together source the zero mode: True
+[PASS] e^{iy} e^{iy} has only the n = 2 coefficient (momentum is conserved): True

@@ -1,0 +1,2 @@
+radial component: 1/32*(x^2 + y^2)*k^4*p0^2/(pi^2*(x^2 + y^2 + z^2)^2) ; transverse part: (0, 0, 0)
+in spherical form: 1/32*k^4*p0^2*sin(th)^2/(pi^2*R^2) ; flux through a sphere: 1/12*k^4*p0^2/pi

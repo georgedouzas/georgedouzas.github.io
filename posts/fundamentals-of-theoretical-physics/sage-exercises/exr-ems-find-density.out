@@ -1,0 +1,4 @@
+rho = (3*a^2 - 2*x^2 - 2*y^2 - 2*z^2)*E0*e^(-x^2/a^2 - y^2/a^2 - z^2/a^2)/a^2
+curl E = (0, 0, 0)
+rho in spherical form matches: True
+total charge 4 pi int r^2 rho dr = 0

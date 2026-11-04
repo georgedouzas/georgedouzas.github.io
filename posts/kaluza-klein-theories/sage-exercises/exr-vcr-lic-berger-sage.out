@@ -1,0 +1,6 @@
+R = 1/2*(2*a + b)*(2*a - b)/a^4 ; equals (4a^2 - b^2)/(2a^4): True
+frame Ricci matrix Ric(e_a, e_b):
+[1/2*(2*a^2 - b^2)/a^2                     0                     0]
+[                    0 1/2*(2*a^2 - b^2)/a^2                     0]
+[                    0                     0           1/2*b^4/a^4]
+round sphere a = b = 1/2 (radius 1): R = 6 ; R < 0 once b > 2a, e.g. b = 3a: -5/2/a^2

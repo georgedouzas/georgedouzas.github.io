@@ -1,0 +1,3 @@
+sum = 2 cos(dk x/2 - dw t/2) cos(kbar x - wbar t): True
+envelope velocity dw/dk as k2 -> k1: k/sqrt(k^2 + m^2)  ; phase velocity: sqrt(k^2 + m^2)/k
+at k = 3/4, m = 1: group velocity 3/5 , phase velocity 5/3

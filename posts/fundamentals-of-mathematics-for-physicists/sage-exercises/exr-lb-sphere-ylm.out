@@ -1,0 +1,6 @@
+l = 0: -Delta Y_lm = 0 Y_lm for all m: True ; number of eigenfunctions: 1
+l = 1: -Delta Y_lm = 2 Y_lm for all m: True ; number of eigenfunctions: 3
+l = 2: -Delta Y_lm = 6 Y_lm for all m: True ; number of eigenfunctions: 5
+l = 3: -Delta Y_lm = 12 Y_lm for all m: True ; number of eigenfunctions: 7
+Gram matrix of the nine Y_lm with l <= 2 is the identity: True
+total number of eigenfunctions with l <= 3: 16

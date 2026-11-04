@@ -1,0 +1,7 @@
+g^-1 dg/dx = [0, 1, 0, 0, 0, 0, 0, 0, 0]
+g^-1 dg/dy = [0, 0, -x, 0, 0, 1, 0, 0, 0]
+g^-1 dg/dz = [0, 0, 1, 0, 0, 0, 0, 0, 0]
+L_h^* sigma^Z = L_h^*(sZ) = -x dy + dz ; invariant: True
+pairings sigma^A(B): [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+d sigma^Z = dsZ = -dx∧dy ; -sigma^X ^ sigma^Y = -sX∧sY = -dx∧dy ; equal: True
+d sigma^X = 0, d sigma^Y = 0: True True

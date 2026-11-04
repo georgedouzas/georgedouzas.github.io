@@ -1,0 +1,4 @@
+n =  1: within 1 sd 0.5764 (Gaussian 0.6827), within 2 sd 1.0000 (Gaussian 0.9545)
+n =  2: within 1 sd 0.6491 (Gaussian 0.6827), within 2 sd 0.9645 (Gaussian 0.9545)
+n = 12: within 1 sd 0.6819 (Gaussian 0.6827), within 2 sd 0.9532 (Gaussian 0.9545)
+exact for n = 1: P(|U - 1/2| <= 1/sqrt 12) = 2/sqrt(12) = 0.5774, within 2 sd: 1

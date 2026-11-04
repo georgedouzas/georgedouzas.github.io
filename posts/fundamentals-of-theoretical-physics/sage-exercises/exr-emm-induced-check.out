@@ -1,0 +1,3 @@
+inside: curl E = (0, 0, -diff(B(t), t)) ; -dB/dt e_z = (0, 0, -diff(B(t), t)) ; div E = 0
+outside: curl E = (0, 0, 0) ; div E = 0
+circulation outside at radius s: -pi*r0^2*diff(B(t), t) = -pi r0^2 dB/dt

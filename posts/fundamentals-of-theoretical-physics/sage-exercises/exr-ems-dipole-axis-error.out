@@ -1,0 +1,6 @@
+ratio = (1/u^2 + 1)^(-3/2) ; large-u expansion: 15/8*e^4 - 3/2*e^2 + 1
+ratio > 0.99 for z/a > 12.196
+z = 2 a: ratio 0.7155
+z = 3 a: ratio 0.8538
+z = 5 a: ratio 0.9429
+z = 10 a: ratio 0.9852

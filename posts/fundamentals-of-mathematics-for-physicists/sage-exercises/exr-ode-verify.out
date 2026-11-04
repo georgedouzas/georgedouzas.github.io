@@ -1,0 +1,4 @@
+y'' + y for C1 cos x + C2 sin x: 0 -> solution: True
+x^2 y'' - 2y for y = x^2 : 0 -> solution: True
+x^2 y'' - 2y for y = 1/x : 0 -> solution: True
+y' - 2y for y = e^(x^2): 2*(x - 1)*e^(x^2) -> solution: False

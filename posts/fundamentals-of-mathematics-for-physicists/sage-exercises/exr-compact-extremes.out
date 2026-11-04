@@ -1,0 +1,4 @@
+critical points: [
+x == 1
+] ; f(1) = e^(-1) ; f(0) = 0 ; f(2) = 2*e^(-2)
+[PASS] maximum e^{-1} at x = 1, minimum 0 at the endpoint 0 (not attained on the open interval, where f > 0): True

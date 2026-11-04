@@ -1,0 +1,9 @@
+non-zero Christoffel symbols Gamma^k_ij (i <= j):
+   ('rho', 'th', 'th') = -rho
+   ('rho', 'ph', 'ph') = -rho*sin(th)^2
+   ('th', 'rho', 'th') = 1/rho
+   ('th', 'ph', 'ph') = -cos(th)*sin(th)
+   ('ph', 'rho', 'ph') = 1/rho
+   ('ph', 'th', 'ph') = cos(th)/sin(th)
+six non-zero symbols, as expected: True
+the Riemann tensor vanishes (flat space in curvilinear coordinates): True

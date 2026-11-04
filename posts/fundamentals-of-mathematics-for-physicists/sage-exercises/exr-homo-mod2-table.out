@@ -1,0 +1,3 @@
+rho(j + k) = rho(j) + rho(k) for all 36 pairs: True
+kernel: [0, 2, 4] ; fibre over 1: [1, 3, 5]
+reduction modulo 4 fails on 15 pairs, e.g. [(1, 5), (2, 4), (2, 5)] (4 does not divide 6)

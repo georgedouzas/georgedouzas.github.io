@@ -1,0 +1,9 @@
+F_12 =
+[              1/2*I*p*pb - 1/3*I                       1/2*I*p*qb                                0]
+[                      1/2*I*pb*q               1/2*I*q*qb - 1/3*I                                0]
+[                               0                                0 -1/2*I*p*pb - 1/2*I*q*qb + 2/3*I]
+[PASS] F_12 = (i/2) diag-block(Phi Phi^dagger - (2/3) 1, -|Phi|^2 + 4/3): True
+[PASS] at Phi = 0, F_12 = -tau: True
+[PASS] at Phi = (0, 1), F_12 = -Q_em/2 = (i/6) diag(-2, 1, 1): True
+Tr(tau F_12) = -1/2*p*pb - 1/2*q*qb + 2/3
+[PASS] Tr(tau F_12) = 2/3 - r/2, and F_12 has rank-one upper block Phi Phi^dagger, so F_12 = 0 is impossible: True

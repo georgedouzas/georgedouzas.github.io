@@ -1,0 +1,6 @@
+xi_1 : L_xi A = [cos(ph)*cos(th)/sin(th)^2, sin(ph)/sin(th)] , W = -cos(ph)/sin(th)
+[PASS] xi_1: L_xi A = dW exactly: True
+xi_2 : L_xi A = [cos(th)*sin(ph)/sin(th)^2, -cos(ph)/sin(th)] , W = -sin(ph)/sin(th)
+[PASS] xi_2: L_xi A = dW exactly: True
+xi_3 : L_xi A = [0, 0] , W = 0
+[PASS] xi_3: L_xi A = dW exactly: True

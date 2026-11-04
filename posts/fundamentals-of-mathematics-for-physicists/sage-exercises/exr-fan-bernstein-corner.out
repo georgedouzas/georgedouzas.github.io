@@ -1,0 +1,6 @@
+n = 2: error 1/4
+n =    2: error 0.250000, 1/sqrt(2 pi n) = 0.282095, ratio 0.8862
+n =   10: error 0.123047, 1/sqrt(2 pi n) = 0.126157, ratio 0.9754
+n =   50: error 0.056138, 1/sqrt(2 pi n) = 0.056419, ratio 0.9950
+n =  200: error 0.028174, 1/sqrt(2 pi n) = 0.028209, ratio 0.9988
+n = 1000: error 0.012613, 1/sqrt(2 pi n) = 0.012616, ratio 0.9998

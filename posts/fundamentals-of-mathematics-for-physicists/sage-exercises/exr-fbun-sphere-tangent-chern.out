@@ -1,0 +1,5 @@
+omega^1_2 = nabla_g connection 1-form (0,1) = -cos(th) dph
+d omega^1_2 = d(nabla_g connection 1-form (0,1)) = sin(th) dth∧dph
+Gauss curvature K = R_1212: 1
+int d omega^1_2 = 4*pi ; (1/2 pi) int = 2
+compare with the Hopf connection: omega^1_2 = -cos(theta) d phi is minus the potential A = cos(theta) d phi

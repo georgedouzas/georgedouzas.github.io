@@ -1,0 +1,6 @@
+R e_3 = (cos(ph)*sin(th), sin(ph)*sin(th), cos(th))
+R is orthogonal with det 1: True True
+e1, e2 are tangent to S^2 at R e_3: True True
+the right action of R_z(alpha) fixes the base point: True
+and rotates the frame: e1' = cos(al) e1 + sin(al) e2: True
+at psi = 0 the frame is (d/dtheta, d/dphi / sin theta): (cos(ph)*cos(th), cos(th)*sin(ph), -sin(th)) (-sin(ph), cos(ph), 0)

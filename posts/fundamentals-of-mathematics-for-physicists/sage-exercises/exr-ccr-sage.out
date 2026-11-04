@@ -1,0 +1,11 @@
+[x, p] f = I*f(x)
+a psi_0 = 0
+psi_0 = e^(-1/2*x^2)/pi^(1/4) ; H psi_0 = (0 + 1/2) psi_0: True
+psi_1 = sqrt(2)*x*e^(-1/2*x^2)/pi^(1/4) ; H psi_1 = (1 + 1/2) psi_1: True
+psi_2 = 1/2*sqrt(2)*(2*x^2 - 1)*e^(-1/2*x^2)/pi^(1/4) ; H psi_2 = (2 + 1/2) psi_2: True
+psi_3 = 1/3*sqrt(3)*(2*x^2 - 3)*x*e^(-1/2*x^2)/pi^(1/4) ; H psi_3 = (3 + 1/2) psi_3: True
+Gram matrix:
+[1 0 0 0]
+[0 1 0 0]
+[0 0 1 0]
+[0 0 0 1]

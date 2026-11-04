@@ -1,0 +1,5 @@
+[PASS] Clifford algebra {gamma^mu, gamma^nu} = 2 eta^{mu nu}: True
+[PASS] the gauged Dirac Lagrangian is gauge invariant: True
+coefficient of A_0, A_1: [-q*a1(t, x)^2 - q*a2(t, x)^2 - q*b1(t, x)^2 - q*b2(t, x)^2, q*a1(t, x)^2 - q*a2(t, x)^2 + q*b1(t, x)^2 - q*b2(t, x)^2]
+[PASS] the coupling is -q psibar gamma^mu psi A_mu: True
+psibar gamma^0 psi = psi^dagger psi = a1(t, x)^2 + a2(t, x)^2 + b1(t, x)^2 + b2(t, x)^2 (a positive density)

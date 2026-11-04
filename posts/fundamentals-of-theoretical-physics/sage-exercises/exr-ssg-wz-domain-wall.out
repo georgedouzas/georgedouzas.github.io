@@ -1,0 +1,4 @@
+[PASS] the kink solves the first-order equation phi' = W'(phi): True
+[PASS] it connects the two supersymmetric vacua: phi(-oo) = 0, phi(+oo) = -2: True
+energy per area E = 4/3 ; Bogomolnyi bound 2|Delta W| = 4/3
+[PASS] the kink saturates the bound E = 2|W(-2) - W(0)| = 4/3: True

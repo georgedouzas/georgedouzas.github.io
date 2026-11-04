@@ -1,0 +1,4 @@
+delta A^c = [-A2*e1 + A1*e2 + de0, A2*e0 - A0*e2 + de1, -A1*e0 + A0*e1 + de2]
+[PASS] L_xi g_{mu m} = K_{m c} delta A^c_mu with delta A^c = d_mu eps^c + eps_abc A^a eps^b: True
+[PASS] the internal block is unchanged, L_xi h = 0 (the K_a are Killing): True
+[PASS] with f_ab^c = -eps_abc from the brackets, delta A^c = d eps^c - f_ab^c A^a eps^b (Duff, eq. 30): True

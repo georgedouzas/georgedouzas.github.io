@@ -1,0 +1,4 @@
+m0 = 1.0e+15 GeV, m = 1 GeV: k r_c = 10.994; 1 - e^{-2 k r_c pi} = 1 - 1.0e-30
+m0 = 1.0e+18 GeV, m = 246 GeV: k r_c = 11.440; 1 - e^{-2 k r_c pi} = 1 - 6.1e-32
+m0 = 2.4e+18 GeV, m = 1000 GeV: k r_c = 11.273; 1 - e^{-2 k r_c pi} = 1 - 1.7e-31
+k r_c = 10.994 -> 1.1 k r_c changes m by the factor e^{-0.1 k r_c pi} = 0.0316

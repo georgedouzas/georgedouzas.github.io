@@ -1,0 +1,4 @@
+Gram matrix of the stereographic parametrisation:
+g = 4/(u^4 + v^4 + 2*(u^2 + 1)*v^2 + 2*u^2 + 1) du⊗du + 4/(u^4 + v^4 + 2*(u^2 + 1)*v^2 + 2*u^2 + 1) dv⊗dv
+G_uu = G_vv = 4/(1 + u^2 + v^2)^2: True
+determinant: 16/(u^2 + v^2 + 1)^4  -> never zero: the chart is regular everywhere

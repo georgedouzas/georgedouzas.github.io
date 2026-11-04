@@ -1,0 +1,5 @@
+beta = 0.25: exact -log u = 2.77519, leading -log(beta/4) = 2.77259, with beta^2/24: 2.77519
+beta = 0.50: exact -log u = 2.08975, leading -log(beta/4) = 2.07944, with beta^2/24: 2.08986
+beta = 1.00: exact -log u = 1.42631, leading -log(beta/4) = 1.38629, with beta^2/24: 1.42796
+beta = 2.00: exact -log u = 0.83672, leading -log(beta/4) = 0.69315, with beta^2/24: 0.85981
+beta = 4.00: exact -log u = 0.41848, leading -log(beta/4) = -0.00000, with beta^2/24: 0.66667

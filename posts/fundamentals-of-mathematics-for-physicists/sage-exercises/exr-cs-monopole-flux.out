@@ -1,0 +1,6 @@
+total flux  int_S2 de^3 = -4*pi
+line integral of e^3 along theta = theta_0: 2*pi*cos(th0)
+flux through the cap theta < theta_0: -2*pi + 2*pi*cos(th0)
+line - cap = 2*pi  (a Dirac string at the north pole)
+with e^3 - dphi: line integral = -2*pi + 2*pi*cos(th0)  equals the cap flux: True
+and d(e^3 - dphi) = de^3: True

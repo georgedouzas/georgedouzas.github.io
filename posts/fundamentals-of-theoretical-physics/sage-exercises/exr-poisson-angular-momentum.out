@@ -1,0 +1,4 @@
+{x, px} = 1 ; {x, py} = 0 ; {px, py} = 0
+{L_x, L_y} = L_z: True ; {L_y, L_z} = L_x: True ; {L_z, L_x} = L_y: True
+{L_z, H} for a central potential: 0  -> L_z is conserved
+{L^2, L_z} = 0: True

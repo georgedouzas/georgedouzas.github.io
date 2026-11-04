@@ -1,0 +1,5 @@
+exponential cutoff: (R)*d^(-2) + (-1/12/R) + Order(d^2)
+Gaussian cutoff, R = 1, delta = 0.10: sum - 1/(2 delta^2) = -0.08341687
+Gaussian cutoff, R = 1, delta = 0.03: sum - 1/(2 delta^2) = -0.08334083
+Gaussian cutoff, R = 1, delta = 0.01: sum - 1/(2 delta^2) = -0.08333417
+zeta: zeta(-1) = -1/12

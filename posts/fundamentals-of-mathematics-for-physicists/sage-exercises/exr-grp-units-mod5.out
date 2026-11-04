@@ -1,0 +1,11 @@
+n = 5: closed under multiplication: True ; inverses: {1: [1], 2: [3], 3: [2], 4: [4]}
+        every element has an inverse: True
+n = 6: closed under multiplication: False ; inverses: {1: [1], 2: [], 3: [], 4: [], 5: [5]}
+        every element has an inverse: False
+multiplication table modulo 5 on {1,2,3,4}:
+    [1, 2, 3, 4]
+    [2, 4, 1, 3]
+    [3, 1, 4, 2]
+    [4, 3, 2, 1]
+2 * 3 = 0 modulo 6, so {1,...,5} is not closed: True
+Sage's group of units of Z_5: [1, 2, 3, 4] ; of Z_6: [1, 5]

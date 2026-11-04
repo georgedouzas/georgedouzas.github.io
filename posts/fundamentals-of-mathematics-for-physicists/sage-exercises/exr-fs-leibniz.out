@@ -1,0 +1,4 @@
+sum (-1)^n/(2n+1) = 1/4*pi
+N = 10 : 4 s_N = 3.0418396 ; error |4 s_N - pi| = 0.0999 ; about 1/N: True
+N = 100 : 4 s_N = 3.1315929 ; error |4 s_N - pi| = 0.0100 ; about 1/N: True
+N = 1000 : 4 s_N = 3.1405927 ; error |4 s_N - pi| = 0.000977 ; about 1/N: True

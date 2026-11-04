@@ -1,0 +1,3 @@
+global rotation (alpha constant): L unchanged: True
+local rotation (alpha(t, x)): L changes by terms proportional to d alpha: True ; the change vanishes when d alpha = 0: True
+|phi|^2 is invariant under any phase rotation: True

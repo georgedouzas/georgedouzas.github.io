@@ -1,0 +1,2 @@
+E = (-1/2*K0*cos((t - z)*w), 0, 0) ; B = (0, -1/2*K0*cos(-t*w + w*z), 0) ; vacuum equations: [0, 0, (0, 0, 0), (0, 0, 0)]
+average Poynting flux on one side: 1/8*K0^2

@@ -1,0 +1,3 @@
+transform of sgn(x) e^{-eps|x|}: -2*I*k/(epsilon^2 + k^2) = -2ik/(eps^2 + k^2): True
+transform of theta(x) e^{-eps x}: 1/(epsilon + I*k) ; real part epsilon/(epsilon^2 + k^2) with integral pi (-> pi delta); imaginary part -k/(epsilon^2 + k^2) (-> -PV 1/k)
+consistency: 1/(eps + ik) = (1/2)(transform of 1) + (1/2)(transform of sgn) with the same damping: True

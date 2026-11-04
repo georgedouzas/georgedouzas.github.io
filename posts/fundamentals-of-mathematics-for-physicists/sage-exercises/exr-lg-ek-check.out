@@ -1,0 +1,6 @@
+R^{-1} dR/dt and dR/dt R^{-1} antisymmetric: True True
+body angular velocity omega = (sin(psi(t))*sin(theta(t))*diff(phi(t), t) + cos(psi(t))*diff(theta(t), t), cos(psi(t))*sin(theta(t))*diff(phi(t), t) - sin(psi(t))*diff(theta(t), t), cos(theta(t))*diff(phi(t), t) + diff(psi(t), t))
+equals the left-invariant forms sigma^a(d/dt): True
+space angular velocity Omega = (sin(phi(t))*sin(theta(t))*diff(psi(t), t) + cos(phi(t))*diff(theta(t), t), -cos(phi(t))*sin(theta(t))*diff(psi(t), t) + sin(phi(t))*diff(theta(t), t), cos(theta(t))*diff(psi(t), t) + diff(phi(t), t))
+equals the right-invariant forms: True ; Omega = R omega: True
+|omega|^2 = |Omega|^2 = 2*cos(theta(t))*diff(phi(t), t)*diff(psi(t), t) + diff(phi(t), t)^2 + diff(psi(t), t)^2 + diff(theta(t), t)^2 : True

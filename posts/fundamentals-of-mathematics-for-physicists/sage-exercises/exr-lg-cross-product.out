@@ -1,0 +1,5 @@
+a x b + b x a = (0, 0, 0)
+a x (b x c) - [b (a.c) - c (a.b)] = (0, 0, 0)
+Jacobi sum = (0, 0, 0)
+e1 x e2, e2 x e3, e3 x e1 = (0, 0, 1) (1, 0, 0) (0, 1, 0)
+associative? (e1 x e1) x e2 = (0, 0, 0) but e1 x (e1 x e2) = (0, -1, 0)

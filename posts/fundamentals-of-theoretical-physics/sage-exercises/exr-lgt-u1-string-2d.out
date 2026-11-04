@@ -1,0 +1,6 @@
+R = 1: exact 1.215546e-01, u^{RL} + u^{(L-R)L} = 1.215546e-01
+R = 2: exact 1.477556e-02, u^{RL} + u^{(L-R)L} = 1.477556e-02
+R = 3: exact 1.796424e-03, u^{RL} + u^{(L-R)L} = 1.796424e-03
+R = 4: exact 2.215416e-04, u^{RL} + u^{(L-R)L} = 2.215416e-04
+R = 5: exact 5.307460e-05, u^{RL} + u^{(L-R)L} = 5.307460e-05
+slope -log(C(2)/C(1)) / L = 0.21074, string tension log(I_0/I_1) = 0.21074

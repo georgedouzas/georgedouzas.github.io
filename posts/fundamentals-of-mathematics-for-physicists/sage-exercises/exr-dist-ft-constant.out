@@ -1,0 +1,6 @@
+transform of e^{-eps x^2}: sqrt(pi)*e^(-1/4*k^2/epsilon)/sqrt(epsilon) ; of e^{-eps|x|}: 2*epsilon/(epsilon^2 + k^2)
+both have integral 2 pi: True
+Gaussian damping against e^{-k^2/2} : 2*pi/sqrt(2*epsilon + 1) -> 2*pi ; 2 pi phi(0) = 2*pi
+Gaussian damping against cos k : 2*pi*e^(-epsilon) -> 2*pi ; 2 pi phi(0) = 2*pi
+exponential damping against cos k : 2*pi*e^(-epsilon) -> 2*pi ; 2 pi phi(0) = 2*pi
+exponential damping against 1/(1 + k^2) : 2*pi/(epsilon + 1) -> 2*pi ; 2 pi phi(0) = 2*pi

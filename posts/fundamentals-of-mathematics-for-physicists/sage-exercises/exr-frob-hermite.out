@@ -1,0 +1,10 @@
+nu = 0: terminating series 1, proportional to H_0: True
+nu = 1: terminating series x, proportional to H_1: True
+nu = 2: terminating series -2*x^2 + 1, proportional to H_2: True
+nu = 3: terminating series -2/3*x^3 + x, proportional to H_3: True
+nu = 4: terminating series 4/3*x^4 - 4*x^2 + 1, proportional to H_4: True
+nu = 1/2: the truncated even series leaves a residual of degree 400 only
+x = 2: y x^(3/2) e^(-x^2) = -0.4334, e^(-x^2/2) y = -1.132
+x = 4: y x^(3/2) e^(-x^2) = -0.3861, e^(-x^2/2) y = -143.9
+x = 6: y x^(3/2) e^(-x^2) = -0.3716, e^(-x^2/2) y = -1.66e+06
+x = 8: y x^(3/2) e^(-x^2) = -0.3671, e^(-x^2/2) y = -1.281e+12

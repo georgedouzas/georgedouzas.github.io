@@ -1,0 +1,5 @@
+int e^{-a x^2} dx = sqrt(pi)/sqrt(a)
+even moments int x^{2n} e^{-x^2} dx for n = 0..3: [sqrt(pi), 1/2*sqrt(pi), 3/4*sqrt(pi), 15/8*sqrt(pi)]
+double factorial formula (2n-1)!! sqrt(pi)/2^n for n = 0..3: [sqrt(pi), 1/2*sqrt(pi), 3/4*sqrt(pi), 15/8*sqrt(pi)]
+odd moments vanish: [0, 0, 0]
+int e^{-a x^2 + b x} dx = sqrt(pi)*e^(1/4*b^2/a)/sqrt(a) = sqrt(pi/a) e^{b^2/(4a)}

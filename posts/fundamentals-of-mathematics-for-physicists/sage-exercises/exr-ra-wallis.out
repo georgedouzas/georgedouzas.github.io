@@ -1,0 +1,6 @@
+I_n from the reduction formula agrees with direct integration for n <= 6: True
+I_4 = 3/16*pi , I_5 = 8/15
+n = 1 : I_{2n+1} <= I_{2n} <= I_{2n-1}: True ; I_{2n}/I_{2n+1} = 1.1780972
+n = 3 : I_{2n+1} <= I_{2n} <= I_{2n-1}: True ; I_{2n}/I_{2n+1} = 1.0737866
+n = 6 : I_{2n+1} <= I_{2n} <= I_{2n-1}: True ; I_{2n}/I_{2n+1} = 1.0391716
+Wallis product prod_{k<=m} 4k^2/(4k^2-1) for m = 10, 100, 1000: [1.5338519, 1.5668937, 1.5704039] -> pi/2 = 1.5707963

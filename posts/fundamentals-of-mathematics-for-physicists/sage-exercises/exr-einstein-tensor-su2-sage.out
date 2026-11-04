@@ -1,0 +1,4 @@
+Einstein tensor: G = -1/4 dth⊗dth - 1/4 dph⊗dph - 1/4*cos(th) dph⊗dps - 1/4*cos(th) dps⊗dph - 1/4 dps⊗dps
+G = -g: True
+trace g^{ij} G_ij = -3 = (1 - n/2) R with n = 3, R = 6: True
+divergence nabla^i G_ij: 0 -> vanishes: True

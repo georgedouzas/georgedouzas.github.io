@@ -1,0 +1,6 @@
+V(sqrt3 - 1, 0) = 0    grad V there = [0, 0]
+[PASS] phi = sqrt3 - 1 is a critical point with V = 0: True
+Hessian eigenvalues / mu^2 = [1.83168, 11.8402]
+[PASS] both Hessian eigenvalues are positive, so it is a minimum: True
+D W = sqrt(3)*mu   m_{3/2} = e^{K/2}|W| = mu*e^(-sqrt(3) + 2) = 1.30728 mu
+[PASS] D W = sqrt3 mu != 0: supersymmetry is broken, and |D W|^2 = 3|W|^2 makes V vanish: True

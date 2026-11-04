@@ -1,0 +1,9 @@
+determinant: 1/12*lam^2 - 4/3*lam + 1  =  lam^2 - 16*lam + 12 / 12
+singular values of lambda: [
+lam == -2*sqrt(13) + 8,
+lam == 2*sqrt(13) + 8
+]
+a = -(lam - 12)/(lam^2 - 16*lam + 12)   b = 6/(lam^2 - 16*lam + 12)
+u(x) = 2*(3*lam*x - 2*lam + 6)/(lam^2 - 16*lam + 12)
+check of the integral equation: True
+reciprocal eigenvalues of the kernel matrix [[1, 1/2], [1/2, 1/3]]: [15.21110255092798?, 0.7888974490720214?]

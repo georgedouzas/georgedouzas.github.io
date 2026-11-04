@@ -1,0 +1,3 @@
+R_6 = 1/2*(c^2*r^4*cos(ph)^2*sin(th)^2 - c^2*r^4 - 4)/r^2
+[PASS] R_6 = -2/r^2 - (c^2/2) r^2 (1 - sin^2 th cos^2 ph): True
+[PASS] the average over the sphere is -2/r^2 - c^2 r^2/3: True

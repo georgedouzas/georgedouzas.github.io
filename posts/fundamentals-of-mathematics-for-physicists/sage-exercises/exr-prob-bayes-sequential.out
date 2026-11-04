@@ -1,0 +1,5 @@
+prior odds = 1/99 ; likelihood ratio of a positive test = 99/5
+after 1 positive test(s): posterior odds = 1/5 , posterior probability = 1/6 = 0.1667
+after 2 positive test(s): posterior odds = 99/25 , posterior probability = 99/124 = 0.7984
+after 3 positive test(s): posterior odds = 9801/125 , posterior probability = 9801/9926 = 0.9874
+direct Bayes after one test: 1/6 ; agrees with the odds form: True

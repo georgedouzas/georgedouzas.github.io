@@ -1,0 +1,41 @@
+---
+title: "Kaluza-Klein Theories"
+description: "Deriving four-dimensional theories from higher dimensions, step by step"
+date: 2026-11-04
+categories: [Tutorial, Physics, Kaluza-Klein]
+image: "../../assets/tutorials/kaluza-klein.svg"
+order: 1
+---
+
+This tutorial derives Kaluza-Klein theories and coset space dimensional reduction from first principles, without omitting steps. It
+starts with the abelian theory on a circle, moves to non-abelian theory on the sphere, and then covers coset space dimensional
+reduction, before surveying other methods of compactification and reduction.
+
+Start with the [preface](preface.qmd) and the [conventions](conventions.qmd). The background is in two
+companion tutorials: [Fundamentals of Mathematics for Physicists](../fundamentals-of-mathematics-for-physicists/index.qmd) and
+[Fundamentals of Theoretical Physics](../fundamentals-of-theoretical-physics/index.qmd). Links in the chapters take you to the results
+they use.
+
+## Chapters
+
+### Abelian Kaluza-Klein theory
+
+- [The Kaluza-Klein reduction](part-iii-01-kaluza-klein-reduction.qmd)
+- [Gauge symmetry and the Kaluza-Klein tower](part-iii-02-gauge-tower.qmd)
+
+### Non-abelian Kaluza-Klein theory
+
+- [Isometries and gauge fields](part-iv-01-isometries-gauge-fields.qmd)
+- [The reduced theory](part-iv-02-reduced-theory.qmd)
+
+### Coset space dimensional reduction
+
+- [Symmetric fields and their constraints](part-v-01-symmetric-fields.qmd)
+- [The four-dimensional theory](part-v-02-four-dimensional-theory.qmd)
+
+### The landscape of compactification and reduction
+
+- [Consistent reductions](part-vi-01-consistent-reductions.qmd)
+- [Compactifications](part-vi-02-compactifications.qmd)
+
+This tutorial has its own [glossary](glossary.qmd) and [verification registry](registry.qmd). Works cited are listed at the end of each chapter.

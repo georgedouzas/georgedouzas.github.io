@@ -1,0 +1,15 @@
+# Exercise exr-lg-mobius-action: SL(2, R) acts on the upper half-plane by z -> (a z + b)/(c z + d). The map is
+# compatible with matrix multiplication (an action), preserves Im z > 0, and the stabiliser of i is SO(2).
+z = var("z"); a1, b1, c1, d1, a2, b2, c2, d2 = var("a1 b1 c1 d1 a2 b2 c2 d2")
+def act(M, w): return (M[0, 0] * w + M[0, 1]) / (M[1, 0] * w + M[1, 1])
+A = matrix(SR, [[a1, b1], [c1, d1]]); B = matrix(SR, [[a2, b2], [c2, d2]])
+print("A.(B.z) = (AB).z:", bool((act(A, act(B, z)) - act(A * B, z)).simplify_full() == 0))
+x, y = var("x y", domain="real"); a, b, c, d = var("a b c d", domain="real")
+w = act(matrix(SR, [[a, b], [c, d]]), x + I * y)
+print("Im(M.z) =", w.imag().simplify_full().factor(), "= y det M / |cz + d|^2, positive when det M = 1 and y > 0")
+t = var("t", domain="real")
+Rt = matrix(SR, [[cos(t), -sin(t)], [sin(t), cos(t)]])
+print("rotation matrices fix i:", bool(act(Rt, I).simplify_full() == I))
+eq = (a * I + b) - I * (c * I + d)                       # M.i = i  <=>  a i + b = i (c i + d)
+print("real and imaginary parts of a i + b - i (c i + d):", eq.real(), ",", eq.imag(), "; solved:", solve([eq.real() == 0, eq.imag() == 0], [c, d]))
+print("then det M = a^2 + b^2 =", (a * a - b * (-b)), ": M = [[a, b], [-b, a]] with a^2 + b^2 = 1 is a rotation in SO(2)")

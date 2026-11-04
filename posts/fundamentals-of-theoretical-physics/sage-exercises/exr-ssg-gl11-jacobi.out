@@ -1,0 +1,4 @@
+[PASS] {Q, Qbar} = identity (central), Q^2 = Qbar^2 = 0: True
+[PASS] [E11 - E22, Q] = 2Q and [E11 - E22, Qbar] = -2Qbar (the even part grades the odd one): True
+[PASS] graded Jacobi identity (-1)^{|X||Z|}[X,[Y,Z}} + cyclic = 0 on all 64 triples: True
+[PASS] with the commutator instead, [Q, Qbar] = E11 - E22 is not central: the odd generators need the anticommutator: True

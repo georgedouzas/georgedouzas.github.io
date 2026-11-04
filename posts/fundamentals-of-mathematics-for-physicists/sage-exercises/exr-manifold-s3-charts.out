@@ -1,0 +1,8 @@
+the north chart's inverse lands on S^3, sum of squares = 1: True
+the south coordinates of that point are the inversion (u, v, w)/rho^2: True
+transition map: up = u/(u^2 + v^2 + w^2)
+vp = v/(u^2 + v^2 + w^2)
+wp = w/(u^2 + v^2 + w^2)
+Jacobian determinant of the transition map: -1/(u^2 + v^2 + w^2)^3
+atlas: [Chart (U, (u, v, w)), Chart (V, (up, vp, wp)), Chart (W, (u, v, w)), Chart (W, (up, vp, wp))]  -> S^3 is a manifold of dimension 3
+the point (u, v, w) = (0, 0, 0) is the south pole (0, 0, 0, -1): [0, 0, 0, -1]

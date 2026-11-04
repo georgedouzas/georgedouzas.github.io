@@ -1,0 +1,9 @@
+3 (dim 3): tau-charges [-2/3, 1/3, 1/3]
+3bar (dim 3): tau-charges [-1/3, -1/3, 2/3]
+6 (dim 6): tau-charges [-4/3, -1/3, -1/3, 2/3, 2/3, 2/3]
+8 (dim 8): tau-charges [-1, -1, 0, 0, 0, 0, 1, 1]
+10 (dim 10): tau-charges [-2, -1, -1, 0, 0, 0, 1, 1, 1, 1]
+15 (dim 15): tau-charges [-5/3, -5/3, -2/3, -2/3, -2/3, -2/3, 1/3, 1/3, 1/3, 1/3, 1/3, 1/3, 4/3, 4/3, 4/3]
+27 (dim 27): tau-charges [-2, -2, -2, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2]
+[PASS] the 3 has charges 1/3, 1/3, -2/3 and the 8 has 0 (x4), +1 (x2), -1 (x2): True
+[PASS] every charge is a multiple of 1/3, so +-1/2 never occurs and no fermion survives on S^2 with this embedding: True

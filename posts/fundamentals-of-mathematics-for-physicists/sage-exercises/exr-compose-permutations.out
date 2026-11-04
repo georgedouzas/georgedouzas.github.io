@@ -1,0 +1,5 @@
+s = (1,2) ; t = (1,2,3)
+s then t: (1,3) ; t then s: (2,3) ; equal: False
+inverse of t: (1,3,2) ; t * t^-1 is the identity: True
+number of bijections of {1,2,3}: 6
+every element composed with its inverse gives the identity: True

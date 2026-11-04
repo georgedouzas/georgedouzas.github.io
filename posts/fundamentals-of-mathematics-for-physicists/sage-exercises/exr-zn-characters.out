@@ -1,0 +1,10 @@
+character table of Z_6 (rows: irreducible representations, columns: conjugacy classes):
+[         1          1          1          1          1          1]
+[         1         -1          1         -1          1         -1]
+[         1 -zeta3 - 1      zeta3          1 -zeta3 - 1      zeta3]
+[         1  zeta3 + 1      zeta3         -1 -zeta3 - 1     -zeta3]
+[         1      zeta3 -zeta3 - 1          1      zeta3 -zeta3 - 1]
+[         1     -zeta3 -zeta3 - 1         -1      zeta3  zeta3 + 1]
+number of irreducible representations: 6 = order of the group: 6
+all irreducible representations are one-dimensional: True
+the character with j = 1 is k -> exp(2 pi i k / 6); its values on k = 0..5: [1, 1/2*I*sqrt(3) + 1/2, (1/2*I*sqrt(3) + 1/2)^2, (1/2*I*sqrt(3) + 1/2)^3, (1/2*I*sqrt(3) + 1/2)^4, (1/2*I*sqrt(3) + 1/2)^5]

@@ -1,0 +1,5 @@
+mass matrix (diagonal): [0, 0, 0, 3/4*g^2*v^2, 3/4*g^2*v^2, 3/4*g^2*v^2, 3/4*g^2*v^2, 0]
+[PASS] the mass matrix is diagonal: True
+[PASS] four massless (T_1, T_2, T_3, T_8) and four of mass^2 3 g^2 v^2/4 (T_4..T_7): True
+[PASS] the kinetic normalisation: -Tr(D Phi D Phi) = (1/2) (d Phi^a)^2 since Tr(T_A T_B) = -delta/2: True
+broken generators: 4 = dim_R SU(3)/(SU(2) x U(1)) = dim_R CP^2 = 4

@@ -1,0 +1,6 @@
+N =   100, e = 0.2: log(Omega)/N = 0.647906, s(e) = 0.673012
+N =  1000, e = 0.2: log(Omega)/N = 0.669352, s(e) = 0.673012
+N = 10000, e = 0.2: log(Omega)/N = 0.672531, s(e) = 0.673012
+s'(e) = -1/2*log(1/2*e + 1/2) + 1/2*log(-1/2*e + 1/2)  = -artanh(e), so s'(e) = 1/T at e* = -tanh(1/T): True
+f(T) = e* - T s(e*) at e* = -tanh(1/T), numerically at T = 0.3, 1, 5: [True, True, True]
+and back: s(e) = min_T (e - f(T))/T at e = -0.4 gives 0.6108643020548934 vs s(-0.4) = 0.6108643021

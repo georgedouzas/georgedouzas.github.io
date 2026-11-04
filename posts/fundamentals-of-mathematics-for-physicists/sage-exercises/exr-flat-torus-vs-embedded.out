@@ -1,0 +1,6 @@
+flat torus: g_flat = r1^2 da⊗da + r2^2 db⊗db
+Christoffel symbols all vanish: True
+Riemann tensor vanishes: True ; area = 4*pi^2*r1*r2
+embedded torus R = 2, r = 4/5: g_emb = 16/25 da⊗da + 4/25*(2*cos(a) + 5)^2 db⊗db
+Riemann tensor vanishes: False ; component R^a_{bab} = cos(a)^2 + 5/2*cos(a)
+scalar curvature: 25/4*cos(a)/(2*cos(a) + 5)  (positive on the outer equator a = 0, negative on the inner one a = pi)

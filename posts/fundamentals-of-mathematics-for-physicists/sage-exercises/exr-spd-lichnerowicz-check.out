@@ -1,0 +1,4 @@
+D^2 psi - nabla^* nabla psi = [1/2*(M + 1)*u(th, ph), -1/2*(M - 1)*v(th, ph)]
+F_12 = 1/2*I*M
+agrees with R/4 - (1/2) F_ab gamma^a gamma^b: True
+for M = 0, D^2 - nabla^* nabla = 1/2 = R/4: [0, 0]

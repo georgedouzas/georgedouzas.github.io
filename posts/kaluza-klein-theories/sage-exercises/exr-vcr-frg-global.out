@@ -1,0 +1,4 @@
+on the quadric: True
+induced metric: [L^2*cosh(rho)^2, -L^2, -L^2*sinh(rho)^2, -L^2*sin(theta)^2*sinh(rho)^2]  off-diagonal zero: True
+R_{mu nu} - (3/L^2) g_{mu nu} = 0: True
+R = 12/L^2 ; with L = 1/(2m): R_{mu nu} = 12*m^2 g_{mu nu}

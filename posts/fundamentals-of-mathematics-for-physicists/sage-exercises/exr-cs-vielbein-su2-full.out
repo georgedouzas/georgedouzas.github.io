@@ -1,0 +1,5 @@
+sigma^1 = (cos(ps)) dtheta + (sin(ps)*sin(th)) dphi + (0) dpsi
+sigma^2 = (-sin(ps)) dtheta + (cos(ps)*sin(th)) dphi + (0) dpsi
+sigma^3 = (0) dtheta + (cos(th)) dphi + (1) dpsi
+agrees with @eq-su2-forms: True
+at psi = 0: e^1, e^2, e^3 = [[1, 0, 0], [0, sin(th), 0], [0, cos(th), 1]]

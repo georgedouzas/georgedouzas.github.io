@@ -1,0 +1,7 @@
+transfer matrix: [         e^(J*b) sqrt(z)*e^(-J*b)]
+[sqrt(z)*e^(-J*b)        z*e^(J*b)]
+largest eigenvalue matches the closed form: True
+periodic chain, L = 6: Xi = tr T^6: True
+density at z = 1 (Ising field h = 0): 1/2
+bJ = 0.5: n(z) for z = 0.01, 0.1, 1, 10, 100: [0.001375, 0.01591, 0.5000, 0.9841, 0.9986]
+bJ = 2.0: n(z) for z = 0.01, 0.1, 1, 10, 100: [3.423e-6, 0.00004141, 0.5000, 1.000, 1.000]

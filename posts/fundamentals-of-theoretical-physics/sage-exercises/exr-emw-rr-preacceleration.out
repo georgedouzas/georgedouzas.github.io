@@ -1,0 +1,2 @@
+t < 0: a = F0*e^(t/tau)/m ; t > 0: a = F0/m
+m a - F - m tau a' for t < 0 (F = 0): 0 ; for t > 0: 0

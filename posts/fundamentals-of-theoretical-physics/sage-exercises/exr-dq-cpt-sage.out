@@ -1,0 +1,6 @@
+apply T then P then C : matrix = (-I) gamma_5: True
+apply T then C then P : matrix = (I) gamma_5: True
+apply P then T then C : matrix = (-I) gamma_5: True
+apply P then C then T : matrix = (I) gamma_5: True
+apply C then T then P : matrix = (-I) gamma_5: True
+apply C then P then T : matrix = (-I) gamma_5: True

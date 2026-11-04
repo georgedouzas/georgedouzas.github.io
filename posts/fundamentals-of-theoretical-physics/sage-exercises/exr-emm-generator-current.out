@@ -1,0 +1,4 @@
+steady current: a = E0*R/(L^2*w^2 + R^2) , b = -E0*L*w/(L^2*w^2 + R^2)
+amplitude equals E0/sqrt(R^2 + w^2 L^2): True
+tan(phase lag) = -b/a = L*w/R
+check: the residual vanishes identically: 0

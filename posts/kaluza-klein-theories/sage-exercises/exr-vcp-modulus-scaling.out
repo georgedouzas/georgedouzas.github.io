@@ -1,0 +1,3 @@
+sphere of radius r: Ricci = [1, 0, 0, sin(theta)^2] ; R = 2/r^2
+after g -> lam g: Ricci unchanged: True ; R -> 2/(lam*r^2) = R/lam: True
+flat torus with constant metric lam [[1, 1/2], [1/2, 2]]: Ricci = [0, 0, 0, 0] for every lam > 0: the size is a modulus

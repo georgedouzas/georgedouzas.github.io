@@ -1,0 +1,8 @@
+X_flat = sin(th)^2 dph ; Y_flat = -sin(th) dth ; Y_flat = dZ: True
+d(X_flat) = 2*cos(th)*sin(th) dth∧dph ; d(Y_flat) = 0
+L_X g = 0 (X is a Killing field): True
+L_Y g = -2*cos(th) dth⊗dth - 2*cos(th)*sin(th)^2 dph⊗dph ; equals -2 cos(theta) g: True
+L_X Z = 0 ; L_Y Z = sin(th)^2
+[X, Y] = [X,Y] = 0
+L_Y(X_flat) = -2*cos(th)*sin(th)^2 dph
+Cartan's formula L_Y alpha = i_Y d alpha + d(alpha(Y)) for alpha = X_flat: True

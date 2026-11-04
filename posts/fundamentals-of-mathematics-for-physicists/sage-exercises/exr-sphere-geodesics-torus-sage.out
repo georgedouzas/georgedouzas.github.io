@@ -1,0 +1,4 @@
+geodesic equations: a'' + Gamma^a_bb b'^2 = 0 with Gamma^a_bb = (r*cos(a) + R)*sin(a)/r ;  b'' + 2 Gamma^b_ab a' b' = 0 with Gamma^b_ab = -r*sin(a)/(r*cos(a) + R)
+outer equator a = 0, b = t: [0, 0] ; inner equator a = pi, b = t: [0, 0]
+tube circle a = t, b = const: [0, 0]
+parallel a = a0, b = t: residuals [(r*cos(a0)*sin(a0) + R*sin(a0))/r, 0] -> vanish only where sin(a0) = 0

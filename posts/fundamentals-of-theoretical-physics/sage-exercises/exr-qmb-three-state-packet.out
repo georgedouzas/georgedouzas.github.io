@@ -1,0 +1,6 @@
+orthonormal: True
+rho(x, t) = 1/6*(4*x^4 + 8*x^3*cos(t) + 4*(2*sqrt(2)*cos(t)^2 - sqrt(2))*x^2 + 4*x*(sqrt(2) - 1)*cos(t) - 4*sqrt(2)*cos(t)^2 + 2*sqrt(2) + 3)*e^(-x^2)/sqrt(pi)
+period 2 pi: True
+<x>(t) = 1/3*(sqrt(2) + 2)*cos(t)
+rho(0, t) = -1/6*(4*sqrt(2)*cos(t)^2 - 2*sqrt(2) - 3)/sqrt(pi)
+rho(x, 0) = 1/6*(4*x^4 + 8*x^3 + 4*sqrt(2)*x^2 + 4*sqrt(2)*x - 4*x - 2*sqrt(2) + 3)*e^(-x^2)/sqrt(pi)

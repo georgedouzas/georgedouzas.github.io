@@ -1,0 +1,50 @@
+/* Block marking (design D20, final): three colours on the TITLES only, no vertical bars, no backgrounds.
+   - statements (definitions, theorems, lemmas, propositions, corollaries): red title;
+   - examples: green title;
+   - exercises: blue title.
+   Quarto gives every cross-reference block the class `theorem` plus its kind, so the kind class is required in each
+   selector; a plain theorem block has only `theorem`. Solution callouts (the only note callouts in the book) are
+   plain: no bar, no fill, no tinted header. */
+:root {
+  --kk-statement: #c0392b;   /* red:   rgb(192, 57, 43)  */
+  --kk-example:   #1e8449;   /* green: rgb(30, 132, 73)  */
+  --kk-exercise:  #1f5fbf;   /* blue:  rgb(31, 95, 191)  */
+}
+/* Layout of every block: the title (e.g. "Definition 3.1 (Vector space)") stands on its own line, and the body is
+   indented beneath it by the same amount as the body of a solution callout. */
+div.theorem { border-left: none; padding-left: 1.25em; margin: 1.2em 0; }
+div.theorem .theorem-title { display: block; margin-left: -1.25em; margin-bottom: 0.3em; }
+div.theorem:not(.example):not(.exercise) .theorem-title { color: var(--kk-statement); }
+div.theorem.example .theorem-title  { color: var(--kk-example); }
+div.theorem.exercise .theorem-title { color: var(--kk-exercise); }
+div.callout.callout-note { border: none; background: transparent; }
+div.callout.callout-note .callout-header { background: transparent; padding-left: 0; }
+div.callout.callout-note .callout-body-container { padding-left: 1.25em; }
+/* verification callouts (design D29): collapsed like the solutions, holding the Lean statement, the Veriphy recipe
+   and the Sage oracle output; no bar, no fill */
+div.callout.callout-tip { border: none; background: transparent; }
+div.callout.callout-tip .callout-header { background: transparent; padding-left: 0; }
+div.callout.callout-tip .callout-body-container { padding-left: 1.25em; }
+
+/* Change kk-csdr-presentation: each statement and its verification in a light red box (verification title red);
+   each statement's examples and exercises folded into collapsed Examples and Exercises boxes */
+:root { --kk-statement-tint: #fbeceb; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --kk-statement-tint: #3a2321; } }
+:root[data-theme="dark"] { --kk-statement-tint: #3a2321; }
+div.statement-box { background: var(--kk-statement-tint); border-radius: 6px; padding: 0.6em 1em 0.2em 1em; margin: 1.2em 0; }
+div.statement-box div.callout.verification .callout-title-container { color: var(--kk-statement); }
+div.callout.examples-fold .callout-title-container { color: var(--kk-example); font-weight: 600; }
+div.callout.exercises-fold .callout-title-container { color: var(--kk-exercise); font-weight: 600; }
+div.callout.examples-fold, div.callout.exercises-fold { margin: 0.6em 0 1.2em 0; }
+
+/* the lamp of a statement's Verification box is red like the statement */
+div.statement-box div.callout.verification .callout-icon::before { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="fill: rgb(192, 57, 43)" class="bi bi-lightbulb" viewBox="0 0 16 16"><path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/></svg>'); }
+
+/* Keep link targets clear of the fixed navbar */
+main [id] { scroll-margin-top: 80px; }
+
+/* Justified text leaves large gaps in narrow navigation columns */
+#quarto-sidebar *, #quarto-margin-sidebar * { text-align: left !important; }
+
+/* Wide tables scroll inside their own block on narrow screens */
+main table { display: block; max-width: 100%; overflow-x: auto; }

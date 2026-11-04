@@ -1,0 +1,5 @@
+W^i = [m*p2, m*p1] ; F_i = -conj(W^i) = [-c2*mb, -c1*mb]
+[PASS] V = |m|^2 (|phi_1|^2 + |phi_2|^2): True
+fermion mass matrix W^{ij} = [0, m, m, 0]
+[PASS] M^dag M = |m|^2 * identity: both Weyl fermions have mass |m|, the scalar mass too: True
+[PASS] the scalar mass matrix d^2V/dphi^*_i dphi_j = |m|^2 * identity equals M^dag M: True

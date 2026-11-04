@@ -1,0 +1,5 @@
+psi -> psi + 2 pi sends (a, b) to (-a, -b): True
+psi -> psi + 4 pi is the identity: True
+the right U(1) action (a, b) -> e^{it}(a, b) is psi -> psi - 2t: True
+S^3 -> S^2, fibre angle chi = psi/2: A_+ = 1/2*cos(t) - 1/2 dphi, F = -1/2*sin(t) dth^dph, c_1 = -1, transition winding = -1
+SO(3) -> S^2, fibre angle psi: A_+ = cos(t) - 1 dphi, F = -sin(t) dth^dph, c_1 = -2, transition winding = -2

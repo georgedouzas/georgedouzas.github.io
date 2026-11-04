@@ -1,0 +1,5 @@
+conformal factor 4/(1 + u^2 + v^2)^2 in spherical coordinates: (cos(th) - 1)^2
+J^T G_ste J = [1, 0, 0, sin(th)^2]
+equals diag(1, sin^2 theta): True
+det G_sph = (det J)^2 det G_ste = sin^2 theta: True
+det J = -sin(th)/(cos(th) - 1)^2

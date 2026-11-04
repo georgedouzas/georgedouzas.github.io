@@ -1,0 +1,4 @@
+Laplacian of u: 0
+v = 3*x^2*y - y^3   v(0,0) = 0
+Cauchy-Riemann hold: True
+u + i v == (x + i y)^3: True

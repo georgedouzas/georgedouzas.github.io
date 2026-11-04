@@ -1,0 +1,8 @@
+m = 1: |W(h) - W(0)|/h =      7.500, bound     3.885, tail + 4 * 2^-m = 3.5e-18 (truncation 2^-59)
+m = 2: |W(h) - W(0)|/h =     11.793, bound     5.828, tail + 4 * 2^-m = 3.5e-18 (truncation 2^-59)
+m = 3: |W(h) - W(0)|/h =     17.872, bound     8.741, tail + 4 * 2^-m = 3.5e-18 (truncation 2^-59)
+m = 4: |W(h) - W(0)|/h =     26.868, bound    13.112, tail + 4 * 2^-m = 3.5e-18 (truncation 2^-59)
+m = 5: |W(h) - W(0)|/h =     40.323, bound    19.668, tail + 4 * 2^-m = 3.5e-18 (truncation 2^-59)
+m = 6: |W(h) - W(0)|/h =     60.491, bound    29.502, tail + 4 * 2^-m = 3.5e-18 (truncation 2^-59)
+m = 7: |W(h) - W(0)|/h =     90.739, bound    44.254, tail + 4 * 2^-m = 3.5e-18 (truncation 2^-59)
+m = 8: |W(h) - W(0)|/h =    136.110, bound    66.380, tail + 4 * 2^-m = 3.5e-18 (truncation 2^-59)

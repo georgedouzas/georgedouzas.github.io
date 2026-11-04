@@ -1,0 +1,5 @@
+E lies on the unit sphere: True
+d_u E and d_v E are tangent (orthogonal to the position vector): True
+d_u E . d_v E = 0: True
+|d_u E|^2 = |d_v E|^2 = 4/(u^2 + v^2 + 1)^2 : True
+length at the origin (south pole), on the unit circle (equator), at u = 3: [2, 1, 1/5]

@@ -1,0 +1,10 @@
+# Exercise exr-ems-find-density: the charge density of E = E0 x exp(-r^2/a^2) and its total.
+x, y, z, E0, a, r = var('x y z E0 a r'); assume(a > 0, r > 0)
+X = vector([x, y, z]); E = E0 * X * exp(-(x^2 + y^2 + z^2) / a^2)
+rho = sum(diff(E[i], v) for i, v in enumerate([x, y, z])).simplify_full()
+print("rho =", rho.factor())
+curl = vector([diff(E[2], y) - diff(E[1], z), diff(E[0], z) - diff(E[2], x), diff(E[1], x) - diff(E[0], y)]).simplify_full()
+print("curl E =", curl)
+rho_r = E0 * exp(-r^2 / a^2) * (3 - 2 * r^2 / a^2)
+print("rho in spherical form matches:", bool((rho - rho_r.subs(r=sqrt(x^2 + y^2 + z^2))).simplify_full() == 0))
+print("total charge 4 pi int r^2 rho dr =", integrate(4 * pi * r^2 * rho_r, r, 0, oo))

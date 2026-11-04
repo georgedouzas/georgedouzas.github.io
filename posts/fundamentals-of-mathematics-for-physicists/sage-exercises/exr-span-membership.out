@@ -1,0 +1,3 @@
+(2, 5, 1) in span(v1, v2): True  with coordinates [2, 5]
+(1, 1, 1) in span(v1, v2): False 
+the plane span(v1, v2) is the solution set of n . x = 0 with n = (1, -1/2, 1/2) ; check n . v1 = n . v2 = 0: True

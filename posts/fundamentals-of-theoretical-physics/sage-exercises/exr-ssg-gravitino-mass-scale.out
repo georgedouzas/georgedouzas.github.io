@@ -1,0 +1,5 @@
+sqrt(F) = 1e+05 GeV: m_3/2 = 2.371e-09 GeV
+sqrt(F) = 1e+11 GeV: m_3/2 = 2.371e+03 GeV
+[PASS] sqrt(F) = 100 TeV gives m_3/2 of a few eV (2.37 eV), gauge mediation: True
+[PASS] sqrt(F) = 1e11 GeV gives m_3/2 of a few TeV (2.37 TeV), gravity mediation: True
+[PASS] in the O'Raifeartaigh model F = k, V = k^2 = 3 m_3/2^2 M_P^2 (the vacuum energy that supergravity can cancel with -3|W|^2/M_P^2): True

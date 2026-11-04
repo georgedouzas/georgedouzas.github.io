@@ -1,0 +1,4 @@
+spherical -> stereographic: u = -cos(ph)*sin(th)/(cos(th) - 1)
+v = -sin(ph)*sin(th)/(cos(th) - 1)
+Jacobian determinant: -sin(th)/(cos(th) - 1)^2
+u^2 + v^2 in spherical coordinates: sin(th)^2/(cos(th) - 1)^2  -> the equator theta = pi/2 is the unit circle

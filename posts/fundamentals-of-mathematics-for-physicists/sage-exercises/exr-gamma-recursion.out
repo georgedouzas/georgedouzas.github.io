@@ -1,0 +1,5 @@
+Gamma(6) = 120
+Gamma(1/2) = sqrt(pi)
+Gamma(-3/2) = 4/3*sqrt(pi)   equals (4/3) sqrt(pi): True
+Gamma(1/3) Gamma(2/3) = gamma(2/3)*gamma(1/3) = pi/sin(pi/3) numerically: True  value 3.62759872846844
+Gamma(z + 1) == z Gamma(z) at z = 7/3: True

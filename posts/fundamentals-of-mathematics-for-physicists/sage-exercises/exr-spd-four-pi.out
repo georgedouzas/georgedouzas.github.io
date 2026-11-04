@@ -1,0 +1,11 @@
+plane (1,2): S(2pi) = -1: True, S(4pi) = 1: True, Lambda(2pi) = 1: True
+plane (1,3): S(2pi) = -1: True, S(4pi) = 1: True, Lambda(2pi) = 1: True
+plane (1,4): S(2pi) = -1: True, S(4pi) = 1: True, Lambda(2pi) = 1: True
+plane (2,3): S(2pi) = -1: True, S(4pi) = 1: True, Lambda(2pi) = 1: True
+plane (2,4): S(2pi) = -1: True, S(4pi) = 1: True, Lambda(2pi) = 1: True
+plane (3,4): S(2pi) = -1: True, S(4pi) = 1: True, Lambda(2pi) = 1: True
+Lambda(pi/2) in the plane (1,2):
+[[ 0.  1.  0.  0.]
+ [-1.  0.  0.  0.]
+ [ 0.  0.  1.  0.]
+ [ 0.  0.  0.  1.]]

@@ -1,0 +1,7 @@
+solution: [
+t == t0 + sqrt(t^2 + 1) - 1
+]
+t0 = 0.01: received at t = 0.0101, proper time 0.0101, check -2.78e-17
+t0 = 0.50: received at t = 0.7500, proper time 0.6931, check 0.00e+00
+t0 = 0.90: received at t = 4.9500, proper time 2.3026, check 0.00e+00
+t0 = 0.99: received at t = 49.9950, proper time 4.6052, check 0.00e+00

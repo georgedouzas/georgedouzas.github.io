@@ -1,0 +1,5 @@
+|w + 1 + 2i|^2 = 4
+orthogonal to the unit circle, |c|^2 = 1 + rho^2: 5 = 1 + 4
+end points: s -> -oo gives (-1, 0) ; s -> +oo gives (3/5, -4/5)
+diameter u = tanh(s/2), v = 0: geodesic equations give [0, 0] ; speed^2 = 1
+image of the semicircle: geodesic equations give [0, 0]

@@ -1,0 +1,4 @@
+e^{tT_3} g(th, ph, ps) = g(th, ph + t, ps): True
+g(th, ph, ps) e^{tT_3} = g(th, ph, ps + t): True
+e^{tT_3} g = g e^{tT_3}? (left = right?): False
+e^{tT_1} g(0, 0, 0) = g(t, 0, 0): True ; but e^{tT_1} g(th, ph, 0) at ph = pi/2 equals g(th + t, pi/2, 0)? False

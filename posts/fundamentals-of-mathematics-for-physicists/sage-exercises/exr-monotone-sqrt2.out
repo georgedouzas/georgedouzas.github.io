@@ -1,0 +1,7 @@
+terms: [2.0, 1.5, 1.4166666666666667, 1.4142156862745099, 1.4142135623746899, 1.4142135623730951, 1.4142135623730951]
+decreasing: True ; bounded below by sqrt(2): True
+|a_6 - sqrt 2| = 0.0 (quadratic convergence: the number of correct digits doubles each step)
+fixed points of L = (L + 2/L)/2: [
+L == -sqrt(2),
+L == sqrt(2)
+]

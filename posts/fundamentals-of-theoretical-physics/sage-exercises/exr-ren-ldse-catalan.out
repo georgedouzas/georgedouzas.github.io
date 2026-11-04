@@ -1,0 +1,4 @@
+coefficients: [1, -1, 2, -5, 14, -42, 132, -429]
+(-1)^(n+1) C_(n-1): [1, -1, 2, -5, 14, -42, 132, -429]
+g(1 + g) - a to order a^8: 0
+ratio C_n / C_(n-1) for n = 50: 3.88235294117647  -> 4, radius of convergence 1/4

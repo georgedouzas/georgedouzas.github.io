@@ -1,0 +1,8 @@
+F-terms (conjugated): F_1 = -1/2*c3^2*y + k  F_2 = -c3*m  F_3 = -c1*c3*y - m*p2
+[PASS] F_2 = 0 forces phi_3 = 0, and then F_1 = k != 0: no supersymmetric vacuum: True
+[PASS] V at the origin is k^2 > 0: True
+scalar mass-squared eigenvalues at the origin: [0, 0, m^2, m^2, m^2 + k*y, m^2 - k*y]
+[PASS] the scalar spectrum is 0, 0, m^2, m^2, m^2 - yk, m^2 + yk (Martin eq. 7.3.9): True
+fermion mass-squared eigenvalues: [0, m^2, m^2]
+[PASS] the fermion spectrum is 0, m^2, m^2 (eq. 7.3.10): the massless one is the goldstino: True
+[PASS] the supertrace sum rule STr(m^2) = sum(scalars) - 2 sum(fermions) = 0 (eq. 7.1.13): True

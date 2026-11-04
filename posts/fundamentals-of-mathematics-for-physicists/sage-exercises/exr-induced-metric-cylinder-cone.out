@@ -1,0 +1,3 @@
+cylinder: g = du⊗du + R^2 dph⊗dph ; det = R^2 ; Riemann = 0: True
+cone z = sqrt(x^2 + y^2): g = 2 ds⊗ds + s^2 dph⊗dph ; det = 2*s^2 ; Riemann = 0: True
+the cone's circle s = 1 has length 2*pi while its radius, measured on the cone, is sqrt(2)

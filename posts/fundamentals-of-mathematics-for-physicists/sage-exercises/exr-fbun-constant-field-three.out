@@ -1,0 +1,5 @@
+F_xy = c1 c2 T_3: True
+F_yz = c2 c3 T_1: True
+F_zx = c3 c1 T_2: True
+-2 sum_{i<j} tr(F_ij^2) = c1^2*c2^2 + c1^2*c3^2 + c2^2*c3^2
+vanishes only if at least two of the c_i vanish; at c = (1, 1, 0): 1

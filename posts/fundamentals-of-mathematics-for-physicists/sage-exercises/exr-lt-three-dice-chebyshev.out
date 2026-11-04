@@ -1,0 +1,4 @@
+mean 21/2 , variance 35/4 = 35/4: True
+k = 1.0: exact tail 0.3241 (= 35/108), Chebyshev 1.0000, Gaussian 0.3173
+k = 1.5: exact tail 0.1852 (= 5/27), Chebyshev 0.4444, Gaussian 0.1336
+k = 2.0: exact tail 0.0370 (= 1/27), Chebyshev 0.2500, Gaussian 0.0455

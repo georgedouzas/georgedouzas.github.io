@@ -1,0 +1,9 @@
+N = 1: {'graviton': 1, 'gravitini': 1, 'vectors': 0, 'spin-1/2': 0, 'real scalars': 0}
+N = 2: {'graviton': 1, 'gravitini': 2, 'vectors': 1, 'spin-1/2': 0, 'real scalars': 0}
+N = 3: {'graviton': 1, 'gravitini': 3, 'vectors': 3, 'spin-1/2': 1, 'real scalars': 0}
+N = 4: {'graviton': 1, 'gravitini': 4, 'vectors': 6, 'spin-1/2': 4, 'real scalars': 2}
+N = 5: {'graviton': 1, 'gravitini': 5, 'vectors': 10, 'spin-1/2': 11, 'real scalars': 10}
+N = 6: {'graviton': 1, 'gravitini': 6, 'vectors': 16, 'spin-1/2': 26, 'real scalars': 30}
+N = 8: {'graviton': 1, 'gravitini': 8, 'vectors': 28, 'spin-1/2': 56, 'real scalars': 70}
+[PASS] the content agrees with Tanii's Table 3: N = 4 has 1, 4, 6, 4, 2 and N = 8 has 1, 8, 28, 56, 70: True
+[PASS] the helicity +s and -s multiplicities agree, so each count is a number of fields: True

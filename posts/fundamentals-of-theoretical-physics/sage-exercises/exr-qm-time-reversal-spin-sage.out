@@ -1,0 +1,4 @@
+U = [0, -1, 1, 0] ; Theta sigma_i Theta^-1 = U conj(sigma_i) U^-1 = -sigma_i: True
+Theta^2 = U conj(U) = [-1, 0, 0, -1]
+Theta |theta, phi> = (-e^(-I*ph)*sin(1/2*th), cos(1/2*th))
+its Bloch vector: [-cos(ph)*sin(th), -sin(ph)*sin(th), -cos(th)]

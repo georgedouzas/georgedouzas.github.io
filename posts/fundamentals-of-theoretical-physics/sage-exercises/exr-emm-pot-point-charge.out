@@ -1,0 +1,2 @@
+E = -dA/dt = (1/4*q*x/((pi*x^2 + pi*y^2 + pi*z^2)*sqrt(x^2 + y^2 + z^2)), 1/4*q*y/((pi*x^2 + pi*y^2 + pi*z^2)*sqrt(x^2 + y^2 + z^2)), 1/4*q*z/((pi*x^2 + pi*y^2 + pi*z^2)*sqrt(x^2 + y^2 + z^2))) ; B = curl A = (0, 0, 0)
+A - grad(lambda) with lambda = q t/(4 pi r): (0, 0, 0) ; q/(4 pi r) - d lambda/dt = 0

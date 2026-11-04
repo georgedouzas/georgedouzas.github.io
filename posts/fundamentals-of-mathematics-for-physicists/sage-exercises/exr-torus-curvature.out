@@ -1,0 +1,3 @@
+scalar curvature: 2*cos(a)/((r*cos(a) + R)*r)
+outer equator a = 0: 2/((R + r)*r)    inner equator a = pi: -2/((R - r)*r)
+integral of K dA over the torus: 0

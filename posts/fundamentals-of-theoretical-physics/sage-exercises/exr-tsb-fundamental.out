@@ -1,0 +1,6 @@
+dS/dE = 1/T: True
+dS/dV = P/T: True
+S is homogeneous of degree one: S(2E, 2V) = 2 S(E, V): True
+S(T, V) = 4/3*T^3*V*a   so the adiabats are V T^3 = const and P V^(4/3) = const
+E(S, V) inverts S(E, V): True
+P V^(4/3) on the adiabat S = sv: 1/8*3^(1/3)*2^(1/3)*sv^(4/3)/a^(1/3) (independent of V)

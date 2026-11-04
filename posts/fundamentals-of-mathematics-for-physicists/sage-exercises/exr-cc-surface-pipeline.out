@@ -1,0 +1,12 @@
+1. induced metric: g = da⊗da + (cos(a)^2 + 4*cos(a) + 4) db⊗db
+2. Christoffel symbols:
+Gam^a_bb = (cos(a) + 2)*sin(a) 
+Gam^b_ab = -sin(a)/(cos(a) + 2) 
+3. Riemann tensor: R^a_bab = (cos(a) + 2)*cos(a)
+4. Ricci tensor: Ric(g) = cos(a)/(cos(a) + 2) da⊗da + (cos(a)^2 + 2*cos(a)) db⊗db
+5. scalar curvature R = 2*cos(a)/(cos(a) + 2) ; Gauss curvature K = R/2
+   K on the outer equator: 1/3 ; inner equator: -1 ; top circle: 0
+6. area element sqrt(det g) = cos(a) + 2 ; area = 8*pi^2
+   total curvature, integral of K dA = 0 = 2 pi chi(T^2) with chi = 0
+   positive part (outer half): 4*pi ; negative part (inner half): -4*pi
+7. Einstein tensor G = Ric - R g / 2 vanishes (two dimensions): True

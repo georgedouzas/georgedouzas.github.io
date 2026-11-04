@@ -1,0 +1,4 @@
+da_N = (1/2*M*sin(th)) dtheta ^ dphi, da_S = (1/2*M*sin(th)) dtheta ^ dphi
+a_N - a_S = M (the gauge transformation exp(i M phi))
+a_N near theta = 0: 1/4*M*th^2 ; a_S near theta = pi: -1/4*M*u^2
+(1/2pi) int da = M

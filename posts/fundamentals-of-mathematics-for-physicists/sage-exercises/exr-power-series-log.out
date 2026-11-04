@@ -1,0 +1,4 @@
+sum (-1)^(n+1) x^n/n = log(x + 1) for |x| < 1
+taylor of log(1 + x) to order 6: -1/6*x^6 + 1/5*x^5 - 1/4*x^4 + 1/3*x^3 - 1/2*x^2 + x
+derivative of the series equals the geometric series 1/(1 + x): True
+at x = 1 the series is the alternating harmonic series, sum = log 2: log(2)

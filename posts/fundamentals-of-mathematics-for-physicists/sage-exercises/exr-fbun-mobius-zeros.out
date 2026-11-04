@@ -1,0 +1,5 @@
+s = cos(1 phi/2): s(phi + 2 pi) = -s(phi): True ; zeros in [0, 2 pi): 1
+s = cos(3 phi/2): s(phi + 2 pi) = -s(phi): True ; zeros in [0, 2 pi): 3
+s = cos(5 phi/2): s(phi + 2 pi) = -s(phi): True ; zeros in [0, 2 pi): 5
+perturbed section antiperiodic: True
+sign changes of the perturbed section on [0, 2 pi]: 3 (odd: True )

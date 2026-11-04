@@ -1,0 +1,5 @@
+T^{tt} (energy density) = 1/2*m^2*phi(t, x)^2 + 1/2*diff(phi(t, x), t)^2 + 1/2*diff(phi(t, x), x)^2
+T^{tx} (momentum density) = -diff(phi(t, x), t)*diff(phi(t, x), x) ; T^{xx} (pressure) = -1/2*m^2*phi(t, x)^2 + 1/2*diff(phi(t, x), t)^2 + 1/2*diff(phi(t, x), x)^2
+d_mu T^(mu t) = (m^2*phi(t, x) + diff(phi(t, x), t, t) - diff(phi(t, x), x, x))*diff(phi(t, x), t)  = (Box phi + m^2 phi) d^nu phi: True
+d_mu T^(mu x) = -(m^2*phi(t, x) + diff(phi(t, x), t, t) - diff(phi(t, x), x, x))*diff(phi(t, x), x)  = (Box phi + m^2 phi) d^nu phi: True
+on the Klein-Gordon equation (Box + m^2) phi = 0 both divergences vanish: energy and momentum are conserved

@@ -1,0 +1,4 @@
+omega^2 = -k*(sqrt(2) - 2)/m ; mode: (1, sqrt(2), 1)
+omega^2 = k*(sqrt(2) + 2)/m ; mode: (1, -sqrt(2), 1)
+omega^2 = 2*k/m ; mode: (1, 0, -1)
+eigenvalues == 4k/m sin^2(j pi/8), j = 1, 2, 3: True

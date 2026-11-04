@@ -1,0 +1,7 @@
+f = x^3 on [ 0 , 2 ]: average slope 4 ; c = 2/3*sqrt(3) = 1.15470 lies in the interval: True ; f'(c) = slope: True
+f = sin(x) on [ 0 , pi ]: average slope 0 ; c = 1/2*pi = 1.57080 lies in the interval: True ; f'(c) = slope: True
+f = e^x on [ 0 , 1 ]: average slope e - 1 ; c = log(e - 1) = 0.541325 lies in the interval: True ; f'(c) = slope: True
+solve f'(x) = 4 for f = x^3: [
+x == -2/3*sqrt(3),
+x == 2/3*sqrt(3)
+]

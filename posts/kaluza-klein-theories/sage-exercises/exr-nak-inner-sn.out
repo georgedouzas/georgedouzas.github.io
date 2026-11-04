@@ -1,0 +1,6 @@
+n = 2: <|K_01|^2> = 2/3, and x.x = 1
+[PASS] on S^2 the average of |K_ij|^2 is 2/(n+1) = 2/3: True
+n = 3: <|K_01|^2> = 1/2, and x.x = 1
+[PASS] on S^3 the average of |K_ij|^2 is 2/(n+1) = 1/2: True
+n = 4: <|K_01|^2> = 2/5, and x.x = 1
+[PASS] on S^4 the average of |K_ij|^2 is 2/(n+1) = 2/5: True

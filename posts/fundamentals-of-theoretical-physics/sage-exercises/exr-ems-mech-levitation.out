@@ -1,0 +1,6 @@
+div B in cylindrical coordinates: 0
+equilibrium: [
+[s == 0, z == -L^2*M*g/(A*B0^2)]
+]
+omega_z^2 = A*B0^2/(L^2*M) ; omega_s^2 = 1/4*A*B0^2/(L^2*M)
+paramagnet (alpha > 0): U'' along z = -A*B0^2/L^2 < 0, unstable

@@ -1,0 +1,10 @@
+exp(t M_12) agrees with the matrix exponential: True
+L . o = [sin(ch)*sin(ph)*sin(th), cos(ph)*sin(ch)*sin(th), cos(th)*sin(ch), cos(ch)]
+e along M_03:  [0, 0, sin(ch)*sin(th)]  (d chi, d theta, d phi)
+e along M_13:  [0, sin(ch), 0]  (d chi, d theta, d phi)
+e along M_23:  [1, 0, 0]  (d chi, d theta, d phi)
+r-component along M_01:  [0, 0, cos(th)]
+r-component along M_02:  [0, 0, cos(ch)*sin(th)]
+r-component along M_12:  [0, cos(ch), 0]
+sum_a e^a e^a = [(1, 0, 0), (0, sin(ch)^2, 0), (0, 0, sin(ch)^2*sin(th)^2)]
+the round metric: True  Ricci scalar: 6

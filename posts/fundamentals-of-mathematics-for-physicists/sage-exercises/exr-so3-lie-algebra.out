@@ -1,0 +1,9 @@
+brackets in Sage's Lie algebra: L3 L1 L2
+Jacobi identity holds (Sage checks it when building the algebra): True
+the matrices L_a satisfy the same brackets: True
+Killing form in the basis L_a:
+[-2  0  0]
+[ 0 -2  0]
+[ 0  0 -2]
+equals -2 delta_ab: True ; negative definite (compact): True
+Sage recognises the algebra as simple of type A1 = su(2): True

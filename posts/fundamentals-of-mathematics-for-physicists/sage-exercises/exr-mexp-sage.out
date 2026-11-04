@@ -1,0 +1,5 @@
+exp(t N ) = [1, t, 0, 1]
+exp(t diag(1, -1) ) = [e^t, 0, 0, e^(-t)]
+exp(t M ) = [e^t, t*e^t, 0, e^t]
+exp(tM) = e^t (1 + tN): True
+d/dt exp(tM) = M exp(tM): True

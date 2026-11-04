@@ -1,0 +1,6 @@
+adjoint of SU(3): A2(1,1) of dimension 8
+multiplicities by U(1) charge (in units where the doublet has charge 1): {1: 2, 0: 4, -1: 2}
+[PASS] 8 -> 4 states of charge 0, 2 of charge +1, 2 of charge -1 under the embedded U(1): True
+[PASS] the charge-0 states form a triplet plus a singlet of SU(2) (T_3 weights -2, 0, 0, 2 in doubled units): True
+weights of the adjoint of SU(2) (doubled T_3 eigenvalues): [-2, 0, 2]
+[PASS] adjoint of SU(2) under U(1): charges -2, 0, 2 (doubled): k = {+-1}, matching the doublets of SU(3): True

@@ -1,0 +1,2 @@
+acceleration: _C*e^(t/tau)
+x(t) = c1 + c2 t + c3 tau^2 e^(t/tau) solves the equation: True ; its acceleration: c3*e^(t/tau) -> bounded only for c3 = 0

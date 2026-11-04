@@ -1,0 +1,9 @@
+first and third derivatives at 0: 0 0
+second derivative at 0: -3*I*(a + 2*b)*(a - 2*b)*a^2/(a^2 + b^2)^(7/2)
+b with vanishing second derivative: [
+b == 1/2*a,
+b == -I*a,
+b == I*a
+]
+B(0) at b = a/2: 8/25*sqrt(5)*I/a = (4/5)^(3/2) I/a: True
+fourth derivative at 0, b = a/2: -27648/3125*sqrt(5)*I/a^5

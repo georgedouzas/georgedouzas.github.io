@@ -1,0 +1,4 @@
+area of the half-strip |x| < 1, y > 1: 2
+inner integral over y > sqrt(1 - x^2): -sqrt(-x^2 + 1)/(x^2 - 1)
+area of the ideal triangle with vertices -1, 1, oo: pi ; equal to pi - (0 + 0 + 0): True
+area of |x| < 1, eps < y < 1: -2*(eps - 1)/eps -> oo as eps -> 0: +Infinity

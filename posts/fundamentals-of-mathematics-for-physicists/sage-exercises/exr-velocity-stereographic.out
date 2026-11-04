@@ -1,0 +1,7 @@
+d_u E = (-2*(u^2 - v^2 - 1)/(u^2 + v^2 + 1)^2, -4*u*v/(u^2 + v^2 + 1)^2, 4*u/(u^2 + v^2 + 1)^2)
+d_v E = (-4*u*v/(u^2 + v^2 + 1)^2, 2*(u^2 - v^2 + 1)/(u^2 + v^2 + 1)^2, 4*v/(u^2 + v^2 + 1)^2)
+both tangent to the sphere, E . d_u E = E . d_v E = 0: True
+orthogonal to each other, d_u E . d_v E = 0: True
+|d_u E|^2 = |d_v E|^2 = 4/(1 + u^2 + v^2)^2: True
+length at the origin (south pole): 2 ; limit of the length as u -> oo along v = 0: 0
+the Jacobian has rank 2 everywhere: the stereographic parametrisation is regular on the whole plane

@@ -1,0 +1,4 @@
+Gamma^x_xx = -1/2*(G(x, y)*diff(E(x, y), x) + F(x, y)*diff(E(x, y), y) - 2*F(x, y)*diff(F(x, y), x))/(F(x, y)^2 - E(x, y)*G(x, y))
+symmetric in the lower indices: True
+independent symbols: 6 = n^2 (n+1)/2 with n = 2: True
+orthogonal chart (F = 0): Gamma^x_yy = -1/2*diff(G(x, y), x)/E(x, y) and Gamma^y_xy = 1/2*diff(G(x, y), x)/G(x, y)

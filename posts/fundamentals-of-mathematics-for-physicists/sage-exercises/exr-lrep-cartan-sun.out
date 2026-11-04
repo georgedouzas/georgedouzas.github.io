@@ -1,0 +1,4 @@
+su(2): H = diag(1, -1); traceless centraliser has dimension 1 = n - 1: True; diagonal traceless basis commutes: True
+su(3): H = diag(1, 2, -3); traceless centraliser has dimension 2 = n - 1: True; diagonal traceless basis commutes: True
+su(4): H = diag(1, 2, 3, -6); traceless centraliser has dimension 3 = n - 1: True; diagonal traceless basis commutes: True
+su(5): H = diag(1, 2, 3, 4, -10); traceless centraliser has dimension 4 = n - 1: True; diagonal traceless basis commutes: True

@@ -1,0 +1,5 @@
+sigma^mu sigmabar^nu sigma^lambda = eta^{mu nu} sigma^lambda - eta^{mu lambda} sigma^nu + eta^{nu lambda} sigma^mu + c i eps^{mu nu lambda rho} sigma_rho with c = [-1]
+[PASS] the triple-product identity holds for all 64 index triples with a single sign c: True
+[PASS] sigmabar sigma sigmabar obeys the same identity with the opposite sign of the epsilon term: True
+tr(sigma^mu sigmabar^nu sigma^lambda sigmabar^rho) = 2(eta eta - eta eta + eta eta) + c' 2i eps^{mu nu lambda rho} with c' = [-1]
+[PASS] Nath's Problem 8.2 trace: tr[s^m sb^n s^l sb^r - s^l sb^n s^m sb^r] = c' 4i eps^{mnlr} for all 256 values: True

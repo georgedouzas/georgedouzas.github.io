@@ -1,0 +1,3 @@
+jump points among -2..2: [-2, -1, 0, 1, 2]
+preimage of (k - 1/2, k + 1/2) for k = 1 is [1, 2): endpoints 1 1 and 0 outside
+[PASS] discontinuous exactly at the integers (sampled), continuous between: True

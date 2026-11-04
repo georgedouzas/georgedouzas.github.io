@@ -1,0 +1,3 @@
+I(1) = 2*pi ; I(cos phi) = 0 ; I(sin 2phi) = 0 ; I(cos^2 phi) = pi
+linearity: I(f + g) = I(f) + I(g): True ; I(5 f) = 5 I(f): True
+row of I on the basis (1, cos phi, sin phi): [2*pi, 0, 0]

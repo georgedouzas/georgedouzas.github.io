@@ -1,0 +1,9 @@
+int_1^oo x^(-1/2) dx = divergent
+int_1^oo x^(-1) dx = divergent
+int_1^oo x^(-2) dx = 1
+int_1^oo x^(-3) dx = 1/2
+int_0^1 x^(-1/2) dx = 2
+int_0^1 x^(-1) dx = divergent
+int_0^1 x^(-2) dx = divergent
+int_0^oo e^{-x} x^n dx for n = 0..5: [1, 1, 2, 6, 24, 120] = n!
+int_{-oo}^{oo} dx/(1 + x^2) = pi

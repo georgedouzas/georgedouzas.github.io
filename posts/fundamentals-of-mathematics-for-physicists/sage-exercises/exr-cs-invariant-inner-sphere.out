@@ -1,0 +1,7 @@
+solutions of X^T g + g X = 0: [
+[a == r1, b == 0, c == r1]
+]
+R(t)^T (a 1) R(t) = a 1: True
+solutions for the vector representation of so(3): [
+[g11 == r2, g12 == 0, g13 == 0, g22 == r2, g23 == 0, g33 == r2]
+]

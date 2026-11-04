@@ -1,0 +1,4 @@
+exp(tA) =
+[          cos(omega*t) sin(omega*t)/(m*omega)]
+[ -m*omega*sin(omega*t)           cos(omega*t)]
+det exp(tA) = 1 ; trace A = 0

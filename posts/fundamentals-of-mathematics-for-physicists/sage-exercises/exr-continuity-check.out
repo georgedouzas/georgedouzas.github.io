@@ -1,0 +1,4 @@
+f : left limit 1 , right limit 1 , value at 1: 1 -> continuous at 1: True
+g : left limit 1 , right limit 2 , value at 1: 2 -> continuous at 1: False
+f is also differentiable at 1: left derivative 2 , right derivative 2 (equal, so the graph has no corner)
+|x| is continuous but not differentiable at 0: the difference quotients |h|/h have one-sided limits 1 and -1

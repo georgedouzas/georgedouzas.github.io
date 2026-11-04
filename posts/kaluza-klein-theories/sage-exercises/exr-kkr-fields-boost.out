@@ -1,0 +1,2 @@
+A' = [A0*cosh(b) + A1*sinh(b), A1*cosh(b) + A0*sinh(b), A2, A3]
+[PASS] J^T G(eta, A, phi) J = G(eta, Lambda^T A, phi): g is invariant, A a covector, phi a scalar: True

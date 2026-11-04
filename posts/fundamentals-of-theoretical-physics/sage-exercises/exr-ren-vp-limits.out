@@ -1,0 +1,4 @@
+small z: int = -1/280*z^2 + 1/30*z   so Pi-hat = (2 alpha/pi)( -1/280*z^2 + 1/30*z )
+z = 1e+02: 6 int - (log z - 5/3) = 5.70e-02
+z = 1e+04: 6 int - (log z - 5/3) = 5.99e-04
+z = 1e+08: 6 int - (log z - 5/3) = -1.44e-09

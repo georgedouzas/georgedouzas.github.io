@@ -1,0 +1,4 @@
+Z in spherical coordinates: cos(th)
+Z in stereographic coordinates (through the transition map): (u^2 + v^2 - 1)/(u^2 + v^2 + 1)
+agrees with (u^2 + v^2 - 1)/(u^2 + v^2 + 1): True
+the angle phi itself has no single-valued expression: atan2(v, u) jumps by 2*pi across the half-line v = 0, u < 0: True

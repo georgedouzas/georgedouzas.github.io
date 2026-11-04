@@ -1,0 +1,7 @@
+grad det = (d, -c, -b, a)
+grad det = 0 forces a = b = c = d = 0, where det = 0, so 1 is a regular value: [
+[a == 0, b == 0, c == 0, d == 0]
+]
+gradient at the identity (a, b, c, d) = (1, 0, 0, 1): (1, 0, 0, 1)
+tangent vectors X at 1 satisfy grad . X = X_11 + X_22 = tr X = 0: dimension 3
+a curve in SL(2, R): [t*sin(t) + cos(t), t*cos(t) - sin(t), sin(t), cos(t)] ; det = 1 ; velocity at t = 0: [0, 0, 1, 0] trace 0

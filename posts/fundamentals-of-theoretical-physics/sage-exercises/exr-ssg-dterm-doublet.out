@@ -1,0 +1,5 @@
+[PASS] each D^a is real: True
+[PASS] V_D = g^2 (phi^dag phi)^2 / 8: True
+[PASS] Fierz identity sum_a sigma^a_ij sigma^a_kl = 2 delta_il delta_jk - delta_ij delta_kl: True
+[PASS] the adjoint D-terms phi^* T^a_adj phi = -i (phi^* x phi)^a equal 2 tr(T^a [phi, phi^dag]) up to sign: True
+[PASS] a real direction phi^a = u^a (v = 0) is D-flat: [phi, phi^dag] = 0: True

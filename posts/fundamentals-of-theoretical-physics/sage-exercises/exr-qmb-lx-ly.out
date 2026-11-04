@@ -1,0 +1,18 @@
+l = 1: [L_x, L_y] = i L_z: True
+   m =  1: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 1/2, bound saturated: True
+   m =  0: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 1, bound saturated: False
+   m = -1: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 1/2, bound saturated: True
+l = 2: [L_x, L_y] = i L_z: True
+   m =  2: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 1, bound saturated: True
+   m =  1: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 2.5000000000000000?, bound saturated: False
+   m =  0: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 3, bound saturated: False
+   m = -1: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 2.5000000000000000?, bound saturated: False
+   m = -2: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 1, bound saturated: True
+l = 3: [L_x, L_y] = i L_z: True
+   m =  3: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 3/2, bound saturated: True
+   m =  2: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 4, bound saturated: False
+   m =  1: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 5.5000000000000000?, bound saturated: False
+   m =  0: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 6, bound saturated: False
+   m = -1: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 5.5000000000000000?, bound saturated: False
+   m = -2: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 4, bound saturated: False
+   m = -3: <Lx> = 0, <Ly> = 0, (dLx)^2 = (dLy)^2 = 3/2, bound saturated: True

@@ -1,0 +1,6 @@
+span of v1, v2, v3 has dimension 2 (v3 = v1 + v2 is redundant)
+linear dependence among v1, v2, v3: [
+(1, 1, -1)
+]
+v1, v2, v4 independent: True ; their span is all of QQ^3: True
+coordinates of (2, 5, 1) in the basis (v1, v2, v4): [2, 1, 0]

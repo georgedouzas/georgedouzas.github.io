@@ -1,0 +1,4 @@
+Jacobian of the polar map: [(cos(phi), -r*sin(phi)), (sin(phi), r*cos(phi))] ; determinant: r
+int_0^oo e^{-r^2} r dr = 1/2 ; times 2 pi: pi
+I = int e^{-x^2} dx = sqrt(pi) ; I^2 = pi = pi: True
+the Cartesian double integral directly: pi

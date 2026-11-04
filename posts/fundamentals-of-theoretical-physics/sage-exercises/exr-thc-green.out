@@ -1,0 +1,7 @@
+n =  0: int_0^beta G e^{i omega_n tau} d tau = 1/(omega_n^2 + omega^2): True
+n =  1: int_0^beta G e^{i omega_n tau} d tau = 1/(omega_n^2 + omega^2): True
+n =  2: int_0^beta G e^{i omega_n tau} d tau = 1/(omega_n^2 + omega^2): True
+n = -3: int_0^beta G e^{i omega_n tau} d tau = 1/(omega_n^2 + omega^2): True
+beta = 1.50000000000000, omega = 0.800000000000000, tau = 0.000000000000000: series 1.1637622, closed form 1.1637660
+beta = 1.50000000000000, omega = 0.800000000000000, tau = 0.400000000000000: series 1.0204301, closed form 1.0204301
+beta = 1.50000000000000, omega = 0.800000000000000, tau = 1.10000000000000: series 1.0204301, closed form 1.0204301

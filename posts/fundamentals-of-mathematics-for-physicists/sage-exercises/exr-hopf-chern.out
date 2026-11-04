@@ -1,0 +1,4 @@
+A_psi = cos(theta) dphi : F = dA has component -sin(th) ; integral over S^2 = -4*pi
+A_chi = (1/2) cos(theta) dphi : F = dA has component -1/2*sin(th) ; integral over S^2 = -2*pi
+Hopf bundle S^3 -> S^2: c_1 = (1/2 pi) integral of d A_chi = -1 ; an integer: True ; equals -1: True
+treating psi as 2 pi-periodic (the quotient SO(3) -> S^2): c_1 = -2

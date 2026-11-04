@@ -1,0 +1,9 @@
+s = 1/2  algebra: True  S^2 = hbar^2 s(s+1): True  eigenvalues of S_1 / hbar: [-1/2, 1/2]
+s = 1  algebra: True  S^2 = hbar^2 s(s+1): True  eigenvalues of S_1 / hbar: [-1, 0, 1]
+s = 3/2  algebra: True  S^2 = hbar^2 s(s+1): True  eigenvalues of S_1 / hbar: [-3/2, -1/2, 1/2, 3/2]
+s = 2  algebra: True  S^2 = hbar^2 s(s+1): True  eigenvalues of S_1 / hbar: [-2, -1, 0, 1, 2]
+S_+ for s = 3/2:
+[      0 sqrt(3)       0       0]
+[      0       0       2       0]
+[      0       0       0 sqrt(3)]
+[      0       0       0       0]

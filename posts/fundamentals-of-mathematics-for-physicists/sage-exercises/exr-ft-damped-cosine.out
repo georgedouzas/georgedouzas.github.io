@@ -1,0 +1,6 @@
+transform: 2*(a^3 + a*b^2 + a*k^2)/(a^4 + 2*a^2*b^2 + b^4 + k^4 + 2*(a^2 - b^2)*k^2)
+equals a/(a^2 + (k - b)^2) + a/(a^2 + (k + b)^2): True
+the Lorentzian at k = b has maximum 1/a and equals half of it at k - b = [
+k == -a + b,
+k == a + b
+]

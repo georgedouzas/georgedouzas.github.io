@@ -1,0 +1,5 @@
+pi^* vol = pi^*(vol) = sin(th) dth∧dph
+d sigma3 = dsigma3 = -sin(th) dth∧dph
+pi^* vol = -d sigma3: True
+pi^* vol = sigma1 ^ sigma2: True
+pi^* vol (d/dpsi, .) = 0, the pulled-back form is horizontal: 0

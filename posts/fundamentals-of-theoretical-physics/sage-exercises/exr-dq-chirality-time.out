@@ -1,0 +1,4 @@
+H^2 = E^2: True
+<gamma_5>(t) = (2*m^2*sin(sqrt(m^2 + p^2)*t)^2 - m^2 - p^2)/(m^2 + p^2)
+= -1 + (m^2/E^2)(1 - cos 2Et): True
+[H, gamma_5] = 2 m beta gamma_5: True

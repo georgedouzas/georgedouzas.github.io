@@ -1,0 +1,4 @@
+X = d/dphi has the constant component 1 in the chart of U; the transition map phi' = phi + const has Jacobian 1,
+so X also has component 1 in the chart of V: a nowhere-vanishing section exists and T S^1 = S^1 x R is trivial.
+ambient length of d/dphi on the sphere: abs(sin(th))  -> vanishes at the poles theta = 0, pi
+by the hairy ball theorem no section of T S^2 is nowhere vanishing: T S^2 is a non-trivial bundle

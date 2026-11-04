@@ -1,0 +1,4 @@
+sum_{k>=1} 2^-k = 1
+partial sums for m = 1, 2, 5, 10, 20: [1/2, 3/4, 31/32, 1023/1024, 1048575/1048576]
+P(no head in the first 20 tosses) = 1 - partial sum = 1/1048576 = 2^-20: True
+expected waiting time sum k 2^-k = 2

@@ -1,0 +1,5 @@
+curve in the chart: (t, 2*t)
+velocity components (da/dt, db/dt): [1, 2]
+image in R^3: (2*cos(t)^3 + 4*cos(t)^2 - cos(t) - 2, 2*(cos(t)^2 + 2*cos(t))*sin(t), sin(t))
+endpoints coincide (the curve closes after one period): True [3, 0, 0]
+the curve winds once around the tube (a: 0 -> 2pi) and twice around the axis (b: 0 -> 4pi)

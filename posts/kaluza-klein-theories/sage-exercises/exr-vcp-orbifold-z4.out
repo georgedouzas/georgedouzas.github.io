@@ -1,0 +1,5 @@
+z -> i z : det(1 - M^k) = 2 ; fixed points (lattice coordinates): [(0, 0), (1/2, 1/2)]
+z -> -z : det(1 - M^k) = 4 ; fixed points (lattice coordinates): [(0, 0), (0, 1/2), (1/2, 0), (1/2, 1/2)]
+z -> -i z : det(1 - M^k) = 2 ; fixed points (lattice coordinates): [(0, 0), (1/2, 1/2)]
+i * (1/2) = i/2: the points 1/2 and i/2 form one orbit of length 2: True
+Riemann-Hurwitz: chi(quotient) = chi(T^2)/4 + sum (1 - 1/m_i) = 2 = 2, a sphere: True

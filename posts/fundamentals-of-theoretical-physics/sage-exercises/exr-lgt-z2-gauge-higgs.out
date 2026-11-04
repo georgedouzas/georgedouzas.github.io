@@ -1,0 +1,5 @@
+beta_G = 0.0, beta_M = 0.4: <S s S> = 0.37995, <sigma_P> = 0.02084, <S_x> = 1.5e-16, <sigma_l> = 3.5e-18
+       tanh(beta_M) = 0.37995, tanh(beta_M)^4 = 0.02084
+beta_G = 0.0, beta_M = 1.0: <S s S> = 0.76159, <sigma_P> = 0.33643, <S_x> = 3.4e-18, <sigma_l> = 3.6e-17
+       tanh(beta_M) = 0.76159, tanh(beta_M)^4 = 0.33643
+beta_G = 0.5, beta_M = 0.4: <S s S> = 0.44579, <sigma_P> = 0.57002, <S_x> = 2.3e-16, <sigma_l> = 1.1e-17

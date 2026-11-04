@@ -1,0 +1,4 @@
+[rot, gradZ] = [rot,gradZ] = 0
+[d_theta, sin(theta) d_phi] = [dth,Y] = cos(th) ∂/∂ph
+the bracket acts on functions as X(Y f) - Y(X f): True
+brackets are antisymmetric, [Y, d_theta] = -[d_theta, Y]: True

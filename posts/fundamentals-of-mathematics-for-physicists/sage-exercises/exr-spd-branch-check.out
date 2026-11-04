@@ -1,0 +1,4 @@
+gamma_5 = diag(-1,-1,1,1): True
+n = 2, D =  6: size 8, Clifford relations: True, Gamma_* = gamma_5 x gamma_*^K: True
+n = 4, D =  8: size 16, Clifford relations: True, Gamma_* = gamma_5 x gamma_*^K: True
+n = 6, D = 10: size 32, Clifford relations: True, Gamma_* = gamma_5 x gamma_*^K: True

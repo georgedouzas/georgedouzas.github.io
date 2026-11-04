@@ -1,0 +1,4 @@
+Lambda_+^2 = Lambda_+, Lambda_+ Lambda_- = 0, sum = 1: True True True
+ranks: 2 2 ; Lambda_+ Hermitian? False ; Lambda_+^dag = gamma^0 Lambda_+ gamma^0: True
+Lambda_+ u = u, Lambda_+ v = 0: True True
+(1 + H/E)/2: Hermitian True , idempotent True , rank 2 , fixes u True

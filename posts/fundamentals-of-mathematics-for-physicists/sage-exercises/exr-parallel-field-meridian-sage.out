@@ -1,0 +1,4 @@
+Gamma^theta_{theta j} = [0, 0] ;  Gamma^phi_{theta j} = [0, cos(t)/sin(t)]
+V^theta(t) = a ;  V^phi(t) = b/sin(t)   (starting from (a, b) on the equator)
+V^phi sin(t) is constant: True
+norm g(V, V) = a^2 + b^2 preserved: True

@@ -1,0 +1,6 @@
+L_P g = 0  -> Killing: True
+L_D g = 0  -> Killing: True
+L_S g = 0  -> Killing: True
+[P, D] = P: True ;  [P, S] = 2 D: True ;  [D, S] = S: True
+scalar curvature R = -2  (Gauss curvature R/2 = -1)
+the Euclidean rotation -y d/dx + x d/dy is Killing here: False

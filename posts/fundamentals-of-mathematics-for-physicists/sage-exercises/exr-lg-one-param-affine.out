@@ -1,0 +1,5 @@
+exp(t(X + Y)) = [e^t, e^t - 1, 0, 1]
+gamma(s) gamma(t) = gamma(s + t): True
+gamma' = (X + Y) gamma: True ; gamma(0) = 1: True
+exp(xX + yY) = [e^x, y*(e^x - 1)/x, 0, 1] ; equals [[e^x, y (e^x - 1)/x], [0, 1]]: True
+the orbit (a, b) = (e^t, e^t - 1) lies on the line b = a - 1 through the identity (1, 0)

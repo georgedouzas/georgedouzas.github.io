@@ -1,0 +1,9 @@
+n = 0:  1 intervals, total length 1, contains 1/4: True, 1/4 is an endpoint: False
+n = 1:  2 intervals, total length 2/3, contains 1/4: True, 1/4 is an endpoint: False
+n = 2:  4 intervals, total length 4/9, contains 1/4: True, 1/4 is an endpoint: False
+n = 3:  8 intervals, total length 8/27, contains 1/4: True, 1/4 is an endpoint: False
+n = 4: 16 intervals, total length 16/81, contains 1/4: True, 1/4 is an endpoint: False
+n = 5: 32 intervals, total length 32/243, contains 1/4: True, 1/4 is an endpoint: False
+n = 6: 64 intervals, total length 64/729, contains 1/4: True, 1/4 is an endpoint: False
+stage 2: [(0, 1/9), (2/9, 1/3), (2/3, 7/9), (8/9, 1)]
+ternary digits of 1/4: [0, 2, 0, 2, 0, 2, 0, 2, 0, 2]

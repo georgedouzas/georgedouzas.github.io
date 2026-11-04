@@ -1,0 +1,4 @@
+h(x1,y1,z1) h(x2,y2,z2) = [1, x1 + x2, x1*y2 + z1 + z2, 0, 1, y1 + y2, 0, 0, 1]
+product is h(x1+x2, y1+y2, z1+z2+x1*y2): True
+inverse = [1, -x1, x1*y1 - z1, 0, 1, -y1, 0, 0, 1] ; equals h(-x, -y, x*y - z): True
+g1 g2 - g2 g1 = [0, 0, -x2*y1 + x1*y2, 0, 0, 0, 0, 0, 0] (nonzero: the group is not abelian; the commutator only moves z)

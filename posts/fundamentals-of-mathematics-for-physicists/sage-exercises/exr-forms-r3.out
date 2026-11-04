@@ -1,0 +1,5 @@
+df = df = 2*x*y dx + x^2 dy + dz
+d omega = domega = 0  -> this vector field is a gradient (curl 0): True
+d alpha = dalpha = 2 dx∧dy  -> curl of (-y, x, 0) is (0, 0, 2)
+d(df) = 0 (curl grad = 0): True ; d(d alpha) = 0 (div curl = 0): True
+d beta = dbeta = 3 dx∧dy∧dz  -> the divergence of (x, y, z) is 3

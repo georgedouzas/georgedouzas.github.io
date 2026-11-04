@@ -1,0 +1,7 @@
+general surface of revolution: g = ((d(f)/dt)^2 + (d(h)/dt)^2) dt⊗dt + f(t)^2 dph⊗dph
+determinant: f(t)^2*diff(f(t), t)^2 + f(t)^2*diff(h(t), t)^2
+inverse: inv_g = 1/((d(f)/dt)^2 + (d(h)/dt)^2) ∂/∂t⊗∂/∂t + f(t)^(-2) ∂/∂ph⊗∂/∂ph
+sphere (f = sin t, h = cos t) : ds^2 = (1) dt^2 + (sin(t)^2) dphi^2
+cylinder (f = R, h = t) : ds^2 = (1) dt^2 + (R^2) dphi^2
+cone (f = t, h = t) : ds^2 = (2) dt^2 + (t^2) dphi^2
+torus (f = R + r cos t, h = r sin t) : ds^2 = (r^2) dt^2 + ((r*cos(t) + R)^2) dphi^2

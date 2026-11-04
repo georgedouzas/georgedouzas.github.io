@@ -1,0 +1,7 @@
+lambda = 1 gives back the SU(2) metric: True
+scalar curvature R(lambda) = -2*lam^2 + 8 : True
+R(1) = 6: True ; R -> 8 as lambda -> 0 (collapsing fibre), R < 0 for lambda > 2
+R_thth / g_thth = -2*lam^2 + 4 ;  R_psps / g_psps = 2*lam^2
+Einstein (the two ratios agree) exactly when lambda = 1: [
+lam == 1
+]

@@ -1,0 +1,9 @@
+tr g = 2*(cos(1/2*ph)*cos(1/2*ps) - sin(1/2*ph)*sin(1/2*ps))*cos(1/2*th)
+equals 2 cos(theta/2) cos((phi + psi)/2): True
+equals a + conj(a) = 2 Re a: True
+at theta = 0, phi + psi = 0 the matrix is the identity: [1 0]
+[0 1]
+at theta = 0, phi + psi = 2 pi the matrix is -1: [-1  0]
+[ 0 -1]
+on the chart 0 < theta < pi, cos(theta/2) lies strictly between 0 and 1, so |tr g| < 2 there
+sample at (theta, phi, psi) = (pi/3, pi/4, pi/2): tr g = 1/4*sqrt(3)*sqrt(2)*sqrt(sqrt(2) + 2) - 1/4*sqrt(3)*sqrt(2)*sqrt(-sqrt(2) + 2) = 0.662827

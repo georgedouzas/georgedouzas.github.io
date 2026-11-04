@@ -1,0 +1,7 @@
+U(t) =
+[   cos(1/2*Om*t) -I*sin(1/2*Om*t)]
+[-I*sin(1/2*Om*t)    cos(1/2*Om*t)]
+Prob(down at t) = sin(1/2*Om*t)^2 ; equals sin(Om t/2)^2: True
+first t with probability 1: [
+t == pi/Om
+]

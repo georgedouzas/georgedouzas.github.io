@@ -1,0 +1,10 @@
+Killing form =
+[8 0 0]
+[0 0 4]
+[0 4 0]
+equals 4 tr(XY): True
+det = -128 ; eigenvalues = [8, 4, -4]
+Sage's lie_algebras.sl(QQ, 2) gives the same matrix in its own basis
+[8 0 0]
+[0 0 4]
+[0 4 0]

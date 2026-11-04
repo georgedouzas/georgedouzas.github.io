@@ -1,0 +1,11 @@
+# Exercise exr-qm-classical-action-osc-sage: classical path and action of the oscillator, and Hamilton-Jacobi.
+s = var("s", domain="real"); x, y = var("x y", domain="real"); m, w, T = var("m w T", domain="positive")
+q = function("q")(s)
+sol = desolve(diff(q, s, 2) + w ** 2 * q, q, ivar=s, ics=None)
+print("general solution:", sol)
+xcl = (y * sin(w * (T - s)) + x * sin(w * s)) / sin(w * T)
+print("boundary values:", xcl.subs(s=0).simplify_full(), ",", xcl.subs(s=T).simplify_full(), "; equation:", (diff(xcl, s, 2) + w ** 2 * xcl).simplify_full())
+S = integrate(m / 2 * diff(xcl, s) ** 2 - m * w ** 2 / 2 * xcl ** 2, s, 0, T).simplify_full()
+target = m * w / (2 * sin(w * T)) * ((x ** 2 + y ** 2) * cos(w * T) - 2 * x * y)
+print("S_cl - target =", (S - target).simplify_full())
+print("dS/dx - m xdot(T) =", (diff(target, x) - m * diff(xcl, s).subs(s=T)).simplify_full(), "; -d^2 S/dx dy =", (-diff(target, x, y)).simplify_full())

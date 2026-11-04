@@ -1,0 +1,8 @@
+T = (N/V)^(2/3)*e^(-s0 + 2/3*S/N)
+p V - N T = 0
+mu = 1/2*(5*N - 2*S)*e^(-s0 + 2/3*S/N)/(V*(N/V)^(1/3))
+U - (T S - p V + mu N) = 0
+G - mu N = 0
+Gibbs-Duhem along dS: 0
+Gibbs-Duhem along dV: 0
+Gibbs-Duhem along dN: 0

@@ -1,0 +1,8 @@
+n = 1  <p> = 0  <p^2>/(2m E_n) = 1
+n = 2  <p> = 0  <p^2>/(2m E_n) = 1
+n = 3  <p> = 0  <p^2>/(2m E_n) = 1
+n = 4  <p> = 0  <p^2>/(2m E_n) = 1
+n = 5  <p> = 0  <p^2>/(2m E_n) = 1
+phi~_1(p) matches hbar sqrt(pi hbar L)(1 + e^(-i p L/hbar))/(pi^2 hbar^2 - p^2 L^2): True
+|phi~_1|^2 at p = 0: 0.12901 ; limit at p = pi: 0.079577 ; at p = 2: 0.10648
+normalised: 0.9999994693108085

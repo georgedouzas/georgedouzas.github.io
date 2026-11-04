@@ -1,0 +1,5 @@
+nabla (d/dy) = nabla_g(Y) = 0
+d/dy is covariantly constant: True
+nabla (d/dr) = nabla_g(e_r) = 1/r ∂/∂ph⊗dph
+nabla_ph (d/dr) = (1/r) d/dph, nabla_r (d/dr) = 0: True
+every constant field a d/dx + b d/dy is covariantly constant: True

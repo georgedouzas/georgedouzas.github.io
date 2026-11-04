@@ -1,0 +1,5 @@
+df/dx = 2*x*y ; df/dy = x^2 + cos(y)
+mixed partials agree (smooth function): True
+directional derivative at (1, 0) along (3, 4)/5: 8/5
+chain rule d/dt f(c(t)) = grad f . c'(t): True
+Taylor expansion of f around (0, 0) to order 3: x^2*y - 1/6*y^3 + y

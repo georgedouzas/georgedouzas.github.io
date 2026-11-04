@@ -1,0 +1,4 @@
+rotation: Phi_t^* g = Phi^*(g) = dx⊗dx + dy⊗dy
+   d/dt|0 Phi_t^* g = [[0, 0], [0, 0]];  L_X g = [[0, 0], [0, 0]];  equal: True
+dilation: Phi_t^* g = Phi^*(g) = e^(2*t) dx⊗dx + e^(2*t) dy⊗dy
+   d/dt|0 Phi_t^* g = [[2, 0], [0, 2]];  L_X g = [[2, 0], [0, 2]];  equal: True

@@ -1,0 +1,6 @@
+AdS_7 x S^4: F^2 = 24*c^2 ; R_{mu nu} = 2/3*c^2 g_{mu nu}; R_mn = -4/3*c^2 g_mn
+[PASS] both factors are Einstein: AdS_7 (k > 0 in our signature) and S^4 (k < 0 for g_mn = -gamma_mn): True
+L_AdS7^2 = 9/c^2 , a_S4^2 = 9/4/c^2
+[PASS] the AdS_7 radius is twice the S^4 radius: True
+AdS_4 x S^7: R_{mu nu} = 4/3*c^2 g; R_mn = -2/3*c^2 g; L^2 = 9/4/c^2 , a^2 = 9/c^2
+[PASS] with c = 3m this is R_{mu nu} = 12 m^2 g, R_mn = -6 m^2 g, and the S^7 radius is twice the AdS_4 radius: True

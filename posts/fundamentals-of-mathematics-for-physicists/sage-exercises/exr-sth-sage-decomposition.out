@@ -1,0 +1,9 @@
+D = diag [-sqrt(2) + 2, sqrt(2) + 2, 2]
+U =
+[         1/2          1/2  1/2*sqrt(2)]
+[-1/2*sqrt(2)  1/2*sqrt(2)            0]
+[         1/2          1/2 -1/2*sqrt(2)]
+U^T U = 1: True
+A = U D U^T: True
+A = sum lambda_k P_k: True ; sum P_k = 1: True
+P_k P_l = delta_kl P_k: True

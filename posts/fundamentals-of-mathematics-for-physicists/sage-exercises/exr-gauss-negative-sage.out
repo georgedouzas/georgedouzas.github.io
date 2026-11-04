@@ -1,0 +1,4 @@
+pseudosphere f = e^{-u}: K = -1 ; equals -f''/f: True
+f = cosh u: K = -1 ; equals -f''/f: True
+cone f = u sin(alpha): K = 0 ; equals -f''/f: True
+sphere f = sin u: K = 1 ; equals -f''/f: True

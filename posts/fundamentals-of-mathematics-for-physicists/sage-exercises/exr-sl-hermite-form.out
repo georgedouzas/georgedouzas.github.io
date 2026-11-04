@@ -1,0 +1,4 @@
+p = e^(-x^2) | multiplier mu = p/a = e^(-x^2) | weight w = mu = e^(-x^2)
+-(p u')' - mu c u equals -mu (a u'' + b u' + c u): True
+H_3 = 8x^3 - 12x satisfies -(e^(-x^2) u')' = 6 e^(-x^2) u: True
+orthogonality of H_1 = 2x and H_3 with weight e^(-x^2): 0

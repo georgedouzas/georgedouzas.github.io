@@ -1,0 +1,4 @@
+d eta_N = area: True ; d eta_S = area: True
+eta_N - eta_S = eta_N-eta_S = 2 dph
+eta_S in the stereographic chart: eta_S = 2*v/(u^2 + v^2 + 1) du - 2*u/(u^2 + v^2 + 1) dv
+components equal (2v, -2u)/(1 + u^2 + v^2): True

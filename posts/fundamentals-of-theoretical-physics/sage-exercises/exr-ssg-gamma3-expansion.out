@@ -1,0 +1,3 @@
+[PASS] gamma^mu gamma^nu gamma^rho = gamma^{mu nu rho} + eta^{mu nu} gamma^rho - eta^{mu rho} gamma^nu + eta^{nu rho} gamma^mu for all indices: True
+gamma^{mu nu rho} = c eps^{mu nu rho sigma} gamma_sigma gamma^5 with c = [-I]
+[PASS] the three-index gamma is dual to gamma_sigma gamma^5 with c = -i, so the Rarita-Schwinger operator is eps^{mu nu rho sigma} gamma^5 gamma_sigma d_nu psi_rho up to a factor: True

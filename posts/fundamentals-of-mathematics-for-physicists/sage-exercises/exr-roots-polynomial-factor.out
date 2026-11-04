@@ -1,0 +1,4 @@
+over QQ:         (z - 1) * (z + 1) * (z^2 - z + 1) * (z^2 + z + 1)
+over QQ(i):      (z - 1) * (z + 1) * (z^2 - z + 1) * (z^2 + z + 1)
+over QQ(omega):  (z - 1) * (z - w - 1) * (z + w) * (z - w) * (z + w + 1) * (z + 1)
+number of linear factors over QQ, QQ(i), QQ(omega): [2, 2, 6]

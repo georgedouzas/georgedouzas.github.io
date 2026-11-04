@@ -1,0 +1,2 @@
+j1 x j2 = sum_{J=|j1-j2|}^{j1+j2} J for all 0 <= j1, j2 <= 3: True
+example 3/2 x 2 = A1(1) + A1(3) + A1(5) + A1(7)

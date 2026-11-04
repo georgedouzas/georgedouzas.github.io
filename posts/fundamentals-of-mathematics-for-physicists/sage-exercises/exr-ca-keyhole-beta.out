@@ -1,0 +1,3 @@
+a = 1/3: integral = 2/3*sqrt(3)*pi   pi/sin(pi/3) = 2/3*sqrt(3)*pi   B(1/3, 2/3) = beta(1/3, 2/3)   numerically 3.62759872846844 3.62759872846844
+general a in (0, 1): integral = beta(-a + 1, a)   equals B(a, 1 - a): True   equals pi/sin(pi a) at a = 1/3, 1/7, 9/10: True
+residue of z^(a-1)/(1 + z) at z = -1 = e^{i pi}: e^{i pi (a - 1)} = -e^{i pi a}; (1 - e^{2 pi i a}) I = -2 pi i e^{i pi a} gives I = pi/sin(pi a): True

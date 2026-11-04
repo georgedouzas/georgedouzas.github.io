@@ -1,0 +1,9 @@
+g = g = 4 du⊗du + 3 du⊗dv + 3 dv⊗du + 9 dv⊗dv
+det g = 27
+inverse: inv_g = 1/3 ∂/∂u⊗∂/∂u - 1/9 ∂/∂u⊗∂/∂v - 1/9 ∂/∂v⊗∂/∂u + 4/27 ∂/∂v⊗∂/∂v
+g^{-1} g = 1: True
+h = h = dt⊗dt - dt⊗dx - dx⊗dt
+det h = -1  (negative: Lorentzian)
+inverse: inv_h = -∂/∂t⊗∂/∂x - ∂/∂x⊗∂/∂t - ∂/∂x⊗∂/∂x
+h^{-1} h = 1: True
+eigenvalues of the matrix of h: [-0.618033988749895?, 1.618033988749895?]  -> one positive, one negative

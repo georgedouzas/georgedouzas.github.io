@@ -1,0 +1,8 @@
+first die = 1 : P(sum >= 10 | i) = 0   P(sum = 7 | i) = 1/6
+first die = 2 : P(sum >= 10 | i) = 0   P(sum = 7 | i) = 1/6
+first die = 3 : P(sum >= 10 | i) = 0   P(sum = 7 | i) = 1/6
+first die = 4 : P(sum >= 10 | i) = 1/6   P(sum = 7 | i) = 1/6
+first die = 5 : P(sum >= 10 | i) = 1/3   P(sum = 7 | i) = 1/6
+first die = 6 : P(sum >= 10 | i) = 1/2   P(sum = 7 | i) = 1/6
+total probability: sum_i P(A | i) P(i) = 1/6 = P(A) = 1/6 : True
+total probability: sum_i P(C | i) P(i) = 1/6 = P(C) = 1/6 : True

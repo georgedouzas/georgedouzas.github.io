@@ -1,0 +1,6 @@
+spin 1/2: J_y^2 = 1/4: True ; exp(-i theta J_y) = [cos(1/2*theta), -sin(1/2*theta), sin(1/2*theta), cos(1/2*theta)]
+  equals d^{1/2}(theta): True
+spin 1: J_y^3 = J_y: True
+  1 - i J_y sin theta - J_y^2 (1 - cos theta) = d^1(theta): True
+  it satisfies d' = -i J_y d: True
+d^{1/2}(2 pi) = -1 while d^1(2 pi) = 1: True

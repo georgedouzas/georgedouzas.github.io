@@ -1,0 +1,4 @@
+L_rot g = 0
+L_rad g = 2 dr⊗dr + 2*r^2 dph⊗dph  = 2 g: True
+L_rad f = rad(f) = 2*r^2*cos(ph) ; L_rot f = -r^2*sin(ph)
+L_rot Y = [rot, Y] = 0 ; L_rad Y = [rad, Y] = -∂/∂r

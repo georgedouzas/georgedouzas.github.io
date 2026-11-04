@@ -1,0 +1,3 @@
+phi continuous on z = 0: True
+D_z continuous on z = 0: True
+force on q (z component): -1/16*(epsilon - 1)*q^2/(pi*d^2*(epsilon + 1))

@@ -1,0 +1,6 @@
+f'(z) = -(z^2 - 2*z - 1)/(z^2 + 1)^2
+numerator -z^2 + 2z + 1 (quotient rule): True
+zeros of f': [
+z == -sqrt(2) + 1,
+z == sqrt(2) + 1
+]

@@ -1,0 +1,4 @@
+solutions satisfy the equation: True
+W(t) = 2*e^(6*t) | companion matrix A = [(0, 1, 0), (0, 0, 1), (6, -11, 6)] | tr A = 6
+W' - (tr A) W = 0
+three solutions of y'' + w^2 y = 0: 3x3 Wronskian = 0

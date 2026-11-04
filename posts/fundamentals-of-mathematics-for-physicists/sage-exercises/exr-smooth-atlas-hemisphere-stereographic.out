@@ -1,0 +1,8 @@
+hemisphere -> stereographic: u = -X/(sqrt(-X^2 - Y^2 + 1) - 1)
+v = -Y/(sqrt(-X^2 - Y^2 + 1) - 1)
+stereographic -> hemisphere: X = 2*u/(u^2 + v^2 + 1)
+Y = 2*v/(u^2 + v^2 + 1)
+Jacobian determinant equals -1/(Z (1 - Z)^2) with Z = sqrt(1 - X^2 - Y^2): True
+it is finite and non-zero for 0 < Z < 1, that is on the hemisphere minus the pole
+the hemisphere corresponds to u^2 + v^2 > 1: at (X, Y) = (3/5, 0), (u, v) = (3, 0)
+and back through the inverse: [3/5, 0]

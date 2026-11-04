@@ -1,0 +1,5 @@
+n = 0 : int K_E psi_n / (e^(-(n + 1/2) w tau) psi_n(x)) = 1
+n = 1 : int K_E psi_n / (e^(-(n + 1/2) w tau) psi_n(x)) = 1
+n = 2 : int K_E psi_n / (e^(-(n + 1/2) w tau) psi_n(x)) = 1
+K_E(x, x; tau) / (e^(-w tau/2) psi_0(x)^2) at w = 1, x = 0.7, tau = 2, 5, 10: [1.1343520, 1.0066034, 1.0000445]
+-(1/tau) log K_E(0, 0; tau) at w = 1, tau = 20: 0.528618 (-> E_0 = 1/2 as tau grows)

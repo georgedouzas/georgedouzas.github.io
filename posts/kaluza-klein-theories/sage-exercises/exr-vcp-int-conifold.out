@@ -1,0 +1,6 @@
+K/(g_s M) for e^{A_min} = 1e-15: 16.491
+check exp(-2 pi ratio/3) = 1.0000e-15
+g_s = 0.1, M = 10: K = 16.5
+g_s = 0.2, M = 20: K = 66.0
+g_s = 0.5, M = 4: K = 33.0
+matching e^{-k r_c pi} = e^{-2 pi K/(3 g_s M)}: k r_c = 2K/(3 g_s M) = 10.994

@@ -23,46 +23,62 @@ section-divs: false
   </div>
 </div>
 <section class="landing-section reveal">
-<div class="oss-grid">
-  <a class="oss-card" href="https://github.com/georgedouzas/sports-betting">
-    <img class="oss-thumb" src="assets/oss/sports-betting.svg" alt="" loading="lazy">
-    <h3>sports-betting</h3>
-    <p>Tools to create and evaluate machine learning models for sports betting, compatible with scikit-learn, usable from an AI agent, Python or the command line.</p>
+<div class="post-list">
+  <a class="post-row" href="https://github.com/georgedouzas/sports-betting">
+    <div class="post-row-thumb"><img src="assets/oss/sports-betting.svg" alt="" loading="lazy"></div>
+    <div class="post-row-text">
+      <h3>sports-betting <span class="post-row-stars" data-repo="sports-betting"><span aria-hidden="true">★</span> <span class="post-row-star-count">832</span><span class="visually-hidden"> GitHub stars</span></span></h3>
+      <p>Tools to create and evaluate machine learning models for sports betting, compatible with scikit-learn, usable from an AI agent, Python or the command line.</p>
+    </div>
   </a>
-  <a class="oss-card" href="https://github.com/georgedouzas/imbalanced-learn-extra">
-    <img class="oss-thumb" src="assets/oss/imbalanced-learn-extra.svg" alt="" loading="lazy">
-    <h3>imbalanced-learn-extra</h3>
-    <p>Novel oversampling algorithms for class imbalance, including Geometric SMOTE and clustering-based oversampling.</p>
+  <a class="post-row" href="https://github.com/georgedouzas/imbalanced-learn-extra">
+    <div class="post-row-thumb"><img src="assets/oss/imbalanced-learn-extra.svg" alt="" loading="lazy"></div>
+    <div class="post-row-text">
+      <h3>imbalanced-learn-extra <span class="post-row-stars" data-repo="imbalanced-learn-extra"><span aria-hidden="true">★</span> <span class="post-row-star-count">34</span><span class="visually-hidden"> GitHub stars</span></span></h3>
+      <p>Novel oversampling algorithms for class imbalance, including Geometric SMOTE and clustering-based oversampling.</p>
+    </div>
   </a>
-  <a class="oss-card" href="https://github.com/georgedouzas/scikit-ai">
-    <img class="oss-thumb" src="assets/oss/scikit-ai.svg" alt="" loading="lazy">
-    <h3>scikit-ai</h3>
-    <p>Task-oriented components for text, images, audio and video with a scikit-learn API, powered by open-source models or cloud APIs.</p>
+  <a class="post-row" href="https://github.com/georgedouzas/scikit-ai">
+    <div class="post-row-thumb"><img src="assets/oss/scikit-ai.svg" alt="" loading="lazy"></div>
+    <div class="post-row-text">
+      <h3>scikit-ai <span class="post-row-stars" data-repo="scikit-ai"><span aria-hidden="true">★</span> <span class="post-row-star-count">2</span><span class="visually-hidden"> GitHub stars</span></span></h3>
+      <p>Task-oriented components for text, images, audio and video with a scikit-learn API, powered by open-source models or cloud APIs.</p>
+    </div>
   </a>
-  <a class="oss-card" href="https://github.com/georgedouzas/scikit-complexity">
-    <img class="oss-thumb" src="assets/oss/scikit-complexity.svg" alt="" loading="lazy">
-    <h3>scikit-complexity</h3>
-    <p>Create and simulate complex systems: describe a model in a few lines, and it works out the mathematics, picks a solver and runs the simulation.</p>
+  <a class="post-row" href="https://github.com/georgedouzas/scikit-complexity">
+    <div class="post-row-thumb"><img src="assets/oss/scikit-complexity.svg" alt="" loading="lazy"></div>
+    <div class="post-row-text">
+      <h3>scikit-complexity <span class="post-row-stars" data-repo="scikit-complexity"><span aria-hidden="true">★</span> <span class="post-row-star-count">3</span><span class="visually-hidden"> GitHub stars</span></span></h3>
+      <p>Create and simulate complex systems: describe a model in a few lines, and it works out the mathematics, picks a solver and runs the simulation.</p>
+    </div>
   </a>
-  <a class="oss-card" href="https://github.com/georgedouzas/veriphy">
-    <img class="oss-thumb" src="assets/oss/veriphy.svg" alt="" loading="lazy">
-    <h3>veriphy</h3>
-    <p>Certified computer algebra for Lean 4, with agent skills that turn a physics or math statement into a machine-verified proof.</p>
+  <a class="post-row" href="https://github.com/georgedouzas/veriphy">
+    <div class="post-row-thumb"><img src="assets/oss/veriphy.svg" alt="" loading="lazy"></div>
+    <div class="post-row-text">
+      <h3>veriphy <span class="post-row-stars" data-repo="veriphy"><span aria-hidden="true">★</span> <span class="post-row-star-count">0</span><span class="visually-hidden"> GitHub stars</span></span></h3>
+      <p>Certified computer algebra for Lean 4, with agent skills that turn a physics or math statement into a machine-verified proof.</p>
+    </div>
   </a>
-  <a class="oss-card" href="https://github.com/georgedouzas/copier-modern-python">
-    <img class="oss-thumb" src="assets/oss/copier-modern-python.svg" alt="" loading="lazy">
-    <h3>copier-modern-python</h3>
-    <p>Copier template for modern Python projects.</p>
+  <a class="post-row" href="https://github.com/georgedouzas/copier-modern-python">
+    <div class="post-row-thumb"><img src="assets/oss/copier-modern-python.svg" alt="" loading="lazy"></div>
+    <div class="post-row-text">
+      <h3>copier-modern-python <span class="post-row-stars" data-repo="copier-modern-python"><span aria-hidden="true">★</span> <span class="post-row-star-count">4</span><span class="visually-hidden"> GitHub stars</span></span></h3>
+      <p>Copier template for modern Python projects.</p>
+    </div>
   </a>
-  <a class="oss-card" href="https://github.com/georgedouzas/mathpix-mcp">
-    <img class="oss-thumb" src="assets/oss/mathpix-mcp.svg" alt="" loading="lazy">
-    <h3>mathpix-mcp</h3>
-    <p>MCP server for Mathpix OCR, converting images, PDFs and DOCX/PPTX to LaTeX and Markdown from any LLM or agent.</p>
+  <a class="post-row" href="https://github.com/georgedouzas/mathpix-mcp">
+    <div class="post-row-thumb"><img src="assets/oss/mathpix-mcp.svg" alt="" loading="lazy"></div>
+    <div class="post-row-text">
+      <h3>mathpix-mcp <span class="post-row-stars" data-repo="mathpix-mcp"><span aria-hidden="true">★</span> <span class="post-row-star-count">2</span><span class="visually-hidden"> GitHub stars</span></span></h3>
+      <p>MCP server for Mathpix OCR, converting images, PDFs and DOCX/PPTX to LaTeX and Markdown from any LLM or agent.</p>
+    </div>
   </a>
-  <a class="oss-card" href="https://github.com/georgedouzas/agentorg">
-    <img class="oss-thumb" src="assets/oss/agentorg.svg" alt="" loading="lazy">
-    <h3>agentorg</h3>
-    <p>A framework for generating multi-agent organisations powered by Agno.</p>
+  <a class="post-row" href="https://github.com/georgedouzas/agentorg">
+    <div class="post-row-thumb"><img src="assets/oss/agentorg.svg" alt="" loading="lazy"></div>
+    <div class="post-row-text">
+      <h3>agentorg <span class="post-row-stars" data-repo="agentorg"><span aria-hidden="true">★</span> <span class="post-row-star-count">0</span><span class="visually-hidden"> GitHub stars</span></span></h3>
+      <p>A framework for generating multi-agent organisations powered by Agno.</p>
+    </div>
   </a>
 </div>
 </section>

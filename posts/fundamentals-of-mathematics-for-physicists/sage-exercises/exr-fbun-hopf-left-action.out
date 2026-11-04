@@ -1,0 +1,6 @@
+pi(a e^{is}, b e^{-is}) = R_z(2s) pi(a, b): True
+pi(cos s a - sin s b, sin s a + cos s b) = R(2s) pi(a, b) about the Y-axis: True
+s = pi gives (a, b) -> (-a, -b) on S^3 but the identity rotation:
+[1 0 0]
+[0 1 0]
+[0 0 1]

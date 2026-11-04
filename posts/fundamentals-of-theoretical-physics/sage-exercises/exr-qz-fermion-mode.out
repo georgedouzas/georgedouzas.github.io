@@ -1,0 +1,5 @@
+{b, b^dag} = 1: True   b^2 = 0: True
+N = b^dag b = [0, 0, 0, 1]  eigenvalues [0, 1]
+{b1, b2} = 0: True   {b1, b2^dag} = 0: True
+{b2, b2^dag} = 1: True   b2^2 = 0: True
+without sigma_3 the modes commute instead: [b1, 1 (x) b] = 0: True , {b1, 1 (x) b} = 0: False

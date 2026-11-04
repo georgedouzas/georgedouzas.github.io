@@ -1,0 +1,5 @@
+Phi = -1/2*g*phi^2/M^2    L_eff = 1/8*g^2*phi^4/M^2
+lambda_eff from -lambda/4! phi^4 = L_eff: [
+lam == -3*g^2/M^2
+]
+expansion of (g^2/8)/(B + M^2): (1/8*g^2/M^2) + (-1/8*g^2/M^4)*B + Order(B^2)

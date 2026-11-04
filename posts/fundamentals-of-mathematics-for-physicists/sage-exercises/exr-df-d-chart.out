@@ -1,0 +1,4 @@
+d omega in Cartesian coordinates: domega = 2 dx∧dy
+omega = r^2 dphi: True
+d(r^2 dphi) = domega_p = 2*r dr∧dph
+the two computations agree: True

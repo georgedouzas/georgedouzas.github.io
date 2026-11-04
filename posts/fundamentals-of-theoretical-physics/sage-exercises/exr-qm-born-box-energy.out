@@ -1,0 +1,4 @@
+Prob(E_n), n = 1..7: [960/pi^6, 0, 320/243/pi^6, 0, 192/3125/pi^6, 0, 960/117649/pi^6]
+equal to 960/(n pi)^6 for odd n: True
+sum over odd n of 960/(n pi)^6 = 1 ; Prob(E_1) = 0.998555
+<H> directly = 5*hbar^2/(L^2*m) ; from the probabilities = 5*hbar^2/(L^2*m) ; <H>/E_1 = 10/pi^2 = 1.0132

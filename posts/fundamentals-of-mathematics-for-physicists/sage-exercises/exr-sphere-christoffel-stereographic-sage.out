@@ -1,0 +1,10 @@
+non-zero Christoffel symbols Gamma^k_ij (i <= j):
+   ('u', 'u', 'u') = -2*u/(u^2 + v^2 + 1)
+   ('u', 'u', 'v') = -2*v/(u^2 + v^2 + 1)
+   ('u', 'v', 'v') = 2*u/(u^2 + v^2 + 1)
+   ('v', 'u', 'u') = 2*v/(u^2 + v^2 + 1)
+   ('v', 'u', 'v') = -2*u/(u^2 + v^2 + 1)
+   ('v', 'v', 'v') = -2*v/(u^2 + v^2 + 1)
+conformal formula Gamma^k_ij = delta^k_i d_j sigma + delta^k_j d_i sigma - delta_ij d^k sigma: True
+all symbols vanish at the pole u = v = 0: True
+Gauss curvature K = R/2 = 1 in this chart: True

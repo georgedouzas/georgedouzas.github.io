@@ -1,0 +1,3 @@
+H = -E*Y*q + 1/2*((B*Y*q + PX)^2 + PY^2)/m ; dH/dX = 0 -> p_x conserved
+y(t) = -(E*m*cos(B*q*t/m) - E*m)/(B^2*q) ; centre of oscillation m E/(q B^2)
+x(t) = (B*E*q*t - E*m*sin(B*q*t/m))/(B^2*q)

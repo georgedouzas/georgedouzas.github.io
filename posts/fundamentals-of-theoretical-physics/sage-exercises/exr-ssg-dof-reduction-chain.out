@@ -1,0 +1,10 @@
+d = 11: {'metric': 1, '3-forms': 1, '2-forms': 0, 'vectors': 0, 'scalars': 0}  bosonic states 128
+d = 10: {'metric': 1, '3-forms': 1, '2-forms': 1, 'vectors': 1, 'scalars': 1}  bosonic states 128
+d =  9: {'metric': 1, '3-forms': 1, '2-forms': 2, 'vectors': 3, 'scalars': 3}  bosonic states 128
+d =  8: {'metric': 1, '3-forms': 1, '2-forms': 3, 'vectors': 6, 'scalars': 7}  bosonic states 128
+d =  7: {'metric': 1, '3-forms': 1, '2-forms': 4, 'vectors': 10, 'scalars': 14}  bosonic states 128
+d =  6: {'metric': 1, '3-forms': 1, '2-forms': 5, 'vectors': 15, 'scalars': 25}  bosonic states 128
+d =  5: {'metric': 1, '3-forms': 1, '2-forms': 6, 'vectors': 21, 'scalars': 41}  bosonic states 128
+d =  4: {'metric': 1, '3-forms': 1, '2-forms': 7, 'vectors': 28, 'scalars': 63}  bosonic states 128
+[PASS] the bosonic count is 128 in every dimension from 11 to 4: True
+[PASS] in d = 4 (n = 7): 7 + 21 = 28 vectors, 28 + 35 = 63 scalars plus 7 two-forms dual to scalars (and a non-dynamical 3-form): 70 scalars: True

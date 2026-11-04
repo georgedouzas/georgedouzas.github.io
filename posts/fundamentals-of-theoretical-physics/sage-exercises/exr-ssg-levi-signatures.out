@@ -1,0 +1,6 @@
+Euclidean 4d : diagonal of eps eps = [6, 6, 6, 6] ; full contraction = 24
+[PASS] Euclidean 4d: eps_{m...} eps_n^{...} = (n-1)! sign(det g) g_mn and the full contraction is n! sign(det g): True
+Lorentzian 4d : diagonal of eps eps = [-6, 6, 6, 6] ; full contraction = -24
+[PASS] Lorentzian 4d: eps_{m...} eps_n^{...} = (n-1)! sign(det g) g_mn and the full contraction is n! sign(det g): True
+internal 7d, g = -delta : diagonal of eps eps = [720, 720, 720, 720, 720, 720, 720] ; full contraction = -5040
+[PASS] internal 7d, g = -delta: eps_{m...} eps_n^{...} = (n-1)! sign(det g) g_mn and the full contraction is n! sign(det g): True

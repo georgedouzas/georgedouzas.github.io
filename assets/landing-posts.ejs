@@ -1,5 +1,4 @@
 <%
-const [featured, ...older] = items;
 const tagsOf = (item) => (item.categories || []);
 const tagLink = (tag) => `posts.html#tag=${encodeURIComponent(tag)}`;
 const allTags = [...new Set(items.flatMap(tagsOf))].sort();
@@ -12,33 +11,14 @@ const allTags = [...new Set(items.flatMap(tagsOf))].sort();
 <% } %></nav>
 <p class="tag-empty" hidden>No posts with this tag yet.</p>
 <% } %>
-<% if (featured) { %>
-<p class="landing-eyebrow">Latest post</p>
-<article class="featured-post<%= featured.image ? '' : ' featured-post-text-only' %>" data-tags="<%- tagsOf(featured).join('|') %>">
-<% if (featured.image) { %>
-<div class="featured-media">
-<a href="<%- featured.path %>"><img class="featured-image" src="<%- featured.image %>" alt=""></a>
-</div>
-<% } %>
-<div class="featured-text">
-<p class="listing-date"><%= featured.date %></p>
-<h2 class="featured-title"><a href="<%- featured.path %>"><%= featured.title %></a></h2>
-<p class="listing-description"><%= featured.description %></p>
-<div class="listing-categories">
-<% for (const tag of tagsOf(featured)) { %><a class="tag-chip" href="<%- tagLink(tag) %>"><%= tag %></a><% } %>
-</div>
-</div>
-</article>
-<% } %>
-<% if (older.length > 0) { %>
-<h2 class="older-heading">More posts</h2>
-<div class="older-posts">
-<% for (const item of older) { %>
-<article class="older-post" data-tags="<%- tagsOf(item).join('|') %>">
-<p class="listing-date"><%= item.date %></p>
-<div>
-<h3 class="older-title"><a href="<%- item.path %>"><%= item.title %></a></h3>
-<p class="listing-description"><%= item.description %></p>
+<div class="post-list">
+<% for (const item of items) { %>
+<article class="post-row" data-tags="<%- tagsOf(item).join('|') %>">
+<a class="post-row-thumb" href="<%- item.path %>"><img src="<%- item.image %>" alt="" loading="lazy"></a>
+<div class="post-row-text">
+<p class="post-row-date"><%= item.date %></p>
+<h3><a href="<%- item.path %>"><%= item.title %></a></h3>
+<p><%= item.description %></p>
 <div class="listing-categories">
 <% for (const tag of tagsOf(item)) { %><a class="tag-chip" href="<%- tagLink(tag) %>"><%= tag %></a><% } %>
 </div>
@@ -46,5 +26,4 @@ const allTags = [...new Set(items.flatMap(tagsOf))].sort();
 </article>
 <% } %>
 </div>
-<% } %>
 ```

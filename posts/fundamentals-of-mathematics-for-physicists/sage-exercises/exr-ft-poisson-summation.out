@@ -1,0 +1,4 @@
+sigma = 1 : sum f(2 pi n) = 1.00000000535058 ; (1/2pi) sum fhat(n) = 1.00000000535058 ; agree to 1e-12: True
+sigma = 2 : sum f(2 pi n) = 1.01438377206223 ; (1/2pi) sum fhat(n) = 1.01438377206223 ; agree to 1e-12: True
+sigma = 3 : sum f(2 pi n) = 1.22341796813122 ; (1/2pi) sum fhat(n) = 1.22341796813122 ; agree to 1e-12: True
+sigma = 5 : sum f(2 pi n) = 1.99472626920231 ; (1/2pi) sum fhat(n) = 1.99472626920231 ; agree to 1e-12: True

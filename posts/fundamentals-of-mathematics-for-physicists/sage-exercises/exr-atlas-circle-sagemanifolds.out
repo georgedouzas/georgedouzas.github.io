@@ -1,0 +1,8 @@
+atlas of the circle: [Chart (U, (ph,)), Chart (V, (php,))]
+inverse of the chart Chart (U, (ph,)) lands on X^2 + Y^2 = 1: True
+inverse of the chart Chart (V, (php,)) lands on X^2 + Y^2 = 1: True
+point missed by the first chart (limit phi -> 0 or 2 pi): (1, 0)
+point missed by the second chart (limit phi' -> +-pi): (-1, 0)
+the missed points differ, so every point of the circle lies in at least one domain: True
+the point p = (0, -1) has phi = 3/2*pi and lies at (X, Y) = (0, -1)
+in the second chart the same point has phi' = -pi/2: True

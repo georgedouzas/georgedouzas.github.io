@@ -1,0 +1,4 @@
+Ricci scalar of a^2(s1^2 + s2^2) + b^2 s3^2: 1/2*(2*a + b)*(2*a - b)/a^4
+at a = b = 1/2 (the bi-invariant metric of @eq-su2-metric): 6
+d/dpsi is Killing for the squashed metric: True
+d/dpsi is Killing when sigma^1, sigma^2 have different radii a != c: False  (its (theta, theta) component: -2*(a + c)*(a - c)*cos(ps)*sin(ps) )

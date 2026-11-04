@@ -1,0 +1,10 @@
+ d  c1    chi   int p1   A-hat   spin
+ 1   3      3        3    -1/8   no
+ 2   2      4        0       0   yes
+ 3   1      9      -15     5/8   no
+ 4   0     24      -48       2   yes
+ 5  -1     55     -105    35/8   no
+ 6  -2    108     -192       8   yes
+ 7  -3    189     -315   105/8   no
+ 8  -4    304     -480      20   yes
+closed form A-hat = d (d^2 - 4)/24: True

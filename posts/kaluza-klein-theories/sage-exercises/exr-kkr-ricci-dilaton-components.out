@@ -1,0 +1,3 @@
+R_tt = -diff(phi(t, x), t, t)/phi(t, x) ; R_tx = -diff(phi(t, x), t, x)/phi(t, x)
+[PASS] R_{mu y} = 0 for A = 0: True
+[PASS] R_{mu nu} = -(1/phi) d_mu d_nu phi for g = eta: True

@@ -1,0 +1,4 @@
+lowering d_phi: r^2 dph
+lowering X = d_r + d_phi: dr + r^2 dph ; components [1, r^2]
+X^flat(Y) = -r^2 + r ; g(X, Y) = -r^2 + r ; equal: True
+|d_phi| from the lowered form: sqrt((d_phi)^flat(d_phi)) = r

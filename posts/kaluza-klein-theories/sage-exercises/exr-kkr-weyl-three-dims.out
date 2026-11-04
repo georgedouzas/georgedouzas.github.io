@@ -1,0 +1,2 @@
+R~ = 2*(diff(Omega(x), x)^2 - 2*Omega(x)*diff(Omega(x), x, x))/Omega(x)^4
+[PASS] n = 3: R~ = Omega^{-2}(-4 (ln Omega)'' - 2 ((ln Omega)')^2) on flat space: True

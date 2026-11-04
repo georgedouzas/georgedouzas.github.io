@@ -1,0 +1,4 @@
+cone: g = [1, 0, 0, rho^2*sin(alpha)^2] ; n = [-cos(alpha)*cos(ph), -cos(alpha)*sin(ph), sin(alpha)] ; h = [0, 0, 0, rho*cos(alpha)*sin(alpha)] ; det h / det g = 0
+torus: g = [r^2, 0, 0, r^2*cos(a)^2 + 2*R*r*cos(a) + R^2] ; n = [-cos(a)*cos(b), -cos(a)*sin(b), -sin(a)]
+torus: h = [r, 0, 0, r*cos(a)^2 + R*cos(a)]
+h_bb = (R + r cos a) cos a: True ; h_aa = r: True

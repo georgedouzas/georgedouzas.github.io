@@ -1,0 +1,7 @@
+(pslash - m) u = 0, (pslash + m) v = 0: True True
+bar(u^r) u^s = [[48, 0], [0, 48]]  bar(v^r) v^s = [[-48, 0], [0, -48]]
+bar(u^r) v^s = [[0, 0], [0, 0]]
+u^dag u = [[50, 0], [0, 50]]  v^dag v = [[50, 0], [0, 50]]
+sum u bar(u) = pslash + m: True
+sum v bar(v) = pslash - m: True
+u^r(p)^dag v^s(-p) = 0: True

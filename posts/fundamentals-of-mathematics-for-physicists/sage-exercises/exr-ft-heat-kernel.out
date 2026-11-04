@@ -1,0 +1,5 @@
+heat kernel K_t(x) = 1/2*e^(-1/4*x^2/(kappa*t))/(sqrt(pi)*sqrt(kappa*t))
+K solves u_t = kappa u_xx: True ; unit integral: True
+solution with u_0 = e^{-x^2/2}: u(t, x) = 1/2*sqrt(2)*e^(-1/2*x^2/(2*kappa*t + 1))/sqrt(kappa*t + 1/2)
+u solves the heat equation: True ; u(0, x) = e^{-x^2/2}: True
+u = (1 + 2 kappa t)^(-1/2) exp(-x^2/(2(1 + 2 kappa t))): True

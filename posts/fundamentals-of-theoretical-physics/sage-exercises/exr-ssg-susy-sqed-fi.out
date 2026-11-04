@@ -1,0 +1,5 @@
+[PASS] without W the vacua are the D-flat surface r - s = kappa/g, with V = 0: True
+radial scalar mass^2 = 2*g*kappa ; vector mass^2 2 g^2 |phi_+|^2 = 2*g*kappa
+[PASS] the radial scalar and the photon have the same mass^2 2 g kappa: a massive vector multiplet: True
+[PASS] states: vector 3 + radial scalar 1 = 4 bosons, two Weyl fermions (gaugino, psi_+) married into a Dirac pair = 4 fermions: True
+[PASS] with W = m Phi_+ Phi_- V > 0 everywhere: at V = 0 both m^2(r + s) = 0 and r - s = kappa/g would be needed: True

@@ -1,0 +1,5 @@
+well defined and a homomorphism: True
+kernel: [0, 4, 8]
+fibres: {0: [0, 4, 8], 1: [1, 5, 9], 2: [2, 6, 10], 3: [3, 7, 11]}
+the fibres are the cosets of the kernel: True
+the induced map on cosets is a bijection onto Z_4: True

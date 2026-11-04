@@ -1,0 +1,5 @@
+[D, E_13] = 0 requires: [
+a == -1/2*b
+]
+[PASS] the diagonal generators fixing E_13 are the multiples of Q' = (i/3) diag(-1, 2, -1): True
+[PASS] w = exp(-pi T_2) is in SU(3) and commutes with tau; w E_23 w^-1 = -E_13 and w Q_em w^-1 = Q': True

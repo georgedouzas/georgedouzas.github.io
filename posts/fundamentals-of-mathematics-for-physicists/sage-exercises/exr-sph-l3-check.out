@@ -1,0 +1,3 @@
+the Gram matrix of Y_3m, m = -3..3, is the identity: True
+L_+ Y_3m = sqrt((3 - m)(4 + m)) Y_{3,m+1} for m = -3..2: True ; L_+ Y_33 = 0: True
+r^3 Y_33 = -sqrt(35/64pi) (x + iy)^3 at three points: True

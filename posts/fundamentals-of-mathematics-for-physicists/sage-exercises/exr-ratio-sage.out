@@ -1,0 +1,5 @@
+a_n = 2^n/n! : lim a_{n+1}/a_n = 0 -> converges
+a_n = n!/n^n : lim a_{n+1}/a_n = e^(-1) -> converges
+a_n = n^2/2^n : lim a_{n+1}/a_n = 1/2 -> converges
+a_n = 1/n : lim a_{n+1}/a_n = 1 -> inconclusive
+sum 2^n/n! = 2*e*sinh(1) = e^2 - 1 (2 e sinh 1 = e^2 - 1): True ; sum n^2/2^n = 6

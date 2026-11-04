@@ -1,0 +1,4 @@
+[PASS] all components of F are gauge invariant (mixed partial derivatives commute): True
+concrete case A = (0, t x, 0, 0), alpha = sin(t x): A' = [x*cos(t*x), t*x + t*cos(t*x), 0, 0]
+F_tx before: x ; after: x
+[PASS] the concrete field strength is unchanged: True

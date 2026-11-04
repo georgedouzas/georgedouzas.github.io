@@ -1,0 +1,5 @@
+solutions (a0, a1, a2, a3): [
+[a0 == -1/2*sqrt(2), a1 == -1/2*sqrt(2), a2 == 0, a3 == 0],
+[a0 == 1/2*sqrt(2), a1 == 1/2*sqrt(2), a2 == 0, a3 == 0]
+]
+e^{(pi/2) T_1} = [1/2*sqrt(2), -1/2*I*sqrt(2), -1/2*I*sqrt(2), 1/2*sqrt(2)] ; Ad of it = R: True ; Ad of minus it = R: True

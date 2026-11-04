@@ -1,0 +1,8 @@
+general (a, b e^{i d}): I, Q, U, V = a^2 + b^2 a^2 - b^2 2*a*b*cos(d) 2*a*b*sin(d)
+I^2 = Q^2 + U^2 + V^2: True
+linear along x               I, Q, U, V = [1, 1, 0, 0]
+linear at 45 deg             I, Q, U, V = [1, 0, 1, 0]
+circular, positive helicity  I, Q, U, V = [1, 0, 0, 1]
+circular, negative helicity  I, Q, U, V = [1, 0, 0, -1]
+elliptic (1, 2i)/sqrt(5)     I, Q, U, V = [1, -3/5, 0, 4/5]
+E = c+ e+ + c- e-: True   |c+|^2 - |c-|^2 = V: True

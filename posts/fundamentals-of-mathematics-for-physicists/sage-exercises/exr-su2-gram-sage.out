@@ -1,0 +1,8 @@
+lands on S^3: True
+Gram matrix:
+[        1/4           0           0]
+[          0         1/4 1/4*cos(th)]
+[          0 1/4*cos(th)         1/4]
+equals (1/4) [[1, 0, 0], [0, 1, cos theta], [0, cos theta, 1]]: True
+determinant: 1/64*sin(th)^2  equals sin^2 theta / 64: True
+the angle between the phi- and psi-velocities has cosine G_{phi psi}/sqrt(G_{phi phi} G_{psi psi}) = cos(th)

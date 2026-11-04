@@ -1,0 +1,3 @@
+equivalence classes of n ~ m iff 3 | (n - m): {0: [0, 3, 6, 9], 1: [1, 4, 7, 10], 2: [2, 5, 8, 11]}
+the quotient set has 3 elements, the remainders [0, 1, 2] ; the classes partition X: True
+Sage's Zmod(3) is this quotient set with its addition: [0, 1, 2]

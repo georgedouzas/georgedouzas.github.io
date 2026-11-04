@@ -1,0 +1,7 @@
+f' = 3*x^2 + 1 > 0 for all x
+roots of g: [
+x == -1,
+x == 1,
+x == 0
+]
+[PASS] f' = 3x^2 + 1 is positive and g has three zeros: True

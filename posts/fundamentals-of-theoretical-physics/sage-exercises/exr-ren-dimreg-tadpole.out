@@ -1,0 +1,4 @@
+series: 1/16*((euler_gamma + log(1/4*m^2/(pi*mu^2)) - 1)*eps - 2)*m^2/(pi^2*eps)
+series - claim = 0: True
+16 pi^2 x coefficient of q log q (q = m^2), dimensional: 1
+16 pi^2 x coefficient of q log q, cutoff: 1

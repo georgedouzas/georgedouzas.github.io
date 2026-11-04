@@ -1,0 +1,5 @@
+cosets of <4>: [(0, 4, 8), (1, 5, 9), (2, 6, 10), (3, 7, 11)] ; number 4 = 12/|H| = 4
+   they partition Z_12: True
+cosets of <3>: [(0, 3, 6, 9), (1, 4, 7, 10), (2, 5, 8, 11)] ; number 3 = 12/|H| = 3
+   they partition Z_12: True
+Sage: C_12 has 4 cosets of <g^4>, each of size {3}

@@ -1,0 +1,4 @@
+x^n on [0, 1): sup |x^n - 0| = lim_{x->1^-} x^n = [1, 1, 1] -> never below 1: not uniform
+sin(nx)/n: sup = 1/n for n = 1, 5, 50: [1, 1/5, 1/50] -> 0: uniform
+h_n = x/(1 + n x^2): critical points [-1/sqrt(n), 1/sqrt(n)] ; maximum value 1/2/sqrt(n) = 1/(2 sqrt n) -> 0: uniform
+integrals pass to the limit under uniform convergence: int_0^pi sin(nx)/n dx = -(cos(pi*n)/n - 1/n)/n -> 0 as n -> oo: 0

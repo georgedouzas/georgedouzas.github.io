@@ -1,0 +1,4 @@
+fixed-fixed omega = [0.445, 0.8678, 1.247, 1.5637, 1.8019, 1.9499]  matches closed form: True
+free-free   omega = [0.0, 0.5176, 1.0, 1.4142, 1.7321, 1.9319]  matches closed form: True
+periodic    omega = [0.0, 1.0, 1.0, 1.7321, 1.7321, 2.0]  matches closed form: True
+fixed-free  omega = [0.2411, 0.7092, 1.1361, 1.497, 1.7709, 1.9419]  matches closed form: True

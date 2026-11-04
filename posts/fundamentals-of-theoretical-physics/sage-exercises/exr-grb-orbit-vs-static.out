@@ -1,0 +1,6 @@
+alpha^2 = 1/(1 - 3 rs/(2 r0)): True
+normalisation f alpha^2 - r0^2 beta^2 = 1: True
+relative speed v^2 = 1/2*rs/(r0 - rs)   equals rs/(2 (r0 - rs)): True
+tau_orbit/tau_static = 1/gamma: True
+GPS: v = 3876.6 m/s, 1 - tau_orbit/tau_static = 8.349e-11
+GPS: one orbit takes 11.96 h of coordinate time

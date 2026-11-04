@@ -1,0 +1,5 @@
+X e_3 = (x2, -x1, 0) ; vanishes iff [
+[x1 == 0, x2 == 0]
+]
+R(t) e_3 = e_3: True
+orbit of (sin th, 0, cos th) under SO(2): (cos(t)*sin(th), sin(t)*sin(th), cos(th)) ; height constant: True ; radius^2 = sin(th)^2

@@ -1,0 +1,5 @@
+solutions: [{c1: 0, c2: 0, c3: 2*r1, c4: r1}]
+unbroken generator: [ 4/3*I*r1         0         0]
+[        0 -2/3*I*r1         0]
+[        0         0 -2/3*I*r1]
+[PASS] c_1 = c_2 = 0 and c_3 = 2 c_4, i.e. X = c_4 (2 T_3 + tau) = 2 c_4 Q_em: one unbroken generator: True

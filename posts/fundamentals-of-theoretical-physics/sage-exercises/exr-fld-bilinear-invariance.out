@@ -1,0 +1,3 @@
+boost exp(w S^01) : gamma^0 Lambda^dagger gamma^0 Lambda = 1: True
+rotation exp(theta S^12) : gamma^0 Lambda^dagger gamma^0 Lambda = 1: True
+psi^dagger psi after a boost minus before, for psi = (1, 0, 0, 0): 1/2*(e^(2*w) - 2*e^w + 1)*e^(-w)

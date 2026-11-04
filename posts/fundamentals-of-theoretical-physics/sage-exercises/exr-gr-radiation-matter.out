@@ -1,0 +1,3 @@
+(a')^2 - C_r - C_m a = 0
+t(eta) = 1/12*Cm*eta^3 + 1/2*sqrt(Cr)*eta^2 ; at small eta t ~ sqrt(C_r) eta^2/2, so a ~ (2 sqrt(C_r) t)^{1/2}; at large eta t ~ C_m eta^3/12, so a ~ t^{2/3}
+equality (rho_r = rho_m, a = C_r/C_m) at eta = 2(sqrt 2 - 1) sqrt(C_r)/C_m: True

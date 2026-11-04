@@ -1,0 +1,10 @@
+FTCS r = 0.24, t = 0.010 (  150 steps): max|u - steady| = 22.2
+FTCS r = 0.24, t = 0.050 (  750 steps): max|u - steady| = 14.3
+FTCS r = 0.24, t = 0.300 ( 4500 steps): max|u - steady| = 1.21
+FTCS r = 0.24, t = 1.000 (15000 steps): max|u - steady| = 0.00121
+FTCS r = 0.53, t = 0.005 (   34 steps): max|u - steady| = 211
+FTCS r = 0.53, t = 0.010 (   68 steps): max|u - steady| = 6.59e+03
+FTCS r = 0.53, t = 0.020 (  136 steps): max|u - steady| = 1.04e+07
+Crank-Nicolson r = 5, t = 0.05 (36 steps): max|u - steady| = 14.3
+Crank-Nicolson r = 5, t = 0.30 (216 steps): max|u - steady| = 1.22
+Crank-Nicolson r = 5, t = 1.00 (720 steps): max|u - steady| = 0.00122

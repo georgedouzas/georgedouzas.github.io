@@ -1,0 +1,22 @@
+---
+pagetitle: "Registry of verified results"
+---
+
+# Registry of verified results {#sec-registry-kaluza-klein-theories}
+
+Every claim of the book with its Lean declaration and its verification level. A **certificate** is a proof whose data a Veriphy recipe found in Sage and whose proof the Lean kernel checked. A **kernel-checked test** is a check of the claim's Lean statement at instances chosen by Sage, each checked by the kernel by computation alone, used where no certificate is feasible. An **oracle test** is an evaluation of the claim at instances in exact or interval arithmetic by Sage. A **pending** claim is proved in Lean and awaits its certificate or test. Chapters whose claims are not yet formalised are listed with their number of blocks.
+
+## Claims by level
+
+| Chapter | Blocks | certificate | kernel-checked test | oracle test | pending |
+|---|---|---|---|---|---|
+| @sec-kk-reduction-group | 158 blocks, not yet formalised | | | | |
+| @sec-kk-gauge-tower | 148 blocks, not yet formalised | | | | |
+| @sec-nonabelian-isometries | 59 blocks, not yet formalised | | | | |
+| @sec-nonabelian-reduced | 73 blocks, not yet formalised | | | | |
+| @sec-csdr-symmetric-fields | 80 blocks, not yet formalised | | | | |
+| @sec-csdr-four-dimensional | 118 blocks, not yet formalised | | | | |
+| @sec-vi-consistent-reductions | 136 blocks, not yet formalised | | | | |
+| @sec-vi-compactifications | 176 blocks, not yet formalised | | | | |
+
+

@@ -1,0 +1,2 @@
+div A = y ; Laplacian of lambda = -y
+A' = (x*y, -1/2*y^2, 0) ; div A' = 0 ; curl A = (0, 0, -x) ; curl A' = (0, 0, -x)

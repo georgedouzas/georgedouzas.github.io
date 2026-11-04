@@ -1,0 +1,2 @@
+k^T = (t*w*cos(th) - w*x)/(a*t^2 - a*x^2)    k^X = (w*x*cos(th) - t*w)/sqrt(-t^2 + x^2)    k^Y = 0   k^Z = w*sin(th)
+Rindler norm a^2 X^2 (k^T)^2 - (k^X)^2 - (k^Z)^2 = 0

@@ -1,0 +1,4 @@
+V' = -(Omega^2*R*cos(theta) - g)*R*m*sin(theta)
+V''(0) = -(Omega^2*R - g)*R*m  -> the bottom is stable iff Omega^2 < g/R
+V''(theta0) at cos(theta0) = g/(R Omega^2): (Omega^4*R^2 - g^2)*m/Omega^2 == m R^2 Omega^2 sin^2(theta0): True
+omega^2 = V''/(m R^2) = (Omega^4*R^2 - g^2)/(Omega^2*R^2)

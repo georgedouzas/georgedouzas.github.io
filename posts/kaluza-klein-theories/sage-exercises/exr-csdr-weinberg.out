@@ -1,0 +1,6 @@
+Tr Y_n^2 = 1/2 , Tr T_3^2 = 1/2 , Tr(Y_n T_3) = 0
+[PASS] Y_n and T_3 are orthonormal in the SU(3) trace, Tr = 1/2 each, Tr(Y_n T_3) = 0: True
+hypercharge eigenvalue of the doublet under Y_n: 1/2*sqrt(3)
+[PASS] with Y = 1/2 for the doublet, g' = sqrt(3) g and sin^2 theta_W = 3/4: True
+charges Q = T_3 + Y of the two doublet components: [1, 0]
+[PASS] the doublet has electric charges (1, 0): the neutral component takes the vacuum value: True

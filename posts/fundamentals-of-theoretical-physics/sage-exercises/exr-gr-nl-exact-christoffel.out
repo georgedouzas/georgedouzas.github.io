@@ -1,0 +1,2 @@
+Gamma^i_tt = d_i Phi/(1 - 2 Phi): True ; Gamma^t_ti = d_i Phi/(1 + 2 Phi): True
+Gamma^x_yy = -diff(Phi(x, y, z), x)/(2*Phi(x, y, z) - 1)  (multiplies v^2: negligible for slow particles)

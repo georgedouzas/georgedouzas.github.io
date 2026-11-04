@@ -1,0 +1,5 @@
+Ad_g = e^{phi L_3} e^{theta L_1} e^{psi L_3}: True
+Ad_g^T Ad_g = 1: True ; det Ad_g = 1
+Ad_{-g} = Ad_g: True
+ad_{T_a} = L_a: True ; Killing form: [-2, 0, 0, 0, -2, 0, 0, 0, -2]
+at (theta, phi, psi) = (0, 0, 2 pi): g = [-1, 0, 0, -1] , Ad_g = [1, 0, 0, 0, 1, 0, 0, 0, 1]

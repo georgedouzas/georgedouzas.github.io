@@ -8,6 +8,7 @@ html-math-method: plain
 resources:
   - assets/particles.js
   - assets/landing.js
+  - assets/posts.svg
   - assets/open-source.svg
   - assets/publications.svg
 include-after-body: assets/landing-scripts.html
@@ -55,7 +56,7 @@ listing:
         <div class="quick-thumb"><img src="assets/open-source.svg" alt=""></div>
         <div class="quick-body">
           <p class="quick-label">Open source <span aria-hidden="true">→</span></p>
-          <h2>8 projects</h2>
+          <h2>Tools and libraries</h2>
           <p class="quick-text">Including imbalanced-learn-extra, veriphy and scikit-complexity.</p>
         </div>
       </a>
@@ -63,7 +64,7 @@ listing:
         <div class="quick-thumb"><img src="assets/publications.svg" alt=""></div>
         <div class="quick-body">
           <p class="quick-label">Publications <span aria-hidden="true">→</span></p>
-          <h2>16 papers</h2>
+          <h2>Research papers</h2>
           <p class="quick-text">On imbalanced learning, reinforcement learning and particle physics.</p>
         </div>
       </a>

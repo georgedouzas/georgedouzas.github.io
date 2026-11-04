@@ -1,0 +1,2 @@
+series: 1/16*(euler_gamma - 1)*m^2/pi^2 - 1/8*m^2*log(2)/pi^2 - 1/16*m^2*log(pi)/pi^2 + 1/8*m^2*log(m)/pi^2 - 1/8*m^2/(pi^2*ep)
+agrees with the stated form: True

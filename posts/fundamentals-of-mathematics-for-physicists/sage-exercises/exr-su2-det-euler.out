@@ -1,0 +1,14 @@
+e^{phi T3} =
+[cos(1/2*ph) - I*sin(1/2*ph)                           0]
+[                          0 cos(1/2*ph) + I*sin(1/2*ph)]
+e^{theta T1} =
+[   cos(1/2*th) -I*sin(1/2*th)]
+[-I*sin(1/2*th)    cos(1/2*th)]
+g[0,0] = a = cos(theta/2) e^{-i(phi+psi)/2}: True
+g[1,0] = b = -i sin(theta/2) e^{i(phi-psi)/2}: True
+g[0,1] = -conj(b) and g[1,1] = conj(a): True
+|a|^2 + |b|^2 = 1: True
+det g = 1: True
+g is unitary, g^dagger g = 1: True
+at theta = 0 only phi + psi matters: g(0, phi, psi) = [cos(1/2*ph + 1/2*ps) - I*sin(1/2*ph + 1/2*ps)                                             0]
+[                                            0 cos(1/2*ph + 1/2*ps) + I*sin(1/2*ph + 1/2*ps)]

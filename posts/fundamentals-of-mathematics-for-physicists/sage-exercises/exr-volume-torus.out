@@ -1,0 +1,4 @@
+det g = (r*cos(a) + R)^2*r^2 ; sqrt(det g) = r (R + r cos a): True
+area of the embedded torus: 4*pi^2*R*r
+volume element of the flat torus r^2 da^2 + R^2 db^2: R*r ; area: 4*pi^2*R*r
+the two areas agree: True

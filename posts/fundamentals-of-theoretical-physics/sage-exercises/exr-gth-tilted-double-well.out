@@ -1,0 +1,8 @@
+critical points: [-0.945649, -0.101031, 1.046681]
+  phi = -0.945649: V = 0.097361, V'' = 1.682758
+  phi = -0.101031: V = 0.255026, V'' = -0.969378
+  phi = 1.046681: V = -0.102386, V'' = 2.286620
+[PASS] the right minimum is the true vacuum, the left one is a false vacuum, the middle point a maximum: True
+first-order estimate mu + eps/(2 lam mu^2) = 1.05 ; exact: 1.046681
+[PASS] the estimate is good to O(eps^2): True
+energy splitting V(false) - V(true) = 0.199747 ~ 2 eps mu = 0.2

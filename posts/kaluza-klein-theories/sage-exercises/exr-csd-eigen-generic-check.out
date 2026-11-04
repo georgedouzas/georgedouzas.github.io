@@ -1,0 +1,15 @@
+component of eigenvalue 0 :
+[-4*I - 1  3*I - 3        0]
+[-5*I + 5  2*I + 5        0]
+[       0        0 -4*I + 1]
+component of eigenvalue I :
+[       0        0  5*I + 5]
+[       0        0 -2*I - 3]
+[       0        0        0]
+component of eigenvalue -I :
+[      0       0       0]
+[      0       0       0]
+[4*I + 2 3*I - 4       0]
+[PASS] the three components add up to X and each is an eigenvector: [tau, X_lambda] = lambda X_lambda: True
+[PASS] X_{+i} is the (1,3), (2,3) part, X_{-i} the (3,1), (3,2) part, X_0 the block-diagonal part: True
+[PASS] ad tau (ad tau - i)(ad tau + i) = 0 on every matrix unit (ad tau is diagonalisable with eigenvalues 0, +-i): True

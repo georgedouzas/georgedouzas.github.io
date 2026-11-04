@@ -1,0 +1,4 @@
+signs: {'()': 1, '(1,3,2)': 1, '(1,2,3)': 1, '(2,3)': -1, '(1,3)': -1, '(1,2)': -1}
+homomorphism property sign(gh) = sign(g) sign(h): True
+kernel: [(), (1,3,2), (1,2,3)] = A_3: True
+the quotient S_3 / A_3 has order 2 and is cyclic: True

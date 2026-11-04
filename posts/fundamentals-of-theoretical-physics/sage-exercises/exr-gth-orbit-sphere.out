@@ -1,0 +1,6 @@
+[PASS] R is orthogonal with determinant 1: True
+R (0, 0, a) = (a*cos(al)*sin(be), a*sin(al)*sin(be), a*cos(be))
+[PASS] the image is a (sin b cos a, sin b sin a, cos b), the sphere in spherical coordinates: True
+[PASS] V(R phi) = V(phi) for every phi (V is SO(3)-invariant): True
+[PASS] V vanishes on the whole orbit: True
+[PASS] gamma drops out: rotations about the vacuum axis fix it (the stabiliser SO(2)): True

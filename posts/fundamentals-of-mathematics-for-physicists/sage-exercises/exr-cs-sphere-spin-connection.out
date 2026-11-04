@@ -1,0 +1,6 @@
+coframe: E^1 = dth , E^2 = sin(th) dph
+omega^1_2 = nabla_g connection 1-form (1,2) = -cos(th) dph
+omega^1_2 = -e^3: True
+Omega^1_2 = curvature (1,2) of connection nabla_g w.r.t. Vector frame (S2, (E_1,E_2)) = sin(th) dth∧dph
+Omega^1_2 = e^1 ^ e^2 (Gauss curvature 1): True
+d omega^1_2 = Omega^1_2 (abelian in two dimensions): True

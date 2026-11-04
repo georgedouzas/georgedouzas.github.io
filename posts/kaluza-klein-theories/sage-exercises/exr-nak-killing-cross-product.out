@@ -1,0 +1,7 @@
+push-forward of K_1: (0, -cos(th), sin(ph)*sin(th))   e_1 x n: (0, -cos(th), sin(ph)*sin(th))
+push-forward of K_2: (cos(th), 0, -cos(ph)*sin(th))   e_2 x n: (cos(th), 0, -cos(ph)*sin(th))
+push-forward of K_3: (-sin(ph)*sin(th), cos(ph)*sin(th), 0)   e_3 x n: (-sin(ph)*sin(th), cos(ph)*sin(th), 0)
+[PASS] the push-forward of K_a is e_a x n: True
+[PASS] e_a x x = L_a x with (L_a)_{bc} = -eps_abc: True
+[PASS] [X_a, X_b] = (L_b L_a - L_a L_b) x = -eps_abc X_c: True
+[PASS] (e_a x n).(e_b x n) = delta_ab - n_a n_b: True

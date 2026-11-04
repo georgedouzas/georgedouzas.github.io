@@ -1,0 +1,3 @@
+|a_n| / (n! (2/3)^n): [0.75, 0.75, 0.773, 0.797, 0.816, 0.831, 0.842, 0.851, 0.857, 0.862, 0.866, 0.869]
+lam = 0.1: exact 0.955577, best order 12 with error 1.46e-06, Hartree error 1.13e-03
+lam = 0.5: exact 0.838595, best order 2 with error 7.81e-02, Hartree error 1.02e-02

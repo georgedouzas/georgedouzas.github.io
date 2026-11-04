@@ -1,0 +1,5 @@
+(2 + i)(3 - i) = i + 7
+(1 + i)/(1 - i) = i
+(1 + i)^8 = 16
+conj(z w) == conj(z) conj(w): True
+|z w| = |z| |w| (squared moduli, exact): True  |z|^2 = 5  |w|^2 = 10

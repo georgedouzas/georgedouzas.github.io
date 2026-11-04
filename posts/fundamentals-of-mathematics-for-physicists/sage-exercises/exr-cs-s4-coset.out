@@ -1,0 +1,6 @@
+dim so(5) = 10  dim so(4) = 6  dim S^4 = 4
+[r, r] in r: True
+[r, k] in k (reductive): True
+[k, k] in r (symmetric): True
+[M_a4, M_b4] = -M_ab for all a < b: True
+number of vanishing brackets [r, k]: 12 of 24

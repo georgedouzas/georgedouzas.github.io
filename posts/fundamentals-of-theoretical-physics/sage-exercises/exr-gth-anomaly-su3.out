@@ -1,0 +1,21 @@
+[PASS] Tr(t_a t_b) = delta_ab / 2: True
+d_118(3) = 2/(4 sqrt3)
+d_146(3) = 1/4
+d_157(3) = 1/4
+d_228(3) = 2/(4 sqrt3)
+d_247(3) = -1/4
+d_256(3) = 1/4
+d_338(3) = 2/(4 sqrt3)
+d_344(3) = 1/4
+d_355(3) = 1/4
+d_366(3) = -1/4
+d_377(3) = -1/4
+d_448(3) = -1/(4 sqrt3)
+d_558(3) = -1/(4 sqrt3)
+d_668(3) = -1/(4 sqrt3)
+d_778(3) = -1/(4 sqrt3)
+d_888(3) = -2/(4 sqrt3)
+[PASS] d_118 = d_228 = d_338 = 1/(2 sqrt3) and d_888 = -1/(2 sqrt3) for the 3: True
+[PASS] the conjugate 3bar (generators -t^T) has d_abc(3bar) = -d_abc(3) for all a, b, c: True
+[PASS] the adjoint matrices (t_a)_{bc} = -i f_abc satisfy [t_a, t_b] = i f_abc t_c: True
+[PASS] the adjoint 8 is real and all its anomaly coefficients vanish: True

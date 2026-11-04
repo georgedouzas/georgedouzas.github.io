@@ -1,0 +1,4 @@
+dr in Cartesian coordinates: dr = x/sqrt(x^2 + y^2) dx + y/sqrt(x^2 + y^2) dy
+dr in polar coordinates: dr = dr
+dr(d_r) = 1 ; dr(d_phi) = 0
+d(r^2) = 2 r dr: True

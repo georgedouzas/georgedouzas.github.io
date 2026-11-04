@@ -1,0 +1,5 @@
+[J3, J+] = J+: True  [J3, J-] = -J-: True  [J+, J-] = 2 J3: True
+J+ on the weight--1 vector: weight 0: True
+J+ on the weight-0 vector: weight 1: True
+J+ on the weight-1 vector: zero
+J+ is nilpotent of order 3 (a chain of three weights): True

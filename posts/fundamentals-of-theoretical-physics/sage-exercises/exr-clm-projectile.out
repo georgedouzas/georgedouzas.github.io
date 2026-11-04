@@ -1,0 +1,3 @@
+x(t) = t*v0*cos(alpha) ; z(t) = -1/2*g*t^2 + t*v0*sin(alpha)
+landing time: 2*v0*sin(alpha)/g ; range: v0^2*sin(2*alpha)/g
+range maximal at alpha = pi/4: True ; maximal range: v0^2/g

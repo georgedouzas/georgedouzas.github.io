@@ -1,0 +1,5 @@
+[PASS] U is unitary: True
+[PASS] det U = 1: True
+U phi = (0, sqrt(a^2 + b^2 + c^2 + d^2))
+[PASS] U phi = (0, |phi|): True
+example phi = (1 - 2i, 3 + i): U phi = (0, sqrt(15)) = (0, sqrt(15))

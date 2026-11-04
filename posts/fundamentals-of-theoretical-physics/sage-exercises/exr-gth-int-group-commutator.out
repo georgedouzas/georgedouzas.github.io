@@ -1,0 +1,6 @@
+C to second order in eps:
+[-1/2*I*c1*c2*eps^2 + 1                      0]
+[                     0  1/2*I*c1*c2*eps^2 + 1]
+[PASS] F_12 = [A_1, A_2] = c1 c2 T_3: True
+[PASS] C = 1 + eps^2 F_12 + O(eps^3): True
+[PASS] for two potentials along T_3 the transports commute, C = 1 exactly: True

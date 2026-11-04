@@ -1,0 +1,4 @@
+x > 0: (1/2pi) int 2a e^{ikx}/(a^2 + k^2) dk = e^(-a*x)
+x < 0: the same integral = e^(a*x)
+residues at k = ia and k = -ia: -I*e^(-a*x) , I*e^(a*x)
+2 pi i Res_{ia} / (2 pi) = e^{-ax}: True ; -2 pi i Res_{-ia} / (2 pi) = e^{ax}: True

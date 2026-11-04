@@ -1,0 +1,4 @@
+|e1|^2, |e2|^2, e1.e2 in R^3: 1 1 0
+[e1, e2] = [e1,e2] = -cos(th)/sin(th)^2 ∂/∂ph
+[e1, e2] = -cot(theta) e2: True
+check on a function, e1(e2 f) - e2(e1 f) = -cot(theta) e2(f): True

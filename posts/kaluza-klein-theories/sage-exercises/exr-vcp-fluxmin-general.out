@@ -1,0 +1,9 @@
+V'(R_m) = 0
+p, q = (6, 4) : V''(R_m) = q b (p - q) R_m^{-q-2} > 0: True
+p, q = (4, 2) : V''(R_m) = q b (p - q) R_m^{-q-2} > 0: True
+p, q = (3, 1) : V''(R_m) = q b (p - q) R_m^{-q-2} > 0: True
+p, q = (5, 2) : V''(R_m) = q b (p - q) R_m^{-q-2} > 0: True
+V(R_m) = -b (1 - q/p) R_m^{-q}: True
+p, q = (6, 4) : R_m = 1/2*sqrt(3)*sqrt(2)*N*sqrt(a)/sqrt(b) ; V(R_m) = -4/27*b^3/(N^4*a^2)
+p, q = (4, 2) : R_m = sqrt(2)*N*sqrt(a)/sqrt(b) ; V(R_m) = -1/4*b^2/(N^2*a)
+p, q = (3, 1) : R_m = sqrt(3)*N*sqrt(a)/sqrt(b) ; V(R_m) = -2/9*sqrt(3)*b^(3/2)/(N*sqrt(a))

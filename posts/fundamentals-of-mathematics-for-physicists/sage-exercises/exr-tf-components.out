@@ -1,0 +1,7 @@
+T = sin(th) ∂/∂th⊗dph + ∂/∂ph⊗dth ; type (1, 1)
+component matrix T^i_j (row i, column j):
+[      0 sin(th)]
+[      1       0]
+T(dphi, d_theta) = 1 ; T(dtheta, d_phi) = sin(th) ; T(dtheta, d_theta) = 0
+T(X) for X = d_theta + 2 d_phi: 2*sin(th) ∂/∂th + ∂/∂ph
+trace T^i_i = 0

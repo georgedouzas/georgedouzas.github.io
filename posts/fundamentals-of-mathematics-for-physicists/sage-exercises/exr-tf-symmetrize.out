@@ -1,0 +1,5 @@
+symmetric part: T00(x, y) dx⊗dx + (1/2*T01(x, y) + 1/2*T10(x, y)) dx⊗dy + (1/2*T01(x, y) + 1/2*T10(x, y)) dy⊗dx + T11(x, y) dy⊗dy
+antisymmetric part: (1/2*T01(x, y) - 1/2*T10(x, y)) dx∧dy
+T = Sym + Alt: True
+Sym_xy = Sym_yx and Alt_xy = -Alt_yx: True True
+parts of dx (x) dy: 1/2 dx⊗dy + 1/2 dy⊗dx and 1/2 dx∧dy

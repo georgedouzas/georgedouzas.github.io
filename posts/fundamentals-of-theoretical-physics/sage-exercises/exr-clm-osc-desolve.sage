@@ -1,0 +1,10 @@
+# Exercise exr-clm-osc-desolve: the undamped and the damped oscillator solved with desolve.
+t = var("t"); w, g, q0, v0 = var("omega gamma q0 v0", domain="positive")
+assume(w > g)
+q = function("q")(t)
+s1 = desolve(diff(q, t, 2) + w**2 * q == 0, q, ics=[0, q0, v0], ivar=t)
+print("undamped:", s1)
+s2 = desolve(diff(q, t, 2) + 2 * g * diff(q, t) + w**2 * q == 0, q, ics=[0, q0, v0], ivar=t)
+print("damped:", s2)
+wd = sqrt(w**2 - g**2)
+print("damped solution == e^(-gamma t)(q0 cos wd t + (v0 + gamma q0)/wd sin wd t):", bool((s2 - exp(-g * t) * (q0 * cos(wd * t) + (v0 + g * q0) / wd * sin(wd * t))).canonicalize_radical().simplify_full() == 0))

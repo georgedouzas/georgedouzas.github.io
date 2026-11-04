@@ -1,0 +1,6 @@
+1/conj(w) has real part u/(u^2 + v^2) and imaginary part v/(u^2 + v^2): True
+Jacobian determinant of the inversion: -1/(u^2 + v^2)^2  (negative: the inversion reverses orientation)
+1/w = (u - i v)/(u^2 + v^2): True
+Cauchy-Riemann equations P_u = Q_v and P_v = -Q_u hold for 1/w: True
+Jacobian determinant of w -> 1/w: (u^2 + v^2)^(-2)  = |f'(w)|^2 = 1/|w|^4, positive
+the unit circle |w| = 1 is fixed pointwise by the inversion: at w = (3 + 4i)/5, 1/conj(w) = 4/5*I + 3/5

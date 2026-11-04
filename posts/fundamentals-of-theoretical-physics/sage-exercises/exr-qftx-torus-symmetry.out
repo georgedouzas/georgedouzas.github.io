@@ -1,0 +1,3 @@
+int_0^oo log(1 - e^{-x}) dx = -1/6*pi^2    f(beta) = -1/6*pi/beta^2    E_0(L) = -1/6*pi/L
+log Z for beta >> L: 1/6*pi*beta/L    for L >> beta: 1/6*pi*L/beta
+exchanged by beta <-> L: True

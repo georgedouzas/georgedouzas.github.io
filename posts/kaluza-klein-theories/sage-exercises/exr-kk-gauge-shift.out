@@ -1,0 +1,2 @@
+G_{t w} in the shifted chart: -A0(t, x, y, z)*phi(t, x, y, z)^2 + phi(t, x, y, z)^2*diff(eps(t, x, y, z), t)
+[PASS] under w' = w + eps(x) the ansatz keeps its form with g' = g, phi' = phi and A' = A - d eps: True

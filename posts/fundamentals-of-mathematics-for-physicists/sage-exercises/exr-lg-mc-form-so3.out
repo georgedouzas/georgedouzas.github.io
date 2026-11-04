@@ -1,0 +1,7 @@
+tr(L_a L_b) = -2 delta_ab: True
+components sigma^a_i (rows a, columns theta, phi, psi):
+[        cos(ps) sin(ps)*sin(th)               0]
+[       -sin(ps) cos(ps)*sin(th)               0]
+[              0         cos(th)               1]
+equal to the SU(2) forms: True
+R^{-1} dR - sigma^a L_a = 0 in each direction: True

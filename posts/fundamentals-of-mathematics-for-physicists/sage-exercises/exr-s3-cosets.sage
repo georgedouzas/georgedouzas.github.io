@@ -1,0 +1,10 @@
+# Exercise exr-s3-cosets: cosets of A_3 in S_3, and the quotient S_3/A_3 = Z_2; the cosets of a non-normal subgroup.
+S3 = SymmetricGroup(3); A3 = S3.subgroup([S3("(1,2,3)")])
+print("A_3 =", list(A3))
+print("left cosets of A_3:", [sorted(str(x) for x in c) for c in S3.cosets(A3, side="left")])
+print("right cosets equal the left cosets (A_3 is normal):", set(frozenset(c) for c in S3.cosets(A3, side="left")) == set(frozenset(c) for c in S3.cosets(A3, side="right")))
+Q = S3.quotient(A3); print("S_3 / A_3 has order", Q.order(), "and is cyclic:", Q.is_cyclic())
+H = S3.subgroup([S3("(1,2)")])
+print("left cosets of H = <(1,2)>:", [sorted(str(x) for x in c) for c in S3.cosets(H, side="left")])
+print("right cosets of H:", [sorted(str(x) for x in c) for c in S3.cosets(H, side="right")])
+print("H is normal:", H.is_normal(S3), " (left and right cosets differ, so S_3/H is only a set of 3 cosets, not a group)")

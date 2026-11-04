@@ -1,0 +1,6 @@
+N = 201, dx = 0.05, k_max = pi/dx = 62.83: max |S - exact| = 3.6e-06, max |FFT route - S| = 1.6e-14
+N = 101, dx = 0.20, k_max = pi/dx = 15.71: max |S - exact| = 9.9e-16, max |FFT route - S| = 1.0e-14
+N =  41, dx = 0.50, k_max = pi/dx =  6.28: max |S - exact| = 1.7e-08, max |FFT route - S| = 6.2e-15
+N =  21, dx = 1.00, k_max = pi/dx =  3.14: max |S - exact| = 3.9e-02, max |FFT route - S| = 6.7e-15
+N =  15, dx = 1.50, k_max = pi/dx =  2.09: max |S - exact| = 4.9e-01, max |FFT route - S| = 2.0e-15
+dx = 1.5, k = 1: Im(S - psi^(1)) = 5.257080e-02, Im of the aliased copies sum_(j != 0) psi^(1 + 2 pi j/dx) = 5.257080e-02

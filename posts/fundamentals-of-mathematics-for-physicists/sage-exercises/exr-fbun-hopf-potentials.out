@@ -1,0 +1,4 @@
+section psi = 0: A = s^* sigma3 = s^*(sigma3) = cos(t) dp ; F = dA = ds^*(sigma3) = -sin(t) dt∧dp
+section psi = -phi: A = s^* sigma3 = s^*(sigma3) = (cos(t) - 1) dp ; F = dA = ds^*(sigma3) = -sin(t) dt∧dp
+section psi = +phi: A = s^* sigma3 = s^*(sigma3) = (cos(t) + 1) dp ; F = dA = ds^*(sigma3) = -sin(t) dt∧dp
+A_- - A_0 = d(-phi) (a gauge transformation): True

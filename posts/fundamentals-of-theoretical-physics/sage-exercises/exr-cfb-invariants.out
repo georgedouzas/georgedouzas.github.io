@@ -1,0 +1,6 @@
+E' = [E1, -(B3*v - E2)*gamma, (B2*v + E3)*gamma]
+B' = [B1, (E3*v + B2)*gamma, -(E2*v - B3)*gamma]
+F.F = 2(B^2 - E^2): True
+B'^2 - E'^2 = B^2 - E^2: True
+E'.B' = E.B: True
+crossed fields in the frame v = E/B: E' = [0, 0, 0]  B'_z = sqrt(Bz^2 - Ey^2)

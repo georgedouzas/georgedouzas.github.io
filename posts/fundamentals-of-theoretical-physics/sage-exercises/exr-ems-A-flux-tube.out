@@ -1,0 +1,4 @@
+curl A for s > 0: (0, 0, 0)
+circulation around the axis: Phi
+circulation on a circle not enclosing the axis (centre (3,0), radius 1): 0
+A - grad(Phi arctan(y/x)/(2 pi)) = (0, 0, 0)

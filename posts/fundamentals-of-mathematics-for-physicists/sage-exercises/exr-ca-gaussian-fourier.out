@@ -1,0 +1,3 @@
+Fourier transform: sqrt(2)*sqrt(pi)*e^(-1/2*k^2)
+equals sqrt(2 pi) e^{-k^2/2}: True
+integral of e^{-x^2/2}: sqrt(2)*sqrt(pi) = Gamma(1/2) sqrt(2) = sqrt(2)*sqrt(pi)

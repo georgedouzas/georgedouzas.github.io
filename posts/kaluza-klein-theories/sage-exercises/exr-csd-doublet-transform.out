@@ -1,0 +1,4 @@
+[PASS] [T_a, phi_+] corresponds to T_a Phi with T_a = (i/2) sigma_a: the doublet representation of SU(2): True
+[PASS] [tau, phi_+] corresponds to i Phi: charge 1 under the embedded U(1): True
+[Q_em, phi_+] corresponds to (I*p, 0)
+[PASS] [Q_em, phi_+] corresponds to (i p, 0): the upper component has electric charge 1, the lower 0: True

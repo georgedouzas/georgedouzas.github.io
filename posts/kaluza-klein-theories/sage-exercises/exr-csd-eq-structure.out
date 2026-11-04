@@ -1,0 +1,5 @@
+[PASS] [Q_a, Q_b] = eps_abc Q_c: True
+[PASS] [Q_3, Q_1] = Q_2 and [Q_3, Q_2] = -Q_1: f_31^2 = 1, f_32^1 = -1: True
+Q_+ = [0, 0, -I, 0] , Q_- = [0, -I, 0, 0]
+[PASS] [Q_3, Q_+] = i Q_+ and [Q_3, Q_-] = -i Q_-: the constraints say phi_+- = phi_1 -+ i phi_2 has tau-charge +-1: True
+[PASS] [Q_1, Q_2] = Q_3: f_12^3 = 1, the constant entering F_12 = [phi_1, phi_2] - phi_3: True

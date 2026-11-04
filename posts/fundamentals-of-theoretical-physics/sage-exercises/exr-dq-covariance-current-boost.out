@@ -1,0 +1,4 @@
+S = exp(w S^{01}) (check: S^-1 gamma^0 S = cosh w gamma^0 + sinh w gamma^1): True
+j = [20, -4, -16, 0] ; j' = [28, 20, -16, 0]
+j' = Lambda j: True
+Omega, N unchanged: True ; Omega = 8 , N = -8

@@ -1,0 +1,2346 @@
+---
+pagetitle: "The four-dimensional theory"
+---
+
+# The four-dimensional theory {#sec-csdr-four-dimensional}
+
+The previous chapter set up coset space dimensional reduction of $SU(3)$ Yang-Mills theory over the sphere $S^2 =
+SU(2)/U(1)$, with the isotropy $U(1)$ embedded along $\tau(Q_3) = \tfrac{i}{3}\operatorname{diag}(1, 1, -2)$, and found the
+four-dimensional gauge group $H = SU(2) \times U(1)$ and the matching that leaves one complex doublet of scalars. This
+chapter derives the four-dimensional theory itself. Solving the constraints writes the internal components of the
+gauge field explicitly in terms of a Higgs doublet $\Phi = (p, q)$, shows that the solution is complete, and reduces the
+higher-dimensional Yang-Mills Lagrangian to a four-dimensional gauge theory of $H$ coupled to $\Phi$. The Higgs
+potential and symmetry breaking computes the internal field strength, obtains the potential $V = \tfrac12 r^2 - r +
+\tfrac23$ with $r = |p|^2 + |q|^2$, finds its minimum on the sphere $r = 1$, and shows that the vacuum breaks $SU(2) \times
+U(1)$ to the $U(1)$ of electromagnetism, with masses of the $W$ and $Z$ bosons and a Weinberg angle $\sin^2\theta_W =
+\tfrac34$ fixed by the geometry. Both sections end with propositions, every
+statement is followed by three examples and three exercises with folded solutions, and the chapter closes with three
+integrative exercises, among them the Higgs mass $m_H = 2M_W$ predicted by the model. A third section,
+@sec-csdr-fermions, reduces fermions over the same sphere and matches the chiral fermions it produces with the index of
+@thm-monopole-index.
+
+## Solving the constraints {#sec-csdr-solution}
+
+The CSDR constraints of @def-csdr-constraints reduce, for the sphere, to two linear equations for the internal
+components $\phi_1, \phi_2 \in \mathfrak{su}(3)$ of the gauge field. This section writes them as eigenvalue equations for
+$\operatorname{ad}\tau$, solves them with the eigenspaces of @prp-csdr-eigenspaces, and obtains a complex doublet of
+scalars [@kubyshin2003, Sec. 4; @kapetanakis1992]. It then substitutes the solution into the higher-dimensional
+Yang-Mills Lagrangian to obtain the four-dimensional Lagrangian: a Yang-Mills field of $H = SU(2) \times U(1)$, the
+doublet with its covariant derivative, and a potential that comes from the internal field strength. It has four
+subsections: the constraint equations, the doublet, the reduced Lagrangian, and the properties of the
+solution.
+
+### The constraint equations
+
+On the sphere the isotropy algebra is one-dimensional and the tangent space two-dimensional, so the constraints are
+two matrix equations. The definition below writes them down, together with their complex form, which turns them into
+the eigenvalue problem already solved in the previous chapter.
+
+:::: {.statement-box}
+::: {#def-csd-equivariance-equations}
+#### Equivariance equations
+
+For $S^2 = SU(2)/U(1)$ with $Q_a = \sigma_a/2i$, $[Q_a, Q_b] = \epsilon_{abc}Q_c$, $\mathfrak{r} = \operatorname{span}(Q_3)$ and
+$\mathfrak{k} = \operatorname{span}(Q_1, Q_2)$, the **equivariance equations** for the internal components $\phi_1, \phi_2
+\in \mathfrak{su}(3)$ are
+$$
+[\tau, \phi_1] = \phi_2, \qquad [\tau, \phi_2] = -\phi_1, \qquad \phi_3 = \tau ,
+$$ {#eq-csd-equivariance}
+the constraints 2 and 3 of @def-csdr-constraints with $f_{31}{}^2 = 1$, $f_{32}{}^1 = -1$ (@exr-csd-constraint-sphere). In
+terms of $\phi_\pm = \phi_1 \mp i\phi_2$ they read $[\tau, \phi_\pm] = \pm i\phi_\pm$ [@kubyshin2003, eq. 22].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The complex form is obtained by adding and subtracting the two real equations. The first example carries out this
+step, which turns the pair of real equations into two eigenvalue equations.
+
+::: {#exm-csd-eq-complex}
+#### From real to complex form
+
+$[\tau, \phi_1 - i\phi_2] = \phi_2 + i\phi_1 = i(\phi_1 - i\phi_2)$ and $[\tau, \phi_1 + i\phi_2] = \phi_2 - i\phi_1 = -i(\phi_1 +
+i\phi_2)$. Conversely, from $[\tau, \phi_\pm] = \pm i\phi_\pm$ and $\phi_1 = \tfrac12(\phi_+ + \phi_-)$, $\phi_2 = \tfrac{i}{2}(\phi_+ -
+\phi_-)$ one recovers @eq-csd-equivariance. So $\phi_+ \in \mathfrak{g}_{+i}$ and $\phi_- \in \mathfrak{g}_{-i}$ in the notation of
+@eq-csdr-eigenspaces.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** This step is the statement `constraints_iff_eigen` in `KaluzaKlein/CSDR/Constraints.lean`.
+
+**Sage.** Pending.
+:::
+
+The equations say that $\operatorname{ad}\tau$ acts on the pair $(\phi_1, \phi_2)$ as the isotropy rotation acts on the tangent
+plane. The second example makes the geometric meaning explicit.
+
+::: {#exm-csd-eq-rotation}
+#### A rotation in the tangent plane
+
+Exponentiating, $e^{\alpha\operatorname{ad}\tau}\phi_1 = \cos\alpha\,\phi_1 + \sin\alpha\,\phi_2$ and $e^{\alpha\operatorname{ad}\tau}\phi_2 = -
+\sin\alpha\,\phi_1 + \cos\alpha\,\phi_2$: conjugating the scalars by $e^{\alpha\tau}$ rotates them by the angle $\alpha$, exactly
+as the isotropy rotation $e^{\alpha Q_3}$ rotates the frame $(Q_1, Q_2)$. A rotation of the sphere about the pole is undone
+by a gauge transformation, which is the definition of a symmetric field.
+:::
+
+The same equations with $SU(2)$ in place of $SU(3)$ give the smaller model of @exm-rules-su2. The third example solves
+them there, as a preview of the solution below.
+
+::: {#exm-csd-eq-su2}
+#### The $SU(2)$ model
+
+For $G = SU(2)$ and $\tau = Q_3$, the $+i$ eigenspace of $\operatorname{ad}Q_3$ on $2 \times 2$ matrices is spanned by $E_{21}$
+(@exr-csdr-su2-example), so $\phi_+ = fE_{21}$ with one complex number $f$, and $\phi_- = -\bar fE_{12}$. The internal field
+strength is $F_{12} = [\phi_1, \phi_2] - Q_3$, proportional to $(|f|^2 - 1)\sigma_3$ [@kubyshin2003, eqs. 33-36].
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise verifies the structure constants used in the definition. The constant $f_{12}{}^3$ will reappear in
+the internal field strength of the next section.
+
+::: {#exr-csd-eq-structure}
+#### The structure constants of $\mathfrak{su}(2)$
+
+Check $[Q_a, Q_b] = \epsilon_{abc}Q_c$ for $Q_a = \sigma_a/2i$, read off $f_{31}{}^2$, $f_{32}{}^1$ and $f_{12}{}^3$, and show that
+$Q_\pm = Q_1 \mp iQ_2$ have charges $\pm1$ under $\operatorname{ad}Q_3$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$[Q_3, Q_1] = Q_2$, $[Q_3, Q_2] = -Q_1$ and $[Q_1, Q_2] = Q_3$, so $f_{31}{}^2 = 1$, $f_{32}{}^1 = -1$, $f_{12}{}^3 = 1$;
+$Q_+ = -iE_{21}$ and $Q_- = -iE_{12}$ satisfy $[Q_3, Q_\pm] = \pm iQ_\pm$:
+
+{{< sage exr-csd-eq-structure >}}
+:::
+
+The second exercise proves the equivalence of @exm-csd-eq-complex in both directions. It is a short computation with the
+linearity of the commutator.
+
+::: {#exr-csd-eq-equivalence}
+#### Real and complex forms are equivalent
+
+Show that the pair of real equations @eq-csd-equivariance holds if and only if $[\tau, \phi_+] = i\phi_+$ and $[\tau,
+\phi_-] = -i\phi_-$, for arbitrary complex matrices $\phi_1, \phi_2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+If the real equations hold, the computation of @exm-csd-eq-complex gives the complex ones. Conversely, adding the complex
+equations gives $[\tau, \phi_+ + \phi_-] = i(\phi_+ - \phi_-)$, i.e. $2[\tau, \phi_1] = i(-2i\phi_2) = 2\phi_2$, and subtracting them
+gives $[\tau, \phi_+ - \phi_-] = i(\phi_+ + \phi_-)$, i.e. $-2i[\tau, \phi_2] = 2i\phi_1$, so $[\tau, \phi_2] = -\phi_1$. No reality
+condition is used, which is why the equivalence holds for all complex matrices.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** `constraints_iff_eigen` in `KaluzaKlein/CSDR/Constraints.lean` holds for all complex matrices $A, B$.
+
+**Sage.** Pending.
+:::
+
+The third exercise brings in the reality condition. The fields are elements of $\mathfrak{su}(3)$, and this relates $\phi_-$ to
+$\phi_+$.
+
+::: {#exr-csd-eq-reality}
+#### The reality condition
+
+Show that if $\phi_1, \phi_2$ are anti-Hermitian then $\phi_- = -\phi_+^\dagger$, and conversely that for any $\phi_+$ the
+matrices $\phi_1 = \tfrac12(\phi_+ - \phi_+^\dagger)$ and $\phi_2 = \tfrac{i}{2}(\phi_+ + \phi_+^\dagger)$ are anti-Hermitian.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\phi_+^\dagger = \phi_1^\dagger + i\phi_2^\dagger = -\phi_1 - i\phi_2 = -\phi_-$. Conversely, $\phi_1^\dagger = \tfrac12(\phi_+^\dagger - \phi_+)
+= -\phi_1$ and $\phi_2^\dagger = -\tfrac{i}{2}(\phi_+^\dagger + \phi_+) = -\phi_2$. With $\phi_- = -\phi_+^\dagger$ these are the
+formulas $\phi_1 = \tfrac12(\phi_+ + \phi_-)$, $\phi_2 = \tfrac{i}{2}(\phi_+ - \phi_-)$. If $\phi_+ \in \mathfrak{g}_{+i}$ then $\phi_+^\dagger
+\in \mathfrak{g}_{-i}$ by @exr-csd-eigen-minus, so the second complex equation follows from the first: only one complex
+condition is independent.
+:::
+::::
+
+### The doublet
+
+With the eigenspaces of @prp-csdr-eigenspaces the complex equation is solved at once. The definition below names the
+solution and the field that parametrises it.
+
+:::: {.statement-box}
+::: {#def-csd-higgs-doublet}
+#### Higgs doublet
+
+The general solution of @eq-csd-equivariance in $\mathfrak{su}(3)$ is
+$$
+\phi_+ = pE_{13} + qE_{23}, \qquad \phi_- = -\phi_+^\dagger, \qquad \phi_1 = \tfrac12(\phi_+ + \phi_-), \qquad \phi_2 =
+\tfrac{i}{2}(\phi_+ - \phi_-) ,
+$$ {#eq-csd-doublet}
+with $(p, q) \in \mathbb{C}^2$ arbitrary functions on $M_4$. The column $\Phi = (p, q)^T$ is the **Higgs doublet** of the
+model, and $r = |\Phi|^2 = |p|^2 + |q|^2$ its squared norm [@kapetanakis1992; @manton1979].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+Written out, the two real fields are sparse matrices with entries only in the third row and column. The first example
+displays them, as also drawn in @fig-csdr-solution.
+
+::: {#exm-csd-doublet-matrices}
+#### The matrices $\phi_1$ and $\phi_2$
+
+$$
+\phi_1 = \frac12\begin{pmatrix} 0 & 0 & p \\ 0 & 0 & q \\ -\bar p & -\bar q & 0 \end{pmatrix}, \qquad
+\phi_2 = \frac{i}{2}\begin{pmatrix} 0 & 0 & p \\ 0 & 0 & q \\ \bar p & \bar q & 0 \end{pmatrix} .
+$$
+Both are anti-Hermitian and traceless, and they are the real and imaginary parts, in the sense of
+@exr-csd-eq-reality, of the single complex matrix $\phi_+$.
+:::
+
+The name doublet refers to how the four-dimensional gauge group acts. The second example computes this action from the
+commutators with the generators of $H$.
+
+::: {#exm-csd-doublet-action}
+#### How $H$ acts
+
+For $X = \operatorname{diag}(U, u) \in \mathfrak{h}$, with $U$ a $2 \times 2$ anti-Hermitian matrix and $u = -\operatorname{tr}U$,
+$[X, \phi_+] = ((U - u)\Phi)_1E_{13} + ((U - u)\Phi)_2E_{23}$: the $SU(2)$ generators $T_a = \tfrac{i}{2}\sigma_a$ act on $\Phi$
+by matrix multiplication, and $\tau$ acts as multiplication by $i$, charge $1$. $\Phi$ is a doublet of $SU(2)$ with a
+$U(1)$ charge, as in the Standard Model (@exm-covariant-doublet).
+:::
+
+The count of real fields confirms that nothing has been lost. The third example compares it with the dimension of
+the solution space.
+
+::: {#exm-csd-doublet-count}
+#### Four real scalars
+
+$(p, q) \in \mathbb{C}^2$ is four real fields, and the constraint system on the sixteen real components of $(\phi_1,
+\phi_2)$ has rank $12$ (@fig-csdr-solution): the solution space is four-dimensional, so @eq-csd-doublet is the general
+solution, as @prp-csd-doublet-solution states.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** The statement `solution_is_doublet` in `KaluzaKlein/CSDR/Constraints.lean`.
+
+**Sage.** The rank is computed in `figures/csdr_solution.sage` (@fig-csdr-solution).
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+![Solving the constraints. Left: the internal components $\varphi_1$ and $\varphi_2$ of the symmetric field in terms of the
+doublet $\Phi = (p, q)$; the red entries form $\varphi_+ = pE_{13} + qE_{23}$, in the $+i$ eigenspace of $\operatorname{ad}\tau$, the
+blue ones $\varphi_- = -\varphi_+^\dagger$. Right: the constraints as a real linear system on $\mathfrak{su}(3) \times \mathfrak{su}(3)$,
+sixteen unknowns and rank twelve, computed by Sage: a four-dimensional solution space, one complex doublet.
+Generated by `figures/csdr_solution.sage`.](figures/csdr_solution.svg){#fig-csdr-solution width=95%}
+
+The first exercise computes the action of $H$ on the doublet in Sage. It also identifies the electric charges of the two
+components, anticipating the symmetry breaking of the next section.
+
+::: {#exr-csd-doublet-transform}
+#### The doublet representation
+
+Compute $[T_a, \phi_+]$ for $T_a = \tfrac{i}{2}\sigma_a$ in the upper block, $[\tau, \phi_+]$ and $[Q_{em}, \phi_+]$ with
+$Q_{em} = \tfrac{i}{3}\operatorname{diag}(2, -1, -1)$, and express them as operations on $\Phi$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$[T_a, \phi_+] \leftrightarrow T_a\Phi$, $[\tau, \phi_+] \leftrightarrow i\Phi$ and $[Q_{em}, \phi_+] \leftrightarrow (ip, 0)$: the upper
+component $p$ has electric charge $1$ and the lower component $q$ is neutral.
+
+{{< sage exr-csd-doublet-transform >}}
+:::
+
+The second exercise uses the gauge symmetry to simplify the doublet. Every doublet can be rotated into a standard form,
+which will be the form of the vacuum.
+
+::: {#exr-csd-doublet-gauge}
+#### A standard form
+
+Show that for every $\Phi \neq 0$ there is $U \in SU(2)$ with $U\Phi = (0, |\Phi|)^T$. What is the stabiliser of $(0, 1)^T$
+in $SU(2)$, and in $U(2) \cong H$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$SU(2)$ acts transitively on the unit sphere $S^3 \subset \mathbb{C}^2$ (@exm-coset-s3): the matrix
+$U = \frac{1}{|\Phi|}\begin{pmatrix} q & -p \\ \bar p & \bar q \end{pmatrix}$ has orthonormal rows and determinant
+$(|q|^2 + |p|^2)/|\Phi|^2 = 1$, and $U\Phi = (qp - pq, |p|^2 + |q|^2)^T/|\Phi| = (0, |\Phi|)^T$. The stabiliser of $(0, 1)^T$ in $SU(2)$ is
+trivial (an $SU(2)$ matrix with second column $(0, 1)^T$ is the identity). In $U(2)$, where $\tau$ acts by the phase
+$e^{i\alpha}$ on both components and $SU(2)$ can compensate on the lower one, the stabiliser is a $U(1)$: it is generated
+by $Q_{em}$, as found in @sec-csdr-potential.
+:::
+
+The third exercise checks the counting of @exm-csd-doublet-count by hand. It solves the real linear system without the
+eigenspace decomposition.
+
+::: {#exr-csd-doublet-rank}
+#### The rank of the constraint system
+
+Write $\phi_1 = \sum_k a_k\,i\lambda_k$, $\phi_2 = \sum_k b_k\,i\lambda_k$ and use the matrix of $\operatorname{ad}\tau$ found in
+@exr-csd-embedding-gellmann to show that the constraints leave exactly $a_4, a_5, a_6, a_7$ free, with $b$ determined by $a$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\operatorname{ad}\tau$ kills $i\lambda_{1,2,3,8}$ and maps $i\lambda_4 \mapsto -i\lambda_5$, $i\lambda_5 \mapsto i\lambda_4$,
+$i\lambda_6 \mapsto -i\lambda_7$, $i\lambda_7 \mapsto i\lambda_6$. The equation $[\tau, \phi_2] = -\phi_1$ forces the components
+$a_{1,2,3,8}$ to vanish, and $[\tau, \phi_1] = \phi_2$ determines $b$: $b_4 = a_5$, $b_5 = -a_4$, $b_6 = a_7$, $b_7 = -a_6$,
+$b_{1,2,3,8} = 0$; then the second equation holds automatically. Four free real parameters remain, matching the basis
+printed by `csdr_solution.sage` and the four real components of $(p, q)$.
+:::
+::::
+
+### The reduced Lagrangian
+
+The solution is substituted into the higher-dimensional Yang-Mills Lagrangian. The definition below gives the
+four-dimensional Lagrangian that results, in the normalisation used throughout this chapter.
+
+:::: {.statement-box}
+::: {#def-csd-reduced-lagrangian}
+#### Reduced Lagrangian
+
+With the six-dimensional Lagrangian $\tfrac{1}{g^2}\cdot\tfrac12\operatorname{Tr}(\hat F_{MN}\hat F^{MN})$ (@def-yang-mills-action), the
+signature $(+,-,-,-,-,-)$, the internal metric $R^2\delta_{ab}$ in the frame of @exr-csd-local-form-sphere, and the
+symmetric field @eq-csd-doublet, the **reduced Lagrangian** is
+$$
+\mathcal{L}_4 = \frac{1}{g^2}\left[\frac12\operatorname{Tr}(F_{\mu\nu}F^{\mu\nu}) - \frac{1}{R^2}\sum_{a=1}^{2}\operatorname{Tr}(D_\mu\phi_a
+D^\mu\phi_a) - \frac{1}{R^4}V\right], \qquad V = -\operatorname{Tr}(F_{12}F_{12}) ,
+$$ {#eq-csd-reduced-lagrangian}
+with $A_\mu \in \mathfrak{h}$, $D_\mu\phi_a = \partial_\mu\phi_a + [A_\mu, \phi_a]$ and the internal field strength $F_{12}$ of
+@def-csd-internal-field-strength; it agrees with @manolakos2016 [eqs. 10-11] and @manousselis2000 [eqs. 17-18] up to
+the normalisation of the trace and the sign conventions noted there.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The kinetic term of the scalars is the familiar kinetic term of a complex doublet. The first example states the
+identity behind this, checked in @exr-csd-lagr-kinetic.
+
+::: {#exm-csd-lagr-kinetic}
+#### The scalar kinetic term
+
+$-\sum_a\operatorname{Tr}(\phi_a\phi_a) = |p|^2 + |q|^2 = \Phi^\dagger\Phi$, and $D_\mu\phi_a$ is again of the form
+@eq-csd-doublet with $\Phi$ replaced by $D_\mu\Phi = \partial_\mu\Phi + A^a_\mu T_a\Phi + iA^4_\mu\Phi$ (where $A_\mu = A^a_\mu T_a +
+A^4_\mu\tau$). So $-\sum_a\operatorname{Tr}(D_\mu\phi_aD^\mu\phi_a) = (D_\mu\Phi)^\dagger D^\mu\Phi$: the doublet is minimally coupled
+to the gauge fields of $H$.
+:::
+
+The three terms come from the three types of components of $\hat F_{MN}$. The second example shows where each comes
+from.
+
+::: {#exm-csd-lagr-split}
+#### Where the terms come from
+
+$\tfrac12\operatorname{Tr}(\hat F_{MN}\hat F^{MN})$ splits into $\tfrac12\operatorname{Tr}(F_{\mu\nu}F^{\mu\nu})$, the mixed terms
+$\operatorname{Tr}(F_{\mu a}F^{\mu a})$ with $F_{\mu a} = D_\mu\phi_a$ and $g^{ab} = -\delta^{ab}/R^2$, and the internal part
+$\tfrac12\operatorname{Tr}(F_{ab}F^{ab}) = \tfrac{1}{R^4}\operatorname{Tr}(F_{12}F_{12})$ (the two orderings $(1,2)$ and $(2,1)$
+contribute equally). The internal part, with its sign, is minus the potential.
+:::
+
+The sign of the potential deserves a check, since conventions vary in the literature. The third example verifies that
+the potential defined here is non-negative and enters the Lagrangian with the correct sign.
+
+::: {#exm-csd-lagr-sign}
+#### The sign of the potential
+
+For an anti-Hermitian matrix $X$, $-\operatorname{Tr}(X^2) = \operatorname{Tr}(X^\dagger X) \geq 0$, with equality only for $X = 0$.
+So $V \geq 0$ and, in the signature $(+,-,-,-)$ of @sec-conventions-indices, the Lagrangian has the form kinetic
+minus potential, $\mathcal{L} = \tfrac12\dot\varphi^2 - \dots - V$ (@def-lagrangian-density). The papers cited write $+V$
+with an opposite trace convention [@manolakos2016, eq. 10].
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise derives the split of @exm-csd-lagr-split in detail. It is the same bookkeeping as in the reduction
+of Part III, with a non-abelian field and a curved internal space.
+
+::: {#exr-csd-lagr-split}
+#### Splitting the Yang-Mills Lagrangian
+
+With $\hat A = A_\mu dx^\mu + (\text{internal part})$ and frame indices $a, b$ on the sphere, show that
+$\tfrac12\operatorname{Tr}(\hat F_{MN}\hat F^{MN}) = \tfrac12\operatorname{Tr}(F_{\mu\nu}F^{\mu\nu}) + \operatorname{Tr}(F_{\mu a}F^{\mu a}) +
+\tfrac12\operatorname{Tr}(F_{ab}F^{ab})$, and evaluate the last two terms with $g^{ab} = -\delta^{ab}/R^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The double sum over $M, N$ splits into $(\mu, \nu)$, $(\mu, a)$ and $(a, \mu)$, which are equal and give the factor $1$,
+and $(a, b)$. With the block-diagonal metric, $F^{\mu a} = \eta^{\mu\nu}g^{ab}F_{\nu b} = -\tfrac{1}{R^2}F^\mu{}_a$, so
+$\operatorname{Tr}(F_{\mu a}F^{\mu a}) = -\tfrac{1}{R^2}\sum_a\operatorname{Tr}(D_\mu\phi_aD^\mu\phi_a)$, using $F_{\mu a} = \partial_\mu\phi_a +
+[A_\mu, \phi_a]$ for $y$-independent frame components. The internal term is $\tfrac12 \cdot \tfrac{1}{R^4}(\operatorname{Tr}
+F_{12}^2 + \operatorname{Tr}F_{21}^2) = \tfrac{1}{R^4}\operatorname{Tr}F_{12}^2$. Multiplying by $1/g^2$ gives
+@eq-csd-reduced-lagrangian; the volume of the sphere has been absorbed into $g$.
+:::
+
+The second exercise verifies the kinetic identity of @exm-csd-lagr-kinetic in Sage. It is a polarisation identity for the
+real inner product $-\operatorname{Tr}(XY)$ on doublet fields.
+
+::: {#exr-csd-lagr-kinetic}
+#### The kinetic term in Sage
+
+For two doublet fields built from $\Phi = (p, q)$ and $\Psi = (u, v)$ by @eq-csd-doublet, show $-\sum_a\operatorname{Tr}(\phi_a\psi_a) =
+\operatorname{Re}(\Phi^\dagger\Psi)$, and check that $[A, \phi_a]$ for $A \in \mathfrak{h}$ is the doublet field of $(A^aT_a +
+iA^4)\Phi$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Both identities hold for all values of the fields; together they give $-\sum_a\operatorname{Tr}(D_\mu\phi_aD^\mu\phi_a) =
+(D_\mu\Phi)^\dagger D^\mu\Phi$:
+
+{{< sage exr-csd-lagr-kinetic >}}
+:::
+
+The third exercise is about scales. It identifies the canonically normalised fields and the dimensions of the couplings
+that appear in @eq-csd-reduced-lagrangian.
+
+::: {#exr-csd-lagr-scales}
+#### Canonical normalisation
+
+Rescale $A_\mu \to gA_\mu$ and $\Phi \to gRH$ in @eq-csd-reduced-lagrangian. Show that the gauge and Higgs kinetic terms
+become canonical, and write the potential in terms of $H$. Which combinations of $g$ and $R$ play the roles of the
+quartic coupling and of the mass parameter?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\tfrac{1}{g^2}\cdot\tfrac12\operatorname{Tr}(F F) \to \tfrac12\operatorname{Tr}(FF) = -\tfrac14F^a_{\mu\nu}F^{a\mu\nu}$ (with
+$\operatorname{Tr}(T_aT_b) = -\tfrac12\delta_{ab}$), the commutator terms acquiring the coupling $g$; the scalar term becomes
+$\tfrac{1}{g^2R^2}(gR)^2|D_\mu H|^2 = |D_\mu H|^2$. With $V = \tfrac12r^2 - r + \tfrac23$ (@prp-csd-potential) and $r = g^2R^2 |
+H|^2$, $\tfrac{1}{g^2R^4}V = \tfrac{g^2}{2}|H|^4 - \tfrac{1}{R^2}|H|^2 + \tfrac{2}{3g^2R^4}$: a quartic coupling $\lambda = g^2/2$
+fixed by the gauge coupling, a negative mass term $-\mu^2|H|^2$ with $\mu = 1/R$ fixed by the size of the sphere, and a
+constant. Nothing is adjustable: this is the predictive power of the method (@exr-csd-int-higgs-mass).
+:::
+::::
+
+### Worked computations
+
+The solution of the constraints and its properties are finite computations with $3 \times 3$ matrices. The proposition
+below collects them, as checked by the script that draws @fig-csdr-solution.
+
+:::: {.statement-box}
+::: {#prp-csd-doublet-solution}
+#### The doublet solves the constraints
+
+For all $(p, q) \in \mathbb{C}^2$ the fields @eq-csd-doublet are anti-Hermitian, traceless and satisfy @eq-csd-equivariance;
+the solution space of @eq-csd-equivariance in $\mathfrak{su}(3) \times \mathfrak{su}(3)$ is four-dimensional and is spanned by
+them; $-\operatorname{Tr}(\phi_1^2 + \phi_2^2) = |p|^2 + |q|^2$; $[\phi_1, \phi_2] = \tfrac{i}{2}\operatorname{diag}(\Phi\Phi^\dagger, -
+|\Phi|^2)$ in block form; and $\mathfrak{h}$ acts on $\phi_+$ as on the doublet $\Phi$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending; see @exm-csd-sol-lean for the related statements.
+
+**Sage.** Checked by exact computation in `figures/csdr_solution.sage`.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The bracket formula is the key input for the potential of the next section. The first example evaluates it at the
+point that will turn out to be the vacuum.
+
+::: {#exm-csd-sol-bracket-point}
+#### The bracket at a point
+
+For $\Phi = (0, 1)$: $\phi_1 = \tfrac12(E_{23} - E_{32})$, $\phi_2 = \tfrac{i}{2}(E_{23} + E_{32})$ and $[\phi_1, \phi_2] =
+\tfrac{i}{2}\operatorname{diag}(0, 1, -1)$, which is $\tfrac{i}{2}$ times the block matrix $\operatorname{diag}(\Phi\Phi^\dagger, -1)$
+with $\Phi\Phi^\dagger = \operatorname{diag}(0, 1)$.
+:::
+
+The norm identity says that the doublet has the standard kinetic normalisation. The second example illustrates it on a
+sample configuration.
+
+::: {#exm-csd-sol-norm}
+#### A sample norm
+
+For $p = 0.6 + 0.3i$ and $q = 0.8 - 0.2i$, $|p|^2 + |q|^2 = 0.45 + 0.68 = 1.13$, and $-\operatorname{Tr}(\phi_1^2 + \phi_2^2)$ gives the same number: each of $\phi_1$, $\phi_2$ contributes
+half, $-\operatorname{Tr}\phi_1^2 = -\operatorname{Tr}\phi_2^2 = \tfrac12 r$.
+:::
+
+The proposition bundles statements of different kinds. The third example separates them into existence, completeness
+and the algebraic facts used later.
+
+::: {#exm-csd-sol-lean}
+#### Existence, completeness and algebra
+
+The proposition contains an existence statement (the doublet @eq-csd-doublet satisfies @eq-csd-equivariance), a
+completeness statement (every solution is of this form, the dimension count of @exm-csd-doublet-count), a reality
+statement (the doublet fields are anti-Hermitian and traceless) and the equivalence of the real equations with the
+eigenvalue equations of @exm-csd-eq-complex. The trace and bracket formulas are the algebraic facts used for the
+potential in the next section.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** The file `KaluzaKlein/CSDR/Constraints.lean` states the same facts as `doublet_solves` (the doublet satisfies
+@eq-csd-equivariance), `solution_is_doublet` (every solution is of this form), `doublet_antihermitian` and
+`constraints_iff_eigen` (@exm-csd-eq-complex). These are not yet part of the verification of this chapter.
+
+**Sage.** The proposition relies on the computation in `figures/csdr_solution.sage`.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise recovers the doublet from the fields. This inverse map is what identifies the four real scalars with
+$\Phi$.
+
+::: {#exr-csd-sol-inverse}
+#### From $(\phi_1, \phi_2)$ back to $\Phi$
+
+Given a solution $(\phi_1, \phi_2)$ of @eq-csd-equivariance in $\mathfrak{su}(3)$, show that $p = (\phi_1 - i\phi_2)_{13}$ and $q =
+(\phi_1 - i\phi_2)_{23}$, and that $p = 2(\phi_1)_{13}$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\phi_1 - i\phi_2 = \phi_+ = pE_{13} + qE_{23}$ by @exm-csd-eq-complex, so its $(1,3)$ and $(2,3)$ entries are $p$ and $q$. From
+@exm-csd-doublet-matrices, $(\phi_1)_{13} = p/2$ and $(\phi_2)_{13} = ip/2$, so $(\phi_1 - i\phi_2)_{13} = p/2 + p/2 = p$, consistent.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** This is the formula used in `solution_is_doublet` in `KaluzaKlein/CSDR/Constraints.lean`.
+
+**Sage.** Pending.
+:::
+
+The second exercise computes the commutators of the doublet fields in both the real and the complex form. The result
+lies in the gauge algebra, as the grading of @exr-csd-eigen-grading predicts.
+
+::: {#exr-csd-sol-bracket}
+#### Commutators of the doublet fields
+
+Compute $[\phi_+, \phi_-]$ and $[\phi_1, \phi_2]$, check $[\phi_1, \phi_2] = -\tfrac{i}{2}[\phi_+, \phi_-]$, and verify that both
+commute with $\tau$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$[\phi_+, \phi_-] = -\operatorname{diag}(\Phi\Phi^\dagger, -|\Phi|^2)$ in block form; then $[\phi_1, \phi_2] = \tfrac{i}{4}[\phi_+ +
+\phi_-, \phi_+ - \phi_-] = -\tfrac{i}{2}[\phi_+, \phi_-]$, and both are block diagonal, so they lie in the kernel of
+$\operatorname{ad}\tau$:
+
+{{< sage exr-csd-sol-bracket >}}
+:::
+
+The third exercise compares with the $SU(2)$ model. The structure is the same, with a single complex number in place of
+the doublet.
+
+::: {#exr-csd-sol-su2}
+#### The $SU(2)$ analogue
+
+For $G = SU(2)$, $\tau = Q_3$ and $\phi_+ = fE_{21}$, compute $\phi_1$, $\phi_2$, $-\operatorname{Tr}(\phi_1^2 + \phi_2^2)$ and
+$[\phi_1, \phi_2]$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\phi_- = -\bar fE_{12}$, $\phi_1 = \tfrac12(fE_{21} - \bar fE_{12})$, $\phi_2 = \tfrac{i}{2}(fE_{21} + \bar fE_{12})$. Then
+$\phi_1^2 = -\tfrac14|f|^2\mathbb{1}$, $\phi_2^2 = -\tfrac14|f|^2\mathbb{1}$, so $-\operatorname{Tr}(\phi_1^2 + \phi_2^2) = |f|^2$, and
+$[\phi_1, \phi_2] = \tfrac{i}{2}|f|^2\operatorname{diag}(-1, 1) = -\tfrac{i}{2}|f|^2\sigma_3 = |f|^2 Q_3$. With $\phi_3 = Q_3$ the
+internal field strength is $(|f|^2 - 1)Q_3$ and the potential $-\operatorname{Tr}F_{12}^2 = \tfrac12(|f|^2 - 1)^2$, as in
+@exr-csdr-su2-example.
+:::
+::::
+
+## The Higgs potential and symmetry breaking {#sec-csdr-potential}
+
+The reduced Lagrangian @eq-csd-reduced-lagrangian contains a potential for the Higgs doublet, coming from the internal
+components of the higher-dimensional field strength. Unlike in the Standard Model, where the potential is put in by
+hand, its form here is fixed by the coset and the embedding, and for a symmetric coset it necessarily breaks the
+four-dimensional gauge group [@manousselis2000, Sec. 3; @kapetanakis1992]. This section computes the internal field
+strength and the potential, finds the vacuum and the unbroken electromagnetic $U(1)$, and obtains the masses of the
+gauge bosons and the Weinberg angle of the model of Manton [@manton1979]. It has six subsections: the internal field
+strength, the potential, the vacuum, the electric charge, the Weinberg angle, and the results.
+
+### The internal field strength
+
+The potential is the square of the internal components of the field strength. The definition below gives these
+components on the symmetric field, where the structure constants of the coset enter through the fixed component
+$\phi_3 = \tau$.
+
+:::: {.statement-box}
+::: {#def-csd-internal-field-strength}
+#### Internal field strength
+
+The **internal field strength** of the symmetric field on $S^2$ is
+$$
+F_{12} = [\phi_1, \phi_2] - f_{12}{}^C\phi_C = [\phi_1, \phi_2] - \tau ,
+$$ {#eq-csd-f12}
+since $f_{12}{}^3 = 1$ and $\phi_3 = \tau$ (@exr-csd-eq-structure) [@manolakos2016, eq. 11; @kubyshin2003, eq. 36]. It is an
+element of $\mathfrak{su}(3)$ that depends on $x$ only through $\Phi$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+By @prp-csd-doublet-solution the commutator is block diagonal, and so is $F_{12}$. The first example writes it in block
+form, which is all that is needed for the potential.
+
+::: {#exm-csd-fs-block}
+#### Block form
+
+With $[\phi_1, \phi_2] = \tfrac{i}{2}\operatorname{diag}(\Phi\Phi^\dagger, -|\Phi|^2)$ and $\tau = \tfrac{i}{2}\operatorname{diag}(\tfrac23\mathbb{1}_2, -
+\tfrac43)$,
+$$
+F_{12} = \frac{i}{2}\begin{pmatrix} \Phi\Phi^\dagger - \tfrac23\mathbb{1}_2 & 0 \\ 0 & -|\Phi|^2 + \tfrac43 \end{pmatrix} ,
+$$
+an element of the centraliser algebra $\mathfrak{h}$, as it must be by the grading of @exr-csd-eigen-grading.
+:::
+
+At the symmetric point $\Phi = 0$ the internal field is the embedded monopole alone. The second example describes it.
+
+::: {#exm-csd-fs-zero}
+#### The symmetric point
+
+At $\Phi = 0$, $F_{12} = -\tau$: the internal field strength is that of a monopole on $S^2$ embedded in $SU(3)$ along $\tau$,
+the field $\tau(\theta^3Q_3)$ of @exr-csd-local-form-sphere, whose curvature is $-\tau$ times the area form. The whole gauge
+group $H$ is unbroken there.
+:::
+
+On the sphere $|\Phi| = 1$ the field strength takes a particularly simple form. The third example evaluates it at the point
+$\Phi = (0, 1)$, which will be the vacuum.
+
+::: {#exm-csd-fs-vacuum}
+#### At the vacuum
+
+At $\Phi = (0, 1)$, $\Phi\Phi^\dagger = \operatorname{diag}(0, 1)$ and $F_{12} = \tfrac{i}{2}\operatorname{diag}(-\tfrac23, \tfrac13, \tfrac13) = -
+\tfrac12Q_{em}$ with $Q_{em} = \tfrac{i}{3}\operatorname{diag}(2, -1, -1)$: part of the monopole survives, but only along the generator
+of the unbroken $U(1)$ (@def-csd-electric-charge).
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise computes $F_{12}$ for a general doublet in Sage. It also evaluates the trace with $\tau$, used below to
+show that $F_{12}$ never vanishes.
+
+::: {#exr-csd-fs-explicit}
+#### $F_{12}$ in Sage
+
+Compute $F_{12}$ for $\phi_+ = pE_{13} + qE_{23}$, its values at $\Phi = 0$ and $\Phi = (0, 1)$, and $\operatorname{Tr}(\tau F_{12})$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The result is the block form of @exm-csd-fs-block, with $\operatorname{Tr}(\tau F_{12}) = \tfrac23 - \tfrac{r}{2}$:
+
+{{< sage exr-csd-fs-explicit >}}
+:::
+
+The second exercise checks that the potential built from $F_{12}$ is gauge invariant. The argument is the same as for any
+Yang-Mills field strength.
+
+::: {#exr-csd-fs-covariance}
+#### Covariance under $H$
+
+Show that under $\phi_a \mapsto h^{-1}\phi_ah$, $h \in H$, the internal field strength transforms as $F_{12} \mapsto
+h^{-1}F_{12}h$, and deduce that $\operatorname{Tr}F_{12}^2$ is invariant.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$[h^{-1}\phi_1h, h^{-1}\phi_2h] = h^{-1}[\phi_1, \phi_2]h$, and $h^{-1}\tau h = \tau$ because $h$ commutes with $\tau$. So
+$F_{12} \mapsto h^{-1}F_{12}h$, and the trace of the square is invariant under conjugation. The term $\tau$ in
+@eq-csd-f12 is invariant only under $H$, not under all of $SU(3)$: this is how the embedding breaks $SU(3)$ to $H$ at the
+level of the potential.
+:::
+
+The third exercise proves that the internal field strength never vanishes. This is why the minimum of the potential will
+be positive.
+
+::: {#exr-csd-fs-never-zero}
+#### $F_{12}$ never vanishes
+
+Using the block form, show that $F_{12} = 0$ has no solution $\Phi \in \mathbb{C}^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$F_{12} = 0$ requires $\Phi\Phi^\dagger = \tfrac23\mathbb{1}_2$. The left-hand side has rank at most one (it maps every vector to a
+multiple of $\Phi$), the right-hand side rank two: impossible. Alternatively, the lower entry requires $|\Phi|^2 = \tfrac43$
+and the trace of the upper block requires $|\Phi|^2 = \tfrac43$ as well, but then $\Phi\Phi^\dagger$ has eigenvalues $\tfrac43$ and $0$,
+not $\tfrac23, \tfrac23$. So $V = -\operatorname{Tr}F_{12}^2 > 0$ everywhere, in contrast with the $SU(2)$ model, where
+$F_{12} = (|f|^2 - 1)Q_3$ vanishes at $|f| = 1$ (@exr-csd-sol-su2).
+:::
+::::
+
+### The potential
+
+Squaring the internal field strength gives the potential of the Higgs doublet. The definition below names it, in the
+normalisation of @eq-csd-reduced-lagrangian.
+
+:::: {.statement-box}
+::: {#def-csd-higgs-potential}
+#### Higgs potential
+
+The **Higgs potential** of the model is
+$$
+V(\Phi) = -\operatorname{Tr}(F_{12}F_{12}) = \tfrac12 r^2 - r + \tfrac23, \qquad r = |p|^2 + |q|^2 ,
+$$ {#eq-csd-potential}
+a quartic polynomial in the doublet, invariant under $H$ (@prp-csd-potential); the potential energy density in four
+dimensions is $V/(g^2R^4)$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The constant term has a direct meaning in terms of the embedded monopole. The first example evaluates the potential at
+the symmetric point.
+
+::: {#exm-csd-pot-zero}
+#### The value at $\Phi = 0$
+
+$V(0) = -\operatorname{Tr}\tau^2 = \tfrac19(1 + 1 + 4) = \tfrac23$: the energy of the embedded monopole of @exm-csd-fs-zero. The
+point $\Phi = 0$ is a critical point of $V$ (a local maximum, since $\partial V/\partial r = r - 1 = -1 < 0$ there).
+:::
+
+Completing the square exhibits the minimum at once. The second example rewrites the potential in the standard
+Mexican-hat form of @eq-mexican-hat.
+
+::: {#exm-csd-pot-square}
+#### The Mexican hat
+
+$V = \tfrac12(r - 1)^2 + \tfrac16 = \tfrac12(|\Phi|^2 - 1)^2 + \tfrac16$: the potential @eq-mexican-hat with $\lambda = 2$, $\mu = 1$,
+shifted by the constant $\tfrac16$. The minimum is on the sphere $|\Phi| = 1$, and the minimum value is $\tfrac16$, not $0$.
+:::
+
+The potential depends on the four real components of $\Phi$ only through $r$. The third example explains why this had
+to be so.
+
+::: {#exm-csd-pot-invariance}
+#### Why only $r$ appears
+
+$V$ is invariant under $H \cong U(2)$ acting on $\Phi \in \mathbb{C}^2$ by @exm-csd-doublet-action, and $U(2)$ acts transitively
+on each sphere $|\Phi| = \text{const}$. A function on $\mathbb{C}^2$ invariant under $U(2)$ is a function of $|\Phi|^2$ alone,
+and a quartic polynomial in $(p, q, \bar p, \bar q)$ invariant under $U(2)$ is a quadratic polynomial in $r$.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+![The Higgs potential of $SU(3)$ over $S^2$. Left: $V(r) = \tfrac12r^2 - r + \tfrac23$ as a function of $r = |p|^2 + |
+q|^2$, with the value $\tfrac23$ at the symmetric point and the minimum $\tfrac16$ at $r = 1$. Right: $V$ over the plane
+$(\operatorname{Re}p, \operatorname{Re}q)$ (clipped at $1.3$), with the circle of vacua $|\Phi| = 1$. Sage checks the formula
+$V = -\operatorname{Tr}F_{12}^2 = \tfrac12r^2 - r + \tfrac23$ exactly. Generated by
+`figures/csdr_potential.sage`.](figures/csdr_potential.svg){#fig-csdr-potential width=95%}
+
+{{< interactive csdr_potential 520 >}}
+
+The interactive version shows, on the left, the surface $V$ over the $(\operatorname{Re}q, \operatorname{Im}q)$ plane at $p = 0$:
+a Mexican hat whose rim, the red circle at height $\tfrac16$, is a great circle of the three-sphere of vacua. On the right
+is the radial profile $V(r)$; dragging rotates the surface, and hovering reads off the values.
+
+The first exercise derives the potential in Sage from the matrices of the previous section. It also identifies the
+unbroken generator at the vacuum, anticipating the next subsections.
+
+::: {#exr-csdr-potential}
+#### The potential in Sage
+
+Compute $[\phi_1, \phi_2]$, $F_{12}$ and $V = -\operatorname{Tr}F_{12}^2$ for the doublet, find the minimum, and determine the
+diagonal generators of $\mathfrak{su}(3)$ that commute with the vacuum $\phi_+ = E_{23}$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-csdr-potential >}}
+:::
+
+The second exercise derives the same formula by hand from the block form. The computation is short and shows where each
+term comes from.
+
+::: {#exr-csd-pot-by-hand}
+#### The potential by hand
+
+Using @exm-csd-fs-block and $\operatorname{Tr}((\Phi\Phi^\dagger)^2) = |\Phi|^4$, compute $-\operatorname{Tr}F_{12}^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$-\operatorname{Tr}F_{12}^2 = \tfrac14\left[\operatorname{Tr}(\Phi\Phi^\dagger - \tfrac23\mathbb{1})^2 + (r - \tfrac43)^2\right]$. The first
+trace is $r^2 - \tfrac43r + \tfrac89$ (using $\operatorname{Tr}\Phi\Phi^\dagger = r$), the second term $r^2 - \tfrac83r + \tfrac{16}{9}$; the
+sum is $2r^2 - 4r + \tfrac{24}{9}$, and a quarter of it is $\tfrac12r^2 - r + \tfrac23$, @eq-csd-potential.
+:::
+
+The third exercise compares the three potentials met so far. The comparison shows which features are generic and which
+depend on the embedding.
+
+::: {#exr-csd-pot-compare}
+#### Three models compared
+
+Compare the potential of the running example with those of the $SU(2)$ model (@exr-csdr-su2-example) and of $SU(3)$ with the
+$T_3$ embedding (@exr-csd-int-t3-model): number of scalars, minimum value, unbroken group.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$SU(2)$, $\tau = Q_3$: one complex scalar $f$, $V = \tfrac12(|f|^2 - 1)^2$, minimum $0$ at $|f| = 1$, where $F_{12} = 0$; the
+$U(1)$ gauge group is broken completely. $SU(3)$, $T_3$ embedding: the same potential for one singlet $f$ (the $SU(2)$
+model in the upper block), minimum $0$, and of $H = U(1)^2$ the $\lambda_8$ factor survives. $SU(3)$, $\lambda_8$
+embedding: a doublet, $V = \tfrac12(r - 1)^2 + \tfrac16$, minimum $\tfrac16 > 0$, $H = SU(2) \times U(1)$ broken to $U(1)_{em}$. In
+all three cases the symmetric point is unstable and the gauge group breaks spontaneously, as it must for a symmetric
+coset [@manousselis2000, Sec. 3]; whether the vacuum energy vanishes depends on whether $\tau$ extends to an embedding
+of all of $SU(2)$ (it does for the first two, where $\tau$ has half-integer charges, and not for the third).
+:::
+::::
+
+### The vacuum
+
+The minima of the potential form a manifold, and the choice of one point of it is the spontaneous breaking of the gauge
+symmetry. The definition below names this manifold and the standard point on it.
+
+:::: {.statement-box}
+::: {#def-csd-vacuum-manifold}
+#### Vacuum manifold
+
+The **vacuum manifold** is the set of minima of $V$, $\{\Phi \in \mathbb{C}^2 : |p|^2 + |q|^2 = 1\} \cong S^3$, on which $V =
+\tfrac16$ (@prp-csd-potential). By @exr-csd-doublet-gauge every vacuum is gauge equivalent to $\Phi_0 = (0, 1)$, i.e.
+$\phi_+ = E_{23}$, the vacuum used from now on (@def-vacuum).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The vacuum manifold is a homogeneous space of the gauge group. The first example identifies it as a coset space, as for
+any spontaneously broken symmetry (@def-unbroken-subgroup).
+
+::: {#exm-csd-vac-coset}
+#### The vacuum manifold as a coset
+
+$H \cong U(2)$ acts transitively on $S^3$ with stabiliser $U(1)_{em}$ at $\Phi_0$, so $S^3 \cong U(2)/U(1)_{em}$. Its dimension
+$3 = 4 - 1$ is the number of broken generators.
+:::
+
+Directions along the vacuum manifold cost no energy. The second example identifies them in the Hessian of the
+potential, computed in @exr-csd-ppot-hessian.
+
+::: {#exm-csd-vac-flat}
+#### Flat and massive directions
+
+In the real coordinates $(\operatorname{Re}p, \operatorname{Im}p, \operatorname{Re}q, \operatorname{Im}q)$ the Hessian of $V$ at $\Phi_0$ is
+$\operatorname{diag}(0, 0, 4, 0)$: three flat directions tangent to $S^3$, the would-be Goldstone bosons (@def-goldstone-boson)
+absorbed by the massive gauge bosons, and one massive radial direction, the Higgs boson.
+:::
+
+The minimum value of the potential is positive, unlike in the Standard Model. The third example interprets the field
+strength that remains in the vacuum.
+
+::: {#exm-csd-vac-monopole}
+#### The vacuum carries a monopole
+
+At $\Phi_0$, $F_{12} = -\tfrac12Q_{em}$ (@exm-csd-fs-vacuum): the vacuum is a magnetic monopole on the sphere for the unbroken
+electromagnetic $U(1)$. Its energy is $V = -\tfrac14\operatorname{Tr}Q_{em}^2 = \tfrac14 \cdot \tfrac19(4 + 1 + 1) = \tfrac16$, a positive
+contribution $\tfrac{1}{6g^2R^4}$ to the four-dimensional vacuum energy.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise computes the Hessian of the potential at the vacuum in Sage. It confirms the count of flat and massive
+directions in @exm-csd-vac-flat.
+
+::: {#exr-csd-ppot-hessian}
+#### The Hessian at the vacuum
+
+Compute the gradient and the Hessian of $V = \tfrac12r^2 - r + \tfrac23$ in the real coordinates of $\mathbb{C}^2$ at $(0, 0, 1, 0)$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $r = \sum x_k^2$, $\partial_kV = 2(r - 1)x_k$ vanishes on $r = 1$, and $\partial_k\partial_lV = 4x_kx_l + 2(r - 1)\delta_{kl}$ is
+$4$ in the radial direction and $0$ in the three tangent directions:
+
+{{< sage exr-csd-ppot-hessian >}}
+:::
+
+The second exercise checks the claim of @exm-csd-vac-monopole at vacua other than $\Phi_0$. Since all vacua are gauge
+equivalent, $F_{12}$ must be conjugate to $-\tfrac12Q_{em}$ everywhere on the vacuum manifold.
+
+::: {#exr-csd-ppot-vacuum-f}
+#### $F_{12}$ on the vacuum manifold
+
+For several exact points $\Phi$ with $|\Phi| = 1$, compute the eigenvalues of $F_{12}$ and the value of $V$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The eigenvalues are always $\tfrac{i}{6}(-2, 1, 1)$, those of $-\tfrac12Q_{em}$, and $V = \tfrac16$:
+
+{{< sage exr-csd-ppot-vacuum-f >}}
+:::
+
+The third exercise counts the fate of the four real scalars. It is the Higgs mechanism of @def-higgs-mechanism applied to
+the model.
+
+::: {#exr-csd-vac-goldstone}
+#### Where the scalars go
+
+Of the four real components of $\Phi$, which become massive, which are eaten, and by which gauge bosons? Use the unitary
+gauge (@def-unitary-gauge).
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+In the unitary gauge the three tangent directions to $S^3$ at $\Phi_0$ are removed by an $H$-gauge transformation, so
+$\Phi = (0, 1 + \rho)$ with $\rho$ real: one physical scalar, the Higgs boson, with the mass found in
+@exr-csd-int-higgs-mass. The three removed components become the longitudinal polarisations of the three gauge bosons
+that acquire mass, $W^\pm$ and $Z$ (@prp-csd-symmetry-breaking); the photon, along the unbroken $Q_{em}$, eats nothing and
+stays massless.
+:::
+::::
+
+### The electric charge
+
+A vacuum is left invariant by a subgroup of the gauge group, and the gauge fields of that subgroup stay massless. The
+definition below names the generator of the unbroken subgroup at $\Phi_0$, which plays the role of the electric charge.
+
+:::: {.statement-box}
+::: {#def-csd-electric-charge}
+#### Electric charge
+
+The **electric charge** of the model is the generator
+$$
+Q_{em} = \frac{i}{3}\operatorname{diag}(2, -1, -1) = T_3 + \tfrac12\tau, \qquad T_3 = \tfrac{i}{2}\operatorname{diag}(1, -1, 0) ,
+$$ {#eq-csd-qem}
+of the subgroup $U(1)_{em}$ of $H$ that leaves the vacuum $\Phi_0$ invariant (@def-unbroken-subgroup); the charge of a
+field component $X$ with $[Q_{em}, X] = iQX$ is the number $Q$ (@prp-csd-symmetry-breaking).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The decomposition of $Q_{em}$ into $T_3$ and the hypercharge direction is the Gell-Mann-Nishijima relation of the Standard
+Model. The first example checks it entry by entry.
+
+::: {#exm-csd-qem-decomposition}
+#### $Q_{em} = T_3 + \tfrac12\tau$
+
+$T_3 + \tfrac12\tau = i\operatorname{diag}(\tfrac12 + \tfrac16, -\tfrac12 + \tfrac16, 0 - \tfrac13) = \tfrac{i}{3}\operatorname{diag}(2, -1, -1)$.
+In terms of Hermitian charges, with the doublet's $\tau$-charge $1$ playing the role of twice the hypercharge,
+$Q = T_3 + Y$ with $Y = \tfrac12$ on the doublet: the familiar formula of the electroweak theory.
+:::
+
+The charges of the doublet components follow. The second example lists them and explains why the vacuum must sit in the
+neutral component.
+
+::: {#exm-csd-qem-doublet}
+#### Charges of the Higgs doublet
+
+$[Q_{em}, \phi_+] \leftrightarrow (ip, 0)$ (@exr-csd-doublet-transform): $p$ has charge $1$ and $q$ charge $0$. The vacuum $\Phi_0 =
+(0, 1)$ lies in the neutral component, as it must for $Q_{em}$ to be unbroken; a vacuum with $p \neq 0$ is gauge equivalent
+to it, but breaks the conjugate $U(1)$ of @exr-csd-qem-other-vacuum.
+:::
+
+The gauge bosons and the scalars both live in the adjoint, so they are charged too. The third example computes the
+charges of all eight components of the adjoint.
+
+::: {#exm-csd-qem-adjoint}
+#### Charges of the gauge bosons
+
+With $Q_{em} = i\operatorname{diag}(q_1, q_2, q_3)$, $q = (\tfrac23, -\tfrac13, -\tfrac13)$, the unit $E_{jk}$ has charge $q_j - q_k$: $E_{12}$
+and $E_{21}$ have charges $\pm1$ (the $W^\pm$ bosons, in $\mathfrak{h}$), the diagonal directions charge $0$ (the photon and the
+$Z$), $E_{13}, E_{31}$ charges $\pm1$ (the charged component of the doublet) and $E_{23}, E_{32}$ charge $0$ (the neutral
+component).
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise determines the unbroken subalgebra by solving linear equations. It confirms that there is exactly one
+unbroken direction.
+
+::: {#exr-csd-qem-solve}
+#### The unbroken subalgebra in Sage
+
+For $X = c_1T_1 + c_2T_2 + c_3T_3 + c_4\tau$ with real $c_k$, solve $[X, \phi_1] = [X, \phi_2] = 0$ at the vacuum $\phi_+ = E_{23}$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$c_1 = c_2 = 0$ and $c_3 = 2c_4$, so $X = c_4(2T_3 + \tau) = 2c_4Q_{em}$:
+
+{{< sage exr-csd-qem-solve >}}
+:::
+
+The second exercise looks at a different point of the vacuum manifold. The unbroken generator changes, but only by a
+conjugation within $H$.
+
+::: {#exr-csd-qem-other-vacuum}
+#### Another vacuum
+
+At $\Phi = (1, 0)$, find the diagonal generators that commute with $\phi_+ = E_{13}$, and find an element $w$ of the $SU(2)$
+factor of $H$ that maps $E_{23}$ to a multiple of $E_{13}$ and $Q_{em}$ to the new generator.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The generator is $Q' = \tfrac{i}{3}\operatorname{diag}(-1, 2, -1)$, and $w = e^{-\pi T_2} = \begin{pmatrix} 0 & -1 & 0 \\ 1 & 0 & 0 \\
+0 & 0 & 1 \end{pmatrix}$ satisfies $wE_{23}w^{-1} = -E_{13}$ and $wQ_{em}w^{-1} = Q'$. Different vacua give conjugate unbroken
+subgroups and physically equivalent theories:
+
+{{< sage exr-csd-qem-other-vacuum >}}
+:::
+
+The third exercise asks for the electric charges of the fundamental representation. The answer is a curiosity of the
+$\lambda_8$ embedding that was already noted in the previous chapter.
+
+::: {#exr-csd-qem-fundamental}
+#### Charges in the $\mathbf{3}$ and $\bar{\mathbf{3}}$
+
+Give the eigenvalues of $Q_{em}/i$ on the $\mathbf{3}$ and on the $\bar{\mathbf{3}}$ of $SU(3)$, and compare them with
+@exr-csd-matching-fundamental.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+On the $\mathbf{3}$ the eigenvalues are the diagonal entries $\tfrac23, -\tfrac13, -\tfrac13$, those of an up-type and two
+down-type quarks, as found in @exr-csd-matching-fundamental; on the $\bar{\mathbf{3}}$ they are the negatives $-\tfrac23,
+\tfrac13, \tfrac13$. The charges are fractional because $Q_{em}$ is not an integer combination of the coroots of $SU(3)$;
+on the adjoint, all charges are integers (@exm-csd-qem-adjoint).
+:::
+::::
+
+### The Weinberg angle
+
+The four-dimensional gauge group sits inside the simple group $SU(3)$, so its two factors have a single gauge coupling
+once the generators are normalised alike. The definition below expresses this in the language of the electroweak theory
+through the mixing angle of the neutral gauge bosons.
+
+:::: {.statement-box}
+::: {#def-csd-weinberg-angle}
+#### Weinberg angle
+
+Normalise the Hermitian generators of $H$ by the $SU(3)$ trace, $\tfrac12\lambda_3$ and $Y_n = \tfrac12\lambda_8$ with
+$\operatorname{Tr}(Y_n^2) = \operatorname{Tr}(\tfrac14\lambda_3^2) = \tfrac12$, so that one coupling $g$ multiplies both factors. In
+Standard Model conventions the doublet has hypercharge $Y = \tfrac12$ and coupling $g'$; matching $g'Y = gy_n$, where $y_n$ is
+the eigenvalue of $Y_n$ on the doublet, fixes $g'$, and the **Weinberg angle** is defined by
+$$
+\tan\theta_W = \frac{g'}{g}, \qquad \sin^2\theta_W = \frac{g'^2}{g^2 + g'^2} .
+$$ {#eq-csd-weinberg}
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The hypercharge eigenvalue of the doublet is a one-line computation. The first example carries it out and finds the
+coupling $g'$.
+
+::: {#exm-csd-weinberg-yn}
+#### The doublet hypercharge
+
+$[Y_n, E_{13}] = \tfrac{1}{2\sqrt3}(1 - (-2))E_{13} = \tfrac{\sqrt3}{2}E_{13}$, and likewise for $E_{23}$: $y_n = \tfrac{\sqrt3}{2}$. Then
+$g' \cdot \tfrac12 = g \cdot \tfrac{\sqrt3}{2}$ gives $g' = \sqrt3\,g$ [@manton1979].
+:::
+
+The angle itself follows from the ratio of the two couplings. The second example evaluates it and gives the electric
+coupling of the unbroken $U(1)$.
+
+::: {#exm-csd-weinberg-value}
+#### $\theta_W = 60°$
+
+$\tan\theta_W = \sqrt3$, so $\theta_W = 60°$ and $\sin^2\theta_W = \tfrac34$ (@prp-csd-weinberg); the electric coupling is $e =
+gg'/\sqrt{g^2 + g'^2} = g\sin\theta_W = \tfrac{\sqrt3}{2}g$.
+:::
+
+The value should be compared with experiment. The third example does so, and explains why the comparison is only
+qualitative.
+
+::: {#exm-csd-weinberg-experiment}
+#### Comparison with experiment
+
+The measured value at the $Z$ mass is $\sin^2\theta_W \approx 0.23$, far from $0.75$, and $M_W/M_Z = \cos\theta_W$ is about
+$0.88$, not $\tfrac12$. The model is a tree-level toy: it has no fermions (@exr-csd-matching-fermions) and fixes the angle at
+the compactification scale; it shows how geometry can determine the parameters of the electroweak theory, not their
+observed values.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise checks the normalisations and the angle in Sage. It also recomputes the electric charges of the
+doublet components with the Standard Model formula.
+
+::: {#exr-csdr-weinberg}
+#### The Weinberg angle in Sage
+
+Check $\operatorname{Tr}Y_n^2 = \operatorname{Tr}T_3^2 = \tfrac12$ and $\operatorname{Tr}(Y_nT_3) = 0$ for the Hermitian generators,
+compute the doublet hypercharge, $g'$ and $\sin^2\theta_W$, and the charges $Q = T_3 + Y$ of the doublet.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-csdr-weinberg >}}
+:::
+
+The second exercise obtains the angle from the masses instead of the couplings. The mass matrix of the gauge bosons
+follows from the scalar kinetic term at the vacuum.
+
+::: {#exr-csd-weinberg-masses}
+#### The angle from the mass matrix
+
+With $M^2_{ij} = -2\sum_a\operatorname{Tr}([T_i, \phi_a][T_j, \phi_a])$ at $\Phi_0$, in the basis $T_{1,2,3} = \tfrac{i}{2}\sigma_{1,2,3}$
+(upper block) and $T_8 = \tfrac{i}{2}\lambda_8$, find the eigenvalues and eigenvectors, and read off the mixing angle of the
+neutral bosons.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The eigenvalues are $\tfrac12, \tfrac12$ ($W$), $2$ ($Z$) and $0$ (photon), in units $1/R^2$. The photon is $\sin\theta\,T_3 +
+\cos\theta\,T_8$ and the $Z$ is $\cos\theta\,T_3 - \sin\theta\,T_8$ with $\tan\theta = \sqrt3$: the same angle as from the couplings,
+and $M_W^2/M_Z^2 = \tfrac14 = \cos^2\theta_W$:
+
+{{< sage exr-csd-weinberg-masses >}}
+:::
+
+The third exercise checks that the angle is independent of conventions. Only the relative normalisation inside the simple
+group matters.
+
+::: {#exr-csd-weinberg-convention}
+#### Independence of the hypercharge convention
+
+Suppose the hypercharge is normalised as $Y' = cY$ with coupling $g'' = g'/c$, so that $g''Y' = g'Y$. Show that the
+physical predictions $e$ and $M_W/M_Z$ are unchanged, and explain why the convention $Y = \tfrac12$ is needed only to define
+$\theta_W$ in the usual way.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The covariant derivative contains only the product $g'Y$, which is unchanged, so the gauge boson mass matrix, the photon
+direction and the coupling of the photon to the doublet are the same: $e = \tfrac{\sqrt3}{2}g$ and $M_W/M_Z = \tfrac12$. The angle
+$\theta_W$ is defined as the mixing angle of the neutral bosons, $\cos\theta_W = M_W/M_Z$ at tree level; the formula $\tan\theta_W =
+g'/g$ holds when $g'$ is the coupling of the generator with the doublet's hypercharge $\tfrac12$, which is the convention of
+@def-csd-weinberg-angle.
+:::
+::::
+
+### Worked computations
+
+The potential and its minimum are exact polynomial identities. The first proposition collects them, as checked by the
+script that draws @fig-csdr-potential.
+
+:::: {.statement-box}
+::: {#prp-csd-potential}
+#### The potential and its minimum
+
+On the doublet @eq-csd-doublet, $V = -\operatorname{Tr}F_{12}^2 = \tfrac12r^2 - r + \tfrac23 = \tfrac12(r - 1)^2 + \tfrac16$ with $r = |
+p|^2 + |q|^2$; its minimum value $\tfrac16$ is attained exactly on $r = 1$; and at $\Phi_0 = (0, 1)$, $F_{12} = -\tfrac12Q_{em}$, so
+$V_{min} = -\tfrac14\operatorname{Tr}Q_{em}^2$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** The completed-square argument of @exr-csd-pp-square is the statement `potential_min`.
+
+**Sage.** Checked by exact computation in `figures/csdr_potential.sage`.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The proposition has a direct graphical reading in the two versions of the figure. The first example relates the formula
+to the static and the interactive pictures.
+
+::: {#exm-csd-pp-graph}
+#### Reading the figure
+
+In @fig-csdr-potential the left panel is the quadratic $\tfrac12(r - 1)^2 + \tfrac16$ in $r$; as a function of $|\Phi| = \sqrt r$ it
+becomes the Mexican-hat profile $\tfrac12(|\Phi|^2 - 1)^2 + \tfrac16$ of the interactive surface, with the rim at height $\tfrac16$ and
+the top of the hat at $\tfrac23$.
+:::
+
+The same structure appeared in the general discussion of spontaneous symmetry breaking. The second example compares with
+the potential of Part II.
+
+::: {#exm-csd-pp-part-ii}
+#### Comparison with the Mexican hat of Part II
+
+@eq-mexican-hat, $\tfrac{\lambda}{4}(|\phi|^2 - \mu^2)^2$, has the same shape with free parameters $\lambda, \mu$ and minimum $0$. Here
+both are fixed, $\lambda = 2$ and $\mu = 1$ in units of $1/R$, and there is an extra constant $\tfrac16$; the dimensionful
+potential $V/(g^2R^4)$ has $\lambda_{phys} \propto g^2$ (@exr-csd-lagr-scales).
+:::
+
+The value of the potential at the minimum is a vacuum energy. The third example records what this constant means for
+the four-dimensional theory.
+
+::: {#exm-csd-pp-vacuum-energy}
+#### A positive vacuum energy
+
+$V_{min}/(g^2R^4) = \tfrac{1}{6g^2R^4} > 0$ is a positive four-dimensional cosmological constant, coming from the monopole flux
+of $U(1)_{em}$ on the sphere (@exm-csd-vac-monopole). It depends on $R$, so it acts as a potential for the size of the internal
+sphere, which in this rigid model is held fixed.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise proves the minimum from the completed square. It is the shortest route to the minimum
+and needs no calculus.
+
+::: {#exr-csd-pp-square}
+#### The minimum from the completed square
+
+Prove $\tfrac12r^2 - r + \tfrac23 = \tfrac12(r - 1)^2 + \tfrac16$, and deduce that the minimum over $r \geq 0$ is $\tfrac16$, attained
+only at $r = 1$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Expanding, $\tfrac12(r - 1)^2 + \tfrac16 = \tfrac12r^2 - r + \tfrac12 + \tfrac16 = \tfrac12r^2 - r + \tfrac23$. The square is non-negative and
+vanishes only at $r = 1$, which lies in the allowed range $r \geq 0$; so $V \geq \tfrac16$ with equality exactly on the sphere
+$|\Phi| = 1$.
+:::
+
+The second exercise examines the profile along a ray in field space. It shows that the symmetric point is a local
+maximum and the vacuum a minimum in the radial direction.
+
+::: {#exr-csd-pp-ray}
+#### Along a ray
+
+Let $\Phi = t\Phi_0$ with $t \in \mathbb{R}$. Write $V(t)$, find its critical points and classify them.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$r = t^2$ and $V(t) = \tfrac12t^4 - t^2 + \tfrac23$, with $V'(t) = 2t^3 - 2t = 2t(t^2 - 1)$: critical points at $t = 0$ ($V'' = -2 <
+0$, a local maximum with $V = \tfrac23$) and $t = \pm1$ ($V'' = 4 > 0$, minima with $V = \tfrac16$). The second derivative $4$ at
+the minimum is the radial entry of the Hessian of @exr-csd-ppot-hessian.
+:::
+
+The third exercise interprets the residual field strength at the vacuum as a monopole flux. The flux is computed with the
+area form of the sphere.
+
+::: {#exr-csd-pp-flux}
+#### The electromagnetic flux of the vacuum
+
+At $\Phi_0$ the internal curvature is $F_{12}\,\theta^1 \wedge \theta^2$ with $F_{12} = -\tfrac12Q_{em}$. Writing $Q_{em} = i\,\hat Q$ with
+$\hat Q = \tfrac13\operatorname{diag}(2, -1, -1)$, compute the flux $\int_{S^2}\theta^1 \wedge \theta^2$ and the field acting on a component of
+electric charge $Q$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\theta^1 \wedge \theta^2 = -\sin\theta\,d\varphi \wedge d\theta = \sin\theta\,d\theta \wedge d\varphi$, the area form of the unit sphere, with
+integral $4\pi$. A component of charge $Q$ (eigenvalue $iQ$ of $\operatorname{ad}Q_{em}$) feels the abelian curvature $-\tfrac{Q}{2}$
+times the area form, total flux $-2\pi Q$: for the charged scalar ($Q = 1$) this is $-2\pi$, the flux of a minimal Dirac
+monopole. The vacuum is the electroweak symmetry broken in the background of a magnetic monopole of $U(1)_{em}$ filling the
+sphere.
+:::
+::::
+
+The pattern of symmetry breaking and the masses of the gauge bosons are the second set of results. The proposition below
+records them, checked by the same script.
+
+:::: {.statement-box}
+::: {#prp-csd-symmetry-breaking}
+#### Symmetry breaking and gauge boson masses
+
+At $\Phi_0 = (0, 1)$ the elements of $\mathfrak{h}$ that commute with $\phi_1$ and $\phi_2$ are the real multiples of $Q_{em} =
+\tfrac{i}{3}\operatorname{diag}(2, -1, -1) = T_3 + \tfrac12\tau$, so $SU(2) \times U(1) \to U(1)_{em}$. In the basis $T_{1,2,3} =
+\tfrac{i}{2}\sigma_{1,2,3}$, $T_8 = \tfrac{i}{2}\lambda_8$, the gauge boson mass matrix $M^2_{ij} = -2\sum_a\operatorname{Tr}([T_i,
+\phi_a][T_j, \phi_a])$ (units $1/R^2$) has eigenvalues $0, \tfrac12, \tfrac12, 2$, the massless direction is $Q_{em}$, and
+$M_W^2/M_Z^2 = \tfrac14$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Checked by exact computation in `figures/csdr_potential.sage`.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The charged bosons are complex combinations of the gauge fields along $T_1$ and $T_2$. The first example identifies them
+and their masses.
+
+::: {#exm-csd-psb-w}
+#### The $W^\pm$ bosons
+
+$T_1 \pm iT_2 = \tfrac{i}{2}(\sigma_1 \pm i\sigma_2)$ is proportional to $E_{12}$, respectively $E_{21}$, of charges $\pm1$ under $Q_{em}$
+(@exm-csd-qem-adjoint). The real fields $W^1_\mu, W^2_\mu$ have equal masses $M_W^2 = \tfrac{1}{2R^2}$, and the combinations
+$W^\pm = (W^1 \mp iW^2)/\sqrt2$ are the charged vector bosons.
+:::
+
+The neutral bosons mix, since $\Phi_0$ is charged under both $T_3$ and $T_8$. The second example writes the $Z$ and the
+photon in terms of $T_3$ and $T_8$.
+
+::: {#exm-csd-psb-neutral}
+#### The $Z$ and the photon
+
+The photon direction is $\tfrac{\sqrt3}{2}T_3 + \tfrac12T_8 \propto T_3 + \tfrac{1}{\sqrt3}T_8 = Q_{em}$ (since $\tfrac{1}{\sqrt3}T_8 =
+\tfrac12\tau$), and the $Z$ is the orthogonal combination $\tfrac12T_3 - \tfrac{\sqrt3}{2}T_8$ with $M_Z^2 = \tfrac{2}{R^2}$. The mixing
+angle is $60°$, the Weinberg angle of @exm-csd-weinberg-value.
+:::
+
+The counting of massive bosons agrees with the counting of broken generators. The third example puts the two counts
+side by side.
+
+::: {#exm-csd-psb-count}
+#### Broken generators and massive bosons
+
+$\dim H - \dim U(1)_{em} = 4 - 1 = 3$ broken generators, three massive vector bosons ($W^1, W^2, Z$) and three would-be Goldstone
+directions on $S^3$ (@exm-csd-vac-flat): every broken generator gives mass to one gauge boson by eating one Goldstone
+boson, as in @def-higgs-mechanism.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise counts physical degrees of freedom before and after symmetry breaking. The totals must agree, since
+the breaking only reorganises the fields.
+
+::: {#exr-csd-psb-dof}
+#### Counting degrees of freedom
+
+Count the physical degrees of freedom of the four massless gauge bosons and the complex doublet at the symmetric point,
+and of the massive and massless particles at the vacuum.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Symmetric point: four massless vectors with two polarisations each, $8$, plus four real scalars: $12$. Vacuum: three massive
+vectors with three polarisations, $9$, one massless photon, $2$, and one real Higgs scalar, $1$: $12$. The three
+Goldstone modes have become the longitudinal polarisations of $W^\pm$ and $Z$.
+:::
+
+The second exercise computes the $\rho$ parameter of the model. This combination of masses and angle tests the doublet
+nature of the Higgs field.
+
+::: {#exr-csd-psb-rho}
+#### The $\rho$ parameter
+
+Compute $\rho = M_W^2/(M_Z^2\cos^2\theta_W)$ with the masses of the proposition and $\theta_W$ of @exm-csd-weinberg-value.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$M_W^2/M_Z^2 = \tfrac{1/2}{2} = \tfrac14$ and $\cos^2 60° = \tfrac14$, so $\rho = 1$, the tree-level value for any theory in which the
+symmetry is broken by doublets. The model reproduces the electroweak mass relation exactly; only the value of the angle
+is different.
+:::
+
+The third exercise shows that the photon is massless for a structural reason. The argument does not need the explicit
+mass matrix.
+
+::: {#exr-csd-psb-photon}
+#### Why the photon is massless
+
+Show that $M^2_{ij}c^j = 0$ for the coefficients $c$ of any $X = c^jT_j$ with $[X, \phi_1] = [X, \phi_2] = 0$, and deduce that
+$Q_{em}$ is a zero mode of $M^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$M^2_{ij}c^j = -2\sum_a\operatorname{Tr}([T_i, \phi_a][X, \phi_a]) = 0$ when $[X, \phi_a] = 0$. Conversely, $c^iM^2_{ij}c^j = -
+2\sum_a\operatorname{Tr}([X, \phi_a]^2) = 2\sum_a\|[X, \phi_a]\|^2$ vanishes only if $[X, \phi_a] = 0$. So the kernel of $M^2$ is exactly
+the unbroken subalgebra, spanned by $Q_{em}$: one massless photon.
+:::
+::::
+
+The Weinberg angle is the third result of the section. The proposition below records it together with the normalisations
+of the generators that determine it.
+
+:::: {.statement-box}
+::: {#prp-csd-weinberg}
+#### The Weinberg angle of the model
+
+The Hermitian generators $\tfrac12\lambda_3$ and $Y_n = \tfrac12\lambda_8$ satisfy $\operatorname{Tr}Y_n^2 = \operatorname{Tr}(\tfrac12\lambda_3)^2 =
+\tfrac12$; $Y_n$ has eigenvalue $\tfrac{\sqrt3}{2}$ on the doublet; hence $g' = \sqrt3\,g$ and $\sin^2\theta_W = \tfrac34$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Checked by exact computation in `figures/csdr_potential.sage`.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The result depends on the normalisation of the hypercharge inside $SU(3)$. The first example explains why that
+normalisation is not a choice.
+
+::: {#exm-csd-pw-normalisation}
+#### Why the normalisation is fixed
+
+In the six-dimensional theory all generators of $SU(3)$ appear in $\operatorname{Tr}\hat F^2$ with the same coupling. A generator
+normalised by $\operatorname{Tr}(X^2) = \tfrac12$ has a canonical kinetic term with coupling $g$; rescaling $Y_n$ would rescale its
+coupling inversely, leaving the physics of @exr-csd-weinberg-convention unchanged. The embedding in a simple group is what
+relates $g'$ to $g$.
+:::
+
+The same mechanism fixes the angle in grand unified theories, where the electroweak group also sits in a simple group.
+The second example makes the comparison.
+
+::: {#exm-csd-pw-gut}
+#### A comparison with unification
+
+In a grand unified theory the hypercharge is also a generator of a simple group, and the same argument fixes
+$\sin^2\theta_W$ at the unification scale: for $SU(5)$ the value is $\tfrac38$. The CSDR model gives $\tfrac34$ because the doublet sits
+differently in $SU(3)$; in both cases the low-energy value is changed by the running of the couplings.
+:::
+
+The electric charges of the doublet components follow from the same generators. The third example recomputes them with
+the Standard Model formula.
+
+::: {#exm-csd-pw-charges}
+#### Charges from $Q = T_3 + Y$
+
+With $Y = Y_n/\sqrt3 = \tfrac16\operatorname{diag}(1, 1, -2)$ the doublet has $Y = \tfrac12$, and $Q = \tfrac12\lambda_3 + Y$ gives charges
+$\tfrac12 + \tfrac12 = 1$ and $-\tfrac12 + \tfrac12 = 0$ for $p$ and $q$, in agreement with @exm-csd-qem-doublet.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise derives the electric coupling of the photon. It uses only the two gauge couplings and the mixing of
+the neutral bosons.
+
+::: {#exr-csd-pw-electric}
+#### The electric coupling
+
+Show that the photon couples with strength $e = gg'/\sqrt{g^2 + g'^2}$ and evaluate it for $g' = \sqrt3\,g$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Writing $W^3 = \cos\theta_W Z + \sin\theta_W A$ and $B = -\sin\theta_W Z + \cos\theta_W A$, the coupling $gT_3W^3 + g'YB$ contains $A$ with
+coefficient $g\sin\theta_W T_3 + g'\cos\theta_W Y$, which equals $e(T_3 + Y)$ when $g\sin\theta_W = g'\cos\theta_W = e$, i.e. $e =
+gg'/\sqrt{g^2 + g'^2}$. For $g' = \sqrt3\,g$: $e = \tfrac{\sqrt3}{2}g$.
+:::
+
+The second exercise checks the trace normalisations directly by hand. These are the only inputs of the proposition besides
+the eigenvalue on the doublet.
+
+::: {#exr-csd-pw-traces}
+#### The trace normalisations
+
+Compute $\operatorname{Tr}(\tfrac12\lambda_3)^2$, $\operatorname{Tr}Y_n^2$ and $\operatorname{Tr}(\tfrac12\lambda_3Y_n)$, and the eigenvalues of $Y_n$
+on the eight states of the adjoint.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\operatorname{Tr}(\tfrac12\lambda_3)^2 = \tfrac14 \cdot 2 = \tfrac12$, $\operatorname{Tr}Y_n^2 = \tfrac{1}{12}(1 + 1 + 4) = \tfrac12$, and
+$\operatorname{Tr}(\tfrac12\lambda_3Y_n) = \tfrac{1}{4\sqrt3}(1 - 1 + 0) = 0$. On the adjoint, $Y_n$ has eigenvalue $y_j - y_k$ on $E_{jk}$ with
+$y = \tfrac{1}{2\sqrt3}(1, 1, -2)$: $0$ on the block and the Cartan directions, $\pm\tfrac{\sqrt3}{2}$ on the doublets, the vertical
+coordinates of @fig-csdr-constraints.
+:::
+
+The third exercise asks what changes with a different embedding. The answer illustrates how strongly the embedding
+determines the low-energy theory.
+
+::: {#exr-csd-pw-other}
+#### A different coset or embedding
+
+For the $T_3$ embedding of @exm-embedding-other, is there a Weinberg angle? What would be needed in general to obtain the
+electroweak structure with a different value of $\sin^2\theta_W$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With the $T_3$ embedding $H = U(1) \times U(1)$ has no $SU(2)$ factor and the scalar is a singlet; there is no electroweak
+structure and no Weinberg angle. To obtain $SU(2) \times U(1)$ with a doublet one needs a centraliser containing $SU(2)$ and a
+matched doublet; the angle is then fixed by the eigenvalue of the normalised $U(1)$ generator on the doublet. Larger
+gauge groups and other cosets give other values, which is how realistic CSDR models were searched for [@kapetanakis1992;
+@manolakos2016].
+:::
+::::
+
+## Fermions and chiral zero modes {#sec-csdr-fermions}
+
+The bosonic reduction of the previous sections has a fermionic counterpart. A spinor on $M^4 \times S^2$ in a representation
+$F$ of the gauge group $G$ is symmetric when an $SU(2)$ rotation of the sphere acts on it as a gauge transformation, and at the
+north pole this becomes an algebraic condition: the isotropy $U(1)$ must act trivially on the spinor and gauge indices
+together. The condition keeps the components whose charge under the embedded $U(1)$ cancels the charge $\pm\tfrac12$ of the
+spinor of the sphere, and the four-dimensional fermions they produce are chiral, because the gauge background is a monopole
+and the index of @thm-monopole-index is not zero. This section states the constraint, solves it, and matches the result
+with the zero modes computed in @sec-dirac-index: CSDR keeps exactly the zero modes that are invariant under the isometry
+group. The running $\lambda_8$ model has no fermions (@exr-csd-matching-fermions), so the examples use the $T_3$ embedding of
+@exm-embedding-other and the $SU(2)$ model of @exm-rules-su2. The sources are @manousselis2000 [Sec. 2, eqs. (9), (12)-(15)]
+for the constraint and the rules and @dolan2009 [Secs. 2.3 and 3.2] for the symmetric spinors on the sphere, their zero modes
+and their Yukawa couplings.
+
+### The fermion constraints
+
+The constraint compares two charges at the north pole: the charge of a component of $F$ under the embedded $U(1)$ and the
+charge of a spinor component under the rotations of the tangent plane. The figure shows the first for the two embeddings of
+$U(1)$ in $SU(3)$ used in this part; the second is $\pm\tfrac12$.
+
+![Charges $q$ of the components of the $\mathbf 3$ and the $\mathbf 8$ of $SU(3)$ under the isotropy $U(1)$ of $S^2$, embedded
+by $\tau = \tfrac i3\operatorname{diag}(1, 1, -2)$ (left, the running model) and by $\tau' = \tfrac i2\operatorname{diag}(1, -1, 0)$ (right,
+the $T_3$ model). A component survives the fermion constraint when $|q| = \tfrac12$ (dashed lines, red points,
+@prp-csf-fermion-constraint): none for $\tau$, one pair in the $\mathbf 3$ and two pairs in the $\mathbf 8$ for $\tau'$. Generated by
+`figures/csf-charges.sage`.](figures/csf-charges.svg){#fig-csf-charges width=85%}
+
+The definition is the spinor case of @def-symmetric-gauge-field. The rotation of the sphere moves the spinor and turns its
+frame, and a gauge transformation is allowed to compensate.
+
+:::: {.statement-box}
+::: {#def-csf-symmetric-spinor}
+#### Symmetric spinor field
+
+Let $\psi$ be a spinor field on $M^4 \times S^2$, $S^2 = SU(2)/U(1)$, with values in a representation $F$ of the gauge group $G$, and let
+$\tau: U(1) \to G$ be the embedding of @def-csdr-embedding. The field is **symmetric** if for every $s \in SU(2)$
+$$
+\psi(x, s\cdot y) = f(s, y)\,\Omega(s, y)\,\psi(x, y) ,
+$$ {#eq-csf-symmetric-spinor}
+where $\Omega(s, y)$ is the lift to spinors of the rotation of the tangent plane by $s$ (@def-spin-group) and $f(s, y) \in G$, acting in
+$F$, is the compensating gauge transformation, equal to $\tau(r)$ when $s = r$ belongs to the isotropy group of $y$. Infinitesimally,
+$\mathcal L_{\xi_A}\psi = F(W_A)\psi$ with the spinor Lie derivative, as in @def-symmetric-gauge-field [@manousselis2000, eq. (9);
+@dolan2009, Sec. 2.3].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+Without a gauge transformation the condition asks for spinors that are invariant under all rotations of the sphere. The first
+example shows that there are none.
+
+::: {#exm-csf-no-gauge}
+#### No compensating gauge transformation
+
+If $f = 1$, a symmetric spinor is an $SU(2)$-invariant section of the spinor bundle. By Frobenius reciprocity (@thm-frobenius-reciprocity)
+the trivial representation occurs in the spinor fields on $S^2$ as often as the $U(1)$-charge $0$ occurs in the spinor of the sphere,
+whose charges are $\pm\tfrac12$: never. The spinor harmonics of @exm-spd-spin-weighted-harmonics start at $j = \tfrac12$; without a gauge field the sphere
+supports no symmetric spinor and no massless fermion (@thm-lichnerowicz-vanishing).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+With the gauge group $SU(2)$ and the embedding $\tau_1$ of @exm-rules-su2 the gauge transformation can undo the rotation of
+the spinor. The second example finds the symmetric spinor.
+
+::: {#exm-csf-su2-doublet}
+#### The doublet of $SU(2)$
+
+For $G = SU(2)$, $\tau_1(Q_3) = Q_3 = \sigma_3/2i$ and $F = \mathbf 2$, the gauge index carries charges $\mp\tfrac12$ on $e_1, e_2$, opposite to
+the charges $\pm\tfrac12$ of the two spinor components: the products $e_2 \otimes S^+$ and $e_1 \otimes S^-$ are invariant. These are the
+sections of the trivial bundle, constant in a suitable frame: the gauge connection cancels the spin connection, as in
+@exm-spd-spin-connection-background. Two symmetric spinors, one of each internal chirality.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+Symmetric spinors are the $SU(2)$-singlets among all spinor fields on the sphere. The third example states this in the language
+of harmonic analysis used by @dolan2009.
+
+::: {#exm-csf-singlets}
+#### Symmetric spinors are singlets
+
+The components of $F \otimes S$ of total charge $c$ under the isotropy $U(1)$ are sections of the homogeneous line bundle of charge $c$
+(@def-homogeneous-spinor-bundle), whose sections decompose into the representations of spin $j \geq |c|$, $j - c \in \mathbb{Z}$
+(@eq-spd-frobenius). Symmetric spinors are the $j = 0$ part, which exists exactly for $c = 0$ [@dolan2009, eqs. (2.38)-(2.39)]: they
+are the first terms of the harmonic expansion, and every other harmonic is a massive or non-invariant mode.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The compensating transformation must be consistent along the orbit of the isotropy group. The first exercise checks this for the
+embedding of @exm-csf-su2-doublet.
+
+::: {#exr-csf-isotropy-loop}
+#### The isotropy loop
+
+The isotropy group of the north pole is $\{e^{\theta Q_3}\}$, $0 \leq \theta < 4\pi$. Show that on the spinor component of charge $s = \pm\tfrac12$ it
+acts by $e^{is\theta}$, on a gauge component of charge $q$ by $e^{iq\theta}$, and that @eq-csf-symmetric-spinor at the pole requires
+$e^{i(s + q)\theta}\psi_{s, q} = \psi_{s, q}$ for all $\theta$. Which products survive for $q = \pm\tfrac12$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$e^{\theta Q_3}$ fixes the pole and rotates its tangent plane by $\theta$; the spin lift acts on the component of charge $s$ by $e^{is\theta}$
+(@exm-spd-spin-two), and $\tau(e^{\theta Q_3}) = e^{\theta\tau(Q_3)}$ acts by $e^{iq\theta}$, with $q$ the eigenvalue of $\tau(Q_3)/i$. Setting $s = r$ in
+@eq-csf-symmetric-spinor at the pole gives $\psi = e^{i(s + q)\theta}\psi$, so $s + q = 0$ for every non-zero component. For $q = \tfrac12$ only $s =
+-\tfrac12$ survives, for $q = -\tfrac12$ only $s = \tfrac12$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A field in a representation of $G$ must be a section of a bundle over the sphere. The second exercise shows that this fails
+for the fundamental representation in the running model.
+
+::: {#exr-csf-bundle}
+#### When the fermion does not exist
+
+With $\tau = \tfrac i3\operatorname{diag}(1, 1, -2)$, compute $\exp(4\pi\tau)$ and show that $\tau$ defines a homomorphism of the isotropy circle
+$\{e^{\theta Q_3}\}$ into $SU(3)/\mathbb{Z}_3$ but not into $SU(3)$. Conclude that the adjoint fields of the model are well defined but
+fields in the $\mathbf 3$ are not, and relate this to the Dirac quantisation $M = 2q \in \mathbb{Z}$ of @exm-spd-monopole-potential.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\exp(4\pi\tau) = \operatorname{diag}(e^{4\pi i/3}, e^{4\pi i/3}, e^{-8\pi i/3}) = e^{4\pi i/3}\mathbb 1$, a non-trivial element of the centre $\mathbb{Z}_3$, while
+$e^{4\pi Q_3} = 1$. So $\theta \mapsto e^{\theta\tau}$ is well defined on the circle only modulo the centre, which acts trivially in the adjoint.
+A field in the $\mathbf 3$ would have components of charge $q = \tfrac13$ and $-\tfrac23$, which see monopoles of charge $2q = \tfrac23$ and
+$-\tfrac43$, not integers: there is no such line bundle, and the fermion in the $\mathbf 3$ cannot be coupled to this background at all
+(@exr-csd-matching-fermions).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The charges of all small representations decide which fermions a model can have. The third exercise computes them with Sage.
+
+::: {#exr-csf-charges}
+#### Charges with Sage
+
+With Sage, compute the charges $q$ of the weights of the $\mathbf 3$, $\mathbf 6$, $\mathbf 8$, $\mathbf{10}$ and $\mathbf{15}$ of $SU(3)$ under
+$\tau' = \tfrac i2\operatorname{diag}(1, -1, 0)$, and list for each the number of components with $q = \tfrac12$ and with $q = -\tfrac12$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+A weight is the triple $(h_1, h_2, h_3)$ of eigenvalues of $\operatorname{diag}(1, 0, 0)$, $\operatorname{diag}(0, 1, 0)$, $\operatorname{diag}(0, 0, 1)$
+on a weight vector, and $q = \tfrac12(h_1 - h_2)$. The counts are
+equal for $q = \tfrac12$ and $q = -\tfrac12$ in every representation, by the Weyl reflection exchanging $h_1$ and $h_2$:
+
+{{< sage exr-csf-charges >}}
+
+The $\mathbf{6}$ and the $\mathbf{10}$ have components with $|q| = \tfrac12$ as well; the representation decides the four-dimensional
+gauge quantum numbers, not whether fermions exist.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+The definition becomes an algebraic condition at one point, as for the gauge field in @def-csdr-constraints. The proposition
+states it and its consequence for each component of $F$.
+
+:::: {.statement-box}
+::: {#prp-csf-fermion-constraint}
+#### The fermion constraint
+
+A spinor field on $M^4 \times S^2$ in the representation $F$ of $G$ is symmetric if and only if it is determined by its value $\psi_0(x) =
+\psi(x, y_0)$ at the north pole through @eq-csf-symmetric-spinor, and
+$$
+\big(\Sigma(Q_3) \otimes 1 + 1 \otimes \tau(Q_3)\big)\psi_0 = 0 ,
+$$ {#eq-csf-fermion-constraint}
+where $\Sigma(Q_3)$ is the spin lift of the isotropy generator, with eigenvalues $is$, $s = \mp\tfrac12$ on $S^\pm$ (with the orientation of
+@exm-spd-branch-six). Decomposing $F = \bigoplus_i(q_i, h_i)$ under $U(1)_\tau \times H$, the component $(q_i, h_i)$ survives exactly
+when $q_i = \pm\tfrac12$, in the spinor component of charge $s = -q_i$ [@manousselis2000, eqs. (12)-(13); @dolan2009, eqs. (2.38)-(2.39)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+In the running model of this part nothing survives. The first example records the reason, which is the content of
+@exr-csd-matching-fermions.
+
+::: {#exm-csf-lambda8}
+#### The running model has no fermions
+
+For $\tau = \tfrac i3\operatorname{diag}(1, 1, -2)$ every charge is a multiple of $\tfrac13$, and $\pm\tfrac12$ never occurs
+(@fig-csf-charges): a reduction of pure Yang-Mills theory with $G = SU(3)$ over $S^2$ has a Higgs doublet but no fermion. Adding
+fermions requires a different gauge group or embedding, and the fundamental representation is not even allowed
+(@exr-csf-bundle).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The $T_3$ embedding gives charges $\pm\tfrac12$ in the fundamental representation. The second example finds the surviving
+components of a fermion in the $\mathbf 3$.
+
+::: {#exm-csf-t3-fundamental}
+#### The $\mathbf 3$ in the $T_3$ model
+
+For $\tau' = \tfrac i2\operatorname{diag}(1, -1, 0)$, $e_1$ has $q = \tfrac12$, $e_2$ has $q = -\tfrac12$ and $e_3$ has $q = 0$ (@fig-csf-charges). The
+constraint keeps $e_1 \otimes S^+$ and $e_2 \otimes S^-$ and removes $e_3$ entirely. The centraliser $H = U(1)_3 \times U(1)_8$ of @exm-embedding-other
+acts on $e_1$, $e_2$ with the charges $(t, y) = (\tfrac12, 1)$ and $(-\tfrac12, 1)$, where $t$ is the eigenvalue of $\tfrac12\operatorname{diag}(1, -1, 0)$
+and $y$ that of $\operatorname{diag}(1, 1, -2)$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+Gauginos are fermions in the adjoint representation of the gauge group. The third example finds which of them survive in the $T_3$ model.
+
+::: {#exm-csf-adjoint}
+#### The adjoint in the $T_3$ model
+
+On the matrix unit $E_{jk}$ the charge is $t_j - t_k$ with $t = (\tfrac12, -\tfrac12, 0)$: $\pm1$ on $E_{12}$, $E_{21}$; $\tfrac12$ on $E_{13}$, $E_{32}$; $-\tfrac12$ on
+$E_{31}$, $E_{23}$; $0$ on the Cartan subalgebra. Four components survive: $E_{13}$, $E_{32}$ with $S^+$ and $E_{31}$, $E_{23}$ with $S^-$, with
+$H$-charges $(t, y) = (\tfrac12, 3), (\tfrac12, -3), (-\tfrac12, -3), (-\tfrac12, 3)$. The gauginos of $H$ itself (charge $0$) do not survive.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The constraint is a statement about invariants of the isotropy group. The first exercise rederives it from the infinitesimal
+form of the definition.
+
+::: {#exr-csf-infinitesimal}
+#### From the Lie derivative
+
+For a Killing vector $\xi$ the spinor Lie derivative is $\mathcal L_\xi\psi = \nabla_\xi\psi - \tfrac14(\nabla_a\xi_b)\gamma^a\gamma^b\psi$. At the north pole the
+Killing vector $\xi_3$ of the isotropy generator vanishes. Show that the infinitesimal condition $\mathcal L_{\xi_3}\psi = F(W_3)\psi$ then contains
+no derivative of $\psi$ and is the derivative at $\theta = 0$ of the condition of @exr-csf-isotropy-loop, and that the conditions for $\xi_1$, $\xi_2$
+impose nothing on $\psi_0$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+At a zero of $\xi_3$ the term $\nabla_{\xi_3}\psi$ vanishes, and $-\tfrac14(\nabla_a\xi_b)\gamma^a\gamma^b$ is the generator of the rotation of the tangent
+plane that $\xi_3$ induces, lifted to spinors: its eigenvalues on the components of charge $s$ are proportional to $is$. The compensating
+parameter $W_3$ at the pole generates $\tau$ restricted to the isotropy group. Both sides are therefore the generators of the two
+actions in @exr-csf-isotropy-loop, and the condition is the derivative at $\theta = 0$ of $e^{i(s + q)\theta}\psi_{s, q} = \psi_{s, q}$, that is
+$(s + q)\psi_{s, q} = 0$, @eq-csf-fermion-constraint. The vectors $\xi_1$, $\xi_2$ do not vanish at the pole: their conditions express
+$\nabla_{\xi_a}\psi$ through $\psi$, determining $\psi$ along the sphere from $\psi_0$ without constraining $\psi_0$ [@manousselis2000, eq. (9)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+For $SU(2)$ and the embeddings $\tau_n$ the charges are multiples of $n$. The second exercise finds which representations
+contain fermions.
+
+::: {#exr-csf-su2-tau-n}
+#### $SU(2)$ with $\tau_n$
+
+For $G = SU(2)$, $\tau_n(Q_3) = nQ_3$ and $F$ the representation of spin $j$, the charges are $-nm$, $m = -j, \dots, j$. For which $(n, j)$ do
+fermions survive, and how many components? Check the answer with Sage for $1 \leq n \leq 4$ and $j \leq 3$, and compare with the scalars, which
+need charges $\pm1$ (@exm-rules-su2).
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$nm = \pm\tfrac12$ requires $|n| = 1$ and $m = \pm\tfrac12$, so $j$ must be a half-integer, and then exactly two components survive, $m = \tfrac12$ and $m
+= -\tfrac12$:
+
+{{< sage exr-csf-su2-tau-n >}}
+
+ For $|n| \geq 2$ no fermion survives in any representation, as no scalar does (@exm-rules-su2): $\tau_1$ is the only embedding
+with matter, and it carries both a scalar (in the adjoint) and fermions (in half-integer spins).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The literature states the rule as a matching of identical representations of the isotropy group. The third exercise compares
+this with @eq-csf-fermion-constraint.
+
+::: {#exr-csf-matching-rule}
+#### Identical or conjugate
+
+The rule of @manousselis2000 [eqs. (12)-(13)] keeps an $h_i$ multiplet for each pair of identical $R$-representations in $F$ and in the
+spinor of $SO(d)$. Show that for $R = U(1)$ on $S^2$ it keeps the same components of $F$ as @prp-csf-fermion-constraint, and that the two
+formulations differ only in which spinor component is attached to which charge, that is, in the name of the internal chirality.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The spinor of $SO(2)$ contains both charges $\pm\tfrac12$, so "$q_i$ equals a spinor charge" and "$q_i$ is minus a spinor charge" both select
+$q_i = \pm\tfrac12$. The first attaches $q_i = \tfrac12$ to the spinor component of charge $\tfrac12$, the second to that of charge $-\tfrac12$:
+the two differ by complex conjugation of the spinor representation, which exchanges $S^+$ and $S^-$ on $S^2$. The four-dimensional
+chiralities are therefore exchanged between the two conventions, and every statement about chirality must be made with one of them;
+this part uses the invariance $s + q = 0$, which is what the index computation of @thm-monopole-index also uses.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+### Solving the constraints
+
+Each surviving component of $F$ gives one four-dimensional Weyl fermion, whose chirality is fixed by the internal chirality of its
+spinor component. The proposition collects the result for a six-dimensional Weyl fermion.
+
+:::: {.statement-box}
+::: {#prp-csf-chiral-content}
+#### Four-dimensional fermions from $S^2$
+
+Let $\psi$ be a six-dimensional Weyl spinor of positive chirality in the representation $F = \bigoplus_i(q_i, h_i)$ of $G$, reduced over
+$S^2$ with the embedding $\tau$. Its symmetric part is a set of four-dimensional massless Weyl fermions: a right-handed one in $h_i$ for
+each component with $q_i = \tfrac12$, and a left-handed one in $h_i$ for each component with $q_i = -\tfrac12$. The four-dimensional theory is
+chiral unless the left-handed representations $h_i$ ($q_i = -\tfrac12$) are the conjugates of the right-handed ones ($q_i = \tfrac12$). The Higgs
+fields couple to them through the internal Dirac operator, with Yukawa couplings fixed by the reduction [@manousselis2000, eqs. (14)-(15),
+(20)-(21); @dolan2009, Sec. 3.2, eq. (3.13)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The $SU(2)$ model is the smallest example with a chiral result. The first example reads off its four-dimensional fermions and their charges.
+
+::: {#exm-csf-su2-content}
+#### The $SU(2)$ model
+
+With $\tau_1$ and $F = \mathbf 2$ (@exm-csf-su2-doublet), $H = U(1)$ is generated by $\tau_1(Q_3)$ itself, so the $H$-charge of a component is
+its $q$: $e_2$ ($q = \tfrac12$) gives a right-handed fermion of charge $\tfrac12$ and $e_1$ ($q = -\tfrac12$) a left-handed one of charge $-\tfrac12$.
+Since a right-handed fermion of charge $\tfrac12$ is equivalent to a left-handed one of charge $-\tfrac12$ (@prp-dq-charge-conjugation), the
+spectrum is two left-handed fermions of charge $-\tfrac12$: chiral.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+In the $T_3$ model the fundamental representation gives two fermions with different charges under the second $U(1)$. The second
+example lists them.
+
+::: {#exm-csf-t3-content}
+#### The $T_3$ model with a fermion in the $\mathbf 3$
+
+From @exm-csf-t3-fundamental: a right-handed fermion with $(t, y) = (\tfrac12, 1)$ and a left-handed one with $(-\tfrac12, 1)$. In left-handed
+form the charges are $(-\tfrac12, -1)$ and $(-\tfrac12, 1)$, which are not closed under $(t, y) \to (-t, -y)$: the spectrum is chiral, and the
+$U(1)_3$ charges, both $-\tfrac12$, are those of a chiral $U(1)$ (@exr-csf-anomaly).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The adjoint representation is real, and one might expect a non-chiral result from it. The third example shows that the
+reduction is chiral all the same.
+
+::: {#exm-csf-t3-adjoint-content}
+#### Gauginos of the $T_3$ model
+
+From @exm-csf-adjoint, the right-handed fermions have $(t, y) = (\tfrac12, \pm3)$ and the left-handed ones $(-\tfrac12, \mp3)$; in left-handed form
+the four are $2 \times (-\tfrac12, 3) + 2 \times (-\tfrac12, -3)$. Every left-handed fermion has $t = -\tfrac12$, so the spectrum is chiral under $U(1)_3$
+although $F$ is real: the chirality comes from the monopole background, not from the representation.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+A chiral spectrum of abelian charges must satisfy the anomaly conditions of @def-anomaly to be consistent. The first exercise
+computes the anomalies of the $T_3$ model with Sage.
+
+::: {#exr-csf-anomaly}
+#### Anomalies of the $T_3$ model
+
+With Sage, compute $\sum t^3$, $\sum y^3$, $\sum t^2y$, $\sum ty^2$, $\sum t$ and $\sum y$ over the left-handed fermions of @exm-csf-t3-content and of
+@exm-csf-t3-adjoint-content. Which are anomalous, and what does this say about the six-dimensional theory?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+For the $\mathbf 3$: $\sum t^3 = -\tfrac14$, $\sum t = -1$, $\sum ty^2 = -1$, the others $0$; for the adjoint: $\sum t^3 = -\tfrac12$, $\sum t = -2$, $\sum ty^2 =
+-18$, the others $0$:
+
+{{< sage exr-csf-anomaly >}}
+
+Both are anomalous. A single six-dimensional Weyl fermion in a representation of $SU(3)$ has a six-dimensional gauge anomaly, and the
+four-dimensional anomaly of its zero modes is its trace; a consistent model needs an anomaly-free fermion content in the higher
+dimension, as for $E_8$ in ten dimensions [@manousselis2000, eq. (16)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The Weyl condition in six dimensions is what makes the result chiral. The second exercise drops it and finds a vector-like spectrum.
+
+::: {#exr-csf-dirac-six}
+#### A six-dimensional Dirac fermion
+
+Repeat @prp-csf-chiral-content for a six-dimensional Dirac fermion, the sum of Weyl fermions of both chiralities in the same representation
+$F$, and show that the four-dimensional spectrum is always vector-like.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The Weyl spinor of negative chirality is $(\psi_L \otimes S^+) \oplus (\psi_R \otimes S^-)$ (@prp-spinor-branching). A component with $q_i = \tfrac12$
+pairs with $S^+$ in both, giving $\psi_R$ from the positive and $\psi_L$ from the negative chirality, both in $h_i$: a Dirac fermion. The same holds
+for $q_i = -\tfrac12$. Every surviving multiplet is a Dirac fermion, and chirality needs the six-dimensional Weyl condition
+[@manousselis2000, eqs. (14)-(15)], the analogue of @prp-kkf-vectorlike.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The Yukawa couplings link the fermions to the Higgs field of the same model. The third exercise checks that the charges allow
+them in the $SU(2)$ model.
+
+::: {#exr-csf-yukawa}
+#### A Yukawa coupling
+
+In the $SU(2)$ model with $\tau_1$ the Higgs field is the complex scalar of @exm-rules-su2, in the components $E_{12}$, $E_{21}$ of the adjoint, of
+$H$-charges $\pm1$. Show that a term $\psi_L^T\epsilon\,\psi_L\,\phi$ built from the two left-handed fermions of @exm-csf-su2-content is invariant
+for one of the two components, and that it is the coupling of @dolan2009 [eq. (3.13)] for $m = 1$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The two left-handed fermions have $H$-charge $-\tfrac12$ each, so the bilinear has charge $-1$ and the term is invariant with the component of
+charge $+1$. In @dolan2009 the case $m = 1$ has the charges $p = \pm1$, the symmetric spinors are the constants of the trivial bundle, and the
+term (3.13), built from the Higgs field $\phi$ and the two symmetric spinors, survives exactly for odd $m$ [@dolan2009, Sec. 3.2]: the
+Yukawa coupling of the zero modes comes from the internal components $\phi_a$ in the Dirac operator (@prp-csf-chiral-content).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+### Chiral zero modes and the index
+
+The surviving fermions are zero modes of the internal Dirac operator twisted by the monopole background. The figure counts the
+zero modes of a component of charge $q$ and marks the ones that CSDR keeps.
+
+![Zero modes on $S^2$ of a spinor component of isotropy charge $q$, which sees the monopole of charge $M = 2q$: $|2q|$ zero modes (bars;
+red: internal chirality $+1$, pairing with right-handed four-dimensional spinors in a six-dimensional Weyl spinor of positive
+chirality; blue: $-1$), forming the representation of spin $|q| - \tfrac12$ of $SU(2)$. The stars mark the $SU(2)$-invariant zero modes, the
+symmetric spinors kept by CSDR, which exist only for $|q| = \tfrac12$ (@prp-csf-index-match). The counts are checked from the regular
+solutions of the zero-mode equation of @exm-spd-zero-mode-solution. Generated by `figures/csf-index.sage`.](figures/csf-index.svg){#fig-csf-index width=70%}
+
+{{< interactive csf-index 460 >}}
+
+The background gauge field seen by a component of charge $q$ is the canonical connection of $SU(2) \to S^2$ in the charge $q$, a monopole.
+The proposition matches the CSDR fermions with the zero modes of @thm-monopole-index.
+
+:::: {.statement-box}
+::: {#prp-csf-index-match}
+#### CSDR fermions and the index
+
+On the component $(q, h)$ of $F$, the internal Dirac operator of the CSDR background is the twisted Dirac operator of the monopole of charge
+$M = 2q$ (@def-twisted-dirac-operator, in the conventions of @exr-spd-spin-connection-charge). It has $|2q|$ zero modes, of internal chirality
+$\operatorname{sign}q$, forming the representation of spin $|q| - \tfrac12$ of the isometry group $SU(2)$ (@thm-monopole-index). The symmetric
+spinors of @prp-csf-fermion-constraint are exactly the $SU(2)$-invariant zero modes, which exist if and only if $|q| = \tfrac12$. Summed over $F$,
+the index is $\sum_i 2q_i\dim h_i = 2\operatorname{tr}_F(\tau(Q_3)/i) = 0$ for semisimple $G$, while the net chirality of the CSDR fermions is $\sum_{|q_i| =
+1/2}2q_i\dim h_i$, which need not vanish [@dolan2009, eqs. (2.45)-(2.47)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+For the $SU(2)$ model the matching can be followed component by component. The first example does this for a fermion in the
+representation of spin $\tfrac32$.
+
+::: {#exm-csf-index-su2}
+#### Spin $\tfrac32$ of $SU(2)$
+
+With $\tau_1$ and $F$ of spin $\tfrac32$, the charges are $q = -m = \pm\tfrac12, \pm\tfrac32$. The components $q = \pm\tfrac32$ see $M = \pm3$ and have three zero
+modes each, a triplet of the isometry $SU(2)$; the components $q = \pm\tfrac12$ have one zero mode each, a singlet. The index is $3 + 1 - 1 - 3 = 0$;
+CSDR keeps the two singlets, one right-handed and one left-handed, with $H$-charges $\tfrac12$ and $-\tfrac12$, that is two left-handed fermions of
+charge $-\tfrac12$, as for the doublet.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+In the $T_3$ model the adjoint contains components of charge $\pm1$ as well as $\pm\tfrac12$. The second example counts all zero modes.
+
+::: {#exm-csf-index-t3}
+#### All zero modes of the $T_3$ adjoint
+
+$E_{12}$ ($q = 1$, $M = 2$) has two zero modes of chirality $+1$, a doublet of $SU(2)$; $E_{21}$ has two of chirality $-1$; the four components with
+$q = \pm\tfrac12$ have one each; the Cartan components have none (@thm-lichnerowicz-vanishing). The index is $2 - 2 + 1 + 1 - 1 - 1 = 0$, and CSDR keeps
+the four singlets of @exm-csf-adjoint, whose net $U(1)_3$-chirality is not zero (@exm-csf-t3-adjoint-content).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The zero modes that CSDR drops are massless too. The third example says what they are and why the truncation keeps the
+theory consistent.
+
+::: {#exm-csf-dropped-modes}
+#### The zero modes that are not kept
+
+The doublet of zero modes of $E_{12}$ in @exm-csf-index-t3 consists of massless four-dimensional fermions that transform as a doublet under the
+isometry $SU(2)$ combined with gauge transformations. CSDR keeps the singlets of this group, and a truncation to singlets is consistent: the
+equations of motion of the singlets do not source the doublets (@prp-csdr-rules-text, symmetric criticality). The full massless spectrum
+of the six-dimensional theory is larger, and @dolan2009 [eqs. (2.45)-(2.47)] keeps all of it in the equivariant reduction.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The count of zero modes can be checked by solving the zero-mode equation. The first exercise does it with Sage for several
+charges.
+
+::: {#exr-csf-zero-mode-count}
+#### Counting the zero modes
+
+Using the solutions $g = \sin^{-m - 1/2}\tfrac\theta2\cos^{m + M - 1/2}\tfrac\theta2$ of @exm-spd-zero-mode-solution, count with Sage the regular ones for
+$M = 2q$, $q = \tfrac12, 1, \tfrac32, 2$, check that each solves the zero-mode equation, and list their $U(1)$ charges $m$. Which value of $m$ belongs to
+the $SU(2)$ singlet when $q = \tfrac12$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Regularity requires $-m - \tfrac12 \geq 0$ and $m + M - \tfrac12 \geq 0$, which leaves $m = -\tfrac12, \dots, \tfrac12 - M$, that is $M = 2q$ values:
+
+{{< sage exr-csf-zero-mode-count >}}
+
+For $q = \tfrac12$ the single solution has $m = -\tfrac12$ and $g = 1$: it is the constant spinor of @exm-csf-su2-doublet, the gauge charge
+cancelling the spin charge.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The index of the whole representation vanishes for a semisimple group. The second exercise tabulates zero modes, index and CSDR
+fermions for several representations of $SU(3)$ with Sage.
+
+::: {#exr-csf-index-table}
+#### A table for the $T_3$ model
+
+With Sage, for the $\mathbf 3$, $\mathbf 6$, $\mathbf 8$ and $\mathbf{10}$ of $SU(3)$ with $\tau'$, list the numbers of zero modes of each internal chirality, the
+index, and the numbers of right- and left-handed CSDR fermions.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Each component of charge $q$ contributes $|2q|$ zero modes of chirality $\operatorname{sign}q$ and one CSDR fermion when $|q| = \tfrac12$:
+
+{{< sage exr-csf-index-table >}}
+
+The index vanishes in every case, since $\tau'$ is traceless; the CSDR fermions are equal in number for the two chiralities, but their $H$-charges
+differ, so the spectra are chiral in the sense of @prp-csf-chiral-content.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The massive modes come in Dirac pairs with masses set by the radius. The third exercise finds the lightest of them for the
+components that have a zero mode.
+
+::: {#exr-csf-massive}
+#### The first massive level
+
+Using the eigenvalues $k(k + |M|)/R^2$ of $D_A^2$ on a sphere of radius $R$ (@thm-monopole-index), find the mass of the lightest massive
+four-dimensional fermion from a component with $q = \tfrac12$ and from one with $q = 0$, and compare with the masses of the Higgs and gauge
+bosons of the model, which are of order $1/R$ (@exr-csd-int-higgs-mass).
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+For $q = \tfrac12$, $|M| = 1$ and $k = 1$ give $\sqrt2/R$; for $q = 0$ the untwisted spectrum $(j + \tfrac12)^2/R^2$ gives $1/R$
+(@thm-sphere-dirac-spectrum). Both are of the order of the Higgs and $W$ masses $\sqrt2/R$ and $1/(\sqrt2R)$: the massive fermions are not
+separated from the four-dimensional theory by a large gap, and the reduced theory is a truncation, not a low-energy limit, unless the
+radius is small and the electroweak scale is produced in another way.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+### Exercises
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The exercises of this part combine the constraint, the four-dimensional content and the index. Each goes from a six-dimensional
+model to its four-dimensional fermions by two routes.
+
+The $T_3$ model has a scalar and fermions. The first integrative exercise puts them together.
+
+::: {#exr-csf-int-t3-model}
+#### The $T_3$ model with matter
+
+Take six-dimensional $SU(3)$ Yang-Mills theory with a Weyl fermion of positive chirality in the $\mathbf 3$, reduced over $S^2$ with $\tau'$. Give
+the four-dimensional gauge group, the scalar (@exr-csd-int-t3-model), the fermions with their charges, and decide whether a Yukawa coupling of
+the scalar to the two fermions is allowed by the charges; check the charges with Sage from the matrices.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$H = U(1)_3 \times U(1)_8$; the scalar is $f$ in $E_{12}$, with $(t, y) = (1, 0)$; the fermions are $\psi_R$ with $(\tfrac12, 1)$ and $\psi_L$ with $(-\tfrac12, 1)$
+(@exm-csf-t3-content). The Dirac bilinear $\bar\psi_L\psi_R$ has charge $(\tfrac12, 1) - (-\tfrac12, 1) = (1, 0)$, so $f^*\bar\psi_L\psi_R$ is invariant:
+
+{{< sage exr-csf-int-t3-model >}}
+
+The model has
+a Yukawa coupling, and in the vacuum $|f| = 1$ it gives the two fermions a Dirac mass of order $1/R$, breaking $U(1)_3$ together with the
+chirality.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The isometry group of the sphere organises all zero modes, not only those that CSDR keeps. The second integrative exercise counts
+both for the adjoint of the $T_3$ model.
+
+::: {#exr-csf-int-all-modes}
+#### Kept and dropped modes
+
+For the gaugino of the $T_3$ model, list all massless four-dimensional fermions of the full Kaluza-Klein reduction with their $SU(2)$
+representations and $H$-charges, and separate those kept by CSDR. Check the net $U(1)_3$-chirality of each set.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Full reduction: $E_{12}$ gives a right-handed $SU(2)$-doublet with $(t, y) = (1, 0)$, $E_{21}$ a left-handed doublet with $(-1, 0)$, and the four
+singlets of @exm-csf-adjoint (@exm-csf-index-t3). In left-handed form the doublets are $2 \times 2$ fermions with $t = -1$, and the singlets $4$ fermions
+with $t = -\tfrac12$. CSDR keeps the singlets. The index in each set vanishes when the chiralities are counted with their sign, since the sum of
+$2q$ over each set is $0$; the CSDR spectrum is chiral in its $H$-charges (@exm-csf-t3-adjoint-content).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The circle and the sphere can be compared directly. The third integrative exercise explains why one gives chiral fermions and
+the other does not.
+
+::: {#exr-csf-int-circle-sphere}
+#### Circle versus sphere
+
+Compare the reduction of a fermion on $M^4 \times S^1$ (@prp-kkf-vectorlike) with the reduction on $M^4 \times S^2$ with a monopole
+background (@prp-csf-chiral-content): the existence of a chirality operator on the internal space, the index, and the role of the gauge
+background. Which ingredient would make the circle chiral?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+On $S^1$ the internal space is odd-dimensional, there is no internal chirality, every zero mode gives a Dirac fermion and no background on the
+circle can change this (@exr-spd-nogo-odd). On $S^2$ the internal chirality exists, the index of the twisted operator is the monopole charge
+(@thm-monopole-index), and the background makes the zero modes of one chirality; CSDR keeps the invariant ones. The circle becomes chiral only when
+the reflection $y \to -y$ is imposed as a projection, the orbifold $S^1/\mathbb{Z}_2$ of @prp-kkf-orbifold-zero-mode, which removes one internal
+chirality by hand rather than through an index.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+## Exercises {#sec-four-dimensional-theory-exercises}
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+Three exercises that combine the two sections: the Higgs mass predicted by the model, the complete analysis of the
+$T_3$ embedding, and a survey of the whole reduction from six to four dimensions.
+
+The masses of the Higgs boson and of the gauge bosons are all determined by $g$ and $R$. The first integrative exercise
+computes them and finds a parameter-free ratio.
+
+::: {#exr-csd-int-higgs-mass}
+#### The Higgs mass
+
+Using @eq-csd-reduced-lagrangian, compute the tree-level Higgs mass from the radial fluctuation $\Phi = (0, 1 + \rho)$ and
+compare it with $M_W$ and $M_Z$ of @prp-csd-symmetry-breaking. Check the result in Standard Model language with $H =
+\Phi/(gR)$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The kinetic term of $\rho$ is $\tfrac{1}{g^2R^2}(\partial\rho)^2$ (@exm-csd-lagr-kinetic) and the potential $\tfrac{1}{g^2R^4}(\tfrac16 +
+2\rho^2 + \dots)$, so $m_H^2 = \tfrac{2/(g^2R^4)}{1/(g^2R^2)} = \tfrac{2}{R^2}$. With $M_W^2 = \tfrac{1}{2R^2}$ and $M_Z^2 = \tfrac{2}{R^2}$:
+$m_H = 2M_W = M_Z$, a prediction independent of $g$ and $R$. In Standard Model language, $v^2 = \tfrac{2}{g^2R^2}$ and $\lambda =
+\tfrac{g^2}{2}$ (@exr-csd-lagr-scales) give $m_H^2 = 2\lambda v^2$ and $M_W^2 = \tfrac14g^2v^2$, the same values:
+
+{{< sage exr-csd-int-higgs-mass >}}
+:::
+
+The alternative embedding of the previous chapter gives a different four-dimensional theory. The second integrative
+exercise derives it completely, from the constraints to the vacuum.
+
+::: {#exr-csd-int-t3-model}
+#### The $T_3$ model in full
+
+For $\tau' = \tfrac{i}{2}\operatorname{diag}(1, -1, 0)$, solve the constraints, compute $F_{12}$ and $V$, find the vacuum and the
+unbroken group, and compare with the $\lambda_8$ model.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The $+i$ eigenspace is $\operatorname{span}(E_{12})$, so $\phi_+ = fE_{12}$: one complex singlet. Then $F_{12} = \tfrac{i}{2}(|f|^2 -
+1)\operatorname{diag}(1, -1, 0)$ and $V = \tfrac12(|f|^2 - 1)^2$, minimised at $|f| = 1$ with $V = 0$ and $F_{12} = 0$: the vacuum is
+flat. The vacuum breaks the $U(1)$ generated by $T_3$ (under which $f$ has charge $1$), and the $U(1)$ generated by $\lambda_8$
+survives. Unlike the $\lambda_8$ model, the vacuum energy vanishes, because $\tau'$ extends to the embedding of all of
+$SU(2)$ in the upper block (@exr-csd-pot-compare):
+
+{{< sage exr-csd-int-t3-model >}}
+:::
+
+The last exercise reviews the whole construction of the two chapters. It traces each four-dimensional quantity back to
+the data of the reduction.
+
+::: {#exr-csd-int-survey}
+#### From six dimensions to the electroweak theory
+
+List the data of the model (coset, gauge group, embedding) and, for each of the following, the step of the two chapters
+that determines it: the gauge group $SU(2) \times U(1)$, the Higgs doublet, the shape of the potential, the vacuum, the
+unbroken $U(1)_{em}$, $\sin^2\theta_W$, $m_H/M_W$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Data: $S^2 = SU(2)/U(1)$, $G = SU(3)$, $\tau(Q_3) = \tfrac{i}{3}\operatorname{diag}(1, 1, -2)$. The gauge group is the centraliser of
+$\tau$ (@def-csdr-centraliser, @prp-csdr-eigenspaces); the doublet is the $+i$ eigenspace matched with the tangent space
+(@prp-csd-sphere-matching, @prp-csd-doublet-solution); the potential is $-\operatorname{Tr}F_{12}^2$ with $F_{12} = [\phi_1, \phi_2] -
+\tau$, its shape fixed by the structure constant $f_{12}{}^3$ and the embedding (@prp-csd-potential); the vacuum is the sphere
+$|\Phi| = 1$; the unbroken group is the stabiliser of $\Phi_0$, generated by $Q_{em} = T_3 + \tfrac12\tau$
+(@prp-csd-symmetry-breaking); $\sin^2\theta_W = \tfrac34$ comes from the normalisation of $\tau$ inside $SU(3)$
+(@prp-csd-weinberg); and $m_H = 2M_W$ from the relative normalisation of the potential and kinetic terms in
+@eq-csd-reduced-lagrangian (@exr-csd-int-higgs-mass). The only free parameters are $g$ and $R$, and every dimensionless
+ratio is fixed.
+:::
+::::

@@ -1,0 +1,6 @@
+[PASS] the Gell-Mann generators are normalised, Tr(T_A T_B) = -delta_AB/2: True
+SU(2), Phi = T_3: dim H = 1 ; broken generators: 2
+SU(3), Phi = T_8: dim H = 4 ; broken generators: 4
+SU(3), Phi = i diag(1, 2, -3): dim H = 2 ; broken generators: 6
+[PASS] SU(2) -> U(1), SU(3) -> SU(2) x U(1), SU(3) -> U(1) x U(1): True
+[PASS] for Phi = T_8 the unbroken generators are T_1, T_2, T_3, T_8: True

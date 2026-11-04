@@ -1,0 +1,4 @@
+alpha_k = [[0, 0, 0, 0], [0, 0, 0, 0], [-1, 1, 1, -1]] (diagonal blocks -sigma_k, sigma_k)
+{alpha_j, alpha_k} = 2 delta_jk: True
+{alpha_k, beta} = 0 and beta^2 = 1: True
+eigenvalues of H: [-25, -25, 25, 25]

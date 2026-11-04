@@ -1,0 +1,7 @@
+x(t) = (B*E*q*t - E*m*sin(B*q*t/m))/(B^2*q)
+y(t) = -(E*m*cos(B*q*t/m) - E*m)/(B^2*q)
+matches the cycloid: True True
+largest y: 2*E*m/(B^2*q)
+electrons stay below h for B > [
+B == sqrt(2)*sqrt(V*m/q)/h
+]

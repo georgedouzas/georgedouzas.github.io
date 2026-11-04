@@ -1,0 +1,3 @@
+Box[f(r - t)/r] = 0
+Box[f(r - t)] = -2*D[0](f)(-t + sqrt(x^2 + y^2 + z^2))/sqrt(x^2 + y^2 + z^2)   (non-zero: the 1/r factor is needed)
+spherical wave solves the wave equation: True | without 1/r: False

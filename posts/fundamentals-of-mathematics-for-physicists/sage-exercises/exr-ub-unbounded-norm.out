@@ -1,0 +1,5 @@
+|<e_n, x>|^2 for n = 1, 2, 3: [2*pi, 1/2*pi, 2/9*pi] ; |<e_n, pi^2 - x^2>|^2: [8*pi, 1/2*pi, 8/81*pi]
+N =   10: sum n^2 |<e_n, f>|^2 =    125.664   sum n^2 |<e_n, g>|^2 =    77.8998   sum n^4 |<e_n, g>|^2 =      502.7
+N =  100: sum n^2 |<e_n, f>|^2 =   1256.637   sum n^2 |<e_n, g>|^2 =    82.1833   sum n^4 |<e_n, g>|^2 =     5026.5
+N = 1000: sum n^2 |<e_n, f>|^2 =  12566.371   sum n^2 |<e_n, g>|^2 =    82.6332   sum n^4 |<e_n, g>|^2 =    50265.5
+limits: sum n^2 |<e_n, g>|^2 = 8/3*pi^3 ; the other two series diverge (their terms, 4 pi and 16 pi for each |n|, do not tend to 0)

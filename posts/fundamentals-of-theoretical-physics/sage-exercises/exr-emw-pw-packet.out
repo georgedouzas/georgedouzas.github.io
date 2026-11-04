@@ -1,0 +1,3 @@
+vacuum equations for any profile g(z - t): [0, 0, (0, 0, 0), (0, 0, 0)]
+the packet is of this form: f depends on z - t only: True
+integral of E_x^2 dz = 1/2*sqrt(pi)*(E0^2*sigma*e^(k0^2*sigma^2) + E0^2*sigma)*e^(-k0^2*sigma^2) ; for k0 sigma >> 1 it tends to E0^2 sigma sqrt(pi)/2 = 1/2*sqrt(pi)*E0^2*sigma

@@ -1,0 +1,4 @@
+<(1,2), (1,2,3,4)> has order 24 ; equals S_4: True
+<(1,2)(3,4), (1,3)(2,4)> = ['()', '(1,2)(3,4)', '(1,3)(2,4)', '(1,4)(2,3)'] ; order 4 ; abelian: True ; cyclic: False
+<(1,2,3,4)> = ['()', '(1,2,3,4)', '(1,3)(2,4)', '(1,4,3,2)'] ; order 4
+<(1,2,3), (1,2)(3,4)> has order 12 ; it is the alternating group A_4 (the even permutations): True

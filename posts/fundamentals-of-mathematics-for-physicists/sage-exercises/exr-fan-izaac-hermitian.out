@@ -1,0 +1,5 @@
+Hermitian: True
+eigenvalues: ['-7.641480', '3.189603', '8.451877']
+||A|| = 8.451877   r(A) = 8.451877
+||e^{-iA}|| = 1.000000   unitary: True
+power iteration finds 8.451877, inverse power iteration finds 3.189603

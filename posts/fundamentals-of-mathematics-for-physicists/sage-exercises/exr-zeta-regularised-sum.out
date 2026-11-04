@@ -1,0 +1,3 @@
+sum e^{-eps n} = 1/(e^eps - 1)    expansion: 1*eps^(-1) + (-1/2) + 1/12*eps + Order(eps^3)
+sum n e^{-eps n} = e^eps/(e^(2*eps) - 2*e^eps + 1)    expansion: 1*eps^(-2) + (-1/12) + 13/144*eps^2 + Order(eps^3)
+finite parts: -1/2 = zeta(0) = -1/2 ; -1/12 = zeta(-1) = -1/12

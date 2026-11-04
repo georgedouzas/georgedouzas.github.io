@@ -1,0 +1,6 @@
+pulled-back metric: [(e^(4*t) + 1)*e^(-2*t), (s*e^(4*t) - s)*e^(-2*t), (s*e^(4*t) - s)*e^(-2*t), (s^2*e^(4*t) + s^2)*e^(-2*t)]
+equals 2cosh(2t) ds^2 + 4 s sinh(2t) ds dt + 2 s^2 cosh(2t) dt^2: True
+det g = 4*s^2
+non-zero Christoffel symbols: {('s', 't', 't'): s, ('t', 's', 't'): 1/s}
+flat: True
+coordinates (u, v) with y = v^2: metric du^2 + 4 v^2 dv^2, symbols {('v', 'v', 'v'): 1/v}

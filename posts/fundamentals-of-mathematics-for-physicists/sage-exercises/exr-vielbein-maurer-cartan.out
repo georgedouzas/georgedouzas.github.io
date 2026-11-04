@@ -1,0 +1,5 @@
+de^3 = de3 = -sin(th) dth∧dph ; -e^1 ^ e^2 = -e1∧e2 = -sin(th) dth∧dph ; equal: True
+de^1 = de1 = 0 ; -e^2 ^ e^3 = -e2∧e3 = 0 ; equal: True
+de^2 = de2 = cos(th) dth∧dph ; -e^3 ^ e^1 = -e3∧e1 = cos(th) dth∧dph ; equal: True
+e^1 (x) e^1 + e^2 (x) e^2 is the round metric: True
+the area form e^1 ^ e^2 = e1∧e2 = sin(th) dth∧dph

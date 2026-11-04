@@ -1,0 +1,3 @@
+phi = sin 2x, psi = 0: u = cos(2*c*t)*sin(2*x) | equals sin 2x cos 2ct: True
+phi = 0, psi = sin 2x: u = 1/2*sin(2*c*t)*sin(2*x)/c | equals sin 2x sin 2ct/(2c): True
+both solve u_tt = c^2 u_xx: True

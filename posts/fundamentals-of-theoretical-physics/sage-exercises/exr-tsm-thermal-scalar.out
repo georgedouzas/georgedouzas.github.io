@@ -1,0 +1,5 @@
+f = (T^4/(2 pi^2)) int x^2 log(1 - e^{-x}) dx = -1/90*pi^2*T^4 ; -pi^2 T^4/90: True
+numerical check of int x^2 log(1 - e^{-x}) dx: -2.1646464673611323 vs -2.16464646742228
+s = -df/dT = 2/45*pi^2*T^3 ; u = f + T s = 1/30*pi^2*T^4 ; p = -f, p = u/3: True
+T = 1: lowest bosonic masses 2 pi |n| T = [0.0000, 6.283, 12.57] ; lowest fermionic pi T = 3.142
+T = 10: lowest bosonic masses 2 pi |n| T = [0.0000, 62.83, 125.7] ; lowest fermionic pi T = 31.42

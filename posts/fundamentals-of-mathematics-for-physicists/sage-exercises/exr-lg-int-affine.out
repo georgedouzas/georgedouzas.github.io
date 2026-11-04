@@ -1,0 +1,6 @@
+[X, Y] = Y ; Killing form: [1, 0, 0, 0] ; semisimple: False ; solvable: True
+exp(xX + yY) = [e^x, y*(e^x - 1)/x, 0, 1]
+inverse of exp: given (a, b) with a > 0, x = log a, y = b log(a)/(a - 1): True
+g^-1 dg/da = [1/a, 0, 0, 0] ; g^-1 dg/db = [0, 1/a, 0, 0]
+d sigma^X = 0 ; d sigma^Y + sigma^X ^ sigma^Y = 0: True
+volume form sigma^X ^ sigma^Y = a^(-2) da∧db

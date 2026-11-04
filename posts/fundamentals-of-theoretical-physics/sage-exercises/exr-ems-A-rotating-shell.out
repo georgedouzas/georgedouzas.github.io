@@ -1,0 +1,5 @@
+div A_in = 0 ; div A_out = 0
+B_in = (0, 0, 2/3*a*sigma*w)
+B_out is the dipole field with m = 4 pi sigma w a^4/3: True
+continuity of A at r = a (point (a,0,0)): (0, 0, 0)
+n x (B_out - B_in) at (a, 0, 0): (0, a*sigma*w, 0) ; K = sigma w x X there: (0, a*sigma*w, 0)

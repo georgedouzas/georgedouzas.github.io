@@ -1,0 +1,10 @@
+W' = -lam*(mu + p)*(mu - p) ; vacua: [-mu, mu]
+[PASS] two supersymmetric vacua phi = -mu, +mu with V = 0: True
+vacuum -mu : scalar mass^2 eigenvalues [4*lam^2*mu^2, 4*lam^2*mu^2] ; fermion mass^2 4*lam^2*mu^2
+[PASS] at phi = -mu both real scalars and the Weyl fermion have mass^2 4 lambda^2 mu^2; supertrace 2*4l^2mu^2 - 2*4l^2mu^2 = 0: True
+vacuum mu : scalar mass^2 eigenvalues [4*lam^2*mu^2, 4*lam^2*mu^2] ; fermion mass^2 4*lam^2*mu^2
+[PASS] at phi = mu both real scalars and the Weyl fermion have mass^2 4 lambda^2 mu^2; supertrace 2*4l^2mu^2 - 2*4l^2mu^2 = 0: True
+[PASS] Witten index = number of massive supersymmetric vacua = 2 (each contributes one bosonic ground state): True
+BPS wall tension 2|Delta W| = 8/3*lam*mu^3
+[PASS] the tension is 8 lambda mu^3 / 3: True
+[PASS] phi(x) = -mu tanh(lambda mu x) solves phi' = W'(phi) and runs from mu to -mu: True

@@ -1,0 +1,3 @@
+delta L = m1*diff(x1(t), t) + m2*diff(x2(t), t) ; delta L - dK/dt = 0
+Noether charge Q = m1*t*diff(x1(t), t) + m2*t*diff(x2(t), t) - m1*x1(t) - m2*x2(t)
+dQ/dt - t (EL1 + EL2) = 0 (so Q is conserved on the equations of motion)

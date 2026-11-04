@@ -1,0 +1,4 @@
+d alpha = dalpha = (3*x^2 + 3*y^2) dx∧dy
+d alpha in polar coordinates: ( 3*r^3 ) dr ^ dphi
+integral of d alpha over the disc: 3/2*pi
+integral of alpha around the circle: 3/2*pi

@@ -1,0 +1,7 @@
+kernel basis (echelon form): [
+(1, 0, -1/3),
+(0, 1, -2/3)
+]
+(1, 1, -1) : A v = (0, 0) ; coordinates in the kernel basis: [1, 1]
+(3, 0, -1) : A v = (0, 0) ; coordinates in the kernel basis: [3, 0]
+the two vectors (1, 1, -1), (3, 0, -1) form another basis of the kernel: True

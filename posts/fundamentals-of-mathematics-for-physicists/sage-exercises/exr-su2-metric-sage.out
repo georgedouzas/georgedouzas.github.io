@@ -1,0 +1,5 @@
+the embedding lands on the unit sphere: True
+induced metric: g = 1/4 dth⊗dth + 1/4 dph⊗dph + 1/4*cos(th) dph⊗dps + 1/4*cos(th) dps⊗dph + 1/4 dps⊗dps
+equals (1/4) [[1, 0, 0], [0, 1, cos th], [0, cos th, 1]]: True
+determinant: 1/64*sin(th)^2
+inverse: inv_g = 4 ∂/∂th⊗∂/∂th + 4/sin(th)^2 ∂/∂ph⊗∂/∂ph - 4*cos(th)/sin(th)^2 ∂/∂ph⊗∂/∂ps - 4*cos(th)/sin(th)^2 ∂/∂ps⊗∂/∂ph + 4/sin(th)^2 ∂/∂ps⊗∂/∂ps

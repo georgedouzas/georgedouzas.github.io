@@ -1,0 +1,4 @@
+[PASS] K is Hermitian and positive definite: True
+[PASS] the extremum is F = -K^{-1} w^*, from d/dF^*_i: K_ij F_j + w^*_i = 0: True
+[PASS] the value of L_aux at the extremum is -w K^{-1} w^dag, so V = w K^{-1} w^dag >= 0: True
+[PASS] for K = 1 the potential is |w_1|^2 + |w_2|^2: True

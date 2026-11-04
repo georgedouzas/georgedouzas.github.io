@@ -1,0 +1,7 @@
+[PASS] V at the origin is kappa^2/2 > 0 (supersymmetry broken by the D-term): True
+dV/dr at 0 = -g*kappa + m^2 ; dV/ds at 0 = g*kappa + m^2
+[PASS] for m^2 > g kappa both slopes in |phi|^2 are positive: the origin is the minimum: True
+[PASS] the scalar masses squared at the origin are m^2 - g kappa (phi_+) and m^2 + g kappa (phi_-): True
+[PASS] the supertrace of the matter and gaugino sector vanishes (the D-term contribution g kappa sum q = 0): True
+for m^2 < g kappa: minimum at |phi_+|^2 = (kappa - m^2/g)/g with V = 1/2*(2*g*kappa*m^2 - m^4)/g^2
+[PASS] for m^2 < g kappa the minimum moves to |phi_+|^2 = (kappa - m^2/g)/g, with V = m^2(2 g kappa - m^2)/(2 g^2) > 0, below kappa^2/2: True

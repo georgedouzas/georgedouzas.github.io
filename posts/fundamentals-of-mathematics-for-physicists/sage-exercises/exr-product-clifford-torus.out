@@ -1,0 +1,6 @@
+lands on S^3, |E|^2 = 1: True
+Gram matrix J^T J = [1/2, 0, 0, 1/2]  -> the coordinate velocities are orthogonal, each of length 1/sqrt(2)
+|a|^2 = |b|^2 = 1/2: True
+the SU(2) matrix g(a, b) has det 1: True
+the a-curve b = 0 and the b-curve a = 0 are great circles of S^3 (each lies in a plane through 0): True
+the map is injective on (0, 2 pi)^2: (cos a, sin a) determines a, and (cos b, sin b) determines b, so distinct chart points have distinct images

@@ -1,0 +1,4 @@
+d/da int e^{-ax} dx = -1/a^2 ; int d/da e^{-ax} dx = -1/a^2 ; equal: True
+Gaussian: G(a) = sqrt(pi)/sqrt(a) ; -G'(a) = 1/2*sqrt(pi)/a^(3/2) = int x^2 e^{-a x^2} dx = 1/2*sqrt(pi)/a^(3/2)
+Feynman's trick: F(a) = int_0^1 (x^a - 1)/log x dx has F'(a) = int_0^1 x^a dx = 1/(a + 1) and F(0) = 0, so F(a) = log(1 + a);
+numerical check at a = 1: 0.6931471837796029 vs log 2 = 0.693147180559945 ; at a = 3: 1.3862943643395464 vs log 4 = 1.38629436111989

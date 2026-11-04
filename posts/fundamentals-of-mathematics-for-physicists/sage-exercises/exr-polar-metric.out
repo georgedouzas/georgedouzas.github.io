@@ -1,0 +1,6 @@
+metric in polar coordinates: g = dr⊗dr + r^2 dph⊗dph
+components: [  1   0]
+[  0 r^2]
+determinant: r^2
+inverse metric: inv_g = ∂/∂r⊗∂/∂r + r^(-2) ∂/∂ph⊗∂/∂ph
+volume element sqrt(det g) = r  (the Jacobian r of polar coordinates)

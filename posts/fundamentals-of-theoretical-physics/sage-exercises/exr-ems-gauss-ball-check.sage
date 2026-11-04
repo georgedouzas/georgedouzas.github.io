@@ -1,0 +1,10 @@
+# Exercise exr-ems-gauss-ball-check: divergence and curl of the field of a uniformly charged ball, inside and outside.
+x, y, z, Q, R = var('x y z Q R', domain='real'); assume(R > 0)
+r = sqrt(x^2 + y^2 + z^2); X = vector([x, y, z])
+rho = 3 * Q / (4 * pi * R^3)
+Ein = rho / 3 * X; Eout = Q * X / (4 * pi * r^3)
+def div(F): return sum(diff(F[i], v) for i, v in enumerate([x, y, z])).simplify_full()
+def curl(F): return vector([diff(F[2], y) - diff(F[1], z), diff(F[0], z) - diff(F[2], x), diff(F[1], x) - diff(F[0], y)]).simplify_full()
+print("div E_in =", div(Ein), "= rho:", bool(div(Ein) == rho))
+print("div E_out =", div(Eout), "; curl E_in =", curl(Ein), "; curl E_out =", curl(Eout))
+print("continuity at r = R (point (R,0,0)):", bool((Ein - Eout).subs(x=R, y=0, z=0).simplify_full() == 0))

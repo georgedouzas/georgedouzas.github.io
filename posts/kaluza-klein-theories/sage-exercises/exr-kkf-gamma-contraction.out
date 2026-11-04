@@ -1,0 +1,6 @@
+F_ab = [(0, -1, -4, 0), (1, 0, 4, -6), (4, -4, 0, -5), (0, 6, 5, 0)]
+omega_ab(E_4) part = +(1/8) F g g Gamma^4: True
+omega_4a(E_b) part = -(1/4) F g g Gamma^4: True
+total = -(1/8) F g g Gamma^4: True
+exp(-i pi g5/4) is (1 - i g5)/sqrt(2): True
+rotated Pauli term = -(1/8) sigma^ab F_ab: True

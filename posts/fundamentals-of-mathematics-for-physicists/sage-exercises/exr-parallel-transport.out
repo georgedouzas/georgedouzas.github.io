@@ -1,0 +1,4 @@
+V^theta(t) = cos(t*cos(th0)) ;  V^phi(t) = -sin(t*cos(th0))/sin(th0)
+norm is preserved, g(V, V) = 1: True
+after one turn V^theta = 2*cos(pi*cos(th0))^2 - 1 : the vector is rotated by the angle 2*pi*cos(theta0)
+holonomy angle 2 pi - 2 pi cos(theta0) equals the area of the cap: True

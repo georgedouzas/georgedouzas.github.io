@@ -1,0 +1,10 @@
+rows e_theta, e_phi, n:
+[cos(ph)*cos(th) cos(th)*sin(ph)        -sin(th)]
+[       -sin(ph)         cos(ph)               0]
+[cos(ph)*sin(th) sin(ph)*sin(th)         cos(th)]
+orthonormal: True
+determinant: 1
+e_z = (e_z . e_theta) e_theta + (e_z . e_phi) e_phi + (e_z . n) n with coefficients [-sin(th), 0, cos(th)]
+tangential part of e_z vanishes only at the poles: -sin(theta) = 0 at theta = [
+th == 0
+]

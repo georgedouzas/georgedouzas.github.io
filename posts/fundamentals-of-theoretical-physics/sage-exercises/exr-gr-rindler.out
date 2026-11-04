@@ -1,0 +1,4 @@
+non-zero Christoffel symbols: {('t', 't', 'x'): 1/x, ('x', 't', 't'): x}
+Riemann tensor vanishes: True
+dT^2 - dX^2 in (t, x): [x^2   0]
+[  0  -1] ; equals diag(x^2, -1): True

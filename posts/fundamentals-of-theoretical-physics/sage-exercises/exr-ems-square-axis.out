@@ -1,0 +1,5 @@
+E = (0, 0, q*z/(pi*(1/2*a^2 + z^2)^(3/2)))
+E_z equals q z/(pi (z^2 + a^2/2)^(3/2)): True
+critical heights: [
+z == 1/2*a
+]

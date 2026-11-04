@@ -1,0 +1,3 @@
+dS/dt + (dS/dq)^2/(2m) + m g q = 0
+beta = dS/dE = -(g*m*t + sqrt(2)*sqrt(-g*m^2*q + E*m))/(g*m)
+q = E/(mg) - g (t + beta)^2/2 satisfies beta = dS/dE for t + beta < 0: True

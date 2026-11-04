@@ -1,0 +1,6 @@
+K1 = u*v ∂/∂u + (-1/2*u^2 + 1/2*v^2 + 1/2) ∂/∂v
+   components equal [u*v, -1/2*u^2 + 1/2*v^2 + 1/2] : True
+K2 = (-1/2*u^2 + 1/2*v^2 - 1/2) ∂/∂u - u*v ∂/∂v
+   components equal [-1/2*u^2 + 1/2*v^2 - 1/2, -u*v] : True
+K3 = -v ∂/∂u + u ∂/∂v
+   components equal [-v, u] : True

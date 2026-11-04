@@ -1,0 +1,9 @@
+u (x) v is a tensor of type (2, 0) with components u^i v^j: [ 1  0 -1]
+[ 2  0 -2]
+[ 3  0 -3]
+dimension of V (x) V: 9 ; of V* (x) V: 9
+a(u) = a_i u^i = -2 ; contracting a with the first slot of u (x) v gives the vector a(u) v = [-2, 0, 2]
+components of u in the basis f = (e0 + e1, e1, e2): [1, 1, 3] ; of u (x) v: [ 1 -1 -1]
+[ 1 -1 -1]
+[ 3 -3 -3]
+the trace (contraction of the two indices) of the type (1,1) tensor T is basis independent: 9 = 9

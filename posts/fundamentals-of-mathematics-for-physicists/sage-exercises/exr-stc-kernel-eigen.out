@@ -1,0 +1,6 @@
+n = 1 : G sin(n pi x) = sin(pi*x)/pi^2 ; equals sin(n pi x)/(n pi)^2: True
+n = 2 : G sin(n pi x) = 1/2*cos(pi*x)*sin(pi*x)/pi^2 ; equals sin(n pi x)/(n pi)^2: True
+n = 3 : G sin(n pi x) = 1/9*(4*cos(pi*x)^2 - 1)*sin(pi*x)/pi^2 ; equals sin(n pi x)/(n pi)^2: True
+N = 1 : partial sum = 0.175493  exact min(x, y) - xy = 1/6 = 0.166667
+N = 3 : partial sum = 0.175493  exact min(x, y) - xy = 1/6 = 0.166667
+N = 10 : partial sum = 0.164892  exact min(x, y) - xy = 1/6 = 0.166667

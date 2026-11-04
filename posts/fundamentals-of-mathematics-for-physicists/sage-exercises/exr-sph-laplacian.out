@@ -1,0 +1,4 @@
+cos^2 theta : Delta f = -3*cos(2*theta) - 1 ; not proportional to f
+sin theta cos phi : Delta f = -2*cos(phi)*sin(theta) ; eigenvalue -2 : True
+sin^2 theta cos 2phi : Delta f = 6*(2*sin(phi)^2 - 1)*sin(theta)^2 ; eigenvalue -6 : True
+cos^2 theta = 1/3 + (cos^2 theta - 1/3) with Delta(1/3) = 0 and Delta(cos^2 theta - 1/3) = -6 (cos^2 theta - 1/3): True

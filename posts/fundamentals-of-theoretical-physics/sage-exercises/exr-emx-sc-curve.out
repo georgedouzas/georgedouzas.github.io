@@ -1,0 +1,5 @@
+omega = 0.100000000000000 : sigma/sigma_T = 0.000102 ; Rayleigh omega^4 = 0.000100
+omega = 0.500000000000000 : sigma/sigma_T = 0.111 ; Rayleigh omega^4 = 0.0625
+omega = 1 : sigma/sigma_T = 400. ; Rayleigh omega^4 = 1.00
+omega = 2 : sigma/sigma_T = 1.78 ; Rayleigh omega^4 = 16.0
+omega = 10 : sigma/sigma_T = 1.02 ; Rayleigh omega^4 = 10000.

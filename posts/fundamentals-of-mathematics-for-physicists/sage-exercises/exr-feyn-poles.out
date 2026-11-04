@@ -1,0 +1,4 @@
+poles: [-sqrt(omega^2 - I*eps), sqrt(omega^2 - I*eps)]
+to first order in eps: [-omega + 1/2*I*eps/omega, omega - 1/2*I*eps/omega]
+t > 0: 1/2*I*e^(-I*omega*t)/omega | t < 0: 1/2*I*e^(I*omega*t)/omega
+both equal i e^(-i omega |t|)/(2 omega): True True

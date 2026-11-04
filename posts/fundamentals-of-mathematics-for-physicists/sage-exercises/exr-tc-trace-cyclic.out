@@ -1,0 +1,4 @@
+tr(AB) = 8  tr(BA) = 8
+tr(ABC) = 22  tr(CAB) = 22  tr(BCA) = 22  tr(BAC) = 28
+projection: P^2 = P: True  tr P = 2
+sum 1/(n pi)^2 = 1/6 ; int_0^1 g(x, x) dx = int_0^1 (x - x^2) dx = 1/6

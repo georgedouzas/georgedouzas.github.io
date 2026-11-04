@@ -1,0 +1,4 @@
+Im w = a^2*y/(a^2*c^2*x^2 + a^2*c^2*y^2 + 2*a*b*c^2*x + b^2*c^2 + 2*a*c*x + 2*b*c + 1) = y / |c z + d|^2: True
+pullback of g equals g: True
+translations (a, b, c) = (1, b, 0) and dilations (a, 0, 0) are special cases; the inversion has a = 0:
+z -> -1/z preserves g: True

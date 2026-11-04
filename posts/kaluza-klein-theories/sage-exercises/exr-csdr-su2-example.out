@@ -1,0 +1,6 @@
+n = 1: +i eigenspace of ad(n Q_3) has free entries [x10]
+n = 2: +i eigenspace of ad(n Q_3) has free entries []
+[PASS] for n = 1 the +i eigenspace is one-dimensional (E_21 in these conventions: one complex parameter f), for n = 2 it is empty (phi = 0, a pure monopole): True
+F_12 = [-1/2*I*f*fb + 1/2*I                   0]
+[                  0  1/2*I*f*fb - 1/2*I]
+[PASS] F_12 is proportional to (|f|^2 - 1) sigma_3, so the potential -Tr F_12^2 = (|f|^2 - 1)^2/2 has its minima at |f| = 1 (Kubyshin eqs. 36-37): True

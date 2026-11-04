@@ -1,0 +1,7 @@
+Gram matrix of e_{-1}, e_0, e_1: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+Parseval for x: ||x||^2 / (4 pi) = 1/6*pi^2 = zeta(2) = 1/6*pi^2
+-e_n'' = n^2 e_n for n = -3..3: True
+heat trace at t = 0.1: 5.604991216397929  Poisson: 5.604991216397929
+det_zeta(-Delta') = exp(-zeta_Delta'(0)) = 39.4784176043574 ; 4 pi^2 = 39.4784176043574
+regularised sum n^2 = 2 zeta(-2) = 0 ; sum |n| = 2 zeta(-1) = -1/6
+Casimir energy E = (pi/L) 2 zeta(-1) = -1/6*pi/L

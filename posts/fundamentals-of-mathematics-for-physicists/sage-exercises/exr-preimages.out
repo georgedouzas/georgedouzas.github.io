@@ -1,0 +1,3 @@
+step: preimage of (1/2, 2) on the grid starts at 0 which is included (the set [0, oo) is not open)
+cos: preimage of (1/2, 2) on the grid is -1 .. 1 (the open interval (-pi/3, pi/3) contains it)
+endpoints excluded: True -> cos(pi/3) = 1/2 is not in the open preimage

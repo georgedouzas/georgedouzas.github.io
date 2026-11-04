@@ -1,0 +1,4 @@
+:phi^4:_c = phi^4 - 6*c*phi^2 + 3*c^2
+:phi^6:_c = phi^6 - 15*c*phi^4 + 45*c^2*phi^2 - 15*c^3
+E_c theta :phi^6:_c = phi^6
+by integration against the Gaussian: phi^6

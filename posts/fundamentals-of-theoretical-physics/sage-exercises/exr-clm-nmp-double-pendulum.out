@@ -1,0 +1,8 @@
+M =
+[2*l^2*m   l^2*m]
+[  l^2*m   l^2*m]
+K =
+[2*g*l*m       0]
+[      0   g*l*m]
+omega^2 = -g*(sqrt(2) - 2)/l ; mode: (1, sqrt(2))
+omega^2 = g*(sqrt(2) + 2)/l ; mode: (1, -sqrt(2))

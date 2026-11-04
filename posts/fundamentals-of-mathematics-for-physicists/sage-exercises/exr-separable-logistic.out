@@ -1,0 +1,5 @@
+desolve returns the separated relation: -log(y(x) - 1) + log(y(x)) == _C + x
+exponentiated and solved for y: [
+Y == e^(C + x)/(e^(C + x) - 1)
+]
+residual of y = 1/(1 + C e^(-x)) in y' - y(1 - y): 0 -> zero: True

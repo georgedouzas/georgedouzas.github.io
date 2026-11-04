@@ -1,0 +1,36 @@
+---
+pagetitle: "Preface"
+---
+
+# Preface {.unnumbered}
+
+These lectures derive Kaluza-Klein theories and coset space dimensional reduction (CSDR) from first principles,
+without omitting steps, and then survey every other method of compactification and dimensional reduction. Every
+displayed computational result is a theorem of a Lean 4 library built with mathlib [@mathlib2020; @demoura2021],
+proved with certificates authored by Veriphy [@veriphy2026], which uses SageMath [@sagemath] as an untrusted
+oracle and the Lean kernel as the judge. The committed proofs build without Sage.
+
+## The five parts
+
+1. **Foundations.** Differential geometry (manifolds, metrics, connections, curvature, Lie groups, Killing
+   vectors, bundles and cosets), classical and quantum field theory, Yang-Mills theory and the Higgs mechanism,
+   general relativity, supersymmetry and supergravity, each worked on explicit examples.
+2. **Abelian Kaluza-Klein theory** on $M_4 \times S^1$: the metric ansatz, the reduction of the Einstein-Hilbert
+   action to gravity, Maxwell theory and a scalar, the geometric origin of gauge invariance, the Kaluza-Klein
+   tower and charge quantisation.
+3. **Non-abelian Kaluza-Klein theory** on $M_4 \times S^2$: the Killing vectors of the sphere as $SU(2)$ gauge
+   fields.
+4. **Coset space dimensional reduction** over $S^2 = SO(3)/SO(2) \cong SU(2)/U(1)$: the symmetric-field
+   constraints, their solution, the four-dimensional gauge group, Higgs fields and potential.
+5. **The landscape of compactification and reduction**: toroidal and Scherk-Schwarz reductions, group manifolds
+   and the consistency problem, sphere reductions in supergravity, the symmetric-field schemes compared,
+   special-holonomy compactifications, flux compactifications, and warped and large extra dimensions.
+
+## How to read
+
+Every term is defined before it is used (definition blocks), every definition is followed by worked examples
+(example blocks), and every chapter ends with exercises whose solutions are folded below them and may be given
+theoretically, as a Sage computation whose recorded output is shown, as a Lean theorem, or in all three forms.
+Results are numbered propositions with the names of the Lean theorems that verify them; the statement of each
+theorem is shown in a box extracted from the Lean source. @sec-conventions fixes the conventions and explains the
+verification; @sec-registry-kaluza-klein-theories lists every result with its verification level and @sec-glossary-kaluza-klein-theories every defined term.

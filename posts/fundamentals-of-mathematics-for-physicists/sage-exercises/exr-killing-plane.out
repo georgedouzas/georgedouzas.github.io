@@ -1,0 +1,5 @@
+L_(d/dx) g = 0  -> Killing: True
+L_(d/dy) g = 0  -> Killing: True
+L_(x d/dy - y d/dx) g = 0  -> Killing: True
+L_(x d/dx (dilation)) g = 2 dx⊗dx  -> Killing: False
+on the circle, L_K h = 2*d(k)/dph dph⊗dph  -> K is Killing iff k'(phi) = 0: K = const d/dphi

@@ -1,0 +1,3 @@
+F = -1/4*lam^2*log((2*L + a)*a/(L + a)^2)/pi
+equals lam^2/(4 pi) log((a+L)^2/(a(a+2L))): True
+expansion for small L: -1/2*L^3*lam^2/(pi*a^3) + 1/4*L^2*lam^2/(pi*a^2)

@@ -1,0 +1,5 @@
+[[], [1, 2]]
+[[], [1], [1, 2]]
+[[], [1, 2], [2]]
+[[], [1], [1, 2], [2]]
+[PASS] there are 4 topologies on two points: True

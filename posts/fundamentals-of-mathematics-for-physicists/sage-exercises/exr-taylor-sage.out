@@ -1,0 +1,6 @@
+T_4 of e^x : 1/24*x^4 + 1/6*x^3 + 1/2*x^2 + x + 1
+T_4 of log(x + 1) : -1/4*x^4 + 1/3*x^3 - 1/2*x^2 + x
+T_4 of sqrt(x + 1) : -5/128*x^4 + 1/16*x^3 - 1/8*x^2 + 1/2*x + 1
+T_4 of -1/(x - 1) : x^4 + x^3 + x^2 + x + 1
+max |e^x - T_4(x)| on [0, 1] (sampled): 0.00994849512571161 <= e/5! = 0.0226523485704920 : True
+Taylor polynomial of sin x at pi/2 to degree 4: 1/384*(pi - 2*x)^4 - 1/8*(pi - 2*x)^2 + 1

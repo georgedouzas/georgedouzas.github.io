@@ -1,0 +1,8 @@
+sigma_1 = (cos(ps)) dth + (sin(ps)*sin(th)) dph
+sigma_2 = (-sin(ps)) dth + (cos(ps)*sin(th)) dph
+sigma_3 = (cos(th)) dph + (1) dps
+(1/4) sum_a sigma_a (x) sigma_a =
+[        1/4           0           0]
+[          0         1/4 1/4*cos(th)]
+[          0 1/4*cos(th)         1/4]
+equals the Euler-angle metric: True

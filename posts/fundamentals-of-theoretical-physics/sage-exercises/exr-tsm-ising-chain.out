@@ -1,0 +1,8 @@
+l_+ is an eigenvalue of T: True
+N = 6: brute-force Z = 406.0515677249, tr T^6 = 406.0515677249
+m(h = 0) = 0
+m at small h: m = beta e^{2 beta J} h + O(h^3): True
+J = 1, h = 0.01, T = 0.5: exact chain m = 0.73750
+J = 1, h = 0.01, T = 1.0: exact chain m = 0.07369
+J = 1, h = 0.01, T = 2.0: exact chain m = 0.01359
+J = 1, h = 0.01, T = 4.0: exact chain m = 0.00412

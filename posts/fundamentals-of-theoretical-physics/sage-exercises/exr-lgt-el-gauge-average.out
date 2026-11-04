@@ -1,0 +1,4 @@
+n =     100: |average of g(x)^-1 U g(y)| = 0.05145, 1/sqrt(n) = 0.10000
+n =   10000: |average of g(x)^-1 U g(y)| = 0.01323, 1/sqrt(n) = 0.01000
+n = 1000000: |average of g(x)^-1 U g(y)| = 0.00069, 1/sqrt(n) = 0.00100
+(1/2) Tr of g^-1 U_P g for 1000 random g: spread 3.3e-16

@@ -1,0 +1,7 @@
+eta(v, v) for v = (1, 1, 0, 0): 0  (null) ; eta(w, w) for w = (1, 0, 0, 0): 1  (timelike)
+symmetric: True ; non-degenerate (det != 0): True
+signature (positive, negative, zero): (1, 3, 0)  (one time direction, three space directions)
+the form with matrix [[1,2],[2,4]] is degenerate: det = 0 ; kernel: [
+(1, -1/2)
+]
+the Euclidean inner product on R^3 has signature (3, 0, 0) (positive definite: True )

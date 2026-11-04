@@ -1,0 +1,2 @@
+E = (1/2*I0*a^2*n*w*y*cos(t*w)/(x^2 + y^2), -1/2*I0*a^2*n*w*x*cos(t*w)/(x^2 + y^2), 0) ; curl E = (0, 0, 0) ; B = curl A = (0, 0, 0)
+circulation: -pi*I0*a^2*n*w*cos(t*w) ; -dPhi/dt = -pi*I0*a^2*n*w*cos(t*w)

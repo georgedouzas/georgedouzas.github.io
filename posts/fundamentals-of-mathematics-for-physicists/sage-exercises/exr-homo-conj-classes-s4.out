@@ -1,0 +1,8 @@
+representative ()           cycle type [1, 1, 1, 1] class size  1
+representative (1,2)        cycle type [2, 1, 1]    class size  6
+representative (1,2)(3,4)   cycle type [2, 2]       class size  3
+representative (1,2,3)      cycle type [3, 1]       class size  8
+representative (1,2,3,4)    cycle type [4]          class size  6
+number of classes: 5 ; sizes add up to 24 = |S_4|
+every element of a class has the same cycle type: True
+number of partitions of 4: 5

@@ -1,0 +1,5 @@
+polar components T^a_b:
+[ cos(ph)*sin(ph)      r*cos(ph)^2]
+[    -sin(ph)^2/r -cos(ph)*sin(ph)]
+agree with T^r_r = sin cos, T^r_phi = r cos^2, T^phi_r = -sin^2/r, T^phi_phi = -sin cos: True
+trace in Cartesian: 0 ; trace in polar: 0

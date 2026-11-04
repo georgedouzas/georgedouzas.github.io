@@ -1,0 +1,5 @@
+blocks = 10 : rearranged partial sum = 0.33438570
+blocks = 100 : rearranged partial sum = 0.34532672
+blocks = 1000 : rearranged partial sum = 0.34644862
+(1/2) log 2 = 0.34657359 ; log 2 = 0.69314718
+an absolutely convergent series is immune: sum (-1)^(n+1)/n^2 = pi^2/12 = 0.82246703 whatever the order

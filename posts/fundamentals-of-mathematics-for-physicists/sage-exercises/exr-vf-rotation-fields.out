@@ -1,0 +1,6 @@
+K1 as an ambient vector equals e_1 x p: True
+   it is tangent, (K1 . p) = 0: True ; its squared length: -cos(ph)^2*sin(th)^2 + 1
+K2 as an ambient vector equals e_2 x p: True
+   it is tangent, (K2 . p) = 0: True ; its squared length: -sin(ph)^2*sin(th)^2 + 1
+K3 as an ambient vector equals e_3 x p: True
+   it is tangent, (K3 . p) = 0: True ; its squared length: sin(th)^2

@@ -1,0 +1,3 @@
+div A = t ; lap lambda = -t
+phi_new = 1/6*x^2 + 1/6*y^2 + 1/6*z^2 ; A_new = (-1/3*t*x, x^2 - 1/3*t*y, 2/3*t*z) ; div A_new = 0
+fields unchanged: (0, 0, 0) (0, 0, 0)

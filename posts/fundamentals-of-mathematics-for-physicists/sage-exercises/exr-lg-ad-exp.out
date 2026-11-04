@@ -1,0 +1,4 @@
+Ad_{exp(t T_3)} = [cos(t), -sin(t), 0, sin(t), cos(t), 0, 0, 0, 1]
+equals exp(t L_3): True
+Ad_{exp(tH)}: E -> [0, e^(2*t), 0, 0] ; F -> [0, 0, e^(-2*t), 0] ; H -> H: True
+e^{t ad_H} with ad_H = diag(0, 2, -2): [1, 0, 0, 0, e^(2*t), 0, 0, 0, e^(-2*t)]

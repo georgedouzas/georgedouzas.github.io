@@ -1,0 +1,8 @@
+dX = dX = cos(ph)*cos(th) dth - sin(ph)*sin(th) dph
+dY = dY = cos(th)*sin(ph) dth + cos(ph)*sin(th) dph
+dZ = dZ = -sin(th) dth
+table of dX_b(K_a), rows a = 1, 2, 3, columns X, Y, Z:
+[               0         -cos(th)  sin(ph)*sin(th)]
+[         cos(th)                0 -cos(ph)*sin(th)]
+[-sin(ph)*sin(th)  cos(ph)*sin(th)                0]
+equals -epsilon_abc X_c: True

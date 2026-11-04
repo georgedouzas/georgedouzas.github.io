@@ -1,0 +1,4 @@
+D psi = +1 psi for e^{i phi/2}(cos, -i sin): True ; for e^{-i phi/2}(-i sin, cos): True
+D psi = -1 psi for e^{i phi/2}(cos, +i sin): True ; for e^{-i phi/2}(+i sin, cos): True
+dimension of the solution space of D psi = 2 psi in the ansatz: 1
+solution (coefficients of cos^k sin^(3-k), k = 0..3, upper then lower): [(-0+0j), (1+0j), (-0+0j), (-0.5+0j), -0.5j, (-0+0j), (-0+1j), 0j]

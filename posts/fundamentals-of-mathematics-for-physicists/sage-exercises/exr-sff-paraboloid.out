@@ -1,0 +1,3 @@
+induced metric: [4*rho^2 + 1, 0, 0, rho^2] ; h = [2/sqrt(4*rho^2 + 1), 0, 0, 2*rho^2/sqrt(4*rho^2 + 1)] ; principal curvatures [2/(4*rho^2 + 1)^(3/2), 2/sqrt(4*rho^2 + 1)]
+intrinsic R_{rho ph rho ph} = 4*r^2/(4*r^2 + 1) ; det h = 4*r^2/(4*r^2 + 1) ; equal: True
+K = R_1212/det g = 4/(4*r^2 + 1)^2 ; extrinsic det h/det g = 4/(4*rho^2 + 1)^2

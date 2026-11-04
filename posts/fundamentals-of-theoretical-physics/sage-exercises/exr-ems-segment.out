@@ -1,0 +1,4 @@
+E_s = 1/2*L*lam/(pi*sqrt(L^2 + 4*s^2)*s)
+equals lam L/(4 pi s sqrt(s^2 + L^2/4)): True
+limit L -> oo: 1/2*lam/(pi*s)
+leading term for L << s: 1/4*L*lam/(pi*s^2)

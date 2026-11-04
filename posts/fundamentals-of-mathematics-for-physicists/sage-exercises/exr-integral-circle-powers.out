@@ -1,0 +1,6 @@
+n = -2: integral of z^n dz = 0
+n = -1: integral of z^n dz = 2*I*pi
+n =  0: integral of z^n dz = 0
+n =  1: integral of z^n dz = 0
+n =  2: integral of z^n dz = 0
+integral of conj(z) dz = 2*I*pi  (conj(z) = 1/z on the circle)

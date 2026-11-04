@@ -1,0 +1,3 @@
+heat u_t - u_xx for u = e^(-t)*sin(x) : residual 0 -> solution: True
+wave u_tt - 4 u_xx for u = cos(-2*t + x) : residual 0 -> solution: True
+Laplace u_xx + u_yy for u = arctan(y/x) : residual 0 -> solution: True

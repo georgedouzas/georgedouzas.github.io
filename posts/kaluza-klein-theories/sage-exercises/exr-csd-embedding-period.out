@@ -1,0 +1,5 @@
+exp(alpha tau) = [e^(1/3*I*al), e^(1/3*I*al), e^(-2/3*I*al)] ; exp(alpha Q_3) = [e^(-1/2*I*al), e^(1/2*I*al)]
+[PASS] exp(alpha tau) is unitary with determinant 1: True
+[PASS] periods: exp(alpha Q_3) = 1 first at alpha = 4 pi, exp(alpha tau) = 1 first at alpha = 6 pi: True
+exp(4 pi tau) = [-1/2*I*sqrt(3) - 1/2, -1/2*I*sqrt(3) - 1/2, -1/2*I*sqrt(3) - 1/2]
+[PASS] exp(4 pi tau) = exp(4 pi i/3) 1, a non-trivial element of the centre Z_3 of SU(3): True

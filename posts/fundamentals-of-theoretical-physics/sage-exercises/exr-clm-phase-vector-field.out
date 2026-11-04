@@ -1,0 +1,3 @@
+pendulum X_H components (d_q, d_p): [p, -sin(q)] ; X_H(H) = 0
+sphere X_H components (d_theta, d_phi, d_p_theta, d_p_phi): [p_theta, p_phi/sin(theta)^2, p_phi^2*cos(theta)/sin(theta)^3, 0]
+X_H(H) = 0 ; X_H(p_phi) = 0

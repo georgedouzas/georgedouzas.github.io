@@ -1,0 +1,4 @@
+grad x = grad_g(x) = cos(ph)*cos(th) ∂/∂th - sin(ph)/sin(th) ∂/∂ph ;  L_grad(x) g = -2 x g: True
+grad y = grad_g(y) = cos(th)*sin(ph) ∂/∂th + cos(ph)/sin(th) ∂/∂ph ;  L_grad(y) g = -2 y g: True
+grad z = grad_g(z) = -sin(th) ∂/∂th ;  L_grad(z) g = -2 z g: True
+L_K_a g = 0 for a = 1, 2, 3: [True, True, True]

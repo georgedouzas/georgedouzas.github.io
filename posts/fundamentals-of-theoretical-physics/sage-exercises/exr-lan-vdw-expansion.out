@@ -1,0 +1,7 @@
+p_r to the relevant order: -3/2*phi^3 - 6*phi*t + 4*t + 1
+coefficient of phi^2: 9*t (it vanishes at t = 0, and 9 t phi^2 ~ t^2 is subleading on the coexistence curve phi ~ sqrt(-t))
+roots of -6 t phi - (3/2) phi^3 = 0: [
+phi == -2*sqrt(-t),
+phi == 2*sqrt(-t),
+phi == 0
+] ; equal-area integral int_{-a}^{a} = 0

@@ -1,0 +1,5 @@
+I(1/2) = ln(9/8)/2 = 0.058892, I(1/2 - eps) = 0.052160
+N =   100: P = 7.6063e-04, Chernoff bound 5.4290e-03, -ln(P)/N = 0.071814
+N =  1000: P = 1.1622e-24, Chernoff bound 2.2242e-23, -ln(P)/N = 0.055112
+N = 10000: P = 4.9270e-229, Chernoff bound 2.9631e-227, -ln(P)/N = 0.052570
+fair coin, same window: P = 0.9556 (N = 10000), tending to 1

@@ -1,0 +1,8 @@
+e^1 = (1) dtheta
+e^2 = (sin(th)) dphi
+e^3 = (cos(th)) dphi
+(e^1)^2 + (e^2)^2 =
+[        1         0]
+[        0 sin(th)^2]
+is the round metric diag(1, sin^2 theta): True
+e^3 (the U(1) connection) = (cos(th)) dphi

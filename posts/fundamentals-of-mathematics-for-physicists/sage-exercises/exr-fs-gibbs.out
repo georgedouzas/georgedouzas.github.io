@@ -1,0 +1,6 @@
+Gibbs constant (2/pi) Si(pi) = 1.17897974447
+N = 9 : S_N(pi/(N+1)) = 1.18232820886 ; difference from the limit = 0.003348 ; above the limit: True 
+N = 49 : S_N(pi/(N+1)) = 1.17911310189 ; difference from the limit = 0.0001334 ; above the limit: True ; ratio of differences 25.11
+N = 199 : S_N(pi/(N+1)) = 1.17898807790 ; difference from the limit = 8.333e-6 ; above the limit: True ; ratio of differences 16.00
+N = 999 : S_N(pi/(N+1)) = 1.17898007781 ; difference from the limit = 3.333e-7 ; above the limit: True ; ratio of differences 25.00
+N^2 times the difference is roughly constant (Riemann-sum error of order 1/N^2): True

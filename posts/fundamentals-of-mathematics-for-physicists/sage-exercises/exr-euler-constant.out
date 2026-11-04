@@ -1,0 +1,5 @@
+n = 10 : H_n - log n = 0.6263831610 ; difference to gamma = 0.0491674 ; times 2n: 0.983347
+n = 100 : H_n - log n = 0.5822073317 ; difference to gamma = 0.00499153 ; times 2n: 0.998276
+n = 1000 : H_n - log n = 0.5777155816 ; difference to gamma = 0.000499725 ; times 2n: 0.999268
+n = 10000 : H_n - log n = 0.5772656641 ; difference to gamma = 0.0000500679 ; times 2n: 0.999023
+gamma = 0.577215664902

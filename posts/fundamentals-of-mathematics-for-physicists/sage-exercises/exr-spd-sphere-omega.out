@@ -1,0 +1,5 @@
+omega_{11} = (0) dtheta + (0) dphi
+omega_{12} = (0) dtheta + (-cos(th)) dphi
+omega_{21} = (0) dtheta + (cos(th)) dphi
+omega_{22} = (0) dtheta + (0) dphi
+d e^a + omega^a_b ^ e^b (coefficient of dtheta ^ dphi): [0, 0]

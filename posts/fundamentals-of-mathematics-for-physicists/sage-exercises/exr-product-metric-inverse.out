@@ -1,0 +1,7 @@
+product metric: g = dt⊗dt - dx⊗dx - dy⊗dy - dz⊗dz - R^2 dph⊗dph
+det g = R^2  (positive in five dimensions, four negative eigenvalues); sqrt|det g| = R
+inverse: inv_g = ∂/∂t⊗∂/∂t - ∂/∂x⊗∂/∂x - ∂/∂y⊗∂/∂y - ∂/∂z⊗∂/∂z - 1/R^2 ∂/∂ph⊗∂/∂ph
+warped metric: h = e^(2*A(w)) dt⊗dt - e^(2*A(w)) dx⊗dx - e^(2*A(w)) dy⊗dy - e^(2*A(w)) dz⊗dz - dw⊗dw
+det h = e^(8*A(w))
+inverse: inv_h = e^(-2*A(w)) ∂/∂t⊗∂/∂t - e^(-2*A(w)) ∂/∂x⊗∂/∂x - e^(-2*A(w)) ∂/∂y⊗∂/∂y - e^(-2*A(w)) ∂/∂z⊗∂/∂z - ∂/∂w⊗∂/∂w
+the inverse is block diagonal with the reciprocal blocks: True

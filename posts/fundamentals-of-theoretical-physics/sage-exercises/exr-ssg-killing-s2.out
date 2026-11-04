@@ -1,0 +1,4 @@
+s = +1: [True, True]
+s = -1: [True, True]
+[PASS] for both signs, eta = exp(i s theta sigma_1 / 2) exp(phi gamma_12 / 2) eta_0 solves D_m eta = (i s/2) gamma_m eta for every constant eta_0: True
+[PASS] the two solutions for s = +1 are linearly independent (2 Killing spinors, the maximum): True

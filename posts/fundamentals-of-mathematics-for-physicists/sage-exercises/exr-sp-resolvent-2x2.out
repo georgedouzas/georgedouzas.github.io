@@ -1,0 +1,10 @@
+R_A(lambda) =
+[              -1/(lambda_ - 2) -1/(lambda_^2 - 3*lambda_ + 2)]
+[                             0               -1/(lambda_ - 1)]
+R_sigma1(lambda) =
+[-lambda_/(lambda_^2 - 1)       -1/(lambda_^2 - 1)]
+[      -1/(lambda_^2 - 1) -lambda_/(lambda_^2 - 1)]
+resolvent identity R(lambda) - R(mu) = (lambda - mu) R(lambda) R(mu): True
+||R(2 + 1/10)|| = 13.528470443429207  ~ 1/epsilon = 10
+||R(2 + 1/100)|| = 140.72471629834766  ~ 1/epsilon = 100
+||R(2 + 1/1000)|| = 1413.5075148395442  ~ 1/epsilon = 1000

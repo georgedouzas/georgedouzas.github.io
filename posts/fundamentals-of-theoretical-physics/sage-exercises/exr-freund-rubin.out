@@ -1,0 +1,5 @@
+F_{mu PQR} F_nu^{PQR} = [-54*m^2, 54*m^2, 54*m^2, 54*m^2]  F^2 = -216*m^2
+[PASS] epsilon_{mu abc} epsilon_nu^{abc} = -6 eta_{mu nu} and epsilon^2 = -24 in Lorentzian signature (they depend only on det eta = -1): True
+R = 6*m^2 ; R_{mu nu} = [12*m^2, -12*m^2, -12*m^2, -12*m^2] ; R_mn = -6*g7*m^2
+[PASS] R_{mu nu} = 12 m^2 g_{mu nu} (AdS_4) and R_mn = -6 m^2 g_mn (S^7 with g_mn = -gamma_mn), DNP eqs. 10-11 in our signature: True
+[PASS] the radii: sphere a = 1/m and anti-de Sitter L = 1/(2m), the sphere twice as large as the AdS scale: True

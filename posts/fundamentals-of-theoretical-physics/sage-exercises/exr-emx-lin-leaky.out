@@ -1,0 +1,2 @@
+C = -4*pi*a*b*epsilon/(a - b) ; R = -1/4*(a - b)/(pi*a*b*sigma) ; RC = epsilon/sigma
+Q(t) = Q0*e^(-sigma*t/epsilon)

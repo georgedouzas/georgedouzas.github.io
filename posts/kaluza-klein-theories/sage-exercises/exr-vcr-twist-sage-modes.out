@@ -1,0 +1,3 @@
+monodromy phi(y + 2 pi R)/phi(y) = e^(2*I*pi*R*omega)
+|d_y phi|^2 = omega^2*p0i^2 + omega^2*p0r^2  (independent of y)
+-f''/f for the mode n: (R^2*omega^2 + 2*R*n*omega + n^2)/R^2 ; periodic part e^{i n y/R} has period 2 pi R for integer n

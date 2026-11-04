@@ -1,0 +1,5 @@
+exact solution solves the problem: True
+iterate 1 : 1/2*x^2 + x + 1 | its terms up to degree 1 are the Taylor polynomial x + 1: True
+iterate 2 : 1/6*x^3 + x^2 + x + 1 | its terms up to degree 2 are the Taylor polynomial x^2 + x + 1: True
+iterate 3 : 1/24*x^4 + 1/3*x^3 + x^2 + x + 1 | its terms up to degree 3 are the Taylor polynomial 1/3*x^3 + x^2 + x + 1: True
+iterate 4 : 1/120*x^5 + 1/12*x^4 + 1/3*x^3 + x^2 + x + 1 | its terms up to degree 4 are the Taylor polynomial 1/12*x^4 + 1/3*x^3 + x^2 + x + 1: True

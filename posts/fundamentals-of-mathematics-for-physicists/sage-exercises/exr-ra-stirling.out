@@ -1,0 +1,5 @@
+n = 5 : int_1^n log x = 4.04719 <= log n! = 4.78749 <= int_1^{n+1} log x = 5.75056 : True ; Stirling ratio 1.0167840
+n = 10 : int_1^n log x = 14.0259 <= log n! = 15.1044 <= int_1^{n+1} log x = 16.3768 : True ; Stirling ratio 1.0083654
+n = 50 : int_1^n log x = 146.601 <= log n! = 148.478 <= int_1^{n+1} log x = 150.523 : True ; Stirling ratio 1.0016680
+n = 200 : int_1^n log x = 860.663 <= log n! = 863.232 <= int_1^{n+1} log x = 865.964 : True ; Stirling ratio 1.0004168
+int log x dx = x log x - x, so log n! = n log n - n + O(log n); the O(log n) term is (1/2) log(2 pi n) + o(1)

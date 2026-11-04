@@ -1,0 +1,2 @@
+q(t) = C*V0*e^(-t/(C*R)) ; I(t) = V0*e^(-t/(C*R))/R
+heat: 1/2*C*V0^2 ; initial energy: 1/2*C*V0^2

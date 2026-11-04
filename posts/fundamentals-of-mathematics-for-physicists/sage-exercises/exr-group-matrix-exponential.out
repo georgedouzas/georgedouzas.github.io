@@ -1,0 +1,6 @@
+rotation: A = [0, -1, 1, 0], exp(tA) = [cos(t), -sin(t), sin(t), cos(t)]
+   desolve flow equals exp(tA) (x0, y0): True;  exp(sA) exp(tA) = exp((s+t)A): True
+shear: A = [0, 1, 0, 0], exp(tA) = [1, t, 0, 1]
+   desolve flow equals exp(tA) (x0, y0): True;  exp(sA) exp(tA) = exp((s+t)A): True
+boost: A = [0, 1, 1, 0], exp(tA) = [1/2*(e^(2*t) + 1)*e^(-t), 1/2*(e^(2*t) - 1)*e^(-t), 1/2*(e^(2*t) - 1)*e^(-t), 1/2*(e^(2*t) + 1)*e^(-t)]
+   desolve flow equals exp(tA) (x0, y0): True;  exp(sA) exp(tA) = exp((s+t)A): True

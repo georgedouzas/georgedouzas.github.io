@@ -1,0 +1,7 @@
+Gram matrix of 1, sigma_1, sigma_2, sigma_3:
+[2 0 0 0]
+[0 2 0 0]
+[0 0 2 0]
+[0 0 0 2]
+coefficients c_0, c_1, c_2, c_3 = [2, 2, 1, -1] ; reconstruction: True
+|<u, v>| = sqrt(5)  ||u|| ||v|| = 2*sqrt(6)*sqrt(3)  Cauchy-Schwarz: True

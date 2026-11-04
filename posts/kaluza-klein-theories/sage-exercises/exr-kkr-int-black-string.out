@@ -1,0 +1,7 @@
+[PASS] the boosted black string is Ricci flat: True
+phi^2 = (2*m*sinh(b)^2 + r)/r ; A_t = 2*m*cosh(b)*sinh(b)/(2*m*sinh(b)^2 + r)
+[PASS] phi^2 = 1 + (2m/r) sinh^2 b and g_tt = G_tt + phi^2 A_t^2 = f/phi^2: True
+F^2 = -8*m^2*cosh(b)^2*sinh(b)^2/(8*m^3*r*sinh(b)^6 + 12*m^2*r^2*sinh(b)^4 + 6*m*r^3*sinh(b)^2 + r^4)
+[PASS] R_yy = 0: phi Box phi = (1/2) Box phi^2 - (d phi)^2 = -(1/4) phi^4 F^2: True
+[PASS] R_{mu y} = A_mu R_yy: nabla^l F_{l mu} = 3 phi^{-1} d_l phi F_mu^l: True
+[PASS] R5 = 0: R4 = -(3/4) phi^2 F^2: True

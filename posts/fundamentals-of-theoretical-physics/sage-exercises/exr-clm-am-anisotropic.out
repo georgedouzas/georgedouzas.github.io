@@ -1,0 +1,4 @@
+{L_z, H} = -3*x*y
+solution satisfies Hamilton's equations: True
+L_z(t) = cos(t)^3 ; at t = 0: 1 ; at t = pi: -1
+min, max of L_z(t) over a period: -1.0000 1.0000

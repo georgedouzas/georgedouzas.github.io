@@ -1,0 +1,4 @@
+dL/dF = F + Wp(X) => F = -Wp(X) (no time derivative of F: the equation is algebraic)
+[PASS] substituting F = -W'(x) gives L = xdot^2/2 - W'(x)^2/2: True
+[PASS] the equation of motion xddot = F W'' with F = -W' equals that of the reduced Lagrangian, xddot = -W' W'': True
+[PASS] for W = x^3/3 - x the potential (x^2 - 1)^2/2 vanishes exactly at the critical points x = -1, 1 of W: True

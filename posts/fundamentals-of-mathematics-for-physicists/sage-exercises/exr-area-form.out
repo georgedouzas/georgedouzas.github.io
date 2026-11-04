@@ -1,0 +1,5 @@
+area form: area = sin(th) dth∧dph
+integral over the sphere: 4*pi
+d(cos(theta) dphi) = deta = -sin(th) dth∧dph  = -area: True
+d(d eta) = 0: True
+dtheta ^ dphi = -dphi ^ dtheta: True ; dtheta ^ dtheta = 0: True

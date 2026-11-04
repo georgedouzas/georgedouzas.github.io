@@ -1,0 +1,4 @@
+general solution: _K2*cos(s*w) + _K1*sin(s*w)
+boundary values: y , x ; equation: 0
+S_cl - target = 0
+dS/dx - m xdot(T) = 0 ; -d^2 S/dx dy = m*w/sin(T*w)

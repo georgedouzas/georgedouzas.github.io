@@ -1,0 +1,3 @@
+[PASS] the Lie derivative of the ansatz along d_y vanishes (d_y is Killing): True
+L_xi G_{t y} = -phi(t, x)^2*diff(eps(t, x), t)
+[PASS] L_{eps d_y} G = d/ds G(A + s d eps) at s = 0: the Lie derivative is the gauge variation delta A = d eps: True

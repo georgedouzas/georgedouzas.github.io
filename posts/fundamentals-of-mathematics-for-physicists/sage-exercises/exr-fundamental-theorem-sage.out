@@ -1,0 +1,5 @@
+F(x) = int_0^x e^{-t^2} dt = 1/2*sqrt(pi)*erf(x) ; F'(x) = e^(-x^2)
+int of sin(x) from 0 to pi = 2 ; antiderivative -cos(x) ; F(b) - F(a) agrees: True
+int of x*e^x from 0 to 1 = 1 ; antiderivative (x - 1)*e^x ; F(b) - F(a) agrees: True
+int of 1/(x^2 + 1) from -1 to 1 = 1/2*pi ; antiderivative arctan(x) ; F(b) - F(a) agrees: True
+int of 1/x from 1 to 7 = log(7) ; antiderivative log(x) ; F(b) - F(a) agrees: True

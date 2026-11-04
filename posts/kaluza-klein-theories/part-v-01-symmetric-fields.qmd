@@ -1,0 +1,1465 @@
+---
+pagetitle: "Symmetric fields and their constraints"
+---
+
+# Symmetric fields and their constraints {#sec-csdr-symmetric-fields}
+
+Coset space dimensional reduction (CSDR) starts from a gauge theory on a product $M_4 \times S/R$ of spacetime with a
+coset space, and keeps not the fields that are independent of the internal coordinates but those that are
+*symmetric*: invariant under the isometries of the coset up to a gauge transformation. Because the action of the
+isometry group on such fields is a gauge transformation, the Lagrangian evaluated on them is the same at every
+internal point, and integrating over the coset gives an honest four-dimensional theory whose solutions are solutions
+of the higher-dimensional one. The price is a set of algebraic constraints on the fields, which depend on how the
+isotropy group $R$ of the coset is embedded in the gauge group $G$; their solution decides which gauge fields and which
+scalars survive in four dimensions. This chapter has two sections. Symmetric fields and the CSDR constraints defines
+symmetric gauge fields, splits them into a four-dimensional gauge field and internal scalars, states the constraints
+those satisfy and the representation-theoretic rules that solve them, and checks the matching of charges for the running
+example. The embedding of $U(1)$ in $SU(3)$ fixes that example: the sphere $S^2 = SO(3)/SO(2) \cong SU(2)/U(1)$, the
+gauge group $SU(3)$, and the isotropy $U(1)$ embedded along the hypercharge direction $\lambda_8$; it computes the
+eigenspaces of the embedded generator and identifies the four-dimensional gauge group $SU(2) \times U(1)$. The next
+chapter solves the constraints and derives the Higgs potential. Every statement is followed by three examples and
+three exercises with folded solutions, and the chapter ends with three integrative exercises.
+
+The construction goes back to Forgács and Manton [@forgacs1980] and to Harnad, Shnider and Vinet [@harnad1980], who
+stated the invariance conditions for gauge fields under a group acting on a principal bundle. It was soon used for
+model building: Chapline and Manton gave the geometric meaning of the resulting Higgs potentials [@Chapline:1980mr],
+and unified models broken towards the standard model [@Bais:1985yd], dynamical symmetry breaking [@Forgacs:1984zx] and
+the reduction of ten-dimensional $E_8$ gauge theory over coset spaces [@Lust:1985be] followed. The reviews
+@kapetanakis1992 and @manolakos2016 and the monograph @kubyshin1989 cover the subject in depth.
+
+## Symmetric fields and the CSDR constraints {#sec-csdr-constraints}
+
+Coset space dimensional reduction keeps, instead of the fields independent of the internal coordinates, the
+fields that are *symmetric*: invariant under the isometries of the coset up to a gauge transformation. The
+Lagrangian evaluated on such fields does not depend on the internal point, so it is an honest four-dimensional
+Lagrangian, and the consistency problem of @sec-nonabelian-reduction disappears for the fields kept. This section
+defines symmetric gauge fields, derives the constraints they satisfy and the rules that solve them, following
+@manolakos2016 [Sec. 2, eqs. 2-13] and @kubyshin2003 [Secs. 2-3], before the running example of Part V, $SU(3)$ over
+$S^2 = SU(2)/U(1)$, is worked out in the rest of this chapter and the next. It has four subsections: symmetric gauge
+fields, the constraints on the reduced fields, the counting rules, and the matching of charges for the
+running example.
+
+### Symmetric gauge fields
+
+A gauge field on a space with symmetries can be asked to be invariant, but for a gauge field invariance is too strong a
+requirement: two potentials that differ by a gauge transformation describe the same physics. The definition below asks
+only that each isometry act on the field as some gauge transformation, which is the right notion of symmetry for a
+gauge theory.
+
+:::: {.statement-box}
+::: {#def-symmetric-gauge-field}
+#### Symmetric gauge field
+
+Let $S$ act on $M_4 \times S/R$ by its left action on the coset (@def-coset-space), with Killing vectors $\xi_A$,
+$A = 1, \dots, \dim S$. A gauge field $\hat A$ with gauge group $G$ on $M_4 \times S/R$ is **symmetric** if every
+$S$-transformation of it is a gauge transformation: for each generator there is a $G$-valued function $W_A(y)$
+with
+$$
+\mathcal{L}_{\xi_A}\hat A_\alpha = \partial_\alpha W_A - [W_A, \hat A_\alpha] ,
+$$ {#eq-symmetric-field}
+the infinitesimal gauge transformation @eq-gauge-transformation with parameter $W_A$ [@manolakos2016, eq. 3;
+@kubyshin2003, eq. 17]. Scalars and spinors are symmetric when $\mathcal{L}_{\xi_A}\phi = D(W_A)\phi$ in their
+representation [@manolakos2016, eqs. 2 and 4].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The simplest symmetric fields are those for which the compensating gauge transformation is not needed at all. The
+first example records this case and explains why it is too restrictive on a sphere.
+
+::: {#exm-symmetric-invariant}
+#### Strictly invariant fields
+
+$W_A = 0$: the field is invariant under the isometries, $\mathcal{L}_{\xi_A}\hat A = 0$, which for the circle is the
+cylinder condition of @def-cylinder-condition. On a sphere the only strictly invariant fields are trivial, and
+the compensating gauge transformations are essential.
+:::
+
+The magnetic monopole is the standard example of a field that is symmetric without being invariant. Its potential
+cannot be rotation invariant, since no potential of a monopole is globally defined, but each rotation changes it only
+by a gradient.
+
+::: {#exm-symmetric-monopole}
+#### The monopole
+
+The $U(1)$ potential $A = \cos\theta\,d\varphi$ of the Hopf fibration (@def-hopf-connection) is not invariant under
+rotations, but rotating it changes it by a gradient: it is a symmetric gauge field with $W_A \neq 0$, the first
+example of the construction [@kubyshin2003, eq. 32].
+:::
+
+The reason for the definition is what it does to the Lagrangian. The third example shows that a symmetric field has a
+Lagrangian density that is the same at every point of the coset, so that integrating over the internal space is
+trivial.
+
+::: {#exm-symmetric-lagrangian}
+#### The Lagrangian is constant on the coset
+
+Since the $S$-action on a symmetric field is a gauge transformation and the Yang-Mills Lagrangian is gauge
+invariant, $\mathcal{L}_{YM}(\hat A)$ at $(x, sy)$ equals its value at $(x, y)$: it is a function on $M_4$ alone, the
+reduced Lagrangian [@kubyshin2003, p. 6]. This is the basis of the method and the reason it is consistent for the
+fields it keeps.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise checks that the right-hand side of @eq-symmetric-field really is an infinitesimal gauge
+transformation, and computes the Lie derivative of a one-form that appears on its left-hand side. Both formulas are
+used in every later computation with symmetric fields.
+
+::: {#exr-csd-lie-derivative}
+#### The two sides of the definition
+
+(a) Show that for a one-form $A = A_\alpha dy^\alpha$ and a vector field $\xi$, $\mathcal{L}_\xi A = d(\iota_\xi A) +
+\iota_\xi dA$ has components $\xi^\beta\partial_\beta A_\alpha + A_\beta\partial_\alpha\xi^\beta$. (b) Show that the gauge
+transformation $\hat A \mapsto g^{-1}\hat A g + g^{-1}dg$ with $g = e^{\epsilon W}$ changes $\hat A$ to first order by
+$\epsilon(dW - [W, \hat A])$, the right-hand side of @eq-symmetric-field.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+(a) Cartan's formula gives $d(\xi^\beta A_\beta) = (\partial_\alpha\xi^\beta A_\beta + \xi^\beta\partial_\alpha A_\beta)dy^\alpha$ and
+$\iota_\xi dA = \xi^\beta(\partial_\beta A_\alpha - \partial_\alpha A_\beta)dy^\alpha$; the terms $\pm\xi^\beta\partial_\alpha A_\beta$ cancel and
+leave $\xi^\beta\partial_\beta A_\alpha + A_\beta\partial_\alpha\xi^\beta$. (b) With $g = 1 + \epsilon W + O(\epsilon^2)$, $g^{-1} = 1 - \epsilon W$
+and $g^{-1}\hat A g = \hat A + \epsilon(\hat A W - W\hat A)$, $g^{-1}dg = \epsilon\,dW$, so $\delta\hat A = \epsilon(dW - [W, \hat A])$.
+The definition therefore says that the infinitesimal motion of the field along $\xi_A$ coincides with an infinitesimal gauge
+transformation, with a parameter $W_A$ that may depend on the point.
+:::
+
+The second exercise makes the monopole example explicit. For each of the three rotations of the sphere it computes the
+Lie derivative of $A = \cos\theta\,d\varphi$ and finds the gauge parameter that compensates it.
+
+::: {#exr-csd-monopole-rotation}
+#### Rotating the monopole
+
+With the Killing vectors $\xi_1 = -\sin\varphi\,\partial_\theta - \cot\theta\cos\varphi\,\partial_\varphi$, $\xi_2 = \cos\varphi\,\partial_\theta -
+\cot\theta\sin\varphi\,\partial_\varphi$, $\xi_3 = \partial_\varphi$ of the round sphere, compute $\mathcal{L}_{\xi_A}A$ for
+$A = \cos\theta\,d\varphi$ and find functions $W_A$ with $\mathcal{L}_{\xi_A}A = dW_A$. Where are the $W_A$ singular, and why
+is that expected?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The rotation about the axis, $\xi_3$, leaves $A$ invariant ($W_3 = 0$); the other two change it by the gradients of
+$W_1 = -\cos\varphi/\sin\theta$ and $W_2 = -\sin\varphi/\sin\theta$. For an abelian group the commutator in @eq-symmetric-field
+vanishes, so this is exactly the symmetric-field condition. The parameters are singular at the poles, like the
+potential itself: $A$ is a potential of a monopole field, and no potential of a monopole is smooth on the whole sphere
+(@def-hopf-connection), so the compensating transformations inherit the singularity of the chosen gauge.
+
+{{< sage exr-csd-monopole-rotation >}}
+:::
+
+The third exercise proves the statement of @exm-symmetric-lagrangian. It uses only the covariance of the field
+strength under gauge transformations and the invariance of the trace.
+
+::: {#exr-csd-lagrangian-constant}
+#### Why the Lagrangian is constant
+
+Let $\hat A$ be symmetric. Show that its field strength satisfies $\mathcal{L}_{\xi_A}\hat F = -[W_A, \hat F]$, deduce
+$\mathcal{L}_{\xi_A}\operatorname{Tr}(\hat F_{MN}\hat F^{MN}) = 0$ when the $\xi_A$ are Killing vectors, and conclude that the
+Lagrangian density is a function on $M_4$ alone.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The Lie derivative commutes with $d$, so $\mathcal{L}_\xi\hat F = d(\mathcal{L}_\xi\hat A) + [\mathcal{L}_\xi\hat A, \hat A] +
+[\hat A, \mathcal{L}_\xi\hat A]$ (in form notation, $\hat F = d\hat A + \hat A \wedge \hat A$). Substituting
+$\mathcal{L}_\xi\hat A = dW - [W, \hat A]$ and using the Jacobi identity, the terms with $dW$ cancel and the rest
+combine into $-[W, \hat F]$: the field strength transforms covariantly, as under any gauge transformation
+(@def-nonabelian-field-strength). The trace of a commutator with a product vanishes, $\operatorname{Tr}([W, \hat F]\hat F) =
+0$, and the metric is preserved by a Killing vector, so the Lie derivative of $\operatorname{Tr}(\hat F_{MN}\hat F^{MN})$
+vanishes. A function whose derivative along all the $\xi_A$ vanishes is constant on the orbits of $S$; since $S$ acts
+transitively on $S/R$, it depends on $x \in M_4$ only.
+:::
+::::
+
+### The constraints
+
+With the definition in place, the field on $M_4 \times S/R$ is split into the components along spacetime and along the
+coset. The definition below names the four-dimensional fields obtained this way; the conditions they inherit from
+@eq-symmetric-field come afterwards.
+
+:::: {.statement-box}
+::: {#def-csdr-reduced-fields}
+#### Reduced fields
+
+Splitting $\hat A_M = (\hat A_\mu, \hat A_a)$ into spacetime and internal components, with $a$ running over the
+coset directions of a reductive decomposition $\mathfrak{s} = \mathfrak{r} \oplus \mathfrak{k}$
+(@def-reductive-decomposition), the symmetric-field condition @eq-symmetric-field splits into conditions on
+$A_\mu(x) = \hat A_\mu$, which becomes the four-dimensional gauge field, and on $\phi_a(x) = \hat A_a$, which become
+four-dimensional scalars [@manolakos2016, eq. 10]. The **reduced fields** are $A_\mu$ and $\phi_a$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The precise statement behind this splitting is a classical theorem on invariant connections. The first example quotes
+it and identifies its two pieces with the reduced fields.
+
+::: {#exm-reduced-wang}
+#### Wang's theorem
+
+Every $S$-invariant connection on $M_4 \times S/R$ is a pair of an unconstrained connection on $M_4$ with gauge
+group the centraliser $C_G(\tau(R))$, and a linear map $\phi: \mathfrak{k} \to \mathfrak{g}$ equivariant under $R$
+[@kubyshin2003, p. 8]: the reduced fields are exactly $(A_\mu, \phi_a)$ with the constraints below.
+:::
+
+In coordinates the symmetric field can be written down explicitly from the Maurer-Cartan form of the coset. The second
+example gives this local form, in which the internal components are the scalars contracted with the coset vielbein.
+
+::: {#exm-reduced-local-form}
+#### The local form
+
+In a chart with coset representative $s(y)$ and Maurer-Cartan form $s^{-1}ds = \bar\theta_{\mathfrak r} +
+\bar\theta_{\mathfrak k}$ (@sec-coset-vielbeins), the symmetric field is $\hat A(x, y) = A(x) + \tau'(\bar\theta_{\mathfrak r}) +
+\phi_x(\bar\theta_{\mathfrak k})$ [@kubyshin2003, eq. 23]: the four-dimensional gauge field, the embedded
+$R$-connection of @exm-gauge-field-r-connection, and the scalars contracted with the coset vielbein.
+:::
+
+The circle is the degenerate case in which the isotropy group is trivial. The third example shows that the method then
+reduces to the zero-mode truncation of ordinary Kaluza-Klein theory.
+
+::: {#exm-reduced-circle}
+#### The circle
+
+For $S/R = U(1)/\{e\}$ there is no $R$, no constraint, one scalar $\phi_y = \hat A_y$ and the gauge group is all of
+$G$: the symmetric fields are the $y$-independent ones, as in Part III.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise counts the reduced fields of the running example before any constraint is imposed. The count is
+the starting point against which the effect of the constraints will be measured.
+
+::: {#exr-csd-count-components}
+#### Counting before the constraints
+
+For $G = SU(3)$ on $M_4 \times S^2$, how many real four-dimensional fields do $A_\mu$ and $\phi_1, \phi_2$ contain before
+the constraints? Anticipating @sec-csdr-embedding and @sec-csdr-solution, how many survive?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$A_\mu$ is an $\mathfrak{su}(3)$-valued vector field, eight real vector fields; $\phi_1$ and $\phi_2$ are two
+$\mathfrak{su}(3)$-valued scalars, sixteen real scalars. After the constraints, $A_\mu$ lies in the four-dimensional
+centraliser $\mathfrak{su}(2) \oplus \mathfrak{u}(1)$ (four vector fields) and $(\phi_1, \phi_2)$ in a four-dimensional
+real solution space, one complex doublet (four real scalars): $8 + 16 = 24$ components reduce to $4 + 4 = 8$.
+:::
+
+The second exercise computes the local form of @exm-reduced-local-form for the sphere. It shows how the isotropy
+connection and the frame arise from the Maurer-Cartan form of a coset representative.
+
+::: {#exr-csd-local-form-sphere}
+#### The Maurer-Cartan form of the sphere
+
+With $Q_a = \sigma_a/2i$ and the coset representative $s(\theta, \varphi) = e^{\varphi Q_3}e^{\theta Q_2}$ of $SU(2)/U(1)$,
+compute $s^{-1}ds = \theta^aQ_a$ and identify the $\mathfrak{r}$-component $\theta^3$ and the frame $(\theta^1, \theta^2)$.
+Which metric does the frame define, and which potential is $\theta^3$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\theta^1 = -\sin\theta\,d\varphi$, $\theta^2 = d\theta$, $\theta^3 = \cos\theta\,d\varphi$. The frame gives the round metric
+$d\theta^2 + \sin^2\theta\,d\varphi^2$ of the unit sphere, and the isotropy component is the monopole potential of
+@exm-symmetric-monopole: the $R$-connection term $\tau(\theta^3 Q_3)$ of the local form is the monopole embedded in $G$
+along $\tau(Q_3)$, which is why symmetric fields on the sphere carry a monopole background.
+
+{{< sage exr-csd-local-form-sphere >}}
+:::
+
+The third exercise looks at the circle more closely. A constant compensating gauge transformation, allowed by the
+definition even when the isotropy group is trivial, produces fields that are not independent of $y$.
+
+::: {#exr-csd-twisted-circle}
+#### Twisted fields on the circle
+
+On $M_4 \times S^1$ take $\xi = \partial_y$ and a constant $W \in \mathfrak{g}$. Solve $\partial_y\hat A_\alpha = -[W, \hat A_\alpha]$ (the
+condition @eq-symmetric-field with $\partial_\alpha W = 0$) and state the periodicity condition on $W$. How does this relate
+to @exm-reduced-circle?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The solution is $\hat A_\alpha(x, y) = e^{-yW}\hat A_\alpha(x, 0)e^{yW}$, a field that rotates in the gauge algebra as one
+goes around the circle. It is single-valued if $e^{-2\pi R W}$ (with $y \sim y + 2\pi R$) commutes with all the values of
+the field, for instance if it is central in $G$. Such twisted ansätze are allowed by the definition and are again
+consistent, but they are gauge equivalent to $y$-independent fields only when $W$ can be removed by a periodic gauge
+transformation; the choice $W = 0$ gives the zero modes of @exm-reduced-circle. On a coset with non-trivial $R$ the
+compensating transformations are forced, not optional, which is the content of the constraints below.
+:::
+::::
+
+The splitting of @def-csdr-reduced-fields is not yet useful: the reduced fields still have to satisfy what remains of
+@eq-symmetric-field. The definition below lists these conditions, which are purely algebraic once an embedding of
+$R$ in $G$ has been chosen.
+
+:::: {.statement-box}
+::: {#def-csdr-constraints}
+#### The CSDR constraints
+
+Choose an embedding $\tau: R \to G$ (a homomorphism, @def-homomorphism). The symmetric-field condition is
+equivalent to [@manolakos2016, eq. 12; @kubyshin2003, eq. 22]:
+
+1. $A_\mu$ is independent of $y$ and commutes with $\tau(\mathfrak{r})$: $[\tau(Q_i), A_\mu] = 0$ for the generators
+   $Q_i$ of $R$;
+2. the scalars are $R$-equivariant, $[\tau(Q_i), \phi_a] = f_{ia}{}^b\phi_b$, where $f_{ia}{}^b$ are the structure
+   constants of $[Q_i, Q_a] = f_{ia}{}^bQ_b$ (@eq-coset-structure);
+3. the components along $R$ are fixed, $\phi_i = \tau(Q_i)$.
+
+The constraints are algebraic: they are solved once, at a point of the coset.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+Each of the three constraints has a direct meaning. The first example reads the first constraint as the choice of the
+four-dimensional gauge group.
+
+::: {#exm-constraints-gauge-group}
+#### The four-dimensional gauge group
+
+Constraint 1 says that $A_\mu$ takes values in the centraliser $\mathfrak{h} = \{X \in \mathfrak{g} : [\tau(Q_i), X] =
+0\}$: the reduced gauge group is $H = C_G(\tau(R))$ [@manolakos2016, p. 3], computed for $SU(3)$ in
+@sec-csdr-embedding.
+:::
+
+The second constraint is a linear system for the scalars. The second example explains why its solutions are counted by
+representation theory.
+
+::: {#exm-constraints-scalars}
+#### The scalar constraint
+
+Constraint 2 is a linear system for the $\phi_a \in \mathfrak{g}$: $\phi$ intertwines the representation of $R$ on
+$\mathfrak{k}$ with its representation on $\mathfrak{g}$ through $\tau$. By Schur's lemma (@sec-representations-schur)
+its solutions are counted by matching irreducible representations (@def-csdr-rules); for the sphere the system
+and its solution are in @sec-csdr-solution.
+:::
+
+Fermions are reduced by the same logic, with the spinor representation of the tangent space in place of the
+representation on $\mathfrak{k}$. The third example states the result and the condition for chiral fermions.
+
+::: {#exm-constraints-spinors}
+#### Fermions
+
+A spinor on $M_4 \times S/R$ in a representation $F$ of $G$ reduces to four-dimensional fermions in the
+representations $h_i$ of $H$ for which $F \supset (r_i, h_i)$ and the spinor of $SO(\dim S/R)$ contains $r_i$
+[@manolakos2016, eqs. 7-8]; chirality in four dimensions requires Weyl fermions in a higher dimension of the form
+$4n + 2$, with the Majorana condition removing a doubling [@manolakos2016, p. 4].
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise writes the scalar constraint out for the sphere. All it needs are the structure constants of
+$\mathfrak{su}(2)$ in the basis $Q_a = \sigma_a/2i$.
+
+::: {#exr-csd-constraint-sphere}
+#### The constraints on the sphere
+
+For $S = SU(2)$, $R = U(1)$ generated by $Q_3$ and $\mathfrak{k} = \operatorname{span}(Q_1, Q_2)$, with $[Q_a, Q_b] =
+\epsilon_{abc}Q_c$, write constraints 2 and 3 explicitly for $\phi_1, \phi_2, \phi_3$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$[Q_3, Q_1] = Q_2$ and $[Q_3, Q_2] = -Q_1$, so $f_{31}{}^2 = 1$, $f_{32}{}^1 = -1$ and constraint 2 reads
+$$
+[\tau(Q_3), \phi_1] = \phi_2, \qquad [\tau(Q_3), \phi_2] = -\phi_1 ,
+$$
+while constraint 3 fixes $\phi_3 = \tau(Q_3)$. In words: $\operatorname{ad}\tau(Q_3)$ rotates the pair $(\phi_1, \phi_2)$ like a
+vector in the tangent plane, exactly as $\operatorname{ad}Q_3$ rotates $(Q_1, Q_2)$. These are the equations solved in
+@sec-csdr-solution.
+:::
+
+The second exercise takes the embedding to be trivial. It shows that the constraints then remove all scalars, and that
+the remaining symmetric field is the pure four-dimensional gauge field with the full gauge group.
+
+::: {#exr-csd-constraint-trivial}
+#### The trivial embedding
+
+Solve the constraints for the sphere with $\tau = 0$. Which gauge group and which scalars survive, and why is this the
+case of strictly invariant fields?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $\tau = 0$ constraint 1 is empty, so $A_\mu$ takes values in all of $\mathfrak{g}$; constraint 2 gives $0 = \phi_2$
+and $0 = -\phi_1$, and constraint 3 gives $\phi_3 = 0$. No scalar survives, and the internal components of the field
+vanish: $\hat A = A_\mu(x)dx^\mu$, invariant under rotations without any compensating transformation. This is the
+content of @exm-symmetric-invariant: on the sphere the strictly invariant fields carry no internal components, and a
+non-trivial embedding is needed for scalars.
+:::
+
+The third exercise checks that the constraints are compatible with the four-dimensional gauge symmetry. Without this
+the reduced theory would not be a gauge theory with group $H$.
+
+::: {#exr-csd-constraint-h-invariant}
+#### The constraints are $H$-invariant
+
+Show that if $(A_\mu, \phi_a)$ satisfies the constraints, so does its gauge transform by an $x$-dependent $h(x) \in H$:
+$A_\mu \mapsto h^{-1}A_\mu h + h^{-1}\partial_\mu h$, $\phi_a \mapsto h^{-1}\phi_a h$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Elements of $H$ commute with every $\tau(Q_i)$. Then $[\tau(Q_i), h^{-1}\phi_a h] = h^{-1}[\tau(Q_i), \phi_a]h = f_{ia}{}^b
+h^{-1}\phi_b h$, so constraint 2 is preserved; constraint 3 is preserved because $h^{-1}\tau(Q_i)h = \tau(Q_i)$; and
+$h^{-1}A_\mu h$ and $h^{-1}\partial_\mu h \in \mathfrak{h}$ both commute with $\tau(\mathfrak{r})$, so constraint 1 is preserved.
+The transformations of $G$ outside $H$ move $\tau$ and are not symmetries of the constrained system: the gauge group
+in four dimensions is $H$.
+:::
+::::
+
+### The rules
+
+Solving the constraints case by case would be tedious. Representation theory turns the scalar constraint into a
+matching problem between the decomposition of the adjoint of $G$ and the isotropy representation of the coset, and the
+definition below states the resulting rules.
+
+:::: {.statement-box}
+::: {#def-csdr-rules}
+#### CSDR rules
+
+Decompose the adjoint of $G$ under $R \times H$ and the adjoint of $S$ under $R$,
+$$
+\operatorname{adj}G = (\operatorname{adj}R, 1) \oplus (1, \operatorname{adj}H) \oplus \sum_i(r_i, h_i), \qquad
+\operatorname{adj}S = \operatorname{adj}R \oplus \sum_js_j ,
+$$ {#eq-csdr-rules}
+[@manolakos2016, eqs. 5-6]. Then: the four-dimensional gauge group is $H$; for every pair $r_i = s_j$ of identical
+irreducible representations of $R$ there survives one scalar multiplet in the representation $h_i$ of $H$; all
+other scalars vanish.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The rules are applied first to the running example. The charges of the adjoint of $SU(3)$ under the embedded $U(1)$ are
+those of @fig-csdr-constraints, and the tangent space of the sphere has charges $\pm1$.
+
+::: {#exm-rules-sphere}
+#### The sphere with $G = SU(3)$
+
+$\operatorname{adj}SU(2) = \operatorname{adj}U(1) \oplus (+1) \oplus (-1)$ and, for the embedding of
+@sec-csdr-embedding, $\operatorname{adj}SU(3) = (0, \mathbf{3}) \oplus (0, \mathbf{1}) \oplus (+1, \mathbf{2}) \oplus
+(-1, \mathbf{2})$ (@fig-csdr-constraints, @exr-csdr-branching): one complex doublet of $SU(2) \times U(1)$
+survives, the Higgs field.
+:::
+
+The same sphere with the smaller gauge group $SU(2)$ is the example worked out in the review of Kubyshin and
+collaborators. It shows that the normalisation of the embedding decides whether any scalar survives.
+
+::: {#exm-rules-su2}
+#### The sphere with $G = SU(2)$
+
+With $\tau_n(Q_3) = nQ_3$, $\operatorname{adj}SU(2) = (0) \oplus (n) \oplus (-n)$ under $\tau_n(R)$: for $n = \pm1$ one
+complex scalar $f$ survives, for $|n| \geq 2$ none, and the symmetric field is a pure monopole of charge $n$
+[@kubyshin2003, eqs. 31-33] (@exr-csdr-su2-example).
+:::
+
+The rules are not limited to small groups. The third example quotes a model of current interest, in which the same
+counting produces a grand unified group with a family of scalars and fermions.
+
+::: {#exm-rules-e8}
+#### A realistic case
+
+$E_8$ over the nearly-Kähler coset $SU(3)/U(1) \times U(1)$ gives $H = E_6 \times U(1) \times U(1)$ with scalars and
+fermions in the $\mathbf{27}$ of $E_6$, and a potential that breaks supersymmetry softly [@manolakos2016, eqs.
+14-15]; the Wilson-flux mechanism then breaks $E_6$ further. The same rules, applied to a bigger group.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+![The CSDR matching rule for $SU(3)$ over $S^2$. Left: the weights of the adjoint of $\mathfrak{su}(3)$ (its root
+diagram, from Sage's root system of $A_2$) with their charges under the embedded $U(1)$: four states of charge $0$,
+the adjoint of $H = SU(2) \times U(1)$, and two doublets of charges $\pm1$. Right: the tangent space of the sphere
+carries the charges $\pm1$ under the isotropy $U(1)$; the rule keeps one $H$-multiplet for each matching pair, the
+complex doublet. Generated by `figures/csdr_constraints.sage`.](figures/csdr_constraints.svg){#fig-csdr-constraints width=90%}
+
+{{< interactive csdr_constraints 460 >}}
+
+The interactive version places the eight states of the adjoint in the plane of the two Cartan generators $T_3$ and
+$Y_n = \lambda_8/2$; hovering over a state shows its matrix unit, its $T_3$ and $Y_n$ eigenvalues, its charge under the
+embedded $U(1)$ and its electric charge $Q_{em} = T_3 + \tfrac12\tau$ of @sec-csdr-potential. The charge under the
+embedded $U(1)$ is proportional to the vertical coordinate, so the rule reads off the doublet as the upper row.
+
+The first exercise performs the branching of the running example with Sage's character rings. It decomposes both
+adjoint representations and compares the charges.
+
+::: {#exr-csdr-branching}
+#### The branching with Sage
+
+Use Sage's `WeylCharacterRing` to decompose the adjoint of $SU(3)$ under the embedded $U(1)$ and the adjoint of
+$SU(2)$ under its $U(1)$, and apply the rule.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-csdr-branching >}}
+:::
+
+The second exercise treats the $SU(2)$ model of @exm-rules-su2 in full. It solves the constraint for two values of $n$
+and computes the internal field strength in the case where a scalar survives.
+
+::: {#exr-csdr-su2-example}
+#### $SU(2)$ on the sphere
+
+Solve the constraint for $G = SU(2)$ with $\tau_n(Q_3) = nQ_3$, $n = 1, 2$, and compute the internal field strength
+for $n = 1$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-csdr-su2-example >}}
+:::
+
+The third exercise applies the rules to a larger gauge group with an embedding that has two blocks of equal entries. It
+produces a different four-dimensional theory, with two $SU(2)$ factors and a scalar in a bi-doublet.
+
+::: {#exr-csd-rules-su4}
+#### $SU(4)$ on the sphere
+
+For $G = SU(4)$ and $\tau(Q_3) = \tfrac{i}{2}\operatorname{diag}(1, 1, -1, -1)$, find the charges of the adjoint under
+$\tau$, the centraliser $H$ and the surviving scalars.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The charges of the matrix units are $t_i - t_j \in \{0, \pm1\}$: $15 \to 7 \cdot (0) + 4 \cdot (+1) + 4 \cdot (-1)$. The
+charge-0 part is the block-diagonal algebra $\mathfrak{s}(\mathfrak{u}(2) \oplus \mathfrak{u}(2))$, so $H = S(U(2) \times U(2))$,
+locally $SU(2) \times SU(2) \times U(1)$; the charge $+1$ part is the upper-right $2 \times 2$ block, on which the two
+$SU(2)$ factors act from the left and from the right. One complex bi-doublet $(\mathbf{2}, \mathbf{2})$ survives, eight
+real scalars: the structure of a left-right symmetric Higgs sector.
+
+{{< sage exr-csd-rules-su4 >}}
+:::
+::::
+
+The rules and the constraints are quoted, not derived, in this tutorial. The proposition below records them as cited
+results; for the sphere, the rest of this chapter and the next derive everything they predict by explicit computation.
+
+:::: {.statement-box}
+::: {#prp-csdr-rules-text}
+#### Wang's theorem and the CSDR rules
+
+The equivalence of the symmetric-field condition @eq-symmetric-field with the constraints of
+@def-csdr-constraints, and the counting rules @eq-csdr-rules, are taken from @kubyshin2003 [Sec. 3, eqs.
+17-24] and @manolakos2016 [Sec. 2]; for the sphere the constraints are written out and solved explicitly in
+@sec-csdr-solution.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Cited, not derived; the sphere case is solved and checked by exact computation in @sec-csdr-solution.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The counting in the rules is a statement about dimensions, which can be checked independently of the matching. The
+first example does this for the running example.
+
+::: {#exm-csd-rules-dimensions}
+#### The dimension count
+
+For $SU(3)$ the decomposition @eq-csdr-rules reads $8 = 4 + 2 + 2$ in complex dimensions (the abelian $R$ has no
+summand of its own, because $\tau(Q_3)$ commutes with itself and lies in $\mathfrak{h}$), and the two matched pieces
+$(\pm1, \mathbf{2})$ are conjugate to each other: one complex doublet, four real scalars, out of the sixteen of
+@exr-csd-count-components.
+:::
+
+When no representation matches, the rules predict no scalars at all. The second example gives the simplest such case,
+an abelian gauge group, where the surviving symmetric field is a pure monopole.
+
+::: {#exm-csd-rules-abelian}
+#### An abelian gauge group
+
+For $G = U(1)$ the adjoint is the trivial representation, of charge $0$, which never matches the charges $\pm1$ of the
+tangent space: no scalar survives, $H = U(1)$, and the symmetric field is $A(x) + \tau(\theta^3 Q_3)$, a
+four-dimensional Maxwell field plus a fixed monopole on the sphere, with the monopole charge fixed by $\tau$.
+:::
+
+The third example explains why the reduced theory obtained from the rules is consistent. The underlying principle is
+general and applies whenever a theory is restricted to the fields invariant under a compact symmetry group.
+
+::: {#exm-csd-rules-criticality}
+#### Symmetric criticality
+
+The action is invariant under the isometries combined with gauge transformations, and the symmetric fields are the
+fixed points of this action of $S$. By the principle of symmetric criticality, valid for compact $S$ [@kubyshin2003,
+p. 12], a symmetric field that extremises the action among symmetric fields extremises it among all fields: the
+four-dimensional equations of the reduced fields imply the higher-dimensional ones.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise turns @exm-csd-rules-criticality into an argument. It contrasts the symmetric fields with the
+truncation of Part IV, where consistency failed.
+
+::: {#exr-csdr-why-consistent}
+#### Why symmetric fields avoid the consistency problem
+
+Explain why the reduced equations of symmetric fields are exactly the restriction of the higher-dimensional
+equations, in contrast with @def-consistency-problem.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The space of symmetric fields is invariant under the $S$-action, and the action functional is $S$-invariant;
+by the principle of symmetric criticality [@kubyshin2003, p. 12] a critical point of the action restricted to
+symmetric fields is a critical point of the full action. The higher-dimensional equations evaluated on a
+symmetric field are $S$-covariant, so their $y$-dependence is a gauge transformation and they reduce to the
+four-dimensional equations: no massive mode is sourced. In Part IV the ansatz was not closed under the isometries
+with compensating gauge transformations, which is what allowed $K_a\cdot K_b$ to vary.
+:::
+
+The second exercise applies the rules to the abelian case of @exm-csd-rules-abelian with an arbitrary embedding. The
+embedding of $U(1)$ in $U(1)$ is a single integer, and the integer turns out to be the monopole charge.
+
+::: {#exr-csd-rules-u1}
+#### $U(1)$ on the sphere
+
+Let $G = U(1)$ and $\tau(Q_3) = \tfrac{i}{2}n$ (in the normalisation where $e^{4\pi Q_3} = 1$ in $SU(2)$). Solve the
+constraints, and compute the flux $\frac{1}{2\pi}\int_{S^2} d\hat A$ of the internal field $\hat A = \tau(\theta^3 Q_3)/i$
+with $\theta^3 = \cos\theta\,d\varphi$ of @exr-csd-local-form-sphere.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Constraint 2 reads $[\tau, \phi_1] = \phi_2$, $[\tau, \phi_2] = -\phi_1$, and all commutators vanish in an abelian algebra:
+$\phi_1 = \phi_2 = 0$. Constraint 1 is empty and $H = U(1)$. The internal field is $\hat A = \tfrac{n}{2}\cos\theta\,d\varphi$
+with $d\hat A = -\tfrac{n}{2}\sin\theta\,d\theta \wedge d\varphi$, whose integral over the sphere is $-2\pi n$: the flux is $-n$,
+an integer, the monopole charge of the symmetric field. That the embedding must be a homomorphism of groups, not only
+of Lie algebras, is what makes $n$ an integer: Dirac's quantisation reappears as a condition on $\tau$.
+:::
+
+The third exercise is about the general structure of the counting. It derives the number of real scalars from the
+rules for any $G$ on the sphere.
+
+::: {#exr-csd-rules-general-count}
+#### The number of scalars on the sphere
+
+On $S^2 = SU(2)/U(1)$ the tangent space carries the charges $\pm1$. Show that the number of real scalars surviving the
+constraints equals the complex dimension of the charge $+1$ eigenspace of $\operatorname{ad}\tau(Q_3)$ on
+$\mathfrak{g}_{\mathbb{C}}$ times two, and that the gauge group has dimension equal to that of the charge $0$ eigenspace.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+By @exr-csd-constraint-sphere, the complex combination $\phi_+ = \phi_1 - i\phi_2$ satisfies $[\tau, \phi_+] = i\phi_+$, so
+it lies in the $+i$ eigenspace $\mathfrak{g}_{+i}$; conversely any $\phi_+ \in \mathfrak{g}_{+i}$ determines the real
+fields through $\phi_- = -\phi_+^\dagger$ and $\phi_1 = (\phi_+ + \phi_-)/2$, $\phi_2 = \tfrac{i}{2}(\phi_+ - \phi_-)$. The
+solution space is therefore $\mathfrak{g}_{+i}$ as a real vector space, of real dimension $2\dim_{\mathbb{C}}\mathfrak{g}_{+i}$.
+The gauge algebra is the kernel of $\operatorname{ad}\tau$ in the real form $\mathfrak{g}$, whose real dimension equals
+the complex dimension of the kernel in $\mathfrak{g}_{\mathbb{C}}$. For $SU(3)$: $2 \cdot 2 = 4$ scalars and a
+four-dimensional $H$.
+:::
+::::
+
+### Worked computations
+
+The rules make a definite prediction for the running example, which can be checked by computing charges directly. The
+proposition below records the result, which @fig-csdr-constraints displays.
+
+:::: {.statement-box}
+::: {#prp-csd-sphere-matching}
+#### The matching on the sphere
+
+For $G = SU(3)$ and $\tau(Q_3) = \tfrac{i}{3}\operatorname{diag}(1, 1, -2)$, the adjoint of $\mathfrak{su}(3)$ has four
+states of charge $0$ with $T_3$ weights $-1, 0, 0, 1$ (the adjoint of $SU(2) \times U(1)$), two states of charge $+1$
+with $T_3 = \pm\tfrac12$ (a doublet) and two of charge $-1$; the tangent space of $S^2$ has the charges $\pm1$; the rule of
+@def-csdr-rules leaves one complex doublet, four real scalars.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Checked by exact computation in `figures/csdr_constraints.sage`.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The charges can be read off from the root diagram of $\mathfrak{su}(3)$. The first example explains the geometry of
+@fig-csdr-constraints.
+
+::: {#exm-csd-matching-roots}
+#### Charges from the root diagram
+
+The six roots of $\mathfrak{su}(3)$ form a regular hexagon in the $(T_3, Y_n)$ plane, and the charge under $\tau$ is
+$2Y_n/\sqrt3$. The two roots on the horizontal axis ($E_{12}, E_{21}$) have charge $0$ and, with the two Cartan
+generators, form the adjoint of $SU(2) \times U(1)$; the upper two roots ($E_{13}, E_{23}$) have charge $+1$, the lower two
+charge $-1$. This is the branching @eq-branching-su3 of @sec-branching.
+:::
+
+The tangent space side of the rule is just as explicit. The second example recalls the charges of the isotropy
+representation of the sphere.
+
+::: {#exm-csd-matching-tangent}
+#### Charges of the tangent space
+
+$[Q_3, Q_1 \mp iQ_2] = \pm i(Q_1 \mp iQ_2)$: the complexified tangent space of the sphere at the pole has charges
+$\pm1$ under the isotropy generator, the vector representation of $SO(2)$ (@exm-isotropy-sphere). Only the charge $+1$
+states of $\mathfrak{g}$ can be matched with $Q_+ = Q_1 - iQ_2$.
+:::
+
+The proposition also contains a negative statement: nothing else matches. The third example lists the states that do not
+survive and why.
+
+::: {#exm-csd-matching-rest}
+#### What does not survive
+
+The charge-0 states would need a charge-0 direction in $\mathfrak{k}$, which does not exist ($Q_3$ belongs to $\mathfrak{r}$,
+and its partner is constraint 3, $\phi_3 = \tau$); no state of $\mathfrak{su}(3)$ has charge $\pm2$ or more, so even a
+coset with such charges would add nothing. Of the sixteen real scalars only the doublet is left.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise recomputes the weights of @exm-csd-matching-roots in Sage. It checks the hexagon and the charge
+classes at the same time.
+
+::: {#exr-csd-matching-weights}
+#### Weights and charges
+
+Compute the weights $(T_3, Y_n)$ of the six root vectors $E_{ij}$ with $T_3 = \tfrac12\operatorname{diag}(1, -1, 0)$ and
+$Y_n = \operatorname{diag}(1, 1, -2)/2\sqrt3$, their charges $2Y_n/\sqrt3$, and group them by charge.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The weight of $E_{ij}$ is the difference of the $i$-th and $j$-th diagonal entries; all six have length $1$, and the
+classes are those of @prp-csd-sphere-matching:
+
+{{< sage exr-csd-matching-weights >}}
+:::
+
+The second exercise decomposes the fundamental representation in the same way. The result is needed whenever matter in
+the $\mathbf{3}$ is added to the model.
+
+::: {#exr-csd-matching-fundamental}
+#### The fundamental representation
+
+Decompose the $\mathbf{3}$ of $SU(3)$ under $SU(2) \times U(1)_\tau$ and give the charges under $\tau$ and under $Q_{em} =
+T_3 + \tfrac12\tau$ (in units of $i$).
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\tau = \tfrac{i}{3}\operatorname{diag}(1, 1, -2)$ acts on the basis vectors $e_1, e_2, e_3$ with charges $\tfrac13, \tfrac13, -
+\tfrac23$; the $SU(2)$ block acts on $(e_1, e_2)$. So $\mathbf{3} \to (\mathbf{2}, \tfrac13) \oplus (\mathbf{1}, -\tfrac23)$.
+The electric charges $T_3 + \tfrac12\tau$ are $\tfrac12 + \tfrac16 = \tfrac23$, $-\tfrac12 + \tfrac16 = -\tfrac13$ and $0 - \tfrac13 = -
+\tfrac13$: the charges of the up and down quarks, a coincidence of the $\lambda_8$ embedding.
+:::
+
+The third exercise applies the fermion rule of @exm-constraints-spinors to all small representations of $SU(3)$. The
+answer is that no fermion survives in this model, for a reason that can be read off from the charges.
+
+::: {#exr-csd-matching-fermions}
+#### No fermions
+
+Fermions on $S^2$ couple to the spinor of $SO(2)$, of charges $\pm\tfrac12$ under the isotropy generator. Compute the
+$\tau$-charges of the $\mathbf{3}, \bar{\mathbf{3}}, \mathbf{6}, \mathbf{8}, \mathbf{10}, \mathbf{15}, \mathbf{27}$ of $SU(3)$ and decide
+which fermions survive.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+All charges are multiples of $\tfrac13$, because the entries of $\tau/i$ are, and $\pm\tfrac12$ is never a multiple of
+$\tfrac13$: no representation $F$ contains a component matching the spinor, and no fermion survives. This is a known
+limitation of the model, which is a reduction of pure Yang-Mills theory; realistic models need a different coset or
+embedding (@exm-rules-e8).
+
+{{< sage exr-csd-matching-fermions >}}
+:::
+::::
+
+## The embedding of $U(1)$ in $SU(3)$ {#sec-csdr-embedding}
+
+The data of a CSDR model are the coset, the gauge group and the embedding of the isotropy group in the gauge
+group. For the running example the coset is $S^2 = SU(2)/U(1)$ (@exm-coset-sphere), the gauge group is $SU(3)$,
+and the isotropy $U(1)$ is embedded along the hypercharge direction of $\mathfrak{su}(3)$. This section defines the
+embedding, computes the eigenspaces of its adjoint action, and identifies the centraliser $H = SU(2) \times U(1)$,
+with the matrix statements proved on explicit $3 \times 3$ matrices; this is the classic model of Manton [@manton1979;
+@forgacs1980], reviewed in @kapetanakis1992. It has three subsections: the embedding itself, the eigenspaces of its
+adjoint action together with the centraliser, and the propositions about them.
+
+### The embedding
+
+An embedding of a one-parameter group is fixed by the image of its generator. The definition below makes this choice
+for the running example and explains why a diagonal generator is no loss of generality.
+
+:::: {.statement-box}
+::: {#def-csdr-embedding}
+#### Embedding of $R$ in $G$
+
+The **embedding** is a Lie algebra homomorphism $\tau: \mathfrak{r} \to \mathfrak{g}$ (@def-homomorphism); for $R = U(1)$
+with generator $Q_3 = \sigma_3/2i$ it is the choice of one element $\tau(Q_3) \in \mathfrak{su}(3)$, which by conjugation
+can be taken diagonal, $\tau(Q_3) = i\operatorname{diag}(t_1, t_2, t_3)$ with $\sum t_i = 0$. For the running example
+$$
+\tau(Q_3) = \frac{i}{3}\operatorname{diag}(1, 1, -2) = \frac{i}{\sqrt3}\,\lambda_8 ,
+$$ {#eq-csdr-tau}
+the direction of the Gell-Mann matrix $\lambda_8$ (@eq-gell-mann), anti-Hermitian and traceless (@prp-csdr-embedding).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+A diagonal generator acts on matrix units by multiplication with differences of its entries. The first example records
+the resulting charges, which are all that is needed for the rest of the chapter.
+
+::: {#exm-embedding-charges}
+#### Charges of the matrix units
+
+$[\tau(Q_3), E_{ij}] = i(t_i - t_j)E_{ij}$ for the matrix unit $E_{ij}$: with $t = (\tfrac13, \tfrac13, -\tfrac23)$ the
+charges are $0$ on the $2 \times 2$ block and the corner, $+i$ on $E_{13}, E_{23}$ and $-i$ on $E_{31}, E_{32}$
+(@fig-csdr-embedding, @exr-csdr-eigenspaces).
+:::
+
+The overall scale of $\tau$ is not free. The second example explains how the charges of the tangent space of the sphere
+fix it.
+
+::: {#exm-embedding-normalisation}
+#### Why this normalisation
+
+The tangent space of the sphere has charges $\pm i$ under $\operatorname{ad}Q_3$ (@exm-isotropy-sphere); the rule
+of @def-csdr-rules needs equal charges in $\mathfrak{g}$, which fixes $t_1 - t_3 = 1$: a different multiple of
+$\lambda_8$ would leave no scalars, as $\tau_n$ with $|n| \geq 2$ does for $SU(2)$ (@exm-rules-su2).
+:::
+
+Other directions in the Cartan subalgebra give other models. The third example shows that the $T_3$ direction gives a
+smaller gauge group and a single singlet scalar.
+
+::: {#exm-embedding-other}
+#### Other embeddings
+
+$\tau(Q_3) = \tfrac{i}{2}\operatorname{diag}(1, -1, 0)$, the $T_3$ direction, has charges $\pm i$ on $E_{12}, E_{21}$ and
+$\pm\tfrac{i}{2}$ on the other off-diagonal units: the centraliser is $U(1) \times U(1)$ and one complex singlet
+survives, a different and less interesting model. The embedding is part of the data.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+![The embedding $\tau = \tfrac{i}{3}\operatorname{diag}(1, 1, -2)$ and the decomposition of $3 \times 3$ matrices under
+$\operatorname{ad}\tau$: the block-diagonal kernel, the Lie algebra of the centraliser $H = SU(2) \times U(1)$; the
+upper-right column, the $+i$ eigenspace, which carries the doublet $\varphi_+ = (\Phi_1, \Phi_2)$; and the lower-left
+row, the $-i$ eigenspace of its conjugate. Sage checks the eigenvalues on the matrix units and the kernel.
+Generated by `figures/csdr_embedding.sage`.](figures/csdr_embedding.svg){#fig-csdr-embedding width=70%}
+
+The first exercise works out the alternative embedding of @exm-embedding-other in detail. It is the same computation as
+for the running example, with a different diagonal.
+
+::: {#exr-csdr-other-embedding}
+#### The $T_3$ embedding
+
+For $\tau(Q_3) = \tfrac{i}{2}\operatorname{diag}(1, -1, 0)$ find the charges of all matrix units, the centraliser and the
+surviving scalars.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$t = (\tfrac12, -\tfrac12, 0)$: the charges $t_i - t_j$ are $\pm1$ for $E_{12}, E_{21}$, and $\pm\tfrac12$ for $E_{13}, E_{31},
+E_{23}, E_{32}$ ($+\tfrac12$ for $E_{13}$ and $E_{32}$, $-\tfrac12$ for $E_{31}$ and $E_{23}$). The kernel is the diagonal
+algebra, so $H = U(1) \times U(1)$, generated by $T_3$ and $\lambda_8$. The $+i$ eigenspace is $\operatorname{span}(E_{12})$:
+one complex scalar survives, charged under $T_3$ (charge $1$) and neutral under $\lambda_8$, the $SU(2)$ model of
+@exm-rules-su2 embedded in the upper block of $SU(3)$. There is no doublet and no non-abelian factor: the hypercharge
+embedding @eq-csdr-tau is what produces the electroweak structure.
+:::
+
+The second exercise looks at the embedding at the level of groups. The Lie algebra map is a homomorphism, but its
+exponential reveals a subtlety of the global structure.
+
+::: {#exr-csdr-tau-exponential}
+#### The group element
+
+Compute $\exp(\alpha\tau(Q_3))$ and check that it lies in $SU(3)$. For which $\alpha$ is it the identity, and how does
+this compare with the period of $\exp(\alpha Q_3)$ in $SU(2)$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\exp(\alpha\tau) = \operatorname{diag}(e^{i\alpha/3}, e^{i\alpha/3}, e^{-2i\alpha/3})$, unitary with determinant $1$; it is the
+identity when $\alpha/3 \in 2\pi\mathbb{Z}$, so its period is $6\pi$. In $SU(2)$, $\exp(\alpha Q_3) = \operatorname{diag}(e^{-i\alpha/2},
+e^{i\alpha/2})$ has period $4\pi$ (and $2\pi$ in $SO(3)$). The two periods do not agree: at $\alpha = 4\pi$, where
+$\exp(\alpha Q_3) = 1$, one has $\exp(4\pi\tau) = e^{4\pi i/3}\,\mathbb{1}$, a non-trivial element of the centre $\mathbb{Z}_3$ of
+$SU(3)$. So $\tau$ integrates to a group homomorphism from the isotropy $U(1)$ of $SU(2)$ only into $SU(3)/\mathbb{Z}_3$; on
+the adjoint representation, where the centre acts trivially, this is all that is needed, and the constraints, being
+infinitesimal, do not see the difference. For fields in the $\mathbf{3}$ it matters: their $\tau$-charges $\tfrac13, \tfrac13, -
+\tfrac23$ are not half-integers, the charges allowed by the isotropy $U(1)$ of $SU(2)$, the same arithmetic that removes
+the fermions in @exr-csd-matching-fermions.
+
+{{< sage exr-csd-embedding-period >}}
+:::
+
+The third exercise asks which diagonal embeddings are equivalent. Conjugation by a permutation matrix reorders the
+entries, so only the unordered triple of eigenvalues matters.
+
+::: {#exr-csd-embedding-conjugate}
+#### Equivalent embeddings
+
+Show that two embeddings $\tau, \tau' \in \mathfrak{su}(3)$ conjugate by an element of $SU(3)$ give isomorphic reduced
+theories, and that $\tfrac{i}{3}\operatorname{diag}(1, 1, -2)$, $\tfrac{i}{3}\operatorname{diag}(1, -2, 1)$ and
+$\tfrac{i}{3}\operatorname{diag}(-2, 1, 1)$ are conjugate. Is $-\tau$ conjugate to $\tau$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+If $\tau' = g\tau g^{-1}$, the map $X \mapsto gXg^{-1}$ is an automorphism of $\mathfrak{g}$ that carries the constraints for
+$\tau$ into those for $\tau'$, the centraliser $H$ into $gHg^{-1}$ and the solutions into each other; the reduced
+Lagrangians correspond. A permutation matrix (times a phase to make its determinant $1$) permutes the diagonal
+entries, so the three matrices are conjugate. $-\tau$ has eigenvalues $\tfrac{i}{3}(-1, -1, 2)$, not a permutation of
+$\tfrac{i}{3}(1, 1, -2)$, so it is not conjugate to $\tau$ in $SU(3)$; it gives the conjugate model, in which the surviving
+scalar is the conjugate doublet in the row $(E_{31}, E_{32})$ (equivalently, after a permutation, the row
+$(E_{12}, E_{13})$, @exr-csd-int-scan).
+:::
+::::
+
+### Eigenspaces and the centraliser
+
+The constraints involve $\operatorname{ad}\tau$, so its eigenspaces organise everything. The definition below lists them for
+the running example; their dimensions add up to the dimension of $\mathfrak{gl}(3, \mathbb{C})$.
+
+:::: {.statement-box}
+::: {#def-adjoint-eigenspaces}
+#### Eigenspaces of $\operatorname{ad}\tau$
+
+The **eigenspaces** of $\operatorname{ad}\tau(Q_3)$ on $\mathfrak{gl}(3, \mathbb{C})$ are
+$$
+\mathfrak{g}_0 = \{X : X_{13} = X_{23} = X_{31} = X_{32} = 0\}, \qquad
+\mathfrak{g}_{+i} = \operatorname{span}(E_{13}, E_{23}), \qquad
+\mathfrak{g}_{-i} = \operatorname{span}(E_{31}, E_{32}) ,
+$$ {#eq-csdr-eigenspaces}
+of dimensions $5 + 2 + 2 = 9$ over $\mathbb{C}$; intersected with $\mathfrak{su}(3)$ the kernel has real dimension
+$4$ and the two eigenspaces together $4$, $4 + 4 = 8$ (@prp-csdr-eigenspaces).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The $+i$ eigenspace is where the scalars live. The first example describes it as a column vector on which the
+centraliser acts.
+
+::: {#exm-eigenspaces-doublet}
+#### The doublet
+
+$\mathfrak{g}_{+i}$ is the third column above the diagonal: a vector $(\Phi_1, \Phi_2)^T$ on which the $SU(2)$ block
+acts by matrix multiplication, a **doublet**, and the $U(1)$ by a phase; this is where the scalar fields of
+@sec-csdr-solution live.
+:::
+
+The two non-zero eigenspaces are not independent once the reality condition of $\mathfrak{su}(3)$ is imposed. The second
+example explains the pairing.
+
+::: {#exm-eigenspaces-conjugate}
+#### The conjugate
+
+$\mathfrak{g}_{-i} = \mathfrak{g}_{+i}^\dagger$: anti-Hermiticity pairs the two eigenspaces, so the real solution of
+the constraints has one complex doublet, not two.
+:::
+
+The eigenspace decomposition is a branching rule in disguise. The third example makes the connection with the
+representation theory of @sec-branching.
+
+::: {#exm-eigenspaces-branching}
+#### The branching
+
+@eq-csdr-eigenspaces is the branching $\mathbf{8} \to (\mathbf{3}, 0) \oplus (\mathbf{1}, 0) \oplus (\mathbf{2}, +1)
+\oplus (\mathbf{2}, -1)$ of @sec-branching, the charges now those of the embedded $U(1)$ in the normalisation of
+@eq-csdr-tau (@exr-csdr-branching).
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise computes the eigenspaces by brute force. Sage solves the linear systems $[\tau, X] = \lambda X$ for a
+general matrix $X$ and also solves the constraints directly.
+
+::: {#exr-csdr-eigenspaces}
+#### Eigenspaces in Sage
+
+Solve $[\tau, X] = \lambda X$ for $\lambda = i, -i, 0$ over the $3 \times 3$ matrices and read off the spaces of
+@eq-csdr-eigenspaces.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-csdr-eigenspaces >}}
+:::
+
+The second exercise shows that the eigenspace decomposition is compatible with the bracket. This grading is what makes
+the commutator $[\phi_+, \phi_-]$ of the next chapter land in the gauge algebra.
+
+::: {#exr-csd-eigen-grading}
+#### A grading of the Lie algebra
+
+Show that $[\mathfrak{g}_\lambda, \mathfrak{g}_\mu] \subseteq \mathfrak{g}_{\lambda + \mu}$ (with $\mathfrak{g}_{\pm2i} = 0$). Deduce that
+$[\mathfrak{g}_{+i}, \mathfrak{g}_{+i}] = 0$, that $[\mathfrak{g}_{+i}, \mathfrak{g}_{-i}] \subseteq \mathfrak{g}_0$, and that
+$\mathfrak{g}_0$ acts on $\mathfrak{g}_{+i}$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\operatorname{ad}\tau$ is a derivation: $[\tau, [X, Y]] = [[\tau, X], Y] + [X, [\tau, Y]] = (\lambda + \mu)[X, Y]$ for
+$X \in \mathfrak{g}_\lambda$, $Y \in \mathfrak{g}_\mu$ (Jacobi identity). Since $\pm2i$ is not an eigenvalue, $[\mathfrak{g}_{+i},
+\mathfrak{g}_{+i}] = 0$ (directly: $E_{13}E_{23} = E_{23}E_{13} = 0$); $[\mathfrak{g}_{+i}, \mathfrak{g}_{-i}] \subseteq \mathfrak{g}_0$,
+for instance $[E_{13}, E_{31}] = E_{11} - E_{33}$; and $[\mathfrak{g}_0, \mathfrak{g}_{+i}] \subseteq \mathfrak{g}_{+i}$, which is the
+statement that the centraliser acts on the scalars.
+:::
+
+The third exercise restricts the eigenspaces to the real form $\mathfrak{su}(3)$, where the fields actually live. It
+explains the real dimensions quoted in the definition.
+
+::: {#exr-csd-eigen-real}
+#### Real dimensions
+
+Show that $X \in \mathfrak{su}(3)$ decomposes as $X = X_0 + X_+ + X_-$ with $X_0 \in \mathfrak{g}_0 \cap \mathfrak{su}(3)$ and
+$X_- = -X_+^\dagger$, and deduce the real dimensions $4$ (kernel) and $4$ (the two eigenspaces together).
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Decompose $X$ into its block-diagonal part, its $(1,3), (2,3)$ entries and its $(3,1), (3,2)$ entries. Anti-Hermiticity
+$X^\dagger = -X$ maps each block-diagonal entry to the conjugate of its mirror, so $X_0$ is anti-Hermitian and traceless,
+an element of $\mathfrak{s}(\mathfrak{u}(2) \oplus \mathfrak{u}(1))$ of real dimension $3 + 1 = 4$; and it relates the column to
+the row, $X_- = -X_+^\dagger$. The pair $(X_+, X_-)$ is determined by $X_+ \in \mathfrak{g}_{+i}$, two complex numbers, real
+dimension $4$. Together $4 + 4 = 8 = \dim\mathfrak{su}(3)$, as checked in `csdr_embedding.sage`.
+:::
+::::
+
+The kernel of $\operatorname{ad}\tau$ is a Lie algebra, and the group it generates is the four-dimensional gauge group.
+The definition below names it.
+
+:::: {.statement-box}
+::: {#def-csdr-centraliser}
+#### The centraliser
+
+The **centraliser** of the embedding is $H = C_G(\tau(R)) = \{g \in G : g\tau(Q_3)g^{-1} = \tau(Q_3)\}$, with Lie
+algebra the kernel $\mathfrak{g}_0 \cap \mathfrak{su}(3)$ of $\operatorname{ad}\tau$. For @eq-csdr-tau it is the
+block-diagonal subgroup $S(U(2) \times U(1)) \cong SU(2) \times U(1)$ of $SU(3)$: the four-dimensional gauge group of
+the model is the electroweak group (@prp-csdr-eigenspaces).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+A basis of the centraliser algebra exhibits its structure as a direct sum. The first example writes it down in terms
+of Pauli matrices.
+
+::: {#exm-centraliser-generators}
+#### Its generators
+
+$T_a = \tfrac{i}{2}\sigma_a$ in the upper block ($a = 1, 2, 3$) and $\tau(Q_3)$ itself, the hypercharge: four
+anti-Hermitian traceless matrices commuting with $\tau$, the $\mathfrak{su}(2) \oplus \mathfrak{u}(1)$ of
+@exm-nonabelian-su2 with a $U(1)$ factor.
+:::
+
+The centraliser is defined for any embedding. The second example states the general fact and the dimension count it
+implies.
+
+::: {#exm-centraliser-general}
+#### In general
+
+$H$ is the subgroup of $G$ commuting with the image of $R$ [@manolakos2016, p. 3]; a larger $R$ gives a smaller
+$H$, and the dimension counting $\dim\mathfrak{g} = \dim\mathfrak{h} + \sum\dim(r_i, h_i)$ of @eq-csdr-rules is
+@prp-csdr-eigenspaces's $8 = 4 + 2 + 2$.
+:::
+
+For the smaller gauge group $SU(2)$ the centraliser is abelian. The third example gives it for all the embeddings
+$\tau_n$.
+
+::: {#exm-centraliser-kubyshin}
+#### $SU(2)$ with $\tau_n$
+
+For $G = SU(2)$ and $\tau_n(Q_3) = nQ_3$ the centraliser is the $U(1)$ generated by $Q_3$ itself, for every
+$n \neq 0$: a $U(1)$ gauge theory with, for $n = \pm1$, one charged scalar [@kubyshin2003, Sec. 4].
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise computes the centraliser as a real linear system on the Gell-Mann coordinates. It also checks that
+the four generators close into $\mathfrak{su}(2) \oplus \mathfrak{u}(1)$.
+
+::: {#exr-csd-centraliser-sage}
+#### The centraliser in Sage
+
+Write a general $X = \sum_k x_k\,i\lambda_k \in \mathfrak{su}(3)$, solve $[\tau, X] = 0$ for the real $x_k$, and check the
+brackets of the solutions.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The kernel is spanned by $i\lambda_1, i\lambda_2, i\lambda_3, i\lambda_8$; the first three close into $\mathfrak{su}(2)$ and the
+fourth commutes with them:
+
+{{< sage exr-csd-centraliser-sage >}}
+:::
+
+The second exercise identifies the global structure of the centraliser. As a group it is $U(2)$, which is locally, but not
+globally, a product.
+
+::: {#exr-csd-centraliser-u2}
+#### The group $S(U(2) \times U(1))$
+
+Show that $A \mapsto \operatorname{diag}(A, (\det A)^{-1})$ is an isomorphism $U(2) \to S(U(2) \times U(1))$, and that
+$SU(2) \times U(1) \to U(2)$, $(B, e^{i\alpha}) \mapsto e^{i\alpha}B$, is surjective with kernel $\mathbb{Z}_2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+An element of $S(U(2) \times U(1))$ is $\operatorname{diag}(A, u)$ with $A \in U(2)$, $|u| = 1$ and $u\det A = 1$, so $u$ is
+determined by $A$; the map is a bijective homomorphism. Every $A \in U(2)$ is $e^{i\alpha}B$ with $e^{2i\alpha} = \det A$ and
+$B = e^{-i\alpha}A \in SU(2)$, and $e^{i\alpha}B = 1$ forces $B = e^{-i\alpha}\mathbb{1}$ with $e^{-2i\alpha} = 1$, i.e.
+$(B, e^{i\alpha}) = \pm(\mathbb{1}, 1)$. So $H \cong U(2) \cong (SU(2) \times U(1))/\mathbb{Z}_2$, which has the same Lie algebra as
+$SU(2) \times U(1)$: the electroweak group of the Standard Model is also $U(2)$ in this sense.
+:::
+
+The third exercise surveys the possible centralisers of a diagonal embedding. The answer depends only on which entries
+of $\tau$ coincide.
+
+::: {#exr-csd-centraliser-types}
+#### Which centralisers occur
+
+For $\tau = i\operatorname{diag}(t_1, t_2, t_3) \neq 0$ with $\sum t_i = 0$, show that the centraliser is $U(1) \times U(1)$ if
+the $t_i$ are distinct and $S(U(2) \times U(1))$ if two of them coincide. Can all three coincide?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$[\tau, E_{ij}] = i(t_i - t_j)E_{ij}$, so the complexified kernel is spanned by the diagonal units and by those $E_{ij}$ with
+$t_i = t_j$. With distinct entries it is the diagonal algebra, whose real form is the maximal torus $U(1) \times U(1)$;
+with $t_1 = t_2 \neq t_3$ it adds $E_{12}, E_{21}$ and becomes the block-diagonal algebra of $S(U(2) \times U(1))$. All three
+equal and summing to zero means $\tau = 0$, the trivial embedding of @exr-csd-constraint-trivial, with centraliser all of
+$SU(3)$.
+:::
+::::
+
+### Worked computations
+
+The statements of this section are finite computations with $3 \times 3$ matrices, each reducing to finitely many
+entries. The
+first proposition records that $\tau$ is an element of $\mathfrak{su}(3)$ and the charges of the matrix units that carry
+the scalars.
+
+:::: {.statement-box}
+::: {#prp-csdr-embedding}
+#### The embedding
+
+$\tau(Q_3) = \tfrac{i}{3}\operatorname{diag}(1, 1, -2)$ is anti-Hermitian and traceless, and $[\tau, E_{13}] = iE_{13}$,
+$[\tau, E_{23}] = iE_{23}$, $[\tau, E_{31}] = -iE_{31}$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** `KaluzaKlein.CSDR.τ_mem_su3`, `KaluzaKlein.CSDR.ad_τ_E13`, `KaluzaKlein.CSDR.ad_τ_E23` and
+`KaluzaKlein.CSDR.ad_τ_E31`.
+
+**Sage.** Checked in `figures/csdr_embedding.sage`.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+Matrix units can be labelled with indices starting at $1$ or at $0$. The first example translates between the two
+conventions and gives the entrywise form of the bracket with $\tau$.
+
+::: {#exm-csd-embedding-indices}
+#### Matrix units and indices
+
+With indices in $\{0, 1, 2\}$ the matrix unit $E_{jk}$ of the text is $E_{j-1,k-1}$, so $E_{13}$, $E_{23}$ and $E_{31}$
+become $E_{02}$, $E_{12}$ and $E_{20}$. In either labelling $\tau = \operatorname{diag}(t_1, t_2, t_3)$ with $t_1 = t_2 = \tfrac{i}{3}$,
+$t_3 = -\tfrac{2i}{3}$, and the bracket $[\tau, X] = \tau X - X\tau$ has the entries $(t_j - t_k)X_{jk}$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** In `KaluzaKlein/CSDR/Embedding.lean` the matrix unit `E i j` has indices in `Fin 3 = {0, 1, 2}`, so `E 0 2` is
+$E_{13}$, `E 1 2` is $E_{23}$ and `E 2 0` is $E_{31}$; `τ` is `diagonal ![I/3, I/3, -2*I/3]`, and the bracket `⁅τ, X⁆`
+is the commutator $\tau X - X\tau$.
+
+**Sage.** Pending.
+:::
+
+The bracket with a diagonal matrix is a one-line computation. The second example carries it out for $E_{13}$ and for
+one unit of the kernel.
+
+::: {#exm-csd-embedding-by-hand}
+#### One bracket by hand
+
+$\tau E_{13} = \tfrac{i}{3}E_{13}$ (the first diagonal entry multiplies the first row) and $E_{13}\tau = -\tfrac{2i}{3}E_{13}$
+(the third diagonal entry multiplies the third column), so $[\tau, E_{13}] = (\tfrac{i}{3} + \tfrac{2i}{3})E_{13} = iE_{13}$.
+The same computation gives $[\tau, E_{12}] = (\tfrac{i}{3} - \tfrac{i}{3})E_{12} = 0$.
+:::
+
+The proposition fixes the normalisation of $\tau$ relative to the other generators. The third example compares its
+norm with that of $T_3$, a number that will set the Weinberg angle in the next chapter.
+
+::: {#exm-csd-embedding-norm}
+#### The norm of $\tau$
+
+$\operatorname{Tr}\tau^2 = -\tfrac19(1 + 1 + 4) = -\tfrac23$, while $T_3 = \tfrac{i}{2}\operatorname{diag}(1, -1, 0)$ has
+$\operatorname{Tr}T_3^2 = -\tfrac12$. So $\tau$ is $\tfrac{2}{\sqrt3}$ times the generator $\tfrac{i}{2}\lambda_8$ normalised like
+$T_3$, and the charge $1$ of the doublet under $\tau$ becomes $\tfrac{\sqrt3}{2}$ under the normalised generator.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise computes the whole matrix of $\operatorname{ad}\tau$ in the Gell-Mann basis. It confirms the eigenvalues
+and the normalisation of @exm-csd-embedding-norm.
+
+::: {#exr-csd-embedding-gellmann}
+#### $\operatorname{ad}\tau$ on the Gell-Mann basis
+
+Compute the $8 \times 8$ matrix of $\operatorname{ad}\tau$ in the basis $i\lambda_1, \dots, i\lambda_8$ of $\mathfrak{su}(3)$, its
+eigenvalues, and $\operatorname{Tr}\tau^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\operatorname{ad}\tau$ vanishes on $i\lambda_1, i\lambda_2, i\lambda_3, i\lambda_8$ and acts as a rotation on each of the planes
+$(i\lambda_4, i\lambda_5)$ and $(i\lambda_6, i\lambda_7)$; its eigenvalues are $0$ four times and $\pm i$ twice each:
+
+{{< sage exr-csd-embedding-gellmann >}}
+:::
+
+The second exercise derives the brackets that the proposition does not list. Hermitian conjugation does most of the
+work, and the rest follows from the charges of @exm-embedding-charges.
+
+::: {#exr-csd-embedding-e32}
+#### The remaining brackets
+
+From $[\tau, E_{23}] = iE_{23}$ and $\tau^\dagger = -\tau$ deduce $[\tau, E_{32}] = -iE_{32}$, and compute $[\tau, E_{12}]$,
+$[\tau, E_{21}]$ and $[\tau, E_{kk}]$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Taking the adjoint of $\tau E_{23} - E_{23}\tau = iE_{23}$ gives $E_{32}\tau^\dagger - \tau^\dagger E_{32} = -iE_{32}$, and with
+$\tau^\dagger = -\tau$ this is $\tau E_{32} - E_{32}\tau = -iE_{32}$. The units $E_{12}, E_{21}$ have charge $t_1 - t_2 = 0$ and
+the diagonal units commute with the diagonal $\tau$: all of them lie in the kernel, the algebra of $H$.
+:::
+
+The third exercise asks for an independent hand check of anti-Hermiticity and tracelessness. These two properties are
+what make $\tau$ a legitimate generator of $SU(3)$.
+
+::: {#exr-csd-embedding-su3}
+#### $\tau$ is in $\mathfrak{su}(3)$
+
+Check $\tau^\dagger = -\tau$ and $\operatorname{Tr}\tau = 0$, and show that every diagonal anti-Hermitian traceless matrix is
+a real combination of $iT_3$-type and $i\lambda_8$-type matrices. Which combination is $\tau$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\tau^\dagger = -\tfrac{i}{3}\operatorname{diag}(1, 1, -2) = -\tau$ because the entries are imaginary, and the trace is
+$\tfrac{i}{3}(1 + 1 - 2) = 0$. A diagonal anti-Hermitian traceless matrix is $i\operatorname{diag}(a, b, -a - b)$ with $a, b$
+real, which equals $i\tfrac{a - b}{2}\lambda_3 + i\tfrac{\sqrt3(a + b)}{2}\lambda_8$ (compare the entries: $\lambda_3 =
+\operatorname{diag}(1, -1, 0)$, $\lambda_8 = \operatorname{diag}(1, 1, -2)/\sqrt3$). For $\tau$, $a = b = \tfrac13$: the $\lambda_3$
+component vanishes and the $\lambda_8$ coefficient is $\tfrac{i}{\sqrt3}$, as in @eq-csdr-tau.
+:::
+::::
+
+The second proposition upgrades the charges of individual matrix units to a description of the full eigenspaces. It
+is the statement used to solve the constraints in the next chapter.
+
+:::: {.statement-box}
+::: {#prp-csdr-eigenspaces}
+#### Eigenspaces and centraliser
+
+For every $3 \times 3$ complex matrix $X$: $[\tau, X] = iX$ if and only if all entries of $X$ other than $X_{13}, X_{23}$
+vanish, and $[\tau, X] = 0$ if and only if $X_{13} = X_{23} = X_{31} = X_{32} = 0$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** `KaluzaKlein.CSDR.eigenspace_plus_i` and `KaluzaKlein.CSDR.centraliser`, with the dimension count
+`KaluzaKlein.CSDR.branching_dimensions`.
+
+{{< lean KaluzaKlein.CSDR.eigenspace_plus_i >}}
+
+{{< lean KaluzaKlein.CSDR.centraliser >}}
+
+**Sage.** Checked in @exr-csdr-eigenspaces and `figures/csdr_embedding.sage`.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The proposition is an "if and only if" for all matrices, not only for the matrix units. The first example shows how the
+entrywise form of the commutator gives both directions at once.
+
+::: {#exm-csd-eigen-entrywise}
+#### The entrywise form
+
+For a diagonal $\tau = i\operatorname{diag}(t_1, t_2, t_3)$, $([\tau, X])_{jk} = i(t_j - t_k)X_{jk}$. The equation $[\tau, X] = iX$
+is therefore the nine scalar equations $(t_j - t_k - 1)X_{jk} = 0$, and $X_{jk}$ is free exactly when $t_j - t_k = 1$, i.e.
+for $(j, k) = (1, 3), (2, 3)$; otherwise it must vanish.
+:::
+
+A sample matrix illustrates the decomposition. The second example splits a simple integer matrix into its three
+components and applies $\operatorname{ad}\tau$ to each.
+
+::: {#exm-csd-eigen-sample}
+#### A sample decomposition
+
+$X = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{pmatrix}$ splits as the block-diagonal part with entries $1, 2, 4, 5, 9$
+(in $\mathfrak{g}_0$), the column $3E_{13} + 6E_{23}$ (in $\mathfrak{g}_{+i}$) and the row $7E_{31} + 8E_{32}$ (in $\mathfrak{g}_{-i}$);
+$[\tau, X] = i(3E_{13} + 6E_{23}) - i(7E_{31} + 8E_{32})$.
+:::
+
+The dimension count is the simplest consequence. The third example states it in the form used by the
+rules of the previous section.
+
+::: {#exm-csd-eigen-count}
+#### The dimension count
+
+The kernel of $\operatorname{ad}\tau$ in $\mathfrak{su}(3)$ is four-dimensional, and the $\pm i$ eigenspaces contribute $2 + 2$
+real dimensions to $\mathfrak{su}(3)$ (one complex doublet): $4 + 2 + 2 = 8$, the content of @prp-csd-sphere-matching.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** `KaluzaKlein.CSDR.branching_dimensions`.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise decomposes a random matrix numerically exactly, using spectral projectors. It checks the
+proposition on an example that is not built from matrix units.
+
+::: {#exr-csd-eigen-generic-check}
+#### Spectral projectors
+
+With $P_\lambda = \prod_{\mu \neq \lambda}(\operatorname{ad}\tau - \mu)/(\lambda - \mu)$, $\lambda, \mu \in \{0, i, -i\}$, decompose a random
+integer matrix into eigencomponents in Sage and compare with the proposition.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Since $\operatorname{ad}\tau(\operatorname{ad}\tau - i)(\operatorname{ad}\tau + i) = 0$ on $\mathfrak{gl}(3, \mathbb{C})$, the projectors are
+well defined and sum to the identity; the components are exactly the block-diagonal part, the column and the row:
+
+{{< sage exr-csd-eigen-generic-check >}}
+:::
+
+The second exercise derives the $-i$ eigenspace from the $+i$ one. The argument is the same conjugation as in
+@exr-csd-embedding-e32, applied to a general matrix.
+
+::: {#exr-csd-eigen-minus}
+#### The $-i$ eigenspace
+
+Using the proposition and $\tau^\dagger = -\tau$, show that $[\tau, X] = -iX$ holds exactly for the $X$ supported on the
+entries $(3, 1), (3, 2)$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$[\tau, X] = -iX$ is equivalent, after taking adjoints, to $[X^\dagger, \tau^\dagger] = iX^\dagger$, i.e. $[\tau, X^\dagger] = iX^\dagger$.
+By the proposition $X^\dagger$ is supported on $(1, 3), (2, 3)$, so $X$ is supported on $(3, 1), (3, 2)$; the converse is the
+same computation backwards.
+:::
+
+The third exercise proves that $\operatorname{ad}\tau$ is diagonalisable. This justifies speaking of eigenspaces that add
+up to the whole algebra.
+
+::: {#exr-csd-eigen-projectors}
+#### $\operatorname{ad}\tau$ is diagonalisable
+
+Show that $\operatorname{ad}\tau$ satisfies $p(\operatorname{ad}\tau) = 0$ with $p(z) = z(z - i)(z + i)$, and conclude that
+$\mathfrak{gl}(3, \mathbb{C}) = \mathfrak{g}_0 \oplus \mathfrak{g}_{+i} \oplus \mathfrak{g}_{-i}$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+On the basis of matrix units $\operatorname{ad}\tau$ is diagonal with eigenvalues $i(t_j - t_k) \in \{0, i, -i\}$, so $p(\operatorname{ad}
+\tau)$ vanishes on each $E_{jk}$ and hence everywhere. A linear map annihilated by a polynomial with distinct roots is
+diagonalisable, and the space is the direct sum of its eigenspaces; the projectors are the Lagrange interpolation
+polynomials of @exr-csd-eigen-generic-check.
+:::
+::::
+
+## Exercises {#sec-01-symmetric-fields-exercises}
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+Three exercises that combine the two sections: a scan over all diagonal embeddings of $U(1)$ in $SU(3)$ with the rules
+applied to each, the general block embedding in $SU(n)$, and a complete table for the $SU(2)$ model of Kubyshin and
+collaborators.
+
+The running example used one particular embedding. The first integrative exercise asks which other diagonal embeddings
+leave scalars on the sphere, and what four-dimensional theory each produces.
+
+::: {#exr-csd-int-scan}
+#### All diagonal embeddings
+
+Scan $\tau = i\operatorname{diag}(t_1, t_2, t_3)$ with $t_i \in \tfrac16\mathbb{Z}$, $\sum t_i = 0$ and $|t_i - t_j| \leq 2$, up to
+permutations. For each embedding with scalars on $S^2$ give $\dim H$ and the charge $+1$ matrix units, and identify the
+models with a doublet.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+By @exr-csd-rules-general-count the scalars are the matrix units with $t_i - t_j = 1$, and by @exr-csd-centraliser-types
+$\dim H = 4$ exactly when two entries coincide. Six embeddings on the grid leave scalars. Only $\tfrac13(1, 1, -2)$ and its
+negative (up to order) $\tfrac13(2, -1, -1)$ have a non-abelian $H = U(2)$ and a doublet; the others, such as
+$\tfrac12(1, 0, -1)$ or $(1, 0, -1)$, have $H = U(1) \times U(1)$ and one or two charged singlets. The electroweak structure
+is special to the $\lambda_8$ direction:
+
+{{< sage exr-csd-int-scan >}}
+:::
+
+The block structure of the running example generalises to any $SU(n)$. The second integrative exercise works out the
+general case and checks the dimension count of the rules.
+
+::: {#exr-csd-int-sun}
+#### Block embeddings in $SU(n)$
+
+Let $G = SU(n)$ and $\tau = i\operatorname{diag}(a\mathbb{1}_k, (a - 1)\mathbb{1}_{n-k})$ with $a = (n - k)/n$. Show that $\tau$ is
+traceless, find $H$ and the surviving scalars, and check $n^2 - 1 = \dim H + 2 \cdot 2k(n - k)$ in real dimensions.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\operatorname{Tr}\tau = i(ka + (n - k)(a - 1)) = i(na - (n - k)) = 0$. The charges $t_i - t_j$ are $0$ within each block and
+$\pm1$ between the blocks, so $H = S(U(k) \times U(n - k))$, of dimension $k^2 + (n - k)^2 - 1$, and the scalar is the
+upper-right $k \times (n - k)$ block, a complex bifundamental $(\mathbf{k}, \overline{\mathbf{n - k}})$ with $2k(n - k)$ real
+components. The off-diagonal blocks together have $2k(n - k)$ complex entries, i.e. real dimension $2k(n - k)$ inside
+$\mathfrak{su}(n)$, and $k^2 + (n - k)^2 - 1 + 2k(n - k) = n^2 - 1$. For $n = 3$, $k = 2$ this is the running example
+($a = \tfrac13$); for $n = 4$, $k = 2$ it is @exr-csd-rules-su4.
+:::
+
+The $SU(2)$ model is small enough to be described completely. The third integrative exercise collects its features for
+the first few embeddings, including the monopole charge and the fate of fermions.
+
+::: {#exr-csd-int-su2-table}
+#### The $SU(2)$ model in a table
+
+For $G = SU(2)$ on $S^2$ and $\tau_n(Q_3) = nQ_3$, $n = 0, 1, 2, 3$, give $H$, the number of real scalars, and whether
+doublet fermions (charges $\pm\tfrac{n}{2}$ under $\tau_n$) can match the spinor charges $\pm\tfrac12$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$n = 0$: $H = SU(2)$, no scalar (@exr-csd-constraint-trivial), and doublet fermions have charge $0$, no match. $n = 1$:
+$H = U(1)$, one complex scalar, two real (@exm-rules-su2), and the doublet has charges $\pm\tfrac12$, which match: one
+four-dimensional fermion survives, the zero mode of the Dirac operator in the monopole background. $n = 2$: $H = U(1)$,
+no scalar, the adjoint has charges $0, \pm2$ (no match), the doublet $\pm1$ (no match): a pure monopole of charge $2$.
+$n = 3$: $H = U(1)$, no scalar, doublet charges $\pm\tfrac32$, no match. Only $n = 1$ gives a Higgs-type theory, the
+abelian Higgs model of @exr-csdr-su2-example, with potential $\tfrac12(|f|^2 - 1)^2$.
+:::
+::::

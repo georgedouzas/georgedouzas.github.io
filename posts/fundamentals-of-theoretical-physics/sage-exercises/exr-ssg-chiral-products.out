@@ -1,0 +1,3 @@
+[PASS] Phi1 Phi2 = phi1 phi2 + sqrt2 theta(phi1 psi2 + psi1 phi2) + theta theta (phi1 F2 + F1 phi2 - psi1 psi2): True
+[PASS] one field: [W(Phi)]_{theta theta} = W' F - 1/2 W'' psi psi (and the theta component is sqrt2 W' psi): True
+[PASS] two fields: [W(Phi)]_{theta theta} = W^i F_i - 1/2 W^{ij} psi_i psi_j: True

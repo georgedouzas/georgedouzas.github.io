@@ -1,0 +1,6 @@
+(1/2, 1/2): dimension 4 -> diagonal su(2): A1(0) + A1(2)  (A1(n) is spin n/2)
+(1, 0): dimension 3 -> diagonal su(2): A1(2)  (A1(n) is spin n/2)
+(0, 1): dimension 3 -> diagonal su(2): A1(2)  (A1(n) is spin n/2)
+(1, 1/2): dimension 6 -> diagonal su(2): A1(1) + A1(3)  (A1(n) is spin n/2)
+(1, 1): dimension 9 -> diagonal su(2): A1(0) + A1(2) + A1(4)  (A1(n) is spin n/2)
+vector of so(4) branched to so(3): B1(0) + B1(2) (coroot labels: B1(2) is the vector of so(3), dimension 3 )

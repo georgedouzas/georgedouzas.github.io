@@ -1,0 +1,9 @@
+[a, a^dagger] =
+[ 1  0  0  0  0]
+[ 0  1  0  0  0]
+[ 0  0  1  0  0]
+[ 0  0  0  1  0]
+[ 0  0  0  0 -4]
+trace: 0
+tr[A, B] for symbolic 3 x 3 matrices: 0
+x, p Hermitian: True True ; [x, p] = i [a, a^dagger]: True

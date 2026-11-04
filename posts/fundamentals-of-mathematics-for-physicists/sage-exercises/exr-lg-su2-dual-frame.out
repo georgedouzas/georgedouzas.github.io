@@ -1,0 +1,7 @@
+xi1 = cos(ps) ∂/∂th + sin(ps)/sin(th) ∂/∂ph - cos(th)*sin(ps)/sin(th) ∂/∂ps
+xi2 = -sin(ps) ∂/∂th + cos(ps)/sin(th) ∂/∂ph - cos(ps)*cos(th)/sin(th) ∂/∂ps
+xi3 = ∂/∂ps
+sigma^a(xi_b) = delta: True
+[xi1, xi2] = xi3: True
+[xi2, xi3] = xi1: True
+[xi3, xi1] = xi2: True

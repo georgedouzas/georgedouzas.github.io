@@ -1,0 +1,4 @@
+curl A1 = (0, 0, B(t)) ; curl A2 = (0, 0, B(t))
+E1 = (1/2*y*diff(B(t), t), -1/2*x*diff(B(t), t), 0) ; E2 = (0, -x*diff(B(t), t), 0)
+E2 - E1 + (dB/dt/2) grad(x y) = (0, 0, 0)
+with phi2 = -dB/dt x y/2: E2 - grad(phi2) - E1 = (0, 0, 0)

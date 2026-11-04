@@ -1,0 +1,5 @@
+J = [(2*x, -2*y), (2*y, 2*x)] ; det J = 4*x^2 + 4*y^2
+F(1, 1) = (0, 2) = F(-1, -1) = (0, 2) : not injective, each value is taken twice
+Jacobian of the local inverse at (1, 1): [ 1/4  1/4]
+[-1/4  1/4] ; product with J: True
+check: F(x(u, v), y(u, v)) for the branch x = sqrt((sqrt(u^2+v^2) + u)/2), y = v/(2x) at (u, v) = (0, 2): (0, 2)

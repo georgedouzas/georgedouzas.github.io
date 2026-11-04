@@ -1,0 +1,5 @@
+K 1 = 1/2*x , K^2 1 = 1/6*x , K^3 1 = 1/18*x
+partial sum (39 terms) at lam = 1, x = 1: 1.750000000000; closed form: 1.750000000000
+solving u - lam K u = 1 with u = 1 + c x: [
+c == -3/2*lam/(lam - 3)
+]

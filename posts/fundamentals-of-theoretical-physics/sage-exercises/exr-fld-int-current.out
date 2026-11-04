@@ -1,0 +1,5 @@
+positive frequency: j^mu = (2*sqrt(k1^2 + m^2)*a^2, 2*a^2*k1, 0, 0)  = 2 a^2 k^mu with k^mu = (omega, k1, 0, 0)
+j_mu j^mu = 4*a^4*m^2
+negative frequency: j^mu = (-2*sqrt(k1^2 + m^2)*a^2, -2*a^2*k1, 0, 0)
+superposition: j^0 = 2*(a^2 - b^2)*sqrt(k1^2 + m^2)
+conserved, d_mu j^mu = 0

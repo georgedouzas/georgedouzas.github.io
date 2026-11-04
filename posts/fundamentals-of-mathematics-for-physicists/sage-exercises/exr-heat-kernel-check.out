@@ -1,0 +1,6 @@
+K_t - kappa K_xx = 0: True
+integral of K: 1
+integral of x^2 K: 2*kap*t
+convolution with e^(-y^2): e^(-x^2/(4*kap*t + 1))/sqrt(4*kap*t + 1)
+its variance: 2*kap*t + 1/2 = 1/2 + 2 kappa t: True
+the convolution solves the heat equation: True

@@ -1,0 +1,6 @@
+j = 0: chi_j = sin((j+1/2) theta)/sin(theta/2): True;  chi_j(2 pi) = 1 = (-1)^(2j)(2j+1): True
+j = 1/2: chi_j = sin((j+1/2) theta)/sin(theta/2): True;  chi_j(2 pi) = -2 = (-1)^(2j)(2j+1): True
+j = 1: chi_j = sin((j+1/2) theta)/sin(theta/2): True;  chi_j(2 pi) = 3 = (-1)^(2j)(2j+1): True
+j = 3/2: chi_j = sin((j+1/2) theta)/sin(theta/2): True;  chi_j(2 pi) = -4 = (-1)^(2j)(2j+1): True
+j = 2: chi_j = sin((j+1/2) theta)/sin(theta/2): True;  chi_j(2 pi) = 5 = (-1)^(2j)(2j+1): True
+j = 5/2: chi_j = sin((j+1/2) theta)/sin(theta/2): True;  chi_j(2 pi) = -6 = (-1)^(2j)(2j+1): True

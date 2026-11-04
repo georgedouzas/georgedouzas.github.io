@@ -1,0 +1,4 @@
+S = diag(exp(-w n.sigma/2), exp(w n.sigma/2)): True
+Sl^2 = p.sigma and Sr^2 = p.sigma-bar: True True
+xi = (1, 0) : S u(0) = [11/20*sqrt(2), -3/20*sqrt(2), 19/20*sqrt(2), 3/20*sqrt(2)] ; (pslash - 1) S u(0) = 0: True
+xi = (0, 1) : S u(0) = [-3/20*sqrt(2), 19/20*sqrt(2), 3/20*sqrt(2), 11/20*sqrt(2)] ; (pslash - 1) S u(0) = 0: True

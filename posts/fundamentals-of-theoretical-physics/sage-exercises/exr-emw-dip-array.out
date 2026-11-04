@@ -1,0 +1,2 @@
+d = lambda/2 : factor cos(1/2*pi*cos(phi))^2 ; values at phi = 0, pi/3, pi/2: [0, 1/2, 1]
+d = lambda : factor cos(pi*cos(phi))^2 ; values at phi = 0, pi/3, pi/2: [1, 0, 1]

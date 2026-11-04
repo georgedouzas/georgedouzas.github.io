@@ -1,0 +1,3 @@
+s^{-1} ds = theta^1 Q_1 + theta^2 Q_2 + theta^3 Q_3 with theta = [-dph*sin(th), dth, dph*cos(th)]
+[PASS] theta^1 = -sin(th) dph, theta^2 = dth (the frame), theta^3 = cos(th) dph (the R-connection): True
+[PASS] the frame gives the round metric (theta^1)^2 + (theta^2)^2 = dth^2 + sin(th)^2 dph^2: True

@@ -1,0 +1,5 @@
+(Box_5 Phi) e^{-i n y/R} = (n^2*phin(t, xx) + R^2*diff(phin(t, xx), t, t) - R^2*diff(phin(t, xx), xx, xx))/R^2
+[PASS] the mode obeys the 4D Klein-Gordon equation (Box_4 + (n/R)^2) phi_n = 0 with mass squared (n/R)^2: True
+[PASS] orthogonality: int_0^{2 pi R} e^{i(n-m)y/R} dy = 2 pi R delta_{nm} (n = m case and n != m case): True
+masses |n|/R for n = -2..2 and R = 1: [2, 1, 0, 1, 2]
+[PASS] periodicity e^{i n 2 pi} = 1 holds for integer n and fails for n = 1/2: True

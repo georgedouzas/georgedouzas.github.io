@@ -1,0 +1,7 @@
+line element in parabolic coordinates: h = (u^2 + v^2) du⊗du + (u^2 + v^2) dv⊗dv
+components:
+[u^2 + v^2         0]
+[        0 u^2 + v^2]
+conformal to the flat chart metric with factor u^2 + v^2: True
+determinant: (u^2 + v^2)^2
+inverse metric: inv_h = 1/(u^2 + v^2) ∂/∂u⊗∂/∂u + 1/(u^2 + v^2) ∂/∂v⊗∂/∂v

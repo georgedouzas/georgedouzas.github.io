@@ -1,0 +1,5 @@
+gamma_* diagonal: True ; dims of S_+ and S_-: 4 4
+Sigma^{ab} preserve S_+: True
+restrictions anti-Hermitian and traceless: True
+real dimension of their span: 15 (dim su(4) = 15)
+spectrum on S_- is minus the spectrum on S_+ for every generator: True

@@ -1,0 +1,17 @@
+two coins:
+   A & B : P(intersection) = 1/4 , product = 1/4 , independent: True
+   A & C : P(intersection) = 1/4 , product = 1/4 , independent: True
+   B & C : P(intersection) = 1/4 , product = 1/4 , independent: True
+   A & B & C : P(intersection) = 1/4 , product = 1/8 , independent: False
+three coins:
+   A1 & A2 : P(intersection) = 1/4 , product = 1/4 , independent: True
+   A1 & A3 : P(intersection) = 1/4 , product = 1/4 , independent: True
+   A1 & D : P(intersection) = 1/4 , product = 1/4 , independent: True
+   A2 & A3 : P(intersection) = 1/4 , product = 1/4 , independent: True
+   A2 & D : P(intersection) = 1/4 , product = 1/4 , independent: True
+   A3 & D : P(intersection) = 1/4 , product = 1/4 , independent: True
+   A1 & A2 & A3 : P(intersection) = 1/8 , product = 1/8 , independent: True
+   A1 & A2 & D : P(intersection) = 1/8 , product = 1/8 , independent: True
+   A1 & A3 & D : P(intersection) = 1/8 , product = 1/8 , independent: True
+   A2 & A3 & D : P(intersection) = 1/8 , product = 1/8 , independent: True
+   A1 & A2 & A3 & D : P(intersection) = 0 , product = 1/16 , independent: False

@@ -1,0 +1,5 @@
+n(theta, phi, psi) = [sin(ph)*sin(th), -cos(ph)*sin(th), cos(th)]
+n does not depend on psi (the fibre is the coset g U(1)): True
+|n|^2 = 1, a point of the sphere: True
+n = (sin th sin ph, -sin th cos ph, cos th), the point exp(phi L_3) exp(theta L_1) o of exr-transitive-so3: True
+dim SU(2) - dim U(1) = 3 - 1 = 2 = dim S^2

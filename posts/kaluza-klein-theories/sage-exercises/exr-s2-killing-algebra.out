@@ -1,0 +1,9 @@
+[K_1, K_2] = (0, -1)  and -K_3 = (0, -1)
+[PASS] [K_a, K_b] = -eps_abc K_c: True
+K_a . K_b =
+[cos(ph)^2*cos(th)^2 + sin(ph)^2      -cos(ph)*sin(ph)*sin(th)^2        -cos(ph)*cos(th)*sin(th)]
+[     -cos(ph)*sin(ph)*sin(th)^2 cos(th)^2*sin(ph)^2 + cos(ph)^2        -cos(th)*sin(ph)*sin(th)]
+[       -cos(ph)*cos(th)*sin(th)        -cos(th)*sin(ph)*sin(th)                       sin(th)^2]
+[PASS] K_a . K_b = delta_ab - n_a n_b: True
+[PASS] the Killing vectors are tangent to the sphere and the matrix K_a . K_b has rank 2 (one combination, n^a K_a, vanishes at each point): True
+sage sage/exercises/$e.sage  4.14s user 0.50s system 63% cpu 7.298 total

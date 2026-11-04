@@ -1,0 +1,11 @@
+V at the vacuum (0, 0, a): 0
+gradient at the vacuum: (0, 0, 0)
+mass matrix (Hessian) at the vacuum:
+[        0         0         0]
+[        0         0         0]
+[        0         0 2*a^2*lam]
+eigenvalues: [2*a^2*lam, 0, 0]
+[PASS] two zero modes (Goldstone bosons) and one massive mode with m^2 = 2 lam a^2: True
+L_a phi_0 for a = 1, 2, 3: (0, -a, 0) (a, 0, 0) (0, 0, 0)
+[PASS] only L_3 (rotation about the vacuum axis) fixes the vacuum, so H = SO(2) and there are 3 - 1 = 2 broken generators: True
+[PASS] the zero modes of the mass matrix are the broken directions L_1 phi_0, L_2 phi_0: True

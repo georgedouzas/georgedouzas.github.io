@@ -1,0 +1,5 @@
+Clifford relations in 1+1 dimensions, {gamma^mu, gamma^nu} = 2 eta^{mu nu} with eta = diag(1, -1): True
+varying psi-bar_1 and psi-bar_2 gives the two components of (i gamma^mu d_mu - m) psi = 0:
+   -m*p1(t, x) + I*diff(p2(t, x), t) + I*diff(p2(t, x), x) = 0
+   -m*p2(t, x) + I*diff(p1(t, x), t) - I*diff(p1(t, x), x) = 0
+(i gamma d + m)(i gamma d - m) psi = -(Box + m^2) psi componentwise, Box = d_t^2 - d_x^2: True

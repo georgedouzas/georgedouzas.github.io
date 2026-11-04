@@ -1,0 +1,6 @@
+poles: b^3*lam^4/eps^3 + b^2*lam^3/eps^2 + b*lam^2/eps + lam
+beta = b*lam^2 - eps*lam
+solves the flow: True   initial value: lam1
+eps -> 0 limit: -lam1/(b*lam1*t - 1)
+eps = 0.03, lambda_1 = 2: lambda* = 1.579, lambda(t = -200) = 1.580
+eps = 0.06, lambda_1 = 2: lambda* = 3.158, lambda(t = -200) = 3.158

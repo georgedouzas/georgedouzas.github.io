@@ -1,0 +1,7 @@
+lambda_1 + i lambda_2: charges (ad lambda_3, ad lambda_8) = (2, 0)
+lambda_1 - i lambda_2: charges (ad lambda_3, ad lambda_8) = (-2, 0)
+lambda_4 + i lambda_5: charges (ad lambda_3, ad lambda_8) = (1, sqrt(3))
+lambda_4 - i lambda_5: charges (ad lambda_3, ad lambda_8) = (-1, -sqrt(3))
+lambda_6 + i lambda_7: charges (ad lambda_3, ad lambda_8) = (-1, sqrt(3))
+lambda_6 - i lambda_7: charges (ad lambda_3, ad lambda_8) = (1, -sqrt(3))
+[lambda_1, lambda_4] = i lambda_7: True

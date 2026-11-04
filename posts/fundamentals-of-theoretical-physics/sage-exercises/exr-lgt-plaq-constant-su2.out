@@ -1,0 +1,4 @@
+order a^2 of log U_P equals c1 c2 T3: True
+order a^3 equals ([X,[X,Y]] + [Y,[X,Y]])/2: True
+order a^3 term: [                           0  1/4*c1^2*c2 - 1/4*I*c1*c2^2]
+[-1/4*c1^2*c2 - 1/4*I*c1*c2^2                            0]

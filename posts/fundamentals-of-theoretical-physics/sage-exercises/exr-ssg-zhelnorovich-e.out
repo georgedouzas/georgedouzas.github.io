@@ -1,0 +1,6 @@
+2nu =  2: gamma^T = -E gamma E^-1: True; E is antisymmetric; symmetry rule (1.55) for k = 0..2: True
+2nu =  4: gamma^T = -E gamma E^-1: True; E is antisymmetric; symmetry rule (1.55) for k = 0..4: True
+2nu =  6: gamma^T = -E gamma E^-1: True; E is symmetric; symmetry rule (1.55) for k = 0..6: True
+2nu =  8: gamma^T = -E gamma E^-1: True; E is symmetric; symmetry rule (1.55) for k = 0..8: True
+2nu = 10: gamma^T = -E gamma E^-1: True; E is antisymmetric; symmetry rule (1.55) for k = 0..10: True
+[PASS] E exists, E^T = (-1)^{nu(nu+1)/2} E and (E gamma_{i1..ik})^T = (-1)^{[nu(nu+1)+k(k+1)]/2} E gamma_{i1..ik} for 2nu = 2, ..., 10: True

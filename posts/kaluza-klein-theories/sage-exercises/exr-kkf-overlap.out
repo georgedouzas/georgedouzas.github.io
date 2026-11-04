@@ -1,0 +1,5 @@
+overlap = 2*pi*M*R*e^(pi*M*R)/(e^(2*pi*M*R) - 1)
+closed form 2 M pi R exp(-pi M R)/(1 - exp(-2 pi M R)): True
+  M R =  1: overlap 2.720e-01, ratio to 2 pi M R exp(-pi M R) = 1.001871
+  M R =  5: overlap 4.734e-06, ratio to 2 pi M R exp(-pi M R) = 1.000000
+  M R = 10: overlap 1.427e-12, ratio to 2 pi M R exp(-pi M R) = 1.000000

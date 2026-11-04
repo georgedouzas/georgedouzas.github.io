@@ -1,0 +1,4 @@
+Clifford relations {gamma^mu, gamma^nu} = 2 eta^{mu nu} with eta = diag(1, -1, -1, -1): True
+gamma_5 = i gamma^0 gamma^1 gamma^2 gamma^3 = [-1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] ; gamma_5^2 = 1: True ; anticommutes with all gamma^mu: True
+the generators S^{mu nu} = [gamma^mu, gamma^nu]/4 satisfy the so(3,1) algebra: True
+S^{12} = -(i/2) diag(sigma_3, sigma_3): True ; a rotation by 2 pi about z gives exp(2 pi S^{12}) = -1: True

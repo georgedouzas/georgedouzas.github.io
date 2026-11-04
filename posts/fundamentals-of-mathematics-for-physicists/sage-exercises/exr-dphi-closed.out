@@ -1,0 +1,4 @@
+omega = omega = dph
+d(omega) = domega = 0  (a one-form on a 1-manifold is always closed)
+integral of dphi over (0, 2*pi): 2*pi
+locally omega = d(phi): True ; but phi is not a function on the whole circle: it jumps by 6.2832 at the point the chart misses

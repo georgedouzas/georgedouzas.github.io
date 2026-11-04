@@ -1,0 +1,4 @@
+simplified: 1/(z^2 - 1)
+poles after cancellation: [-1, 1]
+cos z = 0 solutions: [z == 1/2*pi]
+|cos(x + i y)|^2 = cos^2 x + sinh^2 y: True  so zeros need sinh y = 0 and cos x = 0

@@ -1,0 +1,4 @@
+site link, order a^0 equals D phi: True
+site link, order a^1 minus (1/2) D D phi: -1/2*I*q*phi(x)*diff(A(x), x)
+midpoint link, order a^0 equals D phi: True
+midpoint link, order a^1 minus (1/2) D D phi: 0

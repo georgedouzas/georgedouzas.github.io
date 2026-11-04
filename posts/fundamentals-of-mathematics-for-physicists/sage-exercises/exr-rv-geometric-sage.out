@@ -1,0 +1,4 @@
+total probability: 1
+mean: 1/p ; variance: -(p - 1)/p^2
+characteristic function: p*e^(I*t)/((p - 1)*e^(I*t) + 1) ; equals p e^{it}/(1 - (1-p) e^{it}): True
+at p = 1/2: mean 2 , variance 2 , E K^2 = 6

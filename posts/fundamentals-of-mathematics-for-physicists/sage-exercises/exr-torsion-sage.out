@@ -1,0 +1,6 @@
+coefficients: Gam^x_yx = 1 
+torsion: ∂/∂x⊗dx⊗dy - ∂/∂x⊗dy⊗dx
+T^x_xy = 1 and T^x_yx = -1: True
+Riemann tensor vanishes (flat): True
+symmetric part Gamma^x_xy = Gamma^x_yx = 1/2: True ; its torsion vanishes: True
+but the symmetric part is curved: R^x_yxy = -1/4

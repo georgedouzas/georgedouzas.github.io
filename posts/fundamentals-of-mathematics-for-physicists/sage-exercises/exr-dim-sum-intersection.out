@@ -1,0 +1,2 @@
+dim U = 2 , dim W = 2 , dim(U cap W) = 1 , dim(U + W) = 3
+U cap W is the line spanned by (1, 2, 0) ; dim(U + W) = dim U + dim W - dim(U cap W): True

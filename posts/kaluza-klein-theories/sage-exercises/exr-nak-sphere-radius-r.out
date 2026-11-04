@@ -1,0 +1,5 @@
+[PASS] the K_a are Killing for every radius: True
+[PASS] K_a . K_b = r^2 (delta_ab - n_a n_b): True
+[PASS] the block inverse inverts ghat on the sphere of radius r: True
+[PASS] det ghat = det g r^4 sin^2 th: True
+[PASS] L_xi ghat_{mu m} = h_{mn} K^n_c (d eps^c + eps_abc A^a eps^b) for every radius: True

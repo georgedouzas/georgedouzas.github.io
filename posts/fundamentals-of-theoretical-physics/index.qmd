@@ -1,0 +1,33 @@
+---
+title: "Fundamentals of Theoretical Physics"
+description: "Classical mechanics, electromagnetism, quantum theory, relativity and supersymmetry"
+date: 2026-11-04
+categories: [Tutorial, Physics]
+image: "../../assets/tutorials/physics.svg"
+order: 3
+---
+
+This tutorial covers the core of theoretical physics. It goes from classical mechanics, electromagnetism and statistical mechanics
+to quantum mechanics, field theory, gauge theories and renormalisation, and then to special and general relativity, supersymmetry
+and supergravity.
+
+Each chapter sets out definitions and results, works through examples, and gives exercises to try. It uses the mathematics from
+[Fundamentals of Mathematics for Physicists](../fundamentals-of-mathematics-for-physicists/index.qmd), and links back to it where a
+result is needed. It also leads into [Kaluza-Klein Theories](../kaluza-klein-theories/index.qmd).
+
+## Chapters
+
+- [Classical mechanics](part-ii-01-classical-mechanics.qmd)
+- [Classical electromagnetism](part-ii-01b-electromagnetism.qmd)
+- [Thermodynamics and statistical mechanics](part-ii-02-thermodynamics-statistical-mechanics.qmd)
+- [Quantum mechanics](part-ii-03-quantum-mechanics.qmd)
+- [Classical field theory](part-ii-04-classical-field-theory.qmd)
+- [The Dirac equation](part-ii-05-dirac-equation.qmd)
+- [Quantum field theory](part-ii-07-quantum-field-theory.qmd)
+- [Gauge theories](part-ii-06-gauge-theories.qmd)
+- [Renormalisation](part-ii-08-renormalisation.qmd)
+- [Special relativity](part-ii-08b-special-relativity.qmd)
+- [General relativity](part-ii-09-general-relativity.qmd)
+- [Supersymmetry and supergravity](part-ii-10-supersymmetry-supergravity.qmd)
+
+This tutorial has its own [glossary](glossary.qmd) and [verification registry](registry.qmd). Works cited are listed at the end of each chapter.

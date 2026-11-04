@@ -1,0 +1,4 @@
+Q = 1/2*q^2 ; P = p/q ; {Q, P} = 1
+K(Q, P) = Pn^2*Qn
+Hamilton's equations Q' = dK/dP, P' = -dK/dQ hold: True
+q(t) = sqrt(2 Q(t)) with Q0 = q0^2/2, P0 = p0/q0: p0*t + q0

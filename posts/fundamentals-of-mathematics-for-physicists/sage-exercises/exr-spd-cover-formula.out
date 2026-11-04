@@ -1,0 +1,8 @@
+S1, S2 in SU(2): True
+Lambda(S1 S2) = Lambda(S1) Lambda(S2): True
+Lambda(-S1) = Lambda(S1): True ; Lambda in SO(3): True 1.0
+Lambda(exp(-i phi sigma_1 / 2)) for phi = 0.7:
+[[ 1.        0.        0.      ]
+ [ 0.        0.764842 -0.644218]
+ [ 0.        0.644218  0.764842]]
+cos(0.7), sin(0.7) = 0.764842 0.644218

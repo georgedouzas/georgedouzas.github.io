@@ -1,0 +1,11 @@
+# Exercise exr-qm-galilean-boost: a Galilean boost of a free solution is a free solution.
+x, t, v = var("x t v", domain="real"); hbar, m, s = var("hbar m s", domain="positive")
+psi = function("psi")
+phase = exp(I * (m * v * x - m * v ** 2 * t / 2) / hbar)
+boost = phase * psi(x - v * t, t)
+res = ((I * hbar * diff(boost, t) + hbar ** 2 / (2 * m) * diff(boost, x, 2)) / phase).simplify_full()
+print("(i hbar d/dt + hbar^2/(2m) d^2/dx^2) psi_v / phase =", res)
+print("this is i hbar psi_t + (hbar^2/2m) psi_xx at (x - v t, t): zero whenever psi solves the free equation")
+packet = lambda p0: (2 * pi * s ** 2) ** (-1 / 4) / sqrt(1 + I * hbar * t / (2 * m * s ** 2)) * exp(-(x - p0 * t / m) ** 2 / (4 * s ** 2 * (1 + I * hbar * t / (2 * m * s ** 2))) + I * p0 * x / hbar - I * p0 ** 2 * t / (2 * m * hbar))
+boosted = phase * packet(0).subs(x=x - v * t)
+print("boost of the p0 = 0 packet equals the p0 = m v packet:", bool((boosted / packet(m * v)).simplify_full() == 1))

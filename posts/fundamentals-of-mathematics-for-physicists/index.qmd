@@ -1,0 +1,33 @@
+---
+title: "Fundamentals of Mathematics for Physicists"
+description: "The mathematics of theoretical physics, from sets and topology to spinors"
+date: 2026-11-04
+categories: [Tutorial, Mathematics]
+image: "../../assets/tutorials/mathematics.svg"
+order: 2
+---
+
+This tutorial covers the mathematics that theoretical physics relies on. It starts with sets and topology, moves through analysis,
+differential equations and probability, and ends with differential geometry, Lie groups, fibre bundles and spinors.
+
+Each chapter sets out definitions and results, works through examples, and gives exercises to try. It's the first of three connected
+tutorials. [Fundamentals of Theoretical Physics](../fundamentals-of-theoretical-physics/index.qmd) builds on it, and both lead to
+[Kaluza-Klein Theories](../kaluza-klein-theories/index.qmd).
+
+## Chapters
+
+- [Sets, relations and topology](part-i-01-sets-relations-topology.qmd)
+- [Linear algebra](part-i-02-linear-algebra.qmd)
+- [Real analysis](part-i-03-real-analysis.qmd)
+- [Complex analysis](part-i-04-complex-analysis.qmd)
+- [Differential equations](part-i-05-differential-equations.qmd)
+- [Fourier analysis](part-i-06-fourier-analysis.qmd)
+- [Functional analysis](part-i-07-hilbert-spaces-operators.qmd)
+- [Probability and statistics](part-i-08-probability.qmd)
+- [Differential geometry](part-i-09-differential-geometry.qmd)
+- [Group theory](part-i-10-group-theory.qmd)
+- [Lie groups and Lie algebras](part-i-11-lie-groups-algebras.qmd)
+- [Homogeneous spaces and fibre bundles](part-i-12-homogeneous-spaces-bundles.qmd)
+- [Spinors and the Dirac operator](part-i-13-spinors-dirac-operator.qmd)
+
+This tutorial has its own [glossary](glossary.qmd) and [verification registry](registry.qmd). Works cited are listed at the end of each chapter.

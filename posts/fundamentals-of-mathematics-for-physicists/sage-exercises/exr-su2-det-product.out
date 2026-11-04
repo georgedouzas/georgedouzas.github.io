@@ -1,0 +1,5 @@
+g g' has the SU(2) form with a'' = a a' - conj(b) b', b'' = b a' + conj(a) b': True
+det g = |a|^2 + |b|^2: True
+four-square identity |a''|^2 + |b''|^2 = (|a|^2 + |b|^2)(|a'|^2 + |b'|^2): True
+example: det g = 15, det g' = 7 and det(g g') = 15 7 105
+so matrices of this form with det 1 are closed under products: SU(2) is a group, and (a, b) -> g is the quaternion multiplication

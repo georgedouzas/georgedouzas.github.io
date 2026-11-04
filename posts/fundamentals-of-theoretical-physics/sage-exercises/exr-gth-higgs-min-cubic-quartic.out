@@ -1,0 +1,4 @@
+coefficients of sigma^0..sigma^4: [0, 0, 1/2*lam*mu^2, 1/4*sqrt(2)*lam*mu, 1/16*lam]
+[PASS] m_sigma^2 = lam mu^2: True
+[PASS] cubic coupling = m^2/(2 sqrt2 mu), quartic = m^2/(16 mu^2): True
+[PASS] the real-displacement form V(mu + h) = lam mu^2 h^2 + lam mu h^3 + lam h^4/4 is the same polynomial with h = sigma/sqrt2: True

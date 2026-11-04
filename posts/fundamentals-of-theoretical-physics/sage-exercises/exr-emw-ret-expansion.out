@@ -1,0 +1,2 @@
+zeroth order: 1/4*q/(pi*sqrt(d^2*cos(t*w)^2 + X0^2)) ; first order (charge conservation): 0
+second order term, leading in d: 1/8*(2*d^2*q*w^2*sin(t*w)^2 - d^2*q*w^2)/(pi*X0)

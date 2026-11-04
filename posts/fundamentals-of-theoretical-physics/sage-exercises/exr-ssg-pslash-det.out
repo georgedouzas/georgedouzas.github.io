@@ -1,0 +1,8 @@
+p.sigma =
+[  p0 + p3 p1 - I*p2]
+[p1 + I*p2   p0 - p3]
+[PASS] det(p.sigma) = det(p.sigmabar) = p_mu p^mu: True
+[PASS] (p.sigma)(p.sigmabar) = (p.sigmabar)(p.sigma) = p^2 times the identity: True
+[PASS] tr((p.sigma) sigmabar^nu) = 2 p^nu = 2 eta^{nu nu} p_nu for every nu: True
+for p^mu = (E, 0, 0, E): p.sigma = [0, 0, 0, 2*E]  rank 1
+[PASS] a null momentum gives a rank-one p.sigma = diag(0, 2E): True

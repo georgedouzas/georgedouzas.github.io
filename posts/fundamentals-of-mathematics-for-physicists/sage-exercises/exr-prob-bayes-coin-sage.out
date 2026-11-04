@@ -1,0 +1,11 @@
+k = 0 : posterior = 1/1000 = 0.001000
+k = 1 : posterior = 2/1001 = 0.001998
+k = 5 : posterior = 32/1031 = 0.03104
+k = 8 : posterior = 256/1255 = 0.2040
+k = 10 : posterior = 1024/2023 = 0.5062
+k = 12 : posterior = 4096/5095 = 0.8039
+k = 15 : posterior = 32768/33767 = 0.9704
+k = 17 : posterior = 131072/132071 = 0.9924
+k = 20 : posterior = 1048576/1049575 = 0.9990
+smallest k with posterior above 0.99: 17 ; log_2(999 * 99) = 16.59
+posterior odds at k = 17: 2^17/999 = 131072/999 > 99: True

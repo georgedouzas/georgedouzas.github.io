@@ -1,0 +1,3 @@
+rectangle: dx first then dy: 2/3 ; dy first then dx: 2/3 ; equal: True
+triangle 0 <= y <= x <= 1: inner dy from 0 to x: 1/2*e^2 - e + 1/2 ; inner dx from y to 1: 1/2*e^2 - e + 1/2 ; equal: True
+the triangle's area as a double integral: 1/2

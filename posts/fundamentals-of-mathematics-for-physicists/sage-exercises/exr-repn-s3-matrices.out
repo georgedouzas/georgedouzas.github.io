@@ -1,0 +1,9 @@
+P(g h) = P(g) P(h) for all 36 pairs: True
+P(e) = 1: True
+  g = ()       det P(g) =  1  trace P(g) = 3  P(g) rows [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+  g = (1,3,2)  det P(g) =  1  trace P(g) = 0  P(g) rows [[0, 1, 0], [0, 0, 1], [1, 0, 0]]
+  g = (1,2,3)  det P(g) =  1  trace P(g) = 0  P(g) rows [[0, 0, 1], [1, 0, 0], [0, 1, 0]]
+  g = (2,3)    det P(g) = -1  trace P(g) = 1  P(g) rows [[1, 0, 0], [0, 0, 1], [0, 1, 0]]
+  g = (1,3)    det P(g) = -1  trace P(g) = 1  P(g) rows [[0, 0, 1], [0, 1, 0], [1, 0, 0]]
+  g = (1,2)    det P(g) = -1  trace P(g) = 1  P(g) rows [[0, 1, 0], [1, 0, 0], [0, 0, 1]]
+the transposed convention e_i -> e_{g^-1(i)} is also a representation: True

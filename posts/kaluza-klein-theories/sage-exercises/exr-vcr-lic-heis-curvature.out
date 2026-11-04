@@ -1,0 +1,9 @@
+metric:
+[          1           0           0]
+[          0           1         m*y]
+[          0         m*y m^2*y^2 + 1]
+scalar curvature R = -1/2*m^2
+frame Ricci matrix (y, 1, 2):
+[-1/2*m^2        0        0]
+[       0  1/2*m^2        0]
+[       0        0 -1/2*m^2]

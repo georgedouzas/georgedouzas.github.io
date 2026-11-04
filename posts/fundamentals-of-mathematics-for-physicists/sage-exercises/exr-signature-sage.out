@@ -1,0 +1,5 @@
+Minkowski eta = diag(1, -1, -1, -1): signature (p, q, z) = (1, 3, 0) ; det = -1
+five-dimensional diag(1, -1, -1, -1, -1): signature (1, 4, 0) ; det = 1
+[[1, 2], [2, 1]] : eigenvalues [-1, 3] ; signature (1, 1, 0) ; det -3 ; non-degenerate: True
+[[2, 1], [1, 2]] : eigenvalues [1, 3] ; signature (2, 0, 0) ; det 3 ; non-degenerate: True
+[[1, 2], [2, 4]] : eigenvalues [0, 5] ; signature (1, 0, 1) ; det 0 ; non-degenerate: False

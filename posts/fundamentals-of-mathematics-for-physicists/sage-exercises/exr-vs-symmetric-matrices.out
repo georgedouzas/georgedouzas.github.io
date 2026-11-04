@@ -1,0 +1,4 @@
+A, B symmetric: True True ; A + B and 3A symmetric: True True
+dimension of the symmetric 3 x 3 matrices: 6 = 3 * 4 / 2
+R1, R2 rotations (R^T R = 1, det 1): True True
+R1 + R2 is a rotation: False  (so SO(3) is not a subspace)

@@ -1,0 +1,4 @@
+(X(X_amb), X(Y_amb), X(Z)) = [cos(ph)*cos(th) - 2*sin(ph)*sin(th), cos(th)*sin(ph) + 2*cos(ph)*sin(th), -sin(th)]
+equal to the ambient vector d_theta E + 2 d_phi E: True
+X(Z) = -sin(theta) (the proposition): True
+at (theta, phi) = (pi/3, pi/4): [-1/2*sqrt(3)*sqrt(2) + 1/4*sqrt(2), 1/2*sqrt(3)*sqrt(2) + 1/4*sqrt(2), -1/2*sqrt(3)]

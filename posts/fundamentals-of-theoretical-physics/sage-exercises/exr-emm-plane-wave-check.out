@@ -1,0 +1,2 @@
+B along e_y : div E = 0 , div B = 0 , curl E + dB/dt = (0, 0, 0) , curl B - dE/dt = (0, 0, 0)
+B along e_x : div E = 0 , div B = 0 , curl E + dB/dt = (-E0*cos(z)*sin(t) + E0*cos(t)*sin(z), E0*cos(z)*sin(t) - E0*cos(t)*sin(z), 0) , curl B - dE/dt = (E0*cos(z)*sin(t) - E0*cos(t)*sin(z), E0*cos(z)*sin(t) - E0*cos(t)*sin(z), 0)

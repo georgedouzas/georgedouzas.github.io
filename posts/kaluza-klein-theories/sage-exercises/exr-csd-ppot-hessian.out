@@ -1,0 +1,7 @@
+Hessian at the vacuum:
+[0 0 0 0]
+[0 0 0 0]
+[0 0 4 0]
+[0 0 0 0]
+[PASS] gradient zero at the vacuum, Hessian eigenvalues 0, 0, 0, 4 with the non-zero one along the radial direction x_3: True
+[PASS] the flat directions are tangent to the vacuum sphere r = 1: the Hessian vanishes on vectors orthogonal to the vacuum: True

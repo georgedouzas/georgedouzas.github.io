@@ -1,0 +1,7 @@
+A.(B.z) = (AB).z: True
+Im(M.z) = -(b*c - a*d)*y/(c^2*x^2 + c^2*y^2 + 2*c*d*x + d^2) = y det M / |cz + d|^2, positive when det M = 1 and y > 0
+rotation matrices fix i: True
+real and imaginary parts of a i + b - i (c i + d): b + c , a - d ; solved: [
+[c == -b, d == a]
+]
+then det M = a^2 + b^2 = a^2 + b^2 : M = [[a, b], [-b, a]] with a^2 + b^2 = 1 is a rotation in SO(2)

@@ -1,0 +1,5 @@
+exp(-a thetabar theta) = a*t1*tb1 + 1
+[PASS] the series stops: exp(-a thetabar theta) = 1 - a thetabar theta: True
+[PASS] int dthetabar dtheta exp(-a thetabar theta) = a (top monomial t1 tb1): True
+int exp(-thetabar A theta) = -A12*A21 + A11*A22
+[PASS] the Grassmann Gaussian integral is det A: True

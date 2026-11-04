@@ -1,0 +1,12 @@
+N = 1: 2:1, 3/2:1, -3/2:1, -2:1  bosons 2 fermions 2
+N = 2: 2:1, 3/2:2, 1:1, -1:1, -3/2:2, -2:1  bosons 4 fermions 4
+N = 3: 2:1, 3/2:3, 1:3, 1/2:1, -1/2:1, -1:3, -3/2:3, -2:1  bosons 8 fermions 8
+N = 4: 2:1, 3/2:4, 1:6, 1/2:4, 0:2, -1/2:4, -1:6, -3/2:4, -2:1  bosons 16 fermions 16
+N = 5: 2:1, 3/2:5, 1:10, 1/2:11, 0:10, -1/2:11, -1:10, -3/2:5, -2:1  bosons 32 fermions 32
+N = 6: 2:1, 3/2:6, 1:16, 1/2:26, 0:30, -1/2:26, -1:16, -3/2:6, -2:1  bosons 64 fermions 64
+N = 7: 2:1, 3/2:8, 1:28, 1/2:56, 0:70, -1/2:56, -1:28, -3/2:8, -2:1  bosons 128 fermions 128
+N = 8: 2:1, 3/2:8, 1:28, 1/2:56, 0:70, -1/2:56, -1:28, -3/2:8, -2:1  bosons 128 fermions 128
+[PASS] every multiplet has as many bosonic as fermionic states: True
+[PASS] the CPT-completed N = 7 gravity multiplet equals the N = 8 one: True
+[PASS] the N = 8 multiplet has 256 states with helicity counts 1, 8, 28, 56, 70, 56, 28, 8, 1: True
+[PASS] for N = 9 any ladder spans 9/2 units, so some |helicity| > 2: True

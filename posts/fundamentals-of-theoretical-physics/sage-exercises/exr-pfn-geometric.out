@@ -1,0 +1,4 @@
+Z = e^(beta*omega)/(e^(3/2*beta*omega) - e^(1/2*beta*omega))
+U = 1/2*(omega*e^(beta*omega) + omega)/(e^(beta*omega) - 1) ; U - (omega/2 + omega/(e^{beta omega} - 1)) = 0
+high-T expansion: U = T + 1/12*omega^2/T - 1/720*omega^4/T^3
+mean occupation <n> = (U - omega/2)/omega = 1/(e^(beta*omega) - 1)

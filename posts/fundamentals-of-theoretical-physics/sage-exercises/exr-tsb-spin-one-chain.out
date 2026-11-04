@@ -1,0 +1,4 @@
+eigenvalues of T agree with the closed forms at bJ = 0.3, 1, 2.5: True
+periodic chain, L = 5: Z = sum of lambda^5 at bJ = 0.7: True
+free energy per spin f(T)/J at T/J = 0.5, 1, 4/3, 2: [-1.02820, -1.33509, -1.63830, -2.31052]
+lambda_max - other eigenvalues > 0 for all T > 0 (gap at T/J = 0.2, 1, 5): [147.45, 3.5145, 3.0136]

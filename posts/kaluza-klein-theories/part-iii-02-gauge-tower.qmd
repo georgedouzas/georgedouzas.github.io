@@ -1,0 +1,3051 @@
+---
+pagetitle: "Gauge symmetry and the Kaluza-Klein tower"
+---
+
+# Gauge symmetry and the Kaluza-Klein tower {#sec-kk-gauge-tower}
+
+The reduction of the previous chapter produced a vector field $A_\mu$ whose action is Maxwell's. For it to be the
+electromagnetic potential it must also have Maxwell's symmetry, the abelian gauge invariance $A_\mu \to A_\mu -
+\partial_\mu\epsilon$ of @sec-gauge-theories, and charged matter must couple to it with quantised charges. Both properties
+come from the circle. A coordinate change that shifts the position on each circle by an amount depending on the
+spacetime point leaves the form of the ansatz intact and acts on $A_\mu$ as a gauge transformation: gauge invariance is
+a part of five-dimensional general covariance, and the gauge group is the isometry group $U(1)$ of the circle. Once
+fields are allowed to depend on the circle coordinate, each of them becomes an infinite tower of four-dimensional
+fields, the Kaluza-Klein modes, whose masses and charges are both proportional to the momentum around the circle, so
+that charge is quantised because momentum on a circle is.
+
+The chapter has two sections. The first derives the gauge transformation from the reparametrisations of the circle,
+as a matrix identity, and identifies the gauge symmetry with the Killing vector $\partial_y$ of
+@sec-flows-killing. The second expands fields in the Fourier series of @sec-fourier-series, finds the masses $|n|/R$
+and the charges $ne$ of the tower from the spectrum of $-\partial_y^2$, a self-adjoint operator in the sense of
+@sec-unbounded-operators, proves that periodicity forces integer charges, and relates the radius of the circle to the
+Planck length and the fine-structure constant. The numbers show both the success and the problem of the
+five-dimensional theory: charge is quantised and the gauge coupling is predicted, but the charged states are as heavy
+as the Planck mass. The same Fourier analysis describes a field at finite temperature (@sec-thermal-circle), and the
+tower is the simplest example of an ultraviolet completion of a four-dimensional effective theory
+(@sec-renormalisation). A third section, @sec-kk-fermions, expands a five-dimensional fermion in the same way and
+finds its magnetic moment, its spin structures and why the circle gives no chiral fermions. Every statement is followed by
+three examples and three exercises with hidden solutions.
+
+## Gauge invariance from the fifth dimension {#sec-kk-gauge}
+
+The vector field of the ansatz is a gauge field: a coordinate change along the circle, $y \mapsto y + \epsilon(x)$,
+leaves the ansatz in its form and shifts $A_\mu$ by the gradient of $\epsilon$. This section derives that
+transformation, identifies the five-dimensional origin of the $U(1)$ gauge symmetry of @sec-abelian-gauge, and
+relates it to the Killing vector $\partial_y$, following @overduin1998 [Sec. 4.3] and @duff1994 [Sec. 2].
+
+### Reparametrising the circle
+
+The ansatz singles out the circle coordinate $y$, but nothing in five-dimensional geometry fixes where $y = 0$ is on
+each circle. Choosing the origin independently over each spacetime point is a coordinate change, and it is the one
+that does not disturb the cylinder condition.
+
+:::: {.statement-box}
+::: {#def-circle-reparametrisation}
+#### Reparametrisation of the circle
+
+A **reparametrisation of the circle** is the five-dimensional coordinate change
+$$
+x'^\mu = x^\mu, \qquad y' = y + \epsilon(x),
+$$ {#eq-circle-shift}
+with $\epsilon$ a function on spacetime: the same point of $M_4 \times S^1$ is labelled by a circle coordinate shifted
+by an amount depending on where one is in spacetime. Its Jacobian $\partial x^A/\partial x'^B$ is the identity on
+spacetime, $\partial y/\partial x'^\mu = -\partial_\mu\epsilon$, $\partial y/\partial y' = 1$ (@def-kk-jacobian).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The two-dimensional toy shows the effect of the shift on a picture. The first example is the computation behind
+@fig-kk-gauge-shift.
+
+::: {#exm-shift-cylinder}
+#### On the cylinder
+
+For the two-dimensional ansatz the lines of constant $y'$ wind relative to those of constant $y$ (left panel of
+@fig-kk-gauge-shift); in the chart $(x, y')$ the Riemannian toy $dx^2 + \phi^2(dy + A\,dx)^2$ is $dx^2 + \phi^2(dy' + (A -
+\epsilon')dx)^2$ (the sign of the circle block plays no role).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Checked with SageManifolds in `figures/kk_gauge_shift.sage`.
+:::
+
+A shift by the same amount everywhere is a rigid rotation of every circle. The second example identifies it with
+the isometry of the circle and with a global symmetry.
+
+::: {#exm-shift-constant}
+#### A constant shift
+
+$\epsilon = c$ rotates the circle rigidly and changes nothing: it is the $U(1)$ isometry generated by $\partial_y$
+(@def-isometry-u1), and the gauge transformation with constant parameter is a global symmetry
+(@def-global-local-symmetry).
+:::
+
+The new coordinate must again be a coordinate on a circle. The third example checks the periodicity and points to the
+subtlety of large gauge transformations.
+
+::: {#exm-shift-periodicity}
+#### Periodicity
+
+$\epsilon(x)$ need not be periodic in anything, but $y'$ must again be a circle coordinate: $y' \sim y' + 2\pi$ holds
+automatically since $y \sim y + 2\pi$ and $\epsilon$ is single valued. The large gauge transformations with $\epsilon$
+winding are the subtlety behind $\mathbb{R}$ versus $U(1)$ in @exm-isometry-r-vs-u1.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+![The gauge transformation as a coordinate change along the circle. Left: lines of constant $y$ (gray) and of
+constant $y' = y + \epsilon(x)$ (red) on the cylinder, for $\epsilon = 0.8\sin x$. Right: the gauge field in the two
+coordinate systems, $A' = A - \epsilon'$. SageManifolds checks that the ansatz keeps its form in the new chart.
+Generated by `figures/kk_gauge_shift.sage`.](figures/kk_gauge_shift.svg){#fig-kk-gauge-shift width=90%}
+
+Reparametrisations can be composed. The first exercise shows that they form an abelian group, the group of gauge
+transformations. The answer identifies the gauge group.
+
+::: {#exr-kkr-shift-composition}
+#### Composing shifts
+
+Show that the shift by $\epsilon_1$ followed by the shift by $\epsilon_2$ is the shift by $\epsilon_1 + \epsilon_2$, that the inverse
+of the shift by $\epsilon$ is the shift by $-\epsilon$, and that the transformations commute. Which group is this when $\epsilon$
+takes values in $\mathbb{R}/2\pi\mathbb{Z}$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$y'' = y' + \epsilon_2(x) = y + \epsilon_1(x) + \epsilon_2(x)$, and $x$ is untouched, so the composition is the shift by $\epsilon_1 +
+\epsilon_2$, the identity is $\epsilon = 0$ and the inverse is $-\epsilon$; addition of functions is commutative. With $y \sim y +
+2\pi$ the shift by $\epsilon$ and by $\epsilon + 2\pi$ act identically, so the group is that of maps from spacetime to
+$U(1) = \mathbb{R}/2\pi\mathbb{Z}$ with pointwise multiplication: the abelian gauge group of @def-gauge-field-u1.
+:::
+
+In two dimensions the shift can remove the gauge field altogether. The second exercise does so with SageManifolds and
+explains why this is impossible in five dimensions.
+
+::: {#exr-kkr-shift-remove-a}
+#### Removing $A$ in two dimensions
+
+For the toy $dx^2 + \phi(x)^2(dy + A(x)dx)^2$ choose $\epsilon$ with $\epsilon' = A$ and verify with SageManifolds that the metric
+becomes $dx^2 + \phi^2dy'^2$. Why can one not do the same with $A_\mu(x)$ in four dimensions?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $\epsilon = \int A\,dx$, $A' = A - \epsilon' = 0$:
+
+{{< sage exr-kkr-shift-remove-a >}}
+
+In four dimensions $A' = A - d\epsilon = 0$ requires $A = d\epsilon$, so $F = dA = 0$: a gauge field with non-zero field
+strength cannot be removed, and the field strength is exactly what survives in the reduced action
+(@exm-gauge-f-invariant). In one spacetime dimension every one-form is exact, which is why the toy has no field
+strength (@exr-kk-toy).
+:::
+
+The horizontal curves of @fig-kk-circle are drawn without reference to coordinates. The third exercise shows that they
+are unchanged by a reparametrisation, although $A$ changes.
+
+::: {#exr-kkr-shift-horizontal}
+#### Horizontal curves are invariant
+
+A curve $(x(s), y(s))$ is horizontal if $\dot y + A_\mu\dot x^\mu = 0$, i.e. if its tangent is orthogonal to $\partial_y$. Show
+that a curve horizontal for $(y, A)$ is horizontal for $(y', A')$, and interpret the winding of the horizontal curves
+around a closed loop in spacetime.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\dot y' + A'_\mu\dot x^\mu = \dot y + \partial_\mu\epsilon\,\dot x^\mu + (A_\mu - \partial_\mu\epsilon)\dot x^\mu = \dot y + A_\mu\dot x^\mu$: the condition
+is the same, as it must be since orthogonality to $\partial_y$ is geometric (@exr-kkr-horizontal-lift). Following a
+horizontal curve around a closed loop $\gamma$ in spacetime shifts $y$ by $-\oint_\gamma A = -\int_\Sigma F$ for a surface $\Sigma$
+bounded by $\gamma$: the holonomy, gauge invariant because $F$ is; it is the Aharonov-Bohm phase of a particle of
+unit momentum around the circle.
+:::
+::::
+
+### The gauge transformation
+
+The reparametrisation acts on the metric through its Jacobian. Because only the circle coordinate changes, the
+Jacobian has a simple triangular form, and the transformation of the ansatz becomes a product of three block
+matrices.
+
+:::: {.statement-box}
+::: {#def-kk-jacobian}
+#### Jacobian of the shift
+
+The **Jacobian** of @eq-circle-shift is the $5 \times 5$ matrix $J = \begin{pmatrix} 1 & 0 \\ -\partial\epsilon^T & 1
+\end{pmatrix}$ in the blocks $(x^\mu, y)$, with $\det J = 1$; a metric transforms as $\hat g' = J^T\hat gJ$
+(@def-tensor-field).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The inverse Jacobian belongs to the inverse shift. The first example writes it and reads off the group law. Both follow from the triangular form of the matrix.
+
+::: {#exm-jacobian-inverse}
+#### Its inverse
+
+$J^{-1} = \begin{pmatrix} 1 & 0 \\ \partial\epsilon^T & 1 \end{pmatrix}$, the Jacobian of the inverse shift $y = y' -
+\epsilon$: two shifts compose by adding their $\epsilon$, the group law of $U(1)$ gauge transformations.
+:::
+
+A unit determinant means that volumes are preserved. The second example draws the consequence for the volume
+element of the ansatz.
+
+::: {#exm-jacobian-volume}
+#### Volume preserved
+
+$\det J = 1$, so $\sqrt{|\hat g|}$ is unchanged, consistent with @eq-kk-volume: $\phi$ and $g$ do not transform.
+:::
+
+The shifts are only part of the five-dimensional diffeomorphisms. The third example places them among all those that
+preserve the cylinder condition.
+
+::: {#exm-jacobian-general}
+#### General five-dimensional diffeomorphisms
+
+A general $\xi^A(x, y)$ mixes the Fourier modes of @sec-kk-tower; the transformations preserving the cylinder
+condition have $\xi^\mu = \xi^\mu(x)$, $\xi^y = \epsilon(x)$, and generate the four-dimensional diffeomorphisms of
+@def-kk-fields together with the gauge transformations [@duff1994, eqs. 9-10].
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise checks the group law of @exm-jacobian-inverse at the level of matrices. It is a computation with
+symbolic gradients.
+
+::: {#exr-kkr-jacobian-compose}
+#### The group of Jacobians
+
+Verify with Sage that $J(\epsilon_1)J(\epsilon_2) = J(\epsilon_1 + \epsilon_2)$, $J(\epsilon)^{-1} = J(-\epsilon)$, $\det J = 1$ and that the
+Jacobians commute.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The gradients $\partial\epsilon_1$, $\partial\epsilon_2$ are independent symbols:
+
+{{< sage exr-kkr-jacobian-compose >}}
+
+The map $\partial\epsilon \mapsto J(\epsilon)$ is a homomorphism from the additive group of gradients into the unipotent lower
+triangular matrices.
+:::
+
+The Jacobian of @def-kk-jacobian is $\partial x/\partial x'$. The second exercise computes $\partial x'/\partial x$ directly and checks
+that it is the inverse.
+
+::: {#exr-kkr-jacobian-direction}
+#### Which Jacobian?
+
+Compute the matrix $\partial x'^A/\partial x^B$ of @eq-circle-shift and show that it is $J^{-1}$. Why does the metric transform
+with $J = \partial x/\partial x'$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\partial x'^\mu/\partial x^\nu = \delta^\mu_\nu$, $\partial x'^\mu/\partial y = 0$, $\partial y'/\partial x^\nu = \partial_\nu\epsilon$, $\partial y'/\partial y = 1$:
+$\begin{pmatrix} 1 & 0 \\ \partial\epsilon^T & 1 \end{pmatrix} = J^{-1}$ (@exm-jacobian-inverse). The metric components are
+covariant, $\hat g'_{AB} = \frac{\partial x^C}{\partial x'^A}\frac{\partial x^D}{\partial x'^B}\hat g_{CD}$ (@def-tensor-field), so they
+transform with $\partial x/\partial x' = J$; contravariant objects such as $\hat g^{AB}$ transform with $J^{-1}$
+(@exr-kkr-gauge-inverse-metric).
+:::
+
+Gauge transformations and four-dimensional coordinate changes can be combined. The third exercise writes the
+Jacobian of the combination and its action on the fields.
+
+::: {#exr-kkr-jacobian-general}
+#### The combined transformation
+
+For $x'^\mu = x'^\mu(x)$, $y' = y + \epsilon(x)$, write the Jacobian $\partial x/\partial x'$ in blocks and the transformation of
+$(g, A, \phi)$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $L^\nu{}_\mu = \partial x^\nu/\partial x'^\mu$: $\partial y/\partial x'^\mu = -L^\nu{}_\mu\partial_\nu\epsilon$, so $\partial x/\partial x' =
+\begin{pmatrix} L & 0 \\ -\partial\epsilon^TL & 1 \end{pmatrix} = J(\epsilon)\operatorname{diag}(L, 1)$. The metric transforms first by the
+shift and then by the four-dimensional change: $g' = L^TgL$, $A' = L^T(A - \partial\epsilon)$, $\phi' = \phi$, combining
+@exr-kk-tensor-law and @eq-kk-gauge.
+:::
+::::
+
+The Jacobian acting on the ansatz gives back the ansatz with a shifted vector. This is the central fact of the
+section, the five-dimensional origin of gauge invariance.
+
+:::: {.statement-box}
+::: {#def-kk-gauge-transformation}
+#### The Kaluza-Klein gauge transformation
+
+Under @eq-circle-shift the ansatz keeps its form with
+$$
+g'_{\mu\nu} = g_{\mu\nu}, \qquad \phi' = \phi, \qquad A'_\mu = A_\mu - \partial_\mu\epsilon ,
+$$ {#eq-kk-gauge}
+since $dy + A\,dx = dy' + (A - d\epsilon)dx$ [@overduin1998, eq. 30; @duff1994, eq. 10]: the coordinate freedom along
+the circle is the abelian gauge transformation of @def-gauge-field-u1 (@prp-kk-gauge-shift). The four-dimensional
+theory inherits a $U(1)$ gauge invariance from five-dimensional general covariance.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+A gauge transformation must leave the field strength invariant. The first example checks this and concludes that the
+reduced action is gauge invariant.
+
+::: {#exm-gauge-f-invariant}
+#### $F$ is invariant
+
+$F'_{\mu\nu} = \partial_\mu(A_\nu - \partial_\nu\epsilon) - \partial_\nu(A_\mu - \partial_\mu\epsilon) = F_{\mu\nu}$ by the symmetry of second
+derivatives, the content of @prp-covariant-u1; so the reduced action @eq-kk-reduced-action is gauge invariant, as
+it must be, being a coordinate-invariant five-dimensional action evaluated on a form-invariant ansatz.
+:::
+
+The transformation is a matrix identity. The second example writes the block products that prove it. Each block reduces to a short polynomial identity.
+
+::: {#exm-gauge-matrix}
+#### As a matrix identity
+
+$J^T\hat g(g, A, \phi)J = \hat g(g, A - \partial\epsilon, \phi)$ for the block matrix of @exm-ansatz-matrix: the
+$(\mu\nu)$ block gives $g - \phi^2AA^T + \phi^2(A\,\partial\epsilon^T + \partial\epsilon\,A^T) - \phi^2\partial\epsilon\,\partial\epsilon^T = g -
+\phi^2(A - \partial\epsilon)(A - \partial\epsilon)^T$, the mixed block $-\phi^2(A - \partial\epsilon)$, the corner $-\phi^2$
+(@prp-kk-gauge-shift, @exr-kk-gauge-shift).
+:::
+
+Fields that depend on $y$ transform too. The third example shows that they acquire phases, the transformation of
+charged fields.
+
+::: {#exm-gauge-charged-modes}
+#### Charged modes
+
+A mode $f_n(x)e^{iny/R}$ of a five-dimensional field becomes $f_n(x)e^{in(y' - \epsilon)/R}$: the four-dimensional
+field $f_n$ acquires the phase $e^{-in\epsilon/R}$, the gauge transformation of a field of charge $n/R$
+(@def-covariant-derivative-u1); the charge is the momentum around the circle (@sec-kk-tower).
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise checks the gauge invariance of the reduced action term by term. It uses the invariance of the
+abelian field strength under a gauge transformation.
+
+::: {#exr-kk-f-invariant}
+#### Gauge invariance of the reduced action
+
+Show that each term of @eq-kk-reduced-action is invariant under @eq-kk-gauge.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$g$ and $\phi$ are unchanged, so $\sqrt{-g}$, $R$ and the prefactor $\phi$ are; $F_{\mu\nu}$ is invariant by
+@exm-gauge-f-invariant, so $F_{\mu\nu}F^{\mu\nu}$ is. @prp-covariant-u1 is exactly the statement needed, with $\alpha = -\epsilon$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** `KaluzaKlein.FieldTheory.abelian_F_invariant` (@prp-covariant-u1), with $\alpha = -\epsilon$.
+
+**Sage.** Pending.
+:::
+
+The inverse metric must transform consistently with the metric. The second exercise checks that it does, with the same
+shift of $A$.
+
+::: {#exr-kkr-gauge-inverse-metric}
+#### The inverse ansatz
+
+Verify with Sage that $J^{-1}\hat g^{-1}(A)J^{-T} = \hat g^{-1}(A - \partial\epsilon)$ for the inverse ansatz @eq-kk-inverse, with
+$g^{\mu\nu}$ as free symbols.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Inverting $\hat g' = J^T\hat gJ$ gives $\hat g'^{-1} = J^{-1}\hat g^{-1}J^{-T}$, and the claim is that the right-hand side is
+again of the form @eq-kk-inverse:
+
+{{< sage exr-kkr-gauge-inverse-metric >}}
+
+Only $\hat g^{\mu y} = -A^\mu$ and $\hat g^{yy}$ change; $\hat g^{\mu\nu} = g^{\mu\nu}$ is gauge invariant.
+:::
+
+The frame one-form $e^y = dy + A_\mu dx^\mu$ is the natural object on the five-dimensional space. The third exercise shows
+that it does not depend on the choice of circle coordinate.
+
+::: {#exr-kkr-gauge-frame}
+#### The connection one-form
+
+Show that $e^y = dy + A_\mu dx^\mu$ equals $dy' + A'_\mu dx^\mu$, and that $de^y = \tfrac12F_{\mu\nu}dx^\mu \wedge dx^\nu$. Why does this
+make $A$ a connection on the circle bundle?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$dy' + A'_\mu dx^\mu = dy + \partial_\mu\epsilon\,dx^\mu + (A_\mu - \partial_\mu\epsilon)dx^\mu = dy + A_\mu dx^\mu$: $e^y$ is a well-defined
+one-form on $M_4 \times S^1$, while $A$ depends on the coordinate $y$. Its exterior derivative is $d(A_\mu dx^\mu) =
+\partial_\nu A_\mu\,dx^\nu \wedge dx^\mu = \tfrac12F_{\nu\mu}dx^\nu \wedge dx^\mu$, the curvature. A one-form on the total space that
+is invariant under the circle action and equal to $dy$ on the fibres is a connection, and $A$ is its local
+expression: the Kaluza-Klein gauge field is a connection on the circle bundle in the sense of
+@def-bundle-connection, and $F$ is its curvature (@def-curvature-connection).
+:::
+::::
+
+### The isometry
+
+The gauge symmetry is generated by a vector field on the five-dimensional space, the generator of rotations of the
+circle. Its defining property is that it preserves the metric, which is the cylinder condition in invariant form.
+
+:::: {.statement-box}
+::: {#def-isometry-u1}
+#### The circle isometry
+
+The vector field $\partial_y$ is a Killing vector of every metric satisfying the cylinder condition
+(@def-killing), and its flow $y \mapsto y + c$ is a one-parameter group of isometries; since $y$ is
+periodic the group is $U(1)$, and its orbits are the circles of constant $x$. The gauge group of the reduced theory
+is the isometry group of the internal space, here $U(1)$ for $S^1$; for a general internal space it is the group
+of its Killing vectors (Part IV).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+In adapted coordinates the Killing equation is trivial. The first example checks it. No computation is needed beyond the definition of the Lie derivative.
+
+::: {#exm-isometry-killing}
+#### Killing's equation
+
+$\mathcal{L}_{\partial_y}\hat g_{AB} = \partial_y\hat g_{AB} = 0$ by @def-cylinder-condition (the Lie derivative along a
+coordinate vector field is the partial derivative, @def-lie-derivative): the Killing equation holds identically.
+:::
+
+The group generated by $\partial_y$ is $U(1)$ only because $y$ is periodic. The second example explains when the
+periodicity is visible.
+
+::: {#exm-isometry-r-vs-u1}
+#### $\mathbb{R}$ versus $U(1)$
+
+The zero-mode theory alone has no memory of the periodicity of $y$: its gauge group is $\mathbb{R}$, and the
+compactness of $U(1)$, with the quantisation of charge, appears only when the massive modes are kept [@duff1994,
+p. 6] (@def-charge-quantisation).
+:::
+
+Every continuous symmetry has a conserved charge. The third example identifies the charge of the circle isometry. It is the bridge to the Kaluza-Klein tower of the next section.
+
+::: {#exm-isometry-charge}
+#### Charge as momentum
+
+The Noether charge of the $U(1)$ isometry is the momentum $p_y$ along the circle, $-i\partial_y = n/R$ on the mode
+$e^{iny/R}$: the electric charge of a Kaluza-Klein particle is its momentum in the fifth dimension, and charge
+conservation is momentum conservation along $y$.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise shows that the infinitesimal gauge transformation is the Lie derivative along $\epsilon(x)\partial_y$. It
+connects the gauge transformation with the flows of @sec-flows-killing.
+
+::: {#exr-kk-lie-derivative}
+#### The Killing vector
+
+Compute the Lie derivative of the ansatz metric along $\xi = \epsilon(x)\partial_y$ and show that it reproduces
+$\delta A_\mu = -\partial_\mu\epsilon$ infinitesimally.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\mathcal{L}_\xi\hat g_{AB} = \xi^C\partial_C\hat g_{AB} + \partial_A\xi^C\hat g_{CB} + \partial_B\xi^C\hat g_{AC}$ (@eq-lie-metric) with
+$\xi^y = \epsilon$, $\xi^\mu = 0$: the first term vanishes by the cylinder condition, and $\partial_\mu\xi^y = \partial_\mu\epsilon$
+gives $\mathcal{L}_\xi\hat g_{\mu\nu} = -\partial_\mu\epsilon\,\phi^2A_\nu - \partial_\nu\epsilon\,\phi^2A_\mu$, $\mathcal{L}_\xi\hat g_{\mu y} = -
+\partial_\mu\epsilon\,\phi^2$, $\mathcal{L}_\xi\hat g_{yy} = 0$. Comparing with the variation of @eq-kk-components under
+$\delta A_\mu$: $\delta\hat g_{\mu y} = -\phi^2\delta A_\mu$, so $\delta A_\mu = \partial_\mu\epsilon$ for the active transformation,
+that is $-\partial_\mu\epsilon$ for the passive coordinate change @eq-kk-gauge, with $\delta g = \delta\phi = 0$.
+:::
+
+The second exercise repeats @exr-kk-lie-derivative with SageManifolds in three dimensions. It also shows that
+$\epsilon(x)\partial_y$ is not a Killing vector unless $\epsilon$ is constant.
+
+::: {#exr-kkr-isometry-killing}
+#### Killing vectors with SageManifolds
+
+For the ansatz in $2 + 1$ dimensions with arbitrary functions, compute $\mathcal{L}_{\partial_y}\hat g$ and $\mathcal{L}_{\epsilon\partial_y}\hat
+g$, and compare the latter with $\frac{d}{ds}\hat g(A + s\,d\epsilon)|_{s = 0}$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-kkr-isometry-killing >}}
+
+$\mathcal{L}_{\epsilon\partial_y}\hat g_{ty} = -\phi^2\partial_t\epsilon$ vanishes only for constant $\epsilon$: the local transformations are not
+isometries; they are symmetries of the reduced theory because they act on the fields, not because they preserve a
+given metric.
+:::
+
+The Killing vector field has a dual one-form, obtained by lowering its index. The third exercise shows that it contains
+the gauge field.
+
+::: {#exr-kkr-isometry-one-form}
+#### The Killing one-form
+
+Lower the index of $K = \partial_y$ with @eq-kk-components. Show that $K_A dx^A = -\phi^2e^y$, that $\hat g(K, K) = -\phi^2$,
+and recover $A_\mu$ and $\phi$ from $K$ and $\hat g$ alone.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$K_A = \hat g_{Ay}$: $K_\mu = -\phi^2A_\mu$ and $K_y = -\phi^2$, so $K_Adx^A = -\phi^2(dy + A_\mu dx^\mu) = -\phi^2e^y$ and $\hat
+g(K, K) = K_y = -\phi^2$. Hence $\phi^2 = -\hat g(K, K)$ and $A_\mu = K_\mu/K_y$: the Kaluza-Klein fields are geometric
+data of the pair (metric, Killing vector), the size of the orbits and the one-form orthogonal to them, which is how
+the reduction generalises to other isometry groups (Part IV).
+:::
+::::
+
+The proposition of this section is the matrix identity behind the gauge transformation. It holds for any
+$4 \times 4$ block, not only for metrics.
+
+:::: {.statement-box}
+::: {#prp-kk-gauge-shift}
+#### The gauge shift
+
+$J^T\hat gJ = \hat g'$ with $\hat g$ the ansatz for $(g, A, \phi)$, $\hat g'$ the ansatz for $(g, A - \partial\epsilon, \phi)$
+and $J$ the Jacobian of @def-kk-jacobian, for any $4 \times 4$ matrix $g$, vectors $A$, $\partial\epsilon$ and scalar
+$\phi$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.**
+
+{{< lean KaluzaKlein.AbelianKK.Gauge.gauge_shift >}}
+
+**Sage.** Checked with SageManifolds in five dimensions in @exr-kk-gauge-shift.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+A constant shift has the identity as Jacobian. The first example records this trivial case of the proposition. It shows which transformations act on the zero modes.
+
+::: {#exm-kkr-gauge-constant}
+#### A constant shift
+
+For constant $\epsilon$, $\partial\epsilon = 0$, $J = 1$ and the identity is $\hat g = \hat g$: the rigid rotations of
+@exm-shift-constant act trivially on the zero modes, and only on the modes with $n \neq 0$ (@exm-gauge-charged-modes).
+:::
+
+A linear shift changes a constant potential by a constant. The second example shows that a constant $A$ is pure gauge.
+
+::: {#exm-kkr-gauge-linear}
+#### A constant potential is pure gauge
+
+For $\epsilon = c_\mu x^\mu$, $\partial\epsilon = c$ is constant and the proposition gives $A' = A - c$: a constant potential can be
+shifted to zero. In the five-dimensional picture, $\hat g(g, c, \phi)$ is the flat metric in the sheared coordinates
+$(x, y - c_\mu x^\mu)$, which is why a constant $A$ has no physical effect, apart from a holonomy around closed loops
+when spacetime itself has non-contractible circles.
+:::
+
+The proposition does not assume that $g$ is a metric. The third example comments on its form. Its generality makes the proof a pure computation.
+
+::: {#exm-kkr-gauge-any-matrix}
+#### The generality of the statement
+
+The identity holds for any matrix $g$ and any $A$, $\partial\epsilon$ and $\phi$, with $\partial\epsilon$ an arbitrary vector rather
+than a gradient: the integrability of $\partial\epsilon$ plays no role at a point. Splitting the indices into the four
+spacetime ones and the circle one, the matrix products expand block by block, and each entry is a polynomial
+identity.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** `KaluzaKlein.AbelianKK.Gauge.gauge_shift` splits the indices into the blocks of $\text{Fin}\,4 \oplus \text{Unit}$,
+expands the matrix products and closes each entry with `ring`.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise is the five-dimensional check of the proposition with SageManifolds. It uses a genuine change of
+chart rather than matrices.
+
+::: {#exr-kk-gauge-shift}
+#### The shifted chart in SageManifolds
+
+Write the five-dimensional ansatz in the chart $(x, y + \epsilon(x))$ and read off the transformed fields.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-kk-gauge-shift >}}
+:::
+
+The finite transformation of the proposition and the infinitesimal one of @exr-kk-lie-derivative must agree. The
+second exercise expands the first to first order.
+
+::: {#exr-kkr-gauge-infinitesimal}
+#### The infinitesimal form
+
+Replace $\epsilon$ by $s\epsilon$ in @prp-kk-gauge-shift and expand to first order in $s$. Compare with the Lie derivative of
+@exr-kk-lie-derivative.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\hat g(A - s\,\partial\epsilon) = \hat g(A) - s\frac{\partial\hat g}{\partial A}\cdot\partial\epsilon + O(s^2)$, with the first-order term
+$\phi^2(A_\mu\partial_\nu\epsilon + A_\nu\partial_\mu\epsilon)$ in the $(\mu\nu)$ block and $\phi^2\partial_\mu\epsilon$ in the mixed block: minus the Lie
+derivative $\mathcal{L}_{\epsilon\partial_y}\hat g$ of @exr-kk-lie-derivative. The sign is the difference between the passive
+coordinate change (components in the new chart) and the active transformation (the metric pulled back along the
+flow).
+:::
+
+A gauge field of the form $A = d\chi$ is pure gauge. The third exercise interprets this in five dimensions.
+
+::: {#exr-kkr-gauge-pure-gauge}
+#### Pure gauge
+
+Show that the ansatz with $A = d\chi$ for a function $\chi$ is the ansatz with $A = 0$ in the coordinate $y + \chi$. What
+does this imply for the Ricci tensor of the first metric?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $\epsilon = \chi$, @eq-kk-gauge gives $A' = d\chi - d\chi = 0$, so in the chart $(x, y + \chi)$ the metric is $g -
+\phi^2dy'^2$. The two are the same metric in two charts, so all curvature invariants agree, and the frame components of
+the Ricci tensor of @exr-kkr-ricci-frame are those of the $A = 0$ metric: $F = 0$ removes every Maxwell term from
+@eq-kk-ricci.
+:::
+::::
+
+## The Kaluza-Klein tower {#sec-kk-tower}
+
+Klein's contribution was to take the fifth dimension seriously as a circle: every field is a Fourier series in
+$y$, each mode is a four-dimensional particle with a mass and a charge fixed by its momentum around the circle, and
+the quantisation of electric charge follows from periodicity. This section defines the mode expansion, the masses
+and charges of the tower, the zero-mode truncation and the relation between the radius, the Planck mass and the
+gauge coupling, following @duff1994 [Sec. 2] and @overduin1998 [Secs. 4.1-4.2]. Here the circle coordinate has period $2\pi R$ and the scalar is set to $\phi = 1$ in the ground state, which
+is the same geometry as $y \sim y + 2\pi$ with $\phi = R$ (@exr-kkr-volume-circle).
+
+### Fourier modes
+
+A function on a circle is determined by its Fourier coefficients (@sec-fourier-series). Applied to the circle
+coordinate of a five-dimensional field, the expansion turns one field into infinitely many four-dimensional ones,
+labelled by an integer.
+
+:::: {.statement-box}
+::: {#def-fourier-modes}
+#### Fourier modes on the circle
+
+A field on $M_4 \times S^1$ with $y \sim y + 2\pi R$ has the expansion
+$$
+\Phi(x, y) = \sum_{n \in \mathbb{Z}}\phi_n(x)\,e^{iny/R}, \qquad \phi_{-n} = \phi_n^*\ \text{for real}\ \Phi,
+$$ {#eq-fourier-modes}
+the **Kaluza-Klein modes**; the same expansion applies to each component of the metric [@duff1994, eqs. 5-6].
+The mode $e^{iny/R}$ is an eigenfunction of $\partial_y^2$ with eigenvalue $-(n/R)^2$ (@prp-kk-modes), and the
+modes are orthogonal, $\int_0^{2\pi R}e^{i(n - m)y/R}dy = 2\pi R\,\delta_{nm}$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The simplest field to expand is a massless scalar. The first example derives the equations of its modes. The equation obtained is the one stated in @prp-kk-modes.
+
+::: {#exm-modes-scalar}
+#### A massless scalar
+
+For $\Box_5\Phi = 0$ with $\Box_5 = \hat g^{AB}\partial_A\partial_B = \Box_4 - \partial_y^2$ in the signature $(+, -, -, -, -)$,
+inserting @eq-fourier-modes gives $(\Box_4 + (n/R)^2)\phi_n = 0$ mode by mode (@exr-kk-modes), the Klein-Gordon
+equation of @sec-conventions-indices with $m^2 = (n/R)^2$: an infinite set of four-dimensional Klein-Gordon fields
+with masses $|n|/R$.
+:::
+
+The metric itself has modes. The second example lists them and anticipates their reorganisation into massive
+spin-two fields. The counting is completed in the next subsection.
+
+::: {#exm-modes-metric}
+#### The metric modes
+
+$g_{\mu\nu}(x, y) = \sum_ng_{\mu\nu,n}(x)e^{iny/R}$ and likewise $A_\mu$, $\phi$: the $n = 0$ modes are the Kaluza-Klein fields
+of @def-kk-fields, the $n \neq 0$ modes of $g_{\mu\nu}$ are massive spin-$2$ fields, and the $n \neq 0$ modes of $A_\mu$
+and $\phi$ are eaten by them [@duff1994, p. 7] (@exr-kk-spin2).
+:::
+
+The symmetries have modes too. The third example describes the algebra they generate. It is much larger than the symmetry of the zero modes.
+
+::: {#exm-modes-gauge-parameters}
+#### The gauge parameters
+
+The diffeomorphism parameters $\hat\xi^A(x, y)$ expand too; their $n \neq 0$ modes generate an infinite-dimensional
+algebra of Kac-Moody-Virasoro type that contains the Poincaré and $U(1)$ algebras of the zero modes [@duff1994,
+eq. 15].
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+![The Kaluza-Klein tower. Left: the masses $|n|/R$ of the modes $e^{iny/R}$ for two radii, each level carrying
+the charge $ne$. Right: the real parts of the first three mode functions around the circle. The eigenvalue
+$(n/R)^2$ of $-\partial_y^2$ and the periodicity condition are checked symbolically. Generated by
+`figures/kk_tower.sage`; in the interactive version a slider sets $R$ and the title counts the modes lighter than
+$E = 2$.](figures/kk_tower.svg){#fig-kk-tower width=90%}
+
+{{< interactive kk_tower 460 >}}
+
+A real field has complex modes. The first exercise works out the constraint that reality imposes on them. The answer pairs each mode with its antiparticle.
+
+::: {#exr-kkr-modes-reality}
+#### Real fields
+
+Show that $\Phi$ is real if and only if $\phi_{-n} = \phi_n^*$ for all $n$, and rewrite the expansion of a real field as a
+sum of cosines and sines. How many real four-dimensional fields are there at each mass level $n \neq 0$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\Phi^* = \sum_n\phi_n^*e^{-iny/R} = \sum_n\phi_{-n}^*e^{iny/R}$, and uniqueness of Fourier coefficients gives $\Phi^* = \Phi$ iff
+$\phi_{-n}^* = \phi_n$. Then $\Phi = \phi_0 + \sum_{n \geq 1}(2\operatorname{Re}\phi_n\cos(ny/R) - 2\operatorname{Im}\phi_n\sin(ny/R))$, with $\phi_0$
+real. Each level $n \geq 1$ carries two real fields, $\operatorname{Re}\phi_n$ and $\operatorname{Im}\phi_n$, equivalently one complex
+field: a charged particle and its antiparticle (@exm-charge-conjugation).
+:::
+
+A field profile around the circle determines which modes are present. The second exercise computes the modes of a
+square wave with Sage.
+
+::: {#exr-kkr-modes-square-wave}
+#### The modes of a square wave
+
+Find the Kaluza-Klein modes of the profile $\Phi(y) = 1$ for $0 < y < \pi R$, $-1$ for $\pi R < y < 2\pi R$, and check
+Parseval's identity $\frac{1}{2\pi R}\int_0^{2\pi R}|\Phi|^2dy = \sum_n|\phi_n|^2$. Which masses does the profile contain?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\phi_n = \frac{1}{2\pi R}\int_0^{2\pi R}\Phi e^{-iny/R}dy = \frac{2}{i\pi n}$ for odd $n$ and $0$ for even $n$:
+
+{{< sage exr-kkr-modes-square-wave >}}
+
+The profile has no zero mode and contains only the odd levels, masses $|n|/R$ with $n$ odd, with weights falling like
+$1/n$: a sharp profile around the circle is built from arbitrarily heavy modes.
+:::
+
+The orthogonality of the modes makes the action diagonal. The third exercise shows that the five-dimensional action of
+a scalar becomes a sum of four-dimensional actions, one per mode.
+
+::: {#exr-kkr-modes-action}
+#### The action mode by mode
+
+For a complex massless scalar with action $\int d^4x\int_0^{2\pi R}dy\,\hat g^{AB}\partial_A\Phi^*\partial_B\Phi$ on flat $M_4 \times S^1$,
+insert @eq-fourier-modes and integrate over $y$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\hat g^{AB}\partial_A\Phi^*\partial_B\Phi = \partial_\mu\Phi^*\partial^\mu\Phi - |\partial_y\Phi|^2$. With the modes, $\int dy\,\partial_\mu\Phi^*\partial^\mu\Phi = 2\pi
+R\sum_n\partial_\mu\phi_n^*\partial^\mu\phi_n$ and $\int dy\,|\partial_y\Phi|^2 = 2\pi R\sum_n(n/R)^2|\phi_n|^2$, the cross terms vanishing by
+orthogonality. The action is $2\pi R\sum_n\int d^4x(\partial_\mu\phi_n^*\partial^\mu\phi_n - (n/R)^2|\phi_n|^2)$: decoupled complex
+Klein-Gordon fields of masses $|n|/R$, each with the normalisation factor $2\pi R$ that is absorbed into the
+fields.
+:::
+::::
+
+### Masses and charges
+
+The mode number $n$ appears twice in the four-dimensional physics: in the mass, through the eigenvalue of $-\partial_y^2$,
+and in the charge, through the phase that a gauge transformation produces. Both are fixed by the radius.
+
+:::: {.statement-box}
+::: {#def-kk-mass}
+#### Kaluza-Klein mass
+
+The **mass** of the mode $n$ is $m_n = |n|/R$: the five-dimensional massless wave equation on
+$\phi_n(x)e^{iny/R}$ is the four-dimensional one with $m_n^2 = (n/R)^2$ (@prp-kk-modes, @exr-kk-modes), and the
+masses grow without bound, an infinite **tower** (@fig-kk-tower).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+If the circle is as small as the Planck length, the masses are huge. The first example puts in the numbers.
+
+::: {#exm-mass-planck}
+#### Planck-scale masses
+
+If $R$ is of the order of the Planck length, $m_1 \sim 10^{19}\,\text{GeV}$: the first massive mode is twenty-two
+orders of magnitude heavier than the electron, the discrepancy that "played a large role in the abandonment of
+five-dimensional Kaluza-Klein theory" [@overduin1998, p. 23] (@exr-kk-numbers).
+:::
+
+The massive modes of the metric combine into massive spin-two particles. The second example counts their degrees of
+freedom. The count is the one of @exr-kk-spin2.
+
+::: {#exm-mass-spin2}
+#### Massive spin two
+
+The mode $g_{\mu\nu,n}$ has $5$ degrees of freedom, obtained by eating the $2$ of $A_{\mu,n}$ and the $1$ of $\phi_n$
+in addition to its own $2$: the massive spectrum is pure spin $2$ [@duff1994, p. 7] (@exr-kk-spin2).
+:::
+
+The masses depend on the size of the circle, which is the dynamical scalar. The third example states the dependence
+in the two frames of @sec-kk-einstein-frame.
+
+::: {#exm-mass-radius}
+#### Varying $\phi$
+
+With a non-constant $\phi$ the mode $n$ has the mass $|n|/(R\phi)$ measured with the Jordan metric, the inverse local
+radius $R\phi$ of the circle (@exm-charge-covariant-derivative), and $|n|/(R\phi^{3/2})$ in the Einstein frame
+(@exr-kkr-mass-einstein-frame, @fig-kkr-couplings): the tower's spacing is set by the local size of the circle,
+which is why $\phi$ must be stabilised.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise counts the polarisations of the massive modes of the metric. It is the gravitational analogue of
+the Higgs mechanism.
+
+::: {#exr-kk-spin2}
+#### Degrees of freedom of a massive mode
+
+Count the degrees of freedom of the modes $g_{\mu\nu,n}$, $A_{\mu,n}$, $\phi_n$ for $n \neq 0$ and show they match a
+massive spin-$2$ field.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+A massless graviton has $2$ polarisations, a massless vector $2$, a scalar $1$: $5$ in all, the number of
+polarisations of a massive spin-$2$ particle ($2s + 1$ with $s = 2$). The $n \neq 0$ gauge parameters $\xi^\mu_n$,
+$\xi^y_n$ can be used to set $A_{\mu,n}$ and $\phi_n$ to zero, after which $g_{\mu\nu,n}$ is a massive spin-$2$ field
+with $5$ polarisations [@duff1994, p. 7]: a gravitational Higgs mechanism, the analogue of @def-higgs-mechanism
+with the vector and the scalar as the eaten modes.
+:::
+
+The dependence of the mass on $\phi$ in @exm-mass-radius can be derived from the wave equation. The second exercise
+does so with SageManifolds for constant $\phi$.
+
+::: {#exr-kkr-mass-einstein-frame}
+#### The mass in the Einstein frame
+
+For constant $\phi$ write the ansatz with the Einstein-frame metric $g^E = \eta$, i.e. $\phi^{-1}\eta - \phi^2dy^2$, and solve
+$\Box_5\Phi = 0$ on $\Phi = f(t)e^{iny/R}$. Deduce the masses in both frames.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+SageManifolds gives $\Box_5\Phi\,e^{-iny/R} = \phi(f'' + \frac{n^2}{R^2\phi^3}f)$:
+
+{{< sage exr-kkr-mass-einstein-frame >}}
+
+So $m_E = |n|/(R\phi^{3/2})$ with respect to $g^E = \eta$. The Jordan metric $\phi^{-1}\eta$ has proper time $t_J = t/\sqrt\phi$,
+and $m_J^2 = \phi m_E^2 = n^2/(R\phi)^2$, in agreement with @exr-kkr-einstein-masses.
+:::
+
+A five-dimensional field may itself be massive. The third exercise shows how the tower shifts. The result is used again for the thermal circle.
+
+::: {#exr-kkr-mass-massive}
+#### A massive five-dimensional field
+
+Find the four-dimensional masses of the modes of a five-dimensional scalar with $(\Box_5 + M^2)\Phi = 0$. What is the
+lightest mass, and how many modes have mass below $2M$ when $MR = 3$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+On a mode, $\Box_5 = \Box_4 + (n/R)^2$, so $(\Box_4 + M^2 + n^2/R^2)\phi_n = 0$ and $m_n^2 = M^2 + n^2/R^2$: the masses add in
+quadrature, the lightest is $M$ (the zero mode). Below $2M$: $M^2 + n^2/R^2 < 4M^2$ iff $|n| < \sqrt3MR = 3\sqrt3 \approx 5.2$,
+so $n = -5, \dots, 5$: eleven modes.
+:::
+::::
+
+The charge of a mode is read off from its gauge transformation. Since the phase of the mode $n$ is proportional to
+$n$, all charges are integer multiples of one unit, which is fixed by the gravitational coupling and the radius.
+
+:::: {.statement-box}
+::: {#def-charge-quantisation}
+#### Charge quantisation
+
+Under the gauge transformation @eq-kk-gauge the mode $\phi_n$ transforms by $e^{-in\epsilon/R}$ (@exm-gauge-charged-modes), so
+it has charge $q_n = n/R$ in the units of @eq-kk-ansatz, or $q_n = ne$ with $e = \sqrt2\kappa/R$ once the Maxwell
+term is canonically normalised [@duff1994, eq. 16]. Periodicity of $e^{iny/R}$ under $y \to y + 2\pi R$ forces
+$n \in \mathbb{Z}$ (@prp-kk-periodicity): electric charge is quantised in units of $e$, Klein's explanation of
+charge quantisation.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The charge can also be read off from the coupling to the gauge field in the action. The first example expands the
+five-dimensional kinetic term and finds the covariant derivative.
+
+::: {#exm-charge-covariant-derivative}
+#### From the covariant derivative
+
+$\hat g^{AB}\partial_A\Phi\,\partial_B\Phi^*$ with @eq-kk-inverse contains $-A^\mu(\partial_\mu\Phi\,\partial_y\Phi^* + \partial_y\Phi\,\partial_\mu\Phi^*) +
+(A_\mu A^\mu - \phi^{-2})|\partial_y\Phi|^2$, which on the mode $n$ assembles into $g^{\mu\nu}(\partial_\mu - inA_\mu/R)\phi_n
+(\partial_\nu + inA_\nu/R)\phi_n^*$ minus the mass term $\phi^{-2}(n/R)^2|\phi_n|^2$ [@overduin1998, eq. 24]: the covariant derivative @eq-covariant-derivative-u1 with charge $n/R$.
+:::
+
+The integrality of $n$ is the whole content of charge quantisation. The second example shows what fails for a
+non-integer $n$.
+
+::: {#exm-charge-integer}
+#### Why integers
+
+$e^{in(y + 2\pi R)/R} = e^{iny/R}e^{2\pi in}$, and $e^{2\pi in} = 1$ exactly when $n \in \mathbb{Z}$: for $n = \tfrac12$ the mode
+changes sign around the circle (@fig-kk-tower). The general statement rests on $\exp z = \exp w \iff z - w \in 2\pi i\mathbb{Z}$ (@prp-kk-periodicity).
+:::
+
+Opposite charges correspond to opposite momenta. The third example identifies charge conjugation with a reflection
+of the circle. It explains the reality condition of @def-fourier-modes.
+
+::: {#exm-charge-conjugation}
+#### Charge conjugation
+
+$n \to -n$ is the reflection $y \to -y$ of the circle: charge conjugation is parity in the fifth dimension
+[@duff1994, p. 8], and the reality condition $\phi_{-n} = \phi_n^*$ pairs particles with antiparticles.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise verifies @exm-charge-covariant-derivative with Sage. The derivatives of the mode are treated as
+independent symbols, as in the jet computations of @sec-kk-reduction.
+
+::: {#exr-kkr-charge-covariant}
+#### The covariant derivative in Sage
+
+For $\Phi = f(x)e^{iny/R}$ and the inverse ansatz with $g^{\mu\nu}$ free, verify that $\hat g^{AB}\partial_A\Phi\,\partial_B\Phi^* =
+g^{\mu\nu}D_\mu f\,(D_\nu f)^* - \phi^{-2}(n/R)^2|f|^2$ with $D_\mu = \partial_\mu - inA_\mu/R$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-kkr-charge-covariant >}}
+
+The identity is exact: no term of the five-dimensional kinetic term is lost, and the minimal coupling with charge $n/R$
+is forced by the geometry.
+:::
+
+A field may return to itself up to a phase after going around the circle. The second exercise shows how such twisted
+boundary conditions shift the charges.
+
+::: {#exr-kkr-charge-twisted}
+#### Twisted boundary conditions
+
+Suppose $\Phi(x, y + 2\pi R) = e^{2\pi i\theta}\Phi(x, y)$ with $0 < \theta < 1$. Find the allowed modes, their masses and their
+charges. Is there a massless mode?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$e^{iky/R}$ satisfies the condition when $e^{2\pi ik} = e^{2\pi i\theta}$, i.e. $k = n + \theta$ with $n \in \mathbb{Z}$. The masses are
+$|n + \theta|/R$ and the charges $(n + \theta)/R$: still evenly spaced, but shifted, and no mode is massless. For $\theta = \tfrac12$
+(antiperiodic fields, as fermions at finite temperature, @exr-kkr-truncation-thermal) the charges are half-integers;
+charge quantisation in the strict sense, all charges being integer multiples of one unit, requires that every field
+be periodic.
+:::
+
+All modes of the tower have the same charge-to-mass ratio. The third exercise compares it with that of the electron.
+
+::: {#exr-kkr-charge-ratio}
+#### Charge to mass
+
+Compute $q_n/m_n$ for $n \neq 0$ with $q_n = ne$, $m_n = |n|/R$ and $e = \sqrt2\kappa/R$. Compare with the electron, for which
+$e/m_e \approx 7 \times 10^{21}\sqrt{G}$ in units $\hbar = c = 1$, and conclude whether the electron can be a Kaluza-Klein
+mode.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$q_n/m_n = \pm ne/(|n|/R) = \pm\sqrt2\kappa = \pm4\sqrt{\pi G}$, independent of $n$ and of $R$: every mode has a charge-to-mass ratio
+of gravitational size, the extremality bound of @exm-radius-black-holes. The electron's ratio is about $10^{21}$
+times larger, so it cannot be a mode of the tower: its mass would have to be $10^{21}$ times smaller than $1/R$, i.e.
+the electron would have to be a zero mode with a mass from some other source, while the zero modes are neutral.
+:::
+::::
+
+### The zero modes and the radius
+
+At energies far below $1/R$ only the zero modes can be excited. The theory then reduces to the four-dimensional theory
+of @sec-kk-reduction, and the only trace of the circle is the relation between the couplings and the radius.
+
+:::: {.statement-box}
+::: {#def-zero-mode-truncation}
+#### Zero-mode truncation
+
+The **zero-mode truncation** keeps only the $n = 0$ modes of every field: it is the cylinder condition
+(@def-cylinder-condition), it is consistent because zero modes never source non-zero ones, and it yields the
+reduced theory of @sec-kk-reduction. Truncating instead to finitely many massive modes is inconsistent
+[@duff1994, p. 8].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The truncation is justified physically by the mass gap. The first example states it. It is an energy argument, valid only below $1/R$.
+
+::: {#exm-truncation-light}
+#### The light sector
+
+For $R$ small all $n \neq 0$ modes are heavier than any energy available: the zero modes are the whole observable
+theory, with $U(1)$ gauge invariance and a massless scalar. The massive modes are the signature of the extra
+dimension, visible only at energies $\sim 1/R$.
+:::
+
+Consistency is a separate requirement from lightness. The second example defines it and notes where it fails. The circle is the case in which it holds exactly.
+
+::: {#exm-truncation-consistency}
+#### Consistency
+
+A truncation is consistent when every solution of the truncated equations lifts to a solution of the full ones;
+for the circle this holds because products of $y$-independent fields are $y$-independent. For spheres (Part IV) it
+fails for the naive ansatz, the consistency problem of @overduin1998 [Sec. 4.4].
+:::
+
+The truncated theory forgets the periodicity. The third example draws the consequence for the gauge group. The global structure of the group is invisible to the zero modes.
+
+::: {#exm-truncation-gauge-group}
+#### $\mathbb{R}$ not $U(1)$
+
+The truncated theory has lost the periodicity of $y$: its gauge group is $\mathbb{R}$ (@exm-isometry-r-vs-u1), and
+the charge quantisation of @def-charge-quantisation is visible only in the full tower.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+Interactions between modes conserve the momentum around the circle. The first exercise shows this for a cubic
+interaction with Sage, and draws the consequence for the truncation.
+
+::: {#exr-kkr-truncation-cubic}
+#### A cubic interaction
+
+For the interaction $\lambda\int dy\,\Phi^3$ of a five-dimensional scalar, show that the modes $n_1, n_2, n_3$ couple with
+strength proportional to $\int_0^{2\pi R}e^{i(n_1 + n_2 + n_3)y/R}dy$, and evaluate it.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Inserting @eq-fourier-modes, $\int dy\,\Phi^3 = \sum_{n_1, n_2, n_3}\phi_{n_1}\phi_{n_2}\phi_{n_3}\int dy\,e^{i(n_1 + n_2 + n_3)y/R}$ and the
+integral is $2\pi R\,\delta_{n_1 + n_2 + n_3, 0}$:
+
+{{< sage exr-kkr-truncation-cubic >}}
+
+Momentum (charge) is conserved at each vertex. Two zero modes can only produce a zero mode, so setting the massive
+modes to zero is consistent; two massive modes $n$ and $-n$ produce a zero mode, so the converse truncation is not.
+:::
+
+Keeping a few massive modes is tempting but wrong. The second exercise shows why with the same selection rule. The selection rule leaves no intermediate option.
+
+::: {#exr-kkr-truncation-finite}
+#### Finite truncations
+
+Show that a truncation of $\Phi$ to the modes $n = 0, \pm1$ is inconsistent for the cubic interaction of
+@exr-kkr-truncation-cubic. Which modes must be added, and where does the process stop?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The vertex $(1, 1, -2)$ is allowed, so the equation of $\phi_{-2}$ (equivalently $\phi_2^*$) is sourced by $\phi_1^2$: setting
+$\phi_{\pm2} = 0$ contradicts its field equation whenever $\phi_1 \neq 0$. Adding $\pm2$ brings in $\pm3$, $\pm4$ and so on:
+the process never stops, and the only consistent truncations are to the zero modes or to the full tower. This is the
+precise sense of the statement in @def-zero-mode-truncation.
+:::
+
+A field at temperature $T$ lives on a Euclidean time circle of circumference $1/T$. The third exercise applies the
+Kaluza-Klein reasoning to it.
+
+::: {#exr-kkr-truncation-thermal}
+#### The thermal circle
+
+In the Euclidean formulation of @sec-thermal-circle, bosonic fields are periodic in imaginary time with period $\beta =
+1/T$ and fermionic fields antiperiodic. Using the Matsubara frequencies of @def-matsubara-frequency, find the
+"Kaluza-Klein masses" of the three-dimensional modes and explain why a high-temperature field theory is effectively
+three-dimensional.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Periodic fields have modes $e^{2\pi in\tau/\beta}$, frequencies $\omega_n = 2\pi nT$, so a massless boson gives three-dimensional
+fields of masses $2\pi|n|T$; antiperiodic fermions have $\omega_n = (2n + 1)\pi T$, masses at least $\pi T$, and no zero mode
+(@exr-kkr-charge-twisted with $\theta = \tfrac12$). At high temperature all non-zero modes are heavy compared with the
+other scales, and the long-distance physics is that of the bosonic zero modes in three dimensions: dimensional
+reduction, with the circle of circumference $1/T$ shrinking as $T$ grows.
+:::
+::::
+
+The gauge coupling of the reduced theory is not a free parameter: it is fixed by the gravitational coupling and the
+radius. Inverting this relation determines the size of the circle from the measured charge.
+
+:::: {.statement-box}
+::: {#def-planck-radius-relation}
+#### Radius-coupling relation
+
+With $2\pi\kappa^2R = \hat\kappa^2$ (@exr-frame-newton) and $e = \sqrt2\kappa/R$, the three parameters of the theory, the
+five-dimensional Newton constant, the radius and the electric charge unit, are related by
+$$
+R = \frac{\sqrt2\,\kappa}{e}, \qquad \kappa^2 = 8\pi G_4 = \frac{8\pi}{M_P^2} ,
+$$ {#eq-radius-coupling}
+so that for $e$ the electron charge $R$ is of order the Planck length [@duff1994, p. 8] (@prp-kk-radius).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The relation can be evaluated with the measured fine-structure constant. The first example does so. The result is a radius of about two dozen Planck lengths.
+
+::: {#exm-radius-numbers}
+#### The numbers
+
+$e^2/4\pi = \alpha \approx 1/137$ and $\kappa = \sqrt{8\pi}/M_P$ give $R = \sqrt2\kappa/e = \sqrt{4/\alpha}\,/M_P \approx 23/M_P
+\sim 4 \times 10^{-34}\,\text{m}$: a circle about two dozen Planck lengths in radius (@exr-kk-numbers).
+:::
+
+The relation can be read the other way. The second example predicts the fine-structure constant from the radius. This is the form in which @overduin1998 states it.
+
+::: {#exm-radius-fine-structure}
+#### The fine-structure constant
+
+Conversely, $\alpha = 4/(M_P^2R^2\phi)$ in the conventions of @overduin1998 [eq. 26]: a Planck-size circle predicts
+$\alpha$ of order one, so the smallness of $\alpha$ requires $R$ somewhat larger than the Planck length, and the
+masses of the tower are then slightly below the Planck mass.
+:::
+
+The massive modes have a remarkable charge-to-mass ratio. The third example connects them with black holes. The coincidence is no accident (Part VI).
+
+::: {#exm-radius-black-holes}
+#### Extreme black holes
+
+The charge-to-mass ratio $e_n/m_n = \sqrt2\kappa$ of the modes is exactly the extremality bound of the charged
+Kaluza-Klein black holes [@duff1994, eq. 19]: the massive Kaluza-Klein states are extreme black holes, a hint
+of the dualities of Part VI.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise estimates the radius and the first mass from the measured couplings. It is the computation behind
+@exm-radius-numbers.
+
+::: {#exr-kk-numbers}
+#### The size of the circle
+
+Using $\alpha = e^2/4\pi \approx 1/137$ and $M_P \approx 1.2 \times 10^{19}\,\text{GeV}$, estimate $R$ and $m_1$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$e = \sqrt{4\pi\alpha} \approx 0.30$ and $\kappa = \sqrt{8\pi}/M_P$, so $R = \sqrt2\kappa/e = \sqrt{16\pi}/(eM_P) \approx 7.1/(0.30\,M_P)
+\approx 23/M_P \approx 2 \times 10^{-18}\,\text{GeV}^{-1} \approx 4 \times 10^{-34}\,\text{m}$, and $m_1 = 1/R \approx 5 \times
+10^{17}\,\text{GeV}$: the first charged mode is a few percent of the Planck mass, and no mode is light. Different
+conventions for $\kappa$ and $e$ shift these by factors of order one (@overduin1998 finds $\alpha \sim 4$ for
+$R = \ell_P$ exactly).
+:::
+
+Modern models consider much larger extra dimensions. The second exercise shows that a TeV-size circle is incompatible
+with the Kaluza-Klein photon being the photon.
+
+::: {#exr-kkr-radius-tev}
+#### A TeV circle
+
+Suppose $m_1 = 1/R = 1\,\text{TeV}$. Compute with Sage the gauge coupling $e = \sqrt2\kappa/R$ and $\alpha = e^2/4\pi$. What
+does this imply for models with TeV-size extra dimensions?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\alpha = 4/(M_PR)^2$ with $M_PR = 1.22 \times 10^{16}$:
+
+{{< sage exr-kkr-radius-tev >}}
+
+$\alpha \approx 3 \times 10^{-32}$: the Kaluza-Klein gauge field of a TeV circle is far too weakly coupled to be the photon.
+Models with large or TeV-size extra dimensions therefore put the Standard Model gauge fields elsewhere (on a brane, or
+in a different sector), and use the circle only for gravity (@arkanihamed1998).
+:::
+
+The relation involves couplings of different dimensions. The third exercise checks the dimensions, a useful habit in
+a theory with several Newton constants.
+
+::: {#exr-kkr-radius-dimensions}
+#### Dimensions
+
+In units $\hbar = c = 1$, find the dimensions of $\hat\kappa^2$, $\kappa^2$, $e$ and $R$, and check $2\pi R\kappa^2 = \hat\kappa^2$ and
+$R = \sqrt2\kappa/e$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The action is dimensionless, $\int d^Dx\sqrt{|g|}R$ has dimension $\text{length}^{D - 2}$, so $\kappa_D^2$ has dimension
+$\text{length}^{D - 2}$: $\hat\kappa^2 \sim \text{length}^3$ and $\kappa^2 \sim \text{length}^2$. The charge $e$ is dimensionless in four
+dimensions ($\alpha = e^2/4\pi$). Then $2\pi R\kappa^2 \sim \text{length}^3$ matches $\hat\kappa^2$, and $\sqrt2\kappa/e \sim \text{length}$
+matches $R$.
+:::
+::::
+
+The tower and its relation to the radius rest on four identities. The first is the eigenvalue equation of the modes and
+the four-dimensional wave equation it implies.
+
+:::: {.statement-box}
+::: {#prp-kk-modes}
+#### The mode functions
+
+$\partial_y^2e^{iny/R} = -(n/R)^2e^{iny/R}$, and on a product mode the five-dimensional Klein-Gordon operator
+$\Box_5 = \Box_4 - \partial_y^2$ gives the four-dimensional one with mass squared $(n/R)^2$, $(\Box_4 + (n/R)^2)\phi_n$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** `KaluzaKlein.AbelianKK.Tower.deriv2_mode` and `KaluzaKlein.AbelianKK.Tower.klein_gordon_mode`, with
+`mass_of_mode` for $m_n = |n|/R$.
+
+{{< lean KaluzaKlein.AbelianKK.Tower.deriv2_mode >}}
+
+**Sage.** Checked symbolically in `figures/kk_tower.sage` and @exr-kk-modes.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The zero mode is the massless one. The first example records it, with the fields it describes. These are the fields of the reduced theory of the previous chapter.
+
+::: {#exm-kkr-modes-zero}
+#### The zero mode
+
+For $n = 0$ the mode function is constant, $\partial_y^2 1 = 0$, and $\phi_0$ obeys $\Box_4\phi_0 = 0$: the massless field of the
+zero-mode truncation. For the metric these are the graviton, the photon and the dilaton of @def-kk-fields.
+:::
+
+The first massive level is doubly degenerate. The second example evaluates it. The degeneracy is a consequence of the reflection symmetry of the circle.
+
+::: {#exm-kkr-modes-first-level}
+#### The first level
+
+For $R = 1$ the modes $n = \pm1$ have $m^2 = 1$, $e^{\pm iy}$ being the two eigenfunctions of $-\partial_y^2$ with eigenvalue $1$, or
+equivalently $\cos y$ and $\sin y$. Every level $n \neq 0$ is doubly degenerate, as the slider of @fig-kk-tower shows by
+the symmetric pattern of masses.
+:::
+
+The mass formula is the four-dimensional reading of the five-dimensional dispersion relation. The third example makes
+this explicit. It is the particle picture of the wave equation.
+
+::: {#exm-kkr-modes-dispersion}
+#### A massless particle in five dimensions
+
+A plane wave $e^{-i(Et - \vec p\cdot\vec x - p_yy)}$ with $p_y = n/R$ solves $\Box_5\Phi = 0$ when $E^2 = \vec p^2 + p_y^2$: a massless
+five-dimensional particle, null with respect to $\hat g$. Four-dimensional observers see $E^2 = \vec p^2 + m_n^2$ with $m_n = |
+p_y|$: mass is momentum in the hidden direction.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise expands a five-dimensional massless scalar in modes with Sage. It also derives the
+four-dimensional Klein-Gordon equation of each mode.
+
+::: {#exr-kk-modes}
+#### The tower of a massless scalar
+
+Expand a five-dimensional massless scalar in modes and derive the four-dimensional equations, orthogonality and
+periodicity with Sage.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-kk-modes >}}
+
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.**
+
+{{< lean KaluzaKlein.AbelianKK.Tower.klein_gordon_mode >}}
+
+**Sage.** The solution above (@exr-kk-modes).
+:::
+
+An interval instead of a circle gives a different tower. The second exercise computes it with Sage, for Dirichlet and
+Neumann conditions.
+
+::: {#exr-kkr-modes-interval}
+#### Modes on an interval
+
+On $0 \leq y \leq \pi R$ find the eigenfunctions of $-\partial_y^2$ with Dirichlet conditions $\Phi = 0$ and with Neumann conditions
+$\partial_y\Phi = 0$ at both ends. Compare the spectra with that of the circle.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Dirichlet: $\sin(ny/R)$, $n \geq 1$; Neumann: $\cos(ny/R)$, $n \geq 0$; eigenvalues $(n/R)^2$ in both cases:
+
+{{< sage exr-kkr-modes-interval >}}
+
+The masses are those of the circle, but each level appears once instead of twice, and the Dirichlet tower has no zero
+mode. The interval is the circle divided by the reflection $y \to -y$, and the two boundary conditions keep the
+odd and the even functions; such orbifolds remove unwanted massless fields.
+:::
+
+The eigenfunctions of $-\partial_y^2$ form a complete orthogonal system. The third exercise places this in the theory of
+unbounded operators.
+
+::: {#exr-kkr-modes-self-adjoint}
+#### The circle Laplacian
+
+Consider $-\partial_y^2$ on $L^2(S^1)$ with domain the periodic functions with square-integrable second derivative. Using
+@sec-unbounded-operators and @sec-fourier-series, explain why it is self-adjoint, find its spectrum, and why every field
+on the circle is a superposition of Kaluza-Klein modes.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+In the Fourier basis $e_n = e^{iny/R}/\sqrt{2\pi R}$, which is orthonormal and complete in $L^2(S^1)$, the operator is
+multiplication by $(n/R)^2$: its domain is the set of $\sum c_ne_n$ with $\sum n^4|c_n|^2 < \infty$, on which it is symmetric,
+and a multiplication operator by a real sequence on its maximal domain is self-adjoint. The spectrum is $\{n^2/R^2 : n
+\in \mathbb{Z}\}$, purely discrete with multiplicity $2$ for $n \neq 0$; completeness of the eigenvectors is the
+completeness of the Fourier series, which is why the expansion @eq-fourier-modes loses nothing.
+:::
+::::
+
+The second identity is the periodicity condition. It is the mathematical core of charge quantisation. Its proof uses only the periodicity of the exponential function.
+
+:::: {.statement-box}
+::: {#prp-kk-periodicity}
+#### Charge quantisation
+
+$e^{in(y + 2\pi R)/R} = e^{iny/R}$ if and only if $n \in \mathbb{Z}$, for $R \neq 0$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.**
+
+{{< lean KaluzaKlein.AbelianKK.Tower.periodic_iff_int >}}
+
+**Sage.** @exr-kkr-periodicity-check.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+A half-integer mode is the simplest failure of periodicity. The first example describes it and where it nonetheless
+appears. Such modes appear when fields are allowed to change sign around the circle.
+
+::: {#exm-kkr-periodicity-half}
+#### $n = \tfrac12$
+
+$e^{i(y + 2\pi R)/2R} = -e^{iy/2R}$: the mode changes sign around the circle. It is not a function on the circle, but it is a
+section of the twisted (Möbius) line bundle over it, and fermions with antiperiodic boundary conditions, as at
+finite temperature, are expanded in such modes (@exr-kkr-charge-twisted).
+:::
+
+Rational values of $n$ are periodic after several turns. The second example counts them. They live on a larger circle.
+
+::: {#exm-kkr-periodicity-rational}
+#### Rational $n$
+
+For $n = p/q$ in lowest terms, $e^{in(y + 2\pi kR)/R} = e^{iny/R}e^{2\pi ikp/q}$ is periodic after $k = q$ turns and not before: such
+a mode lives on the $q$-fold cover of the circle, a circle of radius $qR$, on which it is the integer mode $p$.
+:::
+
+Irrational values are never periodic. The third example notes the consequence for a field theory on the circle. They live on no circle at all.
+
+::: {#exm-kkr-periodicity-irrational}
+#### Irrational $n$
+
+For $n = \sqrt2$ the phases $e^{2\pi i\sqrt2k}$, $k = 1, 2, \dots$, never return to $1$ and are dense on the unit circle: the
+mode is not a function on any finite cover. A field theory on the circle has only integer modes, and the charges of
+all its states are commensurate.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise checks the periodicity criterion with Sage on integers, rationals and an irrational. It mirrors
+the three examples.
+
+::: {#exr-kkr-periodicity-check}
+#### Periodicity in Sage
+
+Evaluate $e^{2\pi iq}$ for $q = 0, 1, -2, \tfrac12, \tfrac13, \tfrac25$, find after how many turns $q = \tfrac25$ returns, and check
+numerically that $q = \sqrt2$ does not return within fifty turns.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-kkr-periodicity-check >}}
+:::
+
+The proof of the proposition uses one property of the exponential. The second exercise reconstructs the argument from that property alone.
+
+::: {#exr-kkr-periodicity-proof}
+#### The proof
+
+Prove @prp-kk-periodicity from the fact that $e^z = 1$ if and only if $z \in 2\pi i\mathbb{Z}$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$e^{in(y + 2\pi R)/R} = e^{iny/R}$ iff $e^{2\pi in} = 1$, dividing by the non-zero $e^{iny/R}$, iff $2\pi in = 2\pi ik$ for some $k \in
+\mathbb{Z}$, iff $n \in \mathbb{Z}$. The radius cancels, which is why the hypothesis $R \neq 0$ is only needed to make $y/R$
+meaningful.
+:::
+
+Periodicity also restricts the gauge parameters. The third exercise shows that this makes the gauge group compact. The argument shows that charge quantisation and compactness are equivalent.
+
+::: {#exr-kkr-periodicity-gauge-group}
+#### The gauge group is compact
+
+Show that the gauge transformations with parameters $\epsilon$ and $\epsilon + 2\pi R$ act identically on every mode $\phi_n$ with $n
+\in \mathbb{Z}$, so that the gauge group is $U(1) = \mathbb{R}/2\pi R\mathbb{Z}$. What would change if a mode with $n = \tfrac12$ were
+present?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\phi_n \mapsto e^{-in\epsilon/R}\phi_n$ and $e^{-in(\epsilon + 2\pi R)/R} = e^{-in\epsilon/R}e^{-2\pi in} = e^{-in\epsilon/R}$ for integer $n$: the shift by
+$2\pi R$ acts trivially and the group is $\mathbb{R}/2\pi R\mathbb{Z} \cong U(1)$. A mode with $n = \tfrac12$ changes sign under
+the shift by $2\pi R$, so only $4\pi R$ would act trivially: the group would be a double cover, still $U(1)$ but with
+the unit of charge halved. Compactness of the gauge group and quantisation of charge are the same statement
+(@exm-isometry-r-vs-u1).
+:::
+::::
+
+The last identity inverts the normalisation of the charge. Its content is algebraic; the normalisation itself is
+taken from the literature.
+
+:::: {.statement-box}
+::: {#prp-kk-radius}
+#### The radius from the coupling
+
+$e = \sqrt2\kappa/R$ gives $R = \sqrt2\kappa/e$; the normalisation $e = \sqrt2\kappa/R$ itself is taken from @duff1994 [eq.
+16].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** `KaluzaKlein.AbelianKK.Tower.radius_of_coupling` (an algebraic identity); the normalisation is cited, not derived.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The radius is expressed most usefully through $\alpha$ and $M_P$. The first example rewrites the proposition in these
+terms. It is the form used in numerical estimates.
+
+::: {#exm-kkr-radius-alpha}
+#### In terms of $\alpha$
+
+With $\kappa = \sqrt{8\pi}/M_P$ and $e = \sqrt{4\pi\alpha}$: $R = \sqrt2\sqrt{8\pi}/(M_P\sqrt{4\pi\alpha}) = 2/(\sqrt\alpha\,M_P)$. The radius is
+inversely proportional to the square root of the fine-structure constant: a weaker electromagnetism needs a larger
+circle.
+:::
+
+The normalisation was derived in @exr-kkr-action-normalisation. The second example retraces the steps that lead
+to it. The factor $\sqrt2$ is a consequence of the normalisation of the Einstein-Hilbert action.
+
+::: {#exm-kkr-radius-origin}
+#### Where $\sqrt2\kappa/R$ comes from
+
+The reduced action has $-\frac{1}{2\kappa^2}\cdot\tfrac14F^2$ with $A$ the potential of the coordinate $y$ of period $2\pi R$
+(dimensionless $A$); the canonical field is $\mathcal{A} = A/(\sqrt2\kappa)$, and the mode $n$ couples through $\partial - i(n/R)A =
+\partial - in(\sqrt2\kappa/R)\mathcal{A}$ (@exm-charge-covariant-derivative). So the unit of charge is $\sqrt2\kappa/R$.
+:::
+
+The proposition fixes one of the three parameters in terms of the others. The third example lists what is predicted
+and what is input.
+
+::: {#exm-kkr-radius-parameters}
+#### Inputs and predictions
+
+The five-dimensional theory has two parameters, $\hat\kappa$ and $R$. Four-dimensional physics measures $\kappa$ (Newton's
+constant) and $e$ (the electron charge, if it were a Kaluza-Klein charge): $R = \sqrt2\kappa/e$ and $\hat\kappa^2 = 2\pi R\kappa^2$
+follow, and the masses $|n|/R$ of the tower are then a prediction, the unsuccessful one of @exm-mass-planck.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The first exercise solves the relation with Sage and evaluates it. It checks the closed form of @exm-kkr-radius-alpha. The numerical value is the one quoted in @exm-radius-numbers.
+
+::: {#exr-kkr-radius-solve}
+#### Solving for the radius
+
+Solve $e = \sqrt2\kappa/R$ for $R$ with Sage, substitute $\kappa^2 = 8\pi/M_P^2$ and $e^2 = 4\pi\alpha$, and evaluate $RM_P$ for $\alpha =
+1/137.036$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+{{< sage exr-kkr-radius-solve >}}
+
+$R \approx 23.4/M_P$, in agreement with @exr-kk-numbers.
+:::
+
+The relation can be written with the five-dimensional coupling. The second exercise eliminates $\kappa$. The result explains the exponent in @fig-kkr-couplings.
+
+::: {#exr-kkr-radius-five-dimensional}
+#### In five-dimensional terms
+
+Using $\hat\kappa^2 = 2\pi R\kappa^2$, express $e^2$ through $\hat\kappa$ and $R$. How does the charge unit scale with the radius at
+fixed five-dimensional coupling?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$e^2 = 2\kappa^2/R^2 = 2\hat\kappa^2/(2\pi R \cdot R^2) = \hat\kappa^2/(\pi R^3)$. At fixed $\hat\kappa$ the charge unit falls like $R^{-3/2}$:
+a larger circle dilutes both gravity ($\kappa^2 \propto 1/R$) and electromagnetism, the latter faster. This is the
+$\phi^{-3/2}$ of @fig-kkr-couplings, with $R\phi$ the radius.
+:::
+
+Above the energy $1/R$ the four-dimensional theory is replaced by the five-dimensional one. The third exercise relates
+this to the effective field theories of @sec-renormalisation.
+
+::: {#exr-kkr-radius-effective-theory}
+#### The tower as an ultraviolet completion
+
+Count the modes with mass below a cutoff $\Lambda$, and estimate how a one-loop sum over the tower of a quantity that
+receives a contribution $c$ from each mode below $\Lambda$ grows with $\Lambda$. In the sense of @def-effective-field-theory, what
+is the cutoff of the four-dimensional zero-mode theory, and what replaces it above?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The modes with $|n|/R < \Lambda$ number $2\lfloor\Lambda R\rfloor + 1 \approx 2\Lambda R$ (the count of the interactive @fig-kk-tower), so
+such a sum grows like $2c\Lambda R$, one power of $\Lambda$ more than a single field would give: above $1/R$ the theory
+behaves as a five-dimensional one, with five-dimensional power counting. The zero-mode theory is an effective
+field theory valid below $\Lambda \sim 1/R$, where the first massive modes appear; above it the tower, i.e. the
+five-dimensional theory, takes over, itself an effective theory below its own Planck scale $\hat\kappa^{-2/3}$.
+:::
+::::
+
+## Fermions on the circle {#sec-kk-fermions}
+
+The two previous sections expanded bosonic fields on the circle. A five-dimensional fermion gives a tower too, but with
+three new features. Its covariant derivative contains the spin connection of the ansatz, which couples the spin of every
+mode to the field strength $F_{\mu\nu}$ and changes the magnetic moment; it may be periodic or antiperiodic around the
+circle, the two spin structures of @exm-spd-spin-circle, which shifts the masses and halves the unit of charge; and its
+four-dimensional modes always come in left-right pairs, so the circle cannot produce the chiral fermions of the Standard
+Model, while the orbifold $S^1/\mathbb{Z}_2$ can. The algebra of five-dimensional spinors, the spectrum of $i\,d/dy$ for
+every twist and the orbifold projection are in @sec-spinors-dirac-operator (@exr-spd-five-four, @def-scherk-schwarz-twist,
+@exm-spd-s1z2); this section does the physics, following @perezlorenzana2005 [Secs. III.A, IV.C-D and V.1] for the
+towers and the orbifold and @duff1998gyromagnetic [Sec. 2] for the magnetic moment. Throughout, $\phi = 1$ and $y \sim y + 2\pi
+R$, as in @sec-kk-tower.
+
+### The Dirac operator on $M^4 \times S^1$
+
+On the Kaluza-Klein ansatz the five-dimensional Dirac operator splits into the four-dimensional operator with the
+covariant derivative of charge $n/R$, the internal operator whose eigenvalues are the masses, and one more term, built from
+the spin connection, that couples the spin to $F_{\mu\nu}$. The figure shows its effect on the Landau levels of the first
+massive mode.
+
+![The lowest Landau levels of the first massive Kaluza-Klein fermion in a weak magnetic field (solid), compared with an
+elementary Dirac particle of the same charge and mass (dashed), in the non-relativistic limit $E - m = \omega(N + \tfrac12) -
+\tfrac12 g\omega s$ with $\omega = |q|B/m$ and $s = \pm\tfrac12$. The Kaluza-Klein mode has $g = 1$ (@prp-kkf-mode-equation), so
+its spin splitting is half as large and its lowest level rises as $\tfrac14\omega$; for $g = 2$ the lowest level stays at $E =
+m$. The spin-connection term and the chiral rotation that produce $g = 1$ are checked with explicit gamma matrices.
+Generated by `figures/kkf-zeeman.sage`; the interactive version adds the level $N = 2$.](figures/kkf-zeeman.svg){#fig-kkf-zeeman width=70%}
+
+{{< interactive kkf-zeeman 460 >}}
+
+The definition needs a frame for the ansatz. The natural one makes the fifth leg the one-form $dy + A$ that already
+appears in the line element, so that the gauge field enters the frame rather than the gamma matrices.
+
+:::: {.statement-box}
+::: {#def-kkf-five-dirac}
+#### Five-dimensional Dirac operator
+
+On $M^4 \times S^1$ with the ansatz $d\hat s^2 = g_{\mu\nu}dx^\mu dx^\nu - (dy + A_\mu dx^\mu)^2$ of @def-kk-ansatz at $\phi
+= 1$, take the frame and its dual
+$$
+\hat E^a = e^a{}_\mu dx^\mu, \quad \hat E^4 = dy + A_\mu dx^\mu, \qquad \hat E_a = e_a{}^\mu(\partial_\mu - A_\mu\partial_y), \quad
+\hat E_4 = \partial_y ,
+$$ {#eq-kkf-frame}
+with $\eta_{AB} = \operatorname{diag}(1, -1, -1, -1, -1)$, and the gamma matrices $\Gamma^a = \gamma^a$, $\Gamma^4 = i\gamma_5$ of
+@exr-spd-five-four. The torsion-free spin connection, $d\hat E^A + \omega^A{}_B \wedge \hat E^B = 0$, is
+$$
+\omega_{ab} = \mathring\omega_{ab} + \tfrac12F_{ab}\hat E^4, \qquad \omega_{4a} = -\tfrac12F_{ab}\hat E^b ,
+$$ {#eq-kkf-spin-connection}
+with $\mathring\omega$ that of $e^a$ and $F_{ab} = e_a{}^\mu e_b{}^\nu F_{\mu\nu}$. The **five-dimensional Dirac operator** is
+$i\Gamma^A\hat E_A{}^M\nabla_M$ with $\nabla_M = \partial_M + \tfrac14\omega_{AB M}\Gamma^A\Gamma^B$, and on the ansatz it reads
+$$
+i\Gamma^A\nabla_A = i\gamma^ae_a{}^\mu(\mathring\nabla_\mu - A_\mu\partial_y) - \gamma_5\partial_y - \tfrac{i}{8}F_{ab}\gamma^a\gamma^b\,i\gamma_5 ,
+$$ {#eq-kkf-dirac}
+where $\mathring\nabla$ is the spinor covariant derivative of $g_{\mu\nu}$. The last term, the **Pauli term**, comes from the
+mixed components $\omega_{4a}$ and $\omega_{ab}(\hat E_4)$ of the spin connection. For $A = 0$ and $g = \eta$ the operator is the
+flat one of @perezlorenzana2005 [eqs. (35)-(38)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+When the gauge field vanishes the frame is a product, the Pauli term drops out and the operator is that of a flat
+five-dimensional space. The first example records this case, which @sec-spinors-dirac-operator treats in full.
+
+::: {#exm-kkf-flat-five}
+#### The product $M^4 \times S^1$
+
+For $A = 0$ and $g = \eta$, @eq-kkf-dirac is $i\gamma^\mu\partial_\mu - \gamma_5\partial_y$: on $\psi = \chi(x)e^{iny/R}$ it becomes
+$(i\gamma^\mu\partial_\mu - i\tfrac nR\gamma_5)\chi$, the equation of @exr-spd-branch-mass with $\lambda = -n/R$, and the
+four-dimensional mass is $|n|/R$. A five-dimensional Dirac spinor has four complex components, a four-dimensional Dirac spinor
+at every level [@perezlorenzana2005, eqs. (35)-(36)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A constant gauge field has no field strength, so it changes only the derivative. The second example shows that it is
+removed by the reparametrisation of @def-circle-reparametrisation, exactly as for scalars.
+
+::: {#exm-kkf-constant-a}
+#### A constant potential
+
+For constant $A_\mu$ and $g = \eta$ the operator is $i\gamma^\mu(\partial_\mu - A_\mu\partial_y) - \gamma_5\partial_y$; on the mode $n$ the
+first term is $i\gamma^\mu(\partial_\mu - i\tfrac nRA_\mu)$. The shift $y \to y + A_\mu x^\mu$ maps the frame @eq-kkf-frame to
+that of $A = 0$ and multiplies the mode by $e^{-inA_\mu x^\mu/R}$ (@exm-gauge-charged-modes): a pure gauge, as long as no spatial
+direction is compact (@exr-kkr-int-charged-scalar).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+Only $F_{\mu\nu}$ can appear besides the minimal coupling, because the operator is covariant under the gauge
+transformations of @def-kk-gauge-transformation. The third example identifies the term it produces.
+
+::: {#exm-kkf-field-strength}
+#### The coupling to the field strength
+
+With $\Gamma^4 = i\gamma_5$ the Pauli term is $\tfrac18F_{ab}\gamma^a\gamma^b\gamma_5$, a matrix that commutes with $\gamma_5$ and
+anticommutes with every $\gamma^\mu$: it has the chirality structure of a mass term, and after the chiral rotation of
+@exr-spd-branch-mass it becomes the magnetic dipole coupling $-\tfrac18\sigma^{\mu\nu}F_{\mu\nu}$ with $\sigma^{\mu\nu} =
+\tfrac{i}{2}[\gamma^\mu, \gamma^\nu]$ (@exr-kkf-gamma-contraction). Its coefficient is fixed by the geometry and does not depend on the
+mode number.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The spin connection @eq-kkf-spin-connection was guessed and checked. The first exercise checks it with Sage, as a
+statement about differential forms.
+
+::: {#exr-kkf-cartan}
+#### The structure equations
+
+Take $e^a = dx^a$ on flat $\mathbb{R}^4$ and an arbitrary potential $A_\mu(x)$. Verify with Sage that @eq-kkf-spin-connection
+satisfies $d\hat E^A + \omega^A{}_B \wedge \hat E^B = 0$ for $A = 0, \dots, 4$ and that $\omega_{AB} = -\omega_{BA}$, by writing all
+two-forms in the basis $\hat E^A \wedge \hat E^B$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $\hat E^4 = dy + A$, $d\hat E^4 = dA = \tfrac12F_{ab}\hat E^a \wedge \hat E^b$, which $\omega^4{}_a \wedge \hat E^a = -\omega_{4a} \wedge
+\hat E^a = \tfrac12F_{ab}\hat E^b \wedge \hat E^a$ cancels; and $\omega^a{}_b \wedge \hat E^b + \omega^a{}_4 \wedge \hat E^4 = \tfrac12F^a{}_b
+\hat E^4 \wedge \hat E^b + \tfrac12F^a{}_b\hat E^b \wedge \hat E^4 = 0$, as $d\hat E^a = 0$ requires. The script checks all five
+components for a general $A$:
+
+{{< sage exr-kkf-cartan >}}
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The coefficient $-\tfrac18$ comes from two contributions of opposite sign. The second exercise separates them and checks the
+sum with explicit matrices.
+
+::: {#exr-kkf-gamma-contraction}
+#### Two contributions to the Pauli term
+
+Show that the $\omega_{ab}(\hat E_4)$ part of $\tfrac14\Gamma^C\omega_{ABC}\Gamma^A\Gamma^B$ gives $+\tfrac18F_{ab}\gamma^a\gamma^b\Gamma^4$
+and the $\omega_{4a}(\hat E_b)$ part $-\tfrac14F_{ab}\gamma^a\gamma^b\Gamma^4$. Check the total with Sage for a random $F_{ab}$, and show
+that $e^{-i\pi\gamma_5/4}\big(\tfrac18F_{ab}\gamma^a\gamma^b\gamma_5\big)e^{-i\pi\gamma_5/4} = -\tfrac18\sigma^{ab}F_{ab}$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The first part is $\tfrac14\Gamma^4\cdot\tfrac12F_{ab}\gamma^a\gamma^b = \tfrac18F_{ab}\gamma^a\gamma^b\Gamma^4$, since $\Gamma^4$ commutes with
+$\gamma^a\gamma^b$. The second is $\tfrac14\gamma^c(\omega_{4ac}\Gamma^4\gamma^a + \omega_{a4c}\gamma^a\Gamma^4) = \tfrac18F_{ac}\gamma^c(\gamma^a\Gamma^4 -
+\Gamma^4\gamma^a) = \tfrac14F_{ac}\gamma^c\gamma^a\Gamma^4 = -\tfrac14F_{ab}\gamma^a\gamma^b\Gamma^4$. The sum is $-\tfrac18F_{ab}\gamma^a\gamma^b\Gamma^4$.
+For the rotation, $e^{-i\pi\gamma_5/4}Xe^{-i\pi\gamma_5/4} = Xe^{-i\pi\gamma_5/2} = -iX\gamma_5$ for $X$ commuting with $\gamma_5$, and
+$F_{ab}\gamma^a\gamma^b = -iF_{ab}\sigma^{ab}$:
+
+{{< sage exr-kkf-gamma-contraction >}}
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The Dirac operator must be self-adjoint for the action to be real. The third exercise checks that the Pauli term does not
+spoil this.
+
+::: {#exr-kkf-hermitian}
+#### A real action
+
+With $\bar\psi = \psi^\dagger\gamma^0$, show that $\bar\psi\,\tfrac18F_{ab}\gamma^a\gamma^b\gamma_5\psi$ is real for real $F_{ab}$, and that
+$\bar\psi\gamma_5\partial_y\psi$ is real up to a total $y$-derivative. Conclude that the action $\int d^4x\,dy\,\bar\psi\,i\Gamma^A\nabla_A\psi$ is
+real on the circle.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$(\bar\psi M\psi)^* = \bar\psi\gamma^0M^\dagger\gamma^0\psi$. For $M = \gamma^a\gamma^b\gamma_5$ with $a \neq b$: $\gamma^0(\gamma^a\gamma^b\gamma_5)^\dagger\gamma^0 =
+\gamma^0\gamma_5\gamma^{b\dagger}\gamma^{a\dagger}\gamma^0 = -\gamma_5\gamma^b\gamma^a = -\gamma^b\gamma^a\gamma_5 = \gamma^a\gamma^b\gamma_5$, using $\gamma^0\gamma^{\mu\dagger}\gamma^0 = \gamma^\mu$
+and $\gamma^0\gamma_5 = -\gamma_5\gamma^0$; so the term is real. For $M = \gamma_5\partial_y$: $(\bar\psi\gamma_5\partial_y\psi)^* = -\partial_y\bar\psi\,\gamma_5\psi =
+\bar\psi\gamma_5\partial_y\psi - \partial_y(\bar\psi\gamma_5\psi)$, and the derivative integrates to zero around the circle. The four-dimensional
+part is the usual real Dirac action up to total derivatives, so the whole action is real, which is the statement that the
+operator is formally self-adjoint (@def-dirac-operator).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+Expanding in modes turns the operator into an infinite set of four-dimensional Dirac operators. The proposition is the
+fermionic version of @prp-kk-modes, and it contains the magnetic moment of the modes.
+
+:::: {.statement-box}
+::: {#prp-kkf-mode-equation}
+#### The tower of a five-dimensional fermion
+
+Let $\psi(x, y) = \sum_{n \in \mathbb{Z}}\psi_n(x)e^{iny/R}$ solve $i\Gamma^A\nabla_A\psi = 0$ on the ansatz of @def-kkf-five-dirac, and set
+$\chi_n = e^{i\pi s_n\gamma_5/4}\psi_n$ with $s_n = \operatorname{sign}n$ ($s_0 = 1$). Then
+$$
+\Big(i\gamma^\mu(\mathring\nabla_\mu - iq_nA_\mu) - m_n - \frac{s_n}{8}\sigma^{\mu\nu}F_{\mu\nu}\Big)\chi_n = 0, \qquad q_n = \frac nR,
+\quad m_n = \frac{|n|}{R} .
+$$ {#eq-kkf-mode-equation}
+Each mode is a four-dimensional Dirac fermion of mass $m_n$ and charge $q_n$, the charges and masses of the bosonic tower
+(@def-charge-quantisation, @def-kk-mass), with a Pauli coupling of fixed strength. For $n \neq 0$ the total magnetic moment
+is half the value $g = 2$ of the Dirac equation (@thm-dq-pauli-limit): the massive modes have the gyromagnetic ratio $g = 1$
+[@duff1998gyromagnetic, Sec. 2].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The zero mode is neutral, yet the Pauli term survives for it. The first example states what this means for the lightest fermion of the tower.
+
+::: {#exm-kkf-zero-mode}
+#### A neutral fermion with a magnetic moment
+
+For $n = 0$, @eq-kkf-mode-equation is $(i\gamma^\mu\mathring\nabla_\mu - \tfrac18\sigma^{\mu\nu}F_{\mu\nu})\chi_0 = 0$: a massless, neutral
+Dirac fermion with a magnetic dipole coupling to the Kaluza-Klein photon, like a neutron without a mass. The coupling comes
+from the spin connection alone; a fermion that is a zero mode of the circle cannot be the electron, which is charged
+(@exr-kkr-charge-ratio).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The first massive level contains a particle and its antiparticle. The second example reads off their charges and shows that
+they are the two modes $n = \pm1$.
+
+::: {#exm-kkf-first-level}
+#### The level $|n| = 1$
+
+The modes $n = 1$ and $n = -1$ have the same mass $1/R$ and opposite charges $\pm1/R$, and the opposite signs $s_{\pm1}$ of their
+Pauli terms follow the signs of their charges. They are exchanged by the reflection $y \to -y$, which is charge conjugation
+on the tower (@exm-charge-conjugation); a five-dimensional Dirac fermion therefore gives at each level $|n| \geq 1$ a charged
+four-dimensional Dirac fermion and its antiparticle, with masses at the Planck scale when $R$ is fixed by $\alpha$
+(@prp-kk-radius).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The value $g = 1$ is a prediction that distinguishes Kaluza-Klein states from elementary particles. The third example
+explains why it does not contradict the general arguments for $g = 2$.
+
+::: {#exm-kkf-g-factor}
+#### Why $g = 1$ is allowed
+
+Tree-level unitarity of a charged particle coupled to a photon up to energies $E \gg M/|Q|$ requires $g = 2$; Kaluza-Klein states
+have $M \sim |Q|$ in Planck units (@exr-kkr-charge-ratio), so the window $M_{\rm Pl} > E > M/|Q|$ in which the argument applies
+is empty [@duff1998gyromagnetic, Sec. 2]. The value $g = 1$ holds for the massive modes of every field reduced on a circle,
+of any spin, and in any dimension [@duff1998gyromagnetic, Sec. 2, eqs. (1)-(5)]; for the spinor it is the combination of the
+minimal coupling and the Pauli term of @eq-kkf-mode-equation.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The chiral rotation that turns the five-dimensional equation into a Dirac equation with a positive mass depends on the
+sign of $n$. The first exercise performs it for both signs.
+
+::: {#exr-kkf-chiral-rotation}
+#### The rotation for both signs
+
+Insert $\psi_n e^{iny/R}$ into @eq-kkf-dirac and show that $\psi_n$ satisfies $\big(i\gamma^\mu D_\mu - i\tfrac nR\gamma_5 + \tfrac18F_{ab}
+\gamma^a\gamma^b\gamma_5\big)\psi_n = 0$ with $D_\mu = \mathring\nabla_\mu - i\tfrac nRA_\mu$. Then derive @eq-kkf-mode-equation for $n > 0$ and for
+$n < 0$, and explain why the zero mode can be rotated either way.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$-\gamma_5\partial_y$ gives $-i\tfrac nR\gamma_5$ and $-\tfrac i8F\gamma\gamma\,i\gamma_5 = \tfrac18F\gamma\gamma\gamma_5$. Write $\psi_n = e^{-i\pi s\gamma_5/4}\chi$ and
+multiply by $e^{-i\pi s\gamma_5/4}$: the kinetic term is unchanged, since $\gamma_5$ anticommutes with $\gamma^\mu$, while every term $X$
+commuting with $\gamma_5$ becomes $Xe^{-i\pi s\gamma_5/2} = -isX\gamma_5$. So $-i\tfrac nR\gamma_5 \to -s\tfrac nR = -\tfrac{|n|}{R}$ and
+$\tfrac18F\gamma\gamma\gamma_5 \to -\tfrac{is}{8}F\gamma\gamma = -\tfrac s8\sigma^{\mu\nu}F_{\mu\nu}$ (@exr-kkf-gamma-contraction). For $n = 0$ there is no
+mass, and a chiral rotation of a massless fermion is a change of variables: either sign of $s_0$ gives an equivalent
+equation.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The gyromagnetic ratio is read off in the non-relativistic limit. The second exercise does this by comparing the Pauli term
+with the moment of the Dirac equation.
+
+::: {#exr-kkf-g-value}
+#### Reading off $g$
+
+For a static magnetic field, $\sigma^{ij}F_{ij} = -2\vec\Sigma\cdot\vec B$. Show that a term $-\tfrac{\mu'}{2}\sigma^{\mu\nu}F_{\mu\nu}$ in the
+Dirac equation adds the energy $-\mu'\vec\Sigma\cdot\vec B$ at rest. With the convention $D_\mu = \partial_\mu - iq_nA_\mu$, so that the
+charge in the sense of @def-dq-minimal-coupling is $-q_n$, find the Dirac moment of the mode $n > 0$, add the Pauli moment and
+compute $g$ with @eq-dq-pauli.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+At rest the upper components satisfy $E\varphi = (m - \mu'\vec\Sigma\cdot\vec B)\varphi$, since $-\tfrac{\mu'}{2}(-2\vec\Sigma\cdot\vec B)$ enters
+$(i\gamma^\mu D_\mu - m + \mu'\vec\Sigma\cdot\vec B)\psi = 0$: the moment is $\mu'\vec\Sigma$. The minimal coupling gives the moment
+$\tfrac{(-q_n)}{2m_n}\vec\Sigma = -\tfrac12\vec\Sigma$ ($g = 2$ for the charge $-q_n$, @thm-dq-pauli-limit), and the Pauli term $\tfrac18 =
+\tfrac{\mu'}{2}$ adds $\mu' = \tfrac14$. The total $-\tfrac14\vec\Sigma$ is half the Dirac moment: $g = 1$. For $n < 0$ both the charge and the
+sign $s_n$ change, and $g = 1$ again.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+Halving the magnetic moment changes the Landau levels of @fig-kkf-zeeman. The third exercise computes them with Sage in the
+Pauli approximation.
+
+::: {#exr-kkf-landau}
+#### Landau levels with $g = 1$
+
+In the Pauli equation the levels in a constant field are $E - m = \omega(N + \tfrac12) - \tfrac12g\omega s$, $N = 0, 1, \dots$, $s =
+\pm\tfrac12$, with $\omega = |q|B/m$. With Sage, list the five lowest levels for $g = 1$ and $g = 2$ with their degeneracies in
+$(N, s)$, and find which coincidences of $g = 2$ are lifted when $g = 1$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+For $g = 2$ the levels are $\omega N'$ with $N' = N + \tfrac12 - s$: $0$ once and every $N' \geq 1$ twice, since $(N, s) = (N', \tfrac12)$
+and $(N' - 1, -\tfrac12)$ coincide. For $g = 1$ they are $\omega(N + \tfrac14)$ and $\omega(N + \tfrac34)$, all distinct:
+
+{{< sage exr-kkf-landau >}}
+
+The pairing of the levels that $g = 2$ produces (@fig-kkf-zeeman) is absent for Kaluza-Klein states, a
+signature by which a tower of charged fermions could in principle be recognised.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+### The fermion tower
+
+A fermion need not be periodic around the circle: only bilinears such as the current must be, so a spinor may change sign.
+The figure places the modes of both spin structures in the plane of charge and mass; the interactive version varies the
+twist continuously.
+
+![Charges and masses of the Kaluza-Klein modes on a circle of radius $R$. Bosons and periodic fermions (circles) have
+momenta $k = n$; antiperiodic fermions (triangles) have $k = n + \tfrac12$. Every mode has charge $k/R$ and mass $|k|/R$, so all
+lie on the lines $|q| = m$ (@def-kkf-fermion-tower); in units of $1/(2R)$ the bosonic charges are even and the antiperiodic
+fermionic charges odd (@prp-kkf-twist-charge). Generated by `figures/kkf-charge-mass.sage`; the interactive version shows the
+twists $\alpha = 0.1, 0.25, 0.5, 0.75$.](figures/kkf-charge-mass.svg){#fig-kkf-charge-mass width=70%}
+
+{{< interactive kkf-charge-mass 460 >}}
+
+The definition allows the general phase of @def-scherk-schwarz-twist, which includes both spin structures. It assigns to every
+mode a mass and a charge exactly as for scalars.
+
+:::: {.statement-box}
+::: {#def-kkf-fermion-tower}
+#### Fermion tower
+
+A fermion on $M^4 \times S^1$ with **twist** $\alpha \in [0, 1)$ satisfies $\psi(x, y + 2\pi R) = e^{2\pi i\alpha}\psi(x, y)$, and its
+**fermion tower** is the expansion
+$$
+\psi(x, y) = \sum_{n \in \mathbb{Z}}\psi_n(x)\,e^{i(n + \alpha)y/R} ,
+$$ {#eq-kkf-twisted-modes}
+with four-dimensional Dirac fermions $\psi_n$ of mass $m_n = |n + \alpha|/R$ and charge $q_n = (n + \alpha)/R$ under the
+Kaluza-Klein $U(1)$. The value $\alpha = 0$ is the periodic and $\alpha = \tfrac12$ the antiperiodic spin structure of the circle
+(@exm-spd-spin-circle); other values are Scherk-Schwarz twists by a global phase symmetry [@perezlorenzana2005, Sec. IV.D,
+eqs. (75)-(77)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+With the periodic structure the fermion tower is the bosonic one. The first example states this and what it means for
+supersymmetry.
+
+::: {#exm-kkf-periodic-tower}
+#### The periodic structure
+
+For $\alpha = 0$ the masses $|n|/R$ and charges $n/R$ are those of @fig-kk-tower, level by level, and there is a massless zero
+mode (@prp-kkf-mode-equation). A five-dimensional supermultiplet on the periodic circle therefore gives degenerate bosonic and
+fermionic towers: the reduction on a circle with the periodic structure preserves all the supersymmetry, the massive levels
+forming massive supermultiplets.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The antiperiodic structure shifts every momentum by a half. The second example describes the resulting tower, which has no
+zero mode.
+
+::: {#exm-kkf-antiperiodic-tower}
+#### The antiperiodic structure
+
+For $\alpha = \tfrac12$ the masses are $\tfrac{1}{2R}, \tfrac{1}{2R}, \tfrac{3}{2R}, \tfrac{3}{2R}, \dots$, each level twice degenerate ($n$ and $-n -
+1$), with charges $\pm\tfrac{1}{2R}, \pm\tfrac{3}{2R}, \dots$: half-integer multiples of the unit $1/R$ of the bosonic tower
+(@fig-kkf-charge-mass, @exr-kkr-charge-twisted). The lightest fermions have mass $1/(2R)$, the largest gap any twist can open
+(@exm-spd-twist-circle).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+Giving the bosons and the fermions of a supermultiplet different twists breaks supersymmetry. The third example is the
+Scherk-Schwarz mechanism in its simplest form.
+
+::: {#exm-kkf-scherk-schwarz}
+#### Supersymmetry breaking by a twist
+
+Let the bosons of a five-dimensional supermultiplet be periodic and the fermions twisted by $\alpha$, the twist being a
+global symmetry that acts differently on the two, as in @def-vcr-scherk-schwarz-twist. The bosonic zero modes stay massless and
+the fermionic ones get the mass $\min(\alpha, 1 - \alpha)/R$, largest for $\alpha = \tfrac12$; the whole tower is split by the
+same shift (@exr-spd-scherk-schwarz-gap). For the gravitino (@def-gravitino) this is a mass $1/(2R)$ set by the radius alone:
+supersymmetry is broken at the compactification scale [@perezlorenzana2005, Sec. IV.D].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The bosonic and fermionic towers of @fig-kkf-charge-mass interleave. The first exercise counts the modes of both with Sage below a given
+energy.
+
+::: {#exr-kkf-tower-count}
+#### Counting states below an energy
+
+With Sage, count the modes with mass below $E$ for $\alpha = 0$ and $\alpha = \tfrac12$, for $ER = 0.3, 1.2, 2.7, 10.4$, and show that the
+counts are $2\lfloor ER\rfloor + 1$ and $2\lfloor ER + \tfrac12\rfloor$. How do they compare for $ER \gg 1$?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$|n| < ER$ gives $2\lfloor ER\rfloor + 1$ modes (@exr-kkr-int-counting), and $|n + \tfrac12| < ER$ gives $n = -\lfloor ER + \tfrac12\rfloor,
+\dots, \lfloor ER + \tfrac12\rfloor - 1$, that is $2\lfloor ER + \tfrac12\rfloor$:
+
+{{< sage exr-kkf-tower-count >}}
+
+The difference is at most one: at high energy the two towers have the same density $2R$ of states per unit mass, and the
+spin structure is invisible, as the five-dimensional density of states must be.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+Bosons and fermions of a supermultiplet contribute to the vacuum energy with opposite signs. The second exercise uses the
+Casimir energies of @prp-ren-casimir-circle to see what the twist does to the radius.
+
+::: {#exr-kkf-casimir}
+#### The vacuum energy of a twisted supermultiplet
+
+Take a five-dimensional multiplet with four real massless scalars and one massless Dirac fermion. Using @prp-ren-casimir-circle
+(a Dirac fermion counts $-4$ times a scalar with its own boundary condition), compute the one-loop vacuum energy for periodic
+fermions and for antiperiodic fermions. Is the circle pushed to grow or to shrink?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $c = \tfrac{3\zeta(5)}{4\pi^2\ell^4}$, a periodic scalar contributes $-c$ and an antiperiodic one $+\tfrac{15}{16}c$. Periodic fermions:
+$4(-c) - 4(-c) = 0$, the supersymmetric cancellation. Antiperiodic fermions: $4(-c) - 4\cdot\tfrac{15}{16}c = -\tfrac{31}{4}c$. The energy is
+negative and grows in magnitude as $\ell^{-4}$ when $\ell$ decreases, so the force pushes the circle to shrink: breaking
+supersymmetry by the twist makes the radius unstable at one loop, as in @ponton2001casimir.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The twist of a fermion is a holonomy, so it can also come from a background gauge field. The third exercise combines the
+two for a fermion that is charged under a five-dimensional $U(1)$.
+
+::: {#exr-kkf-wilson-line}
+#### Twist and Wilson line
+
+A periodic five-dimensional fermion of charge $e'$ under a five-dimensional gauge field $B_M$ (not the Kaluza-Klein field) sees a
+constant $B_y = \theta/(e'R)$, so that $\partial_y$ is replaced by $D_y = \partial_y + ie'B_y$. Show that its masses are those of the tower of
+@def-kkf-fermion-tower with $\alpha = \theta$ modulo $1$, and that the field redefinition $\psi' = e^{ie'B_yy}\psi$ removes $B_y$ at the price of
+the twist. Which quantity is gauge invariant?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$D_y$ acts on $e^{iny/R}$ as $i(n + \theta)/R$, so the masses are $|n + \theta|/R$, those of the twisted tower with $\alpha \equiv \theta$. Since
+$\partial_y\psi' = e^{i\theta y/R}D_y\psi$, the field $\psi'$ obeys the equation without $B_y$, and $\psi'(y + 2\pi R) = e^{2\pi i\theta}\psi'(y)$. The
+invariant is the holonomy $e^{ie'\oint B} = e^{2\pi i\theta}$ (@exm-spd-twist-gauge): the twist and the Wilson line are one quantity, as in
+the Hosotani mechanism [@perezlorenzana2005, Sec. IV.D].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+The charges of an antiperiodic fermion are half-integers in the bosonic unit. The proposition interprets this as a statement
+about the gauge group of the circle.
+
+:::: {.statement-box}
+::: {#prp-kkf-twist-charge}
+#### Charges of the twisted tower
+
+The Kaluza-Klein $U(1)$, generated by $\partial_y$, acts on the mode $\psi_n$ of @eq-kkf-twisted-modes by $e^{i(n + \alpha)\epsilon/R}$ for the
+shift $y \to y + \epsilon$. All charges are multiples of $1/R$ if and only if $\alpha = 0$. For $\alpha = \tfrac12$ the shift by one full
+period $\epsilon = 2\pi R$ acts as $(-1)^F$, $+1$ on bosons and $-1$ on fermions, the charges are multiples of $1/(2R)$, odd for fermions
+and even for bosons, and the group that acts faithfully is the double cover of the circle of period $2\pi R$. For rational $\alpha = p/k$
+in lowest terms the charges are multiples of $1/(kR)$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+A fermion pair is a boson. The first example checks that it carries an integer charge, as a bosonic mode must.
+
+::: {#exm-kkf-pair-charge}
+#### Pairs of fermions
+
+Two antiperiodic modes $n_1$, $n_2$ have total charge $(n_1 + n_2 + 1)/R$, an integer multiple of $1/R$, and their product $e^{i(n_1 + n_2 +
+1)y/R}$ is periodic: every bilinear $\bar\psi\Gamma\psi$ of an antiperiodic fermion is an ordinary function on the circle, as the action
+requires. A single fermion is never a function on the circle, which is why the half-integer charges are allowed.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The sign $(-1)^F$ is a rotation in disguise. The second example connects it with the rotation by $2\pi$ of
+@sec-spin-groups.
+
+::: {#exm-kkf-fermion-number}
+#### $(-1)^F$ from geometry
+
+The shift by $2\pi R$ around a circle of an antiperiodic spinor is the same sign $-1$ as the rotation by $2\pi$ of a spinor
+(@def-spin-group): on the antiperiodic structure the spinor bundle of the circle is the Möbius bundle of @exm-kkr-periodicity-half,
+and translation once around acts as $(-1)^F$. On the thermal circle of @exr-kkr-truncation-thermal the same sign gives the
+antiperiodicity of fermions in imaginary time, which is the trace with $(-1)^F$ removed.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A twist by a rational phase leads to a cover of higher order. The third example gives the case $\alpha = \tfrac13$, which appears
+in orbifolds of order three.
+
+::: {#exm-kkf-rational-twist}
+#### The twist $\tfrac13$
+
+For $\alpha = \tfrac13$ the charges are $(3n + 1)/(3R)$: $\tfrac{1}{3R}, -\tfrac{2}{3R}, \tfrac{4}{3R}, \dots$, all congruent to $1$ modulo $3$ in the unit
+$1/(3R)$. Three such fermions can combine into a periodic state, and the group acting faithfully on all fields is the triple
+cover of the circle; the masses $\tfrac{1}{3R}, \tfrac{2}{3R}, \tfrac{4}{3R}, \tfrac{5}{3R}, \dots$ are not symmetric under $q \to -q$, since the conjugate
+field has the twist $\tfrac23$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The proposition rests on a property of the exponential function. The first exercise proves the statement about the periodic case $\alpha = 0$.
+
+::: {#exr-kkf-integer-charges}
+#### When all charges are integers
+
+Prove that the charges $(n + \alpha)/R$, $n \in \mathbb{Z}$, are all integer multiples of $1/R$ if and only if $\alpha = 0$ (for $\alpha \in [0, 1)$),
+and that $e^{2\pi i(n + \alpha)} = 1$ for one $n$ if and only if it holds for all $n$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$(n + \alpha)R/R = n + \alpha \in \mathbb{Z}$ iff $\alpha \in \mathbb{Z}$, and $\alpha \in [0, 1)$ leaves $\alpha = 0$. Since $e^{2\pi in} = 1$, $e^{2\pi i(n + \alpha)} =
+e^{2\pi i\alpha}$ for every $n$, so the condition does not depend on $n$; it is the periodicity condition of @prp-kk-periodicity
+applied to $n + \alpha$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A theory with fermions of several twists has a smallest common unit of charge. The second exercise computes it with Sage.
+
+::: {#exr-kkf-common-unit}
+#### The unit of charge of a spectrum
+
+With Sage, for the sets of twists $\{0, \tfrac12\}$, $\{0, \tfrac13, \tfrac23\}$, $\{\tfrac12, \tfrac14\}$ and $\{0, \tfrac25\}$, find the largest $u$
+such that every charge $(n + \alpha)/R$ is an integer multiple of $u/R$, and the order of the cover of the circle that acts
+faithfully.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$u$ is $1/k$ with $k$ the least common multiple of the denominators of the twists (and $1$ for the periodic fields), and $k$ is
+the order of the cover:
+
+{{< sage exr-kkf-common-unit >}}
+
+So $\{0, \tfrac12\}$ gives $u = \tfrac12$, the double cover of @prp-kkf-twist-charge; the others give $\tfrac13$, $\tfrac14$ and $\tfrac15$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The proposition implies that charge conservation is compatible with any twist. The third exercise checks this on the cubic
+coupling of a fermion pair to a boson.
+
+::: {#exr-kkf-yukawa-modes}
+#### A Yukawa coupling on the circle
+
+For an antiperiodic fermion $\psi$ and a periodic real scalar $\Phi$, insert the mode expansions into $\int_0^{2\pi R}dy\,\Phi\bar\psi\psi$. Which
+triples $(n_1, n_2, m)$ of modes of $\bar\psi$, $\psi$ and $\Phi$ couple, and why is the result consistent with the charges?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\bar\psi$ carries $e^{-i(n_1 + \frac12)y/R}$, $\psi$ carries $e^{i(n_2 + \frac12)y/R}$ and $\Phi$ carries $e^{imy/R}$; the integral is non-zero only when
+$-n_1 + n_2 + m = 0$, that is $m = n_1 - n_2$. This is conservation of the Kaluza-Klein charge: $q(\psi_{n_2}) + q(\Phi_m) = q(\psi_{n_1})$, with the
+half-integer parts cancelling between $\bar\psi$ and $\psi$, as in @exm-kkf-pair-charge.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+### No chirality from the circle
+
+On the circle every four-dimensional mode has both chiralities, while on the orbifold $S^1/\mathbb{Z}_2$ one chirality of the zero
+mode survives. The figure shows the zero mode on the orbifold when a bulk mass of the odd kind is present: it is pushed
+towards one of the two fixed points.
+
+![The chiral zero mode of a five-dimensional fermion on $S^1/\mathbb{Z}_2$ with the odd bulk mass $M\varepsilon(y)$, on the
+fundamental domain $0 \leq y \leq \pi R$: the density $|f_0|^2 \propto e^{-2M|y|}$ for $MR = 0, \tfrac12, 1, 3$ and $-1$. For $M = 0$ the mode is
+constant; for $MR \gg 1$ it is localised at the fixed point $y = 0$, for $M < 0$ at $y = \pi R$ (@prp-kkf-orbifold-zero-mode). The
+normalisation and the massive spectrum $m_n^2 = M^2 + n^2/R^2$ are checked symbolically. Generated by
+`figures/kkf-kink-zero-mode.sage`; the interactive version adds $MR = 2, 5, -3$.](figures/kkf-kink-zero-mode.svg){#fig-kkf-kink-zero-mode width=70%}
+
+{{< interactive kkf-kink-zero-mode 460 >}}
+
+The first statement says that nothing on the circle distinguishes left from right. It is the circle case of
+@thm-chirality-no-go and @exr-spd-nogo-odd, stated for the four-dimensional physics.
+
+:::: {.statement-box}
+::: {#prp-kkf-vectorlike}
+#### The circle gives Dirac fermions
+
+A five-dimensional fermion on $M^4 \times S^1$, with any twist, any constant gauge background and any bulk mass $M\bar\psi\psi$,
+gives at every level a four-dimensional Dirac fermion: left- and right-handed components with the same charges under every
+gauge group. The four-dimensional spectrum is vector-like. With a bulk mass the masses are $\sqrt{M^2 + (n + \alpha)^2/R^2}$
+[@perezlorenzana2005, Sec. III.A, eqs. (38)-(40)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+The charges under the Kaluza-Klein $U(1)$ are those of the tower. The first example shows that both chiralities carry them.
+
+::: {#exm-kkf-vector-charges}
+#### Both chiralities carry the charge
+
+On the mode $n$ the covariant derivative $\mathring\nabla_\mu - iq_nA_\mu$ of @eq-kkf-mode-equation acts on both components $P_L\chi_n$ and
+$P_R\chi_n$, since the derivative $\partial_y$ and the frame @eq-kkf-frame do not involve $\gamma_5$. A left-handed fermion of charge $q_n$
+is accompanied by a right-handed one of the same charge: the charged spectrum is that of electrodynamics, not of the weak
+interactions.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A bulk mass is allowed on the circle and adds to the internal mass. The second example writes the spectrum.
+
+::: {#exm-kkf-bulk-mass}
+#### A bulk mass
+
+With $(i\Gamma^A\partial_A - M)\psi = 0$ on flat $M^4 \times S^1$, each mode $\psi_n$ satisfies $(i\gamma^\mu\partial_\mu - i\tfrac nR\gamma_5 - M)\psi_n = 0$;
+squaring gives $(\Box + M^2 + n^2/R^2)\psi_n = 0$, so the masses are $\sqrt{M^2 + n^2/R^2}$ and even the zero mode is a massive Dirac fermion
+[@perezlorenzana2005, eq. (40)]. A five-dimensional mass cannot be forbidden by a symmetry that acts on the circle alone.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The Standard Model is not vector-like, and this is the obstacle. The third example states it in the form in which it ended
+the hope of a fully geometric unification.
+
+::: {#exm-kkf-standard-model}
+#### Why the circle cannot give the Standard Model
+
+In the Standard Model the left-handed quarks and leptons are $SU(2)$ doublets and the right-handed ones singlets
+(@exm-anomaly-standard-model). A theory whose four-dimensional fermions all come with both chiralities in the same
+representation can never produce this: the electron would come with a right-handed partner in a doublet. The same holds for
+any internal space with an isometry gauge group and no further gauge fields (@thm-chirality-no-go); the argument, due to
+Witten, is what led to adding gauge fields in higher dimensions [@duff1994, p. 18; @chatzistavrakidis2007eym, Sec. 1].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The spectrum with a bulk mass can be found by squaring the operator. The first exercise does this and reads off the masses.
+
+::: {#exr-kkf-bulk-spectrum}
+#### Squaring the operator
+
+Show that $(i\gamma^\mu\partial_\mu - i\lambda\gamma_5 - M)(-i\gamma^\nu\partial_\nu + i\lambda\gamma_5 - M)$ equals $\Box + \lambda^2 + M^2$ times the identity
+up to a term that vanishes, and deduce the masses of @prp-kkf-vectorlike with $\lambda = (n + \alpha)/R$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Expanding: $(i\gamma\cdot\partial)(-i\gamma\cdot\partial) = \Box$; the cross terms $i\gamma^\mu\partial_\mu\,i\lambda\gamma_5 + (-i\lambda\gamma_5)(-i\gamma^\nu\partial_\nu) =
+-\lambda(\gamma^\mu\gamma_5 + \gamma_5\gamma^\mu)\partial_\mu = 0$; $(-i\lambda\gamma_5)(i\lambda\gamma_5) = \lambda^2$; the terms linear in $M$ are $-M(i\gamma\cdot\partial - i\lambda\gamma_5) -
+M(-i\gamma\cdot\partial + i\lambda\gamma_5) = 0$; and $M^2$. So any solution satisfies $(\Box + \lambda^2 + M^2)\psi_n = 0$, a mass $\sqrt{M^2 + (n +
+\alpha)^2/R^2}$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A vector-like spectrum cannot have a gauge anomaly. The second exercise checks the cubic anomaly of a truncated tower with
+Sage.
+
+::: {#exr-kkf-anomaly}
+#### No anomaly from a vector-like tower
+
+Write every Dirac mode $n$ of charge $q_n = (n + \alpha)/R$ as a left-handed Weyl fermion of charge $q_n$ and a left-handed Weyl fermion of
+charge $-q_n$ (the conjugate of the right-handed part). With Sage, compute $\sum q^3$ and $\sum q$ over the left-handed fermions of the
+modes $|n| \leq N$ for several $\alpha$ and $N$, and explain the result with @def-anomaly.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Every charge appears with its opposite, so both sums vanish identically, for every truncation and every twist:
+
+{{< sage exr-kkf-anomaly >}}
+
+The cancellation is mode by mode, between the two chiralities of one Dirac fermion; it is the arithmetic form of
+@prp-kkf-vectorlike. A chiral spectrum, such as the zero modes of an orbifold, is needed before an anomaly can arise.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The reflection of the circle maps the theory to itself only if it acts on spinors too. The third exercise finds the action
+and shows that it forbids the bulk mass.
+
+::: {#exr-kkf-reflection}
+#### The reflection and the bulk mass
+
+Show that $\psi(x, y) \to \eta\gamma_5\psi(x, -y)$, $\eta = \pm1$, maps solutions of $(i\gamma^\mu\partial_\mu - \gamma_5\partial_y - M)\psi = 0$ to solutions of
+the same equation with $M \to -M$. Conclude that a bulk mass is odd under the reflection, and find how the term $\bar\psi\psi$ transforms.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+Let $\psi'(y) = \eta\gamma_5\psi(-y)$ and $\mathcal D = i\gamma^\mu\partial_\mu - \gamma_5\partial_y$. Then $i\gamma^\mu\partial_\mu\psi' = -\eta\gamma_5(i\gamma^\mu\partial_\mu\psi)(-y)$,
+and, since $\partial_y[\psi(-y)] = -(\partial_y\psi)(-y)$, $-\gamma_5\partial_y\psi' = \eta(\partial_y\psi)(-y) = -\eta\gamma_5(-\gamma_5\partial_y\psi)(-y)$. So $\mathcal D\psi' =
+-\eta\gamma_5(\mathcal D\psi)(-y) = -\eta\gamma_5M\psi(-y) = -M\psi'$. The equation holds with $-M$: the reflection is a symmetry only if $M$ changes sign. Indeed $\bar\psi' \psi' =
+\psi^\dagger\gamma_5\gamma^0\gamma_5\psi = -\bar\psi\psi$ at the reflected point: the mass term is odd [@perezlorenzana2005, eq. (40) and the
+following paragraph].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+On the orbifold the reflection becomes a condition on the fields, and an odd mass must be a step function. The proposition
+describes the result: a single chiral zero mode, which a mass localises.
+
+:::: {.statement-box}
+::: {#prp-kkf-orbifold-zero-mode}
+#### Chiral zero modes on $S^1/\mathbb{Z}_2$
+
+On $M^4 \times S^1/\mathbb{Z}_2$, impose $\psi(x, -y) = \eta\gamma_5\psi(x, y)$ with $\eta = \pm1$ and allow the odd bulk mass $M\varepsilon(y)$, $\varepsilon(y) =
+\operatorname{sign}y$ on $(-\pi R, \pi R)$. Then the four-dimensional spectrum consists of one massless Weyl fermion, right-handed for
+$\eta = 1$ and left-handed for $\eta = -1$, with profile
+$$
+f_0(y) = \sqrt{\frac{2\eta M}{1 - e^{-2\pi\eta MR}}}\;e^{-\eta M|y|}\quad(M \neq 0) ,
+$$ {#eq-kkf-orbifold-zero-mode}
+normalised by $\int_0^{\pi R}|f_0|^2dy = 1$, and of Dirac fermions with masses $m_n = \sqrt{M^2 + n^2/R^2}$, $n \geq 1$.
+Gauge fields must have $A_\mu$ even and $A_y$ odd, so the zero mode keeps the charges of the five-dimensional fermion
+[@perezlorenzana2005, Secs. III.A, IV.C and V.1, eqs. (40), (71)-(72), (98)-(101)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+Without the mass the zero mode is the constant spinor of @exm-spd-s1z2. The first example recovers it and the massive levels of
+@exr-spd-s1z2-tower.
+
+::: {#exm-kkf-orbifold-massless}
+#### No bulk mass
+
+For $M = 0$, $f_0 = 1/\sqrt{\pi R}$ is constant, the right-handed zero mode for $\eta = 1$; the massive modes pair $\cos(ny/R)$ in $\psi_R$
+with $\sin(ny/R)$ in $\psi_L$ into Dirac fermions of mass $n/R$ (@exr-spd-s1z2-tower). The tower is that of the circle with half the
+modes removed: one chirality of the zero mode and one Dirac fermion per level instead of two.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A large mass concentrates the zero mode at one end of the interval. The second example quantifies the localisation shown
+in @fig-kkf-kink-zero-mode.
+
+::: {#exm-kkf-localisation}
+#### Localisation at a fixed point
+
+For $\eta = 1$ and $MR \gg 1$, $|f_0|^2 \approx 2Me^{-2My}$: the mode lives within $1/M$ of $y = 0$, and a fermion with $M < 0$ lives at $y =
+\pi R$. Fermions of different masses sit at different places along the fifth dimension, and the overlap of their profiles controls
+their couplings: this is the field-theory model of matter localised on a brane at a fixed point [@perezlorenzana2005, Sec. V.1,
+eqs. (98)-(103)], the setting of the branes of @exm-vcp-orbifold-interval.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The orbifold condition acts on gauge fields as well. The third example lists the parities that keep the gauge symmetry of the
+zero mode.
+
+::: {#exm-kkf-orbifold-gauge}
+#### The gauge field on the orbifold
+
+For $D_M\psi$ to transform like $\psi$, $D_\mu = \partial_\mu + A_\mu$ must be even and $D_y = \partial_y + A_y$ odd: $A_\mu(x, -y) = A_\mu(x, y)$ and
+$A_y(x, -y) = -A_y(x, y)$. The zero mode of $A_\mu$ is a four-dimensional gauge field, and $A_y$ has no zero mode, so no massless scalar
+accompanies it; a parity matrix $P$ acting on gauge indices, $A_\mu \to PA_\mu P^{-1}$, can in addition break the gauge group to the
+subgroup commuting with $P$ [@perezlorenzana2005, Sec. IV.C, eqs. (69)-(72)].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The normalisation of the zero mode and the fraction of it near the fixed point are elementary integrals. The first exercise
+computes them with Sage.
+
+::: {#exr-kkf-kink-norm}
+#### Normalising the zero mode
+
+With Sage, verify the normalisation @eq-kkf-orbifold-zero-mode for $\eta = 1$, compute the fraction of $\int_0^{\pi R}|f_0|^2dy$ within $y <
+R/10$ for $MR = 1, 10, 100$, and find the limit of $f_0$ as $M \to 0$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\int_0^{\pi R}e^{-2My}dy = \tfrac{1 - e^{-2\pi MR}}{2M}$, so the prefactor squared is $\tfrac{2M}{1 - e^{-2\pi MR}}$, as in
+@eq-kkf-orbifold-zero-mode. The fraction within $R/10$ is $\tfrac{1 - e^{-MR/5}}{1 - e^{-2\pi MR}}$:
+
+{{< sage exr-kkf-kink-norm >}}
+
+For $MR = 100$ almost all of the mode lies within a tenth of the radius of the fixed point; as $M \to 0$ the profile tends to the constant
+$1/\sqrt{\pi R}$ of @exm-kkf-orbifold-massless.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The massive spectrum follows from the first-order equations with the boundary conditions imposed by the parity. The second
+exercise derives it.
+
+::: {#exr-kkf-massive-orbifold}
+#### The massive modes
+
+On $0 < y < \pi R$ write $\psi = f(y)\chi_R(x) + g(y)\chi_L(x)$ for $\eta = 1$, where $\chi_L + \chi_R$ is a Dirac fermion of mass $m$, so that
+$i\gamma^\mu\partial_\mu\chi_R = m\chi_L$ and $i\gamma^\mu\partial_\mu\chi_L = m\chi_R$. Show that $(i\gamma^\mu\partial_\mu - \gamma_5\partial_y - M)\psi = 0$ gives $(\partial_y +
+M)f = mg$ and $(-\partial_y + M)g = mf$ (compare @perezlorenzana2005 [eq. (100)]). Using that $g$ is odd, so $g(0) = g(\pi R) = 0$, show that $f'' = (M^2 - m^2)f$ with $f' + Mf = 0$ at both ends,
+and find $m_n^2 = M^2 + n^2/R^2$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The $\chi_R$ component of the equation is $mg - f' - Mf = 0$ and the $\chi_L$ component $mf + g' - Mg = 0$. From the first, $g = (f' + Mf)/m$,
+and the second gives $(-\partial_y + M)(f' + Mf) = m^2f$, i.e. $f'' = (M^2 - m^2)f$. The conditions
+$g = 0$ at the ends are $f' + Mf = 0$ there. With $k^2 = m^2 - M^2$, $f = \cos(ky) - \tfrac Mk\sin(ky)$ satisfies the condition at $0$, and
+at $\pi R$ it gives $-(k + M^2/k)\sin(k\pi R) = 0$, so $k = n/R$ with $n \geq 1$ and $m_n^2 = M^2 + n^2/R^2$. The case $m = 0$ is the zero mode,
+$f' + Mf = 0$ everywhere.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+Two fermions localised at the two ends couple to a field spread along the interval only through the overlap of their
+profiles. The third exercise estimates the resulting small coupling with Sage.
+
+::: {#exr-kkf-overlap}
+#### A hierarchy from overlaps
+
+A left-handed zero mode with profile $\propto e^{-M_1y}$ and a right-handed one with $\propto e^{+M_2y}$ (localised at $y = \pi R$) couple to a
+constant scalar through $\lambda\int_0^{\pi R}f_1f_2\,dy$ with normalised profiles. With Sage, compute the effective coupling for $M_1 = M_2 =
+M$ and $MR = 1, 5, 10$, and show that it falls like $e^{-\pi MR}$ for large $MR$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+With $f_1 = \sqrt{\tfrac{2M}{1 - e^{-2\pi MR}}}e^{-My}$ and $f_2 = \sqrt{\tfrac{2M}{1 - e^{-2\pi MR}}}e^{M(y - \pi R)}$, the overlap is $\tfrac{2M}{1 - e^{-2\pi
+MR}}\pi Re^{-\pi MR}$:
+
+{{< sage exr-kkf-overlap >}}
+
+An order-one ratio of masses gives an exponentially small coupling: separating fermions along the fifth dimension produces
+hierarchies of Yukawa couplings without small parameters [@perezlorenzana2005, Sec. V.1].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+### The fermion tower on the torus
+
+The internal space of a realistic reduction has more than one dimension, and the simplest choice is a flat torus $T^n$, a
+product of $n$ circles. Each circle contributes a Kaluza-Klein $U(1)$, a spin structure and possibly a twist, and the masses
+of the four-dimensional fermions are the eigenvalues of the internal Dirac operator, which @prp-torus-spectrum computed for every
+radius and twist. The figure shows the charges of the modes on the square torus for its four spin structures.
+
+![The charge lattice of the fermion tower on the square torus $T^2$ with $R_1 = R_2 = R$. The mode with integers $(m_1, m_2)$ has
+charges $q_i = (m_i + \alpha_i)/R$ under the two Kaluza-Klein $U(1)$s and mass $|q|$; the four spin structures $(\alpha_1,
+\alpha_2) \in \{0, \tfrac12\}^2$ fill the four cosets of $\mathbb{Z}^2$ in $\tfrac12\mathbb{Z}^2$, and the dashed circles mark the lightest
+massive level of each: $1/R$ for $(P, P)$, whose lightest level is massless, $1/(2R)$ for $(A, P)$ and $(P, A)$, $1/(\sqrt2R)$ for $(A, A)$
+(@prp-kkf-torus-tower). Generated by `figures/kkf-torus-lattice.sage`; the interactive version adds Scherk-Schwarz twists that are not
+spin structures.](figures/kkf-torus-lattice.svg){#fig-kkf-torus-lattice width=60%}
+
+{{< interactive kkf-torus-lattice 460 >}}
+
+The statement combines three results already proved: the splitting of the Dirac operator of a product into a four-dimensional
+and an internal part (@exr-spd-branch-mass), the spectrum of the internal operator on the flat torus (@prp-torus-spectrum),
+and the charges of a mode under the isometries of a circle (@def-kkf-fermion-tower). Nothing has to be computed again; what
+is new is the reading of the internal spectrum as a four-dimensional particle content.
+
+:::: {.statement-box}
+::: {#prp-kkf-torus-tower}
+#### The fermion tower on the torus
+
+Let $\Psi$ be a Dirac fermion in $4 + n$ dimensions on $M^4 \times T^n$, with radii $R_i$ and twists $\alpha_i \in [0, 1)$ as in
+@def-scherk-schwarz-twist, and let $N = 2^{\lfloor n/2\rfloor}$. Then:
+
+1. For every $m \in \mathbb{Z}^n$ there are $N$ four-dimensional Dirac fermions of mass $|k|$, $k_i = (m_i + \alpha_i)/R_i$, each with
+   charge $k_i$ under the Kaluza-Klein $U(1)$ of the $i$-th circle. A mass level $\mu$ therefore contains $N\,\#\{m : |k| = \mu\}$
+   Dirac fermions.
+2. Massless fermions exist only if every $\alpha_i = 0$; there are then $N$ of them, uncharged. Of the $2^n$ spin structures
+   ($\alpha_i \in \{0, \tfrac12\}$) only the periodic one has massless fermions, and with twists the lightest mass is
+   $\big(\sum_i \|\alpha_i\|^2/R_i^2\big)^{1/2}$, where $\|\alpha\| = \min(\alpha, 1 - \alpha)$.
+3. At every level the left- and right-handed components carry the same charges: the four-dimensional spectrum is vector-like.
+   For even $n$ and a Weyl fermion in $4 + n$ dimensions every number above is halved, and the zero modes are $N/2$ left-handed
+   and $N/2$ right-handed Weyl fermions.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .examples-fold collapse="true" title="Examples"}
+For the proof, write $\Psi = \sum_m\chi_m(x) \otimes e^{ik\cdot y}u$ with $u$ running over the $N$ eigenvectors of $-\gamma_K\cdot k$
+(@prp-torus-spectrum): each eigenvector with eigenvalue $\pm|k|$ gives by @exr-spd-branch-mass one Dirac fermion of mass $|k|$, and
+$-i\partial_{y^i}$ acts on the mode as $k_i$, which is its charge exactly as on the circle. For even $n$ the internal chirality matrix
+$\gamma_*^K$ anticommutes with $\gamma_K\cdot k$ and exchanges the eigenvalues $+|k|$ and $-|k|$; since the Weyl condition ties the
+four-dimensional chirality to $\gamma_*^K$ (@exr-spd-branch-check), each massive Dirac fermion pairs a left-handed spinor of one internal
+eigenvector with a right-handed spinor of its image, both with the charges $k_i$. The zero modes are the constant spinors, which
+contain both internal chiralities equally (@exm-spd-vanishing-tori).
+
+The square torus is the first case to look at. The first example turns the internal eigenvalues of @exm-spd-torus-two into a
+four-dimensional particle spectrum for each of the four spin structures.
+
+::: {#exm-kkf-torus-square}
+#### The four spin structures of the square torus
+
+A six-dimensional Dirac fermion on $T^2$ with $R_1 = R_2 = R$ has $N = 2$. With the periodic structure $(P, P)$ there are two massless
+Dirac fermions, eight of mass $1/R$ (the lattice points $(\pm1, 0)$, $(0, \pm1)$) and eight of mass $\sqrt2/R$. With $(A, P)$ the lightest
+level is $1/(2R)$ with the points $(m_1 + \tfrac12, 0)$, $m_1 \in \{0, -1\}$, hence four Dirac fermions; $(P, A)$ gives the same spectrum
+with the roles of the circles exchanged. With $(A, A)$ the lightest level is $1/(\sqrt2R)$ with the four points $(\pm\tfrac12, \pm\tfrac12)$,
+hence eight Dirac fermions. The four lattices are drawn in @fig-kkf-torus-lattice.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+On the circle a level of mass $n/R$ carried the charges $\pm n/R$. On the torus a level collects every lattice point on a sphere, so
+modes of one mass carry different charge vectors, and the second example lists them.
+
+::: {#exm-kkf-torus-charges}
+#### Charges at a degenerate level
+
+On the periodic square torus the level $\sqrt5/R$ contains the eight lattice points $(\pm1, \pm2)$ and $(\pm2, \pm1)$, hence sixteen Dirac
+fermions with charge vectors $(q_1, q_2)R$ among these eight. The degeneracy is not explained by the $U(1) \times U(1)$ isometry, whose
+charges separate the points, but by the discrete symmetries of the square lattice: the reflections $q_i \to -q_i$ and the exchange
+$q_1 \leftrightarrow q_2$, a group of order eight that permutes the eight points. A rectangular torus, $R_1 \neq R_2$, keeps only the
+reflections, and the level splits into $|(\pm1, \pm2)|$ and $|(\pm2, \pm1)|$ with four points each.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+A twist that is not a spin structure breaks even the reflections, because $k \to -k$ maps the twist $\alpha$ to $-\alpha$. The third
+example applies twists along two cycles to the gravitino, the Scherk-Schwarz mechanism on the torus.
+
+::: {#exm-kkf-torus-scherk-schwarz}
+#### Scherk-Schwarz breaking along two cycles
+
+Let the bosons of a supermultiplet on $T^2$ be periodic and the gravitino twisted by $(\alpha_1, \alpha_2)$, as on the circle in
+@exm-kkf-scherk-schwarz. The lightest gravitino has mass $m_{3/2} = \big(\|\alpha_1\|^2/R_1^2 + \|\alpha_2\|^2/R_2^2\big)^{1/2}$, at most
+$\tfrac12\big(R_1^{-2} + R_2^{-2}\big)^{1/2}$, reached by the antiperiodic structure $(A, A)$. For $\alpha = (\tfrac14, \tfrac14)$ and $R_1 = R_2 = R$
+it is $1/(2\sqrt2R)$ and non-degenerate: the point $(-\tfrac34, \tfrac14)$ already lies higher, at $\sqrt{10}/(4R)$, and $k \to -k$ maps the
+twisted lattice to the one with twist $(\tfrac34, \tfrac34)$, a different boundary condition. When the radii differ, a twist along the
+large cycle alone, $\alpha = (\tfrac12, 0)$ with $R_1 > R_2$, gives the lower scale $1/(2R_1)$: the breaking scale is set by the
+largest twisted cycle.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The six-dimensional torus is the flat internal space of string theory. The fourth example counts the four-dimensional fermions of
+a ten-dimensional Weyl spinor on it level by level, and shows that the torus gives no chirality at any level.
+
+::: {#exm-kkf-torus-ten}
+#### A ten-dimensional Weyl fermion on $T^6$
+
+For $n = 6$, $N = 8$, and a Weyl spinor in ten dimensions gives $N/2 = 4$ four-dimensional Dirac fermions per lattice point. With the
+periodic structure the massless level holds four left-handed and four right-handed Weyl fermions (@exm-spd-torus-six), the level
+$1/R$ of a cubic torus twelve lattice points and so $48$ Dirac fermions, and every level is vector-like. With any other spin structure
+there are no massless fermions at all. A chiral spectrum from a flat internal space needs a projection, as for the orbifold
+$S^1/\mathbb{Z}_2$ of @prp-kkf-orbifold-zero-mode or the orbifold $T^6/\mathbb{Z}_3$ of @exm-vcp-orbifold-t6z3, or a gauge background
+with flux, as in @exr-spd-torus-flux.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The spectra on rectangular tori are easy to list by machine. The first exercise compares the four spin structures on a torus with
+unequal radii, where the two structures with one antiperiodic circle no longer agree.
+
+::: {#exr-kkf-torus-levels}
+#### The lightest levels on a rectangular torus
+
+With Sage, list the five lightest four-dimensional mass levels and the number of Dirac fermions at each for a six-dimensional Dirac
+fermion on $T^2$ with $R_1 = 1$, $R_2 = \tfrac12$, for the four spin structures. Explain why $(A, P)$ and $(P, A)$ now differ.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+By @prp-kkf-torus-tower the levels are $|k|^2 = (m_1 + \alpha_1)^2 + 4(m_2 + \alpha_2)^2$, with two Dirac fermions per lattice point:
+
+{{< sage exr-kkf-torus-levels >}}
+
+The antiperiodic condition shifts the momentum of its circle by $1/(2R_i)$: along the large circle $(A, P)$ this costs $\tfrac12$, along the
+small one $(P, A)$ it costs $1$. A twist along a large cycle is cheaper, as in @exm-kkf-torus-scherk-schwarz.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The lightest mass with twists is the distance from the origin to the twisted lattice. The second exercise derives the formula of
+@prp-kkf-torus-tower and asks when the levels are degenerate in pairs.
+
+::: {#exr-kkf-torus-gap}
+#### The gap and the pairing of charges
+
+Show that the lightest mass on $T^n$ with twists $\alpha_i$ is $\big(\sum_i\|\alpha_i\|^2/R_i^2\big)^{1/2}$. Show that the spectrum is invariant
+under $k \to -k$, so that every massive level contains the charges $q$ and $-q$ together, if and only if every $\alpha_i \in \{0, \tfrac12\}$,
+that is, for a spin structure.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$|k|^2 = \sum_i(m_i + \alpha_i)^2/R_i^2$ is a sum of independent terms, each minimised over $m_i \in \mathbb{Z}$ by the integer nearest to
+$-\alpha_i$, with minimum $\|\alpha_i\|^2/R_i^2$. The set $\{m + \alpha\}$ is mapped by $k \to -k$ to $\{-m - \alpha\} = \{m' - \alpha\}$, which
+equals $\{m + \alpha\}$ iff $2\alpha_i \in \mathbb{Z}$ for every $i$. For other twists the level of $q$ need not contain $-q$, as in
+@exm-kkf-torus-scherk-schwarz: the twist breaks charge conjugation of the tower, the conjugate tower being the one with twist $1 - \alpha$.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+At high energy the number of four-dimensional fermions is governed by the volume of the torus, as in Weyl's law
+(@exr-spd-torus-weyl-law). The third exercise counts them on a three-torus and compares the two extreme spin structures.
+
+::: {#exr-kkf-torus-weyl}
+#### Counting the tower on $T^3$
+
+A seven-dimensional Dirac fermion on the cubic torus $T^3$ with $R_i = R$ has $N = 2$. With Sage, count the four-dimensional Dirac fermions of
+mass below $E$ for $ER = 2, 5, 10, 20$, with the periodic and the antiperiodic structure, and compare with $N\cdot\tfrac{4\pi}{3}(ER)^3$.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The count is $N$ times the number of points of $\mathbb{Z}^3 + \alpha$ in the ball of radius $ER$:
+
+{{< sage exr-kkf-torus-weyl >}}
+
+Both ratios tend to $1$: at energies far above $1/R$ the spin structure is invisible and the number of fermions is the volume
+$(2\pi R)^3$ of the torus times the density $N(4\pi/3)E^3/(2\pi)^3$ of a seven-dimensional fermion, as for the circle in @exr-kkf-tower-count.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The last statement of the proposition is the reason the torus alone cannot produce the Standard Model. The fourth exercise proves
+it for $n = 2$ with explicit matrices and shows that a constant gauge background does not help.
+
+::: {#exr-kkf-torus-chirality}
+#### No chirality on $T^2$
+
+On $T^2$ take $\gamma^1_K = \sigma_1$, $\gamma^2_K = \sigma_2$ and $\gamma_*^K = \sigma_3$. Show that $\sigma_3$ maps the eigenvector of $-\sigma\cdot k$
+with eigenvalue $|k|$ to the one with eigenvalue $-|k|$, and conclude that at every level the left- and right-handed four-dimensional
+spinors are equal in number and charges. Why does a constant gauge potential along $T^2$, a Wilson line, change none of this?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+$\sigma_3$ anticommutes with $\sigma_1$ and $\sigma_2$, so $(-\sigma\cdot k)\sigma_3u = -\sigma_3(-\sigma\cdot k)u = -\lambda\,\sigma_3u$: the eigenvalues
+$\pm|k|$ are exchanged. The six-dimensional chirality $\gamma_5 \otimes \sigma_3$ then pairs a left-handed spinor with one internal eigenvector and a
+right-handed one with the other, with the same $e^{ik\cdot y}$ and hence the same charges (@prp-kkf-torus-tower). A constant potential
+$A = a_idy^i$ only shifts $k$ by $a$, which is a twist (@def-scherk-schwarz-twist, @exr-kkf-wilson-line); the argument holds for every
+$k$. Chirality requires a background with flux, $\int_{T^2}F \neq 0$, which no constant potential has (@exr-spd-torus-flux).
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+### Exercises
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The exercises of this part combine the tower, the spin structures and the orbifold. Each uses the mode equation of
+@prp-kkf-mode-equation together with one of the later statements.
+
+A fermion may carry a charge under a five-dimensional gauge group as well as the Kaluza-Klein charge. The first integrative
+exercise computes the tower of such a fermion with Sage.
+
+::: {#exr-kkf-int-charged-tower}
+#### Two charges
+
+A five-dimensional fermion of charge $e'$ under a gauge field $B_M$, antiperiodic around the circle, sees a constant $B_y$ with
+$e'B_y R = \theta$. With Sage, list for $\theta = 0, \tfrac14, \tfrac12$ the masses below $3/R$ with their multiplicities, find for which $\theta$
+a massless fermion exists, and say which degeneracies of the antiperiodic tower the Wilson line lifts.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The internal operator acts on $e^{i(n + \frac12)y/R}$ as $(n + \tfrac12 + \theta)/R$ (@exr-kkf-wilson-line), so the masses are $|n + \tfrac12 +
+\theta|/R$, the tower with the total twist $\tfrac12 + \theta$:
+
+{{< sage exr-kkf-int-charged-tower >}}
+
+For $\theta = 0$ every level is doubly degenerate ($n$ and $-n - 1$); for $\theta = \tfrac14$ the degeneracy is lifted completely; for $\theta =
+\tfrac12$ the Wilson line cancels the antiperiodicity, a massless mode appears and the levels above it are again paired. A Wilson line
+can thus restore a zero mode that the spin structure removed.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+The zero mode of the orbifold is chiral, and the Pauli term of the circle survives for it. The second integrative exercise
+asks what the four-dimensional theory of the zero modes looks like.
+
+::: {#exr-kkf-int-orbifold-pauli}
+#### The zero mode on the orbifold
+
+On $S^1/\mathbb{Z}_2$ the Kaluza-Klein field $A_\mu = g_{\mu y}$ is odd under $y \to -y$ (the metric component $g_{\mu y}$ changes sign), so it has no
+zero mode. Using this and @prp-kkf-orbifold-zero-mode, describe the zero modes of a five-dimensional fermion coupled to gravity on
+$M^4 \times S^1/\mathbb{Z}_2$: chirality, charge, Pauli coupling. Why can a single Weyl fermion not have a Pauli coupling at all?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+The zero mode is one Weyl fermion (right-handed for $\eta = 1$). The Kaluza-Klein photon is projected out, so the zero mode has no Kaluza-Klein
+charge and nothing to couple to through $F_{\mu\nu}$. Independently of this, $\bar\chi\sigma^{\mu\nu}\chi = \bar\chi_L\sigma^{\mu\nu}\chi_R + \bar\chi_R\sigma^{\mu\nu}
+\chi_L$ connects the two chiralities, as a mass does (@exm-kkf-field-strength), so a single Weyl fermion has neither a Dirac mass nor a magnetic
+moment: the orbifold removes the magnetic moment of @exm-kkf-zero-mode together with the photon.
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+
+Supersymmetry breaking by a twist and by an orbifold can be combined on the same circle. The third integrative exercise
+counts the zero modes of a five-dimensional supermultiplet in both cases.
+
+::: {#exr-kkf-int-counting}
+#### Zero modes of a hypermultiplet
+
+A five-dimensional hypermultiplet has two complex scalars and one Dirac fermion. Count its massless four-dimensional fields
+(complex scalars and Weyl fermions) (a) on the periodic circle, (b) with antiperiodic fermions, (c) on $S^1/\mathbb{Z}_2$ with
+$\psi_R$ even and one of the two scalars even, the other odd. Which case gives a four-dimensional chiral multiplet?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+(a) Two complex scalars and one Dirac fermion, that is two Weyl fermions: two chiral multiplets of opposite chirality, a non-chiral
+($\mathcal N = 2$) hypermultiplet. (b) Two complex scalars and no fermion (@exm-kkf-antiperiodic-tower): supersymmetry is broken
+(@exm-kkf-scherk-schwarz). (c) One complex scalar and one right-handed Weyl fermion (@prp-kkf-orbifold-zero-mode), which is the
+content of one chiral multiplet (equivalently a left-handed one of conjugate charges): the orbifold halves the supersymmetry and
+produces chirality: the chiral $N = 1$ multiplets of a hypermultiplet are the even ones, which contain the massless states
+[@perezlorenzana2005, Sec. III.C].
+:::
+
+::: {.callout-tip .verification collapse="true" title="Verification"}
+**Veriphy.** Pending.
+
+**Lean.** Pending.
+
+**Sage.** Pending.
+:::
+::::
+
+## Exercises {#sec-02-gauge-tower-exercises}
+
+:::: {.callout-note .exercises-fold collapse="true" title="Exercises"}
+The three exercises below combine the two sections of the chapter: the gauge transformation acting on the tower, the
+counting of the tower, and the motion of a particle with momentum around the circle. Each of them needs results from both sections.
+
+::: {#exr-kkr-int-charged-scalar}
+#### A charged tower in a background field
+
+Take a five-dimensional massless complex scalar on the ansatz with $g = \eta$, $\phi = 1$ and a constant $A_\mu$, with $y \sim y +
+2\pi R$. (a) Show with SageManifolds that $\Box_5\Phi = 0$ on $\Phi = f(x)e^{iny/R}$ is $(D_\mu D^\mu + (n/R)^2)f = 0$ with $D_\mu = \partial_\mu -
+inA_\mu/R$. (b) Remove $A$ by the reparametrisation $\epsilon = A_\mu x^\mu$ and check that $f$ picks up the phase of
+@exm-gauge-charged-modes. (c) What physical effect could a constant $A$ have if one spatial direction of spacetime
+were also a circle?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+(a), (b) For constant $A$ the inverse ansatz is constant and $\Box_5 = \hat g^{AB}\partial_A\partial_B$; the cross terms $-2A^\mu\partial_\mu\partial_y$ and
+the term $A^2\partial_y^2$ assemble into $D_\mu D^\mu$ (@exr-kkr-charge-covariant). With $\epsilon = A_\mu x^\mu$, $A' = A - d\epsilon = 0$
+and $f' = e^{-in\epsilon/R}f$:
+
+{{< sage exr-kkr-int-charged-scalar >}}
+
+(c) If $x^1 \sim x^1 + 2\pi L$, the parameter $\epsilon = A_1x^1$ is not single valued modulo $2\pi R$ unless $A_1L/R \in \mathbb{Z}$, so a constant $A_1$ cannot be removed: it is the holonomy $\oint A$ of @exr-kkr-shift-horizontal, and it shifts
+the momenta of the charged modes along $x^1$ from $k/L$ to $k/L - nA_1/R$, like a twisted boundary condition
+(@exr-kkr-charge-twisted). This is the Aharonov-Bohm effect of the Kaluza-Klein photon.
+:::
+
+The second exercise counts the tower. It connects the slider of @fig-kk-tower with the density of states of a
+five-dimensional field.
+
+::: {#exr-kkr-int-counting}
+#### Counting the tower
+
+(a) Show that the number of modes of a five-dimensional massless scalar with mass $m_n < E$ is $N(E) = 2\lfloor ER\rfloor + 1$ for
+$ER \notin \mathbb{Z}$. (b) The number of one-particle states with energy below $E$ in a box of volume $V$ is $\sum_n\frac{V}{6\pi^2}(E^2 -
+m_n^2)^{3/2}$ for the modes with $m_n < E$. Show that it is $VE^3/6\pi^2$ for $ER < 1$ and approximately $VRE^4/16\pi$ for $ER \gg
+1$, the count for a massless field in the five-dimensional volume $V \cdot 2\pi R$. (c) Where is the crossover, and what does a four-dimensional observer conclude from it?
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+(a) $|n|/R < E$ iff $|n| < ER$, i.e. $n = -\lfloor ER\rfloor, \dots, \lfloor ER\rfloor$, which is the count in the title of the
+interactive @fig-kk-tower. (b) For $ER \ll 1$ only $n = 0$ contributes and the count is $\frac{V}{6\pi^2}E^3$, the
+four-dimensional density of states. For $ER \gg 1$ the sum over $n$ is approximated by an integral, $\sum_n \approx R\int dp_y$ with
+$p_y = n/R$: $\frac{VR}{6\pi^2}\int_{-E}^{E}(E^2 - p^2)^{3/2}dp = \frac{VR}{6\pi^2}\cdot\frac{3\pi}{8}E^4 = \frac{VRE^4}{16\pi}$, which is
+$V \cdot 2\pi R$ times the volume $\frac{\pi^2}{2}E^4$ of the four-ball of momenta divided by $(2\pi)^4$: the five-dimensional count. (c) The crossover is at $E
+\sim 1/R$: a four-dimensional observer sees the number of states grow faster than $E^3$ above $1/R$ and can infer the
+size of the extra dimension from where this happens (@exr-kkr-radius-effective-theory).
+:::
+
+The third exercise follows a particle that moves around the circle. It combines the Killing vector, the gauge field
+and the masses of the tower.
+
+::: {#exr-kkr-int-particle}
+#### A particle with momentum around the circle
+
+A massless particle in five dimensions moves on a geodesic of the ansatz with $\phi = 1$ and $y \sim y + 2\pi R$. (a) Show
+that $p_y = \hat g(\partial_y, \dot x)$ is conserved and that quantum mechanics on the circle requires $p_y = -n/R$ (with the sign
+convention $\hat g_{yy} = -1$, $p_y = -\dot y - A_\mu\dot x^\mu$). (b) Using @exr-kkr-christoffel-lorentz, show that the
+four-dimensional motion is that of a particle of mass $|n|/R$ and charge $n/R$ in the field $F$. (c) Show that the
+charge-to-mass ratio is independent of $n$, and compare with @exr-kkr-charge-ratio.
+:::
+
+::: {.callout-note .solution collapse="true" title="Solution"}
+(a) $\partial_y$ is Killing (@def-isometry-u1), so its inner product with the tangent of a geodesic is conserved. The wave
+function of the particle around the circle is $e^{iny/R}$ (@prp-kk-periodicity), with momentum $-i\partial_y = n/R$; the
+covariant component is $p_y = \hat g_{yy}p^y = -n/R$. (b) The null condition $\hat g(\dot x, \dot x) = 0$ is $g_{\mu\nu}\dot x^\mu\dot
+x^\nu = (\dot y + A\cdot\dot x)^2 = p_y^2$, so with proper time $d\tau = |p_y|\,ds$ the particle is timelike in four dimensions
+with $m = |p_y| = |n|/R$ (@exm-kkr-modes-dispersion). With $\dot x = m\,dx/d\tau$ the equation of
+@exr-kkr-christoffel-lorentz, $\ddot x^\lambda + \Gamma^\lambda_{\mu\nu}\dot x^\mu\dot x^\nu = p_yF^\lambda{}_\mu\dot x^\mu$, becomes $m(\frac{d^2x^\lambda}{d\tau^2} +
+\Gamma^\lambda_{\mu\nu}\frac{dx^\mu}{d\tau}\frac{dx^\nu}{d\tau}) = p_yF^\lambda{}_\mu\frac{dx^\mu}{d\tau}$: the Lorentz force on a particle of mass $|n|/R$
+and charge of magnitude $|n|/R$, the modes $n$ and $-n$ having opposite charges (the overall sign is the convention
+relating $p_y$ to the eigenvalue of $-i\partial_y$). (c) $|q|/m = 1$ in the units of the ansatz, independent of $n$; with the canonical normalisation the charge is $ne$ and
+$|q|/m = eR = \sqrt2\kappa$, the result of @exr-kkr-charge-ratio: classical Kaluza-Klein particles, like the quantum modes,
+have the extremal charge-to-mass ratio.
+:::
+::::

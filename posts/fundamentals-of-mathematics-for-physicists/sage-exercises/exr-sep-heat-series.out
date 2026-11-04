@@ -1,0 +1,5 @@
+partial sum u_5(t, x) = 8/125*e^(-25*t)*sin(5*x)/pi + 8/27*e^(-9*t)*sin(3*x)/pi + 8*e^(-t)*sin(x)/pi
+u_t = u_xx exactly: True
+u(t, 0) = u(t, pi) = 0: True True
+squared error of the initial condition: 0.000115452558839380 (relative 0.0000113181502281737 )
+value at the midpoint after t = 1: 0.936785665112147 against the first term alone: 0.936797304389107

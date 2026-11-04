@@ -1,0 +1,5 @@
+alpha ^ beta = -beta ^ alpha for one-forms: True
+alpha ^ alpha = 0: True
+Leibniz rule d(g alpha) = dg ^ alpha + g d alpha: True
+d(alpha ^ beta) = d alpha ^ beta - alpha ^ d beta (both sides are 3-forms on a 2-manifold, hence zero): True
+d alpha = dalpha = (-d(a1)/dy + d(a2)/dx) dx∧dy

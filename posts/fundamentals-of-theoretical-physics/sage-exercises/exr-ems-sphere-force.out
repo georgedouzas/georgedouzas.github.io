@@ -1,0 +1,2 @@
+grounded: -1/4*R*d*q^2/(pi*R^4 - 2*pi*R^2*d^2 + pi*d^4) ; leading term: -1/4*q^2*u^3/(pi*R^2)
+isolated: leading term in u = R/d: -1/2*q^2*u^5/(pi*R^2) (times 1/R^2)

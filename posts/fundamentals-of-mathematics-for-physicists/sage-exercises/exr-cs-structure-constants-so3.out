@@ -1,0 +1,17 @@
+f_12^1 =  0   type f_ab^c
+f_12^2 =  0   type f_ab^c
+f_12^3 =  1   type f_ab^i
+f_13^1 =  0   type f_ai^b
+f_13^2 = -1   type f_ai^b
+f_13^3 =  0   type f_ai^j (must vanish)
+f_23^1 =  1   type f_ai^b
+f_23^2 =  0   type f_ai^b
+f_23^3 =  0   type f_ai^j (must vanish)
+f_31^1 =  0   type f_ia^b
+f_31^2 =  1   type f_ia^b
+f_31^3 =  0   type f_ia^j (must vanish)
+f_32^1 = -1   type f_ia^b
+f_32^2 =  0   type f_ia^b
+f_32^3 =  0   type f_ia^j (must vanish)
+f_ij^a = 0 and f_ia^j = 0 (subalgebra, reductive): True
+f_ab^c = 0 (symmetric): True

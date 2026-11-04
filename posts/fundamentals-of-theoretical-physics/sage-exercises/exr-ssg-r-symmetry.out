@@ -1,0 +1,5 @@
+dimensions of the fundamental representations of SU(8): [8, 28, 56, 70, 56, 28, 8]
+[PASS] Lambda^k of the 8 has dimension binomial(8, k): 8, 28, 56, 70, 56, 28, 8: True
+[PASS] 8 x 8 = 28 (antisymmetric, the vectors) + 36 (symmetric): True
+[PASS] Lambda^4 (the 70 scalars) is self-conjugate, Lambda^k and Lambda^{8-k} are conjugate: True
+[PASS] N = 4 super-Yang-Mills: the 4 gauginos and the 6 scalars are the 4 and Lambda^2 = 6 of SU(4), and the 6 is real: True

@@ -1,0 +1,5 @@
+det e^A = e^5  e^{tr A} = e^5
+eigenvalues: [-1/2*sqrt(33) + 5/2, 1/2*sqrt(33) + 5/2]  det(1 + A) = 4  prod(1 + lambda) = 4
+log det(1 + zA) = -833/4*z^4 + 155/3*z^3 - 29/2*z^2 + 5*z
+trace series   = -833/4*z^4 + 155/3*z^3 - 29/2*z^2 + 5*z
+agree: True

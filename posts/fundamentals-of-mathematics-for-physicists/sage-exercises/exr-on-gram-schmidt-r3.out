@@ -1,0 +1,10 @@
+orthogonal vectors w_k (rows):
+[   1    1    0]
+[ 1/2 -1/2    1]
+[-2/3  2/3  2/3]
+orthonormal frame e_k (rows):
+[   1/2*sqrt(2)    1/2*sqrt(2)              0]
+[ 1/3*sqrt(3/2) -1/3*sqrt(3/2)  2/3*sqrt(3/2)]
+[    -sqrt(1/3)      sqrt(1/3)      sqrt(1/3)]
+Gram matrix E E^T = 1: True
+same span as the v_k: True

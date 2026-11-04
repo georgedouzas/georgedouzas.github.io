@@ -1,0 +1,8 @@
+beta = 0.25: W11 = 0.24594  W12 = 0.06165  W22 = 0.00374
+   Creutz ratio chi(2,2) = 1.4184; strong coupling -log tanh(beta) = 1.4068
+   -log W / perimeter: 0.3507 0.4644 0.6985; dilute flipped links give 2 exp(-8 beta) = 0.27067
+   -log W / area:      1.4027 1.3931 1.3971
+beta = 1.00: W11 = 0.99666  W12 = 0.99480  W22 = 0.99276
+   Creutz ratio chi(2,2) = 0.0002; strong coupling -log tanh(beta) = 0.2723
+   -log W / perimeter: 0.0008 0.0009 0.0009; dilute flipped links give 2 exp(-8 beta) = 0.00067
+   -log W / area:      0.0033 0.0026 0.0018

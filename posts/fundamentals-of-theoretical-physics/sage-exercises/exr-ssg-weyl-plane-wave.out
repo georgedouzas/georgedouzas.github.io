@@ -1,0 +1,7 @@
+det(p.sigmabar) = p0^2 - p3^2
+[PASS] a non-zero plane wave needs det = p0^2 - p3^2 = 0, the massless shell: True
+p.sigmabar for p = (E, 0, 0, E): [2*E, 0, 0, 0] ; kernel: [
+(0, 1)
+]
+[PASS] the solution space is one-dimensional, spanned by u = (0, 1): True
+[PASS] u is an eigenvector of S^{12} = sigma_3/2 with eigenvalue -1/2: the left-handed spinor has helicity -1/2: True

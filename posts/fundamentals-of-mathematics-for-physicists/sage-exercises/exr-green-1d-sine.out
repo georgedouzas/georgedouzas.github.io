@@ -1,0 +1,6 @@
+u(x) = sin(pi*x)/pi^2 | equals sin(pi x)/pi^2: True
+Wronskian p(u_a u_b' - u_a' u_b) = -sin(1)
+G(x, xi) for x < xi: sin(x)*sin(-xi + 1)/sin(1) | for x > xi: sin(-x + 1)*sin(xi)/sin(1)
+continuous at x = xi: True
+slope jump at x = xi: -1
+-G'' - G = 0 on each side and G(0, xi) = G(1, xi) = 0: True True True True

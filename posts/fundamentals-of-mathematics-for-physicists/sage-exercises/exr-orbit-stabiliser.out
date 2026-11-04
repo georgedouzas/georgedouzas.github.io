@@ -1,0 +1,4 @@
+S_3 acting on {1,2,3}: orbit of 1 = (1, 2, 3) ; stabiliser of 1 = [(), (2,3)] ; |orbit| |stab| = 6 = |S_3| = 6
+D_6 (order 12 ) on the hexagon: orbit of vertex 1 = (1, 2, 6, 3, 5, 4) ; stabiliser = [(), (2,6)(3,5)] ; |orbit| |stab| = 12
+number of left cosets of the stabiliser: 6 = size of the orbit: 6
+each coset sends vertex 1 to a single point: True

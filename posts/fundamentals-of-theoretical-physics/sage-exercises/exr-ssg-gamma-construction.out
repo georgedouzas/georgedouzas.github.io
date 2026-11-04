@@ -1,0 +1,6 @@
+[PASS] d = 4: 4 matrices of size 4 = 2^floor(d/2) satisfy {Gamma^a, Gamma^b} = 2 eta^{ab}: True
+[PASS] d = 5: 5 matrices of size 4 = 2^floor(d/2) satisfy {Gamma^a, Gamma^b} = 2 eta^{ab}: True
+[PASS] d = 10: 10 matrices of size 32 = 2^floor(d/2) satisfy {Gamma^a, Gamma^b} = 2 eta^{ab}: True
+[PASS] d = 11: 11 matrices of size 32 = 2^floor(d/2) satisfy {Gamma^a, Gamma^b} = 2 eta^{ab}: True
+[PASS] in d = 11 the product Gamma^0 ... Gamma^10 is a multiple of the identity (so no chirality matrix): True
+    Gamma^0 ... Gamma^10 = I * identity

@@ -1,0 +1,6 @@
+sum (-1)^(n+1)/n = log(2)
+m = 10 : s_m - log 2 = -0.0475122 ; |error| < 1/(m+1): True ; sign -
+m = 11 : s_m - log 2 = 0.0433968 ; |error| < 1/(m+1): True ; sign +
+m = 100 : s_m - log 2 = -0.00497502 ; |error| < 1/(m+1): True ; sign -
+m = 101 : s_m - log 2 = 0.00492597 ; |error| < 1/(m+1): True ; sign +
+the series of absolute values is the harmonic series, whose partial sums H_100 = 5.18738 exceed any bound as m grows

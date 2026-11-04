@@ -1,0 +1,5 @@
+J^+: [J_a, J_b] = i eps_abc J_c: True
+J^-: [J_a, J_b] = i eps_abc J_c: True
+[J^+_a, J^-_b] = 0 for all a, b: True
+J^+ vanishes on gamma_* = +1: False, on gamma_* = -1: True; Casimir on its nonzero block: [0.75 0.   0.   0.75]
+J^- vanishes on gamma_* = +1: True, on gamma_* = -1: False; Casimir on its nonzero block: [0.   0.75 0.75 0.  ]

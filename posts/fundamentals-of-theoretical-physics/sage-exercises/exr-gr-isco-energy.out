@@ -1,0 +1,3 @@
+L^2 = -m*r^2/(3*m - r) ; E^2 = -(2*m - r)^2/((3*m - r)*r) ; equals (1 - 2m/r)^2/(1 - 3m/r): True
+at r = 6m: E = 2/3*sqrt(2) ; binding energy fraction 1 - E = 0.05719
+large r: E - 1 ~ -1/2*m*u  (the Newtonian -m/(2r))

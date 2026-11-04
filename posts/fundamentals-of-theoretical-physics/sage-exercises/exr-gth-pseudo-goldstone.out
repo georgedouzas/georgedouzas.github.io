@@ -1,0 +1,7 @@
+vacuum u0 = 1.0241203
+Hessian at the vacuum:
+[  2.14646716793769  0.000000000000000]
+[ 0.000000000000000 0.0488223893125648]
+[PASS] the Goldstone direction v acquires m^2 = eps/u0: True
+[PASS] the radial mass stays close to the unbroken value 2 lam mu^2: True
+[PASS] symbolically, d^2V/dv^2 at (U, 0) is lam (U^2 - mu^2), which equals eps/U on the vacuum condition: True

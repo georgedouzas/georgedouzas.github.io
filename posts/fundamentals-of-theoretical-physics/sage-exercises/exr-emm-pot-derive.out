@@ -1,0 +1,3 @@
+div E - (-lap phi - d_t div A) = 0
+curl B - dE/dt - (box A + grad(div A + d_t phi)) = (0, 0, 0)
+homogeneous equations: div B = 0 ; curl E + dB/dt = (0, 0, 0)

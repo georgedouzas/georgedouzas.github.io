@@ -1,0 +1,12 @@
+eigenvalues: [-sqrt(2) + 2, sqrt(2) + 2, 2]
+eigenvectors (columns):
+[       1        1        1]
+[-sqrt(2)  sqrt(2)        0]
+[       1        1       -1]
+A V = V D: True
+Gram matrix of the eigenvectors (diagonal = orthogonal):
+[4 0 0]
+[0 4 0]
+[0 0 2]
+sum of eigenvalues = 6 = tr A = 6 ; product = 4 = det A = 4
+characteristic polynomial: (x - 2) * (x^2 - 4*x + 2)

@@ -1,0 +1,5 @@
+tr gamma^mu = 0: True
+tr gamma^mu gamma^nu = 4 eta^{mu nu}: True
+trace of a product of three gammas = 0: True
+four gammas: True
+tr gamma_5 = 0: 0 == 0 ; tr gamma_5 gamma^0 gamma^1 gamma^2 gamma^3 = -4*I

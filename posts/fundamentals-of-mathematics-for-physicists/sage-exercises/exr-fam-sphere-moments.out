@@ -1,0 +1,7 @@
+density s0 cos(theta): q = 0, d = [0, 0, 4/3*pi*R^3*s0]
+  Q = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+  nonzero q_lm: {(1, 0): 2/3*sqrt(3)*sqrt(pi)*R^3*s0}
+density s0 sin(2 theta) cos(phi): q = 0, d = [0, 0, 0]
+  Q = [[0, 0, 8/5*pi*R^4*s0], [0, 0, 0], [8/5*pi*R^4*s0, 0, 0]]
+  nonzero q_lm: {(2, -1): 2/15*sqrt(15)*sqrt(2)*sqrt(pi)*R^4*s0, (2, 1): -2/15*sqrt(6)*sqrt(5)*sqrt(pi)*R^4*s0}
+Phi outside = 8/5*pi*R^4*s0*cos(phi)*cos(theta)*sin(theta)/r^3

@@ -1,0 +1,5 @@
+dZ = dZ = -sin(th) dth
+components (dZ_theta, dZ_phi): [-sin(th), 0]
+dZ(d_theta) = -sin(th) ; dZ(d_phi) = 0 ; dZ(X) for X = 0.4 d_theta + 0.5 d_phi: -0.4*sin(th)
+dZ(X) equals X(Z): True
+omega = 3 dtheta - dphi on X: 0.700000000000000

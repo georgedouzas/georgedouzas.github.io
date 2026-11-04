@@ -1,0 +1,7 @@
+g = g = 1/4 dth⊗dth + 1/4 dph⊗dph + 1/4*cos(th) dph⊗dps + 1/4*cos(th) dps⊗dph + 1/4 dps⊗dps
+inverse: inv_g = 4 ∂/∂th⊗∂/∂th + 4/sin(th)^2 ∂/∂ph⊗∂/∂ph - 4*cos(th)/sin(th)^2 ∂/∂ph⊗∂/∂ps - 4*cos(th)/sin(th)^2 ∂/∂ps⊗∂/∂ph + 4/sin(th)^2 ∂/∂ps⊗∂/∂ps
+lowering d_psi: 1/4*cos(th) dph + 1/4 dps
+lowering d_phi: 1/4 dph + 1/4*cos(th) dps
+raising the one-form dpsi: -4*cos(th)/sin(th)^2 ∂/∂ph + 4/sin(th)^2 ∂/∂ps
+down then up returns d_psi: True
+|d_psi| = 1/2 ; g(H, d_psi) = 0 ; |H| = 1/2*sin(th)

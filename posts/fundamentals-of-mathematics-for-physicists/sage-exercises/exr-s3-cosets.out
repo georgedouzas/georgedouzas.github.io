@@ -1,0 +1,7 @@
+A_3 = [(), (1,2,3), (1,3,2)]
+left cosets of A_3: [['()', '(1,2,3)', '(1,3,2)'], ['(1,2)', '(1,3)', '(2,3)']]
+right cosets equal the left cosets (A_3 is normal): True
+S_3 / A_3 has order 2 and is cyclic: True
+left cosets of H = <(1,2)>: [['()', '(1,2)'], ['(1,2,3)', '(2,3)'], ['(1,3)', '(1,3,2)']]
+right cosets of H: [['()', '(1,2)'], ['(1,3,2)', '(2,3)'], ['(1,2,3)', '(1,3)']]
+H is normal: False  (left and right cosets differ, so S_3/H is only a set of 3 cosets, not a group)

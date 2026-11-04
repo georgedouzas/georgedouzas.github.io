@@ -1,0 +1,10 @@
+# Exercise exr-ems-anti-helmholtz (Pierrus, Question 4.17): two coaxial loops with opposite currents.
+I, a, b, z = var('I a b z', domain='positive')
+Bloop = lambda zz: I * a^2 / (2 * (a^2 + zz^2)^(3/2))
+B = Bloop(z - b) - Bloop(z + b)
+print("B(0) =", B.subs(z=0))
+g = diff(B, z).subs(z=0).simplify_full()
+print("dB/dz at 0 =", g, "; equals 3 I a^2 b/(a^2+b^2)^(5/2):", bool((g - 3 * I * a^2 * b / (a^2 + b^2)^(5/2)).simplify_full() == 0))
+d3 = diff(B, z, 3).subs(z=0).simplify_full()
+print("third derivative at 0:", d3.factor())
+print("b with vanishing third derivative:", solve(d3 == 0, b))

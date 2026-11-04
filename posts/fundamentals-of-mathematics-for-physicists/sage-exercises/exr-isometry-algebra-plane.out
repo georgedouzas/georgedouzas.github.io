@@ -1,0 +1,5 @@
+[P1, P2] = 0  = 0 ;  Killing: True
+[J, P1] = -∂/∂y  = -P2 ;  Killing: True
+[J, P2] = ∂/∂x  = P1 ;  Killing: True
+[D, P1] = -P1: True ;  [D, P2] = -P2: True ;  [D, J] = 0: True
+L_D g = 2 g (conformal, not Killing): True

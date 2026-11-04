@@ -1,0 +1,6 @@
+ghat_{t th} = -A20*cos(ph) + A10*sin(ph)    ghat_{t ph} = (A10*cos(ph) + A20*sin(ph))*cos(th)*sin(th) - A30*sin(th)^2
+[PASS] ghat_{mu th} = sin(ph) A^1_mu - cos(ph) A^2_mu: True
+[PASS] ghat_{mu ph} = sin th cos th (cos ph A^1 + sin ph A^2) - sin^2 th A^3: True
+[PASS] ghat_{mn} = -gamma_{mn} and ghat_{mu nu} = g_{mu nu} - gamma_{mn} B^m_mu B^n_nu: True
+[PASS] the horizontal vectors e_mu = d_mu - B^m_mu d_m are orthogonal to the fibre: True
+[PASS] ghat(e_mu, e_nu) = g_{mu nu}: True

@@ -1,0 +1,2 @@
+dL/dN at N = 1: -(kappa^2*rho0 - 3*a(t)*diff(a(t), t)^2)/kappa^2
+vanishes exactly when adot^2/a^2 = kappa^2 rho/3 with rho = rho0/a^3: True

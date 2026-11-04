@@ -1,0 +1,5 @@
+N = 1 : exact error = 1.19023 ; Parseval tail = 1.19023 ; equal: True ; N * error = 1.190
+N = 3 : exact error = 0.624343 ; Parseval tail = 0.624343 ; equal: True ; N * error = 1.873
+N = 9 : exact error = 0.253811 ; Parseval tail = 0.253811 ; equal: True ; N * error = 2.285
+N = 29 : exact error = 0.0848517 ; Parseval tail = 0.0848517 ; equal: True ; N * error = 2.463
+8/pi = 2.546

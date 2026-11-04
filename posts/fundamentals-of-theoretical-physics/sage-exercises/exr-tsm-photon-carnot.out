@@ -1,0 +1,4 @@
+adiabats: S(B) = S(C): True ; S(D) = S(A): True
+Q_h = -4/45*pi^2*T_h^4*(V_1 - V_2) = T_h Delta S: True
+efficiency W/Q_h = -(T_c - T_h)/T_h
+int p dV around the cycle - (Q_h - Q_c) = 0

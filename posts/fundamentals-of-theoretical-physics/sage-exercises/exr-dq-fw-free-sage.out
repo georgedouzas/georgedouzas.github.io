@@ -1,0 +1,3 @@
+U H U^dag = [2*m*cos(theta)^2 + 2*p*cos(theta)*sin(theta) - m, 0, 2*p*cos(theta)^2 - 2*m*cos(theta)*sin(theta) - p, 0, 0, 2*m*cos(theta)^2 + 2*p*cos(theta)*sin(theta) - m, 0, -2*p*cos(theta)^2 + 2*m*cos(theta)*sin(theta) + p, 2*p*cos(theta)^2 - 2*m*cos(theta)*sin(theta) - p, 0, -2*m*cos(theta)^2 - 2*p*cos(theta)*sin(theta) + m, 0, 0, -2*p*cos(theta)^2 + 2*m*cos(theta)*sin(theta) + p, 0, -2*m*cos(theta)^2 - 2*p*cos(theta)*sin(theta) + m]
+odd part = alpha_3 (p cos 2theta - m sin 2theta): True
+for p = 3, m = 4: U H U^dag = [5, 5, -5, -5] = 5 beta

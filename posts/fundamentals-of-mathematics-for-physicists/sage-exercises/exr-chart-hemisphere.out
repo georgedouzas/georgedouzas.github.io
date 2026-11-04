@@ -1,0 +1,6 @@
+the inverse chart lands on the sphere, X^2 + Y^2 + Z^2 = 1: True
+u'^2 + v'^2 = (1 - Z)/(1 + Z): True
+1 - (u'^2 + v'^2) = 2*(X^4 + 2*X^2*Y^2 + Y^4 - 3*sqrt(-X^2 - Y^2 + 1)*X^2 - 3*sqrt(-X^2 - Y^2 + 1)*Y^2 - 5*X^2 - 5*Y^2 + 4*sqrt(-X^2 - Y^2 + 1) + 4)/(X^4 + 2*X^2*Y^2 + Y^4 - 4*sqrt(-X^2 - Y^2 + 1)*X^2 - 4*sqrt(-X^2 - Y^2 + 1)*Y^2 - 8*X^2 - 8*Y^2 + 8*sqrt(-X^2 - Y^2 + 1) + 8)  which is positive for Z > 0: the image is inside the unit disc
+Jacobian determinant of (X, Y) -> (u', v') is 1/(Z (1 + Z)^2): True  (non-zero on the hemisphere)
+the centre (X, Y) = (0, 0), the north pole, goes to (u', v') = (0, 0)
+the point (X, Y) = (3/5, 0) with Z = 4/5 goes to (u', v') = (1/3, 0)

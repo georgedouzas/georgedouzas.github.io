@@ -1,0 +1,7 @@
+identity tensor in Cartesian coordinates: [1 0]
+[0 1]
+in polar coordinates: [1 0]
+[0 1]
+its trace (contraction of the two indices): 2
+g^{ij} g_{jk} = delta^i_k: True
+full contraction g^{ij} g_{ij} = n: 2

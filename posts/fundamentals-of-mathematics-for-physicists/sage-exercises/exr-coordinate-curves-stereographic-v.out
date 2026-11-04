@@ -1,0 +1,6 @@
+the v-curve u = c lies on the plane X = c (1 - Z): True
+the plane contains N = (0, 0, 1): True
+the u-curve v = c lies on the plane Y = c (1 - Z): True
+radius of the circle: 1/sqrt(c^2 + 1)
+for c = 0 the v-curve is the great circle X = 0 (a meridian), radius 1
+the v-curve approaches N at both ends, v -> +-oo: (0, 0, 1)

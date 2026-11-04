@@ -1,0 +1,3 @@
+[PASS] sigma^mu is Hermitian for every mu: True
+[PASS] eps eps sigma^mu = sigmabar^mu, i.e. eps sigma^T eps^T = sigmabar: True
+[PASS] for the spatial matrices this is sigma_2 sigma_i^T sigma_2 = -sigma_i: True

@@ -1,0 +1,4 @@
+[PASS] the +i eigenspace of ad tau' is spanned by E_12: True
+[PASS] the singlet solves the constraints [tau', phi_1] = phi_2, [tau', phi_2] = -phi_1: True
+F_12 = [1/2*I*f*fb - 1/2*I, -1/2*I*f*fb + 1/2*I, 0] ; V = 1/2*f^2*fb^2 - f*fb + 1/2
+[PASS] V = (|f|^2 - 1)^2 / 2: minimum 0 at |f| = 1, where F_12 = 0 (a flat vacuum, unlike the 1/6 of the lambda_8 model): True

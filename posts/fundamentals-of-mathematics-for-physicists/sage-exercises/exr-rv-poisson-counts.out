@@ -1,0 +1,4 @@
+lambda = 2: P(|N - lambda| <= sqrt(lambda)) = 0.7218 (Gaussian: 0.6827)
+lambda = 10: P(|N - lambda| <= sqrt(lambda)) = 0.7343 (Gaussian: 0.6827)
+lambda = 100: P(|N - lambda| <= sqrt(lambda)) = 0.7065 (Gaussian: 0.6827)
+lambda = 2: P(N = 0) = e^(-2) = 0.1353 ; P(N >= 5) = (e^2 - 7)*e^(-2) = 0.05265

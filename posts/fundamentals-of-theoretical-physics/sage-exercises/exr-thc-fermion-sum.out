@@ -1,0 +1,5 @@
+tanh(beta omega/2)/(2 omega) = (1/2 - n_F)/omega: True
+coth(beta omega/2)/(2 omega) = (1/2 + n_B)/omega: True
+beta = 1.00000000000000, omega = 1.00000000000000: fermion sum 0.23105833 vs 0.23105858; boson sum 1.08197645 vs 1.08197671
+beta = 2.00000000000000, omega = 0.500000000000000: fermion sum 0.46211665 vs 0.46211716; boson sum 2.16395291 vs 2.16395341
+beta = 0.500000000000000, omega = 3.00000000000000: fermion sum 0.10585803 vs 0.10585816; boson sum 0.26240551 vs 0.26240564

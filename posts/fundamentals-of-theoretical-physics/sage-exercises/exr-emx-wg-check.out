@@ -1,0 +1,5 @@
+Faraday curl E + dB/dt: (0, 0, 0)
+div E, div B: 0 0
+Ampere-Maxwell residual: (0, -(a^2*k^2 - a^2*omega^2 + pi^2)*(cos(k*z)*sin(omega*t) - cos(omega*t)*sin(k*z))*E0*sin(pi*x/a)/(a^2*omega), 0)
+vanishes when omega^2 = k^2 + pi^2/a^2: True
+E_y on x = 0, a: 0 0 ; B_x on x = 0, a: 0 0

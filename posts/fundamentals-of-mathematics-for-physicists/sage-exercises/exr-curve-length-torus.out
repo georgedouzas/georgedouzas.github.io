@@ -1,0 +1,3 @@
+tube circle b = 1: 8/5*pi = 2 pi r
+outer axis circle a = 0: 28/5*pi = 2 pi (R + r); inner axis circle a = pi: 12/5*pi = 2 pi (R - r)
+diagonal curve a = b = t, t in [0, 2 pi]: length 13.60474041330959 ; chart length 2 pi sqrt(2) = 8.88577

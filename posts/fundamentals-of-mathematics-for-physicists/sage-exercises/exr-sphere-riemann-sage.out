@@ -1,0 +1,8 @@
+  R^th_th th ph = 0   R^th_th ph th = 0
+  R^th_ph th ph = sin(th)^2   R^th_ph ph th = -sin(th)^2
+  R^ph_th th ph = -1   R^ph_th ph th = 1
+  R^ph_ph th ph = 0   R^ph_ph ph th = 0
+R^th_ph th ph = sin^2 th, R^ph_th th ph = -1, R^th_th th ph = 0, R^ph_ph th ph = 0: True
+components with mu = nu vanish: True
+number of non-zero components: 4 (the two independent ones and their mirror images)
+lowered: R_th ph th ph = sin^2 th = det g: True

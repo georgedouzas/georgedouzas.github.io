@@ -1,0 +1,5 @@
+e^(1 + i pi) = -e
+e^(i pi/2) = I
+e^(ln 2 + i pi/3) = I*sqrt(3) + 1
+e^(3 pi i/2) = -I
+e^(z + 2 pi i) == e^z for z = 1 + i (numerically): True

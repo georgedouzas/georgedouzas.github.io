@@ -1,0 +1,5 @@
+[J_a, J_b] = J_c (cyclic): True
+[K_a, K_b] = K_c (cyclic): True
+[J_a, K_b] = 0 for all a, b: True
+J_0 = Lean's J 0: True
+weights (i J_2, i K_2) of R^4 (x) C: [(-1/2, -1/2), (-1/2, 1/2), (1/2, -1/2), (1/2, 1/2)]

@@ -1,0 +1,6 @@
+K = -diff(f(u), u, u)/f(u) ; with f > 0, sqrt(det g) = f and K f = -f''(u): True
+so the integral of K dA over u0 <= u <= u1 is -2 pi [f'(u1) - f'(u0)]
+sphere, f = sin u on [0, pi]: total curvature = 4*pi ; direct integration agrees: True
+torus, f = R + r cos u on [0, 2 pi] (r = 1): total curvature = 0 ; direct integration agrees: True
+f = cosh u (K = -1) on [-L, L]: total curvature = -4*pi*sinh(L) ; direct integration agrees: True
+for f = cosh u the total curvature -4 pi sinh L grows without bound: the surface is not compact

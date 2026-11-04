@@ -1,0 +1,4 @@
+arrival time tr = R*log(-R*e^(te/R)/(d*e^(te/R) - R))
+1 + z = -R/(d*e^(te/R) - R)
+1 + z equals 1/(1 - d exp(te/R)/R): True
+small separation: z = d exp(te/R)/R + O(d^2): True

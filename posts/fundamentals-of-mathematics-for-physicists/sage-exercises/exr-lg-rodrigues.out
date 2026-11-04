@@ -1,0 +1,4 @@
+(n.L)^3 + |n|^2 (n.L) = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+(n.L)^2 = n n^T - |n|^2 1: True
+exp(t u.L) - Rodrigues = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+rotation by 2 pi/3 about (1,1,1): [0, 0, 1, 1, 0, 0, 0, 1, 0] ; sends e1 -> e2 -> e3 -> e1: True

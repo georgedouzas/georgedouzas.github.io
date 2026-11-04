@@ -1,0 +1,10 @@
+n = 1, x = 0.7: |sum relation| = 6.2e-61, |derivative relation| = 0.0e+00
+n = 1, x = 1.7: |sum relation| = 6.2e-61, |derivative relation| = 0.0e+00
+n = 1, x = 5.3: |sum relation| = 0.0e+00, |derivative relation| = 0.0e+00
+n = 2, x = 0.7: |sum relation| = 0.0e+00, |derivative relation| = 0.0e+00
+n = 2, x = 1.7: |sum relation| = 6.2e-61, |derivative relation| = 0.0e+00
+n = 2, x = 5.3: |sum relation| = 7.8e-62, |derivative relation| = 0.0e+00
+n = 3, x = 0.7: |sum relation| = 3.9e-62, |derivative relation| = 0.0e+00
+n = 3, x = 1.7: |sum relation| = 3.1e-61, |derivative relation| = 0.0e+00
+n = 3, x = 5.3: |sum relation| = 0.0e+00, |derivative relation| = 0.0e+00
+all residuals below 1e-45: True

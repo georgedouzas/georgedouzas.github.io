@@ -1,0 +1,4 @@
+f_ab^c = -1 eps_abc: Killing form [-2, 0, 0, 0, -2, 0, 0, 0, -2]
+[PASS] Jacobi identity and B_ab = -2 delta_ab for f = -1 eps: True
+f_ab^c = +1 eps_abc: Killing form [-2, 0, 0, 0, -2, 0, 0, 0, -2]
+[PASS] Jacobi identity and B_ab = -2 delta_ab for f = +1 eps: True

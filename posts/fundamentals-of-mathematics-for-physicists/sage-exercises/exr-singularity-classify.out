@@ -1,0 +1,6 @@
+f = sin(z)/z :   1 + (-1/6)*z^2 + Order(z^3)
+f = -(cos(z) - 1)/z^4 :   1/2*z^(-2) + (-1/24) + 1/720*z^2 + Order(z^3)
+f = z e^{1/z}:  z + 1/2/z + 1/6/z^2 + 1/24/z^3 + 1/120/z^4 + 1/720/z^5 + 1 + ... (the terms z^{1-n}/n! never stop)
+sin z/z: no negative powers, removable with value 1
+(1 - cos z)/z^4: lowest power z^-2, pole of order 2; residue 0
+z e^{1/z}: essential; coefficient of 1/z is 1/2

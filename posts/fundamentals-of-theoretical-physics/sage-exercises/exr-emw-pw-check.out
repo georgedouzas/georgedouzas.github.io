@@ -1,0 +1,4 @@
+div E / (-sin) = e1*k1 + e2*k2 + e3*k3 ; div B / (-sin) = b1*k1 + b2*k2 + b3*k3
+Faraday / (-sin) = (e3*k2 - e2*k3 - b1*w, -e3*k1 + e1*k3 - b2*w, e2*k1 - e1*k2 - b3*w) = k x E0 - w B0
+Ampere / (-sin) = (b3*k2 - b2*k3 + e1*w, -b3*k1 + b1*k3 + e2*w, b2*k1 - b1*k2 + e3*w) = k x B0 + w E0
+k x (k x E0)/w + w E0 = ((e2*k1*k2 - e1*k2^2 + e3*k1*k3 - e1*k3^2 + e1*w^2)/w, -(e2*k1^2 - e1*k1*k2 - e3*k2*k3 + e2*k3^2 - e2*w^2)/w, -(e3*k1^2 + e3*k2^2 - e3*w^2 - (e1*k1 + e2*k2)*k3)/w)

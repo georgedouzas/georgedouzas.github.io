@@ -1,0 +1,3 @@
+incident : residual numerators [-(E^2 - k^2 - m^2)/(E + m), 0] ; vanish on the mass shell: True
+reflected : residual numerators [-(E^2 - k^2 - m^2)/(E + m), 0] ; vanish on the mass shell: True
+transmitted : residual numerators [-(E^2 - 2*E*V + V^2 - m^2 - q^2)/(E - V + m), 0] ; vanish on the mass shell: True

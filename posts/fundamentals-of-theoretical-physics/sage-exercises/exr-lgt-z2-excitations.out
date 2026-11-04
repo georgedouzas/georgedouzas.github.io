@@ -1,0 +1,10 @@
+d = 2: links per site 2, plaquettes per site 1, plaquettes through a link 2, flipping one link costs 4 beta
+d = 3: links per site 3, plaquettes per site 3, plaquettes through a link 4, flipping one link costs 8 beta
+       <sigma_P> = 1 - 2 * 4 * (192/192) * exp(-8 beta) = 1 - 8 exp(-8 beta)
+d = 4: links per site 4, plaquettes per site 6, plaquettes through a link 6, flipping one link costs 12 beta
+       <sigma_P> = 1 - 2 * 6 * (1024/1536) * exp(-12 beta) = 1 - 8 exp(-12 beta)
+d = 2, beta = 2: exact tanh beta = 0.96403; single flipped plaquettes 1 - 2 exp(-2 beta) = 0.96337; link-flip formula 1 - 8 exp(-4 beta) = 0.99732
+polygons per site of the cubic lattice: length 4: 3, length 6: 22
+d = 3: <sigma_P> = 1 - 2 (4 p4/3 exp(-8 beta) + 6 p6/3 exp(-12 beta)) = 1 - 8 exp(-8 beta) - 88 exp(-12 beta)
+   beta = 1.0: 1 - 8 exp(-8 beta) = 0.99732, with the second term 0.99678
+   beta = 1.2: 1 - 8 exp(-8 beta) = 0.99946, with the second term 0.99941

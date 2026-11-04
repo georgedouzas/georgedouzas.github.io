@@ -1,0 +1,8 @@
+S unitary: True ; F unitary: True
+F^dagger S F diagonal: True ; entries: [1, -(1/2*I - 1/2)*sqrt(2), -I, -(1/2*I + 1/2)*sqrt(2), -1, (1/2*I - 1/2)*sqrt(2), I, (1/2*I + 1/2)*sqrt(2)]
+L Hermitian: True ; [L, S] = 0: True
+eigenvalues of L = 4 sin^2(pi k/N): True
+lowest eigenvalues of L/h^2 (N = 64): [0.0, 0.9992, 0.9992, 3.9872, 3.9872, 8.9351, 8.9351]
+t = 0.500000000000000: discrete trace 2.509665   theta(t) 2.506628
+t = 1: discrete trace 1.773718   theta(t) 1.772637
+t = 2: discrete trace 1.271794   theta(t) 1.271342

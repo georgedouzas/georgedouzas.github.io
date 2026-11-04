@@ -1,0 +1,15 @@
+# Exercise exr-ft-lorentzian-inverse: the inverse transform of the Lorentzian 2a/(a^2 + k^2) is e^{-a|x|}, by direct
+# integration and by residues at k = +-ia.
+k, a, x = var("k a x")
+assume(a > 0)
+assume(x > 0)
+plus = (integrate(2 * a / (a ** 2 + k ** 2) * exp(I * k * x), k, -oo, oo) / (2 * pi)).simplify_full()
+print("x > 0: (1/2pi) int 2a e^{ikx}/(a^2 + k^2) dk =", plus)
+forget(x > 0); assume(x < 0)
+minus = (integrate(2 * a / (a ** 2 + k ** 2) * exp(I * k * x), k, -oo, oo) / (2 * pi)).simplify_full()
+print("x < 0: the same integral =", minus)
+forget(x < 0)
+g = 2 * a / (a ** 2 + k ** 2) * exp(I * k * x)
+r_up = g.residue(k == I * a).simplify_full(); r_down = g.residue(k == -I * a).simplify_full()
+print("residues at k = ia and k = -ia:", r_up, ",", r_down)
+print("2 pi i Res_{ia} / (2 pi) = e^{-ax}:", bool((2 * pi * I * r_up / (2 * pi) - exp(-a * x)).simplify_full() == 0), "; -2 pi i Res_{-ia} / (2 pi) = e^{ax}:", bool((-2 * pi * I * r_down / (2 * pi) - exp(a * x)).simplify_full() == 0))

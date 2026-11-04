@@ -1,0 +1,4 @@
+Noether current J^0 = -2*v(t, x, y, z)*diff(u(t, x, y, z), t) + 2*u(t, x, y, z)*diff(v(t, x, y, z), t)
+j^mu = -J^mu = i(phibar d^mu phi - phi d^mu phibar): True
+div j = i(phibar box phi - phi box phibar): True
+on-shell divergence: 0

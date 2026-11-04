@@ -1,0 +1,5 @@
+exact E0 = (251 + 4 sqrt 15)/40 = 6.66229833, dissociation threshold C0 + De = 6.7
+dx = 0.40: finite differences 6.66144968 (error -8.5e-04), Numerov 6.66228086 (error -1.7e-05)
+dx = 0.20: finite differences 6.66208881 (error -2.1e-04), Numerov 6.66229727 (error -1.1e-06)
+dx = 0.10: finite differences 6.66224611 (error -5.2e-05), Numerov 6.66229827 (error -6.6e-08)
+eigenvalues below the threshold 6.7: [6.66225] ; next: 6.70089

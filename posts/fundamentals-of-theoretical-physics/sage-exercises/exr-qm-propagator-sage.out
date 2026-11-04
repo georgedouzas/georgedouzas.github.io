@@ -1,0 +1,3 @@
+(i hbar K_t + hbar^2/(2m) K_xx)/K = 0
+int K_E(x, y; tau) e^(-y^2) dy = sqrt(m)*e^(-m*x^2/(2*hbar*tau + m))/sqrt(2*hbar*tau + m)
+limit tau -> 0: e^(-x^2)

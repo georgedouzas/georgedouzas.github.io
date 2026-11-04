@@ -1,0 +1,6 @@
+equation for A_0: diff(A0(t, x), x, x) - diff(A1(t, x), t, x) = 0  (Gauss's law, d_x F_{10} = 0)
+equation for A_1: -diff(A0(t, x), t, x) + diff(A1(t, x), t, t) = 0  (d_t F_{01} = 0)
+F is gauge invariant under A -> A + d lambda: True
+both equations say that F_01 is constant: d_x F_01 = 0 and d_t F_01 = 0; in 1+1 dimensions there are no propagating
+electromagnetic waves, only a constant electric field (the photon has no transverse directions there).
+EL_0 = -d_x F_{01} and EL_1 = d_t F_{01} as expressions: True True

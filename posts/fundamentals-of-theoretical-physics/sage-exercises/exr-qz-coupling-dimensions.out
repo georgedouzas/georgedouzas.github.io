@@ -1,0 +1,11 @@
+g3 phi^3 : dimension -1/2*d + 3
+lambda phi^4 : dimension -d + 4
+g6 phi^6 : dimension -2*d + 6
+Yukawa g phi psibar psi : dimension -1/2*d + 2
+gauge e psibar A psi : dimension -1/2*d + 2
+d   g3 phi^3  lambda phi^4  g6 phi^6  Yukawa g phi psibar psi  gauge e psibar A psi
+4 [1, 0, -2, 0, 0]
+5 [1/2, -1, -4, -1/2, -1/2]
+6 [0, -2, -6, -1, -1]
+10 [-2, -6, -14, -3, -3]
+11 [-5/2, -7, -16, -7/2, -7/2]

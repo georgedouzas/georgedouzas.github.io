@@ -1,0 +1,4 @@
+oscillator: EL equation m*w^2*q(t) + m*diff(q(t), t, t) = 0
+x = A cos(w t) solves it: True
+pendulum: EL equation g*l*m*sin(q(t)) + l^2*m*diff(q(t), t, t) = 0  (nonlinear; for small q it is the oscillator with w^2 = g/l)
+free particle: EL equation m*diff(q(t), t, t) = 0 -> uniform motion q = q0 + v t

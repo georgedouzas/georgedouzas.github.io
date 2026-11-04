@@ -1,0 +1,5 @@
+[L_x, L_y] f = i hbar L_z f: True
+[L_y, L_z] f = i hbar L_x f: True
+[L_z, L_x] f = i hbar L_y f: True
+[L^2, L_z] f = 0: True
+example: L_z (x + i y) = hbar (x + i y): True

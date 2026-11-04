@@ -1,0 +1,5 @@
+SU(3)/U(1)^2: solutions of W_2 = 0 with positive radii: [[R2 == R1, R3 == R1]]
+W_1 at R1 = R2 = R3 = R: -2*I/R
+W_2 coefficients at R1 = R2 = R3: [0, 0, 0]
+W_2 at R1 = 1, R2 = 1, R3 = 2 (not nearly-Kahler): [-3, -3, 24]
+Sp(4)/(SU(2) x U(1)): W_2 coefficients [(R1^2 - R2^2)*R1^2, 2*(R1^2 - R2^2)*R2^2] vanish iff R1 = R2: True ; W_1 at R1 = R2 = R: -2*I/R

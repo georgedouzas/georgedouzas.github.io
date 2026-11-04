@@ -1,0 +1,3 @@
+(i hbar d/dt + hbar^2/(2m) d^2/dx^2) psi_v / phase = 1/2*(hbar^2*D[0, 0](psi)(-t*v + x, t) + 2*I*hbar*m*D[1](psi)(-t*v + x, t))/m
+this is i hbar psi_t + (hbar^2/2m) psi_xx at (x - v t, t): zero whenever psi solves the free equation
+boost of the p0 = 0 packet equals the p0 = m v packet: True

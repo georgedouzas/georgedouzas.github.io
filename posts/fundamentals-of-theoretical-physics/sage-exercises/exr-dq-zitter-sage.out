@@ -1,0 +1,5 @@
+H^2 = E^2: True
+alpha(t) = p H^-1 + e^{2iHt}(alpha - p H^-1): True
+time average over a period pi/E: [ m*p/(m^2 + p^2)  p^2/(m^2 + p^2)]
+[ p^2/(m^2 + p^2) -m*p/(m^2 + p^2)] ; equals p H^-1: True
+eigenvalues of p H^-1: [-p/sqrt(m^2 + p^2), p/sqrt(m^2 + p^2)]

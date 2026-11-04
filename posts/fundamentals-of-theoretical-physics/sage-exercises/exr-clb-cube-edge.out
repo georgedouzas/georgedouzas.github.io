@@ -1,0 +1,6 @@
+inertia tensor at the centre: [2/3*M*a^2         0         0]
+[        0 2/3*M*a^2         0]
+[        0         0 2/3*M*a^2]  (isotropic, 2 M a^2/3)
+edge y = a, z = -a meets the diagonal: False
+moment of inertia about the edge: 8/3*M*a^2   new angular velocity: 1/12*sqrt(3)*w  = sqrt(3)/12 omega: True
+kinetic energy ratio after/before: 1/12

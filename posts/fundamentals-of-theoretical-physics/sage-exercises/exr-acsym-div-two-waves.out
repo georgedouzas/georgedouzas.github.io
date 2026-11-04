@@ -1,0 +1,4 @@
+phi solves the Klein-Gordon equation: True
+j^0 = 2(a^2 omega_1 + b^2 omega_2) + 2ab(omega_1 + omega_2) cos((omega_2 - omega_1) t - (k_2 - k_1) x): True
+d_t j^0 + d_x j^1 = 0
+Q = int_0^{2 pi} j^0 dx = 4*pi*sqrt(m^2 + 1)*a^2 + 4*pi*sqrt(m^2 + 4)*b^2   equals 4 pi (a^2 omega_1 + b^2 omega_2): True

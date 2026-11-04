@@ -1,0 +1,17 @@
+# Exercise exr-emw-zones-flux: the time-averaged Poynting vector of the full dipole field.
+x, y, z = var("x y z"); k, p0 = var("k p0", domain="positive")
+X = [x, y, z]
+def div(F): return sum(diff(F[i], X[i]) for i in range(3)).simplify_full()
+def curl(F): return vector([diff(F[2], y) - diff(F[1], z), diff(F[0], z) - diff(F[2], x), diff(F[1], x) - diff(F[0], y)])
+r = sqrt(x^2 + y^2 + z^2); n = vector(X) / r; p = vector([0, 0, p0])
+ph = exp(I * k * r)
+E = ph / (4 * pi) * (k^2 * n.cross_product(p).cross_product(n) / r + (3 * n * n.dot_product(p) - p) * (1 / r^3 - I * k / r^2))
+B = k^2 * ph / (4 * pi) * n.cross_product(p) / r * (1 - 1 / (I * k * r))
+Sav = (E.cross_product(B.conjugate()) / 2).apply_map(lambda e: e.real_part())
+Sav = Sav.simplify_full()
+radial = (Sav.dot_product(n)).simplify_full()
+transverse = (Sav - radial * n).simplify_full()
+print('radial component:', radial.factor(), '; transverse part:', transverse)
+th, R = var('th R', domain='positive')
+rad_sph = radial.subs(x=R*sin(th), y=0, z=R*cos(th)).simplify_full()
+print('in spherical form:', rad_sph, '; flux through a sphere:', integrate(rad_sph * 2 * pi * R^2 * sin(th), th, 0, pi).simplify_full())

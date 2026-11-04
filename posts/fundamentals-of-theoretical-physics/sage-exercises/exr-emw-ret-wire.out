@@ -1,0 +1,4 @@
+A_z = 1/2*I0*arcsinh(sqrt(-s^2 + t^2)/s)/pi
+equals (I0/2 pi) log((t + sqrt(t^2 - s^2))/s): True
+E_z = -1/2*I0/(pi*sqrt(-s^2 + t^2)) ; B_phi = 1/2*I0*t/(pi*sqrt(-s^2 + t^2)*s)
+limits t -> oo: E_z -> 0 ; B_phi -> 1/2*I0/(pi*s)

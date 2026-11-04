@@ -1,0 +1,16 @@
+row sums: [1, 1, 1]
+eigenvalues: [0.4166666666666667?, 0.500000000000000?, 1.000000000000000?]
+right eigenvectors: [(1, [
+(1, 1, 1)
+], 1), (1/2, [
+(1, -1, 1/2)
+], 1), (5/12, [
+(1, -4/3, 1)
+], 1)]
+stationary distribution w: (2/7, 3/7, 2/7)   w P = w: True
+P^60 =
+ [0.28571429 0.42857143 0.28571429]
+[0.28571429 0.42857143 0.28571429]
+[0.28571429 0.42857143 0.28571429]
+every row of P^n tends to w: True
+detailed balance w_i P_ij = w_j P_ji holds: False

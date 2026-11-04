@@ -1,0 +1,9 @@
+Gram matrix:
+[1 0 0 0 0 0]
+[0 1 0 0 0 0]
+[0 0 1 0 0 0]
+[0 0 0 1 0 0]
+[0 0 0 0 1 0]
+[0 0 0 0 0 1]
+a psi_n = sqrt(n) psi_(n-1), n = 1..5: True ; a psi_0 = 0: True
+Hermite polynomials: [1, 2*xi, 4*xi^2 - 2, 8*xi^3 - 12*xi, 16*xi^4 - 48*xi^2 + 12]
