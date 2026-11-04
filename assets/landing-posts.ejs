@@ -1,0 +1,50 @@
+<%
+const [featured, ...older] = items;
+const tagsOf = (item) => (item.categories || []);
+const tagLink = (tag) => `posts.html#tag=${encodeURIComponent(tag)}`;
+const allTags = [...new Set(items.flatMap(tagsOf))].sort();
+%>
+```{=html}
+<% if (allTags.length > 0) { %>
+<nav class="tag-bar" aria-label="Filter posts by tag">
+<a class="tag-chip" href="posts.html" data-tag-filter="">All</a>
+<% for (const tag of allTags) { %><a class="tag-chip" href="<%- tagLink(tag) %>" data-tag-filter="<%= tag %>"><%= tag %></a>
+<% } %></nav>
+<p class="tag-empty" hidden>No posts with this tag yet.</p>
+<% } %>
+<% if (featured) { %>
+<p class="landing-eyebrow">Latest post</p>
+<article class="featured-post<%= featured.image ? '' : ' featured-post-text-only' %>" data-tags="<%- tagsOf(featured).join('|') %>">
+<% if (featured.image) { %>
+<div class="featured-media">
+<a href="<%- featured.path %>"><img class="featured-image" src="<%- featured.image %>" alt=""></a>
+</div>
+<% } %>
+<div class="featured-text">
+<p class="listing-date"><%= featured.date %></p>
+<h2 class="featured-title"><a href="<%- featured.path %>"><%= featured.title %></a></h2>
+<p class="listing-description"><%= featured.description %></p>
+<div class="listing-categories">
+<% for (const tag of tagsOf(featured)) { %><a class="tag-chip" href="<%- tagLink(tag) %>"><%= tag %></a><% } %>
+</div>
+</div>
+</article>
+<% } %>
+<% if (older.length > 0) { %>
+<h2 class="older-heading">More posts</h2>
+<div class="older-posts">
+<% for (const item of older) { %>
+<article class="older-post" data-tags="<%- tagsOf(item).join('|') %>">
+<p class="listing-date"><%= item.date %></p>
+<div>
+<h3 class="older-title"><a href="<%- item.path %>"><%= item.title %></a></h3>
+<p class="listing-description"><%= item.description %></p>
+<div class="listing-categories">
+<% for (const tag of tagsOf(item)) { %><a class="tag-chip" href="<%- tagLink(tag) %>"><%= tag %></a><% } %>
+</div>
+</div>
+</article>
+<% } %>
+</div>
+<% } %>
+```

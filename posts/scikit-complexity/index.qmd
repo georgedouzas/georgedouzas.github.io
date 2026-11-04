@@ -1,0 +1,66 @@
+---
+title: "scikit-complexity"
+description: "A Python library to create and simulate complex systems"
+date: 2026-11-04
+categories: [Complex Systems, Simulation, Open Source]
+image: "../../assets/oss/scikit-complexity.svg"
+order: 1
+---
+
+[scikit-complexity](https://github.com/georgedouzas/scikit-complexity) is a Python library to create and simulate complex systems.
+You describe a model in a few lines, and it works out the mathematics, picks a solver and runs the simulation.
+
+It handles differential equations, stochastic processes, discrete maps, cellular automata, agents, networks and fields through one
+interface. There are two ways to use it.
+
+The first is the model catalog in `skcomplex.models`. Pick a ready-made model and run it:
+
+```python
+from skcomplex.models import describe, run
+
+print(describe('lotka_volterra').description)
+
+trajectory = run('lotka_volterra').trajectory_
+print(trajectory.names)
+```
+
+```
+Prey and predators whose populations oscillate through predation.
+['prey.n', 'predators.n', 'growth.r', 'predation.a', 'predation.b', 'death.d']
+```
+
+The second is `skcomplex.core`, for your own models. A model is made of elements, which carry state, and interactions, which change
+that state through laws. Here is the same kind of predator and prey system, written from scratch:
+
+```python
+from skcomplex.core.elements import CompartmentElement
+from skcomplex.core.interactions import RateInteraction
+from skcomplex.core.system import System
+from skcomplex.engine.runtime import Simulation
+system = System(
+    elements=[CompartmentElement('rabbits', n=40), CompartmentElement('foxes', n=9)],
+    interactions=[
+        RateInteraction('r', target='rabbits', state='n', sources=['foxes'],
+            rate=lambda s: 1.1 * s.target.n - 0.4 * s.target.n * s.sources[0].n),
+        RateInteraction('f', target='foxes', state='n', sources=['rabbits'],
+            rate=lambda s: 0.1 * s.target.n * s.sources[0].n - 0.4 * s.target.n),
+    ],
+)
+trajectory = Simulation(system, dt=0.05).check().prepare().run(until=30).trajectory_
+print(round(float(trajectory.values('rabbits.n').max())))
+```
+
+```
+53
+```
+
+That is the highest rabbit population reached during the run.
+
+You don't have to state what kind of model you are building. You write the laws, and the library decides whether it is an ODE, an
+SDE or a jump process. Add a `RerunObserver` and the run streams live to the [Rerun](https://rerun.io) viewer, where you can watch it while
+changing its parameters.
+
+The catalog is listed in the [gallery](https://georgedouzas.github.io/scikit-complexity), from Game of Life to Schelling segregation.
+Its models use the same public classes you do, so each one doubles as an example for your own.
+
+Install it with `pip install scikit-complexity`. It runs on Linux and on macOS with Apple silicon, and on Windows through WSL.

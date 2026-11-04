@@ -1,0 +1,16 @@
+<% const post = items[0]; %>
+<% if (post) { %>
+```{=html}
+<article class="quick-card">
+<div class="quick-thumb"><% if (post.image) { %><img src="<%- post.image %>" alt=""><% } %></div>
+<div class="quick-body">
+<p class="quick-label">Posts <span aria-hidden="true">→</span></p>
+<h2><a class="quick-link" href="posts.html"><%= post.title %></a></h2>
+<p class="quick-text"><%= post.description %></p>
+<div class="quick-tags">
+<% for (const tag of (post.categories || []).slice(0, 3)) { %><a class="tag-chip" href="posts.html#tag=<%- encodeURIComponent(tag) %>"><%= tag %></a><% } %>
+</div>
+</div>
+</article>
+```
+<% } %>

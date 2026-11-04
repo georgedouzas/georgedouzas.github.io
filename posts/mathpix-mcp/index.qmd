@@ -1,0 +1,38 @@
+---
+title: "mathpix-mcp"
+description: "An MCP server for Mathpix OCR"
+date: 2026-11-04
+categories: [AI Agents, OCR, Open Source]
+image: "../../assets/oss/mathpix-mcp.svg"
+order: 5
+---
+
+[mathpix-mcp](https://github.com/georgedouzas/mathpix-mcp) is a Model Context Protocol server for [Mathpix](https://mathpix.com)
+OCR. It lets an LLM or agent turn images and PDF, DOCX or PPTX documents into LaTeX and Markdown.
+
+It's written in Ruby, so you need Ruby 3.2 or newer and your own Mathpix credentials:
+
+```bash
+gem install mathpix-mcp
+export MATHPIX_APP_ID=your-app-id
+export MATHPIX_APP_KEY=your-app-key
+mathpix-mcp
+```
+
+That runs it over stdio. There is also a `mathpix-mcp-http` executable for Streamable HTTP, with bearer-token authentication. An
+agent that connects gets these tools:
+
+```
+convert_image_tool
+convert_document_tool
+convert_strokes_tool
+batch_convert_tool
+check_document_status_tool
+search_results_tool
+get_usage_tool
+get_account_info_tool
+list_formats_tool
+```
+
+OCR output is always written to a file and never returned inline. The tool sends back a path, a short preview and some metadata.
+A long PDF can produce a lot of text, and this stops it from overflowing the model's context.

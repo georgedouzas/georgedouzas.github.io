@@ -1,0 +1,48 @@
+---
+title: "copier-modern-python"
+description: "A Copier template for modern Python projects"
+date: 2026-11-04
+categories: [Python, Developer Tools, Open Source]
+image: "../../assets/oss/copier-modern-python.svg"
+order: 6
+---
+
+[copier-modern-python](https://github.com/georgedouzas/copier-modern-python) is a [Copier](https://github.com/copier-org/copier)
+template for modern Python projects. It asks you a few questions and generates a project with its tooling already configured.
+
+```bash
+copier copy "gh:georgedouzas/copier-modern-python.git" my-project
+ls -A my-project
+```
+
+With the default answers, you get this:
+
+```
+.copier-answers.yml
+.editorconfig
+.github
+.gitignore
+.pre-commit-config.yaml
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+LICENSE
+README.md
+docs
+noxfile.py
+openspec
+properdocs.yml
+pyproject.toml
+renovate.json
+src
+tests
+```
+
+The questions cover your package manager (PDM or uv), your Git provider, the license, the Python versions you support, and the
+project layout: a library, a command line tool, machine learning, data engineering or a service. You can also add a Dockerfile, and
+choose a spec-driven workflow with OpenSpec, Spec Kit or neither.
+
+[Nox](https://github.com/wntrblm/nox) runs the tasks, including tests across Python versions, formatting, checks and building the
+docs.
+
+Copier also remembers your answers, so `copier update` applies later template changes while keeping your own settings.

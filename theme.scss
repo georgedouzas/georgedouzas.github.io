@@ -1,0 +1,1003 @@
+/*-- scss:defaults --*/
+
+// Use the reader's own fonts, and stop the base themes loading web fonts.
+$web-font-path: false;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+$font-size-root: 17px;
+$headings-font-weight: 600;
+
+/*-- scss:rules --*/
+
+body {
+  --site-bg: #ffffff;
+  --site-text: #1f2328;
+  --site-muted: #59636e;
+  --site-border: #e3e6ea;
+  --site-surface: #f5f6f8;
+  --site-accent: #0b63ce;
+  --bs-body-bg: var(--site-bg);
+  --bs-body-color: var(--site-text);
+  --bs-emphasis-color: var(--site-text);
+  --bs-heading-color: var(--site-text);
+  --bs-secondary-color: var(--site-muted);
+  --bs-border-color: var(--site-border);
+  --bs-link-color: var(--site-accent);
+  --bs-link-hover-color: var(--site-accent);
+  background-color: var(--site-bg);
+  color: var(--site-text);
+}
+
+a {
+  color: var(--site-accent);
+  text-decoration: none;
+  &:hover {
+    color: var(--site-accent);
+    text-decoration: underline;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, .title {
+  color: var(--site-text);
+  letter-spacing: -0.015em;
+}
+
+// Navigation
+.navbar {
+  a,
+  a:hover,
+  a:focus {
+    text-decoration: none !important;
+  }
+
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  background: var(--site-bg) !important;
+  border-bottom: 1px solid var(--site-border);
+  box-shadow: none;
+
+  .navbar-brand,
+  .navbar-title {
+    color: var(--site-text) !important;
+    font-weight: 600;
+  }
+
+  .nav-link,
+  .navbar-nav .nav-link,
+  .quarto-navigation-tool,
+  .navbar-toggler {
+    color: var(--site-muted) !important;
+  }
+
+  // Pill-shaped section buttons.
+  .navbar-nav .nav-link {
+    margin: 0 0.15rem;
+    padding: 0.4rem 0.95rem;
+    border: 1px solid var(--site-border);
+    border-radius: 999px;
+    background: var(--site-surface);
+    font-weight: 600;
+    transition: transform 0.15s ease, color 0.15s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--site-accent);
+      background: var(--site-surface);
+      box-shadow: 0 4px 16px rgba(90, 120, 255, 0.28);
+      color: var(--site-text) !important;
+      transform: translateY(-1px);
+    }
+
+    &.active {
+      border-color: transparent;
+      background: linear-gradient(100deg, #8ab4ff, #b49cff);
+      box-shadow: 0 4px 18px rgba(120, 140, 255, 0.4);
+      color: #0a1020 !important;
+    }
+  }
+
+  // Icon links stay plain.
+  .navbar-nav .nav-link:has(> .bi) {
+    margin: 0;
+    padding: 0.4rem 0.45rem;
+    box-shadow: none;
+    background: transparent;
+    border-color: transparent;
+  }
+}
+
+.aa-DetachedSearchButtonIcon,
+.aa-SubmitIcon {
+  color: var(--site-muted);
+}
+
+/*!
+ * Landing page masthead and featured row adapted from Start Bootstrap Grayscale.
+ * Copyright 2013-2023 Start Bootstrap LLC. MIT licence, see assets/grayscale.LICENSE.md.
+ */
+// The hero and section cards share one screen, so the homepage needs no scrolling.
+.home-stage {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - 62px);
+  // Overrides Quarto's first-child rule, which leaves a strip above the hero.
+  padding-top: 0 !important;
+}
+
+header.masthead {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex: 1 0 auto;
+  // Important overrides Quarto's first-child rule on the top padding.
+  padding: clamp(0.75rem, 3vh, 2.5rem) 1.25rem clamp(2rem, 6vh, 3.5rem) !important;
+  text-align: center;
+  background: linear-gradient(to bottom, #070a11, #111829);
+
+  // Blends the hero into the page background.
+  &::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: clamp(1.25rem, 4vh, 2.5rem);
+    background: linear-gradient(to bottom, transparent, var(--site-bg));
+    pointer-events: none;
+  }
+
+  h1 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: clamp(2rem, min(6.5vw, 9vh), 4.75rem);
+    font-weight: 800;
+    // Gradient text paints only inside its box, so leave room for descenders.
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    background: linear-gradient(100deg, #ffffff 15%, #a9c8ff 40%, #d2b8ff 60%, #ffffff 85%);
+    background-size: 220% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hero-shimmer 9s linear infinite;
+  }
+}
+
+// Moving colour glows behind the particles.
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  span {
+    position: absolute;
+    width: 38rem;
+    height: 38rem;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.32;
+    animation: aurora-drift 20s ease-in-out infinite alternate;
+  }
+
+  span:nth-child(1) {
+    top: -20rem;
+    left: 2%;
+    background: #2f62d8;
+  }
+
+  span:nth-child(2) {
+    top: -16rem;
+    right: 2%;
+    background: #6a3fc8;
+    animation-duration: 26s;
+    animation-delay: -6s;
+  }
+
+  span:nth-child(3) {
+    bottom: -28rem;
+    left: 35%;
+    background: #0f8a9c;
+    animation-duration: 31s;
+    animation-delay: -12s;
+  }
+}
+
+#hero-particles {
+  position: absolute;
+  inset: 0;
+}
+
+.masthead-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 56rem;
+  // Lets the pointer reach the particles between the text and links.
+  pointer-events: none;
+
+  a {
+    pointer-events: auto;
+  }
+
+  > * {
+    animation: hero-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  > :nth-child(2) { animation-delay: 0.08s; }
+  > :nth-child(3) { animation-delay: 0.16s; }
+  > :nth-child(4) { animation-delay: 0.24s; }
+  > :nth-child(5) { animation-delay: 0.32s; }
+}
+
+.masthead-roles {
+  margin: clamp(0.35rem, 1.2vh, 0.9rem) 0 clamp(0.35rem, 1.4vh, 1rem);
+  color: #b9d2ff;
+  font-size: clamp(0.9rem, min(2vw, 2.4vh), 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  span {
+    margin: 0 0.35rem;
+    color: #8ea3c4;
+  }
+}
+
+.masthead-summary {
+  margin: 0 auto;
+  max-width: 47rem;
+  color: #d3dbe6;
+  font-size: clamp(0.84rem, min(1.5vw, 2.1vh), 1.05rem);
+  line-height: 1.55;
+
+  a {
+    color: #b9d2ff;
+    text-decoration: underline;
+    text-decoration-color: rgba(185, 210, 255, 0.45);
+    text-underline-offset: 0.2em;
+    white-space: nowrap;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+// Cards advertising the three sections, on the page background below the hero.
+.quick-section {
+  width: 100%;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: clamp(0.5rem, 1.5vh, 1rem) 1.25rem clamp(0.75rem, 2.5vh, 1.75rem);
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1.5vh, 1rem);
+  text-align: left;
+  animation: hero-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.24s both;
+
+  // The listing wrapper must not add a grid level around the Posts card.
+  #listing-posts {
+    display: contents;
+  }
+
+  .listing-no-matching {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.quick-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--site-border);
+  border-radius: 0.9rem;
+  background: var(--site-surface);
+  color: var(--site-text);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  // A soft highlight that follows the pointer.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(16rem circle at var(--pointer-x, 50%) var(--pointer-y, 0%), rgba(108, 140, 255, 0.18), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--site-accent);
+    box-shadow: 0 14px 40px rgba(50, 90, 200, 0.22);
+    color: var(--site-text);
+    text-decoration: none;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  h2 {
+    margin: 0 0 0.2rem;
+    padding: 0;
+    border: 0;
+    color: var(--site-text);
+    font-size: clamp(0.98rem, min(1.6vw, 2.3vh), 1.2rem);
+    font-weight: 700;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+}
+
+// Makes a whole card clickable while its tags stay separate links.
+.quick-link {
+  color: var(--site-text);
+  font-weight: 700;
+
+  &:hover {
+    color: var(--site-text);
+    text-decoration: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.quick-thumb {
+  height: clamp(4rem, 15vh, 10rem);
+  overflow: hidden;
+  background: #101a2e;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+  }
+}
+
+.quick-body {
+  padding: clamp(0.45rem, 1.4vh, 0.9rem) 0.9rem;
+}
+
+.quick-label {
+  margin: 0 0 0.15rem;
+  color: var(--site-accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.quick-text {
+  margin: 0;
+  color: var(--site-muted);
+  font-size: clamp(0.76rem, min(1.2vw, 1.8vh), 0.88rem);
+  line-height: 1.4;
+}
+
+// Phones: compact rows with a small thumbnail, to fit one screen.
+@media (max-width: 767px) {
+  .quick-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .quick-thumb {
+    flex: 0 0 4.75rem;
+    height: auto;
+  }
+
+  .quick-body {
+    padding: 0.45rem 0.7rem;
+  }
+}
+
+// Short phones, including tall ones with browser bars: cards keep only their titles.
+@media (max-width: 767px) and (max-height: 860px) {
+  .quick-text,
+  .quick-tags {
+    display: none !important;
+  }
+
+  .masthead-roles {
+    font-size: 0.8rem;
+  }
+
+  .masthead-summary {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .quick-body {
+    padding: 0.35rem 0.7rem;
+  }
+}
+
+// Short screens: drop the thumbnails first.
+@media (max-height: 560px) {
+  .quick-thumb {
+    display: none;
+  }
+}
+
+@keyframes hero-shimmer {
+  to { background-position: -220% 0; }
+}
+
+@keyframes aurora-drift {
+  to { transform: translate3d(9rem, 5rem, 0) scale(1.2); }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+// Animated header shared by the section pages.
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 3.25rem 1.5rem 4rem;
+  // Quarto's first-child rule would otherwise shrink the top padding.
+  padding-top: 3.25rem !important;
+  text-align: center;
+  background: linear-gradient(to bottom, #070a11, #111829);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 2.5rem;
+    background: linear-gradient(to bottom, transparent, var(--site-bg));
+    pointer-events: none;
+  }
+
+  h1 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: clamp(2.25rem, 6vw, 4rem);
+    font-weight: 800;
+    // Gradient text paints only inside its box, so leave room for descenders.
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    background: linear-gradient(100deg, #ffffff 15%, #a9c8ff 40%, #d2b8ff 60%, #ffffff 85%);
+    background-size: 220% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hero-shimmer 9s linear infinite;
+  }
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 44rem;
+  margin: 0 auto;
+  // Lets the pointer reach the particles between the text and links.
+  pointer-events: none;
+
+  a {
+    color: #b9d2ff;
+    text-decoration: underline;
+    text-decoration-color: rgba(185, 210, 255, 0.45);
+    text-underline-offset: 0.2em;
+    pointer-events: auto;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  > * {
+    animation: hero-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  > :nth-child(2) { animation-delay: 0.08s; }
+  > :nth-child(3) { animation-delay: 0.16s; }
+}
+
+.page-hero-eyebrow {
+  margin: 0 0 0.5rem;
+  color: #b9d2ff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page-hero-lead {
+  margin: 0.85rem 0 0;
+  color: #d3dbe6;
+  font-size: clamp(0.98rem, 1.6vw, 1.1rem);
+  line-height: 1.6;
+}
+
+// Sections animate in only once the script has confirmed it is running.
+.reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header.masthead h1,
+  .page-hero h1,
+  .aurora span,
+  .masthead-content > *,
+  .quick-grid,
+  .page-hero-content > * {
+    animation: none;
+  }
+
+  .navbar .navbar-nav .nav-link,
+  .featured-image,
+  .oss-card,
+  .oss-card .oss-thumb,
+  .quick-card {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// Posts on the landing page
+.landing-section {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+  scroll-margin-top: 4.5rem;
+}
+
+.landing-eyebrow {
+  margin-bottom: 1rem;
+  color: var(--site-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.featured-post {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+
+  @media (min-width: 992px) {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+
+    &.featured-post-text-only {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  // Markdown wraps the image link in a paragraph.
+  .featured-media p {
+    margin: 0;
+  }
+}
+
+.featured-image {
+  display: block;
+  width: 100%;
+  border-radius: 0.75rem;
+  box-shadow: 0 14px 40px rgba(20, 40, 90, 0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 54px rgba(50, 90, 200, 0.34);
+  }
+}
+
+// Open-source projects
+.section-title {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  border: 0;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 700;
+}
+
+.oss-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: 1rem;
+}
+
+.oss-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0 0 1.25rem;
+  border: 1px solid var(--site-border);
+  border-radius: 0.85rem;
+  background: var(--site-surface);
+  color: var(--site-text);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  // A soft highlight that follows the pointer.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(16rem circle at var(--pointer-x, 50%) var(--pointer-y, 0%), rgba(108, 140, 255, 0.18), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--site-accent);
+    box-shadow: 0 12px 34px rgba(50, 90, 200, 0.18);
+    color: var(--site-text);
+    text-decoration: none;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  .oss-thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--site-border);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .oss-thumb {
+    transform: scale(1.03);
+  }
+
+  h3 {
+    margin: 0 1.25rem 0.4rem;
+    padding: 0;
+    border: 0;
+    color: var(--site-accent);
+    font-size: 1.05rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    margin: 0 1.25rem;
+    color: var(--site-muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+}
+
+.featured-text {
+  padding: 1.5rem 0 0;
+
+  @media (min-width: 992px) {
+    margin-left: 2rem;
+    padding: 0.25rem 0 0.25rem 2rem;
+    border-left: 0.3rem solid var(--site-accent);
+  }
+
+  .featured-post-text-only & {
+    margin-left: 0;
+  }
+}
+
+.featured-title,
+.older-heading,
+.older-title {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  border: 0;
+}
+
+.featured-title {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.featured-title a,
+.older-title a {
+  color: var(--site-text);
+  font-weight: 700 !important;
+}
+
+.older-title a {
+  font-weight: 600 !important;
+}
+
+.older-heading {
+  margin-top: 3.5rem;
+  font-size: 1.35rem;
+}
+
+.older-title {
+  font-size: 1.15rem;
+}
+
+.older-post {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0.25rem 1rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--site-border);
+
+  @media (max-width: 575px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.listing-date,
+.listing-description {
+  margin-bottom: 0.6rem;
+  color: var(--site-muted);
+}
+
+.listing-date {
+  font-size: 0.9rem;
+}
+
+// Markdown wraps the category tags in a paragraph.
+.listing-categories,
+.listing-categories p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+}
+
+// Clickable tags.
+.tag-chip {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--site-accent) !important;
+    color: var(--site-accent) !important;
+    text-decoration: none;
+  }
+
+  &.is-active {
+    border-color: transparent !important;
+    background: linear-gradient(100deg, #8ab4ff, #b49cff) !important;
+    color: #0a1020 !important;
+  }
+}
+
+.quarto-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tag-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.75rem;
+}
+
+.tag-empty {
+  color: var(--site-muted);
+}
+
+.quick-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.45rem;
+}
+
+// Justified text, hyphenated so narrow columns avoid wide gaps.
+p,
+li {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.masthead-summary,
+.page-hero-lead {
+  text-align-last: center;
+
+  // Wide enough to justify without splitting words.
+  @media (min-width: 768px) {
+    hyphens: none;
+    -webkit-hyphens: none;
+  }
+}
+
+.masthead-roles,
+.page-hero-eyebrow {
+  text-align: center;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+.navbar li {
+  text-align: start;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+.listing-category,
+.tag-chip,
+.quarto-category {
+  border: 1px solid var(--site-border);
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  color: var(--site-muted) !important;
+  background: transparent;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  opacity: 1 !important;
+}
+
+// Publications timeline
+.pub-timeline {
+  max-width: 50rem;
+  padding-top: 2rem;
+}
+
+.pub-timeline section.level2 {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  column-gap: 1.75rem;
+  padding-bottom: 0.75rem;
+
+  // The vertical line and year marker.
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    bottom: -0.5rem;
+    left: 5.35rem;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--site-accent), var(--site-border));
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0.45rem;
+    left: 5.05rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    border: 2px solid var(--site-bg);
+    border-radius: 50%;
+    background: var(--site-accent);
+  }
+
+  > h2 {
+    position: sticky;
+    top: 4.5rem;
+    align-self: start;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: var(--site-text);
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  > ul > li {
+    margin: 0 0 1.25rem;
+    color: var(--site-muted);
+    font-size: 0.95rem;
+
+    > a:first-child,
+    > p > a:first-child {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    strong {
+      color: var(--site-text);
+    }
+  }
+
+  @media (max-width: 575px) {
+    grid-template-columns: minmax(0, 1fr);
+
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    > h2 {
+      position: static;
+      margin-bottom: 0.6rem;
+    }
+  }
+}
+
+// Technical content
+div.sourceCode,
+pre:not(.sourceCode) {
+  background-color: var(--site-surface);
+  border: 1px solid var(--site-border);
+  border-radius: 6px;
+}
+
+pre.sourceCode {
+  background-color: transparent;
+  border: 0;
+}
+
+code {
+  color: inherit;
+}
+
+.table,
+table {
+  color: var(--site-text);
+  --bs-table-color: var(--site-text);
+  --bs-table-bg: transparent;
+  --bs-table-border-color: var(--site-border);
+}
+
+.cell-output-display,
+.table-responsive,
+.math.display,
+mjx-container[display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.math.display {
+  display: block;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.quarto-title-meta-heading,
+.quarto-title-meta-contents {
+  color: var(--site-muted);
+  opacity: 1 !important;
+}

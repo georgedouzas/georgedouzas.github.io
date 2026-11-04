@@ -1,0 +1,42 @@
+---
+title: "sports-betting"
+description: "Tools to create and evaluate machine learning models for sports betting"
+date: 2026-11-04
+categories: [Machine Learning, Sports Betting, Open Source]
+image: "../../assets/oss/sports-betting.svg"
+order: 3
+---
+
+[sports-betting](https://github.com/georgedouzas/sports-betting) is a set of tools for building, testing and using sports betting
+models. You can use it from Python, from the command line, or through an AI agent.
+
+There are two main parts. A dataloader downloads the data and shapes it for modelling. You build it from a statistics source and an
+odds source, so you always know where your data came from:
+
+```python
+from sportsbet.dataloaders import DataLoader
+from sportsbet.sources import FootballDataOdds, FootballDataStats
+
+dataloader = DataLoader(
+    param_grid={'league': ['England'], 'division': [1], 'year': [2023, 2024]},
+    stats=FootballDataStats(),
+    odds=FootballDataOdds(),
+)
+X, Y, O = dataloader.extract_train_data(odds_type='market_maximum')
+print(X.shape)
+```
+
+```
+(760, 29)
+```
+
+That's two seasons of the English top division: 760 matches, each with 29 columns.
+
+The second part is the bettor. It wraps any scikit-learn estimator, backtests a strategy on the data, and predicts the value bets of
+upcoming matches.
+
+The library can also place a bet for you. Be careful with this, because it spends real money. Some bookmakers have an API, and for
+the rest an agent drives their website on your account, which breaches most bookmakers' terms of service and puts your account at
+risk.
+
+Install it with `pip install sports-betting`.

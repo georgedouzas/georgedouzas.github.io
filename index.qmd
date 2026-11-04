@@ -1,39 +1,73 @@
 ---
+pagetitle: "Georgios Douzas"
+description: "Machine Learning Engineer, Software Engineer and AI Researcher working on open-source tools and research."
+page-layout: custom
+section-divs: false
+toc: false
+html-math-method: plain
+resources:
+  - assets/particles.js
+  - assets/landing.js
+  - assets/open-source.svg
+  - assets/publications.svg
+include-after-body: assets/landing-scripts.html
 listing:
-  - id: posts
-    contents: posts
-    type: grid
-    categories: true
-    fields: [image, title, description]
-  - id: publications
-    contents: publications
-    type: grid
-    categories: true
-    fields: [image, title, description]
-  - id: presentations
-    contents: presentations
-    type: grid
-    categories: true
-    fields: [image, title, description]
+  id: posts
+  contents: "posts/*/index.qmd"
+  sort: ["date desc", "order"]
+  template: assets/home-post-card.ejs
+  fields: [date, title, description, categories, image, order]
+  date-format: "MMM YYYY"
+  sort-ui: false
+  filter-ui: false
 ---
 
-## Posts
+```{=html}
+<div class="home-stage">
+<header class="masthead">
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div id="hero-particles" aria-hidden="true"></div>
+  <div class="masthead-content">
+    <h1>Georgios Douzas</h1>
+    <p class="masthead-roles">Machine Learning Engineer <span aria-hidden="true">·</span> Software Engineer <span aria-hidden="true">·</span> AI Researcher</p>
+    <p class="masthead-summary">
+      I'm a machine learning engineer and researcher with a PhD in theoretical particle physics.
+      Most of my research is about learning from imbalanced data, and I was recognized among Stanford's top 2% of scientists worldwide in
+      <a href="https://www.novaims.unl.pt/en/here-now/news/world-s-top-2-scientists-2024-eight-nova-ims-professors-recognized-among-the-world-s-leading-researchers/">2024</a>
+      and
+      <a href="https://magic.novaims.unl.pt/en/society/awards-and-distinctions/11-nova-ims-researchers-ranked-among-the-world-s-top-2-most-influential-scientists/">2025</a>.
+      I also build open-source tools, including
+      <a href="https://github.com/georgedouzas/imbalanced-learn-extra">imbalanced-learn-extra</a> for oversampling,
+      <a href="https://github.com/georgedouzas/veriphy">veriphy</a> for machine-verified physics and math proofs, and
+      <a href="https://github.com/georgedouzas/scikit-complexity">scikit-complexity</a> for simulating complex systems.
+    </p>
+  </div>
+</header>
+<section class="quick-section">
+    <div class="quick-grid">
+```
 
-My articles on open-source, machine learning, mathematics, and more.
-
-:::{#posts}
+::: {#posts}
 :::
 
-## Publications
-
-Published work.
-
-:::{#publications}
-:::
-
-## Presentations
-
-Slides and materials I have created.
-
-:::{#presentations}
-:::
+```{=html}
+      <a class="quick-card" href="open-source.html">
+        <div class="quick-thumb"><img src="assets/open-source.svg" alt=""></div>
+        <div class="quick-body">
+          <p class="quick-label">Open source <span aria-hidden="true">→</span></p>
+          <h2>8 projects</h2>
+          <p class="quick-text">Including imbalanced-learn-extra, veriphy and scikit-complexity.</p>
+        </div>
+      </a>
+      <a class="quick-card" href="publications.html">
+        <div class="quick-thumb"><img src="assets/publications.svg" alt=""></div>
+        <div class="quick-body">
+          <p class="quick-label">Publications <span aria-hidden="true">→</span></p>
+          <h2>16 papers</h2>
+          <p class="quick-text">On imbalanced learning, reinforcement learning and particle physics.</p>
+        </div>
+      </a>
+    </div>
+</section>
+</div>
+```

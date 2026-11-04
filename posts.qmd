@@ -1,0 +1,40 @@
+---
+pagetitle: "Posts"
+description: "My articles on open-source, machine learning, mathematics, and more."
+page-layout: custom
+toc: false
+html-math-method: plain
+resources:
+  - assets/particles.js
+  - assets/landing.js
+include-after-body: assets/landing-scripts.html
+section-divs: false
+listing:
+  id: all-posts
+  contents: "posts/*/index.qmd"
+  sort: ["date desc", "order"]
+  template: assets/landing-posts.ejs
+  fields: [date, title, description, categories, image, order]
+  date-format: "MMM YYYY"
+  sort-ui: false
+  filter-ui: false
+---
+
+```{=html}
+<div class="page-hero">
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div id="hero-particles" aria-hidden="true"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Writing</p>
+    <h1>Posts</h1>
+    <p class="page-hero-lead">My articles on open-source, machine learning, mathematics, and more.</p>
+  </div>
+</div>
+```
+
+::: {.landing-section .reveal}
+
+::: {#all-posts}
+:::
+
+:::

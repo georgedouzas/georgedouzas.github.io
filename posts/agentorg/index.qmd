@@ -1,0 +1,41 @@
+---
+title: "agentorg"
+description: "A framework for generating multi-agent organisations"
+date: 2026-11-04
+categories: [AI Agents, Open Source]
+image: "../../assets/oss/agentorg.svg"
+order: 7
+---
+
+[agentorg](https://github.com/georgedouzas/agentorg) is a framework for generating multi-agent organisations from one Python file,
+`spec.py`. It's still early and isn't on PyPI yet, so install it from GitHub:
+
+```bash
+pip install git+https://github.com/georgedouzas/agentorg.git
+agentorg --help
+```
+
+```
+Usage: agentorg [OPTIONS] COMMAND [ARGS]...
+
+  Agentorg: Generate runnable multi-agent organisations.
+
+Options:
+  --version  Show the version and exit.
+  --help     Show this message and exit.
+
+Commands:
+  new     Interview the user to assemble an agentorg spec.py.
+  render  Render a project from a specification file.
+  ui      Run the browser-based master interview UI.
+```
+
+`agentorg new` starts an interview with a master agent, which fills in the spec for you. There is also `agentorg ui` if you prefer a
+browser. The interview moves through five stages: discover, configure, build, refine and handoff. Each stage's agent only has the
+tools for that stage, so the discovery agent can't set your organisation's identity by accident.
+
+`agentorg render` then turns the spec into a project. By default that's the full thing, with a backend and a React dashboard. You
+can also render just the frontend, backend or AI layer.
+
+The master agent uses [Agno](https://github.com/agno-agi/agno), but your own agents, teams and workflows don't have to. In the spec,
+each one can be anything runnable, like a plain async function.

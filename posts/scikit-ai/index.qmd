@@ -1,0 +1,41 @@
+---
+title: "scikit-ai"
+description: "Task-oriented components for text, images, audio and video"
+date: 2026-11-04
+categories: [Machine Learning, Generative AI, Open Source]
+image: "../../assets/oss/scikit-ai.svg"
+order: 4
+---
+
+[scikit-ai](https://github.com/georgedouzas/scikit-ai) provides task-oriented components for text, images, audio and video that
+follow the scikit-learn estimator API.
+
+Components are named by what goes in and what comes out, like `ImageClassifier`, `AudioSegmenter` or `TextToVideoGenerator`, so the
+name tells you what each one does. Since they are estimators, they fit into `Pipeline`, `GridSearchCV` and the rest of scikit-learn.
+
+Here is a text classifier that learns from a few labelled examples:
+
+```python
+from skai.classification import TextClassifier
+
+X = ['I loved this movie.', 'The product broke after a day.', 'Great service!', 'Never again.']
+y = ['positive', 'negative', 'positive', 'negative']
+
+classifier = TextClassifier(k_shot=2, random_state=0, backend='dummy').fit(X, y)
+print(classifier.predict(['What a wonderful day.']))
+```
+
+```
+['negative']
+```
+
+The `backend` parameter decides what actually runs the task. It can be local open-source models through Hugging Face, the OpenAI API,
+other providers through LiteLLM, or models hosted on Replicate. The code stays the same.
+
+I used the `dummy` backend above, which is why it calls a wonderful day negative. It comes with the base install and needs no models
+or credentials, but its outputs are placeholders, so swap it for a real one to get real predictions.
+
+Note that `fit` doesn't train a model unless you ask for fine-tuning. A classifier, for example, keeps your samples as examples for
+the model to work from.
+
+Install it with `pip install scikit-ai`, and add an extra such as `scikit-ai[hf]` or `scikit-ai[openai]` for the backend you want.

@@ -1,16 +1,35 @@
 project:
   type: website
+  render:
+    - "**/*.qmd"
+    - "!openspec/"
 
 website:
   title: "Georgios Douzas"
   search: true
   
   navbar:
+    left:
+      - text: Posts
+        href: posts.qmd
+      - text: Open source
+        href: open-source.qmd
+      - text: Publications
+        href: publications.qmd
     right:
       - icon: github
         href: https://github.com/georgedouzas
       - icon: linkedin
         href: https://www.linkedin.com/in/gdouzas
+      - icon: mortarboard-fill
+        href: https://scholar.google.com/citations?user=-A4zUTUAAAAJ&hl=en
+        aria-label: Google Scholar
+
+format:
+  html:
+    theme: [cosmo, theme.scss]
+    grid:
+      body-width: 760px
 
 execute:
   cache: true

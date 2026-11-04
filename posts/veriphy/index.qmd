@@ -1,0 +1,32 @@
+---
+title: "Veriphy"
+description: "Machine-verified physics and math proofs in Lean 4"
+date: 2026-11-04
+categories: [Formal Verification, Physics, Mathematics, Open Source]
+image: "../../assets/oss/veriphy.svg"
+order: 2
+---
+
+[Veriphy](https://github.com/georgedouzas/veriphy) is a set of agent skills and a Lean 4 toolkit for machine-verified math and
+physics, from a single theorem to a whole paper.
+
+It treats both SageMath and the agent as untrusted. Sage finds what is expensive to find, like coefficients or closed forms. A
+script turns that into a Lean tactic block, and the Lean kernel accepts it or rejects it. A Sage bug or an agent's mistake can waste
+your time, but it can't produce a false theorem. The finished proofs are plain Lean and build with mathlib alone, so CI never needs
+Sage.
+
+You give it a statement in plain language:
+
+```text
+/veriphy:prove the partition function Z(β) = 2cosh(βh) satisfies ∂²(log Z)/∂β² = h²/cosh²(βh)
+```
+
+The agent states the claim in Lean. Lean can't tell whether that statement means what you said, so the agent translates it back to
+English to compare, then tests it in Sage. Only then does it try to prove it. You get a proof, a counterexample, or a report of what
+blocked it.
+
+For a draft or a paper, `/veriphy:research` goes through every claim and writes a verification appendix. A theorem is only as strong
+as what it rests on, so one that relies on a lemma Sage merely tested gets a lower level, and the report names that lemma. There is
+one limit: nothing checks that a claim in your prose and its Lean statement say the same thing. You have to confirm that yourself.
+
+You'll need SageMath and elan. The [README](https://github.com/georgedouzas/veriphy#install) has the install steps.

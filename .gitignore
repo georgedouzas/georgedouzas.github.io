@@ -1,10 +1,38 @@
+# OS and editor
 .DS_Store
-/.quarto/
-/_*.local
-*_cache/
-/_site/
 .vscode
+
+# Python
 .venv
+__pycache__/
+*_cache/
 mlruns
-/_freeze/
 **/_pyrate
+
+# Quarto
+.quarto/
+_site/
+_freeze/
+_book/
+_generated/
+_*.local
+*.quarto_ipynb
+
+# Quarto book output in a tutorial directory (index.qmd is the source)
+**/tutorial/*.html
+**/tutorial/site_libs/
+**/tutorial/index_files/
+**/tutorial/index.*
+!**/tutorial/index.qmd
+
+# Lean, Sage and Veriphy
+.lake/
+**/.veriphy/_authoring_*.lean
+**/sage/_runs/
+
+# Reference PDFs
+**/references/papers/
+**/references/textbooks/
+
+/.quarto/
+**/*.quarto_ipynb
