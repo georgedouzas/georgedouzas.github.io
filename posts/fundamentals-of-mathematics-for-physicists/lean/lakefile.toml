@@ -1,11 +1,15 @@
 name = "kaluza_klein_mathematics"
-defaultTargets = ["kaluza_klein_mathematics_lib"]
+defaultTargets = ["kaluza_klein_mathematics_root"]
 
 # `lake build` compiles the root module, as the book did. Modules it does not import are unfinished.
 [[lean_lib]]
+name = "kaluza_klein_mathematics_root"
+roots = ["KaluzaKleinMathematics"]
+
+[[lean_lib]]
 name = "kaluza_klein_mathematics_lib"
-roots = ["KaluzaKleinMathematics", "KaluzaKlein.Geometry", "KaluzaKlein.Groups", "KaluzaKlein.PartI", "KaluzaKlein.Conventions", "KaluzaKlein.Foundations.Linear"]
-globs = ["KaluzaKleinMathematics"]
+roots = ["KaluzaKlein.Geometry", "KaluzaKlein.Groups", "KaluzaKlein.PartI", "KaluzaKlein.Conventions", "KaluzaKlein.Foundations.Linear"]
+globs = ["KaluzaKlein.Geometry.+", "KaluzaKlein.Groups.+", "KaluzaKlein.PartI.+", "KaluzaKlein.Conventions", "KaluzaKlein.Foundations.Linear"]
 
 # Veriphy recipe assets copied into `.veriphy/lean/` (mathlib only).
 [[lean_lib]]

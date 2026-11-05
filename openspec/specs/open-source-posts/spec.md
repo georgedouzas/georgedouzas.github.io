@@ -27,7 +27,7 @@ Each post SHALL have a title, description, date, tags and an image, so it displa
 - **THEN** all eight posts are shown
 
 ### Requirement: Shortened imbalanced-learn-extra post
-The `imbalanced-learn-extra` post SHALL meet the post writing standard, keep its existing address, image and date, and still cover clustering-based oversampling and Geometric SMOTE.
+The `imbalanced-learn-extra` post SHALL meet the post writing standard, keep its existing address, date and in-post image, use the drawn project thumbnail on the Posts page, and still cover clustering-based oversampling and Geometric SMOTE.
 
 #### Scenario: Reader opens the post
 - **WHEN** a reader opens the post at its existing address
@@ -38,15 +38,15 @@ The `imbalanced-learn-extra` post SHALL meet the post writing standard, keep its
 - **THEN** the post renders and loads no third-party scripts
 
 ### Requirement: Stable post order
-Posts SHALL appear in a deliberate order when they share a date, with `scikit-complexity` first as the newest post.
+Posts SHALL appear in a deliberate order when they share a date, with the Kaluza-Klein tutorial first.
 
 #### Scenario: Posts published on the same day
 - **WHEN** several posts have the same date
-- **THEN** the Posts page and homepage card use the same deliberate order on every render
+- **THEN** the Posts page uses the same deliberate order on every render
 
-### Requirement: Project cards link to repositories
-Each card on the Open source page SHALL open the tool's GitHub repository. Posts are reached from the Posts page.
+### Requirement: Project entries link to repositories
+Each entry on the Open source page SHALL open the tool's GitHub repository. Posts are reached from the Posts page.
 
 #### Scenario: Reader selects a project card
-- **WHEN** a reader selects a project card
+- **WHEN** a reader selects a project entry
 - **THEN** the tool's GitHub repository opens

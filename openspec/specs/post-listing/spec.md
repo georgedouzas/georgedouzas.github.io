@@ -20,7 +20,7 @@ A Posts page SHALL list every published post, with the newest as a feature and o
 - **THEN** every published post appears, newest first
 
 ### Requirement: Clickable tags
-Post tags SHALL be visible on the Posts page, the homepage Posts card and each post, and selecting a tag SHALL show only the posts with that tag on the Posts page.
+Post tags SHALL be visible on the Posts page and each post, and selecting a tag SHALL show only the posts with that tag on the Posts page.
 
 #### Scenario: Reader selects a tag
 - **WHEN** a reader selects a tag anywhere on the site
@@ -41,35 +41,20 @@ The Posts page SHALL order posts by date, newest first.
 - **WHEN** two published posts have different dates
 - **THEN** the post with the later date is listed first
 
-### Requirement: Featured newest post
-The Posts page SHALL feature the newest published post prominently with its image, date, title, description and categories, and this SHALL update automatically when a newer post is published.
-
-#### Scenario: Reader sees the featured post
-- **WHEN** a reader views the posts section
-- **THEN** the newest post appears first as a feature with its image and details
-
-#### Scenario: A newer post is published
-- **WHEN** a post with a later date is added and the site is rendered
-- **THEN** that post becomes the feature and the previous one moves into the list
-
-### Requirement: Scannable older posts
-Each post after the featured one SHALL appear as a list entry showing its date, title, description and categories, without an image or card.
-
-#### Scenario: Reader scans an older post
-- **WHEN** a reader views an older post's entry on the Posts page
-- **THEN** the date, title, description and categories are visible and no image is shown
-
-#### Scenario: Only one post exists
-- **WHEN** only one post is published
-- **THEN** the feature is shown and no empty list heading appears
-
-#### Scenario: Reader opens a post
-- **WHEN** a reader selects a post's title
-- **THEN** that post opens
-
 ### Requirement: Published post content is unchanged
 Redesigning the site SHALL NOT change the written content or computed output of a published post.
 
 #### Scenario: Existing post after the redesign
 - **WHEN** a reader opens the `imbalanced-learn-extra` post after the redesign
 - **THEN** its text, code and computed output match the previous version
+
+### Requirement: Posts shown as an equal list
+The Posts page SHALL show every post as an equal list entry, not a card, with a small relevant thumbnail, its date, title, description and tags. No post SHALL be featured or shown differently from the others.
+
+#### Scenario: Reader views the Posts page
+- **WHEN** a reader views the Posts page
+- **THEN** every post appears as the same list entry, each with its own thumbnail
+
+#### Scenario: Reader opens a post
+- **WHEN** a reader selects a post's title or thumbnail
+- **THEN** that post opens

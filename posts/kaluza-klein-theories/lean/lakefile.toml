@@ -1,11 +1,15 @@
 name = "kaluza_klein_theories"
-defaultTargets = ["kaluza_klein_theories_lib"]
+defaultTargets = ["kaluza_klein_theories_root"]
 
 # `lake build` compiles the root module, as the book did. Modules it does not import are unfinished.
 [[lean_lib]]
+name = "kaluza_klein_theories_root"
+roots = ["KaluzaKleinTheories"]
+
+[[lean_lib]]
 name = "kaluza_klein_theories_lib"
-roots = ["KaluzaKleinTheories", "KaluzaKlein.AbelianKK", "KaluzaKlein.NonAbelianKK", "KaluzaKlein.CSDR"]
-globs = ["KaluzaKleinTheories"]
+roots = ["KaluzaKlein.AbelianKK", "KaluzaKlein.NonAbelianKK", "KaluzaKlein.CSDR"]
+globs = ["KaluzaKlein.AbelianKK.+", "KaluzaKlein.NonAbelianKK.+", "KaluzaKlein.CSDR.+"]
 
 [[require]]
 name = "kaluza_klein_mathematics"

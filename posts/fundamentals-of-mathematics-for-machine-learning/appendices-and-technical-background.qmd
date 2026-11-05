@@ -1,0 +1,419 @@
+---
+pagetitle: "Appendices and Technical Background"
+---
+
+# Appendices and Technical Background {#sec-appendices}
+
+This appendix provides essential technical results and mathematical foundations that support the main chapters of these tutorials. The
+material is organized into three main sections: technical lemmas and inequalities used in learning theory proofs
+(@sec-tech-lemmas), a comprehensive review of linear algebra concepts (@sec-linear-algebra-recap), and fundamental concentration
+inequalities from probability theory (@sec-measure-concentration).
+
+These results are referenced throughout these tutorials, particularly in @sec-learning-theory where we establish generalization bounds,
+and in @sec-supervised-learning where we analyze algorithm convergence. Readers encountering unfamiliar mathematical concepts in
+the main chapters should consult the relevant sections here for detailed definitions and proofs.
+
+## Technical Lemmas and Inequalities {#sec-tech-lemmas}
+
+This appendix presents fundamental technical lemmas and inequalities that are frequently used throughout these tutorials. These results
+provide the mathematical foundation for many of the theoretical guarantees and convergence analyses in machine learning theory.
+
+### Basic Algebraic Lemmas
+
+The following lemmas establish relationships between logarithmic and linear functions that are essential for deriving sample
+complexity bounds.
+
+**Lemma A.1** [@shalev2014ml]. Let $a > 0$. Then: $x \geq 2a\log(a) \Rightarrow x \geq a\log(x)$. It follows that a necessary
+condition for the inequality $x < a\log(x)$ to hold is that $x < 2a\log(a)$.
+
+*Proof.* First note that for $a \in (0, \sqrt{e}]$ the inequality $x \geq a\log(x)$ holds unconditionally and therefore the claim
+is trivial. From now on, assume that $a > \sqrt{e}$. Consider the function $f(x) = x - a\log(x)$. The derivative is $f'(x) = 1 -
+a/x$. Thus, for $x > a$ the derivative is positive and the function increases. In addition,
+
+$$ \begin{aligned} f(2a\log(a)) &= 2a\log(a) - a\log(2a\log(a)) \\ &= 2a\log(a) - a\log(a) - a\log(2\log(a)) \\ &= a\log(a) -
+a\log(2\log(a)) \end{aligned} $$
+
+Since $a - 2\log(a) > 0$ for all $a > 0$, the proof follows. $\square$
+
+This lemma is particularly useful when analyzing the relationship between sample size and VC dimension in PAC learning bounds.
+
+**Lemma A.2** [@shalev2014ml]. Let $a \geq 1$ and $b > 0$. Then: $x \geq 4a\log(2a) + 2b \Rightarrow x \geq a\log(x) + b$.
+
+*Proof.* It suffices to prove that $x \geq 4a\log(2a) + 2b$ implies that both $x \geq 2a\log(x)$ and $x \geq 2b$. Since we assume
+$a \geq 1$ we clearly have that $x \geq 2b$. In addition, since $b > 0$ we have that $x \geq 4a\log(2a)$ which using Lemma A.1
+implies that $x \geq 2a\log(x)$. This concludes our proof. $\square$
+
+This result is used to simplify sample complexity expressions in agnostic PAC learning.
+
+### Concentration Lemmas
+
+The following lemmas relate tail bounds to expectations, which are crucial for deriving generalization bounds.
+
+**Lemma A.3** [@shalev2014ml]. Let $X$ be a random variable and $x' \in \mathbb{R}$ be a scalar and assume that there exists $a >
+0$ such that for all $t \geq 0$ we have $\mathbb{P}[|X - x'| > t] \leq 2e^{-t^2/a^2}$. Then, $\mathbb{E}[|X - x'|] \leq 4a$.
+
+*Proof.* For all $i = 0, 1, 2, \ldots$ denote $t_i = ai$. Since $t_i$ is monotonically increasing we have that $\mathbb{E}[|X -
+x'|]$ is at most $\sum_{i=1}^{\infty} t_i \mathbb{P}[|X - x'| > t_{i-1}]$. Combining this with the assumption in the lemma we get
+that $\mathbb{E}[|X - x'|] \leq 2a\sum_{i=1}^{\infty} ie^{-(i-1)^2}$. The proof now follows from the inequalities
+
+$$ \sum_{i=1}^{\infty} ie^{-(i-1)^2} \leq \sum_{i=1}^{5} ie^{-(i-1)^2} + \int_5^{\infty} xe^{-(x-1)^2}dx < 1.8 + 10^{-7} < 2 $$
+
+$\square$
+
+**Lemma A.4** [@shalev2014ml]. Let $X$ be a random variable and $x' \in \mathbb{R}$ be a scalar and assume that there exists $a >
+0$ and $b \geq e$ such that for all $t \geq 0$ we have $\mathbb{P}[|X - x'| > t] \leq 2be^{-t^2/a^2}$. Then, $\mathbb{E}[|X - x'|]
+\leq a(2 + \sqrt{\log(b)})$.
+
+*Proof.* For all $i = 0, 1, 2, \ldots$ denote $t_i = a(i + \sqrt{\log(b)})$. Since $t_i$ is monotonically increasing we have that
+
+$$ \mathbb{E}[|X - x'|] \leq a\sqrt{\log(b)} + \sum_{i=1}^{\infty} t_i \mathbb{P}[|X - x'| > t_{i-1}] $$
+
+Using the assumption in the lemma we have
+
+$$ \begin{aligned} \sum_{i=1}^{\infty} t_i \mathbb{P}[|X - x'| > t_{i-1}] &\leq 2ab\sum_{i=1}^{\infty} (i +
+\sqrt{\log(b)})e^{-(i-1+\sqrt{\log(b)})^2} \\ &\leq 2ab\int_{1+\sqrt{\log(b)}}^{\infty} xe^{-(x-1)^2}dx \\ &=
+2ab\int_{\sqrt{\log(b)}}^{\infty} (y+1)e^{-y^2}dy \\ &\leq 4ab\int_{\sqrt{\log(b)}}^{\infty} ye^{-y^2}dy \\ &=
+2ab[-e^{-y^2}]_{\sqrt{\log(b)}}^{\infty} \\ &= 2ab/b = 2a \end{aligned} $$
+
+Combining the preceding inequalities we conclude our proof. $\square$
+
+This lemma is essential for analyzing Rademacher complexity and deriving data-dependent generalization bounds.
+
+### Combinatorial Lemmas
+
+**Lemma A.5** [@shalev2014ml]. Let $m, d$ be two positive integers such that $d \leq m - 2$. Then,
+
+$$ \sum_{k=0}^{d} \binom{m}{k} \leq \left(\frac{em}{d}\right)^d $$
+
+*Proof.* We prove the claim by induction. For $d = 1$ the left-hand side equals $1 + m$ while the right-hand side equals $em$;
+hence the claim is true. Assume that the claim holds for $d$ and let us prove it for $d + 1$. By the induction assumption we have
+
+$$ \begin{aligned} \sum_{k=0}^{d+1} \binom{m}{k} &\leq \left(\frac{em}{d}\right)^d + \binom{m}{d+1} \\ &=
+\left(\frac{em}{d}\right)^d \left(1 + \left(\frac{d}{em}\right)^d \frac{m(m-1)(m-2)\cdots(m-d)}{(d+1)d!}\right) \\ &\leq
+\left(\frac{em}{d}\right)^d \left(1 + \left(\frac{d}{e}\right)^d \frac{(m-d)}{(d+1)d!}\right) \end{aligned} $$
+
+Using Stirling's approximation we further have that
+
+$$ \begin{aligned} &\leq \left(\frac{em}{d}\right)^d \left(1 + \left(\frac{d}{e}\right)^d \frac{(m-d)}{(d+1)\sqrt{2\pi
+d}(d/e)^d}\right) \\ &= \left(\frac{em}{d}\right)^d \left(1 + \frac{m-d}{\sqrt{2\pi d}(d+1)}\right) \\ &=
+\left(\frac{em}{d}\right)^d \cdot \frac{d+1+(m-d)/\sqrt{2\pi d}}{d+1} \\ &\leq \left(\frac{em}{d}\right)^d \cdot
+\frac{d+1+(m-d)/2}{d+1} \\ &= \left(\frac{em}{d}\right)^d \cdot \frac{d/2+1+m/2}{d+1} \\ &\leq \left(\frac{em}{d}\right)^d \cdot
+\frac{m}{d+1} \end{aligned} $$
+
+where in the last inequality we used the assumption that $d \leq m - 2$. On the other hand,
+
+$$ \begin{aligned} \left(\frac{em}{d+1}\right)^{d+1} &= \left(\frac{em}{d}\right)^d \cdot \frac{em}{d+1} \cdot
+\left(\frac{d}{d+1}\right)^d \\ &= \left(\frac{em}{d}\right)^d \cdot \frac{em}{d+1} \cdot \frac{1}{(1+1/d)^d} \\ &\geq
+\left(\frac{em}{d}\right)^d \cdot \frac{em}{d+1} \cdot \frac{1}{e} \\ &= \left(\frac{em}{d}\right)^d \cdot \frac{m}{d+1}
+\end{aligned} $$
+
+which proves our inductive argument. $\square$
+
+This lemma provides the key bound on growth functions used in Sauer's lemma and VC dimension analysis.
+
+### Exponential Inequalities
+
+**Lemma A.6** [@shalev2014ml]. For all $a \in \mathbb{R}$ we have
+
+$$ \frac{e^a + e^{-a}}{2} \leq e^{a^2/2} $$
+
+*Proof.* Observe that
+
+$$ e^a = \sum_{n=0}^{\infty} \frac{a^n}{n!} $$
+
+Therefore,
+
+$$ \frac{e^a + e^{-a}}{2} = \sum_{n=0}^{\infty} \frac{a^{2n}}{(2n)!} $$
+
+and
+
+$$ e^{a^2/2} = \sum_{n=0}^{\infty} \frac{a^{2n}}{2^n n!} $$
+
+Observing that $(2n)! \geq 2^n n!$ for every $n \geq 0$ we conclude our proof. $\square$
+
+This inequality is fundamental in deriving Hoeffding's inequality and other concentration bounds.
+
+## Linear Algebra Recap {#sec-linear-algebra-recap}
+
+This section provides a comprehensive review of linear algebra concepts that are essential for understanding machine learning
+algorithms and their theoretical foundations. We focus on finite-dimensional Euclidean spaces and present key definitions,
+theorems, and decompositions. These results complement the linear algebra introduction in @sec-linear-algebra and provide the
+technical details needed for understanding matrix decompositions, optimization algorithms, and dimensionality reduction techniques
+discussed in @sec-supervised-learning and @sec-unsupervised-learning.
+
+For more on this topic, see @zhao2025rl [Appendix].
+
+### Basic Definitions and Notation
+
+In these tutorials, we work exclusively with linear algebra over finite-dimensional Euclidean spaces. Vectors are treated as column
+vectors unless otherwise specified.
+
+**Inner Products and Norms.** Given two $d$-dimensional vectors $\mathbf{u}, \mathbf{v} \in \mathbb{R}^d$, their inner product is
+defined as
+
+$$ \langle \mathbf{u}, \mathbf{v} \rangle = \sum_{i=1}^{d} u_i v_i $$
+
+The Euclidean norm (also called the $\ell_2$ norm) is $\|\mathbf{u}\| = \sqrt{\langle \mathbf{u}, \mathbf{u} \rangle}$. We also
+frequently use the $\ell_1$ norm, $\|\mathbf{u}\|_1 = \sum_{i=1}^{d} |u_i|$, and the $\ell_{\infty}$ norm,
+$\|\mathbf{u}\|_{\infty} = \max_i |u_i|$.
+
+**Subspaces and Span.** A subspace of $\mathbb{R}^d$ is a subset of $\mathbb{R}^d$ that is closed under addition and scalar
+multiplication. The span of a set of vectors $\mathbf{u}_1, \ldots, \mathbf{u}_k$ is the subspace containing all vectors of the
+form
+
+$$ \sum_{i=1}^{k} \alpha_i \mathbf{u}_i $$
+
+where for all $i$, $\alpha_i \in \mathbb{R}$.
+
+**Linear Independence and Bases.** A set of vectors $U = \{\mathbf{u}_1, \ldots, \mathbf{u}_k\}$ is independent if for every $i$,
+$\mathbf{u}_i$ is not in the span of $\mathbf{u}_1, \ldots, \mathbf{u}_{i-1}, \mathbf{u}_{i+1}, \ldots, \mathbf{u}_k$. We say that
+$U$ spans a subspace $V$ if $V$ is the span of the vectors in $U$. We say that $U$ is a basis of $V$ if it is both independent and
+spans $V$. The dimension of $V$ is the size of a basis of $V$, and it can be verified that all bases of $V$ have the same size
+[@shalev2014ml].
+
+**Orthogonality.** We say that $U$ is an orthogonal set if for all $i \neq j$, $\langle \mathbf{u}_i, \mathbf{u}_j \rangle = 0$.
+We say that $U$ is an orthonormal set if it is orthogonal and if for every $i$, $\|\mathbf{u}_i\| = 1$.
+
+**Matrix Properties.** Given a matrix $A \in \mathbb{R}^{n \times d}$, the range of $A$ is the span of its columns and the null
+space of $A$ is the subspace of all vectors that satisfy $A\mathbf{u} = \mathbf{0}$. The rank of $A$ is the dimension of its
+range.
+
+The transpose of a matrix $A$, denoted $A^{\top}$, is the matrix whose $(i,j)$ entry equals the $(j,i)$ entry of $A$. We say that
+$A$ is symmetric if $A = A^{\top}$.
+
+### Eigenvalues and Eigenvectors
+
+Eigenvalue decomposition is fundamental to understanding many machine learning algorithms, including principal component analysis
+and spectral clustering.
+
+**Definition.** Let $A \in \mathbb{R}^{d \times d}$ be a matrix. A nonzero vector $\mathbf{u}$ is an eigenvector of $A$ with a
+corresponding eigenvalue $\lambda$ if
+
+$$ A\mathbf{u} = \lambda\mathbf{u} $$
+
+**Theorem (Spectral Decomposition)** [@shalev2014ml]. If $A \in \mathbb{R}^{d \times d}$ is a symmetric matrix of rank $k$, then
+there exists an orthonormal basis of $\mathbb{R}^d$, $\mathbf{u}_1, \ldots, \mathbf{u}_d$, such that each $\mathbf{u}_i$ is an
+eigenvector of $A$. Furthermore, $A$ can be written as
+
+$$ A = \sum_{i=1}^{d} \lambda_i \mathbf{u}_i \mathbf{u}_i^{\top} $$
+
+where each $\lambda_i$ is the eigenvalue corresponding to the eigenvector $\mathbf{u}_i$. This can be written equivalently as $A =
+UDU^{\top}$, where the columns of $U$ are the vectors $\mathbf{u}_1, \ldots, \mathbf{u}_d$, and $D$ is a diagonal matrix with
+$D_{i,i} = \lambda_i$ and for $i \neq j$, $D_{i,j} = 0$. Finally, the number of $\lambda_i$ which are nonzero is the rank of the
+matrix, the eigenvectors which correspond to the nonzero eigenvalues span the range of $A$, and the eigenvectors which correspond
+to zero eigenvalues span the null space of $A$.
+
+This decomposition is central to understanding the geometry of quadratic forms and optimization landscapes in machine learning.
+
+### Positive Definite Matrices
+
+Positive definite matrices play a crucial role in optimization theory and kernel methods.
+
+**Definition.** A symmetric matrix $A \in \mathbb{R}^{d \times d}$ is positive definite if all its eigenvalues are positive. $A$
+is positive semidefinite if all its eigenvalues are nonnegative.
+
+**Theorem** [@shalev2014ml]. Let $A \in \mathbb{R}^{d \times d}$ be a symmetric matrix. Then, the following are equivalent
+definitions of positive semidefiniteness of $A$:
+
+1. All the eigenvalues of $A$ are nonnegative. 2. For every vector $\mathbf{u}$, $\langle \mathbf{u}, A\mathbf{u} \rangle \geq 0$.
+3. There exists a matrix $B$ such that $A = BB^{\top}$.
+
+The second characterization is particularly useful in optimization, as it ensures that quadratic forms are convex. The third
+characterization connects positive semidefiniteness to the existence of matrix factorizations, which is fundamental in kernel
+methods and Gaussian processes.
+
+### Singular Value Decomposition
+
+The Singular Value Decomposition (SVD) generalizes eigenvalue decomposition to non-square matrices and is fundamental to
+dimensionality reduction techniques.
+
+**Definition.** Let $A \in \mathbb{R}^{m \times n}$ be a matrix of rank $r$. Unit vectors $\mathbf{v} \in \mathbb{R}^n$ and
+$\mathbf{u} \in \mathbb{R}^m$ are called right and left singular vectors of $A$ with corresponding singular value $\sigma > 0$ if
+
+$$ A\mathbf{v} = \sigma\mathbf{u} \quad \text{and} \quad A^{\top}\mathbf{u} = \sigma\mathbf{v} $$
+
+**Lemma** [@shalev2014ml]. Let $A \in \mathbb{R}^{m \times n}$ be a matrix of rank $r$. Assume that $\mathbf{v}_1, \ldots,
+\mathbf{v}_r$ is an orthonormal set of right singular vectors of $A$, $\mathbf{u}_1, \ldots, \mathbf{u}_r$ is an orthonormal set
+of corresponding left singular vectors of $A$, and $\sigma_1, \ldots, \sigma_r$ are the corresponding singular values. Then,
+
+$$ A = \sum_{i=1}^{r} \sigma_i \mathbf{u}_i \mathbf{v}_i^{\top} $$
+
+It follows that if $U$ is a matrix whose columns are the $\mathbf{u}_i$'s, $V$ is a matrix whose columns are the $\mathbf{v}_i$'s,
+and $D$ is a diagonal matrix with $D_{i,i} = \sigma_i$, then
+
+$$ A = UDV^{\top} $$
+
+**Connection to Eigenvalues.** The singular values of $A$ are intimately related to the eigenvalues of $A^{\top}A$ and
+$AA^{\top}$.
+
+**Lemma** [@shalev2014ml]. $\mathbf{v}, \mathbf{u}$ are right and left singular vectors of $A$ with singular value $\sigma$ if and
+only if $\mathbf{v}$ is an eigenvector of $A^{\top}A$ with corresponding eigenvalue $\sigma^2$ and $\mathbf{u} =
+\sigma^{-1}A\mathbf{v}$ is an eigenvector of $AA^{\top}$ with corresponding eigenvalue $\sigma^2$.
+
+**Construction of Singular Vectors.** The following result shows how to construct singular vectors through optimization.
+
+**Lemma** [@shalev2014ml]. Let $A \in \mathbb{R}^{m \times n}$ with rank $r$. Define the following vectors:
+
+$$ \begin{aligned} \mathbf{v}_1 &= \arg\max_{\mathbf{v} \in \mathbb{R}^n: \|\mathbf{v}\| = 1} \|A\mathbf{v}\| \\ \mathbf{v}_2 &=
+\arg\max_{\substack{\mathbf{v} \in \mathbb{R}^n: \|\mathbf{v}\| = 1 \\ \langle \mathbf{v}, \mathbf{v}_1 \rangle = 0}}
+\|A\mathbf{v}\| \\ &\vdots \\ \mathbf{v}_r &= \arg\max_{\substack{\mathbf{v} \in \mathbb{R}^n: \|\mathbf{v}\| = 1 \\ \forall i <
+r, \langle \mathbf{v}, \mathbf{v}_i \rangle = 0}} \|A\mathbf{v}\| \end{aligned} $$
+
+Then, $\mathbf{v}_1, \ldots, \mathbf{v}_r$ is an orthonormal set of right singular vectors of $A$.
+
+This construction provides the foundation for principal component analysis, where we seek directions of maximum variance in data.
+
+**Theorem (SVD Theorem)** [@shalev2014ml]. Let $A \in \mathbb{R}^{m \times n}$ with rank $r$. Then $A = UDV^{\top}$ where $D$ is
+an $r \times r$ matrix with nonzero singular values of $A$ and the columns of $U, V$ are orthonormal left and right singular
+vectors of $A$. Furthermore, for all $i$, $D_{i,i}^2$ is an eigenvalue of $A^{\top}A$, the $i$-th column of $V$ is the
+corresponding eigenvector of $A^{\top}A$, and the $i$-th column of $U$ is the corresponding eigenvector of $AA^{\top}$.
+
+The SVD is fundamental to many machine learning techniques including:
+
+- Principal Component Analysis (PCA) for dimensionality reduction - Low-rank matrix approximation and matrix completion - Latent
+semantic analysis in natural language processing - Recommender systems based on collaborative filtering - Image compression and
+denoising
+
+The optimality properties of SVD make it a cornerstone of modern data analysis and machine learning.
+
+
+### Additional Linear Algebra Topics
+
+**Matrix Norms and Operator Norms.** For matrices, we can define various norms. The Frobenius norm of a matrix $A \in
+\mathbb{R}^{m \times n}$ is defined as
+
+$$ \|A\|_F = \sqrt{\sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij}^2} $$
+
+The operator norm (or spectral norm) is defined as
+
+$$ \|A\|_2 = \max_{\|\mathbf{x}\|=1} \|A\mathbf{x}\| $$
+
+which equals the largest singular value of $A$ [@deisenroth2020mml].
+
+**Trace and Determinant.** The trace of a square matrix $A \in \mathbb{R}^{n \times n}$ is the sum of its diagonal elements:
+
+$$ \text{tr}(A) = \sum_{i=1}^{n} a_{ii} $$
+
+The trace has the cyclic property: $\text{tr}(ABC) = \text{tr}(CAB) = \text{tr}(BCA)$. The determinant of $A$ is the product of
+its eigenvalues and provides information about the volume scaling induced by the linear transformation.
+
+These linear algebra concepts form the mathematical foundation for understanding optimization algorithms, dimensionality reduction
+techniques, and the geometry of high-dimensional spaces in machine learning.
+
+## Measure Concentration and Probability Inequalities {#sec-measure-concentration}
+
+Measure concentration inequalities quantify the deviation of empirical averages from their expectations when the sample size is
+finite. These inequalities are fundamental to statistical learning theory and provide the basis for generalization bounds in
+machine learning [@shalev2014ml; @zhao2025rl]. The results in this section are used extensively in @sec-learning-theory to derive
+PAC learning bounds and in @sec-supervised-learning to analyze the convergence of learning algorithms.
+
+Let $Z_1, \ldots, Z_m$ be an i.i.d. sequence of random variables and let $\mu$ be their mean. The strong law of large numbers
+states that when $m$ tends to infinity, the empirical average, $\frac{1}{m}\sum_{i=1}^{m} Z_i$, converges to the expected value
+$\mu$, with probability 1. Measure concentration inequalities quantify this deviation for finite $m$.
+
+### Markov's Inequality
+
+We start with Markov's inequality, which provides a basic bound for nonnegative random variables. Let $Z$ be a nonnegative random
+variable. The expectation of $Z$ can be written as:
+
+$$ \mathbb{E}[Z] = \int_{x=0}^{\infty} \mathbb{P}[Z \geq x]dx $$
+
+Since $\mathbb{P}[Z \geq x]$ is monotonically nonincreasing we obtain
+
+$$ \forall a \geq 0, \quad \mathbb{E}[Z] \geq \int_{x=0}^{a} \mathbb{P}[Z \geq x]dx \geq \int_{x=0}^{a} \mathbb{P}[Z \geq a]dx =
+a\mathbb{P}[Z \geq a] $$
+
+Rearranging the inequality yields Markov's inequality:
+
+$$ \forall a \geq 0, \quad \mathbb{P}[Z \geq a] \leq \frac{\mathbb{E}[Z]}{a} $$
+
+**Lemma (Markov's Inequality for Bounded Variables)** [@shalev2014ml]. Let $Z$ be a random variable that takes values in $[0,1]$.
+Assume that $\mathbb{E}[Z] = \mu$. Then, for any $a \in (0,1)$,
+
+$$ \mathbb{P}[Z > 1-a] \geq \frac{\mu - (1-a)}{a} $$
+
+This also implies that for every $a \in (0,1)$,
+
+$$ \mathbb{P}[Z > a] \geq \frac{\mu - a}{1-a} \geq \mu - a $$
+
+### Chebyshev's Inequality
+
+Applying Markov's inequality on the random variable $(Z - \mathbb{E}[Z])^2$ we obtain Chebyshev's inequality:
+
+$$ \forall a > 0, \quad \mathbb{P}[|Z - \mathbb{E}[Z]| \geq a] = \mathbb{P}[(Z - \mathbb{E}[Z])^2 \geq a^2] \leq
+\frac{\text{Var}[Z]}{a^2} $$
+
+where $\text{Var}[Z] = \mathbb{E}[(Z - \mathbb{E}[Z])^2]$ is the variance of $Z$.
+
+Consider the random variable $\frac{1}{m}\sum_{i=1}^{m} Z_i$. Since $Z_1, \ldots, Z_m$ are i.i.d. it is easy to verify that
+
+$$ \text{Var}\left[\frac{1}{m}\sum_{i=1}^{m} Z_i\right] = \frac{\text{Var}[Z_1]}{m} $$
+
+**Lemma** [@shalev2014ml]. Let $Z_1, \ldots, Z_m$ be a sequence of i.i.d. random variables and assume that $\mathbb{E}[Z_1] = \mu$
+and $\text{Var}[Z_1] \leq 1$. Then, for any $\delta \in (0,1)$, with probability of at least $1-\delta$ we have
+
+$$ \left|\frac{1}{m}\sum_{i=1}^{m} Z_i - \mu\right| \leq \sqrt{\frac{1}{\delta m}} $$
+
+The deviation between the empirical average and the mean given by Chebyshev's inequality decreases polynomially with $m$. It is
+possible to obtain significantly faster, exponential decrease using Chernoff's bounds and Hoeffding's inequality.
+
+### Chernoff's Bounds
+
+Chernoff's bounds provide exponentially decreasing tail probabilities for sums of independent Bernoulli random variables.
+
+**Lemma (Chernoff Bound - Upper Tail)** [@shalev2014ml]. Let $Z_1, \ldots, Z_m$ be independent Bernoulli variables where for every
+$i$, $\mathbb{P}[Z_i = 1] = p_i$ and $\mathbb{P}[Z_i = 0] = 1 - p_i$. Let $p = \sum_{i=1}^{m} p_i$ and let $Z = \sum_{i=1}^{m}
+Z_i$. Then, for any $\delta > 0$,
+
+$$ \mathbb{P}[Z > (1+\delta)p] \leq e^{-h(\delta)p} $$
+
+where
+
+$$ h(\delta) = (1+\delta)\log(1+\delta) - \delta $$
+
+Using the inequality $h(a) \geq a^2/(2 + 2a/3)$ we obtain the simplified bound:
+
+$$ \mathbb{P}[Z > (1+\delta)p] \leq e^{-p\frac{\delta^2}{2+2\delta/3}} $$
+
+**Lemma (Chernoff Bound - Lower Tail)** [@shalev2014ml]. Using the notation above, we also have
+
+$$ \mathbb{P}[Z < (1-\delta)p] \leq e^{-ph(-\delta)} \leq e^{-ph(\delta)} \leq e^{-p\frac{\delta^2}{2+2\delta/3}} $$
+
+These bounds show that the probability of large deviations decreases exponentially with the sample size, which is much faster than
+the polynomial rate given by Chebyshev's inequality.
+
+### Hoeffding's Inequality
+
+Hoeffding's inequality generalizes Chernoff's bounds to arbitrary bounded random variables, not just Bernoulli variables.
+
+**Lemma (Hoeffding's Inequality)** [@shalev2014ml]. Let $Z_1, \ldots, Z_m$ be a sequence of i.i.d. random variables and let
+$\bar{Z} = \frac{1}{m}\sum_{i=1}^{m} Z_i$. Assume that $\mathbb{E}[\bar{Z}] = \mu$ and $\mathbb{P}[a \leq Z_i \leq b] = 1$ for
+every $i$. Then, for any $\epsilon > 0$
+
+$$ \mathbb{P}\left[\left|\frac{1}{m}\sum_{i=1}^{m} Z_i - \mu\right| > \epsilon\right] \leq
+2\exp\left(-\frac{2m\epsilon^2}{(b-a)^2}\right) $$
+
+This inequality is one of the most important tools in statistical learning theory. It provides a uniform bound that holds for all
+$\epsilon > 0$ and shows that the probability of deviation decreases exponentially with both the sample size $m$ and the square of
+the deviation $\epsilon^2$.
+
+**Lemma (Hoeffding's Lemma)** [@shalev2014ml]. Let $X$ be a random variable that takes values in the interval $[a,b]$ and such
+that $\mathbb{E}[X] = 0$. Then, for every $\lambda > 0$,
+
+$$ \mathbb{E}[e^{\lambda X}] \leq e^{\frac{\lambda^2(b-a)^2}{8}} $$
+
+This technical lemma is the key ingredient in proving Hoeffding's inequality and demonstrates how moment generating functions can
+be bounded for bounded random variables.
+
+### Applications to Learning Theory
+
+These concentration inequalities have direct applications in learning theory:
+
+- **Uniform Convergence**: Hoeffding's inequality combined with union bounds provides uniform convergence guarantees for finite
+hypothesis classes. - **Sample Complexity**: The exponential decay rate determines how many samples are needed to achieve a
+desired accuracy with high probability. - **Generalization Bounds**: These inequalities bound the difference between training
+error and test error, providing theoretical guarantees for learning algorithms.
+
+The transition from polynomial (Chebyshev) to exponential (Hoeffding) concentration is crucial for obtaining practical sample
+complexity bounds in PAC learning.
+

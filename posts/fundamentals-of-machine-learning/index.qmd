@@ -1,0 +1,27 @@
+---
+title: "Fundamentals of Machine Learning"
+description: "How machines learn from data, from learning theory to deep and reinforcement learning"
+date: 2026-11-04
+categories: [Tutorial, Machine Learning, Reinforcement Learning]
+image: "../../assets/tutorials/machine-learning.svg"
+order: 4
+---
+
+This tutorial covers the main ideas of machine learning. It starts with the theory of why learning from data works at
+all, then moves through supervised and unsupervised methods, from linear models to deep networks and generative models,
+and ends with reinforcement learning.
+
+The mathematics it relies on is in
+[Fundamentals of Mathematics for Machine Learning](../fundamentals-of-mathematics-for-machine-learning/index.qmd), and chapters link there when they
+need a result.
+
+## Chapters
+
+- [Foundations of learning theory](foundations-of-learning-theory.qmd)
+- [Supervised learning](supervised-learning.qmd)
+- [Unsupervised learning](unsupervised-learning.qmd)
+- [Reinforcement learning](reinforcement-learning.qmd)
+- [Reinforcement learning and LLM-based agents](reinforcement-learning-and-llm-agents.qmd)
+- [Mathematical foundations of reinforcement learning](mathematical-foundations-of-reinforcement-learning.qmd)
+
+Works cited are listed at the end of each chapter.

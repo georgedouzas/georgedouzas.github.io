@@ -60,3 +60,6 @@ posts/*/_references/**/*.pdf
 
 # Earlier chapter versions and the original book files
 posts/*/_archive/
+
+# Full-text copies of textbooks kept beside each tutorial
+posts/*/_references/textbooks/

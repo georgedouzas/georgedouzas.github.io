@@ -6,11 +6,15 @@ Sets the rules every post on the site follows, so posts stay short, sound like t
 ## Requirements
 
 ### Requirement: Posts are short
-Each post SHALL have at most 300 words of prose, excluding code, and at most two code examples of at most 15 lines each. Output blocks are not counted as code examples or prose.
+Each normal post SHALL have at most 300 words of prose, excluding code, and at most two code examples of at most 15 lines each. Output blocks are not counted as code examples or prose. Tutorials are exempt from these limits.
 
 #### Scenario: Measuring a post
-- **WHEN** a post's prose words and code examples are counted
+- **WHEN** a normal post's prose words and code examples are counted
 - **THEN** the counts are within the limits
+
+#### Scenario: Measuring a tutorial
+- **WHEN** a post is a tutorial
+- **THEN** no length limit applies to it or to its chapters
 
 ### Requirement: Natural first-person voice
 Posts SHALL be written in plain first-person language, with varied sentences, and SHALL read as one person explaining a tool to another.

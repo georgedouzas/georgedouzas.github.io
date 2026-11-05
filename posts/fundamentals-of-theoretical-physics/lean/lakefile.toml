@@ -1,11 +1,15 @@
 name = "kaluza_klein_physics"
-defaultTargets = ["kaluza_klein_physics_lib"]
+defaultTargets = ["kaluza_klein_physics_root"]
 
 # `lake build` compiles the root module, as the book did. Modules it does not import are unfinished.
 [[lean_lib]]
+name = "kaluza_klein_physics_root"
+roots = ["KaluzaKleinPhysics"]
+
+[[lean_lib]]
 name = "kaluza_klein_physics_lib"
-roots = ["KaluzaKleinPhysics", "KaluzaKlein.PartII", "KaluzaKlein.Foundations.Higgs", "KaluzaKlein.Foundations.Relativity", "KaluzaKlein.Foundations.Mechanics", "KaluzaKlein.Foundations.Actions", "KaluzaKlein.Foundations.Supergravity", "KaluzaKlein.Foundations.FieldTheory", "KaluzaKlein.Foundations.Supersymmetry", "KaluzaKlein.Foundations.Fields", "KaluzaKlein.Foundations.Primers"]
-globs = ["KaluzaKleinPhysics"]
+roots = ["KaluzaKlein.PartII", "KaluzaKlein.Foundations.Actions", "KaluzaKlein.Foundations.FieldTheory", "KaluzaKlein.Foundations.Fields", "KaluzaKlein.Foundations.Higgs", "KaluzaKlein.Foundations.Mechanics", "KaluzaKlein.Foundations.Primers", "KaluzaKlein.Foundations.Relativity", "KaluzaKlein.Foundations.Supergravity", "KaluzaKlein.Foundations.Supersymmetry"]
+globs = ["KaluzaKlein.PartII.+", "KaluzaKlein.Foundations.Actions", "KaluzaKlein.Foundations.FieldTheory", "KaluzaKlein.Foundations.Fields", "KaluzaKlein.Foundations.Higgs", "KaluzaKlein.Foundations.Mechanics", "KaluzaKlein.Foundations.Primers", "KaluzaKlein.Foundations.Relativity", "KaluzaKlein.Foundations.Supergravity", "KaluzaKlein.Foundations.Supersymmetry"]
 
 [[require]]
 name = "kaluza_klein_mathematics"

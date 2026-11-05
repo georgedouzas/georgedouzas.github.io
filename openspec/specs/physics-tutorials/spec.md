@@ -1,10 +1,9 @@
-# Spec Delta
+# physics-tutorials Specification
 
 ## Purpose
-
 Publishes the owner's lecture notes as three connected tutorials, each a self-contained post, so readers can work through mathematics, theoretical physics and Kaluza-Klein theory in full.
 
-## ADDED Requirements
+## Requirements
 
 ### Requirement: Three tutorials on the Posts page
 The Posts page SHALL list three tutorials: Fundamentals of Mathematics for Physicists, Fundamentals of Theoretical Physics, and Kaluza-Klein Theories. Each SHALL have a title, plain description, date, tags and a relevant thumbnail. Chapters SHALL NOT appear as separate posts.
@@ -15,7 +14,7 @@ The Posts page SHALL list three tutorials: Fundamentals of Mathematics for Physi
 
 #### Scenario: Reader filters by tag
 - **WHEN** a reader selects the Tutorial tag
-- **THEN** exactly the three tutorials are shown
+- **THEN** these three tutorials are shown, along with any other tutorials
 
 ### Requirement: Each tutorial is self-contained
 Each tutorial SHALL keep everything it needs to preview or render inside its own post folder, using only standard Quarto commands from the site, with no central book, shared tutorial folder, or copy step.

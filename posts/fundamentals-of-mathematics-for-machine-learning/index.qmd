@@ -1,0 +1,20 @@
+---
+title: "Fundamentals of Mathematics for Machine Learning"
+description: "The linear algebra, probability, optimization and information theory behind machine learning"
+date: 2026-11-04
+categories: [Tutorial, Mathematics, Machine Learning]
+image: "../../assets/tutorials/mathematics-for-machine-learning.svg"
+order: 5
+---
+
+This tutorial collects the mathematics behind
+[Fundamentals of Machine Learning](../fundamentals-of-machine-learning/index.qmd). It covers notation, linear algebra, probability and statistics,
+optimization and information theory, followed by the technical lemmas and inequalities that the learning theory proofs
+use.
+
+## Chapters
+
+- [Mathematical and statistical foundations](mathematical-and-statistical-foundations.qmd)
+- [Appendices and technical background](appendices-and-technical-background.qmd)
+
+Works cited are listed at the end of each chapter.

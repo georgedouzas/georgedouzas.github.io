@@ -32,6 +32,7 @@
 - [ ] 5.3 Build each Lean package with `lake build`, then verify each package's root module compiles.
 
 ## Workflow follow-up
+- Task 5.3 was left open at archive, at the owner's request. The mathematics and physics packages build with no failures. In Kaluza-Klein, `KaluzaKlein.AbelianKK.Jets` was killed with exit code 137 on all three attempts, so it is unverified.
 
 - Deploy to `docs/`, commit and push after the owner approves the report.
 - Archive this change after deployment.

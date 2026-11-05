@@ -1,0 +1,447 @@
+{
+"thm-no-free-lunch": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Theorem 1 of Foundations of Learning Theory"
+},
+"def-pac-learning": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Definition 1 of Foundations of Learning Theory"
+},
+"def-true-error": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Definition 2 of Foundations of Learning Theory"
+},
+"def-empirical-error": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Definition 3 of Foundations of Learning Theory"
+},
+"def-pac-learnable": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Definition 4 of Foundations of Learning Theory"
+},
+"def-agnostic-pac": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Definition 5 of Foundations of Learning Theory"
+},
+"def-vc-dimension": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Definition 6 of Foundations of Learning Theory"
+},
+"def-generalization-gap": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Definition 7 of Foundations of Learning Theory"
+},
+"def-shattering": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Definition 8 of Foundations of Learning Theory"
+},
+"def-rademacher-complexity": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Definition 9 of Foundations of Learning Theory"
+},
+"sec-learning-theory": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Foundations of Learning Theory"
+},
+"sec-statistical-learning": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Statistical Learning Theory"
+},
+"sec-computational-learning": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Computational Learning Theory"
+},
+"sec-pac-learning": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "PAC Learning Framework"
+},
+"sec-generalization": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Generalization, Complexity, and Stability"
+},
+"sec-model-selection": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Model Selection and Validation"
+},
+"sec-computational-complexity": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Computational Complexity of Learning"
+},
+"sec-nonuniform-learning": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Nonuniform Learning and Structural Risk Minimization"
+},
+"sec-multiple-testing": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Multiple Testing and Error Control"
+},
+"sec-representation": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Representation as Inductive Bias"
+},
+"sec-online-learning": {
+"post": "fundamentals-of-machine-learning",
+"page": "foundations-of-learning-theory.html",
+"text": "Online & Sequential Learning"
+},
+"def-linear-regression-model": {
+"post": "fundamentals-of-machine-learning",
+"page": "supervised-learning.html",
+"text": "Definition 1 of Supervised Learning"
+},
+"def-ols-solution": {
+"post": "fundamentals-of-machine-learning",
+"page": "supervised-learning.html",
+"text": "Definition 2 of Supervised Learning"
+},
+"sec-supervised-learning": {
+"post": "fundamentals-of-machine-learning",
+"page": "supervised-learning.html",
+"text": "Supervised Learning"
+},
+"sec-linear-models": {
+"post": "fundamentals-of-machine-learning",
+"page": "supervised-learning.html",
+"text": "Linear and Generalized Linear Models"
+},
+"sec-generative-models": {
+"post": "fundamentals-of-machine-learning",
+"page": "supervised-learning.html",
+"text": "Generative Probabilistic Models"
+},
+"sec-margin-methods": {
+"post": "fundamentals-of-machine-learning",
+"page": "supervised-learning.html",
+"text": "Margin-Based Methods"
+},
+"sec-tree-methods": {
+"post": "fundamentals-of-machine-learning",
+"page": "supervised-learning.html",
+"text": "Tree-Based and Ensemble Methods"
+},
+"sec-neural-networks": {
+"post": "fundamentals-of-machine-learning",
+"page": "supervised-learning.html",
+"text": "Neural Networks and Deep Models"
+},
+"sec-structured-outputs": {
+"post": "fundamentals-of-machine-learning",
+"page": "supervised-learning.html",
+"text": "Structured Outputs and Complex Prediction"
+},
+"def-kmeans-objective": {
+"post": "fundamentals-of-machine-learning",
+"page": "unsupervised-learning.html",
+"text": "Definition 1 of Unsupervised Learning"
+},
+"sec-unsupervised-learning": {
+"post": "fundamentals-of-machine-learning",
+"page": "unsupervised-learning.html",
+"text": "Unsupervised Learning"
+},
+"sec-clustering": {
+"post": "fundamentals-of-machine-learning",
+"page": "unsupervised-learning.html",
+"text": "Clustering Methods"
+},
+"sec-dimensionality-reduction": {
+"post": "fundamentals-of-machine-learning",
+"page": "unsupervised-learning.html",
+"text": "Dimensionality Reduction"
+},
+"sec-generative-latent": {
+"post": "fundamentals-of-machine-learning",
+"page": "unsupervised-learning.html",
+"text": "Generative Models and Latent Variables"
+},
+"def-state-value-function": {
+"post": "fundamentals-of-machine-learning",
+"page": "reinforcement-learning.html",
+"text": "Definition 1 of Reinforcement Learning"
+},
+"sec-reinforcement-learning": {
+"post": "fundamentals-of-machine-learning",
+"page": "reinforcement-learning.html",
+"text": "Reinforcement Learning"
+},
+"sec-rl-foundations": {
+"post": "fundamentals-of-machine-learning",
+"page": "reinforcement-learning.html",
+"text": "Foundations of RL"
+},
+"sec-advanced-rl": {
+"post": "fundamentals-of-machine-learning",
+"page": "reinforcement-learning.html",
+"text": "Advanced RL"
+},
+"sec-rl-llm-agents": {
+"post": "fundamentals-of-machine-learning",
+"page": "reinforcement-learning-and-llm-agents.html",
+"text": "Reinforcement Learning and LLM-based Agents"
+},
+"sec-mathematical-foundations-rl": {
+"post": "fundamentals-of-machine-learning",
+"page": "mathematical-foundations-of-reinforcement-learning.html",
+"text": "Mathematical Foundations of Reinforcement Learning"
+},
+"def-linear-system-general": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 1 of Mathematical and Statistical Foundations"
+},
+"def-linear-system-matrix": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 2 of Mathematical and Statistical Foundations"
+},
+"def-vector-space": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 3 of Mathematical and Statistical Foundations"
+},
+"def-linear-independence": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 4 of Mathematical and Statistical Foundations"
+},
+"def-span": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 5 of Mathematical and Statistical Foundations"
+},
+"def-basis": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 6 of Mathematical and Statistical Foundations"
+},
+"def-matrix-rank": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 7 of Mathematical and Statistical Foundations"
+},
+"def-inner-product": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 8 of Mathematical and Statistical Foundations"
+},
+"def-norm": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 9 of Mathematical and Statistical Foundations"
+},
+"def-inner-product-induced-norm": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 10 of Mathematical and Statistical Foundations"
+},
+"def-vectors-angle": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 11 of Mathematical and Statistical Foundations"
+},
+"def-norm-p": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 12 of Mathematical and Statistical Foundations"
+},
+"def-eigenvalue-eigenvector": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 13 of Mathematical and Statistical Foundations"
+},
+"def-eigendecomposition": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 14 of Mathematical and Statistical Foundations"
+},
+"def-svd": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 15 of Mathematical and Statistical Foundations"
+},
+"def-bellman-equation": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 16 of Mathematical and Statistical Foundations"
+},
+"def-sum-rule": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 17 of Mathematical and Statistical Foundations"
+},
+"def-bernoulli": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 18 of Mathematical and Statistical Foundations"
+},
+"def-binomial": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 19 of Mathematical and Statistical Foundations"
+},
+"def-gaussian-univariate": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 20 of Mathematical and Statistical Foundations"
+},
+"def-gaussian-multivariate": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 21 of Mathematical and Statistical Foundations"
+},
+"def-multinomial": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 22 of Mathematical and Statistical Foundations"
+},
+"def-markov-property": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 23 of Mathematical and Statistical Foundations"
+},
+"def-mdp": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 24 of Mathematical and Statistical Foundations"
+},
+"def-expected-value": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 25 of Mathematical and Statistical Foundations"
+},
+"def-variance": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 26 of Mathematical and Statistical Foundations"
+},
+"def-covariance": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 27 of Mathematical and Statistical Foundations"
+},
+"def-gradient": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 28 of Mathematical and Statistical Foundations"
+},
+"def-sgd": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 29 of Mathematical and Statistical Foundations"
+},
+"def-minibatch-gd": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 30 of Mathematical and Statistical Foundations"
+},
+"def-convex-set": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 31 of Mathematical and Statistical Foundations"
+},
+"def-convex-function": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 32 of Mathematical and Statistical Foundations"
+},
+"def-lagrangian": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 33 of Mathematical and Statistical Foundations"
+},
+"def-mutual-information": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 34 of Mathematical and Statistical Foundations"
+},
+"def-cross-entropy-discrete": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 35 of Mathematical and Statistical Foundations"
+},
+"def-cross-entropy-continuous": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 36 of Mathematical and Statistical Foundations"
+},
+"def-policy-entropy": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 37 of Mathematical and Statistical Foundations"
+},
+"def-entropy-regularization": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Definition 38 of Mathematical and Statistical Foundations"
+},
+"sec-math-stat-foundations": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Mathematical and Statistical Foundations"
+},
+"sec-notation": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Notation"
+},
+"sec-linear-algebra": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Linear Algebra and Geometry"
+},
+"sec-probability-statistics": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Probability and Statistics"
+},
+"sec-optimization": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Optimization Foundations"
+},
+"sec-information-theory": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "mathematical-and-statistical-foundations.html",
+"text": "Information Theory and Inference"
+},
+"sec-appendices": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "appendices-and-technical-background.html",
+"text": "Appendices and Technical Background"
+},
+"sec-tech-lemmas": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "appendices-and-technical-background.html",
+"text": "Technical Lemmas and Inequalities"
+},
+"sec-linear-algebra-recap": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "appendices-and-technical-background.html",
+"text": "Linear Algebra Recap"
+},
+"sec-measure-concentration": {
+"post": "fundamentals-of-mathematics-for-machine-learning",
+"page": "appendices-and-technical-background.html",
+"text": "Measure Concentration and Probability Inequalities"
+}
+}

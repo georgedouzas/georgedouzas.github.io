@@ -85,6 +85,26 @@ website:
         - posts/fundamentals-of-theoretical-physics/part-ii-10-supersymmetry-supergravity.qmd
         - posts/fundamentals-of-theoretical-physics/registry.qmd
         - posts/fundamentals-of-theoretical-physics/glossary.qmd
+    - id: fundamentals-of-machine-learning
+      title: "Machine Learning"
+      style: docked
+      contents:
+        - text: Overview
+          href: posts/fundamentals-of-machine-learning/index.qmd
+        - posts/fundamentals-of-machine-learning/foundations-of-learning-theory.qmd
+        - posts/fundamentals-of-machine-learning/supervised-learning.qmd
+        - posts/fundamentals-of-machine-learning/unsupervised-learning.qmd
+        - posts/fundamentals-of-machine-learning/reinforcement-learning.qmd
+        - posts/fundamentals-of-machine-learning/reinforcement-learning-and-llm-agents.qmd
+        - posts/fundamentals-of-machine-learning/mathematical-foundations-of-reinforcement-learning.qmd
+    - id: fundamentals-of-mathematics-for-machine-learning
+      title: "Mathematics for Machine Learning"
+      style: docked
+      contents:
+        - text: Overview
+          href: posts/fundamentals-of-mathematics-for-machine-learning/index.qmd
+        - posts/fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.qmd
+        - posts/fundamentals-of-mathematics-for-machine-learning/appendices-and-technical-background.qmd
 
 format:
   html:

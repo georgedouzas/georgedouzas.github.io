@@ -1,0 +1,2971 @@
+---
+pagetitle: "Supervised Learning"
+---
+
+# Supervised Learning {#sec-supervised-learning}
+
+Supervised learning encompasses methods where we have access to labeled training data and seek to learn a mapping from inputs to
+outputs. This chapter covers the major paradigms of supervised learning, from classical linear models to modern deep learning
+approaches.
+
+## Linear and Generalized Linear Models {#sec-linear-models}
+
+Linear models form the foundation of supervised learning, providing interpretable and often effective solutions for both
+regression and classification tasks.
+
+For more on this topic, see @deisenroth2020mml [Ch. 8], @james2023statistical [Chs. 3, 4], @shalev2014ml [Ch. 9] and @theodoridis2025ml [Chs. 9, 11, 12].
+
+### Linear Regression
+
+Linear regression is the foundation of supervised learning, modeling the relationship between a continuous response variable and
+one or more predictor variables through a linear function. Despite its simplicity, linear regression remains widely used due to
+its interpretability, computational efficiency, and strong theoretical properties.
+
+**Model Specification:** Linear regression assumes the response $Y$ is a linear function of predictors $\mathbf{x} = (x_1, \ldots,
+x_p)^T$ plus random noise:
+
+$$Y = \mathbf{w}^T\mathbf{x} + w_0 + \epsilon = w_0 + \sum_{j=1}^p w_j x_j + \epsilon$$
+
+where: - $\mathbf{w} = (w_1, \ldots, w_p)^T \in \mathbb{R}^p$ are the regression coefficients (weights) - $w_0 \in \mathbb{R}$ is
+the intercept (bias term) - $\epsilon$ is random noise with $\mathbb{E}[\epsilon] = 0$
+
+For notational convenience, we often absorb the intercept by augmenting $\mathbf{x}$ with a 1: $\tilde{\mathbf{x}} = (1, x_1,
+\ldots, x_p)^T$ and $\tilde{\mathbf{w}} = (w_0, w_1, \ldots, w_p)^T$, giving:
+
+$$Y = \tilde{\mathbf{w}}^T\tilde{\mathbf{x}} + \epsilon$$
+
+**Training Data:** Given $n$ observations $\{(\mathbf{x}_i, y_i)\}_{i=1}^n$, we can write in matrix form:
+
+::: {#def-linear-regression-model}
+
+Linear Regression Model
+
+$$\mathbf{y} = \mathbf{X}\mathbf{w} + \boldsymbol{\epsilon}$$
+:::
+
+where: - $\mathbf{y} = (y_1, \ldots, y_n)^T \in \mathbb{R}^n$ is the response vector - $\mathbf{X} \in \mathbb{R}^{n \times p}$ is
+the design matrix with rows $\mathbf{x}_i^T$
+- $\boldsymbol{\epsilon} = (\epsilon_1, \ldots, \epsilon_n)^T \in \mathbb{R}^n$ is
+the noise vector
+
+**Ordinary Least Squares (OLS):** The most common estimation method minimizes the sum of squared residuals:
+
+$$\hat{\mathbf{w}} = \arg\min_{\mathbf{w}} \sum_{i=1}^n (y_i - \mathbf{w}^T\mathbf{x}_i)^2 = \arg\min_{\mathbf{w}} \|\mathbf{y} -
+\mathbf{X}\mathbf{w}\|^2$$
+
+**Derivation of OLS Solution:** Taking the gradient with respect to $\mathbf{w}$ and setting to zero:
+
+\begin{align*} \frac{\partial}{\partial \mathbf{w}} \|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2 &= \frac{\partial}{\partial
+\mathbf{w}} (\mathbf{y} - \mathbf{X}\mathbf{w})^T(\mathbf{y} - \mathbf{X}\mathbf{w}) \\ &= \frac{\partial}{\partial \mathbf{w}}
+(\mathbf{y}^T\mathbf{y} - 2\mathbf{y}^T\mathbf{X}\mathbf{w} + \mathbf{w}^T\mathbf{X}^T\mathbf{X}\mathbf{w}) \\ &=
+-2\mathbf{X}^T\mathbf{y} + 2\mathbf{X}^T\mathbf{X}\mathbf{w} = 0 \end{align*}
+
+Solving the **normal equations** $\mathbf{X}^T\mathbf{X}\mathbf{w} = \mathbf{X}^T\mathbf{y}$ gives:
+
+::: {#def-ols-solution}
+
+Ordinary Least Squares (OLS) Solution
+
+$$\hat{\mathbf{w}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$$
+:::
+
+This requires that $\mathbf{X}^T\mathbf{X}$ is invertible, which holds when $\mathbf{X}$ has full column rank (no perfect
+multicollinearity).
+
+**Geometric Interpretation:** The OLS solution has a beautiful geometric interpretation (see @sec-linear-algebra for projection
+concepts):
+
+1. The predicted values $\hat{\mathbf{y}} = \mathbf{X}\hat{\mathbf{w}}$ form the orthogonal projection of $\mathbf{y}$ onto the
+column space of $\mathbf{X}$
+
+2. The residuals $\mathbf{r} = \mathbf{y} - \hat{\mathbf{y}}$ are orthogonal to the column space: $\mathbf{X}^T\mathbf{r} = 0$
+
+3. The projection matrix $\mathbf{H} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T$ (hat matrix) satisfies: -
+   $\hat{\mathbf{y}} = \mathbf{H}\mathbf{y}$
+- $\mathbf{H}$ is symmetric and idempotent: $\mathbf{H}^2 = \mathbf{H}$
+- $\mathbf{I}
+   - \mathbf{H}$ projects onto the orthogonal complement
+
+**Statistical Assumptions:** Classical linear regression assumes:
+
+1. **Linearity:** True relationship is linear: $\mathbb{E}[Y|\mathbf{x}] = \mathbf{w}^T\mathbf{x}$
+
+2. **Independence:** Observations are independent
+
+3. **Homoscedasticity:** Constant error variance: $\text{Var}(\epsilon_i) = \sigma^2$ for all $i$
+
+4. **Normality:** Errors are normally distributed: $\epsilon_i \sim \mathcal{N}(0, \sigma^2)$
+
+5. **No perfect multicollinearity:** Predictors are linearly independent
+
+These assumptions are often summarized as: $\epsilon_i \stackrel{iid}{\sim} \mathcal{N}(0, \sigma^2)$
+
+**Statistical Properties of OLS:**
+
+Under the classical assumptions:
+
+**1. Unbiasedness:** $$\mathbb{E}[\hat{\mathbf{w}}] = \mathbb{E}[(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}] =
+(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbb{E}[\mathbf{y}] = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}\mathbf{w} =
+\mathbf{w}$$
+
+**2. Variance:** $$\text{Cov}(\hat{\mathbf{w}}) = \sigma^2(\mathbf{X}^T\mathbf{X})^{-1}$$
+
+**Derivation:** \begin{align*} \text{Cov}(\hat{\mathbf{w}}) &= \text{Cov}((\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y})
+\\ &= (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T \text{Cov}(\mathbf{y}) \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\ &=
+(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T (\sigma^2\mathbf{I}) \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\ &=
+\sigma^2(\mathbf{X}^T\mathbf{X})^{-1} \end{align*}
+
+**3. Gauss-Markov Theorem:** Among all linear unbiased estimators, OLS has the smallest variance (is BLUE: Best Linear Unbiased
+Estimator).
+
+**4. Sampling Distribution:** Under normality assumption: $$\hat{\mathbf{w}} \sim \mathcal{N}(\mathbf{w},
+\sigma^2(\mathbf{X}^T\mathbf{X})^{-1})$$
+
+This enables hypothesis testing and confidence intervals.
+
+**Estimation of Error Variance:**
+
+The unbiased estimator of $\sigma^2$ is:
+
+$$\hat{\sigma}^2 = \frac{1}{n-p} \sum_{i=1}^n (y_i - \hat{y}_i)^2 = \frac{\text{RSS}}{n-p}$$
+
+where RSS (Residual Sum of Squares) = $\|\mathbf{y} - \hat{\mathbf{y}}\|^2$ and $n-p$ are the degrees of freedom.
+
+**Inference:**
+
+**1. Confidence Intervals:** For coefficient $w_j$: $$w_j \pm t_{\alpha/2, n-p} \cdot \text{SE}(\hat{w}_j)$$
+
+where $\text{SE}(\hat{w}_j) = \hat{\sigma}\sqrt{[(\mathbf{X}^T\mathbf{X})^{-1}]_{jj}}$ and $t_{\alpha/2, n-p}$ is the
+t-distribution critical value.
+
+**2. Hypothesis Testing:** To test $H_0: w_j = 0$ vs. $H_1: w_j \neq 0$: $$t = \frac{\hat{w}_j}{\text{SE}(\hat{w}_j)} \sim
+t_{n-p}$$
+
+Reject $H_0$ if $|t| > t_{\alpha/2, n-p}$.
+
+**3. F-Test for Overall Significance:** Test $H_0: w_1 = \cdots = w_p = 0$: $$F = \frac{(\text{TSS} -
+\text{RSS})/p}{\text{RSS}/(n-p)} \sim F_{p, n-p}$$
+
+where TSS (Total Sum of Squares) = $\sum_i (y_i - \bar{y})^2$.
+
+**Model Assessment:**
+
+**1. Coefficient of Determination ($R^2$):** $$R^2 = 1 - \frac{\text{RSS}}{\text{TSS}} = \frac{\text{ESS}}{\text{TSS}}$$
+
+where ESS (Explained Sum of Squares) = $\sum_i (\hat{y}_i - \bar{y})^2$.
+
+$R^2 \in [0,1]$ measures the proportion of variance explained. However, $R^2$ always increases with more predictors.
+
+**2. Adjusted $R^2$:** $$R_{\text{adj}}^2 = 1 - \frac{\text{RSS}/(n-p)}{\text{TSS}/(n-1)}$$
+
+Penalizes model complexity, can decrease when adding irrelevant predictors.
+
+**3. Residual Standard Error (RSE):** $$\text{RSE} = \sqrt{\frac{\text{RSS}}{n-p}} = \hat{\sigma}$$
+
+Estimates standard deviation of errors.
+
+**Diagnostics:**
+
+**1. Residual Plots:** Plot residuals vs. fitted values to check: - Linearity: Random scatter around zero - Homoscedasticity:
+   Constant spread - Outliers: Extreme values
+
+**2. Q-Q Plot:** Check normality of residuals
+
+**3. Leverage:** Diagonal elements of hat matrix $h_{ii}$ measure influence of observation $i$. High leverage points ($h_{ii} >
+2p/n$) have unusual predictor values.
+
+**4. Cook's Distance:** Measures influence of each observation: $$D_i = \frac{(\hat{\mathbf{y}} -
+\hat{\mathbf{y}}_{(-i)})^T(\hat{\mathbf{y}} - \hat{\mathbf{y}}_{(-i)})}{p\hat{\sigma}^2}$$
+
+where $\hat{\mathbf{y}}_{(-i)}$ is prediction without observation $i$. Values $D_i > 1$ indicate influential points.
+
+**Regularization:** When $p$ is large or multicollinearity exists, regularization improves stability (see @sec-model-selection for
+Ridge and Lasso):
+
+**Ridge Regression:** $$\hat{\mathbf{w}}_{\text{ridge}} = \arg\min_{\mathbf{w}} \left\{\|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2 +
+\lambda\|\mathbf{w}\|^2\right\} = (\mathbf{X}^T\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^T\mathbf{y}$$
+
+**Lasso Regression:** $$\hat{\mathbf{w}}_{\text{lasso}} = \arg\min_{\mathbf{w}} \left\{\|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2 +
+\lambda\|\mathbf{w}\|_1\right\}$$
+
+Lasso performs feature selection by setting some coefficients exactly to zero.
+
+**Computational Considerations:**
+
+- **Direct solution:** $O(np^2 + p^3)$ via normal equations - **QR decomposition:** More numerically stable, $O(np^2)$
+- **SVD:**
+Most stable, $O(np^2)$ (see @sec-linear-algebra) - **Gradient descent:** $O(np)$ per iteration, useful for large $n$
+
+**Extensions:**
+
+- **Polynomial regression:** Include polynomial terms $x_j^2, x_j^3, \ldots$
+- **Interaction terms:** Include products $x_j x_k$
+-
+**Weighted least squares:** Different error variances - **Generalized least squares:** Correlated errors
+
+Linear regression provides the foundation for understanding more complex supervised learning methods, with connections to neural
+networks (single-layer network), SVMs (linear kernel), and Gaussian processes [@james2023statistical; @bishop2024deeplearning].
+
+### Logistic Regression
+
+For binary classification with $y \in \{0,1\}$, logistic regression models the conditional probability:
+
+$$P(y=1|\mathbf{x}) = \sigma(\mathbf{w}^T\mathbf{x}) = \frac{1}{1 + e^{-\mathbf{w}^T\mathbf{x}}}$$
+
+where $\sigma(\cdot)$ is the logistic sigmoid function.
+
+**Maximum Likelihood Estimation:** We maximize the log-likelihood:
+
+$$\ell(\mathbf{w}) = \sum_{i=1}^n [y_i \log \sigma(\mathbf{w}^T\mathbf{x}_i) + (1-y_i)\log(1-\sigma(\mathbf{w}^T\mathbf{x}_i))]$$
+
+This is equivalent to minimizing the cross-entropy loss. The optimization is typically performed using gradient descent or
+Newton-Raphson methods.
+
+**Decision Boundary:** The decision boundary is the hyperplane $\{\mathbf{x}: \mathbf{w}^T\mathbf{x} = 0\}$ where
+$P(y=1|\mathbf{x}) = 0.5$.
+
+### Generalized Linear Models
+
+GLMs extend linear regression to non-Gaussian response distributions through a link function $g$:
+
+$$\mathbb{E}[Y|\mathbf{x}] = \mu = g^{-1}(\mathbf{w}^T\mathbf{x})$$
+
+**Components:** 1. **Random component:** $Y$ follows an exponential family distribution 2. **Systematic component:** Linear
+predictor $\eta = \mathbf{w}^T\mathbf{x}$
+3. **Link function:** $g(\mu) = \eta$
+
+**Common GLMs:** - **Linear regression:** Identity link, Gaussian distribution - **Logistic regression:** Logit link, Bernoulli
+distribution  
+- **Poisson regression:** Log link, Poisson distribution - **Multinomial logistic:** Softmax link, Multinomial distribution
+
+**Estimation:** Parameters are estimated via iteratively reweighted least squares (IRLS) or gradient-based methods
+[@james2023statistical; @bishop2024deeplearning].
+
+## Generative Probabilistic Models {#sec-generative-models}
+
+Generative models take a fundamentally different approach to classification than discriminative models. Rather than directly
+modeling the decision boundary or conditional distribution $P(y|\mathbf{x})$, generative models learn the joint distribution
+$P(\mathbf{x}, y)$ by modeling both the class-conditional distributions $P(\mathbf{x}|y)$ and the class priors $P(y)$.
+Classification is then performed using Bayes' rule.
+
+For more on this topic, see @james2023statistical [Ch. 4] and @theodoridis2025ml [Ch. 10].
+
+### The Generative Approach
+
+**Bayes' Rule for Classification:** Given an observation $\mathbf{x}$, the posterior probability of class $k$ is:
+
+$$P(y=k|\mathbf{x}) = \frac{P(\mathbf{x}|y=k)P(y=k)}{P(\mathbf{x})} = \frac{P(\mathbf{x}|y=k)P(y=k)}{\sum_{j=1}^K
+P(\mathbf{x}|y=j)P(y=j)}$$
+
+where: - $P(\mathbf{x}|y=k)$ is the **class-conditional density** (likelihood) - $P(y=k)$ is the **class prior** - $P(\mathbf{x})$
+is the **marginal density** (evidence)
+
+**Classification Decision:** Assign to class with highest posterior:
+
+$$\hat{y} = \arg\max_{k} P(y=k|\mathbf{x}) = \arg\max_{k} P(\mathbf{x}|y=k)P(y=k)$$
+
+Since $P(\mathbf{x})$ is constant across classes, it can be omitted from the maximization.
+
+**Advantages of Generative Models:** 1. Can generate synthetic data by sampling from $P(\mathbf{x}|y)$
+2. Naturally handle missing
+features 3. Can incorporate prior knowledge through $P(y)$
+4. Often work well with small training sets 5. Provide probabilistic
+predictions
+
+**Disadvantages:** 1. Require modeling the full data distribution (harder problem) 2. Strong distributional assumptions may not
+hold 3. Waste modeling capacity on $P(\mathbf{x}|y)$ when only $P(y|\mathbf{x})$ is needed 4. Can be outperformed by
+discriminative models with sufficient data
+
+### Naive Bayes
+
+Naive Bayes is one of the simplest and most effective generative classifiers, based on a strong conditional independence
+assumption.
+
+**The Naive Bayes Assumption:** Features are conditionally independent given the class:
+
+$$P(\mathbf{x}|y) = P(x_1, \ldots, x_p|y) = \prod_{j=1}^p P(x_j|y)$$
+
+This "naive" assumption dramatically simplifies the model, reducing the number of parameters from exponential to linear in $p$.
+
+**Classification Rule:** Combining with Bayes' rule:
+
+$$\hat{y} = \arg\max_k P(y=k) \prod_{j=1}^p P(x_j|y=k)$$
+
+In practice, we work with log-probabilities to avoid numerical underflow:
+
+$$\hat{y} = \arg\max_k \left\{ \log P(y=k) + \sum_{j=1}^p \log P(x_j|y=k) \right\}$$
+
+**Parameter Estimation:** Given training data $\{(\mathbf{x}_i, y_i)\}_{i=1}^n$:
+
+1. **Class priors:** $\hat{P}(y=k) = \frac{n_k}{n}$ where $n_k = |\{i: y_i = k\}|$
+
+2. **Feature distributions:** Estimate $P(x_j|y=k)$ from data in class $k$
+
+**Variants Based on Feature Type:**
+
+**1. Gaussian Naive Bayes:** For continuous features, assume:
+
+$$P(x_j|y=k) = \mathcal{N}(\mu_{jk}, \sigma_{jk}^2) = \frac{1}{\sqrt{2\pi\sigma_{jk}^2}}\exp\left(-\frac{(x_j -
+\mu_{jk})^2}{2\sigma_{jk}^2}\right)$$
+
+**Parameter estimates:** - $\hat{\mu}_{jk} = \frac{1}{n_k}\sum_{i:y_i=k} x_{ij}$
+- $\hat{\sigma}_{jk}^2 =
+\frac{1}{n_k}\sum_{i:y_i=k} (x_{ij} - \hat{\mu}_{jk})^2$
+
+**2. Multinomial Naive Bayes:** For count data (e.g., word counts in text):
+
+$$P(\mathbf{x}|y=k) = \frac{(\sum_j x_j)!}{\prod_j x_j!} \prod_{j=1}^p \theta_{jk}^{x_j}$$
+
+where $\theta_{jk}$ is the probability of feature $j$ in class $k$.
+
+**Parameter estimate with Laplace smoothing:** $$\hat{\theta}_{jk} = \frac{N_{jk} + \alpha}{N_k + \alpha p}$$
+
+where $N_{jk} = \sum_{i:y_i=k} x_{ij}$, $N_k = \sum_j N_{jk}$, and $\alpha > 0$ is the smoothing parameter.
+
+**3. Bernoulli Naive Bayes:** For binary features $x_j \in \{0,1\}$:
+
+$$P(x_j|y=k) = \theta_{jk}^{x_j}(1-\theta_{jk})^{1-x_j}$$
+
+**Parameter estimate:** $$\hat{\theta}_{jk} = \frac{\sum_{i:y_i=k} x_{ij} + \alpha}{n_k + 2\alpha}$$
+
+**Why Naive Bayes Works Despite Strong Assumptions:**
+
+Even when the independence assumption is violated, Naive Bayes often performs well because:
+
+1. **Classification robustness:** Only need correct ranking of posteriors, not accurate probabilities 2. **Parameter efficiency:**
+Fewer parameters reduce variance 3. **Bias-variance tradeoff:** High bias from wrong assumptions offset by low variance 4.
+**Asymptotic optimality:** Under certain conditions, converges to optimal classifier
+
+**Computational Complexity:** - **Training:** $O(np)$
+- linear in features and samples - **Prediction:** $O(Kp)$
+- linear in
+classes and features
+
+**Practical Considerations:**
+
+1. **Feature scaling:** Not required (features modeled independently) 2. **Missing values:** Easily handled by omitting from
+product 3. **Smoothing:** Essential to avoid zero probabilities 4. **Feature selection:** Can improve performance by removing
+dependent features
+
+**Applications:** - Text classification (spam filtering, sentiment analysis) - Medical diagnosis - Real-time prediction (very
+fast) - Baseline model for comparison
+
+### Linear Discriminant Analysis (LDA)
+
+LDA is a generative classifier that assumes Gaussian class-conditional distributions with shared covariance structure. It provides
+a principled probabilistic framework while producing linear decision boundaries.
+
+**Model Assumptions:** For each class $k$:
+
+$$P(\mathbf{x}|y=k) = \mathcal{N}(\boldsymbol{\mu}_k, \boldsymbol{\Sigma})$$
+
+where: - $\boldsymbol{\mu}_k \in \mathbb{R}^p$ is the class-specific mean - $\boldsymbol{\Sigma} \in \mathbb{R}^{p \times p}$ is
+the shared covariance matrix
+
+The shared covariance assumption is key to obtaining linear decision boundaries.
+
+**Derivation of Decision Rule:** Using Bayes' rule:
+
+\begin{align*} P(y=k|\mathbf{x}) &\propto P(\mathbf{x}|y=k)P(y=k) \\ &\propto
+\exp\left(-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu}_k)^T\boldsymbol{\Sigma}^{-1}(\mathbf{x}-\boldsymbol{\mu}_k)\right) \pi_k
+\end{align*}
+
+where $\pi_k = P(y=k)$. Taking logarithms:
+
+\begin{align*} \log P(y=k|\mathbf{x}) &=
+-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu}_k)^T\boldsymbol{\Sigma}^{-1}(\mathbf{x}-\boldsymbol{\mu}_k) + \log \pi_k + \text{const}
+\\ &= -\frac{1}{2}\mathbf{x}^T\boldsymbol{\Sigma}^{-1}\mathbf{x} + \mathbf{x}^T\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}_k -
+\frac{1}{2}\boldsymbol{\mu}_k^T\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}_k + \log \pi_k + \text{const} \end{align*}
+
+The term $-\frac{1}{2}\mathbf{x}^T\boldsymbol{\Sigma}^{-1}\mathbf{x}$ is constant across classes, so the **discriminant function**
+is:
+
+$$\delta_k(\mathbf{x}) = \mathbf{x}^T\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}_k -
+\frac{1}{2}\boldsymbol{\mu}_k^T\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}_k + \log \pi_k$$
+
+This is linear in $\mathbf{x}$, hence "Linear" Discriminant Analysis.
+
+**Classification Rule:** Assign to class with largest discriminant:
+
+$$\hat{y} = \arg\max_k \delta_k(\mathbf{x})$$
+
+**Decision Boundary:** Between classes $k$ and $\ell$, the boundary is where $\delta_k(\mathbf{x}) = \delta_\ell(\mathbf{x})$:
+
+$$\mathbf{x}^T\boldsymbol{\Sigma}^{-1}(\boldsymbol{\mu}_k - \boldsymbol{\mu}_\ell) =
+\frac{1}{2}(\boldsymbol{\mu}_k^T\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}_k -
+\boldsymbol{\mu}_\ell^T\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}_\ell) + \log\frac{\pi_\ell}{\pi_k}$$
+
+This is a hyperplane (affine subspace of dimension $p-1$).
+
+**Parameter Estimation:** Maximum likelihood estimates:
+
+1. **Class priors:** $\hat{\pi}_k = \frac{n_k}{n}$
+
+2. **Class means:** $\hat{\boldsymbol{\mu}}_k = \frac{1}{n_k}\sum_{i:y_i=k} \mathbf{x}_i$
+
+3. **Shared covariance:** Pooled within-class covariance:
+
+$$\hat{\boldsymbol{\Sigma}} = \frac{1}{n-K}\sum_{k=1}^K \sum_{i:y_i=k}(\mathbf{x}_i - \hat{\boldsymbol{\mu}}_k)(\mathbf{x}_i -
+\hat{\boldsymbol{\mu}}_k)^T$$
+
+The denominator $n-K$ provides an unbiased estimate.
+
+**Connection to Fisher's Linear Discriminant:**
+
+For two classes, LDA is equivalent to Fisher's linear discriminant, which finds the projection direction $\mathbf{w}$ that
+maximizes the ratio of between-class to within-class variance:
+
+$$\mathbf{w} = \arg\max_{\mathbf{w}} \frac{(\mathbf{w}^T(\boldsymbol{\mu}_1 -
+\boldsymbol{\mu}_2))^2}{\mathbf{w}^T\boldsymbol{\Sigma}\mathbf{w}}$$
+
+The solution is $\mathbf{w} \propto \boldsymbol{\Sigma}^{-1}(\boldsymbol{\mu}_1 - \boldsymbol{\mu}_2)$, which is exactly the
+normal vector to the LDA decision boundary.
+
+**Dimensionality Reduction:** LDA can also be used for dimensionality reduction by projecting onto the $K-1$ dimensional subspace
+spanned by the discriminant directions. This is particularly useful when $p \gg K$.
+
+**Regularization:** When $p$ is large or $n$ is small, $\hat{\boldsymbol{\Sigma}}$ may be singular or poorly conditioned.
+Solutions include:
+
+1. **Regularized LDA:** $\hat{\boldsymbol{\Sigma}}_{\text{reg}} = (1-\lambda)\hat{\boldsymbol{\Sigma}} + \lambda\mathbf{I}$
+2.
+**Diagonal LDA:** Assume $\boldsymbol{\Sigma}$ is diagonal 3. **Dimensionality reduction:** Use PCA before LDA (see
+@sec-dimensionality-reduction)
+
+### Quadratic Discriminant Analysis (QDA)
+
+QDA relaxes the shared covariance assumption, allowing each class to have its own covariance matrix.
+
+**Model Assumptions:** For each class $k$:
+
+$$P(\mathbf{x}|y=k) = \mathcal{N}(\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$$
+
+where both $\boldsymbol{\mu}_k$ and $\boldsymbol{\Sigma}_k$ are class-specific.
+
+**Discriminant Function:** Following the same derivation as LDA, but now the $\mathbf{x}^T\boldsymbol{\Sigma}_k^{-1}\mathbf{x}$
+term is not constant:
+
+$$\delta_k(\mathbf{x}) = -\frac{1}{2}\log|\boldsymbol{\Sigma}_k| -
+\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu}_k)^T\boldsymbol{\Sigma}_k^{-1}(\mathbf{x}-\boldsymbol{\mu}_k) + \log \pi_k$$
+
+Expanding:
+
+$$\delta_k(\mathbf{x}) = -\frac{1}{2}\mathbf{x}^T\boldsymbol{\Sigma}_k^{-1}\mathbf{x} +
+\mathbf{x}^T\boldsymbol{\Sigma}_k^{-1}\boldsymbol{\mu}_k -
+\frac{1}{2}\boldsymbol{\mu}_k^T\boldsymbol{\Sigma}_k^{-1}\boldsymbol{\mu}_k - \frac{1}{2}\log|\boldsymbol{\Sigma}_k| + \log
+\pi_k$$
+
+This is quadratic in $\mathbf{x}$, hence "Quadratic" Discriminant Analysis.
+
+**Decision Boundaries:** The boundary between classes $k$ and $\ell$ is defined by $\delta_k(\mathbf{x}) =
+\delta_\ell(\mathbf{x})$, which is a quadratic surface (ellipsoid, parabola, or hyperbola).
+
+**Parameter Estimation:**
+
+1. **Class priors:** $\hat{\pi}_k = \frac{n_k}{n}$
+
+2. **Class means:** $\hat{\boldsymbol{\mu}}_k = \frac{1}{n_k}\sum_{i:y_i=k} \mathbf{x}_i$
+
+3. **Class covariances:** $\hat{\boldsymbol{\Sigma}}_k = \frac{1}{n_k-1}\sum_{i:y_i=k}(\mathbf{x}_i -
+\hat{\boldsymbol{\mu}}_k)(\mathbf{x}_i - \hat{\boldsymbol{\mu}}_k)^T$
+
+**Parameter Count Comparison:** - **LDA:** $Kp + p(p+1)/2$ parameters (means + shared covariance) - **QDA:** $Kp + Kp(p+1)/2$
+parameters (means + $K$ covariances)
+
+QDA requires estimating $K$ times more covariance parameters than LDA.
+
+**Bias-Variance Trade-off:**
+
+**LDA:** - **Bias:** High if covariances truly differ across classes - **Variance:** Low due to parameter sharing - **Preferred
+when:** $n$ is small, classes have similar covariances
+
+**QDA:** - **Bias:** Low, more flexible model - **Variance:** High, many more parameters to estimate - **Preferred when:** $n$ is
+large relative to $p$, covariances clearly differ
+
+**Rule of Thumb:** Use LDA when $n < 10p$, consider QDA when $n > 10p$.
+
+### Comparison with Discriminative Methods
+
+**Generative vs. Discriminative:**
+
+**Logistic Regression (Discriminative):** Directly models $P(y|\mathbf{x})$ using: $$P(y=1|\mathbf{x}) =
+\sigma(\mathbf{w}^T\mathbf{x})$$
+
+**LDA (Generative):** Models $P(\mathbf{x}|y)$ and $P(y)$, derives $P(y|\mathbf{x})$ via Bayes' rule.
+
+**Interesting Result:** If the Gaussian assumptions of LDA hold, the resulting $P(y|\mathbf{x})$ has the logistic form! However: -
+LDA makes stronger assumptions (Gaussian, shared covariance) - Logistic regression is more robust to assumption violations - LDA
+can be more efficient with small samples if assumptions hold - Logistic regression typically preferred in practice
+
+**Connection to Naive Bayes:** LDA with diagonal covariance $\boldsymbol{\Sigma} = \text{diag}(\sigma_1^2, \ldots, \sigma_p^2)$ is
+equivalent to Gaussian Naive Bayes with shared variances.
+
+**Computational Complexity:** - **Training:** $O(np^2 + p^3)$ for LDA (covariance estimation + inversion), $O(Knp^2 + Kp^3)$ for
+QDA - **Prediction:** $O(p^2)$ per sample
+
+**Practical Recommendations:**
+
+1. **Start with LDA:** Simple, interpretable, often works well 2. **Try QDA:** If $n$ is large and LDA underfits 3. **Consider
+regularization:** For high-dimensional problems 4. **Compare with logistic regression:** Often more robust (see
+@sec-linear-models) 5. **Visualize decision boundaries:** Check if linear/quadratic assumption is reasonable 6. **Use
+cross-validation:** For model selection (see @sec-model-selection)
+
+Generative models provide a principled probabilistic framework and can be particularly effective when: - Training data is limited
+- Prior knowledge about class distributions is available - Missing data must be handled - Synthetic data generation is needed -
+Interpretability is important
+
+However, discriminative methods like logistic regression (see @sec-linear-models) and SVMs (see @sec-margin-methods) often achieve
+better classification performance, especially with large datasets [@james2023statistical; @shalev2014ml; @bishop2024deeplearning].
+
+## Margin-Based Methods {#sec-margin-methods}
+
+Margin-based methods represent a paradigm shift in classification: instead of merely finding any decision boundary that separates
+classes, we seek the boundary that maximizes the separation. This geometric intuition leads to classifiers with strong
+generalization guarantees, as established by the theory in @sec-learning-theory.
+
+For more on this topic, see @bishop2024deeplearning [Ch. 6] and @james2023statistical [Ch. 9].
+
+### Support Vector Machines
+
+Support Vector Machines (SVMs) are among the most elegant and theoretically grounded classifiers in machine learning. Developed by
+Vapnik and colleagues in the 1990s, SVMs find the optimal separating hyperplane by maximizing the margin between classes. This
+maximum-margin principle is not just geometrically appealing—it has deep connections to VC dimension and generalization bounds
+discussed in @sec-pac-learning.
+
+**Binary Classification Setup:** Given training data $\{(\mathbf{x}_i, y_i)\}_{i=1}^n$ where $\mathbf{x}_i \in \mathbb{R}^d$ and
+$y_i \in \{-1, +1\}$, we seek a hyperplane that separates the two classes:
+
+$$f(\mathbf{x}) = \mathbf{w}^T\mathbf{x} + w_0$$
+
+The decision rule is: $\hat{y} = \text{sign}(f(\mathbf{x}))$. Points with $f(\mathbf{x}) > 0$ are classified as +1, those with
+$f(\mathbf{x}) < 0$ as -1.
+
+**Geometric Margin:** Consider a point $\mathbf{x}_i$ and the hyperplane defined by $\mathbf{w}^T\mathbf{x} + w_0 = 0$. The
+perpendicular distance from $\mathbf{x}_i$ to this hyperplane is:
+
+$$\gamma_i = \frac{y_i(\mathbf{w}^T\mathbf{x}_i + w_0)}{\|\mathbf{w}\|}$$
+
+The factor $y_i$ ensures $\gamma_i > 0$ for correctly classified points. The vector $\mathbf{w}/\|\mathbf{w}\|$ is the unit normal
+to the hyperplane, and the numerator $y_i(\mathbf{w}^T\mathbf{x}_i + w_0)$ is the signed distance (positive for correct
+classification).
+
+The **margin** of the classifier is the minimum distance over all training points:
+
+$$\gamma = \min_{i=1,\ldots,n} \gamma_i$$
+
+Intuitively, a large margin means the decision boundary is far from all training points, suggesting the classifier will generalize
+well to new data. This intuition is formalized by VC theory: the VC dimension of linear classifiers with margin $\gamma$ in a ball
+of radius $R$ is bounded by $R^2/\gamma^2$, independent of the ambient dimension $d$.
+
+**Hard-Margin SVM (Linearly Separable Case):**
+
+When the data is linearly separable, we can find a hyperplane that perfectly separates the classes. Among all such hyperplanes,
+the SVM chooses the one with maximum margin:
+
+$$\max_{\mathbf{w}, w_0} \gamma \quad \text{s.t.} \quad \frac{y_i(\mathbf{w}^T\mathbf{x}_i + w_0)}{\|\mathbf{w}\|} \geq \gamma,
+\forall i$$
+
+By rescaling (multiplying $\mathbf{w}$ and $w_0$ by a constant doesn't change the hyperplane), we can set $\min_i
+y_i(\mathbf{w}^T\mathbf{x}_i + w_0) = 1$. This gives the canonical form:
+
+$$\min_{\mathbf{w}, w_0} \frac{1}{2}\|\mathbf{w}\|^2 \quad \text{s.t.} \quad y_i(\mathbf{w}^T\mathbf{x}_i + w_0) \geq 1, \forall
+i$$
+
+The margin is now $\gamma = 2/\|\mathbf{w}\|$. Minimizing $\|\mathbf{w}\|^2$ (equivalently, $\frac{1}{2}\|\mathbf{w}\|^2$)
+maximizes the margin. The factor $\frac{1}{2}$ simplifies the derivative.
+
+**Support Vectors:** The constraints $y_i(\mathbf{w}^T\mathbf{x}_i + w_0) \geq 1$ define two parallel hyperplanes (the margin
+boundaries) at distance $1/\|\mathbf{w}\|$ from the decision boundary. Points that lie exactly on these boundaries
+($y_i(\mathbf{w}^T\mathbf{x}_i + w_0) = 1$) are called **support vectors**. These are the critical points that define the decision
+boundary—removing any non-support vector doesn't change the solution. Typically, only a small fraction of training points are
+support vectors, making SVMs memory-efficient at test time.
+
+**Example:** Consider two-dimensional data with positive examples at $(1,1)$ and $(2,2)$, and negative examples at $(-1,-1)$ and
+$(-2,-2)$. The maximum-margin hyperplane passes through the origin with $\mathbf{w} = (1,1)^T$ (perpendicular to the line $y=x$).
+The support vectors are $(1,1)$ and $(-1,-1)$, the closest points to the boundary.
+
+**Soft-Margin SVM (Non-Separable Case):**
+
+Real data is rarely linearly separable. Outliers or overlapping classes make perfect separation impossible or undesirable (it
+would overfit). The soft-margin SVM introduces slack variables $\xi_i \geq 0$ that allow violations of the margin:
+
+$$\min_{\mathbf{w}, w_0, \boldsymbol{\xi}} \frac{1}{2}\|\mathbf{w}\|^2 + C\sum_{i=1}^n \xi_i$$ $$\text{s.t.} \quad
+y_i(\mathbf{w}^T\mathbf{x}_i + w_0) \geq 1 - \xi_i, \quad \xi_i \geq 0, \quad \forall i$$
+
+**Interpretation of Slack Variables:** - $\xi_i = 0$: Point is correctly classified with margin $\geq 1$ (outside or on the margin
+boundary) - $0 < \xi_i < 1$: Point is correctly classified but within the margin (between the margin boundary and decision
+boundary) - $\xi_i = 1$: Point is exactly on the decision boundary - $\xi_i > 1$: Point is misclassified (on the wrong side of the
+decision boundary)
+
+The parameter $C > 0$ controls the trade-off between margin size and training errors: - **Large $C$:** Penalize violations heavily
+→ small margin, low training error, risk of overfitting - **Small $C$:** Allow more violations → large margin, higher training
+error, better generalization
+
+This is analogous to the regularization parameter in ridge regression (@sec-linear-models): $C$ controls the bias-variance
+trade-off discussed in @sec-learning-theory.
+
+**Connection to Regularization:** The soft-margin SVM can be written as:
+
+$$\min_{\mathbf{w}, w_0} C\sum_{i=1}^n \max(0, 1 - y_i(\mathbf{w}^T\mathbf{x}_i + w_0)) + \frac{1}{2}\|\mathbf{w}\|^2$$
+
+This is regularized empirical risk minimization with the hinge loss:
+
+$$\ell_{\text{hinge}}(y, f(\mathbf{x})) = \max(0, 1 - yf(\mathbf{x}))$$
+
+The hinge loss is convex and provides a margin-based upper bound on the 0-1 loss (see @sec-learning-theory for loss functions).
+
+**Dual Formulation:**
+
+Using Lagrange multipliers $\alpha_i \geq 0$ for the margin constraints and $\mu_i \geq 0$ for $\xi_i \geq 0$, the Lagrangian is:
+
+$$\mathcal{L} = \frac{1}{2}\|\mathbf{w}\|^2 + C\sum_i \xi_i - \sum_i \alpha_i[y_i(\mathbf{w}^T\mathbf{x}_i + w_0) - 1 + \xi_i] -
+\sum_i \mu_i\xi_i$$
+
+Taking derivatives and setting to zero:
+
+$$\frac{\partial \mathcal{L}}{\partial \mathbf{w}} = \mathbf{w} - \sum_i \alpha_i y_i \mathbf{x}_i = 0 \implies \mathbf{w} =
+\sum_i \alpha_i y_i \mathbf{x}_i$$
+
+$$\frac{\partial \mathcal{L}}{\partial w_0} = -\sum_i \alpha_i y_i = 0 \implies \sum_i \alpha_i y_i = 0$$
+
+$$\frac{\partial \mathcal{L}}{\partial \xi_i} = C - \alpha_i - \mu_i = 0 \implies \alpha_i + \mu_i = C$$
+
+Substituting back gives the dual problem:
+
+$$\max_{\boldsymbol{\alpha}} \sum_{i=1}^n \alpha_i - \frac{1}{2}\sum_{i,j=1}^n \alpha_i\alpha_j y_i y_j
+\mathbf{x}_i^T\mathbf{x}_j$$ $$\text{s.t.} \quad 0 \leq \alpha_i \leq C, \quad \sum_{i=1}^n \alpha_i y_i = 0$$
+
+This is a quadratic programming (QP) problem with linear constraints.
+
+**KKT Conditions:** At the optimal solution:
+
+1. $\alpha_i[y_i(\mathbf{w}^T\mathbf{x}_i + w_0) - 1 + \xi_i] = 0$ (complementary slackness) 2. $\mu_i\xi_i = 0$
+3. $\alpha_i,
+\mu_i \geq 0$, $\xi_i \geq 0$
+
+**Interpretation:** - $\alpha_i = 0$: Point is correctly classified outside margin (not a support vector) - $0 < \alpha_i < C$:
+Point is on the margin ($\xi_i = 0$, $\mu_i > 0$) - $\alpha_i = C$: Point violates the margin ($\xi_i > 0$, $\mu_i = 0$)
+
+**Prediction:** For a new point $\mathbf{x}$:
+
+$$f(\mathbf{x}) = \sum_{i=1}^n \alpha_i y_i \mathbf{x}_i^T\mathbf{x} + w_0$$
+
+Only support vectors ($\alpha_i > 0$) contribute. The intercept $w_0$ is computed from support vectors on the margin:
+
+$$w_0 = y_i - \sum_{j=1}^n \alpha_j y_j \mathbf{x}_j^T\mathbf{x}_i \quad \text{for any } i \text{ with } 0 < \alpha_i < C$$
+
+In practice, average over all such support vectors for numerical stability.
+
+**Kernel Trick:** The dual formulation only requires inner products $\mathbf{x}_i^T\mathbf{x}_j$. We can replace these with a
+kernel function:
+
+$$K(\mathbf{x}_i, \mathbf{x}_j) = \phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)$$
+
+where $\phi: \mathbb{R}^d \to \mathcal{H}$ maps to a (possibly infinite-dimensional) feature space $\mathcal{H}$.
+
+**Dual with Kernels:**
+
+$$\max_{\boldsymbol{\alpha}} \sum_{i=1}^n \alpha_i - \frac{1}{2}\sum_{i,j=1}^n \alpha_i\alpha_j y_i y_j K(\mathbf{x}_i,
+\mathbf{x}_j)$$ $$\text{s.t.} \quad 0 \leq \alpha_i \leq C, \quad \sum_{i=1}^n \alpha_i y_i = 0$$
+
+**Prediction with Kernels:**
+
+$$f(\mathbf{x}) = \sum_{i=1}^n \alpha_i y_i K(\mathbf{x}_i, \mathbf{x}) + w_0$$
+
+**Common Kernels:**
+
+1. **Linear:** $K(\mathbf{x}, \mathbf{x}') = \mathbf{x}^T\mathbf{x}'$
+
+2. **Polynomial:** $K(\mathbf{x}, \mathbf{x}') = (\gamma\mathbf{x}^T\mathbf{x}' + r)^d$
+- Corresponds to all monomials up to
+   degree $d$
+
+3. **RBF (Gaussian):** $K(\mathbf{x}, \mathbf{x}') = \exp(-\gamma\|\mathbf{x} - \mathbf{x}'\|^2)$
+- Infinite-dimensional feature
+   space - Universal kernel (can approximate any continuous function) - $\gamma$ controls width of Gaussian
+
+4. **Sigmoid:** $K(\mathbf{x}, \mathbf{x}') = \tanh(\gamma\mathbf{x}^T\mathbf{x}' + r)$
+- Related to neural networks
+
+**Mercer's Theorem:** A function $K$ is a valid kernel if and only if the kernel matrix $\mathbf{K}$ with $K_{ij} =
+K(\mathbf{x}_i, \mathbf{x}_j)$ is positive semi-definite for any set of points.
+
+**Kernel Properties:** - **Closure under addition:** $K_1 + K_2$ is a kernel - **Closure under multiplication:** $K_1 \cdot K_2$
+is a kernel - **Closure under scaling:** $cK$ is a kernel for $c > 0$
+
+**Optimization Algorithms:**
+
+1. **Quadratic Programming:** General QP solvers (slow for large $n$)
+
+2. **Sequential Minimal Optimization (SMO):** - Decomposes problem into smallest possible sub-problems - Optimizes two $\alpha_i$
+   at a time analytically - Very efficient, used in LIBSVM
+
+3. **Coordinate Descent:** Update one $\alpha_i$ at a time
+
+4. **Stochastic Gradient Descent:** For large-scale problems
+
+**Computational Complexity:**
+
+- **Training:** $O(n^2d)$ to $O(n^3)$ depending on algorithm - **Prediction:** $O(s \cdot d)$ where $s$ is number of support
+vectors - **Memory:** $O(n^2)$ for kernel matrix (can be prohibitive)
+
+**Multi-Class SVMs:**
+
+1. **One-vs-Rest (OVR):** Train $K$ binary classifiers, one per class - Predict class with highest score - Simple but can be
+   inconsistent
+
+2. **One-vs-One (OVO):** Train $\binom{K}{2}$ classifiers for each pair - Use voting to determine final class - More accurate but
+   more classifiers
+
+3. **Crammer-Singer:** Direct multi-class formulation - Single optimization problem - More principled but more complex
+
+**Advantages of SVMs:**
+
+1. **Effective in high dimensions:** Works well when $d > n$
+2. **Memory efficient:** Only support vectors matter 3.
+**Versatile:** Different kernels for different data 4. **Robust:** Maximum margin principle provides good generalization 5.
+**Convex optimization:** Global optimum guaranteed 6. **Theoretical guarantees:** Based on VC theory (see @sec-learning-theory)
+
+**Disadvantages:**
+
+1. **Computational cost:** $O(n^2)$ to $O(n^3)$ training time 2. **Memory requirements:** Kernel matrix can be large 3.
+**Hyperparameter tuning:** $C$ and kernel parameters need careful selection 4. **No probabilistic output:** Produces only class
+labels (though Platt scaling can add probabilities) 5. **Sensitive to feature scaling:** Requires normalization 6. **Black box:**
+Kernel SVMs are not interpretable
+
+**Hyperparameter Selection:**
+
+1. **$C$ (regularization):** Use cross-validation, typically search $[10^{-3}, 10^3]$
+
+2. **$\gamma$ (RBF kernel):** Controls influence of single training example - Small $\gamma$: Far reach, smooth decision boundary
+   - Large $\gamma$: Close reach, complex boundary - Search $[10^{-3}, 10^3]$
+
+3. **Grid search:** Try combinations on logarithmic scale
+
+4. **Cross-validation:** Use k-fold CV to evaluate (see @sec-model-selection)
+
+**Practical Tips:**
+
+1. **Feature scaling:** Standardize features to zero mean, unit variance 2. **Start with linear kernel:** If it works well, no
+need for complexity 3. **Try RBF kernel:** Good default for nonlinear problems 4. **Use cross-validation:** Essential for
+hyperparameter tuning 5. **Check support vector ratio:** If most points are SVs, model may be overfitting
+
+**Connection to Other Methods:**
+
+- **Logistic regression:** Similar to SVM with different loss function - **Neural networks:** Kernel SVMs related to
+infinite-width networks - **Gaussian processes:** Kernel methods with probabilistic interpretation - **Boosting:** Both are
+margin-based methods
+
+**Extensions:**
+
+- **$\nu$-SVM:** Alternative formulation with $\nu$ parameter - **One-class SVM:** Anomaly detection - **SVR (Support Vector
+Regression):** Regression with $\epsilon$-insensitive loss - **Structured SVM:** For structured output prediction (see
+@sec-structured-outputs)
+
+SVMs remain one of the most powerful and theoretically well-founded classification methods, particularly effective for
+medium-sized datasets with complex decision boundaries [@shalev2014ml; @theodoridis2025ml].
+
+### Kernel Methods
+
+For non-linear decision boundaries, map data to higher-dimensional space via $\phi(\mathbf{x})$:
+
+$$f(\mathbf{x}) = \mathbf{w}^T\phi(\mathbf{x}) + w_0 = \sum_{i=1}^n \alpha_i y_i K(\mathbf{x}_i, \mathbf{x}) + w_0$$
+
+where $K(\mathbf{x}, \mathbf{x}') = \phi(\mathbf{x})^T\phi(\mathbf{x}')$ is the kernel function.
+
+**Common Kernels:** - **Linear:** $K(\mathbf{x}, \mathbf{x}') = \mathbf{x}^T\mathbf{x}'$
+- **Polynomial:** $K(\mathbf{x},
+\mathbf{x}') = (\mathbf{x}^T\mathbf{x}' + c)^d$
+- **RBF (Gaussian):** $K(\mathbf{x}, \mathbf{x}') = \exp(-\gamma\|\mathbf{x} -
+\mathbf{x}'\|^2)$
+- **Sigmoid:** $K(\mathbf{x}, \mathbf{x}') = \tanh(\kappa\mathbf{x}^T\mathbf{x}' + c)$
+
+**Kernel Trick:** Compute inner products in high-dimensional space without explicit mapping, enabling efficient non-linear
+learning [@shalev2014ml; @theodoridis2025ml].
+
+## Tree-Based and Ensemble Methods {#sec-tree-methods}
+
+Tree-based methods partition the feature space into rectangular regions and make predictions based on the training samples in each
+region. While individual trees are simple and interpretable, ensemble methods combine multiple trees to achieve state-of-the-art
+performance on many tasks.
+
+For more on this topic, see @james2023statistical [Ch. 8].
+
+### Decision Trees
+
+Decision trees are non-parametric supervised learning methods that recursively partition the feature space using a tree structure.
+
+**Tree Structure:** A decision tree consists of: - **Root node:** Contains all training data - **Internal nodes:** Represent
+decision rules (splits) on features - **Branches:** Represent outcomes of decision rules - **Leaf nodes (terminal nodes):**
+Contain predictions
+
+**Prediction:** For a new instance $\mathbf{x}$: 1. Start at root node 2. Follow branches based on feature values 3. Return
+prediction at reached leaf node
+
+**Regression Trees:** Predict $\hat{y}_R = \frac{1}{|R|}\sum_{i:x_i \in R} y_i$ (mean of training samples in region $R$)
+
+**Classification Trees:** Predict majority class or class probabilities $\hat{p}_k = \frac{1}{|R|}\sum_{i:x_i \in R}
+\mathbb{1}_{[y_i=k]}$
+
+#### Growing Trees: Recursive Binary Splitting
+
+**Algorithm (Top-Down Greedy):**
+
+1. Start with all data in root node 2. For each node: - If stopping criterion met, make it a leaf - Otherwise, find best split: -
+For each feature $j$ and split point $s$: - Define regions: $R_1(j,s) = \{\mathbf{x}: x_j < s\}$ and $R_2(j,s) = \{\mathbf{x}: x_j
+   \geq s\}$
+- Compute impurity reduction - Choose $(j^*, s^*)$ that maximizes impurity reduction - Create two child nodes 3.
+   Recurse on child nodes
+
+**Splitting Criteria:**
+
+**For Regression:** Minimize residual sum of squares (RSS):
+
+$$\min_{j,s} \left\{ \min_{c_1} \sum_{i:x_i \in R_1(j,s)}(y_i - c_1)^2 + \min_{c_2} \sum_{i:x_i \in R_2(j,s)}(y_i - c_2)^2
+\right\}$$
+
+The optimal constants are the region means: $\hat{c}_1 = \text{avg}(y_i: x_i \in R_1)$, $\hat{c}_2 = \text{avg}(y_i: x_i \in
+R_2)$.
+
+**For Classification:** Minimize node impurity. Let $\hat{p}_{mk}$ be the proportion of class $k$ in node $m$.
+
+**1. Classification Error Rate:** $$E_m = 1 - \max_k \hat{p}_{mk}$$
+
+Not differentiable, rarely used for growing trees.
+
+**2. Gini Index (Gini Impurity):** $$G_m = \sum_{k=1}^K \hat{p}_{mk}(1-\hat{p}_{mk}) = 1 - \sum_{k=1}^K \hat{p}_{mk}^2$$
+
+**Interpretation:** Probability of misclassifying a random sample if labeled according to class distribution in node. - $G_m = 0$
+when node is pure (all samples same class) - $G_m$ is maximum when classes are equally distributed
+
+**3. Cross-Entropy (Deviance):** $$D_m = -\sum_{k=1}^K \hat{p}_{mk} \log \hat{p}_{mk}$$
+
+**Interpretation:** Expected information content (see @sec-information-theory). - $D_m = 0$ when node is pure - More sensitive to
+changes in node probabilities than Gini
+
+**Impurity Reduction:** For a split creating nodes $m_L$ and $m_R$ from parent $m$:
+
+$$\Delta I = I_m - \frac{|m_L|}{|m|} I_{m_L} - \frac{|m_R|}{|m|} I_{m_R}$$
+
+where $I$ is the impurity measure and $|m|$ is the number of samples in node $m$.
+
+**Stopping Criteria:** 1. Maximum depth reached 2. Minimum samples per node 3. Minimum impurity decrease 4. All samples in node
+have same label
+
+#### Pruning
+
+Fully grown trees overfit. **Pruning** reduces tree size to improve generalization.
+
+**Cost-Complexity Pruning (Weakest Link Pruning):**
+
+For a tree $T$ with $|T|$ terminal nodes, define the cost-complexity criterion:
+
+$$C_\alpha(T) = \sum_{m=1}^{|T|} \sum_{i:x_i \in R_m}(y_i - \hat{y}_{R_m})^2 + \alpha|T|$$
+
+where: - First term: Training error - Second term: Complexity penalty - $\alpha \geq 0$: Tuning parameter controlling trade-off
+
+**Algorithm:** 1. Grow large tree $T_0$
+2. For increasing $\alpha$, find subtree $T_\alpha \subseteq T_0$ minimizing $C_\alpha(T)$
+3. Use cross-validation to select $\alpha^*$ (see @sec-model-selection) 4. Return $T_{\alpha^*}$
+
+**Efficient Implementation:** For each $\alpha$, can find $T_\alpha$ by recursively collapsing the internal node that produces
+smallest increase in training error per leaf removed.
+
+#### Advantages and Disadvantages
+
+**Advantages:** 1. **Interpretable:** Easy to visualize and explain 2. **No preprocessing:** Handle mixed data types, no scaling
+needed 3. **Nonlinear:** Capture complex interactions automatically 4. **Feature selection:** Implicitly select important features
+5. **Missing values:** Can handle with surrogate splits 6. **Robust:** To outliers in features (not in response)
+
+**Disadvantages:** 1. **High variance:** Small changes in data can drastically change tree 2. **Suboptimal:** Greedy algorithm may
+miss globally optimal tree 3. **Biased:** Favor features with many levels 4. **Poor extrapolation:** Predictions limited to
+training range 5. **Axis-aligned splits:** Cannot capture diagonal boundaries 6. **Lower predictive accuracy:** Than ensemble
+methods
+
+### Ensemble Methods
+
+Ensemble methods combine multiple models to improve predictive performance. The key insight is that averaging many models reduces
+variance while maintaining low bias.
+
+**General Framework:** Combine $B$ base learners:
+
+$$\hat{f}_{\text{ensemble}}(\mathbf{x}) = \frac{1}{B}\sum_{b=1}^B \hat{f}_b(\mathbf{x}) \quad \text{(regression)}$$
+
+$$\hat{y}_{\text{ensemble}}(\mathbf{x}) = \text{majority vote of } \{\hat{f}_b(\mathbf{x})\}_{b=1}^B \quad
+\text{(classification)}$$
+
+**Why Ensembles Work:** Consider $B$ independent models with variance $\sigma^2$. The ensemble variance is:
+
+$$\text{Var}\left(\frac{1}{B}\sum_{b=1}^B \hat{f}_b\right) = \frac{\sigma^2}{B}$$
+
+Averaging reduces variance by factor of $B$!
+
+With correlation $\rho$ between models:
+
+$$\text{Var}\left(\frac{1}{B}\sum_{b=1}^B \hat{f}_b\right) = \rho\sigma^2 + \frac{1-\rho}{B}\sigma^2$$
+
+As $B \to \infty$: variance approaches $\rho\sigma^2$. Key insight: **decorrelating models is crucial**.
+
+### Bagging (Bootstrap Aggregating)
+
+Bagging reduces variance by training models on bootstrap samples and averaging predictions.
+
+**Algorithm:**
+
+1. For $b = 1, \ldots, B$: - Draw bootstrap sample $S_b$ of size $n$ with replacement from training data - Train model $\hat{f}_b$
+   on $S_b$
+2. For regression: $\hat{f}_{\text{bag}}(\mathbf{x}) = \frac{1}{B}\sum_{b=1}^B \hat{f}_b(\mathbf{x})$
+3. For
+   classification: $\hat{y}_{\text{bag}}(\mathbf{x}) = \text{majority vote of } \{\hat{f}_b(\mathbf{x})\}_{b=1}^B$
+
+**Bootstrap Sampling:** Each bootstrap sample: - Contains $n$ observations sampled with replacement - On average, includes $(1 -
+1/e) \approx 63.2\%$ of unique training observations - Remaining $\approx 36.8\%$ are "out-of-bag" (OOB)
+
+**Out-of-Bag (OOB) Error Estimation:**
+
+For each observation $i$: 1. Find all trees where $i$ was OOB (not in bootstrap sample) 2. Average predictions from these trees 3.
+Compute error
+
+OOB error approximates cross-validation error without additional computation!
+
+**Theoretical Analysis:**
+
+**Bias:** Bagging does not change bias (each tree has same expected prediction)
+
+**Variance:** Reduced by averaging, especially for high-variance models like deep trees
+
+**Best for:** High-variance, low-bias models (unpruned trees, neural networks)
+
+**Not helpful for:** Low-variance models (linear regression, shallow trees)
+
+**Variable Importance:** For each feature $j$: 1. Compute OOB error 2. Randomly permute feature $j$ in OOB samples 3. Compute new
+OOB error 4. Importance = increase in error
+
+Large increase indicates important feature.
+
+### Random Forests
+
+Random Forests extend bagging by decorrelating trees through random feature selection.
+
+**Key Modification:** At each split, consider only $m$ randomly selected features (instead of all $p$).
+
+**Algorithm:**
+
+1. For $b = 1, \ldots, B$: - Draw bootstrap sample $S_b$
+- Grow tree $T_b$ on $S_b$: - At each node, randomly select $m$ features
+   - Find best split among these $m$ features - Split node - Grow to maximum depth (no pruning) 2. Aggregate predictions as in
+   bagging
+
+**Hyperparameter $m$:** - **Classification:** Default $m = \sqrt{p}$
+- **Regression:** Default $m = p/3$
+- **Smaller $m$:** More
+decorrelation, but weaker individual trees - **Larger $m$:** Stronger trees, but more correlation - **$m = p$:** Reduces to
+bagging
+
+**Why Random Forests Work:**
+
+1. **Decorrelation:** Random feature selection creates diverse trees 2. **Variance reduction:** Averaging many decorrelated trees
+3. **Bias control:** Deep trees have low bias 4. **Robustness:** Averaging reduces sensitivity to outliers and noise
+
+**Advantages:** 1. Excellent predictive performance 2. Little tuning required (robust to hyperparameters) 3. Handles
+high-dimensional data 4. Provides variable importance 5. OOB error for free 6. Parallelizable
+
+**Disadvantages:** 1. Less interpretable than single tree 2. Slower prediction than single tree 3. Memory intensive (stores $B$
+trees) 4. Can overfit noisy data with very deep trees
+
+**Extremely Randomized Trees (Extra-Trees):**
+
+Further decorrelate by: 1. Using full training set (no bootstrap) 2. Selecting split points randomly (not optimally)
+
+Often faster and sometimes more accurate.
+
+### Boosting
+
+Boosting sequentially trains models, each focusing on mistakes of previous models. Unlike bagging (parallel), boosting is
+sequential.
+
+**Core Idea:** Combine many weak learners (slightly better than random) to create a strong learner.
+
+#### AdaBoost (Adaptive Boosting)
+
+AdaBoost for binary classification with $y \in \{-1, +1\}$.
+
+**Algorithm:**
+
+1. Initialize observation weights: $w_i^{(1)} = 1/n$ for $i = 1, \ldots, n$
+
+2. For $m = 1, \ldots, M$:
+   
+   a. Fit classifier $G_m(\mathbf{x})$ using weights $w_i^{(m)}$
+   
+   b. Compute weighted error: $$\text{err}_m = \frac{\sum_{i=1}^n w_i^{(m)} \mathbb{1}_{[y_i \neq
+   G_m(\mathbf{x}_i)]}}{\sum_{i=1}^n w_i^{(m)}}$$
+   
+   c. Compute classifier weight: $$\alpha_m = \log\left(\frac{1-\text{err}_m}{\text{err}_m}\right)$$
+   
+   d. Update observation weights: $$w_i^{(m+1)} = w_i^{(m)} \exp(\alpha_m \mathbb{1}_{[y_i \neq G_m(\mathbf{x}_i)]})$$
+   
+   Equivalently: $w_i^{(m+1)} = w_i^{(m)} \exp(-\alpha_m y_i G_m(\mathbf{x}_i))$
+
+3. Output final classifier: $$G(\mathbf{x}) = \text{sign}\left(\sum_{m=1}^M \alpha_m G_m(\mathbf{x})\right)$$
+
+**Interpretation:** - $\alpha_m$ large when $\text{err}_m$ small (accurate classifiers get more weight) - Misclassified
+observations get increased weight (focus on hard examples) - Correctly classified observations get decreased weight
+
+**Theoretical Justification:** AdaBoost minimizes exponential loss:
+
+$$L(y, f(\mathbf{x})) = \exp(-y f(\mathbf{x}))$$
+
+where $f(\mathbf{x}) = \sum_{m=1}^M \alpha_m G_m(\mathbf{x})$.
+
+**Training Error Bound:**
+
+$$\frac{1}{n}\sum_{i=1}^n \mathbb{1}_{[y_i \neq G(\mathbf{x}_i)]} \leq \prod_{m=1}^M \sqrt{(1-\text{err}_m)\text{err}_m} =
+\prod_{m=1}^M \sqrt{1 - 4\gamma_m^2}$$
+
+where $\gamma_m = 1/2 - \text{err}_m$ is the edge. If each $\gamma_m \geq \gamma > 0$, training error decreases exponentially.
+
+**Generalization:** AdaBoost has remarkable generalization properties. Even after training error reaches zero, test error often
+continues to decrease with more iterations! This is explained by margin theory (see @sec-margin-methods).
+
+#### Gradient Boosting
+
+Gradient Boosting is a general framework that views boosting as gradient descent in function space.
+
+**Framework:** Minimize loss function:
+
+$$L(f) = \sum_{i=1}^n \ell(y_i, f(\mathbf{x}_i))$$
+
+where $f(\mathbf{x}) = \sum_{m=0}^M h_m(\mathbf{x})$ is the ensemble.
+
+**Algorithm (Gradient Boosting Machine):**
+
+1. Initialize with constant: $f_0(\mathbf{x}) = \arg\min_c \sum_{i=1}^n \ell(y_i, c)$
+
+2. For $m = 1, \ldots, M$:
+   
+   a. Compute pseudo-residuals (negative gradient): $$r_{im} = -\left[\frac{\partial \ell(y_i, f(\mathbf{x}_i))}{\partial
+   f(\mathbf{x}_i)}\right]_{f=f_{m-1}}$$
+   
+   b. Fit base learner $h_m$ to pseudo-residuals: $\{(\mathbf{x}_i, r_{im})\}_{i=1}^n$
+   
+   c. Compute step size (line search): $$\rho_m = \arg\min_\rho \sum_{i=1}^n \ell(y_i, f_{m-1}(\mathbf{x}_i) + \rho
+   h_m(\mathbf{x}_i))$$
+   
+   d. Update: $$f_m(\mathbf{x}) = f_{m-1}(\mathbf{x}) + \nu \rho_m h_m(\mathbf{x})$$
+   
+   where $\nu \in (0,1]$ is the learning rate (shrinkage)
+
+3. Output: $f_M(\mathbf{x})$
+
+**Common Loss Functions:**
+
+**Regression:** - **Squared error:** $\ell(y, f) = (y - f)^2$, pseudo-residuals: $r_i = y_i - f(\mathbf{x}_i)$
+- **Absolute
+error:** $\ell(y, f) = |y - f|$, pseudo-residuals: $r_i = \text{sign}(y_i - f(\mathbf{x}_i))$
+- **Huber loss:** Robust to outliers
+
+**Classification:** - **Logistic loss:** $\ell(y, f) = \log(1 + \exp(-yf))$ for $y \in \{-1, +1\}$
+- **Exponential loss:**
+$\ell(y, f) = \exp(-yf)$ (AdaBoost)
+
+**Hyperparameters:**
+
+1. **Number of trees $M$:** More trees = better fit but risk overfitting. Use early stopping with validation set.
+
+2. **Learning rate $\nu$:** Smaller $\nu$ requires more trees but often better generalization. Typical: $\nu \in [0.01, 0.1]$.
+
+3. **Tree depth:** Shallow trees (depth 3-6) often work best. Controls interaction order.
+
+4. **Subsampling:** Use random fraction of data for each tree (stochastic gradient boosting). Typical: 50%.
+
+**Regularization:** - **Shrinkage:** Small learning rate $\nu$
+- **Subsampling:** Random data fraction - **Tree constraints:** Max
+depth, min samples per leaf - **Early stopping:** Monitor validation error
+
+**Modern Implementations:**
+
+**XGBoost (Extreme Gradient Boosting):** - Regularized objective: $L(f) = \sum_i \ell(y_i, f(\mathbf{x}_i)) + \sum_m \Omega(h_m)$
+- Second-order approximation (Newton boosting) - Efficient tree construction algorithms - Handles missing values - Built-in
+cross-validation
+
+**LightGBM:** - Histogram-based learning - Leaf-wise tree growth (vs. level-wise) - Very fast on large datasets
+
+**CatBoost:** - Handles categorical features natively - Ordered boosting (reduces overfitting) - Robust to hyperparameters
+
+**Comparison: Bagging vs. Boosting**
+
+| Aspect | Bagging | Boosting | |--------|---------|----------| | Training | Parallel | Sequential | | Focus | Reduce variance |
+Reduce bias and variance | | Weighting | Equal | Adaptive (focus on errors) | | Base learners | Deep trees | Shallow trees | |
+Overfitting | Resistant | Can overfit | | Speed | Fast (parallelizable) | Slower (sequential) | | Interpretability | Low | Very
+low |
+
+**Practical Recommendations:**
+
+1. **Start with Random Forest:** Robust, little tuning, good baseline 2. **Try Gradient Boosting:** Often best performance with
+tuning 3. **Use cross-validation:** For hyperparameter selection (see @sec-model-selection) 4. **Monitor validation error:**
+Prevent overfitting 5. **Feature engineering:** Still important despite tree flexibility 6. **Consider computational cost:**
+Boosting slower than bagging 7. **Interpretability:** Use feature importance, partial dependence plots
+
+Tree-based ensemble methods are among the most powerful techniques for tabular data, achieving state-of-the-art performance on
+many real-world problems. They combine the interpretability of trees with the predictive power of ensembles, making them a go-to
+choice for practitioners [@james2023statistical; @shalev2014ml; @theodoridis2025ml].
+
+## Neural Networks and Deep Models {#sec-neural-networks}
+
+Neural networks represent one of the most transformative developments in machine learning. Inspired by the structure of biological
+neurons in the brain, artificial neural networks are composed of layers of interconnected units that learn hierarchical
+representations of data. While the basic concept dates back to the 1940s, modern deep learning—training networks with many
+layers—has only become practical in the last two decades due to advances in computing power, optimization algorithms, and
+architectural innovations.
+
+For more on this topic, see @james2023statistical [Ch. 10] and @shalev2014ml [Ch. 20].
+
+The power of neural networks lies in their ability to automatically learn useful features from raw data. Unlike traditional
+machine learning methods that require careful feature engineering, neural networks can discover complex patterns directly from
+pixels, words, or sensor readings. This capability has led to breakthroughs in computer vision, natural language processing,
+speech recognition, and many other domains.
+
+### Feedforward Neural Networks
+
+Feedforward neural networks, also called multilayer perceptrons (MLPs), are the simplest type of neural network. Information flows
+in one direction: from input through hidden layers to output, with no cycles or feedback loops. Despite their simplicity,
+feedforward networks are powerful function approximators capable of learning complex nonlinear relationships.
+
+**Architecture:** A feedforward network consists of: - **Input layer:** Receives the raw features $\mathbf{x} \in \mathbb{R}^d$
+-
+**Hidden layers:** One or more layers that transform the input through nonlinear functions - **Output layer:** Produces the final
+prediction $\hat{y}$
+
+For a network with $L$ layers, the computation at layer $\ell$ is:
+
+$$\mathbf{h}^{(\ell)} = \sigma(\mathbf{W}^{(\ell)}\mathbf{h}^{(\ell-1)} + \mathbf{b}^{(\ell)})$$
+
+where: - $\mathbf{h}^{(0)} = \mathbf{x}$ is the input - $\mathbf{W}^{(\ell)} \in \mathbb{R}^{d_\ell \times d_{\ell-1}}$ are the
+weights connecting layer $\ell-1$ to layer $\ell$
+- $\mathbf{b}^{(\ell)} \in \mathbb{R}^{d_\ell}$ are the biases for layer $\ell$
+- $\sigma$ is the activation function (applied element-wise) - $\mathbf{h}^{(\ell)} \in \mathbb{R}^{d_\ell}$ are the activations
+(outputs) of layer $\ell$
+
+**Example:** Consider a simple network for binary classification with input dimension 2, one hidden layer with 3 units, and one
+output: - Input: $\mathbf{x} = [x_1, x_2]^T \in \mathbb{R}^2$
+- Hidden layer: $\mathbf{h} = \sigma(\mathbf{W}_1\mathbf{x} +
+\mathbf{b}_1)$ where $\mathbf{W}_1 \in \mathbb{R}^{3 \times 2}$, $\mathbf{b}_1 \in \mathbb{R}^3$
+- Output: $\hat{y} =
+\sigma(\mathbf{w}_2^T\mathbf{h} + b_2)$ where $\mathbf{w}_2 \in \mathbb{R}^3$, $b_2 \in \mathbb{R}$
+
+This network has $2 \times 3 + 3 + 3 \times 1 + 1 = 13$ parameters. For a specific input $\mathbf{x} = [1, 2]^T$, the network
+computes: 1. $\mathbf{z}_1 = \mathbf{W}_1\mathbf{x} + \mathbf{b}_1$ (linear transformation) 2. $\mathbf{h} = \sigma(\mathbf{z}_1)$
+(nonlinear activation) 3. $z_2 = \mathbf{w}_2^T\mathbf{h} + b_2$ (linear transformation) 4. $\hat{y} = \sigma(z_2)$ (final
+activation)
+
+**Activation Functions:** The activation function $\sigma$ introduces nonlinearity, enabling the network to learn complex
+patterns. Without nonlinearity, stacking multiple layers would be equivalent to a single linear transformation. Common choices
+include:
+
+**1. Sigmoid:** $\sigma(z) = \frac{1}{1+e^{-z}}$
+- Output range: $(0, 1)$
+- Interpretation: Can be viewed as a probability -
+**Problem:** Saturates (gradient near zero) for large $|z|$, causing vanishing gradients - **Use case:** Output layer for binary
+classification
+
+**2. Hyperbolic Tangent (Tanh):** $\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$
+- Output range: $(-1, 1)$
+- Zero-centered (unlike
+sigmoid), which helps optimization - **Problem:** Still saturates for large $|z|$
+- **Use case:** Hidden layers in RNNs
+
+**3. Rectified Linear Unit (ReLU):** $\text{ReLU}(z) = \max(0, z)$
+- Output range: $[0, \infty)$
+- **Advantages:** - Simple and
+fast to compute - No saturation for positive values - Sparse activations (many zeros) - Empirically works very well - **Problem:**
+"Dead ReLU" - neurons can get stuck outputting zero - **Use case:** Default choice for hidden layers in deep networks
+
+**4. Leaky ReLU:** $\text{LeakyReLU}(z) = \max(\alpha z, z)$ where $\alpha \approx 0.01$
+- Addresses dead ReLU problem by allowing
+small negative values - Variants: Parametric ReLU (learnable $\alpha$), Exponential Linear Unit (ELU)
+
+**5. Softmax (for output layer):** $\text{softmax}(\mathbf{z})_k = \frac{e^{z_k}}{\sum_{j=1}^K e^{z_j}}$
+- Converts logits to
+probability distribution over $K$ classes - Output: $\sum_k \text{softmax}(\mathbf{z})_k = 1$
+- **Use case:** Multi-class
+classification output layer
+
+**Universal Approximation Theorem:** A remarkable theoretical result states that a feedforward network with a single hidden layer
+containing a finite number of neurons can approximate any continuous function on a compact set to arbitrary accuracy (given
+appropriate activation functions). This means neural networks are universal function approximators.
+
+However, this theorem doesn't tell us: - How many neurons are needed (could be exponentially many) - How to find the right weights
+(training algorithm) - Whether the network will generalize to new data
+
+In practice, deep networks (many layers) often work better than wide networks (many neurons per layer) because they can learn
+hierarchical representations more efficiently. For example, in image recognition: - Layer 1: Learns edges and simple patterns -
+Layer 2: Combines edges into shapes and textures - Layer 3: Combines shapes into object parts - Layer 4: Combines parts into
+complete objects
+
+This hierarchical feature learning is a key advantage of deep networks [@bishop2024deeplearning; @theodoridis2025ml].
+
+### Training Neural Networks
+
+Training deep neural networks involves optimizing a high-dimensional, non-convex objective function. This section covers the
+backpropagation algorithm for computing gradients, optimization methods for updating parameters, and regularization techniques for
+preventing overfitting.
+
+**The Training Objective:** Given training data $\{(\mathbf{x}_i, y_i)\}_{i=1}^n$, minimize the empirical risk:
+
+$$L(\boldsymbol{\theta}) = \frac{1}{n}\sum_{i=1}^n \ell(f(\mathbf{x}_i; \boldsymbol{\theta}), y_i) + \lambda
+R(\boldsymbol{\theta})$$
+
+where $\ell$ is the loss function, $f(\mathbf{x}; \boldsymbol{\theta})$ is the network output, and $R(\boldsymbol{\theta})$ is a
+regularization term.
+
+**Common Loss Functions:**
+
+1. **Mean Squared Error (Regression):** $$\ell(\hat{y}, y) = \frac{1}{2}(\hat{y} - y)^2$$
+
+2. **Cross-Entropy (Binary Classification):** $$\ell(\hat{y}, y) = -[y\log\hat{y} + (1-y)\log(1-\hat{y})]$$
+
+3. **Categorical Cross-Entropy (Multi-class):** $$\ell(\hat{\mathbf{y}}, \mathbf{y}) = -\sum_{k=1}^K y_k \log \hat{y}_k$$
+
+**Backpropagation Algorithm:**
+
+Backpropagation is the cornerstone of neural network training. It efficiently computes gradients of the loss with respect to all
+parameters using the chain rule from calculus. The name "backpropagation" comes from the fact that gradients are computed backward
+through the network, from output to input.
+
+The key insight is that we can reuse intermediate computations: the gradient at layer $\ell$ depends on the gradient at layer
+$\ell+1$. This recursive structure allows us to compute all gradients in time proportional to the forward pass, rather than
+requiring a separate forward pass for each parameter (which would be prohibitively expensive).
+
+**The Algorithm:** Backpropagation consists of two passes:
+
+**Forward Pass:** Compute outputs and store intermediate values for use in the backward pass.
+
+For a network with $L$ layers:
+
+\begin{align*} \mathbf{h}^{(0)} &= \mathbf{x} \quad \text{(input)} \\ \mathbf{z}^{(\ell)} &=
+\mathbf{W}^{(\ell)}\mathbf{h}^{(\ell-1)} + \mathbf{b}^{(\ell)} \quad \text{(pre-activation)} \\ \mathbf{h}^{(\ell)} &=
+\sigma^{(\ell)}(\mathbf{z}^{(\ell)}) \quad \text{(activation)} \\ \hat{\mathbf{y}} &= \mathbf{h}^{(L)} \quad \text{(output)}
+\end{align*}
+
+We store all $\mathbf{z}^{(\ell)}$ and $\mathbf{h}^{(\ell)}$ for use in the backward pass.
+
+**Backward Pass:** Compute gradients layer by layer, starting from the output.
+
+Define $\boldsymbol{\delta}^{(\ell)} = \frac{\partial L}{\partial \mathbf{z}^{(\ell)}}$ as the gradient of the loss with respect
+to the pre-activations at layer $\ell$. These are sometimes called "error signals."
+
+1. **Output layer gradient:** $$\boldsymbol{\delta}^{(L)} = \frac{\partial L}{\partial \mathbf{z}^{(L)}} = \frac{\partial
+   L}{\partial \hat{\mathbf{y}}} \odot \sigma'^{(L)}(\mathbf{z}^{(L)})$$
+   
+   For example, with squared loss $L = \frac{1}{2}(\hat{y} - y)^2$ and sigmoid output $\hat{y} = \sigma(z^{(L)})$: $$\delta^{(L)}
+   = (\hat{y} - y) \cdot \sigma'(z^{(L)}) = (\hat{y} - y) \cdot \hat{y}(1-\hat{y})$$
+
+2. **Hidden layer gradients (backward recursion):** $$\boldsymbol{\delta}^{(\ell)} = \frac{\partial L}{\partial
+   \mathbf{z}^{(\ell)}} = [(\mathbf{W}^{(\ell+1)})^T\boldsymbol{\delta}^{(\ell+1)}] \odot \sigma'^{(\ell)}(\mathbf{z}^{(\ell)})$$
+   
+   **Intuition:** The error at layer $\ell$ is the error from layer $\ell+1$ propagated backward through the weights
+   $\mathbf{W}^{(\ell+1)}$, scaled by how much the activation function is changing (the derivative $\sigma'$).
+
+3. **Parameter gradients:** $$\frac{\partial L}{\partial \mathbf{W}^{(\ell)}} =
+   \boldsymbol{\delta}^{(\ell)}(\mathbf{h}^{(\ell-1)})^T$$ $$\frac{\partial L}{\partial \mathbf{b}^{(\ell)}} =
+   \boldsymbol{\delta}^{(\ell)}$$
+   
+   **Intuition:** The gradient with respect to a weight $W_{ij}^{(\ell)}$ depends on the error signal $\delta_i^{(\ell)}$ and the
+   input $h_j^{(\ell-1)}$ to that weight.
+
+where $\odot$ denotes element-wise multiplication (Hadamard product).
+
+**Concrete Example:** Consider a tiny network for binary classification: - Input: $x = 2$
+- One hidden unit: $h = \sigma(w_1 x +
+b_1)$ with $w_1 = 0.5$, $b_1 = 0$
+- Output: $\hat{y} = \sigma(w_2 h + b_2)$ with $w_2 = 1$, $b_2 = 0$
+- True label: $y = 1$
+-
+Loss: $L = \frac{1}{2}(\hat{y} - y)^2$
+
+**Forward pass:** 1. $z_1 = 0.5 \cdot 2 + 0 = 1$
+2. $h = \sigma(1) = 0.731$
+3. $z_2 = 1 \cdot 0.731 + 0 = 0.731$
+4. $\hat{y} =
+\sigma(0.731) = 0.675$
+5. $L = \frac{1}{2}(0.675 - 1)^2 = 0.053$
+
+**Backward pass:** 1. Output error: $\delta_2 = (\hat{y} - y) \cdot \hat{y}(1-\hat{y}) = (0.675 - 1) \cdot 0.675 \cdot 0.325 =
+-0.071$
+2. Hidden error: $\delta_1 = (w_2 \cdot \delta_2) \cdot h(1-h) = (1 \cdot (-0.071)) \cdot 0.731 \cdot 0.269 = -0.014$
+3.
+Gradients: - $\frac{\partial L}{\partial w_2} = \delta_2 \cdot h = -0.071 \cdot 0.731 = -0.052$
+- $\frac{\partial L}{\partial b_2}
+= \delta_2 = -0.071$
+- $\frac{\partial L}{\partial w_1} = \delta_1 \cdot x = -0.014 \cdot 2 = -0.028$
+- $\frac{\partial
+   L}{\partial b_1} = \delta_1 = -0.014$
+
+With learning rate $\eta = 0.1$, we update: - $w_2 \leftarrow 1 - 0.1 \cdot (-0.052) = 1.005$
+- $w_1 \leftarrow 0.5 - 0.1 \cdot
+(-0.028) = 0.503$
+
+The weights move in the direction that reduces the loss, bringing $\hat{y}$ closer to $y = 1$.
+
+**Computational Complexity:** - **Forward pass:** $O(\sum_{\ell=1}^L d_{\ell-1}d_{\ell})$ where $d_{\ell}$ is the dimension of
+layer $\ell$
+- **Backward pass:** Same complexity as forward pass (each gradient computation mirrors a forward computation) -
+**Total per sample:** $O(2\sum_{\ell=1}^L d_{\ell-1}d_{\ell})$
+
+For a network with layers of size [784, 256, 128, 10] (e.g., MNIST), this is $O(2(784 \cdot 256 + 256 \cdot 128 + 128 \cdot 10))
+\approx 434,000$ operations per sample—remarkably efficient given we're computing gradients for over 200,000 parameters!
+
+**Why Backpropagation Works:** The chain rule from calculus tells us that for a composition of functions $f(g(x))$:
+$$\frac{df}{dx} = \frac{df}{dg} \cdot \frac{dg}{dx}$$
+
+A neural network is just a long composition: $L = f_L(f_{L-1}(\cdots f_1(x)))$. The chain rule gives: $$\frac{\partial L}{\partial
+\mathbf{W}^{(\ell)}} = \frac{\partial L}{\partial f_L} \cdot \frac{\partial f_L}{\partial f_{L-1}} \cdots \frac{\partial
+f_{\ell+1}}{\partial f_\ell} \cdot \frac{\partial f_\ell}{\partial \mathbf{W}^{(\ell)}}$$
+
+Backpropagation computes this efficiently by reusing the products $\frac{\partial L}{\partial f_L} \cdot \frac{\partial
+f_L}{\partial f_{L-1}} \cdots$ as we move backward through the network [@bishop2024deeplearning; @theodoridis2025ml].
+
+**Optimization Algorithms:**
+
+**1. Stochastic Gradient Descent (SGD):**
+
+$$\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta_t \nabla L_i(\boldsymbol{\theta}_t)$$
+
+where $L_i$ is the loss on a single sample or mini-batch.
+
+**Properties:** - Simple and memory efficient - Can escape shallow local minima due to noise - Requires careful learning rate
+tuning - Slow convergence
+
+**2. SGD with Momentum:**
+
+\begin{align*} \mathbf{v}_{t+1} &= \beta\mathbf{v}_t + \nabla L(\boldsymbol{\theta}_t) \\ \boldsymbol{\theta}_{t+1} &=
+\boldsymbol{\theta}_t - \eta\mathbf{v}_{t+1} \end{align*}
+
+Typically $\beta = 0.9$. Momentum accelerates convergence by accumulating gradients in consistent directions.
+
+**Intuition:** Like a ball rolling down a hill, momentum helps overcome small bumps and accelerates in valleys.
+
+**3. Nesterov Accelerated Gradient (NAG):**
+
+\begin{align*} \mathbf{v}_{t+1} &= \beta\mathbf{v}_t + \nabla L(\boldsymbol{\theta}_t - \beta\mathbf{v}_t) \\
+\boldsymbol{\theta}_{t+1} &= \boldsymbol{\theta}_t - \eta\mathbf{v}_{t+1} \end{align*}
+
+Looks ahead before computing gradient, often converges faster than standard momentum.
+
+**4. AdaGrad (Adaptive Gradient):**
+
+\begin{align*} \mathbf{g}_t &= \nabla L(\boldsymbol{\theta}_t) \\ \mathbf{G}_t &= \mathbf{G}_{t-1} + \mathbf{g}_t \odot
+\mathbf{g}_t \\ \boldsymbol{\theta}_{t+1} &= \boldsymbol{\theta}_t - \frac{\eta}{\sqrt{\mathbf{G}_t + \epsilon}} \odot
+\mathbf{g}_t \end{align*}
+
+Adapts learning rate per parameter based on historical gradients. Good for sparse data but learning rate can become too small.
+
+**5. RMSProp:**
+
+\begin{align*} \mathbf{g}_t &= \nabla L(\boldsymbol{\theta}_t) \\ \mathbf{v}_t &= \beta\mathbf{v}_{t-1} + (1-\beta)\mathbf{g}_t
+\odot \mathbf{g}_t \\ \boldsymbol{\theta}_{t+1} &= \boldsymbol{\theta}_t - \frac{\eta}{\sqrt{\mathbf{v}_t + \epsilon}} \odot
+\mathbf{g}_t \end{align*}
+
+Uses exponential moving average instead of cumulative sum, preventing learning rate decay. Typically $\beta = 0.9$.
+
+**6. Adam (Adaptive Moment Estimation):**
+
+Combines momentum and RMSProp:
+
+\begin{align*} \mathbf{g}_t &= \nabla L(\boldsymbol{\theta}_t) \\ \mathbf{m}_t &= \beta_1\mathbf{m}_{t-1} +
+(1-\beta_1)\mathbf{g}_t \quad \text{(first moment)} \\ \mathbf{v}_t &= \beta_2\mathbf{v}_{t-1} + (1-\beta_2)\mathbf{g}_t \odot
+\mathbf{g}_t \quad \text{(second moment)} \\ \hat{\mathbf{m}}_t &= \frac{\mathbf{m}_t}{1-\beta_1^t} \quad \text{(bias correction)}
+\\ \hat{\mathbf{v}}_t &= \frac{\mathbf{v}_t}{1-\beta_2^t} \quad \text{(bias correction)} \\ \boldsymbol{\theta}_{t+1} &=
+\boldsymbol{\theta}_t - \frac{\eta}{\sqrt{\hat{\mathbf{v}}_t} + \epsilon} \odot \hat{\mathbf{m}}_t \end{align*}
+
+**Default hyperparameters:** $\beta_1 = 0.9$, $\beta_2 = 0.999$, $\epsilon = 10^{-8}$, $\eta = 0.001$
+
+Adam is the most popular optimizer for deep learning due to its robustness and good default performance.
+
+**7. AdamW (Adam with Weight Decay):**
+
+Decouples weight decay from gradient-based update:
+
+$$\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta\left(\frac{\hat{\mathbf{m}}_t}{\sqrt{\hat{\mathbf{v}}_t} + \epsilon} +
+\lambda\boldsymbol{\theta}_t\right)$$
+
+Often works better than Adam with L2 regularization.
+
+**Regularization Techniques:**
+
+**1. Weight Decay (L2 Regularization):**
+
+Add penalty to loss:
+
+$$L_{\text{reg}}(\boldsymbol{\theta}) = L(\boldsymbol{\theta}) + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2$$
+
+Gradient update:
+
+$$\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t - \eta(\nabla L(\boldsymbol{\theta}_t) + \lambda\boldsymbol{\theta}_t) =
+(1-\eta\lambda)\boldsymbol{\theta}_t - \eta\nabla L(\boldsymbol{\theta}_t)$$
+
+The term $(1-\eta\lambda)$ shrinks weights toward zero, hence "weight decay."
+
+**2. Dropout:**
+
+During training, randomly set activations to zero with probability $p$:
+
+$$\mathbf{h}_i^{(\ell)} = \begin{cases} 0 & \text{with probability } p \\ \frac{1}{1-p}\sigma(\mathbf{z}_i^{(\ell)}) & \text{with
+probability } 1-p \end{cases}$$
+
+The factor $\frac{1}{1-p}$ ensures expected value remains unchanged. At test time, use all units without dropout.
+
+**Intuition:** Dropout prevents co-adaptation of neurons, forcing the network to learn robust features. It can be viewed as
+training an ensemble of $2^n$ sub-networks.
+
+**Typical values:** $p = 0.5$ for hidden layers, $p = 0.2$ for input layer.
+
+**3. Batch Normalization:**
+
+Normalize layer inputs to have zero mean and unit variance:
+
+\begin{align*} \boldsymbol{\mu}_B &= \frac{1}{m}\sum_{i=1}^m \mathbf{z}_i \\ \boldsymbol{\sigma}_B^2 &= \frac{1}{m}\sum_{i=1}^m
+(\mathbf{z}_i - \boldsymbol{\mu}_B)^2 \\ \hat{\mathbf{z}}_i &= \frac{\mathbf{z}_i -
+\boldsymbol{\mu}_B}{\sqrt{\boldsymbol{\sigma}_B^2 + \epsilon}} \\ \mathbf{y}_i &= \boldsymbol{\gamma} \odot \hat{\mathbf{z}}_i +
+\boldsymbol{\beta} \end{align*}
+
+where $\boldsymbol{\gamma}$ and $\boldsymbol{\beta}$ are learnable parameters.
+
+**Benefits:** - Reduces internal covariate shift - Allows higher learning rates - Reduces sensitivity to initialization - Acts as
+regularization - Accelerates training
+
+**4. Layer Normalization:**
+
+Normalize across features instead of batch:
+
+$$\hat{\mathbf{z}} = \frac{\mathbf{z} - \mathbb{E}[\mathbf{z}]}{\sqrt{\text{Var}[\mathbf{z}] + \epsilon}}$$
+
+Useful for RNNs and when batch size is small.
+
+**5. Early Stopping:**
+
+Monitor validation error and stop training when it starts increasing:
+
+1. Split data into training and validation sets 2. Train model and evaluate on validation set after each epoch 3. Stop when
+validation error increases for $k$ consecutive epochs 4. Return model with best validation performance
+
+**6. Data Augmentation:**
+
+Artificially expand training set with label-preserving transformations: - **Images:** Rotation, flipping, cropping, color
+jittering - **Text:** Synonym replacement, back-translation - **Audio:** Time stretching, pitch shifting, noise injection
+
+**Training Best Practices:**
+
+1. **Initialization:** - **Xavier/Glorot:** $W \sim \mathcal{U}(-\sqrt{6/(n_{in}+n_{out})}, \sqrt{6/(n_{in}+n_{out})})$
+- **He:**
+   $W \sim \mathcal{N}(0, 2/n_{in})$ for ReLU networks
+
+2. **Learning Rate Scheduling:** - **Step decay:** Reduce by factor every $k$ epochs - **Exponential decay:** $\eta_t = \eta_0
+   e^{-\lambda t}$
+- **Cosine annealing:** $\eta_t = \eta_{\min} + \frac{1}{2}(\eta_{\max} - \eta_{\min})(1 +
+   \cos(\frac{t\pi}{T}))$
+- **Warm restarts:** Periodically reset learning rate
+
+3. **Gradient Clipping:** Prevent exploding gradients: $$\mathbf{g} \leftarrow \begin{cases} \mathbf{g} & \text{if }
+   \|\mathbf{g}\| \leq \theta \\ \theta \frac{\mathbf{g}}{\|\mathbf{g}\|} & \text{otherwise} \end{cases}$$
+
+4. **Batch Size:** - Larger batches: More stable gradients, better hardware utilization - Smaller batches: More noise, better
+   generalization - Typical: 32, 64, 128, 256
+
+5. **Monitoring:** - Track training and validation loss - Monitor gradient norms - Visualize activations and weights - Check for
+   overfitting/underfitting
+
+**Common Training Issues:**
+
+1. **Vanishing Gradients:** Gradients become very small in deep networks - **Solutions:** ReLU activations, batch normalization,
+   residual connections
+
+2. **Exploding Gradients:** Gradients become very large - **Solutions:** Gradient clipping, careful initialization, batch
+   normalization
+
+3. **Dead ReLU:** Neurons always output zero - **Solutions:** Leaky ReLU, careful initialization, lower learning rate
+
+4. **Overfitting:** Model memorizes training data - **Solutions:** More data, regularization, dropout, early stopping
+
+5. **Underfitting:** Model too simple - **Solutions:** Larger network, more training, reduce regularization
+
+Training neural networks is as much art as science, requiring careful tuning of hyperparameters and monitoring of training
+dynamics [@bishop2024deeplearning; @theodoridis2025ml].
+
+### Convolutional Neural Networks (CNNs)
+
+Convolutional Neural Networks represent a breakthrough in computer vision, transforming how machines perceive and understand
+images. Introduced by Yann LeCun in the 1980s and refined over decades, CNNs have achieved superhuman performance on tasks like
+image classification, object detection, and facial recognition. The 2012 AlexNet victory in the ImageNet competition marked the
+beginning of the deep learning revolution, demonstrating that CNNs could dramatically outperform traditional computer vision
+methods.
+
+**The Problem with Fully Connected Networks for Images:** Consider applying a standard feedforward network to images:
+
+1. **Parameter explosion:** A modest 224×224 RGB image has $224 \times 224 \times 3 = 150,528$ input features. Connecting this to
+a hidden layer with just 1,000 units requires $150,528 \times 1,000 = 150$ million parameters! For comparison, the entire AlexNet
+has only 60 million parameters despite being much deeper.
+
+2. **Ignoring spatial structure:** Fully connected layers treat the image as a flat vector, discarding the crucial 2D spatial
+relationships. Nearby pixels are highly correlated (e.g., all pixels in a cat's ear should be processed together), but a fully
+connected layer treats a pixel and its neighbor no differently than two random pixels.
+
+3. **No translation invariance:** If we train on images of cats in the center, the network must relearn cat features for cats in
+the corner. A fully connected network has no built-in understanding that a cat is still a cat regardless of position.
+
+4. **Computational cost:** Processing high-resolution images with fully connected layers is prohibitively expensive in both memory
+and computation.
+
+**CNN Solution:** CNNs address these challenges through three key principles:
+
+1. **Local connectivity:** Each neuron connects only to a small spatial region of the input (the receptive field), dramatically
+reducing parameters 2. **Parameter sharing:** The same filter is applied across all spatial locations, enforcing translation
+invariance 3. **Spatial pooling:** Progressively reduce spatial dimensions while increasing depth, building hierarchical
+representations
+
+#### Convolutional Layers
+
+The convolutional layer is the core building block of CNNs. Instead of connecting every input to every output, we slide a small
+filter (kernel) across the input, computing local features.
+
+**The Convolution Operation:** For a 2D input $\mathbf{H}^{(\ell-1)} \in \mathbb{R}^{H \times W \times C_{in}}$ (height × width ×
+channels) and a filter $\mathbf{W}^{(\ell)} \in \mathbb{R}^{K \times K \times C_{in}}$:
+
+$$h_{ij}^{(\ell,c)} = \sigma\left(\sum_{a=0}^{K-1}\sum_{b=0}^{K-1}\sum_{c'=1}^{C_{in}} w_{abc'}^{(\ell,c)}
+h_{i+a,j+b}^{(\ell-1,c')} + b^{(\ell,c)}\right)$$
+
+where: - $(i,j)$ are spatial coordinates in the output feature map - $c$ indexes the output channel (which filter we're applying)
+- $K$ is the kernel size (typically 3×3 or 5×5) - $C_{in}$ is the number of input channels (3 for RGB images) - $C_{out}$ is the
+number of output channels (number of different filters) - $\sigma$ is the activation function (typically ReLU)
+
+**Concrete Example:** Consider a 5×5 grayscale image (1 channel) and a 3×3 edge detection filter:
+
+Input image: ``` 0 0 0 1 1 0 0 0 1 1 0 0 0 1 1 0 0 0 1 1 0 0 0 1 1 ```
+
+Vertical edge filter: ``` -1  0  1 -1  0  1 -1  0  1 ```
+
+At position (1,1), the convolution computes: $$(-1)(0) + (0)(0) + (1)(0) + (-1)(0) + (0)(0) + (1)(0) + (-1)(0) + (0)(0) + (1)(0) =
+0$$
+
+At position (1,2), where the edge is: $$(-1)(0) + (0)(0) + (1)(1) + (-1)(0) + (0)(0) + (1)(1) + (-1)(0) + (0)(0) + (1)(1) = 3$$
+
+The output feature map will have high values along the vertical edge, detecting its presence!
+
+**Intuitive Interpretation:** Each filter is a feature detector: - **Early layers:** Detect simple features like edges, corners,
+colors - Horizontal edge filter: $\begin{bmatrix} 1 & 1 & 1 \\ 0 & 0 & 0 \\ -1 & -1 & -1 \end{bmatrix}$
+- Corner detector:
+  $\begin{bmatrix} 1 & 0 & -1 \\ 0 & 0 & 0 \\ -1 & 0 & 1 \end{bmatrix}$
+- **Middle layers:** Combine simple features into
+  textures, patterns - **Deep layers:** Combine patterns into object parts (eyes, wheels, windows) - **Final layers:** Combine
+parts into complete objects (faces, cars, buildings)
+
+This hierarchical feature learning happens automatically through training—we don't manually design these filters!
+
+**Stride and Padding:**
+
+**Stride $s$:** The step size when sliding the filter. Stride 1 moves one pixel at a time, stride 2 skips every other position. -
+Larger stride → smaller output → fewer parameters → faster computation - Typical: stride 1 for convolutions, stride 2 for
+downsampling
+
+**Padding $p$:** Adding zeros around the input border. Two common strategies: - **Valid (no padding):** Output size $(H-K+1)
+\times (W-K+1)$. Shrinks with each layer. - **Same (pad to maintain size):** $p = \lfloor K/2 \rfloor$, output size $H \times W$.
+Preserves spatial dimensions.
+
+**Output dimensions:** $$H_{out} = \lfloor (H + 2p - K)/s \rfloor + 1, \quad W_{out} = \lfloor (W + 2p - K)/s \rfloor + 1$$
+
+**Example:** Input 32×32, kernel 5×5, padding 2, stride 1: $$H_{out} = \lfloor (32 + 2(2) - 5)/1 \rfloor + 1 = 32$$
+
+**Parameter Efficiency:** For a convolutional layer with $C_{out}$ filters: $$\text{Parameters} = (K \times K \times C_{in})
+\times C_{out} + C_{out}$$
+
+For a 3×3 filter with 64 input channels and 128 output channels: $$\text{Parameters} = (3 \times 3 \times 64) \times 128 + 128 =
+73,856$$
+
+Compare to a fully connected layer connecting 32×32×64 inputs to 32×32×128 outputs: $$\text{Parameters} = (32 \times 32 \times 64)
+\times (32 \times 32 \times 128) = 4.3 \text{ billion!}$$
+
+The convolutional layer achieves a 58,000× parameter reduction through local connectivity and parameter sharing.
+
+**Receptive Field:** The receptive field is the region in the original input that affects a particular output neuron. It grows
+with network depth: - Layer 1 with 3×3 kernel: receptive field = 3×3 - Layer 2 with 3×3 kernel: receptive field = 5×5 (each layer
+2 neuron sees 3×3 of layer 1, which each see 3×3 of input) - Layer 3 with 3×3 kernel: receptive field = 7×7
+
+Deep networks achieve large receptive fields (seeing the whole image) while maintaining parameter efficiency. This is why depth
+matters in CNNs!
+
+#### Pooling Layers
+
+Pooling reduces spatial dimensions, providing translation invariance and reducing computation.
+
+**Max Pooling:** Take maximum value in each pooling window: $$h_{ij}^{(\ell)} = \max_{(a,b) \in \mathcal{N}_{ij}}
+h_{ab}^{(\ell-1)}$$
+
+Typically 2×2 windows with stride 2, reducing dimensions by half.
+
+**Average Pooling:** Take average value: $$h_{ij}^{(\ell)} = \frac{1}{|\mathcal{N}_{ij}|}\sum_{(a,b) \in \mathcal{N}_{ij}}
+h_{ab}^{(\ell-1)}$$
+
+**Why Pooling Works:** 1. **Translation invariance:** Small shifts in input don't change output 2. **Dimensionality reduction:**
+Reduces computation and parameters 3. **Larger receptive fields:** Each pooling doubles receptive field 4. **Robustness:** Reduces
+sensitivity to exact feature locations
+
+**Modern Alternatives:** Strided convolutions can replace pooling, learning the downsampling operation.
+
+#### Typical CNN Architecture
+
+**Classic Pattern:** ``` Input → [Conv → ReLU → Conv → ReLU → Pool] × N → Flatten → FC → Softmax ```
+
+**Design Principles:** 1. **Spatial dimensions decrease:** Through pooling/strided convolutions 2. **Channel depth increases:**
+More filters in deeper layers 3. **Hierarchical features:** Low-level (edges) → Mid-level (textures) → High-level (objects)
+
+**Example (VGG-style):** - Input: 224×224×3 - Conv1: 224×224×64 (two 3×3 conv layers) - Pool1: 112×112×64 - Conv2: 112×112×128 -
+Pool2: 56×56×128 - Conv3: 56×56×256 - Pool3: 28×28×256 - Conv4: 28×28×512 - Pool4: 14×14×512 - Conv5: 14×14×512 - Pool5: 7×7×512 -
+FC: 4096 → 4096 → 1000
+
+#### Modern CNN Architectures
+
+**AlexNet (2012):** First deep CNN to win ImageNet - 8 layers (5 conv, 3 FC) - ReLU activation - Dropout regularization - Data
+augmentation - GPU training
+
+**VGGNet (2014):** Deeper with smaller filters - 16-19 layers - Only 3×3 convolutions - Showed depth is crucial - Simple, uniform
+architecture
+
+**ResNet (2015):** Residual connections enable very deep networks
+
+**Residual Block:** $$\mathbf{h}^{(\ell+1)} = \mathbf{h}^{(\ell)} + \mathcal{F}(\mathbf{h}^{(\ell)})$$
+
+where $\mathcal{F}$ is a stack of conv layers. The skip connection allows gradients to flow directly, solving vanishing gradient
+problem.
+
+**Why ResNets Work:** - Identity mapping is easy to learn - Gradients flow through skip connections - Enables networks with 50-152
+layers - Better optimization landscape
+
+**Inception/GoogLeNet (2014):** Multi-scale processing
+
+**Inception Module:** Parallel convolutions with different kernel sizes (1×1, 3×3, 5×5) concatenated. Captures features at
+multiple scales simultaneously.
+
+**1×1 Convolutions:** Reduce channel dimensions, add non-linearity, enable cross-channel interactions.
+
+**EfficientNet (2019):** Compound scaling - Jointly scale depth, width, and resolution - Achieves better accuracy-efficiency
+tradeoff - Neural architecture search
+
+#### Practical Considerations
+
+**Computational Cost:** For a conv layer with input $H \times W \times C_{in}$, kernel $K \times K$, and $C_{out}$ filters:
+$$\text{FLOPs} = H_{out} \times W_{out} \times K^2 \times C_{in} \times C_{out}$$
+
+**Memory Requirements:** - **Activations:** Dominate memory during training (need for backprop) - **Parameters:** Conv layers have
+few parameters, FC layers dominate - **Gradients:** Same size as parameters
+
+**Batch Normalization in CNNs:** Applied per channel: $$\hat{h}_{ijc} = \frac{h_{ijc} - \mu_c}{\sqrt{\sigma_c^2 + \epsilon}}$$
+
+where $\mu_c, \sigma_c^2$ are computed across batch and spatial dimensions for channel $c$.
+
+**Data Augmentation:** Critical for CNNs: - Random crops and flips - Color jittering - Cutout/mixup - AutoAugment (learned
+policies)
+
+**Transfer Learning:** Pre-train on ImageNet, fine-tune on target task: 1. **Feature extraction:** Freeze conv layers, train only
+FC layers 2. **Fine-tuning:** Unfreeze and train entire network with small learning rate
+
+Works because early layers learn general features (edges, textures) applicable across tasks.
+
+**Advantages of CNNs:** 1. **Parameter efficiency:** Shared weights across spatial locations 2. **Translation invariance:** Same
+features detected anywhere 3. **Hierarchical features:** Automatic feature learning 4. **Strong inductive bias:** Exploits spatial
+structure 5. **Scalable:** Efficient on GPUs
+
+**Limitations:** 1. **Rotation/scale variance:** Not naturally invariant to these transformations 2. **Large receptive fields need
+depth:** Many layers for global context 3. **Fixed input size:** (though can be addressed with global pooling) 4.
+**Interpretability:** Difficult to understand learned features
+
+**Applications Beyond Vision:** - **Audio:** 1D convolutions for speech recognition - **Text:** 1D convolutions for sentence
+classification - **Time series:** Temporal convolutions - **Graphs:** Graph convolutional networks
+
+CNNs demonstrate the power of incorporating domain knowledge (spatial structure) into neural network architecture. The success of
+CNNs has inspired other specialized architectures like RNNs for sequences and Transformers for attention-based processing
+[@bishop2024deeplearning; @theodoridis2025ml].
+
+### Recurrent Neural Networks (RNNs)
+
+Recurrent Neural Networks are designed for sequential data where the order of inputs matters. Unlike feedforward networks that
+process inputs independently, RNNs maintain a hidden state that captures information about previous inputs, enabling them to model
+temporal dependencies.
+
+**Motivation:** Many real-world problems involve sequential data: - **Natural language:** Words in sentences have temporal
+dependencies - **Speech:** Audio signals are inherently sequential - **Time series:** Stock prices, weather, sensor data -
+**Video:** Sequences of frames
+
+Feedforward networks cannot handle variable-length sequences or capture temporal patterns. RNNs address this through recurrent
+connections that create memory.
+
+#### Vanilla RNN Architecture
+
+**Recurrence Relation:** For input sequence $\mathbf{x}_1, \ldots, \mathbf{x}_T$ where $\mathbf{x}_t \in \mathbb{R}^d$:
+
+$$\mathbf{h}_t = \sigma(\mathbf{W}_{hh}\mathbf{h}_{t-1} + \mathbf{W}_{xh}\mathbf{x}_t + \mathbf{b}_h)$$ $$\mathbf{y}_t =
+\mathbf{W}_{hy}\mathbf{h}_t + \mathbf{b}_y$$
+
+where: - $\mathbf{h}_t \in \mathbb{R}^h$ is the hidden state at time $t$
+- $\mathbf{W}_{hh} \in \mathbb{R}^{h \times h}$ are
+recurrent weights - $\mathbf{W}_{xh} \in \mathbb{R}^{h \times d}$ are input weights - $\mathbf{W}_{hy} \in \mathbb{R}^{o \times
+h}$ are output weights - $\sigma$ is typically $\tanh$ or ReLU - $\mathbf{h}_0$ is initialized (often to zeros)
+
+**Key Insight:** Same weights $\mathbf{W}_{hh}, \mathbf{W}_{xh}, \mathbf{W}_{hy}$ applied at every time step. This parameter
+sharing enables processing variable-length sequences.
+
+**Unrolling Through Time:** The recurrence can be "unrolled" into a feedforward network:
+
+$$\mathbf{h}_1 = \sigma(\mathbf{W}_{xh}\mathbf{x}_1 + \mathbf{b}_h)$$ $$\mathbf{h}_2 = \sigma(\mathbf{W}_{hh}\mathbf{h}_1 +
+\mathbf{W}_{xh}\mathbf{x}_2 + \mathbf{b}_h)$$ $$\mathbf{h}_3 = \sigma(\mathbf{W}_{hh}\mathbf{h}_2 + \mathbf{W}_{xh}\mathbf{x}_3 +
+\mathbf{b}_h)$$ $$\vdots$$
+
+This unrolled view enables backpropagation through time (BPTT).
+
+**RNN Architectures:**
+
+1. **One-to-One:** Standard feedforward (not really recurrent) 2. **One-to-Many:** Image captioning (image → sequence of words) 3.
+**Many-to-One:** Sentiment analysis (sequence of words → sentiment) 4. **Many-to-Many (synced):** Video classification (frame
+sequence → label sequence) 5. **Many-to-Many (encoder-decoder):** Machine translation (source sequence → target sequence)
+
+#### Training RNNs: Backpropagation Through Time (BPTT)
+
+**Forward Pass:** Compute hidden states and outputs for all time steps.
+
+**Backward Pass:** Compute gradients by backpropagating through the unrolled network.
+
+For loss $L = \sum_{t=1}^T \ell(\mathbf{y}_t, \hat{\mathbf{y}}_t)$, the gradient with respect to $\mathbf{W}_{hh}$ involves a sum
+over time:
+
+$$\frac{\partial L}{\partial \mathbf{W}_{hh}} = \sum_{t=1}^T \frac{\partial L_t}{\partial \mathbf{W}_{hh}}$$
+
+Each $\frac{\partial L_t}{\partial \mathbf{W}_{hh}}$ requires backpropagating through all previous time steps:
+
+$$\frac{\partial L_t}{\partial \mathbf{W}_{hh}} = \sum_{k=1}^t \frac{\partial L_t}{\partial \mathbf{h}_t} \frac{\partial
+\mathbf{h}_t}{\partial \mathbf{h}_k} \frac{\partial \mathbf{h}_k}{\partial \mathbf{W}_{hh}}$$
+
+The term $\frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_k}$ is a product of Jacobians:
+
+$$\frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_k} = \prod_{i=k+1}^t \frac{\partial \mathbf{h}_i}{\partial \mathbf{h}_{i-1}} =
+\prod_{i=k+1}^t \mathbf{W}_{hh}^T \text{diag}(\sigma'(\mathbf{z}_i))$$
+
+**Vanishing Gradient Problem:** When $t - k$ is large, this product can vanish exponentially:
+
+$$\left\|\frac{\partial \mathbf{h}_t}{\partial \mathbf{h}_k}\right\| \leq \|\mathbf{W}_{hh}\|^{t-k} \prod_{i=k+1}^t
+\|\text{diag}(\sigma'(\mathbf{z}_i))\|$$
+
+If $\|\mathbf{W}_{hh}\| < 1$ and $\sigma$ is $\tanh$ (with $|\sigma'| \leq 1$), gradients decay exponentially with sequence
+length. This makes learning long-term dependencies extremely difficult.
+
+**Exploding Gradient Problem:** Conversely, if $\|\mathbf{W}_{hh}\| > 1$, gradients can explode.
+
+**Solutions:** - **Gradient clipping:** Rescale gradients if norm exceeds threshold (see @sec-neural-networks) - **Careful
+initialization:** Initialize $\mathbf{W}_{hh}$ to identity or orthogonal matrix - **Better architectures:** LSTM, GRU (see below)
+
+**Truncated BPTT:** For very long sequences, backpropagate only $k$ steps back to reduce computation and memory.
+
+#### Long Short-Term Memory (LSTM)
+
+LSTMs address the vanishing gradient problem through a sophisticated gating mechanism that allows gradients to flow unchanged
+through many time steps.
+
+**Architecture:** LSTM introduces a cell state $\mathbf{c}_t$ that runs parallel to the hidden state $\mathbf{h}_t$, controlled by
+three gates:
+
+**1. Forget Gate:** Decides what information to discard from cell state: $$\mathbf{f}_t = \sigma(\mathbf{W}_f[\mathbf{h}_{t-1},
+\mathbf{x}_t] + \mathbf{b}_f)$$
+
+where $[\mathbf{h}_{t-1}, \mathbf{x}_t]$ denotes concatenation and $\sigma$ is the logistic sigmoid.
+
+**2. Input Gate:** Decides what new information to store: $$\mathbf{i}_t = \sigma(\mathbf{W}_i[\mathbf{h}_{t-1}, \mathbf{x}_t] +
+\mathbf{b}_i)$$
+
+**Candidate Cell State:** New information to potentially add: $$\tilde{\mathbf{c}}_t = \tanh(\mathbf{W}_c[\mathbf{h}_{t-1},
+\mathbf{x}_t] + \mathbf{b}_c)$$
+
+**3. Cell State Update:** Combine forget and input: $$\mathbf{c}_t = \mathbf{f}_t \odot \mathbf{c}_{t-1} + \mathbf{i}_t \odot
+\tilde{\mathbf{c}}_t$$
+
+where $\odot$ is element-wise multiplication.
+
+**4. Output Gate:** Decides what to output: $$\mathbf{o}_t = \sigma(\mathbf{W}_o[\mathbf{h}_{t-1}, \mathbf{x}_t] + \mathbf{b}_o)$$
+
+**5. Hidden State:** Filtered version of cell state: $$\mathbf{h}_t = \mathbf{o}_t \odot \tanh(\mathbf{c}_t)$$
+
+**Why LSTMs Work:**
+
+1. **Constant Error Carousel:** The cell state update $\mathbf{c}_t = \mathbf{f}_t \odot \mathbf{c}_{t-1} + \ldots$ allows
+gradients to flow unchanged when $\mathbf{f}_t \approx 1$:
+
+$$\frac{\partial \mathbf{c}_t}{\partial \mathbf{c}_{t-1}} = \mathbf{f}_t$$
+
+If forget gate is open ($\mathbf{f}_t \approx 1$), gradient flows without vanishing.
+
+2. **Additive Updates:** The $+$ operation (not multiplication) preserves gradients better than repeated matrix multiplications in
+vanilla RNNs.
+
+3. **Learned Gating:** Gates learn when to remember, forget, and output, adapting to the task.
+
+**Parameter Count:** LSTM has 4× parameters of vanilla RNN: - Vanilla RNN: $h^2 + hd + ho$ parameters - LSTM: $4(h^2 + hd) + 4h$
+parameters (4 gates)
+
+#### Gated Recurrent Unit (GRU)
+
+GRU is a simpler alternative to LSTM with fewer parameters:
+
+**1. Reset Gate:** Controls how much past information to forget: $$\mathbf{r}_t = \sigma(\mathbf{W}_r[\mathbf{h}_{t-1},
+\mathbf{x}_t] + \mathbf{b}_r)$$
+
+**2. Update Gate:** Controls how much to update hidden state: $$\mathbf{z}_t = \sigma(\mathbf{W}_z[\mathbf{h}_{t-1}, \mathbf{x}_t]
++ \mathbf{b}_z)$$
+
+**3. Candidate Hidden State:** $$\tilde{\mathbf{h}}_t = \tanh(\mathbf{W}_h[\mathbf{r}_t \odot \mathbf{h}_{t-1}, \mathbf{x}_t] +
+\mathbf{b}_h)$$
+
+**4. Hidden State Update:** $$\mathbf{h}_t = (1 - \mathbf{z}_t) \odot \mathbf{h}_{t-1} + \mathbf{z}_t \odot \tilde{\mathbf{h}}_t$$
+
+**GRU vs LSTM:** - GRU has fewer parameters (3 gates vs 4, no separate cell state) - GRU often trains faster - LSTM sometimes
+performs better on complex tasks - No clear winner; try both
+
+#### Bidirectional RNNs
+
+Process sequence in both directions to capture future context:
+
+$$\overrightarrow{\mathbf{h}}_t = \text{RNN}_{\text{forward}}(\mathbf{x}_t, \overrightarrow{\mathbf{h}}_{t-1})$$
+$$\overleftarrow{\mathbf{h}}_t = \text{RNN}_{\text{backward}}(\mathbf{x}_t, \overleftarrow{\mathbf{h}}_{t+1})$$ $$\mathbf{h}_t =
+[\overrightarrow{\mathbf{h}}_t; \overleftarrow{\mathbf{h}}_t]$$
+
+Useful when entire sequence is available (e.g., sentence classification), not for online prediction.
+
+#### Encoder-Decoder Architecture
+
+For sequence-to-sequence tasks (translation, summarization):
+
+**Encoder:** Processes input sequence into fixed-size context vector: $$\mathbf{h}_t^{\text{enc}} =
+\text{RNN}_{\text{enc}}(\mathbf{x}_t, \mathbf{h}_{t-1}^{\text{enc}})$$ $$\mathbf{c} = \mathbf{h}_T^{\text{enc}}$$
+
+**Decoder:** Generates output sequence conditioned on context: $$\mathbf{h}_t^{\text{dec}} =
+\text{RNN}_{\text{dec}}(\mathbf{y}_{t-1}, \mathbf{h}_{t-1}^{\text{dec}}, \mathbf{c})$$ $$\mathbf{y}_t =
+\text{softmax}(\mathbf{W}\mathbf{h}_t^{\text{dec}})$$
+
+**Limitation:** Fixed-size context vector is a bottleneck for long sequences. Attention mechanisms address this (see Transformers
+below).
+
+#### Practical Considerations
+
+**Computational Cost:** RNNs are inherently sequential—cannot parallelize across time steps. Training time scales linearly with
+sequence length.
+
+**Memory:** Must store all hidden states for BPTT. Memory usage: $O(T \cdot h)$ where $T$ is sequence length.
+
+**Sequence Length:** Very long sequences (>100-1000 steps) remain challenging even with LSTMs. Solutions: - Truncated BPTT -
+Hierarchical models - Attention mechanisms - Transformers (see below)
+
+**Teacher Forcing:** During training, use ground truth $\mathbf{y}_{t-1}$ as input to decoder (not predicted
+$\hat{\mathbf{y}}_{t-1}$). Speeds training but can cause train-test mismatch.
+
+**Scheduled Sampling:** Gradually transition from teacher forcing to using model predictions during training.
+
+**Advantages of RNNs:** 1. **Variable-length sequences:** Natural handling of sequences of any length 2. **Parameter sharing:**
+Same weights across time steps 3. **Memory:** Hidden state captures temporal dependencies 4. **Flexible architectures:**
+Many-to-one, one-to-many, many-to-many
+
+**Limitations:** 1. **Sequential computation:** Cannot parallelize across time 2. **Long-term dependencies:** Still challenging
+despite LSTM/GRU 3. **Vanishing/exploding gradients:** Requires careful tuning 4. **Slow training:** Especially for long sequences
+
+**Applications:** - **Language modeling:** Predict next word - **Machine translation:** Sequence-to-sequence - **Speech
+recognition:** Audio to text - **Video analysis:** Frame sequences to labels - **Time series forecasting:** Predict future values
+- **Music generation:** Generate note sequences
+
+RNNs were the dominant architecture for sequential data until the advent of Transformers, which address many of RNN limitations
+through attention mechanisms [@bishop2024deeplearning; @theodoridis2025ml].
+
+### Transformers and Foundation Models
+
+Transformers revolutionized not just sequence modeling, but the entire paradigm of machine learning. Introduced in "Attention is
+All You Need" (Vaswani et al., 2017), Transformers replaced recurrence with attention mechanisms, enabling parallel computation
+and better modeling of long-range dependencies. This architectural innovation has led to the era of foundation models—large-scale
+pre-trained models that serve as starting points for diverse downstream tasks, from natural language processing to computer vision
+and beyond.
+
+The impact cannot be overstated: Transformers power modern language models like GPT-4 and Claude, vision models like CLIP and
+Stable Diffusion, and multimodal systems that understand both text and images. They have achieved human-level or superhuman
+performance on numerous benchmarks and enabled capabilities previously thought impossible, such as few-shot learning and emergent
+reasoning abilities.
+
+**Motivation:** Recurrent Neural Networks (RNNs) have fundamental limitations that Transformers address:
+
+1. **Sequential computation:** RNNs process tokens one at a time, preventing parallelization across the sequence. For a sequence
+of length $n$, we must perform $n$ sequential steps, making training slow even with powerful GPUs.
+
+2. **Long-range dependencies:** Information must pass through many recurrent steps to connect distant tokens. For a dependency
+spanning 100 tokens, the gradient must backpropagate through 100 steps, leading to vanishing gradients despite LSTM/GRU
+improvements.
+
+3. **Fixed computation per token:** Each token gets the same amount of computation regardless of complexity. Some tokens (like
+"the") need less processing than others (like "antidisestablishmentarianism").
+
+4. **Limited context:** RNNs struggle with sequences longer than a few hundred tokens due to the information bottleneck of the
+hidden state.
+
+Transformers address all these issues through self-attention, which directly models relationships between all positions in
+parallel, with computation that scales with sequence length squared rather than being sequential.
+
+#### Attention Mechanism
+
+**Core Idea:** Attention allows the model to dynamically focus on relevant parts of the input when producing each output. Instead
+of compressing the entire sequence into a fixed-size vector (as RNNs do), attention computes a weighted combination of all inputs,
+where the weights are learned based on relevance.
+
+**Scaled Dot-Product Attention:** The fundamental building block. Given queries $\mathbf{Q} \in \mathbb{R}^{n \times d_k}$, keys
+$\mathbf{K} \in \mathbb{R}^{m \times d_k}$, and values $\mathbf{V} \in \mathbb{R}^{m \times d_v}$:
+
+$$\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) =
+\text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^T}{\sqrt{d_k}}\right)\mathbf{V}$$
+
+**Step-by-step computation:**
+
+1. **Compute similarity scores:** $\mathbf{S} = \mathbf{Q}\mathbf{K}^T \in \mathbb{R}^{n \times m}$ where $S_{ij} =
+\mathbf{q}_i^T\mathbf{k}_j$ measures how much query $i$ should attend to key $j$
+
+2. **Scale:** Divide by $\sqrt{d_k}$ to prevent large magnitudes that push softmax into saturation regions with vanishing
+gradients
+
+3. **Normalize:** Apply softmax row-wise to get attention weights: $$\alpha_{ij} = \frac{\exp(S_{ij}/\sqrt{d_k})}{\sum_{j'=1}^m
+   \exp(S_{ij'}/\sqrt{d_k})}$$
+   
+   Now $\sum_j \alpha_{ij} = 1$ and $\alpha_{ij} \in [0,1]$
+
+4. **Weighted sum:** Output is weighted combination of values: $$\mathbf{o}_i = \sum_{j=1}^m \alpha_{ij} \mathbf{v}_j$$
+
+**Intuition with Example:** Consider translating "The cat sat on the mat" to French. When generating "chat" (cat), the model
+should attend strongly to "cat" but also somewhat to "The" (for gender agreement in French). The attention mechanism learns these
+relationships: - **Queries:** "What am I trying to generate?" (current decoder state) - **Keys:** "What information is available?"
+(encoder representations) - **Values:** "What is that information?" (encoder representations) - **Attention weights:**
+$\alpha_{ij}$ indicates how much the $i$-th output position attends to the $j$-th input position
+
+**Why Scaling by $\sqrt{d_k}$?** For large $d_k$, dot products $\mathbf{q}^T\mathbf{k}$ have variance $d_k$ (assuming unit
+variance inputs). Without scaling, softmax receives inputs with large magnitudes, pushing it into regions where gradients are
+extremely small. Dividing by $\sqrt{d_k}$ keeps variance at 1, maintaining healthy gradients. This is similar to the
+initialization strategies discussed in @sec-neural-networks.
+
+**Self-Attention:** When queries, keys, and values all come from the same sequence, we have self-attention:
+
+$$\mathbf{Q} = \mathbf{X}\mathbf{W}_Q, \quad \mathbf{K} = \mathbf{X}\mathbf{W}_K, \quad \mathbf{V} = \mathbf{X}\mathbf{W}_V$$
+
+where $\mathbf{X} \in \mathbb{R}^{n \times d}$ is the input sequence and $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V \in
+\mathbb{R}^{d \times d_k}$ are learned projection matrices. Each token attends to all other tokens (including itself) to build a
+contextualized representation.
+
+**Computational Complexity:** - **Self-attention:** $O(n^2 d)$ where $n$ is sequence length, $d$ is dimension - Computing
+$\mathbf{QK}^T$: $O(n^2 d)$
+- Softmax: $O(n^2)$
+- Multiplying by $\mathbf{V}$: $O(n^2 d)$
+- **RNN:** $O(nd^2)$ but must be
+  computed sequentially - **Trade-off:** For $n < d$ (typical: $n \approx 512$, $d \approx 768$), self-attention is faster and
+  fully parallelizable
+
+The quadratic complexity in sequence length is the main limitation of Transformers, motivating efficient variants discussed later.
+
+#### Multi-Head Attention
+
+Instead of performing a single attention function, multi-head attention projects queries, keys, and values $h$ times with
+different learned projections, performs attention in parallel, then concatenates:
+
+$$\text{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h)\mathbf{W}_O$$
+
+where each head computes:
+
+$$\text{head}_i = \text{Attention}(\mathbf{Q}\mathbf{W}_i^Q, \mathbf{K}\mathbf{W}_i^K, \mathbf{V}\mathbf{W}_i^V)$$
+
+with projection matrices $\mathbf{W}_i^Q, \mathbf{W}_i^K, \mathbf{W}_i^V \in \mathbb{R}^{d \times d_k}$ where typically $d_k =
+d/h$, and output projection $\mathbf{W}_O \in \mathbb{R}^{hd_v \times d}$.
+
+**Why Multiple Heads?** Different heads can specialize in different types of relationships: - **Head 1:** Might learn syntactic
+dependencies (subject-verb agreement) - **Head 2:** Might learn semantic relationships (co-reference resolution) - **Head 3:**
+Might learn positional patterns (adjacent words)
+
+Empirically, different heads in trained models do learn different attention patterns. This is analogous to how different
+convolutional filters learn different features in CNNs (@sec-neural-networks).
+
+**Parameter Count:** For $h$ heads with model dimension $d$ and $d_k = d_v = d/h$: $$\text{Parameters} = 3hd_k d + hd_v d = 4hd_k
+d = 4d^2$$
+
+The total parameter count is the same as a single large attention head, but splitting across multiple subspaces provides better
+representational capacity. Typical configuration: $h=8$ or $h=16$ heads with $d_k = d_v = 64$.
+
+#### Positional Encoding
+
+A critical challenge: attention is permutation-invariant! The operation $\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V})$
+produces the same output regardless of the order of rows in $\mathbf{K}$ and $\mathbf{V}$. But order matters in sequences: "dog
+bites man" ≠ "man bites dog".
+
+**Solution:** Inject positional information into the input embeddings.
+
+**Sinusoidal Positional Encoding:** Add position-dependent signals to embeddings:
+
+$$\text{PE}_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d}}\right)$$ $$\text{PE}_{(pos, 2i+1)} =
+\cos\left(\frac{pos}{10000^{2i/d}}\right)$$
+
+where $pos \in \{0, 1, \ldots, n-1\}$ is the position and $i \in \{0, 1, \ldots, d/2-1\}$ is the dimension index.
+
+**Properties:** - Each dimension has a different frequency: dimension 0 oscillates every $2\pi$ positions, dimension $d-1$
+oscillates every $2\pi \cdot 10000$ positions - For any fixed offset $k$, $\text{PE}_{pos+k}$ can be represented as a linear
+function of $\text{PE}_{pos}$, allowing the model to learn relative positions - Can extrapolate to longer sequences than seen
+during training (though performance degrades)
+
+**Learned Positional Embeddings:** Modern models (GPT, BERT) often use learned position embeddings: a lookup table $\mathbf{P} \in
+\mathbb{R}^{n_{\max} \times d}$ where $n_{\max}$ is the maximum sequence length. Works well in practice but cannot extrapolate
+beyond $n_{\max}$.
+
+**Rotary Position Embeddings (RoPE):** Used in modern LLMs (LLaMA, PaLM), RoPE applies rotation matrices to queries and keys based
+on position, providing better extrapolation to longer sequences than seen during training.
+
+#### Transformer Architecture
+
+**Encoder Block:** Repeated $N$ times (typically $N=6$):
+
+1. **Multi-Head Self-Attention:** $$\mathbf{Z} = \text{MultiHead}(\mathbf{X}, \mathbf{X}, \mathbf{X})$$
+
+2. **Add & Norm:** Residual connection + layer normalization: $$\mathbf{X}' = \text{LayerNorm}(\mathbf{X} + \mathbf{Z})$$
+
+3. **Feed-Forward Network:** Applied position-wise: $$\text{FFN}(\mathbf{x}) = \text{ReLU}(\mathbf{x}\mathbf{W}_1 +
+   \mathbf{b}_1)\mathbf{W}_2 + \mathbf{b}_2$$
+   
+   Typically $d_{\text{ff}} = 4d$ (e.g., 2048 for $d=512$)
+
+4. **Add & Norm:** $$\mathbf{X}'' = \text{LayerNorm}(\mathbf{X}' + \text{FFN}(\mathbf{X}'))$$
+
+**Decoder Block:** Repeated $N$ times:
+
+1. **Masked Multi-Head Self-Attention:** Prevents attending to future positions: $$\text{Mask}_{ij} = \begin{cases} 0 & \text{if }
+   i \geq j \\ -\infty & \text{if } i < j \end{cases}$$
+   
+   Applied before softmax to zero out future positions
+
+2. **Add & Norm**
+
+3. **Cross-Attention:** Attend to encoder output: $$\mathbf{Z} = \text{MultiHead}(\mathbf{X}_{\text{dec}},
+   \mathbf{X}_{\text{enc}}, \mathbf{X}_{\text{enc}})$$
+   
+   Queries from decoder, keys and values from encoder
+
+4. **Add & Norm**
+
+5. **Feed-Forward Network**
+
+6. **Add & Norm**
+
+**Full Architecture:** ``` Input Embedding + Positional Encoding ↓ Encoder Stack (N layers) ↓ Decoder Stack (N layers) ↓ Linear +
+Softmax ↓ Output Probabilities ```
+
+#### Training Details
+
+**Layer Normalization:** Applied before each sub-layer (Pre-LN) or after (Post-LN):
+
+$$\text{LayerNorm}(\mathbf{x}) = \frac{\mathbf{x} - \mu}{\sqrt{\sigma^2 + \epsilon}} \odot \boldsymbol{\gamma} +
+\boldsymbol{\beta}$$
+
+where $\mu, \sigma^2$ computed across features (not batch).
+
+**Residual Connections:** Enable training very deep networks (similar to ResNets, see @sec-neural-networks).
+
+**Dropout:** Applied to: - Attention weights - Output of each sub-layer - Embeddings
+
+Typical rate: 0.1
+
+**Label Smoothing:** Regularization technique for classification: $$\tilde{y}_k = (1-\epsilon)y_k + \epsilon/K$$
+
+Prevents overconfident predictions.
+
+**Warmup Learning Rate Schedule:** $$\eta_t = d^{-0.5} \cdot \min(t^{-0.5}, t \cdot \text{warmup}^{-1.5})$$
+
+Increase learning rate linearly for warmup steps, then decay.
+
+#### Modern Transformer Variants
+
+**BERT (Bidirectional Encoder Representations from Transformers):** - Encoder-only architecture - Pre-trained on masked language
+modeling and next sentence prediction - Fine-tuned for downstream tasks - Revolutionized NLP transfer learning
+
+**GPT (Generative Pre-trained Transformer):** - Decoder-only architecture - Pre-trained on language modeling (predict next token)
+- Scaled to billions of parameters (GPT-3: 175B) - Few-shot and zero-shot learning capabilities
+
+**Vision Transformer (ViT):** - Apply Transformers to images - Split image into patches, treat as sequence - Competitive with CNNs
+on large datasets - Shows Transformers are not limited to sequences
+
+**Efficient Transformers:** Address $O(n^2)$ complexity: - **Linformer:** Linear attention through low-rank approximation -
+**Performer:** Kernel-based attention approximation - **Longformer:** Sparse attention patterns - **BigBird:** Combination of
+global, local, and random attention
+
+#### Advantages of Transformers
+
+1. **Parallelization:** All positions processed simultaneously 2. **Long-range dependencies:** Direct connections between all
+positions 3. **Interpretability:** Attention weights show what model focuses on 4. **Transfer learning:** Pre-trained models work
+across tasks 5. **Scalability:** Performance improves with scale (data, parameters, compute)
+
+#### Limitations
+
+1. **Quadratic complexity:** $O(n^2)$ memory and computation in sequence length 2. **Data hungry:** Requires large datasets for
+training from scratch 3. **Positional encoding:** Not as natural as RNN's inherent sequentiality 4. **Interpretability:** Despite
+attention weights, still largely black box 5. **Computational cost:** Large models require significant resources
+
+#### Practical Considerations
+
+**Memory Requirements:** For sequence length $n$, batch size $b$, dimension $d$: - Attention scores: $O(bhn^2)$ where $h$ is
+number of heads - Activations: $O(bnd)$
+- Dominates for long sequences
+
+**Inference:** Autoregressive generation (one token at a time) is slow. Caching key-value pairs speeds up.
+
+**Fine-tuning:** Pre-trained Transformers can be fine-tuned with small datasets: 1. Use pre-trained weights (BERT, GPT, etc.) 2.
+Add task-specific head 3. Fine-tune with low learning rate
+
+**Applications:** - **NLP:** Translation, summarization, question answering, text generation - **Vision:** Image classification,
+object detection, segmentation - **Speech:** Speech recognition, synthesis - **Multimodal:** Image captioning, visual question
+answering - **Protein folding:** AlphaFold uses Transformer-based architecture - **Code generation:** GitHub Copilot, CodeX
+
+Transformers represent a paradigm shift in deep learning, demonstrating that attention mechanisms can replace recurrence entirely.
+Their success has led to the "foundation model" era, where large pre-trained Transformers serve as starting points for diverse
+downstream tasks [@bishop2024deeplearning; @theodoridis2025ml].
+
+### Large Language Models (LLMs)
+
+Large Language Models represent the scaling of Transformer architectures to unprecedented sizes, with billions or even trillions
+of parameters. Models like GPT-4, PaLM, and LLaMA have demonstrated remarkable capabilities including few-shot learning,
+reasoning, and even emergent abilities that appear only at scale. Training these models requires sophisticated techniques that go
+far beyond standard supervised learning.
+
+#### Pre-training: Next Token Prediction
+
+**Objective:** LLMs are trained on the simple but powerful task of predicting the next token in a sequence. Given a sequence of
+tokens $x_1, x_2, \ldots, x_t$, predict $x_{t+1}$:
+
+$$\mathcal{L}_{\text{LM}} = -\sum_{t=1}^{T-1} \log P(x_{t+1} | x_1, \ldots, x_t; \boldsymbol{\theta})$$
+
+This is the negative log-likelihood, equivalent to cross-entropy loss. The model learns to assign high probability to the actual
+next token.
+
+**Why This Works:** Next token prediction is a form of self-supervised learning—we create supervision from the data itself without
+manual labeling. By training on trillions of tokens from the internet, books, and code, the model learns: - Grammar and syntax (to
+predict grammatically correct continuations) - Facts and knowledge (to predict factually accurate continuations) - Reasoning
+patterns (to predict logically consistent continuations) - Common sense (to predict plausible continuations)
+
+**Training Data:** Modern LLMs are trained on massive corpora: - **GPT-3:** 300B tokens (45TB of text) - **PaLM:** 780B tokens -
+**LLaMA:** 1.4T tokens
+
+Data sources include web pages, books, Wikipedia, code repositories, and scientific papers. Careful filtering and deduplication
+are essential for quality.
+
+**Tokenization:** Text is split into subword units using algorithms like: - **Byte-Pair Encoding (BPE):** Iteratively merges
+frequent character pairs - **WordPiece:** Similar to BPE, used in BERT - **SentencePiece:** Treats text as raw bytes,
+language-agnostic
+
+Typical vocabulary size: 32K-100K tokens. Rare words are split into subwords: "unhappiness" → ["un", "happiness"].
+
+**Training Scale:** Training large LLMs requires massive computational resources: - **GPT-3 (175B parameters):** ~3.14 × 10²³
+FLOPs, ~$5M in compute - **PaLM (540B parameters):** ~2.5 × 10²⁴ FLOPs - Training time: Weeks to months on thousands of GPUs/TPUs
+
+**Scaling Laws:** Empirical observations show power-law relationships: $$L(N) \propto N^{-\alpha}$$
+
+where $L$ is loss, $N$ is model size, and $\alpha \approx 0.076$. Similar laws hold for dataset size and compute. These laws guide
+decisions about how to allocate resources between model size, data, and training time.
+
+**Optimization for LLMs:**
+
+**1. Mixed Precision Training:** Use FP16 or BF16 for most computations, FP32 for critical operations: - **Memory:** 2× reduction
+- **Speed:** 2-3× faster on modern GPUs - **Stability:** Loss scaling prevents underflow
+
+**2. Gradient Accumulation:** Simulate large batch sizes on limited hardware: ``` For each mini-batch: Forward pass Backward pass
+(accumulate gradients)
+    
+Every K mini-batches: Update parameters Zero gradients ```
+
+Effective batch size = mini-batch size × K. Typical: 4M tokens per batch for large LLMs.
+
+**3. Gradient Checkpointing:** Trade computation for memory: - Don't store all activations during forward pass - Recompute them
+during backward pass as needed - Enables training larger models with limited memory
+
+**4. Model Parallelism:** Split model across multiple devices: - **Pipeline parallelism:** Different layers on different devices -
+**Tensor parallelism:** Split individual layers across devices - **Sequence parallelism:** Split sequence dimension
+
+**5. ZeRO (Zero Redundancy Optimizer):** Partition optimizer states, gradients, and parameters across devices, reducing memory per
+device while maintaining mathematical equivalence to single-device training.
+
+#### Instruction Tuning and Alignment
+
+Pre-trained LLMs predict next tokens but don't follow instructions well. Instruction tuning adapts them to be helpful assistants.
+
+**Supervised Fine-Tuning (SFT):** Train on instruction-response pairs:
+
+$$\mathcal{L}_{\text{SFT}} = -\sum_{(x,y) \in \mathcal{D}_{\text{SFT}}} \log P(y | x; \boldsymbol{\theta})$$
+
+where $x$ is an instruction ("Explain quantum computing") and $y$ is a desired response.
+
+**Dataset Construction:** - Human-written instruction-response pairs (expensive, high quality) - Distillation from stronger models
+(GPT-4 → smaller models) - Synthetic data generation - Typical size: 10K-100K examples (much smaller than pre-training)
+
+**Training:** Fine-tune pre-trained model with low learning rate ($10^{-5}$ to $10^{-6}$) for 1-3 epochs. Too much fine-tuning
+causes catastrophic forgetting of pre-training knowledge.
+
+#### Reinforcement Learning from Human Feedback (RLHF)
+
+RLHF aligns LLMs with human preferences, making them helpful, harmless, and honest. This connects supervised learning with
+reinforcement learning (@sec-reinforcement-learning), using RL to optimize for human preferences.
+
+**Three-Stage Process:**
+
+**Stage 1: Supervised Fine-Tuning (SFT)** Train on high-quality demonstrations as described above. This provides a good
+initialization for RL.
+
+**Stage 2: Reward Model Training** Learn a reward model that predicts human preferences.
+
+1. **Data Collection:** For each prompt, generate multiple responses from the SFT model. Human annotators rank responses: $y_1
+\succ y_2 \succ y_3 \succ y_4$.
+
+2. **Reward Model:** Train a model $r_\phi(x, y)$ to predict which response is better: $$\mathcal{L}_{\text{RM}} =
+   -\mathbb{E}_{(x, y_w, y_l) \sim \mathcal{D}}\left[\log \sigma(r_\phi(x, y_w) - r_\phi(x, y_l))\right]$$
+   
+   where $y_w$ is the preferred (winner) response and $y_l$ is the less preferred (loser) response. This is the Bradley-Terry
+   model for pairwise preferences.
+
+3. **Architecture:** Typically use the same architecture as the LLM, with a scalar output head. Initialize from the SFT model.
+
+**Stage 3: Reinforcement Learning Optimization** Use the reward model to fine-tune the policy via RL, specifically Proximal Policy
+Optimization (PPO).
+
+**Objective:** Maximize expected reward while staying close to the SFT model:
+
+$$\mathcal{L}_{\text{RLHF}} = \mathbb{E}_{x \sim \mathcal{D}, y \sim \pi_\theta}\left[r_\phi(x, y) - \beta \log
+\frac{\pi_\theta(y|x)}{\pi_{\text{SFT}}(y|x)}\right]$$
+
+The KL penalty $\beta \log \frac{\pi_\theta(y|x)}{\pi_{\text{SFT}}(y|x)}$ prevents the model from drifting too far from the SFT
+initialization, which could lead to: - **Reward hacking:** Exploiting flaws in the reward model - **Mode collapse:** Generating
+repetitive or nonsensical text that scores high on the reward model - **Forgetting:** Losing capabilities learned during
+pre-training
+
+**PPO Algorithm for RLHF:**
+
+``` For each iteration: 1. Sample prompts x from dataset 2. Generate responses y ~ π_θ(·|x) 3. Compute rewards r = r_φ(x,y) - β
+KL(π_θ || π_SFT) 4. Compute advantages using GAE (see @sec-reinforcement-learning) 5. Update policy using PPO: L_PPO = E[min(ratio
+    · A, clip(ratio, 1-ε, 1+ε) · A)] where ratio = π_θ(y|x) / π_θ_old(y|x) 6. Update value function for advantage estimation ```
+
+**Why PPO?** PPO (from @sec-reinforcement-learning) is stable and sample-efficient, crucial when each forward pass through a 175B
+parameter model is expensive. The clipped objective prevents large policy updates that could destabilize training.
+
+**Practical Considerations:** - **Batch size:** 512-1024 prompts per iteration - **PPO epochs:** 1-4 updates per batch - **KL
+coefficient:** $\beta = 0.01$ to $0.1$
+- **Training time:** Days to weeks on large clusters - **Reward model quality:**
+Critical—poor reward model leads to poor policy
+
+**Example:** For prompt "Explain photosynthesis": - **SFT model:** Generates technically correct but dry explanation - **After
+RLHF:** Generates engaging, well-structured explanation that humans prefer - **Reward model:** Learned that humans prefer clear
+structure, examples, and appropriate detail level
+
+#### Direct Preference Optimization (DPO)
+
+DPO simplifies RLHF by eliminating the separate reward model and RL training, directly optimizing the policy on preference data.
+
+**Key Insight:** The optimal policy under the RLHF objective has a closed form:
+
+$$\pi^*(y|x) = \frac{1}{Z(x)} \pi_{\text{SFT}}(y|x) \exp\left(\frac{r(x,y)}{\beta}\right)$$
+
+where $Z(x)$ is a partition function. Rearranging:
+
+$$r(x,y) = \beta \log \frac{\pi^*(y|x)}{\pi_{\text{SFT}}(y|x)} + \beta \log Z(x)$$
+
+**DPO Objective:** Substitute this into the Bradley-Terry preference model:
+
+$$\mathcal{L}_{\text{DPO}} = -\mathbb{E}_{(x,y_w,y_l)}\left[\log \sigma\left(\beta \log
+\frac{\pi_\theta(y_w|x)}{\pi_{\text{SFT}}(y_w|x)} - \beta \log \frac{\pi_\theta(y_l|x)}{\pi_{\text{SFT}}(y_l|x)}\right)\right]$$
+
+This directly optimizes the policy to prefer $y_w$ over $y_l$ without needing a reward model or RL!
+
+**Advantages over RLHF:** - **Simpler:** No reward model, no RL training loop - **Stable:** No reward hacking or mode collapse -
+**Efficient:** Single-stage training - **Memory:** Don't need to store reward model
+
+**Disadvantages:** - **Less flexible:** Cannot easily incorporate additional rewards - **Data efficiency:** Requires more
+preference data than RLHF
+
+DPO has become increasingly popular for aligning open-source models due to its simplicity and effectiveness.
+
+#### Constitutional AI (CAI)
+
+Constitutional AI uses AI feedback instead of human feedback, making alignment more scalable.
+
+**Process:**
+
+**1. Critique Phase:** Model generates responses, then critiques them based on principles: ``` Prompt: [User question] Response:
+[Model's initial response] Critique: Identify issues with response according to principle P Revision: Rewrite response to address
+issues ```
+
+**2. Supervised Learning:** Train on (prompt, revision) pairs
+
+**3. RL from AI Feedback (RLAIF):** Similar to RLHF but using AI preferences: - Generate multiple responses - AI model ranks them
+based on principles - Train reward model on AI preferences - Apply PPO as in RLHF
+
+**Advantages:** - **Scalable:** No human annotation bottleneck - **Consistent:** AI feedback more consistent than human -
+**Transparent:** Principles are explicit
+
+**Challenges:** - **Circular:** Using AI to train AI - **Principle design:** Requires careful specification - **Capability
+limits:** AI feedback limited by AI capabilities
+
+### Vision-Language Models (VLMs)
+
+Vision-Language Models extend Transformers to understand both images and text, enabling tasks like image captioning, visual
+question answering, and text-to-image generation.
+
+#### Architecture Approaches
+
+**1. Dual-Encoder Models (CLIP):**
+
+Separate encoders for images and text, trained with contrastive learning:
+
+$$\mathcal{L}_{\text{CLIP}} = -\sum_{i=1}^N \left[\log \frac{\exp(\text{sim}(I_i, T_i)/\tau)}{\sum_{j=1}^N \exp(\text{sim}(I_i,
+T_j)/\tau)} + \log \frac{\exp(\text{sim}(I_i, T_i)/\tau)}{\sum_{j=1}^N \exp(\text{sim}(I_j, T_i)/\tau)}\right]$$
+
+where $\text{sim}(I, T) = \frac{\mathbf{f}_I(I)^T \mathbf{f}_T(T)}{\|\mathbf{f}_I(I)\| \|\mathbf{f}_T(T)\|}$ is cosine similarity
+and $\tau$ is temperature.
+
+**Training:** Given $N$ (image, text) pairs in a batch, maximize similarity of correct pairs while minimizing similarity of
+incorrect pairs. With batch size 32K, each image is contrasted with 32K text descriptions.
+
+**Image Encoder:** Vision Transformer (ViT) or ResNet **Text Encoder:** Transformer (similar to BERT) **Embedding Dimension:**
+Typically 512 or 768
+
+**Applications:** - Zero-shot image classification: Compute similarity between image and text descriptions of classes - Image
+retrieval: Find images matching text query - Text-to-image generation: CLIP guides diffusion models (Stable Diffusion, DALL-E)
+
+**2. Unified Models (Flamingo, GPT-4V):**
+
+Single Transformer processes both modalities through cross-attention:
+
+**Architecture:** ``` Image → Vision Encoder → Visual tokens Text → Text Embeddings → Text tokens Combined → Transformer Decoder →
+Output ```
+
+**Cross-Attention:** Text tokens attend to visual tokens: $$\text{CrossAttn}(\mathbf{Q}_{\text{text}}, \mathbf{K}_{\text{visual}},
+\mathbf{V}_{\text{visual}})$$
+
+This allows the model to "look at" relevant parts of the image when generating text.
+
+**Training:** Multi-task learning on: - Image captioning - Visual question answering - Image-text matching - Interleaved
+image-text sequences
+
+**3. Diffusion-Based Models (Stable Diffusion, DALL-E):**
+
+Generate images from text using diffusion models guided by text embeddings:
+
+$$\boldsymbol{\epsilon}_\theta(\mathbf{x}_t, t, \mathbf{c}) \approx \boldsymbol{\epsilon}$$
+
+where $\mathbf{x}_t$ is noisy image at timestep $t$, $\mathbf{c}$ is text conditioning (from CLIP or T5), and
+$\boldsymbol{\epsilon}$ is the noise to remove.
+
+**Training:** Denoise images conditioned on captions: $$\mathcal{L} = \mathbb{E}_{t, \mathbf{x}_0,
+\boldsymbol{\epsilon}}\left[\|\boldsymbol{\epsilon} - \boldsymbol{\epsilon}_\theta(\mathbf{x}_t, t, \mathbf{c})\|^2\right]$$
+
+**Inference:** Start with random noise, iteratively denoise guided by text embedding.
+
+#### Training Techniques for Large Models
+
+**1. Efficient Attention Mechanisms:**
+
+**Flash Attention:** Reorders attention computation to minimize memory reads/writes: - Standard attention: $O(n^2)$ memory for
+attention matrix - Flash Attention: $O(n)$ memory by fusing operations - 2-4× speedup with no approximation
+
+**Multi-Query Attention (MQA):** Share keys and values across heads: - Standard: Each head has separate $\mathbf{K}, \mathbf{V}$
+-
+MQA: Single $\mathbf{K}, \mathbf{V}$ shared by all heads - Reduces KV cache size during inference - Used in PaLM, Falcon
+
+**Grouped-Query Attention (GQA):** Compromise between multi-head and multi-query: - Group heads, share $\mathbf{K}, \mathbf{V}$
+within groups - Used in LLaMA-2
+
+**2. Mixture of Experts (MoE):**
+
+Instead of using all parameters for every token, route each token to a subset of experts:
+
+$$\mathbf{y} = \sum_{i=1}^E G(x)_i \cdot \text{Expert}_i(\mathbf{x})$$
+
+where $G(x) = \text{softmax}(\text{TopK}(\mathbf{x}^T\mathbf{W}_g))$ is a gating network that selects top-K experts.
+
+**Benefits:** - Increase model capacity without increasing computation - Each expert can specialize (e.g., one for code, one for
+math) - Used in GPT-4, Switch Transformer (1.6T parameters)
+
+**Challenges:** - Load balancing: Ensure experts used equally - Training instability: Gating network can collapse - Inference
+complexity: Requires careful engineering
+
+**3. Low-Rank Adaptation (LoRA):**
+
+Fine-tune large models efficiently by training low-rank updates:
+
+$$\mathbf{W} = \mathbf{W}_0 + \mathbf{B}\mathbf{A}$$
+
+where $\mathbf{W}_0$ is frozen pre-trained weight, $\mathbf{B} \in \mathbb{R}^{d \times r}$ and $\mathbf{A} \in \mathbb{R}^{r
+\times k}$ are trainable with $r \ll \min(d,k)$.
+
+**Benefits:** - Train only $r(d+k)$ parameters instead of $dk$ (e.g., 0.1% of parameters) - Multiple LoRA adapters can share base
+model - No inference latency (merge $\mathbf{BA}$ into $\mathbf{W}_0$ after training)
+
+**Typical:** $r = 8$ or $r = 16$. Apply to attention projections $\mathbf{W}_Q, \mathbf{W}_K, \mathbf{W}_V, \mathbf{W}_O$.
+
+**4. Quantization:**
+
+Reduce precision to decrease memory and increase speed:
+
+**Post-Training Quantization:** - **INT8:** 8-bit integers, 4× memory reduction - **INT4:** 4-bit integers, 8× memory reduction -
+**GPTQ:** Optimal quantization for generative models - **AWQ:** Activation-aware weight quantization
+
+**Quantization-Aware Training (QAT):** Simulate quantization during training for better accuracy.
+
+**Example:** LLaMA-2 70B model: - FP16: 140GB memory - INT8: 35GB memory (fits on single A100 GPU) - INT4: 17.5GB memory (fits on
+consumer GPU)
+
+**5. Efficient Fine-Tuning Methods:**
+
+**Prefix Tuning:** Prepend learnable "prefix" tokens to input: $$\mathbf{h} = \text{Transformer}([\mathbf{P}; \mathbf{x}])$$
+
+Only train prefix parameters $\mathbf{P}$, freeze Transformer.
+
+**Prompt Tuning:** Similar but simpler—just learn soft prompts in embedding space.
+
+**Adapter Layers:** Insert small trainable modules between frozen layers: ``` x → Frozen Layer → Adapter → Output ```
+
+Adapter: $\mathbf{h} \leftarrow \mathbf{h} + \text{MLP}_{\text{down-up}}(\mathbf{h})$
+
+Train only adapters (1-5% of parameters).
+
+#### Scaling and Emergent Abilities
+
+**Emergent Abilities:** Capabilities that appear only at sufficient scale: - **Few-shot learning:** GPT-3 can learn from examples
+in the prompt - **Chain-of-thought reasoning:** Models can solve multi-step problems by generating intermediate steps -
+**Instruction following:** Large models follow complex instructions without fine-tuning
+
+**Scaling Trends:** - **Model size:** 100M → 1B → 10B → 100B → 1T parameters - **Data:** 10B → 100B → 1T → 10T tokens -
+**Compute:** $10^{20}$ → $10^{23}$ → $10^{26}$ FLOPs
+
+**Chinchilla Scaling Laws:** For compute-optimal training: $$N_{\text{optimal}} \propto C^{0.5}, \quad D_{\text{optimal}} \propto
+C^{0.5}$$
+
+where $N$ is model size, $D$ is dataset size, $C$ is compute budget. This suggests models should be trained on ~20 tokens per
+parameter (e.g., 70B model on 1.4T tokens).
+
+#### Inference Optimization
+
+**1. KV Caching:** Store key-value pairs from previous tokens: - Without caching: Recompute all previous tokens' KV pairs - With
+caching: Store and reuse, $O(n)$ → $O(1)$ per new token - Memory: $O(n \cdot d \cdot L \cdot 2)$ for $L$ layers
+
+**2. Speculative Decoding:** Use small model to draft, large model to verify: ``` 1. Small model generates k tokens quickly 2.
+Large model verifies in parallel 3. Accept correct tokens, reject and regenerate incorrect ```
+
+Speedup: 2-3× with no quality loss.
+
+**3. Continuous Batching:** Dynamically batch requests with different lengths, maximizing GPU utilization.
+
+**4. PagedAttention (vLLM):** Manage KV cache like virtual memory: - Split KV cache into blocks - Allocate dynamically as needed -
+Share blocks across requests (for common prefixes) - 2-4× higher throughput
+
+### Training Stability and Best Practices
+
+**1. Gradient Clipping:** Essential for Transformer training: $$\mathbf{g} \leftarrow \min\left(1,
+\frac{\theta}{\|\mathbf{g}\|}\right) \mathbf{g}$$
+
+Typical: $\theta = 1.0$
+
+**2. Learning Rate Warmup:** Gradually increase learning rate: $$\eta_t = \eta_{\max} \cdot \min\left(1,
+\frac{t}{T_{\text{warmup}}}\right)$$
+
+Typical: $T_{\text{warmup}} = 2000$ steps. Prevents instability in early training when parameters are random.
+
+**3. Weight Decay:** L2 regularization (see @sec-optimization): $$\mathbf{w} \leftarrow (1 - \lambda\eta)\mathbf{w} - \eta\nabla
+L(\mathbf{w})$$
+
+Typical: $\lambda = 0.01$ to $0.1$
+
+**4. Layer Normalization:** Applied before each sub-layer (Pre-LN, more stable) or after (Post-LN, original):
+$$\text{LayerNorm}(\mathbf{x}) = \frac{\mathbf{x} - \mu}{\sqrt{\sigma^2 + \epsilon}} \odot \boldsymbol{\gamma} +
+\boldsymbol{\beta}$$
+
+Pre-LN is now standard for training stability.
+
+**5. Initialization:** Critical for deep Transformers: - **Attention weights:** Xavier/Glorot initialization - **Output
+projection:** Scale by $1/\sqrt{2L}$ where $L$ is number of layers - **Embeddings:** Normal distribution with small variance
+
+**6. Monitoring:** - **Loss curves:** Training and validation loss - **Gradient norms:** Detect exploding/vanishing gradients -
+**Attention patterns:** Visualize what model attends to - **Perplexity:** $\exp(\mathcal{L}_{\text{LM}})$, lower is better -
+**Downstream metrics:** Accuracy on evaluation tasks
+
+### Practical Considerations
+
+**Memory Requirements:** For a Transformer with $L$ layers, $h$ heads, dimension $d$, sequence length $n$: - **Parameters:**
+$\approx 12Ld^2$ (attention: $4d^2$, FFN: $8d^2$ per layer) - **Activations:** $O(Lbnd)$ where $b$ is batch size - **Attention:**
+$O(Lbhn^2)$ (dominates for long sequences)
+
+**Example - GPT-3 (175B parameters):** - Layers: $L = 96$
+- Dimension: $d = 12,288$
+- Heads: $h = 96$
+- Context: $n = 2,048$
+-
+Inference (batch=1): ~350GB memory (FP16) - Training (batch=1024): ~5TB memory across multiple devices
+
+**Inference Costs:** Generating 1 token from GPT-3: - FLOPs: $\approx 350 \times 10^9$ (2× forward pass parameters) - Time: ~100ms
+on A100 GPU - Cost: ~$0.0001 per token
+
+For a 500-token response: ~50 seconds, ~$0.05. This is why inference optimization is crucial for deployment.
+
+**Training Costs:** Training GPT-3 from scratch: - Compute: $3.14 \times 10^{23}$ FLOPs - Time: ~34 days on 1024 A100 GPUs - Cost:
+~$5M in cloud compute - Energy: ~1,287 MWh (equivalent to 120 US homes for a year)
+
+These costs motivate efficient training methods (LoRA, quantization) and the use of pre-trained models rather than training from
+scratch.
+
+### Connections to Other Paradigms
+
+**Transformers and Reinforcement Learning:** The connection between Transformers and RL (@sec-reinforcement-learning) is deep:
+
+1. **RLHF:** Uses PPO to align LLMs with human preferences 2. **Decision Transformers:** Frame RL as sequence modeling—predict
+actions given states and desired returns 3. **Trajectory Transformers:** Model entire trajectories for offline RL
+(@sec-advanced-rl) 4. **In-context RL:** LLMs can learn RL tasks from prompts without gradient updates
+
+**Transformers and Unsupervised Learning:** Self-attention relates to clustering (@sec-clustering): - Attention weights form a
+soft clustering of tokens - Similar tokens receive similar representations - Can be viewed as learnable similarity metric
+
+**Transformers and Optimization:** Training LLMs pushes optimization (@sec-optimization) to its limits: - Largest optimization
+problems ever solved (trillions of parameters) - Requires advanced techniques: mixed precision, gradient accumulation, distributed
+training - Connects to stochastic approximation theory from @sec-optimization
+
+The success of Transformers demonstrates that with sufficient scale, simple objectives (next token prediction) can lead to
+sophisticated capabilities. This has profound implications for how we think about intelligence and learning
+[@bishop2024deeplearning; @theodoridis2025ml].
+
+## Structured Outputs and Complex Prediction {#sec-structured-outputs}
+
+Many real-world problems require predicting structured objects—outputs with internal dependencies and combinatorial
+structure—rather than simple scalar labels. Examples include sequences (text, speech), trees (parse trees), graphs (molecular
+structures), and images (segmentation masks). This section covers methods for handling such complex prediction tasks.
+
+For more on this topic, see @bishop2024deeplearning [Chs. 11, 17].
+
+### Multiclass Classification
+
+Multiclass classification extends binary classification to $K > 2$ classes. While conceptually straightforward, the choice of
+approach affects both computational efficiency and predictive performance.
+
+#### Reduction to Binary Classification
+
+**One-vs-Rest (OvR) / One-vs-All (OvA):**
+
+Train $K$ binary classifiers, where classifier $k$ distinguishes class $k$ from all others:
+
+$$f_k(\mathbf{x}) = \mathbf{w}_k^T\mathbf{x} + w_{k0}$$
+
+**Prediction:** Assign to class with highest score: $$\hat{y} = \arg\max_{k \in \{1,\ldots,K\}} f_k(\mathbf{x})$$
+
+**Advantages:** - Simple to implement - Trains $K$ classifiers (linear in $K$) - Can use any binary classifier - Parallelizable
+
+**Disadvantages:** - Class imbalance: Each classifier sees 1 positive class vs $K-1$ negative classes - Inconsistent scales:
+Scores from different classifiers not directly comparable - Ambiguous regions: Multiple classifiers may predict positive
+
+**One-vs-One (OvO):**
+
+Train $\binom{K}{2} = K(K-1)/2$ binary classifiers, one for each pair of classes:
+
+$$f_{kl}(\mathbf{x}) \text{ distinguishes class } k \text{ from class } l$$
+
+**Prediction:** Use voting—each classifier votes for one class, predict class with most votes: $$\hat{y} = \arg\max_{k} \sum_{l
+\neq k} \mathbb{1}_{[f_{kl}(\mathbf{x}) \text{ predicts } k]}$$
+
+**Advantages:** - Balanced training sets (only two classes per classifier) - Each classifier is simpler (binary problem) - Often
+more accurate than OvR
+
+**Disadvantages:** - Trains $O(K^2)$ classifiers (quadratic in $K$) - Slower training and prediction for large $K$
+- Ties possible
+in voting
+
+**Comparison:** OvR preferred for large $K$ (efficiency), OvO often more accurate for moderate $K$.
+
+#### Direct Multiclass Methods
+
+**Multinomial Logistic Regression (Softmax Regression):**
+
+Directly model class probabilities using softmax function:
+
+$$P(y=k|\mathbf{x}) = \frac{\exp(\mathbf{w}_k^T\mathbf{x})}{\sum_{j=1}^K \exp(\mathbf{w}_j^T\mathbf{x})} =
+\frac{\exp(\mathbf{w}_k^T\mathbf{x})}{Z(\mathbf{x})}$$
+
+where $Z(\mathbf{x}) = \sum_{j=1}^K \exp(\mathbf{w}_j^T\mathbf{x})$ is the partition function.
+
+**Properties:** - Probabilities sum to 1: $\sum_{k=1}^K P(y=k|\mathbf{x}) = 1$
+- Invariant to adding constant to all
+$\mathbf{w}_k$: typically set $\mathbf{w}_K = \mathbf{0}$
+- Generalizes logistic regression (which is softmax with $K=2$)
+
+**Training:** Minimize negative log-likelihood (cross-entropy loss):
+
+$$L(\mathbf{W}) = -\sum_{i=1}^n \sum_{k=1}^K \mathbb{1}_{[y_i=k]} \log P(y=k|\mathbf{x}_i) = -\sum_{i=1}^n \log
+P(y=y_i|\mathbf{x}_i)$$
+
+where $\mathbf{W} = [\mathbf{w}_1, \ldots, \mathbf{w}_K]$.
+
+**Gradient:** For sample $i$ with true class $y_i$:
+
+$$\frac{\partial L}{\partial \mathbf{w}_k} = \sum_{i=1}^n (P(y=k|\mathbf{x}_i) - \mathbb{1}_{[y_i=k]}) \mathbf{x}_i$$
+
+Intuition: Increase weight for true class, decrease for predicted classes.
+
+**Connection to Neural Networks:** Softmax is the standard output layer for multiclass classification in neural networks (see
+@sec-neural-networks).
+
+**Multiclass SVMs:** Extend SVMs to multiclass (see @sec-margin-methods): - Crammer-Singer formulation: Single optimization
+problem - Weston-Watkins formulation: Alternative multiclass hinge loss - OvR and OvO with binary SVMs
+
+### Multilabel Classification
+
+In multilabel classification, each instance can belong to multiple classes simultaneously. Predict a subset of labels $\mathcal{Y}
+\subseteq \{1, \ldots, K\}$ rather than a single label.
+
+**Examples:** - **Text categorization:** Document can have multiple topics (politics, economics, sports) - **Image tagging:**
+Image can contain multiple objects (person, car, tree) - **Gene function prediction:** Gene can have multiple biological functions
+- **Music categorization:** Song can have multiple genres (rock, blues, acoustic)
+
+**Evaluation Metrics:** Standard accuracy inadequate. Use: - **Hamming loss:** Fraction of incorrect labels - **Subset accuracy:**
+Fraction of exactly correct label sets - **F1 score:** Harmonic mean of precision and recall (micro/macro/sample averaged) -
+**Jaccard index:** $|\mathcal{Y} \cap \hat{\mathcal{Y}}| / |\mathcal{Y} \cup \hat{\mathcal{Y}}|$
+
+#### Problem Transformation Methods
+
+**Binary Relevance (BR):**
+
+Train $K$ independent binary classifiers, one per label:
+
+$$h_k(\mathbf{x}) \in \{0,1\} \text{ predicts presence of label } k$$
+
+**Prediction:** $\hat{\mathcal{Y}} = \{k : h_k(\mathbf{x}) = 1\}$
+
+**Advantages:** - Simple and efficient - Parallelizable - Scales to large $K$
+- Can use any binary classifier
+
+**Disadvantages:** - Ignores label correlations - Each classifier trained independently - May predict inconsistent label
+combinations
+
+**Classifier Chains (CC):**
+
+Train classifiers sequentially, using previous predictions as additional features:
+
+$$h_1(\mathbf{x})$$ $$h_2(\mathbf{x}, h_1(\mathbf{x}))$$ $$h_3(\mathbf{x}, h_1(\mathbf{x}), h_2(\mathbf{x}))$$ $$\vdots$$
+$$h_K(\mathbf{x}, h_1(\mathbf{x}), \ldots, h_{K-1}(\mathbf{x}))$$
+
+**Advantages:** - Captures label dependencies - Still efficient (linear in $K$) - Often more accurate than BR
+
+**Disadvantages:** - Order of chain matters (can try multiple orders and ensemble) - Error propagation: Mistakes in early
+classifiers affect later ones - Not parallelizable
+
+**Label Powerset (LP):**
+
+Treat each unique label combination as a single class. Transform to multiclass problem with $2^K$ possible classes (or fewer if
+not all combinations observed).
+
+**Advantages:** - Captures all label correlations - Can use any multiclass classifier
+
+**Disadvantages:** - Exponential number of classes (intractable for large $K$) - Data sparsity: Many label combinations have few
+examples - Cannot predict unseen label combinations
+
+**Pruned Problem Transformation (PPT):** Use only frequent label combinations, treat rare ones as separate classes.
+
+#### Algorithm Adaptation Methods
+
+**ML-kNN (Multi-Label k-Nearest Neighbors):**
+
+Extend k-NN to multilabel:
+
+1. Find $k$ nearest neighbors of $\mathbf{x}$
+2. For each label, count how many neighbors have that label 3. Use Bayesian
+reasoning to compute label probabilities 4. Threshold to obtain label set
+
+**ML-DT (Multi-Label Decision Trees):**
+
+Modify decision tree splitting criteria to handle multiple labels: - Use label-based entropy or Gini index - Leaf nodes predict
+label distributions
+
+**Neural Networks for Multilabel:**
+
+Use sigmoid activation on output layer (not softmax):
+
+$$P(y_k=1|\mathbf{x}) = \sigma(\mathbf{w}_k^T\mathbf{h})$$
+
+Train with binary cross-entropy per label:
+
+$$L = -\sum_{i=1}^n \sum_{k=1}^K [y_{ik} \log \hat{y}_{ik} + (1-y_{ik})\log(1-\hat{y}_{ik})]$$
+
+Threshold probabilities (typically 0.5) to obtain label set.
+
+### Sequence Labeling
+
+Sequence labeling assigns a label to each element in a sequence: predict label sequence $\mathbf{y} = (y_1, \ldots, y_T)$ for
+input sequence $\mathbf{x} = (\mathbf{x}_1, \ldots, \mathbf{x}_T)$ where $y_t \in \{1, \ldots, K\}$.
+
+**Applications:** - **Part-of-speech tagging:** Label each word with its grammatical role - **Named entity recognition:** Identify
+person names, locations, organizations - **Chunking:** Identify phrases in sentences - **Speech recognition:** Label audio frames
+with phonemes - **Protein secondary structure prediction:** Label amino acids with structure types
+
+**Challenge:** Labels are not independent—adjacent labels have dependencies (e.g., adjective typically precedes noun).
+
+#### Hidden Markov Models (HMMs)
+
+HMMs are generative models for sequences with hidden states.
+
+**Model:** Joint distribution over observations and labels:
+
+$$P(\mathbf{y}, \mathbf{x}) = P(y_1)P(\mathbf{x}_1|y_1)\prod_{t=2}^T P(y_t|y_{t-1})P(\mathbf{x}_t|y_t)$$
+
+where: - $P(y_1)$: Initial state distribution - $P(y_t|y_{t-1})$: Transition probabilities (Markov assumption) -
+$P(\mathbf{x}_t|y_t)$: Emission probabilities
+
+**Parameters:** - $\boldsymbol{\pi} = [P(y_1=k)]_{k=1}^K$: Initial probabilities - $\mathbf{A} = [P(y_t=j|y_{t-1}=i)]_{i,j=1}^K$:
+Transition matrix - $\mathbf{B}$: Emission parameters (depends on observation type)
+
+**Training:** Maximum likelihood via EM algorithm (Baum-Welch).
+
+**Inference (Viterbi Algorithm):** Find most likely label sequence:
+
+$$\mathbf{y}^* = \arg\max_{\mathbf{y}} P(\mathbf{y}|\mathbf{x}) = \arg\max_{\mathbf{y}} P(\mathbf{y}, \mathbf{x})$$
+
+Dynamic programming:
+
+1. **Forward pass:** $\delta_t(k) = \max_{y_1,\ldots,y_{t-1}} P(y_1, \ldots, y_{t-1}, y_t=k, \mathbf{x}_1, \ldots, \mathbf{x}_t)$
+
+   Recursion: $\delta_t(k) = P(\mathbf{x}_t|y_t=k) \max_j [\delta_{t-1}(j) P(y_t=k|y_{t-1}=j)]$
+
+2. **Backward pass:** Backtrack to recover optimal sequence
+
+**Complexity:** $O(TK^2)$ where $T$ is sequence length, $K$ is number of states.
+
+**Limitations:** - Generative model: Models $P(\mathbf{x}|y)$ which may be complex - Strong independence assumptions - Difficult
+to incorporate rich features
+
+#### Conditional Random Fields (CRFs)
+
+CRFs are discriminative models that directly model $P(\mathbf{y}|\mathbf{x})$.
+
+**Linear-Chain CRF:** For sequence labeling:
+
+$$P(\mathbf{y}|\mathbf{x}) = \frac{1}{Z(\mathbf{x})}\exp\left(\sum_{t=1}^T \sum_k \lambda_k f_k(y_t, y_{t-1}, \mathbf{x},
+t)\right)$$
+
+where: - $f_k$ are feature functions - $\lambda_k$ are learned weights - $Z(\mathbf{x}) = \sum_{\mathbf{y}} \exp(\sum_t \sum_k
+\lambda_k f_k(y_t, y_{t-1}, \mathbf{x}, t))$ is partition function
+
+**Feature Functions:** Can be arbitrary functions of labels and observations: - **Transition features:** $f(y_t, y_{t-1},
+\mathbf{x}, t) = \mathbb{1}_{[y_{t-1}=i, y_t=j]}$
+- **Emission features:** $f(y_t, y_{t-1}, \mathbf{x}, t) = \mathbb{1}_{[y_t=k]}
+\cdot x_{t,d}$
+- **Complex features:** Can incorporate word identity, capitalization, prefixes, suffixes, etc.
+
+**Advantages over HMMs:** - Discriminative: Directly models $P(\mathbf{y}|\mathbf{x})$
+- Flexible features: Can use overlapping,
+non-independent features - Often more accurate
+
+**Training:** Maximize conditional log-likelihood:
+
+$$L(\boldsymbol{\lambda}) = \sum_{i=1}^n \log P(\mathbf{y}^{(i)}|\mathbf{x}^{(i)}) = \sum_{i=1}^n \left[\sum_t \sum_k \lambda_k
+f_k(\mathbf{y}^{(i)}, \mathbf{x}^{(i)}) - \log Z(\mathbf{x}^{(i)})\right]$$
+
+Gradient:
+
+$$\frac{\partial L}{\partial \lambda_k} = \sum_{i=1}^n \left[\sum_t f_k(\mathbf{y}^{(i)}, \mathbf{x}^{(i)}) -
+\mathbb{E}_{P(\mathbf{y}|\mathbf{x}^{(i)})}[\sum_t f_k(\mathbf{y}, \mathbf{x}^{(i)})]\right]$$
+
+Expectation computed via forward-backward algorithm. Optimize with L-BFGS or SGD.
+
+**Inference:** Viterbi algorithm (same as HMMs, $O(TK^2)$).
+
+**Modern Approaches:** Neural CRFs combine RNNs/Transformers with CRF output layer: - RNN/Transformer computes features for each
+position - CRF layer models label dependencies - End-to-end training with backpropagation
+
+### Ranking
+
+Ranking problems involve ordering items by relevance rather than assigning absolute labels. Given query $q$ and items
+$\{\mathbf{x}_1, \ldots, \mathbf{x}_m\}$, produce ranking $\pi$ such that more relevant items appear first.
+
+**Applications:** - **Information retrieval:** Rank documents by relevance to query - **Recommendation systems:** Rank products by
+user preference - **Web search:** Rank web pages - **Computational biology:** Rank genes by relevance to disease
+
+**Evaluation Metrics:** - **Mean Average Precision (MAP):** Average precision across queries - **Normalized Discounted Cumulative
+Gain (NDCG):** Weighted by position - **Mean Reciprocal Rank (MRR):** Reciprocal of rank of first relevant item
+
+#### Learning to Rank Approaches
+
+**Pointwise Approach:**
+
+Treat as regression or classification for each item independently:
+
+$$\min_{f} \sum_{i=1}^n \ell(f(\mathbf{x}_i), y_i)$$
+
+where $y_i$ is relevance score (e.g., 0-4 scale).
+
+**Advantages:** - Simple: Use any regression/classification algorithm - Efficient
+
+**Disadvantages:** - Ignores relative ordering - Doesn't optimize ranking metrics - Treats all positions equally
+
+**Pairwise Approach:**
+
+Learn preference function from pairwise comparisons. For pairs where item $i$ should rank higher than $j$:
+
+$$\min_{f} \sum_{(i,j) \in \mathcal{P}} \ell(f(\mathbf{x}_i) - f(\mathbf{x}_j))$$
+
+where $\mathcal{P} = \{(i,j): y_i > y_j\}$ contains preference pairs.
+
+**RankNet:** Use cross-entropy loss with sigmoid:
+
+$$L = -\sum_{(i,j) \in \mathcal{P}} \log \sigma(s_i - s_j)$$
+
+where $s_i = f(\mathbf{x}_i)$ is the score and $\sigma(z) = 1/(1+e^{-z})$.
+
+**Interpretation:** $\sigma(s_i - s_j)$ is probability that item $i$ ranks higher than $j$.
+
+**Gradient:** $$\frac{\partial L}{\partial s_i} = \sum_{j:(i,j) \in \mathcal{P}} (\sigma(s_j - s_i) - 1) + \sum_{j:(j,i) \in
+\mathcal{P}} \sigma(s_i - s_j)$$
+
+**RankSVM:** Use hinge loss:
+
+$$\min_{\mathbf{w}} \frac{1}{2}\|\mathbf{w}\|^2 + C\sum_{(i,j) \in \mathcal{P}} \max(0, 1 - (\mathbf{w}^T\mathbf{x}_i -
+\mathbf{w}^T\mathbf{x}_j))$$
+
+Similar to SVM (see @sec-margin-methods) but for pairs.
+
+**Advantages:** - Directly optimizes pairwise ordering - More aligned with ranking than pointwise
+
+**Disadvantages:** - Quadratic number of pairs - Still doesn't directly optimize ranking metrics - Treats all pairs equally (top
+vs bottom pairs weighted same)
+
+**Listwise Approach:**
+
+Directly optimize ranking metrics on entire list:
+
+$$\min_{f} \sum_{q=1}^Q \ell(\text{rank}(f(\mathbf{x}_{q,1}), \ldots, f(\mathbf{x}_{q,m_q})), \mathbf{y}_q)$$
+
+where $\text{rank}$ produces ordering and $\ell$ measures ranking quality (e.g., NDCG).
+
+**LambdaRank:** Modify RankNet gradients to directly optimize NDCG:
+
+$$\frac{\partial L}{\partial s_i} = \sum_{j} \lambda_{ij} |\Delta \text{NDCG}_{ij}|$$
+
+where $\lambda_{ij}$ is RankNet gradient and $|\Delta \text{NDCG}_{ij}|$ is change in NDCG from swapping items $i$ and $j$.
+
+**LambdaMART:** Combine LambdaRank with gradient boosted trees (see @sec-tree-methods). State-of-the-art for many ranking tasks.
+
+**Advantages:** - Directly optimizes target metric - Considers entire list - Weights top positions more
+
+**Disadvantages:** - More complex - Ranking metrics often non-differentiable (need approximations) - Computationally expensive
+
+### Structured Prediction
+
+Structured prediction is the general problem of predicting outputs with complex internal structure: $\mathbf{y} \in \mathcal{Y}$
+where $\mathcal{Y}$ has combinatorial structure (sequences, trees, graphs, etc.).
+
+**Key Challenge:** Output space $\mathcal{Y}$ is exponentially large. Cannot enumerate all possibilities.
+
+**Examples:** - **Sequences:** $\mathcal{Y} = \{1,\ldots,K\}^T$ (size $K^T$) - **Trees:** Parse trees, dependency trees -
+**Matchings:** Bipartite matching, assignment problems - **Segmentations:** Partition image into regions
+
+#### Structured Prediction Framework
+
+**Scoring Function:** Define score for input-output pair:
+
+$$s(\mathbf{x}, \mathbf{y}; \mathbf{w}) = \mathbf{w}^T\phi(\mathbf{x}, \mathbf{y})$$
+
+where $\phi(\mathbf{x}, \mathbf{y})$ is joint feature map.
+
+**Prediction:** Find highest-scoring output:
+
+$$\hat{\mathbf{y}} = \arg\max_{\mathbf{y} \in \mathcal{Y}} \mathbf{w}^T\phi(\mathbf{x}, \mathbf{y})$$
+
+This is the **inference problem**—must be solvable efficiently for the specific structure.
+
+**Training:** Learn weights $\mathbf{w}$ such that correct output scores highest.
+
+#### Structured SVM
+
+Extend max-margin principle (see @sec-margin-methods) to structured outputs:
+
+$$\min_{\mathbf{w}, \boldsymbol{\xi}} \frac{1}{2}\|\mathbf{w}\|^2 + C\sum_{i=1}^n \xi_i$$ $$\text{s.t.} \quad
+\mathbf{w}^T\phi(\mathbf{x}_i, \mathbf{y}_i) \geq \mathbf{w}^T\phi(\mathbf{x}_i, \mathbf{y}) + \Delta(\mathbf{y}_i, \mathbf{y}) -
+\xi_i, \quad \forall \mathbf{y} \in \mathcal{Y}, \forall i$$
+
+where $\Delta(\mathbf{y}, \mathbf{y}')$ is task-specific loss (e.g., Hamming distance for sequences).
+
+**Interpretation:** Correct output should score higher than any incorrect output by margin proportional to loss.
+
+**Equivalent Unconstrained Form:**
+
+$$\min_{\mathbf{w}} \frac{1}{2}\|\mathbf{w}\|^2 + C\sum_{i=1}^n \max_{\mathbf{y} \in \mathcal{Y}} [\Delta(\mathbf{y}_i,
+\mathbf{y}) + \mathbf{w}^T\phi(\mathbf{x}_i, \mathbf{y}) - \mathbf{w}^T\phi(\mathbf{x}_i, \mathbf{y}_i)]$$
+
+This is structured hinge loss.
+
+**Training:** Subgradient descent. At each iteration:
+
+1. **Loss-augmented inference:** Find most violated constraint: $$\hat{\mathbf{y}}_i = \arg\max_{\mathbf{y} \in \mathcal{Y}}
+   [\Delta(\mathbf{y}_i, \mathbf{y}) + \mathbf{w}^T\phi(\mathbf{x}_i, \mathbf{y})]$$
+
+2. **Update weights:** $$\mathbf{w} \leftarrow \mathbf{w} - \eta[\mathbf{w} - C(\phi(\mathbf{x}_i, \mathbf{y}_i) -
+   \phi(\mathbf{x}_i, \hat{\mathbf{y}}_i))]$$
+
+**Key Requirement:** Both standard inference and loss-augmented inference must be tractable.
+
+#### Inference Algorithms
+
+Depend on output structure:
+
+**Sequences:** Viterbi algorithm (dynamic programming), $O(TK^2)$
+
+**Trees:** CKY algorithm for parsing, $O(n^3G)$ where $G$ is grammar size
+
+**Graphs:** - **Max-flow/min-cut:** For binary segmentation - **Belief propagation:** For graphical models - **Integer linear
+programming:** General but potentially slow
+
+**Approximate Inference:** When exact inference intractable: - Beam search - Greedy search - Sampling methods
+
+#### Structured Perceptron
+
+Simpler alternative to structured SVM:
+
+**Algorithm:** ``` Initialize w = 0 For each epoch: For each training example (x_i, y_i): ŷ = argmax_{y ∈ Y} w^T φ(x_i, y) If ŷ ≠
+y_i: w ← w + φ(x_i, y_i) - φ(x_i, ŷ) ```
+
+**Advantages:** - Simple - Online learning - Convergence guarantees if data separable
+
+**Disadvantages:** - No margin - Can overfit - Sensitive to order
+
+#### Conditional Random Fields (General)
+
+Probabilistic structured prediction:
+
+$$P(\mathbf{y}|\mathbf{x}) = \frac{1}{Z(\mathbf{x})}\exp(\mathbf{w}^T\phi(\mathbf{x}, \mathbf{y}))$$
+
+where $Z(\mathbf{x}) = \sum_{\mathbf{y} \in \mathcal{Y}} \exp(\mathbf{w}^T\phi(\mathbf{x}, \mathbf{y}))$.
+
+**Training:** Maximum likelihood (requires computing partition function).
+
+**Inference:** $\arg\max_{\mathbf{y}} P(\mathbf{y}|\mathbf{x})$ (same as structured SVM inference).
+
+**Advantages:** - Probabilistic predictions - Principled uncertainty quantification
+
+**Disadvantages:** - Computing partition function expensive - Training slower than structured SVM
+
+#### Applications
+
+**Natural Language Processing:** - **Parsing:** Predict syntactic tree structure - **Named entity recognition:** Sequence labeling
+- **Machine translation:** Sequence-to-sequence - **Semantic role labeling:** Identify predicate-argument structure
+
+**Computer Vision:** - **Image segmentation:** Label each pixel - **Object detection:** Predict bounding boxes and labels - **Pose
+estimation:** Predict joint locations - **Scene understanding:** Parse image into objects and relationships
+
+**Computational Biology:** - **Protein structure prediction:** Predict 3D structure from sequence - **Gene finding:** Identify
+genes in DNA sequences - **Protein-protein interaction:** Predict interaction networks
+
+**Practical Considerations:**
+
+1. **Feature engineering:** Design $\phi(\mathbf{x}, \mathbf{y})$ to capture relevant structure 2. **Inference algorithm:** Must
+be efficient for the specific structure 3. **Approximate inference:** Often necessary for complex structures 4. **Neural
+structured prediction:** Combine neural networks with structured output layers (e.g., CRF on top of RNN)
+
+Structured prediction unifies many supervised learning problems under a common framework, emphasizing the importance of exploiting
+output structure for improved predictions [@shalev2014ml; @theodoridis2025ml].

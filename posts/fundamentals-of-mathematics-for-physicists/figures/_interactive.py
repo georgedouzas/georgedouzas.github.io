@@ -2,11 +2,11 @@
     import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from _interactive import plotly_html, threejs_html
 `plotly_html(path, traces, layout)` writes a self-contained HTML page loading Plotly.js from its CDN with the given
 JSON traces/layout; `threejs_html(path, scene)` saves a Sage 3D scene with the threejs viewer (CDN build).
-Outputs go to tutorial/figures/interactive/<name>.html and are embedded by the `interactive` shortcode.
+Outputs go to figures/interactive/<name>.html and are embedded by the `interactive` shortcode.
 """
 import json, os
 
-OUTDIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tutorial", "figures", "interactive")
+OUTDIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "interactive")
 PLOTLY = "https://cdn.plot.ly/plotly-2.35.2.min.js"
 
 
