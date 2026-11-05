@@ -386,6 +386,7 @@ window.Quarto = {
 <section id="sec-lie-groups-algebras" class="level2">
 <h2 class="anchored" data-anchor-id="sec-lie-groups-algebras">Lie groups and Lie algebras</h2>
 <p>Lie groups are groups that are also manifolds, so that their elements can be multiplied and also differentiated: the rotations of space, the unitary matrices of quantum mechanics and the phases of electromagnetism are the standard examples. This chapter has four sections. Lie groups defines the objects, the matrix groups that realise all the examples used in these lectures, their subgroups, their smooth actions on manifolds and the coverings between them, with <span class="math inline">U(1)</span>, <span class="math inline">SO(3)</span> and <span class="math inline">SU(2)</span> as running examples. Lie algebras linearises a group at its identity: a vector space with a bracket, described by structure constants, acted on by the group through the adjoint representation and equipped with the Killing form. The exponential map goes back from the algebra to the group through one-parameter subgroups, and Maurer-Cartan forms carry the bracket over the whole group as left-invariant vector fields and one-forms obeying the Maurer-Cartan equation. Every statement is followed by three examples and three exercises with hidden solutions, and many exercises have Sage solutions.</p>
+<p>For more on this topic, see <span class="citation" data-cites="gadea2013analysis">Gadea et al. (<a href="#ref-gadea2013analysis" role="doc-biblioref">2013</a>, Ch. 4)</span>, <span class="citation" data-cites="lee2013introduction">Lee (<a href="#ref-lee2013introduction" role="doc-biblioref">2013</a>, Ch. 7, Ch. 8, Ch. 20)</span>, <span class="citation" data-cites="lee2018global">Lee et al. (<a href="#ref-lee2018global" role="doc-biblioref">2018</a>, Ch. 1-2)</span>, <span class="citation" data-cites="mukunda2022continuous">Mukunda and Chaturvedi (<a href="#ref-mukunda2022continuous" role="doc-biblioref">2022</a>, Ch. 4, Ch. 7-8)</span>, <span class="citation" data-cites="pal2015introductory">Pal (<a href="#ref-pal2015introductory" role="doc-biblioref">2015</a>, Ch. 3)</span>, <span class="citation" data-cites="rudolph2013differential">Rudolph and Schmidt (<a href="#ref-rudolph2013differential" role="doc-biblioref">2013</a>, Ch. 5)</span>, <span class="citation" data-cites="scott2023problems">Scott (<a href="#ref-scott2023problems" role="doc-biblioref">2023</a>, Ch. 3)</span> and <span class="citation" data-cites="torresdelcastillo2020differentiable">Castillo (<a href="#ref-torresdelcastillo2020differentiable" role="doc-biblioref">2020</a>, Ch. 7)</span>.</p>
 <section id="sec-lie-groups" class="level3">
 <h3 class="anchored" data-anchor-id="sec-lie-groups">Lie groups</h3>
 <p>Symmetries of a space form a group, and when the symmetries depend smoothly on parameters, as rotations depend on angles, the group is itself a manifold: a Lie group. Isometry groups of metrics, and quotients of one Lie group by another, are the two ways in which Lie groups enter geometry later in the book. This section defines Lie groups, matrix groups, subgroups, actions and covers, and works them out for <span class="math inline">U(1)</span>, <span class="math inline">SO(3)</span> and <span class="math inline">SU(2)</span>.</p>
@@ -5430,6 +5431,7 @@ E_{23} + \frac12E_{13}} = h(1, 1, \tfrac12 + \tfrac12) = h(1, 1, 1)</span>: the 
 <section id="sec-lie-representations" class="level2">
 <h2 class="anchored" data-anchor-id="sec-lie-representations">Representations of Lie algebras</h2>
 <p>A representation lets a Lie algebra act on a vector space by matrices, and the finite-dimensional representations of the compact Lie algebras are classified by a small amount of combinatorial data: weights, roots and highest weights. This chapter has three sections. Weights and the representations of <span class="math inline">\mathfrak{su}(2)</span> introduces Cartan subalgebras and weights, builds the spin-<span class="math inline">j</span> representations from ladder operators, exponentiates them to the rotation matrices of spin <span class="math inline">j</span> and decomposes tensor products with the Clebsch-Gordan rule. Roots and <span class="math inline">\mathfrak{su}(3)</span> runs the same programme in rank two, with the Gell-Mann basis, the hexagon of roots, highest weights, simple roots and the Cartan matrix. Branching rules restricts representations to subalgebras, works the branching of <span class="math inline">\mathfrak{su}(3)</span> under <span class="math inline">\mathfrak{su}(2) \times \mathfrak{u}(1)</span> and splits <span class="math inline">\mathfrak{so}(4)</span> into two commuting copies of <span class="math inline">\mathfrak{su}(2)</span>. Every statement is followed by three examples and three exercises with hidden solutions, and many of the computations use Sage’s <code>WeylCharacterRing</code> and <code>RootSystem</code>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="keskivakkuri2022mathematical">Keski-Vakkuri et al. (<a href="#ref-keskivakkuri2022mathematical" role="doc-biblioref">2022</a>, Ch. 6)</span> and <span class="citation" data-cites="mukunda2022continuous">Mukunda and Chaturvedi (<a href="#ref-mukunda2022continuous" role="doc-biblioref">2022</a>, Ch. 5)</span>.</p>
 <section id="sec-weights-su2" class="level3">
 <h3 class="anchored" data-anchor-id="sec-weights-su2">Weights and the representations of su(2)</h3>
 <p>The representations of <span class="math inline">\mathfrak{su}(2)</span> are the spins of quantum mechanics, and they are classified by a single number because a diagonalisable generator, <span class="math inline">J_3</span>, labels the states and two ladder operators move between them. The same mechanism, with a Cartan subalgebra in place of <span class="math inline">J_3</span> and roots in place of the ladder operators, classifies the representations of every compact Lie algebra, and <a href="#sec-roots-su3" class="quarto-xref">Section&nbsp;1.2.2</a> runs it for <span class="math inline">\mathfrak{su}(3)</span>.</p>
@@ -8793,6 +8795,33 @@ Sage levi branching of 10: A1(0) + A1(1) + A1(2) + A1(3)</code></pre>
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-boudreau2018applied" class="csl-entry" role="listitem">
 Boudreau, Joseph F., and Eric S. Swanson. 2018. <em>Applied Computational Physics</em>. Oxford University Press.
+</div>
+<div id="ref-torresdelcastillo2020differentiable" class="csl-entry" role="listitem">
+Castillo, Gerardo F. Torres del. 2020. <em>Differentiable Manifolds: A Theoretical Physics Approach</em>. Second. Birkhäuser.
+</div>
+<div id="ref-gadea2013analysis" class="csl-entry" role="listitem">
+Gadea, Pedro M., Jaime Muñoz Masqué, and Ihor V. Mykytyuk. 2013. <em>Analysis and Algebra on Differentiable Manifolds: A Workbook for Students and Teachers</em>. Second. Problem Books in Mathematics. Springer.
+</div>
+<div id="ref-keskivakkuri2022mathematical" class="csl-entry" role="listitem">
+Keski-Vakkuri, Esko, Claus K. Montonen, and Marco Panero. 2022. <em>Mathematical Methods for Physics: An Introduction to Group Theory, Topology and Geometry</em>. Cambridge University Press.
+</div>
+<div id="ref-lee2013introduction" class="csl-entry" role="listitem">
+Lee, John M. 2013. <em>Introduction to Smooth Manifolds</em>. Second. Graduate Texts in Mathematics 218. Springer.
+</div>
+<div id="ref-lee2018global" class="csl-entry" role="listitem">
+Lee, Taeyoung, Melvin Leok, and N. Harris McClamroch. 2018. <em>Global Formulations of Lagrangian and Hamiltonian Dynamics on Manifolds: A Geometric Approach to Modeling and Analysis</em>. Interaction of Mechanics and Mathematics. Springer.
+</div>
+<div id="ref-mukunda2022continuous" class="csl-entry" role="listitem">
+Mukunda, Narasimhaiengar, and Subhash Chaturvedi. 2022. <em>Continuous Groups for Physicists</em>. Cambridge University Press.
+</div>
+<div id="ref-pal2015introductory" class="csl-entry" role="listitem">
+Pal, Palash B. 2015. <em>An Introductory Course of Particle Physics</em>. CRC Press.
+</div>
+<div id="ref-rudolph2013differential" class="csl-entry" role="listitem">
+Rudolph, Gerd, and Matthias Schmidt. 2013. <em>Differential Geometry and Mathematical Physics. Part i: Manifolds, Lie Groups and Hamiltonian Systems</em>. Theoretical and Mathematical Physics. Springer.
+</div>
+<div id="ref-scott2023problems" class="csl-entry" role="listitem">
+Scott, Robert B. 2023. <em>Problems and Solutions on Vector Spaces for Physicists: From Part i in Mathematical Physics—a Modern Introduction to Its Foundations</em>. Springer.
 </div>
 <div id="ref-sinha2023rigid" class="csl-entry" role="listitem">
 Sinha, Rajnikant. 2023. <em>Advanced Newtonian Rigid Dynamics</em>. Springer.

@@ -61,7 +61,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -375,6 +394,7 @@ window.Quarto = {
 <section id="sec-sets" class="level2">
 <h2 class="anchored" data-anchor-id="sec-sets">Sets and maps</h2>
 <p>A set is a collection of things, a map a rule assigning to each thing of one set a thing of another. The six notions of this section, sets, maps, injective, surjective and bijective maps, and inverse maps, are the vocabulary in which every later definition is phrased. Each definition is followed by three examples of increasing complexity and three exercises of increasing difficulty with hidden solutions; the counting results of the section are collected in <a href="#prp-count-maps" class="quarto-xref">Proposition&nbsp;1</a>, after the definition of the inverse map.</p>
+<p>For more on this topic, see <span class="citation" data-cites="chirivi2020selected">Chirivì et al. (<a href="#ref-chirivi2020selected" role="doc-biblioref">2020</a>, Theory Ch. 1)</span>, <span class="citation" data-cites="komjath2006problems">Komjáth and Totik (<a href="#ref-komjath2006problems" role="doc-biblioref">2006</a>, Ch. 1, Ch. 6)</span> and <span class="citation" data-cites="radozycki2020solving">Radożycki (<a href="#ref-radozycki2020solving" role="doc-biblioref">2020</a>, Ch. 1)</span>.</p>
 <section id="sets" class="level3">
 <h3 class="anchored" data-anchor-id="sets">Sets</h3>
 <p>Before anything can be counted, mapped or given a shape, one has to say what a collection of objects is and when one collection sits inside another. The picture to keep in mind is a bag of labelled items, with no order and no repetition, together with the smaller bags that can be taken out of it. The first definition fixes this vocabulary and the two symbols, membership and inclusion, that recur on every page of the book.</p>
@@ -2894,6 +2914,7 @@ theorem card_bijections (m n : ℕ) : Fintype.card (Fin m ≃ Fin n) = if m = n 
 <section id="sec-relations-products" class="level2">
 <h2 class="anchored" data-anchor-id="sec-relations-products">Relations, quotients and products</h2>
 <p>Maps are combined by composition, and sets are built from other sets in two ways: by gluing elements together (quotients) and by pairing them (products). An equivalence relation says which elements are to be identified, its classes are the glued-together pieces, and the quotient set is the set of pieces; a product pairs an element of one set with an element of another. The section defines composition, equivalence relations, classes, quotient sets and products, with the remainders modulo <span class="math inline">n</span>, the angles on a circle and the rotations with a common image of the pole as running examples.</p>
+<p>For more on this topic, see <span class="citation" data-cites="komjath2006problems">Komjáth and Totik (<a href="#ref-komjath2006problems" role="doc-biblioref">2006</a>, Ch. 2-3)</span> and <span class="citation" data-cites="radozycki2020solving">Radożycki (<a href="#ref-radozycki2020solving" role="doc-biblioref">2020</a>, Ch. 1)</span>.</p>
 <section id="composition" class="level3">
 <h3 class="anchored" data-anchor-id="composition">Composition</h3>
 <p>Two maps whose domains and codomains fit together can be performed one after the other, and the result is a single map. The picture is a chain of arrows followed from end to end, and the identity map and the inverse of <a href="#def-inverse-map" class="quarto-xref">Definition&nbsp;6</a> find their natural statements here, as the map that composes to nothing and the map that composes to the identity.</p>
@@ -4908,6 +4929,7 @@ theorem card_zmod (n : ℕ) [NeZero n] : Fintype.card (ZMod n) = n</code></pre>
 <section id="sec-topology" class="level2">
 <h2 class="anchored" data-anchor-id="sec-topology">Topological spaces</h2>
 <p>To say that two points are close, that a map is continuous or that a set has no edge, one needs to know which subsets are open. A topology is exactly that: a choice of open sets, subject to three axioms, and every notion of this section, continuity, homeomorphism, the topology of a subspace or of a quotient, is expressed through open sets alone. The section starts from the open sets of <span class="math inline">\mathbb{R}^n</span>, abstracts them to the axioms, and then shows how the circle, the sphere and the rotation group acquire their topologies as subspaces of <span class="math inline">\mathbb{R}^n</span> and as quotients; a Sage enumeration of all topologies on three points makes the axioms concrete.</p>
+<p>For more on this topic, see <span class="citation" data-cites="gasinski2014exercises">Gasiński and Papageorgiou (<a href="#ref-gasinski2014exercises" role="doc-biblioref">2014</a>, Ch. 1)</span>.</p>
 <section id="open-sets-in-mathbbrn" class="level3">
 <h3 class="anchored" data-anchor-id="open-sets-in-mathbbrn">Open sets in <span class="math inline">\mathbb{R}^n</span></h3>
 <p>Before a topology can be defined on an abstract set, one needs the example that motivates the axioms: the open sets of a coordinate space. The picture is a region with no edge, in which every point has some room around it, and the open ball is the unit of room. Closed sets are then the complements, the regions that contain their edges.</p>
@@ -7260,6 +7282,7 @@ def topologies_count_claim : Prop</code></pre>
 <section id="sec-compact-connected" class="level2">
 <h2 class="anchored" data-anchor-id="sec-compact-connected">Compact and connected spaces</h2>
 <p>Three global properties of a topological space decide much of what can be done on it. A Hausdorff space is one in which points can be told apart by open sets, so that limits are unique; a compact space is one on which every continuous function is bounded and attains its extremes, and on which the eigenvalues of a Laplacian form a discrete set; a connected space is one in one piece. The section defines the three properties, with intervals, spheres, rotation groups and finite graphs as examples, and ends with the enumeration of the Hausdorff topologies on three points.</p>
+<p>For more on this topic, see <span class="citation" data-cites="cheung2024metric">Cheung (<a href="#ref-cheung2024metric" role="doc-biblioref">2024</a>, Ch. 1, Ch. 3)</span>, <span class="citation" data-cites="gasinski2014exercises">Gasiński and Papageorgiou (<a href="#ref-gasinski2014exercises" role="doc-biblioref">2014</a>, Ch. 2)</span> and <span class="citation" data-cites="radozycki2020solving">Radożycki (<a href="#ref-radozycki2020solving" role="doc-biblioref">2020</a>, Ch. 6)</span>.</p>
 <section id="hausdorff-spaces" class="level3">
 <h3 class="anchored" data-anchor-id="hausdorff-spaces">Hausdorff spaces</h3>
 <p>The first of the three global properties concerns whether open sets can distinguish points. The picture is two points each sitting in its own open set, with the two sets not overlapping, and the consequences listed in the definition, unique limits and closed points, are what make this property a requirement for manifolds.</p>
@@ -9082,10 +9105,27 @@ theorem periodic_descends_continuous (T : ℝ) (f : ℝ → ℝ) (hf : Continuou
 </div>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-cheung2024metric" class="csl-entry" role="listitem">
+Cheung, Wing-Sum. 2024. <em>Metric Space Topology: Examples, Exercises and Solutions</em>. Third. Series on Analysis, Applications and Computation, Vol. 12. World Scientific.
+</div>
+<div id="ref-chirivi2020selected" class="csl-entry" role="listitem">
+Chirivì, Rocco, Ilaria Del Corso, and Roberto Dvornicich. 2020. <em>Selected Exercises in Algebra: Volume 1</em>. UNITEXT 119. Springer.
+</div>
+<div id="ref-gasinski2014exercises" class="csl-entry" role="listitem">
+Gasiński, Leszek, and Nikolaos S. Papageorgiou. 2014. <em>Exercises in Analysis: Part 1</em>. Problem Books in Mathematics. Springer.
+</div>
+<div id="ref-komjath2006problems" class="csl-entry" role="listitem">
+Komjáth, Péter, and Vilmos Totik. 2006. <em>Problems and Theorems in Classical Set Theory</em>. Problem Books in Mathematics. Springer.
+</div>
+<div id="ref-radozycki2020solving" class="csl-entry" role="listitem">
+Radożycki, Tomasz. 2020. <em>Solving Problems in Mathematical Analysis, Part i: Sets, Functions, Limits, Derivatives, Integrals, Sequences and Series</em>. Problem Books in Mathematics. Springer.
+</div>
+</div></section></div></main> <!-- /main -->
 <script>
 // Turns the tags on a post page into links to the filtered Posts page.
 document.addEventListener("DOMContentLoaded", () => {

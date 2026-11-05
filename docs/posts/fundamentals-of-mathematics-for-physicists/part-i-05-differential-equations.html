@@ -426,6 +426,7 @@ window.Quarto = {
 <section id="sec-odes" class="level2">
 <h2 class="anchored" data-anchor-id="sec-odes">Ordinary differential equations</h2>
 <p>An ordinary differential equation involves one independent variable. This section defines the equation and its order, the initial value problem, quotes the existence and uniqueness theorem of Picard and Lindelöf, solves the two classes of first-order equations that every physicist meets, separable and linear, and introduces the phase portrait, the picture of all solutions of an autonomous system at once. The proposition at the end collects the closed-form solutions, each of which satisfies its equation by direct substitution.</p>
+<p>For more on this topic, see <span class="citation" data-cites="arrigo2023introduction">Arrigo (<a href="#ref-arrigo2023introduction" role="doc-biblioref">2023</a>, Ch. 5)</span>, <span class="citation" data-cites="borodzik2019problems">Borodzik et al. (<a href="#ref-borodzik2019problems" role="doc-biblioref">2019</a>, Ch. 5)</span>, <span class="citation" data-cites="knauf2018mathematical">Knauf (<a href="#ref-knauf2018mathematical" role="doc-biblioref">2018</a>, Ch. 3)</span> and <span class="citation" data-cites="magnus2023essential">Magnus (<a href="#ref-magnus2023essential" role="doc-biblioref">2023</a>, Ch. 2, Ch. 4 and 6)</span>.</p>
 <section id="ordinary-differential-equations" class="level3">
 <h3 class="anchored" data-anchor-id="ordinary-differential-equations">Ordinary differential equations</h3>
 <div class="statement-box">
@@ -3109,6 +3110,7 @@ theorem picard_linear_converges (a x : ℝ) :
 <section id="sec-linear-systems" class="level2">
 <h2 class="anchored" data-anchor-id="sec-linear-systems">Linear systems and the matrix exponential</h2>
 <p>A linear system with constant coefficients, <span class="math inline">\dot x = Ax</span>, is the one class of systems that is solved completely by linear algebra: the solution is <span class="math inline">x(t) = e^{tA}x(0)</span>, and the eigenvalues of <span class="math inline">A</span> decide how the solutions behave as <span class="math inline">t \to \infty</span>. This section defines linear systems, eigenvalues, the matrix exponential and stability, then applies them to the damped harmonic oscillator, whose response to a periodic force exhibits resonance. The proposition at the end collects the matrix exponentials in closed form, with the resonance formulas.</p>
+<p>For more on this topic, see <span class="citation" data-cites="aliev2024mathematical">Aliev and Lara (<a href="#ref-aliev2024mathematical" role="doc-biblioref">2024</a>, Ch. 2-4)</span>, <span class="citation" data-cites="arrigo2023introduction">Arrigo (<a href="#ref-arrigo2023introduction" role="doc-biblioref">2023</a>, Ch. 3)</span>, <span class="citation" data-cites="axler2024linear">Axler (<a href="#ref-axler2024linear" role="doc-biblioref">2024</a>, Ch. 5 and 8)</span>, <span class="citation" data-cites="knauf2018mathematical">Knauf (<a href="#ref-knauf2018mathematical" role="doc-biblioref">2018</a>, Ch. 4-5)</span> and <span class="citation" data-cites="magnus2023essential">Magnus (<a href="#ref-magnus2023essential" role="doc-biblioref">2023</a>, Ch. 1, Ch. 5)</span>.</p>
 <section id="linear-systems" class="level3">
 <h3 class="anchored" data-anchor-id="linear-systems">Linear systems</h3>
 <div class="statement-box">
@@ -6762,6 +6764,7 @@ theorem spiral_B_sq : !![(1 : ℝ), 1; -2, -1] * !![(1 : ℝ), 1; -2, -1] = !![-
 <section id="sec-sturm-liouville" class="level2">
 <h2 class="anchored" data-anchor-id="sec-sturm-liouville">Boundary value and Sturm-Liouville problems</h2>
 <p>Replacing the initial conditions at one point by conditions at the two ends of an interval changes the character of a linear equation: a solution may fail to exist or fail to be unique, and the values of a parameter for which non-zero solutions exist, the eigenvalues, carry the physics of vibrating strings, drums and quantum systems. This section defines boundary value problems and the Sturm-Liouville form, the weighted inner product under which the eigenfunctions are orthogonal, quotes the Sturm-Liouville theorem, and introduces the Legendre polynomials and Bessel functions, the eigenfunctions that appear when the Laplacian is separated in spherical and cylindrical coordinates. The proposition at the end collects the identities of these functions used later.</p>
+<p>For more on this topic, see <span class="citation" data-cites="magnus2023essential">Magnus (<a href="#ref-magnus2023essential" role="doc-biblioref">2023</a>, Ch. 7)</span>.</p>
 <section id="boundary-value-problems" class="level3">
 <h3 class="anchored" data-anchor-id="boundary-value-problems">Boundary value problems</h3>
 <div class="statement-box">
@@ -11110,6 +11113,7 @@ theorem drum_mode (j x : ℝ) (F F' F'' : ℝ → ℝ) (hF : ∀ y, HasDerivAt F
 <section id="sec-pdes" class="level2">
 <h2 class="anchored" data-anchor-id="sec-pdes">Partial differential equations</h2>
 <p>A field depends on several variables, and its equation of motion involves partial derivatives with respect to all of them. This section defines partial differential equations and the classification of the linear second-order ones into hyperbolic, parabolic and elliptic types, then treats the representative of each type: the wave equation, solved by d’Alembert’s formula, the heat equation, solved by its kernel, and Laplace’s equation, whose solutions are the harmonic functions. Separation of variables, which reduces all three to the Sturm-Liouville problems of <a href="#sec-sturm-liouville" class="quarto-xref">Section&nbsp;1.3</a>, closes the section, and the proposition collects the solutions, each of which satisfies its equation by substitution. The d’Alembertian is <span class="math inline">\Box = \partial_t^2 - \nabla^2</span> in the signature <span class="math inline">(+, -, -, -)</span> of <a href="../kaluza-klein-theories/conventions.html#sec-conventions">Prerequisites and conventions</a>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="borodzik2019problems">Borodzik et al. (<a href="#ref-borodzik2019problems" role="doc-biblioref">2019</a>, Ch. 3, Ch. 4)</span>.</p>
 <section id="partial-differential-equations" class="level3">
 <h3 class="anchored" data-anchor-id="partial-differential-equations">Partial differential equations</h3>
 <div class="statement-box">
@@ -14724,6 +14728,7 @@ theorem kg_group_velocity (k m : ℝ) (h : 0 &lt; k ^ 2 + m ^ 2) :
 <p>A linear differential operator <span class="math inline">L</span> can be inverted: if <span class="math inline">G</span> solves <span class="math inline">LG = \delta</span> with a point source, then <span class="math inline">u =
 \int G f</span> solves <span class="math inline">Lu = f</span> for any source <span class="math inline">f</span>, by superposition. This section defines the delta function as far as this use requires, the fundamental solution and the Green’s function with boundary conditions, and computes the Green’s functions of the Laplacian and of the static Klein-Gordon operator; for the wave operator, where <span class="math inline">LG =
 \delta</span> has several solutions, it describes the retarded and the Feynman prescriptions in outline. The proposition collects the properties of <span class="math inline">-1/(4\pi r)</span> and of the Yukawa function, and the figure shows the radial Green’s functions and the Green’s function of a string.</p>
+<p>For more on this topic, see <span class="citation" data-cites="aliev2024mathematical">Aliev and Lara (<a href="#ref-aliev2024mathematical" role="doc-biblioref">2024</a>, Ch. 1)</span>.</p>
 <section id="the-delta-function" class="level3">
 <h3 class="anchored" data-anchor-id="the-delta-function">The delta function</h3>
 <div class="statement-box">
@@ -17753,8 +17758,26 @@ theorem sine_mode_boundary (n : ℕ) : Real.sin (n * 0) = 0 ∧ Real.sin (n * Re
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-aliev2024mathematical" class="csl-entry" role="listitem">
+Aliev, Farkhad G., and Antonio Lara. 2024. <em>Mathematical Methods for Physics: Problems and Solutions</em>. Jenny Stanford Publishing.
+</div>
+<div id="ref-arrigo2023introduction" class="csl-entry" role="listitem">
+Arrigo, Daniel. 2023. <em>An Introduction to Partial Differential Equations</em>. Second. Synthesis Lectures on Mathematics &amp; Statistics. Springer.
+</div>
+<div id="ref-axler2024linear" class="csl-entry" role="listitem">
+Axler, Sheldon. 2024. <em>Linear Algebra Done Right</em>. Fourth. Undergraduate Texts in Mathematics. Springer.
+</div>
+<div id="ref-borodzik2019problems" class="csl-entry" role="listitem">
+Borodzik, Maciej, Paweł Goldstein, Piotr Rybka, and Anna Zatorska-Goldstein. 2019. <em>Problems on Partial Differential Equations</em>. Problem Books in Mathematics. Springer.
+</div>
 <div id="ref-foulaadvand2023computational" class="csl-entry" role="listitem">
 Foulaadvand, M. Ebrahim. 2023. <em>A Computational Approach to Physics</em>. Cambridge Scholars Publishing.
+</div>
+<div id="ref-knauf2018mathematical" class="csl-entry" role="listitem">
+Knauf, Andreas. 2018. <em>Mathematical Physics: Classical Mechanics</em>. UNITEXT 109. Springer.
+</div>
+<div id="ref-magnus2023essential" class="csl-entry" role="listitem">
+Magnus, Robert. 2023. <em>Essential Ordinary Differential Equations</em>. Springer Undergraduate Mathematics Series. Springer.
 </div>
 <div id="ref-cini2023quantum" class="csl-entry" role="listitem">
 Michele Cini, Guido Montagna, Stefano Forte, and Alberto Rotondi. 2023. <em>Quantum Mechanics</em>. Springer.

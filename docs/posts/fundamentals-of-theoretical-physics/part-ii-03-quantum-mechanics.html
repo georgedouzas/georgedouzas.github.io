@@ -421,6 +421,7 @@ window.Quarto = {
 <section id="sec-states-observables" class="level2">
 <h2 class="anchored" data-anchor-id="sec-states-observables">States and observables</h2>
 <p>A quantum system is described by two kinds of objects: states, which encode everything that can be predicted about the system, and observables, which are the quantities that can be measured. This section defines state vectors and the Hilbert space of states, observables as self-adjoint operators and their expectation values, and proves the uncertainty relation, which is then evaluated on the Gaussian wave packet, the particle in a box and a spin one-half.</p>
+<p>For more on this topic, see <span class="citation" data-cites="demilio2017problems"><span class="nocase">d’Emilio and Picasso</span> (<a href="#ref-demilio2017problems" role="doc-biblioref">2017</a>, Ch. 5)</span>, <span class="citation" data-cites="derezinski2022mathematics">Dereziński and Gérard (<a href="#ref-derezinski2022mathematics" role="doc-biblioref">2022</a>, Ch. 8)</span> and <span class="citation" data-cites="tornetta2022mathematical">Tornetta (<a href="#ref-tornetta2022mathematical" role="doc-biblioref">2022</a>, Ch. 1 and 3)</span>.</p>
 <section id="state-vectors" class="level3">
 <h3 class="anchored" data-anchor-id="state-vectors">State vectors</h3>
 <p>In classical mechanics the state of a particle is a point of phase space, a position together with a momentum (<a href="part-ii-01-classical-mechanics.html#def-phase-space">Definition 11 of Classical mechanics</a>). Quantum mechanics replaces the point by a vector of a complex Hilbert space (<a href="../fundamentals-of-mathematics-for-physicists/part-i-07-hilbert-spaces-operators.html#def-hilbert-space">Definition 14 of Functional analysis</a>), and the linear structure is the new physics: two states can be added, and the sum is again a state. The definition fixes the vocabulary and the Dirac notation used for the rest of the chapter.</p>
@@ -1378,6 +1379,7 @@ l = 3: [L_x, L_y] = i L_z: True
 <section id="sec-schroedinger" class="level2">
 <h2 class="anchored" data-anchor-id="sec-schroedinger">Measurement and the Schrödinger equation</h2>
 <p>States and observables become physics through two rules: one says what a measurement returns and how it changes the state, the other how an unobserved state evolves in time. This section states the Born rule and the projection postulate, defines the time-evolution operator, the Schrödinger equation and stationary states, and solves the free particle and the particle in a box exactly.</p>
+<p>For more on this topic, see <span class="citation" data-cites="demilio2017problems"><span class="nocase">d’Emilio and Picasso</span> (<a href="#ref-demilio2017problems" role="doc-biblioref">2017</a>, Ch. 4, Ch. 6, Ch. 7, Ch. 16)</span>, <span class="citation" data-cites="galitski2013exploring">Galitski et al. (<a href="#ref-galitski2013exploring" role="doc-biblioref">2013</a>, Ch. 2, Ch. 7)</span>, <span class="citation" data-cites="guidry2022symmetry">Guidry and Sun (<a href="#ref-guidry2022symmetry" role="doc-biblioref">2022</a>, Ch. 27)</span> and <span class="citation" data-cites="zettili2009quantum">Zettili (<a href="#ref-zettili2009quantum" role="doc-biblioref">2009</a>, Ch. 4)</span>.</p>
 <section id="the-born-rule" class="level3">
 <h3 class="anchored" data-anchor-id="the-born-rule">The Born rule</h3>
 <p>The spectral theorem writes an observable as a sum of eigenvalues times projections, and the squared lengths of the projections of a unit vector add up to one. Born’s rule reads these squared lengths as probabilities, which is the only link between the vectors of the theory and the frequencies observed in a laboratory.</p>
@@ -3632,6 +3634,7 @@ Euler growth factor per step for the highest grid mode, sqrt(1 + (E dt)^2) with 
 <section id="sec-harmonic-oscillator" class="level2">
 <h2 class="anchored" data-anchor-id="sec-harmonic-oscillator">The harmonic oscillator</h2>
 <p>Every smooth potential looks like a parabola near a minimum, so small vibrations of molecules, crystals and fields are harmonic oscillators, and a free quantum field is a collection of them. This section solves the quantum oscillator algebraically with ladder operators, obtains the evenly spaced spectrum and the Hermite functions, and introduces the coherent states that move like a classical particle.</p>
+<p>For more on this topic, see <span class="citation" data-cites="nastase2023quantum">Năstase (<a href="#ref-nastase2023quantum" role="doc-biblioref">2023</a>, Ch. 1-9)</span>.</p>
 <section id="the-quantum-oscillator" class="level3">
 <h3 class="anchored" data-anchor-id="the-quantum-oscillator">The quantum oscillator</h3>
 <p>The classical oscillator of <a href="../fundamentals-of-mathematics-for-physicists/part-i-05-differential-equations.html#def-harmonic-oscillator">Definition 10 of Differential equations</a> (undamped, undriven) has the Hamiltonian <span class="math inline">p^2/2m +
@@ -4601,6 +4604,7 @@ rho(x, 0) = 1/6*(4*x^4 + 8*x^3 + 4*sqrt(2)*x^2 + 4*sqrt(2)*x - 4*x - 2*sqrt(2) +
 <section id="sec-angular-momentum" class="level2">
 <h2 class="anchored" data-anchor-id="sec-angular-momentum">Angular momentum and spin</h2>
 <p>Rotations act on every quantum system, and the observables that generate them are the components of angular momentum. Their commutation relations are those of <span class="math inline">\mathfrak{su}(2)</span>, so the representation theory of <a href="../fundamentals-of-mathematics-for-physicists/part-i-11-lie-groups-algebras.html#sec-weights-su2">Weights and the representations of su(2)</a> classifies the possible values at once, including the half-integer ones that orbital motion cannot produce. This section defines angular momentum, identifies spin with the spin-<span class="math inline">j</span> representations, treats spin one-half with the Pauli matrices and the Bloch sphere, and adds angular momenta with Clebsch-Gordan coefficients.</p>
+<p>For more on this topic, see <span class="citation" data-cites="demilio2017problems"><span class="nocase">d’Emilio and Picasso</span> (<a href="#ref-demilio2017problems" role="doc-biblioref">2017</a>, Ch. 8, Ch. 12)</span>, <span class="citation" data-cites="galitski2013exploring">Galitski et al. (<a href="#ref-galitski2013exploring" role="doc-biblioref">2013</a>, Ch. 3, Ch. 5)</span>, <span class="citation" data-cites="nastase2023quantum">Năstase (<a href="#ref-nastase2023quantum" role="doc-biblioref">2023</a>)</span> and <span class="citation" data-cites="zettili2009quantum">Zettili (<a href="#ref-zettili2009quantum" role="doc-biblioref">2009</a>, Ch. 5-7)</span>.</p>
 <section id="the-angular-momentum-algebra" class="level3">
 <h3 class="anchored" data-anchor-id="the-angular-momentum-algebra">The angular momentum algebra</h3>
 <p>Classically the angular momentum <span class="math inline">\vec L = \vec x \times \vec p</span> has Poisson brackets <span class="math inline">\{L_i, L_j\} = \epsilon_{ijk}
@@ -5771,6 +5775,7 @@ L\cdot\vec S/\hbar^2</span> on each.</p>
 <section id="sec-quantum-symmetries" class="level2">
 <h2 class="anchored" data-anchor-id="sec-quantum-symmetries">Symmetries in quantum mechanics</h2>
 <p>A symmetry of a quantum system is a transformation of its states that preserves all transition probabilities. Symmetries act by unitary operators, the generators of continuous symmetries are observables, and those that commute with the Hamiltonian are conserved and force degeneracies of the spectrum. This section develops these ideas, quotes Wigner’s theorem, and ends with the most striking example: the hidden <span class="math inline">\mathfrak{so}(4)</span> symmetry of the hydrogen atom, which explains its spectrum in outline.</p>
+<p>For more on this topic, see <span class="citation" data-cites="foulaadvand2023computational">Foulaadvand (<a href="#ref-foulaadvand2023computational" role="doc-biblioref">2023</a>, Ch. 8)</span>, <span class="citation" data-cites="galitski2013exploring">Galitski et al. (<a href="#ref-galitski2013exploring" role="doc-biblioref">2013</a>, Ch. 4, Ch. 6)</span>, <span class="citation" data-cites="mukunda2022continuous">Mukunda and Chaturvedi (<a href="#ref-mukunda2022continuous" role="doc-biblioref">2022</a>, Ch. 9)</span>, <span class="citation" data-cites="nastase2023quantum">Năstase (<a href="#ref-nastase2023quantum" role="doc-biblioref">2023</a>, Ch. 22)</span> and <span class="citation" data-cites="talagrand2022what">Talagrand (<a href="#ref-talagrand2022what" role="doc-biblioref">2022</a>, Ch. 2)</span>.</p>
 <section id="unitary-representations" class="level3">
 <h3 class="anchored" data-anchor-id="unitary-representations">Unitary representations</h3>
 <p>A group acts on the states of a quantum system when each group element moves states around compatibly with the group law. Since states are rays, the compatibility only needs to hold up to phases, and both the strict and the projective version occur in nature.</p>
@@ -6724,6 +6729,7 @@ n = 2, l = 1: norm 1, &lt;r&gt; = 5 (formula 5), &lt;r^2&gt; = 30 (formula 30), 
 <section id="sec-path-integral" class="level2">
 <h2 class="anchored" data-anchor-id="sec-path-integral">Perturbation theory and the path integral</h2>
 <p>Few Hamiltonians can be diagonalised exactly, and most problems are solved by expanding around one that can. This section develops Rayleigh-Schrödinger perturbation theory for energy levels, then turns to the propagator, the kernel of the time-evolution operator, and to Feynman’s representation of it as an integral over paths, which makes the classical limit <span class="math inline">\hbar \to 0</span> transparent. The perturbative shifts and the Gaussian integrals behind the free path integral are all computed exactly.</p>
+<p>For more on this topic, see <span class="citation" data-cites="demilio2017problems"><span class="nocase">d’Emilio and Picasso</span> (<a href="#ref-demilio2017problems" role="doc-biblioref">2017</a>, Ch. 11)</span>, <span class="citation" data-cites="galitski2013exploring">Galitski et al. (<a href="#ref-galitski2013exploring" role="doc-biblioref">2013</a>, Ch. 8)</span>, <span class="citation" data-cites="nastase2023quantum">Năstase (<a href="#ref-nastase2023quantum" role="doc-biblioref">2023</a>, Ch. 37-38)</span> and <span class="citation" data-cites="zettili2009quantum">Zettili (<a href="#ref-zettili2009quantum" role="doc-biblioref">2009</a>, Ch. 9-10)</span>.</p>
 <section id="perturbation-series" class="level3">
 <h3 class="anchored" data-anchor-id="perturbation-series">Perturbation series</h3>
 <p>If <span class="math inline">H = H_0 + \lambda V</span> with <span class="math inline">H_0</span> solved and <span class="math inline">\lambda</span> small, the eigenvalues and eigenvectors of <span class="math inline">H</span> can be expanded in powers of <span class="math inline">\lambda</span>. The coefficients involve only the spectrum of <span class="math inline">H_0</span> and the matrix elements of <span class="math inline">V</span>, which makes the method practical whenever those are known.</p>
@@ -8181,14 +8187,44 @@ B</span>) or different <span class="math inline">m_l</span> with equal <span cla
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-demilio2017problems" class="csl-entry" role="listitem">
+<span class="nocase">d’Emilio, Emilio, and Luigi E. Picasso</span>. 2017. <em>Problems in Quantum Mechanics with Solutions</em>. Second. UNITEXT for Physics. Springer.
+</div>
+<div id="ref-derezinski2022mathematics" class="csl-entry" role="listitem">
+Dereziński, Jan, and Christian Gérard. 2022. <em>Mathematics of Quantization and Quantum Fields</em>. Cambridge Monographs on Mathematical Physics. Cambridge University Press.
+</div>
+<div id="ref-foulaadvand2023computational" class="csl-entry" role="listitem">
+Foulaadvand, M. Ebrahim. 2023. <em>A Computational Approach to Physics</em>. Cambridge Scholars Publishing.
+</div>
+<div id="ref-galitski2013exploring" class="csl-entry" role="listitem">
+Galitski, Victor, Boris Karnakov, Vladimir Kogan, and Jr. Victor Galitski. 2013. <em>Exploring Quantum Mechanics: A Collection of 700+ Solved Problems for Students, Lecturers, and Researchers</em>. Oxford University Press.
+</div>
+<div id="ref-guidry2022symmetry" class="csl-entry" role="listitem">
+Guidry, Mike, and Yang Sun. 2022. <em>Symmetry, Broken Symmetry, and Topology in Modern Physics: A First Course</em>. Cambridge University Press.
+</div>
 <div id="ref-izaac2018computational" class="csl-entry" role="listitem">
 Izaac, Joshua, and Jingbo Wang. 2018. <em>Computational Quantum Mechanics</em>. Springer.
 </div>
 <div id="ref-cini2023quantum" class="csl-entry" role="listitem">
 Michele Cini, Guido Montagna, Stefano Forte, and Alberto Rotondi. 2023. <em>Quantum Mechanics</em>. Springer.
 </div>
+<div id="ref-mukunda2022continuous" class="csl-entry" role="listitem">
+Mukunda, Narasimhaiengar, and Subhash Chaturvedi. 2022. <em>Continuous Groups for Physicists</em>. Cambridge University Press.
+</div>
+<div id="ref-nastase2023quantum" class="csl-entry" role="listitem">
+Năstase, Horaţiu. 2023. <em>Quantum Mechanics: A Graduate Course</em>. Cambridge University Press.
+</div>
 <div id="ref-svanberg2022spectroscopy" class="csl-entry" role="listitem">
 Svanberg, Sune. 2022. <em>Atomic and Molecular Spectroscopy: Basic Aspects and Practical Applications</em>. Springer.
+</div>
+<div id="ref-talagrand2022what" class="csl-entry" role="listitem">
+Talagrand, Michel. 2022. <em>What Is a Quantum Field Theory? A First Introduction for Mathematicians</em>. Cambridge University Press.
+</div>
+<div id="ref-tornetta2022mathematical" class="csl-entry" role="listitem">
+Tornetta, Gabriele Nunzio. 2022. <em>Mathematical Quantum Physics: A Foundational Introduction</em>. Springer.
+</div>
+<div id="ref-zettili2009quantum" class="csl-entry" role="listitem">
+Zettili, Nouredine. 2009. <em>Quantum Mechanics: Concepts and Applications</em>. Second. John Wiley &amp; Sons.
 </div>
 </div></section></div></main> <!-- /main -->
 <script>

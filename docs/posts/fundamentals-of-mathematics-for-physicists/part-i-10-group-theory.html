@@ -61,7 +61,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -374,6 +393,7 @@ window.Quarto = {
 <section id="sec-groups" class="level2">
 <h2 class="anchored" data-anchor-id="sec-groups">Groups</h2>
 <p>Symmetry is the organising principle of much of mathematics and physics: the isometries of a space form a group, the transformations that leave the equations of a field theory unchanged form a group, and conserved quantities come from these groups. This section defines groups and subgroups and works every notion on small finite groups and on the rotation groups, so that the Lie groups of <a href="part-i-11-lie-groups-algebras.html#sec-lie-groups">Lie groups</a> and the coset spaces of <a href="part-i-12-homogeneous-spaces-bundles.html#sec-coset-spaces">Coset spaces</a> arrive with their algebra already familiar.</p>
+<p>For more on this topic, see <span class="citation" data-cites="mukunda2022continuous">Mukunda and Chaturvedi (<a href="#ref-mukunda2022continuous" role="doc-biblioref">2022</a>, Ch. 2)</span>.</p>
 <section id="groups" class="level3">
 <h3 class="anchored" data-anchor-id="groups">Groups</h3>
 <p>The transformations of an object that preserve its shape can be performed one after the other, undone, and include the transformation that leaves everything in place. The definition below keeps only these three properties and forgets what is being transformed.</p>
@@ -1544,6 +1564,7 @@ c^{-1}</span>. Write every element of <span class="math inline">S_3</span> in th
 <section id="sec-cosets-quotients" class="level2">
 <h2 class="anchored" data-anchor-id="sec-cosets-quotients">Cosets and quotient groups</h2>
 <p>A subgroup slices a group into cosets, equal-sized pieces that the group permutes. When the subgroup is normal the set of cosets is again a group; when it is not, it is still a set on which the group acts, and the coset spaces of <a href="part-i-12-homogeneous-spaces-bundles.html#sec-coset-spaces">Coset spaces</a>, including the sphere <span class="math inline">SO(3)/SO(2)</span>, are exactly these sets with a manifold structure. This section defines cosets, proves Lagrange’s theorem, and introduces quotient groups, group actions, orbits and stabilisers.</p>
+<p>For more on this topic, see <span class="citation" data-cites="chirivi2020selected">Chirivì et al. (<a href="#ref-chirivi2020selected" role="doc-biblioref">2020</a>, Theory Ch. 4)</span>.</p>
 <section id="cosets" class="level3">
 <h3 class="anchored" data-anchor-id="cosets">Cosets</h3>
 <p>Multiplying every element of a subgroup by a fixed element <span class="math inline">g</span> produces a translated copy of the subgroup. These translated copies, and the way they partition the group, are the subject of the definition below.</p>
@@ -2695,6 +2716,7 @@ H = [0, 3]: cosets [[0, 3], [1, 4], [2, 5]]
 <section id="sec-homomorphisms" class="level2">
 <h2 class="anchored" data-anchor-id="sec-homomorphisms">Homomorphisms</h2>
 <p>A homomorphism is a map between groups that respects multiplication; its kernel is a normal subgroup, its image a subgroup, and the quotient by the kernel is the image. The double cover <span class="math inline">SU(2) \to SO(3)</span>, the sign of a permutation and reduction modulo <span class="math inline">2</span> are the examples this section works, and the correspondence between representations of a group and of its Lie algebra in later chapters is a homomorphism too.</p>
+<p>For more on this topic, see <span class="citation" data-cites="chirivi2020selected">Chirivì et al. (<a href="#ref-chirivi2020selected" role="doc-biblioref">2020</a>, Theory Ch. 1)</span>.</p>
 <section id="homomorphisms-and-kernels" class="level3">
 <h3 class="anchored" data-anchor-id="homomorphisms-and-kernels">Homomorphisms and kernels</h3>
 <p>Two groups can be compared by a map that sends products to products. Such a map transports the multiplication table of one group into the other, possibly collapsing several elements to one, and the definition below names it.</p>
@@ -3806,6 +3828,7 @@ sign of a k-cycle is (-1)^(k-1): [(2, -1), (3, 1), (4, -1)]</code></pre>
 <section id="sec-representations-schur" class="level2">
 <h2 class="anchored" data-anchor-id="sec-representations-schur">Representations and Schur’s lemma</h2>
 <p>A representation makes a group act by matrices, and almost every use of symmetry in physics goes through one: fields and quantum states transform in representations of a symmetry group, and selection rules are statements about which representations of one group can be matched with representations of another. Schur’s lemma is the tool that decides such matching, and this section defines representations and proves it.</p>
+<p>For more on this topic, see <span class="citation" data-cites="keskivakkuri2022mathematical">Keski-Vakkuri et al. (<a href="#ref-keskivakkuri2022mathematical" role="doc-biblioref">2022</a>, Ch. 3)</span> and <span class="citation" data-cites="mukunda2022continuous">Mukunda and Chaturvedi (<a href="#ref-mukunda2022continuous" role="doc-biblioref">2022</a>, Ch. 1)</span>.</p>
 <section id="representations" class="level3">
 <h3 class="anchored" data-anchor-id="representations">Representations</h3>
 <p>Abstract groups become computable when each element is replaced by a matrix and the multiplication by matrix multiplication. The definition below asks that this replacement respect the products.</p>
@@ -5091,10 +5114,21 @@ S^2</span>?</p>
 </div>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-chirivi2020selected" class="csl-entry" role="listitem">
+Chirivì, Rocco, Ilaria Del Corso, and Roberto Dvornicich. 2020. <em>Selected Exercises in Algebra: Volume 1</em>. UNITEXT 119. Springer.
+</div>
+<div id="ref-keskivakkuri2022mathematical" class="csl-entry" role="listitem">
+Keski-Vakkuri, Esko, Claus K. Montonen, and Marco Panero. 2022. <em>Mathematical Methods for Physics: An Introduction to Group Theory, Topology and Geometry</em>. Cambridge University Press.
+</div>
+<div id="ref-mukunda2022continuous" class="csl-entry" role="listitem">
+Mukunda, Narasimhaiengar, and Subhash Chaturvedi. 2022. <em>Continuous Groups for Physicists</em>. Cambridge University Press.
+</div>
+</div></section></div></main> <!-- /main -->
 <script>
 // Turns the tags on a post page into links to the filtered Posts page.
 document.addEventListener("DOMContentLoaded", () => {

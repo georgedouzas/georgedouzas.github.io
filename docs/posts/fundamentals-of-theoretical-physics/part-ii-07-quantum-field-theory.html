@@ -397,6 +397,7 @@ window.Quarto = {
 <section id="sec-quantisation" class="level2">
 <h2 class="anchored" data-anchor-id="sec-quantisation">Quantisation in outline</h2>
 <p>Everything in these lectures is classical field theory, but the theories are meant as quantum theories, and three of their features, particles, renormalisation and anomalies, exist only after quantisation. This chapter says what quantisation adds, one notion at a time, at the level needed to read the later parts: the modes of a free field are harmonic oscillators, their quanta are particles, and the quantum consistency of the Higgs mechanism and of the fermion content constrains the models of Part V.</p>
+<p>For more on this topic, see <span class="citation" data-cites="derezinski2022mathematics">Dereziński and Gérard (<a href="#ref-derezinski2022mathematics" role="doc-biblioref">2022</a>, Ch. 18-19)</span>, <span class="citation" data-cites="galitski2013exploring">Galitski et al. (<a href="#ref-galitski2013exploring" role="doc-biblioref">2013</a>, Ch. 10)</span>, <span class="citation" data-cites="talagrand2022what">Talagrand (<a href="#ref-talagrand2022what" role="doc-biblioref">2022</a>, Ch. 3)</span> and <span class="citation" data-cites="williams2023introduction">Williams (<a href="#ref-williams2023introduction" role="doc-biblioref">2023</a>, Ch. 6)</span>.</p>
 <section id="canonical-quantisation" class="level3">
 <h3 class="anchored" data-anchor-id="canonical-quantisation">Canonical quantisation</h3>
 <p>Classical mechanics in Hamiltonian form (<a href="part-ii-01-classical-mechanics.html#sec-hamiltonian">Hamiltonian mechanics</a>) describes a system by coordinates and momenta whose Poisson brackets generate the time evolution. Quantum mechanics keeps this algebraic structure but realises it by operators on a Hilbert space, and the definition below states the rule that converts one into the other; in this section <span class="math inline">\hbar</span> is kept explicit.</p>
@@ -1322,6 +1323,7 @@ quarks alone: sum Y^3 = -3/4 , sum Y = 0</code></pre>
 <section id="sec-canonical-quantisation" class="level2">
 <h2 class="anchored" data-anchor-id="sec-canonical-quantisation">Canonical quantisation of the free scalar</h2>
 <p>The previous section stated in outline that a free field is a collection of oscillators. This section carries out the construction for the real scalar field of mass <span class="math inline">m</span>, with <span class="math inline">\hbar = c = 1</span> from here on: the field becomes an operator obeying canonical commutation relations, its plane-wave modes become independent ladder operators, and the states they generate from the vacuum form the Fock space, whose vectors are states of finitely many particles. On a circle of length <span class="math inline">L</span> every step reduces to finite sums, and the commutators can be computed there exactly.</p>
+<p>For more on this topic, see <span class="citation" data-cites="aitchison2024gauge">Aitchison and Hey (<a href="#ref-aitchison2024gauge" role="doc-biblioref">2024</a>, Ch. 5-7)</span>, <span class="citation" data-cites="buchbinder2021introduction">Buchbinder and Shapiro (<a href="#ref-buchbinder2021introduction" role="doc-biblioref">2021</a>, Ch. 5)</span>, <span class="citation" data-cites="derezinski2022mathematics">Dereziński and Gérard (<a href="#ref-derezinski2022mathematics" role="doc-biblioref">2022</a>, Ch. 3)</span>, <span class="citation" data-cites="gelis2021problems">Gelis (<a href="#ref-gelis2021problems" role="doc-biblioref">2021</a>)</span> and <span class="citation" data-cites="talagrand2022what">Talagrand (<a href="#ref-talagrand2022what" role="doc-biblioref">2022</a>, Ch. 5-7, Ch. 10)</span>.</p>
 <section id="field-operators" class="level3">
 <h3 class="anchored" data-anchor-id="field-operators">Field operators</h3>
 <p>A classical field assigns a number to every point of space at each time, and its momentum density is <span class="math inline">\pi =
@@ -1955,6 +1957,7 @@ coefficients agree: True</code></pre>
 <section id="sec-propagators" class="level2">
 <h2 class="anchored" data-anchor-id="sec-propagators">Propagators and Green’s functions</h2>
 <p>The vacuum expectation values of products of field operators are the observable content of a free field theory, and the simplest of them, the two-point functions, turn out to be the Green’s functions of the Klein-Gordon operator studied in <a href="../fundamentals-of-mathematics-for-physicists/part-i-05-differential-equations.html#sec-greens-functions">Green’s functions</a>. This section defines the vacuum two-point function, the time-ordered product that yields the Feynman propagator, and the Euclidean correlator obtained by rotating time to the imaginary axis; the poles of the propagator, their residues and the rotation itself are computed with the tools of <a href="../fundamentals-of-mathematics-for-physicists/part-i-04-complex-analysis.html#sec-residues">Series and residues</a> and <a href="../fundamentals-of-mathematics-for-physicists/part-i-04-complex-analysis.html#def-wick-rotation">Definition 21 of Complex analysis</a>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="buchbinder2021introduction">Buchbinder and Shapiro (<a href="#ref-buchbinder2021introduction" role="doc-biblioref">2021</a>, Ch. 6, Ch. 7)</span> and <span class="citation" data-cites="paganini2023fundamentals">Paganini (<a href="#ref-paganini2023fundamentals" role="doc-biblioref">2023</a>, Ch. 5)</span>.</p>
 <section id="vacuum-correlators" class="level3">
 <h3 class="anchored" data-anchor-id="vacuum-correlators">Vacuum correlators</h3>
 <p>The field operators do not commute at different times, so the order of a product matters. The definition takes the plain product first; its expectation value in the vacuum is computed directly from the mode expansion.</p>
@@ -2579,6 +2582,7 @@ i\epsilon)^2 - \omega^2} = 0</span>, the retarded Green’s function at <span cl
 <section id="sec-field-path-integral" class="level2">
 <h2 class="anchored" data-anchor-id="sec-field-path-integral">The path integral and Euclidean field theory</h2>
 <p>The path integral of quantum mechanics (<a href="part-ii-03-quantum-mechanics.html#sec-path-integral">Perturbation theory and the path integral</a>) writes transition amplitudes as integrals over paths weighted by <span class="math inline">e^{iS}</span>. For a field the paths are field configurations, and after the rotation to imaginary time of <a href="#sec-propagators" class="quarto-xref">Section&nbsp;1.3</a> the weight becomes <span class="math inline">e^{-S_E}</span>, a Gaussian for a free field. This section defines the generating functional of correlation functions, evaluates the Gaussian integral that gives it for a free field, derives Wick’s theorem from it, and returns to the thermal circle of <a href="part-ii-02-thermodynamics-statistical-mechanics.html#sec-thermal-circle">Finite temperature as a compact Euclidean time</a>, where Euclidean time is periodic. It ends with the path integral on a lattice: exactly for a free field, through the spectral decomposition of Euclidean correlators, and by Metropolis sampling when the integral is not Gaussian.</p>
+<p>For more on this topic, see <span class="citation" data-cites="derezinski2022mathematics">Dereziński and Gérard (<a href="#ref-derezinski2022mathematics" role="doc-biblioref">2022</a>, Ch. 20-21)</span>, <span class="citation" data-cites="gelis2021problems">Gelis (<a href="#ref-gelis2021problems" role="doc-biblioref">2021</a>, problems 18-25)</span>, <span class="citation" data-cites="nastase2023quantum">Năstase (<a href="#ref-nastase2023quantum" role="doc-biblioref">2023</a>, Ch. 56)</span>, <span class="citation" data-cites="shankar2017quantum">Shankar (<a href="#ref-shankar2017quantum" role="doc-biblioref">2017</a>, Ch. 3-6)</span>, <span class="citation" data-cites="strocchi2021symmetry">Strocchi (<a href="#ref-strocchi2021symmetry" role="doc-biblioref">2021</a>)</span> and <span class="citation" data-cites="tornetta2022mathematical">Tornetta (<a href="#ref-tornetta2022mathematical" role="doc-biblioref">2022</a>, Ch. 4)</span>.</p>
 <section id="the-generating-functional" class="level3">
 <h3 class="anchored" data-anchor-id="the-generating-functional">The generating functional</h3>
 <p>All correlation functions of a theory are packaged in one functional of an external source. The definition gives it in both signatures; the Euclidean form is the one that can be defined as a limit of ordinary integrals.</p>
@@ -4235,6 +4239,7 @@ effective mass log(&lt;q^2&gt;/&lt;q_n q_(n+1)&gt;)/a = 0.982; lattice E = eps/a
 <section id="sec-feynman-diagrams" class="level2">
 <h2 class="anchored" data-anchor-id="sec-feynman-diagrams">Perturbation theory and Feynman diagrams</h2>
 <p>A free field is solved exactly by its modes; an interacting field is not, and its correlators are computed as power series in the coupling. Each term of the series is a Gaussian integral of the previous section, evaluated by Wick’s theorem, and the pairings are drawn as diagrams whose lines are propagators and whose vertices are interactions. This section introduces the quartic interaction, states the Feynman rules in outline, explains the symmetry factors and evaluates the basic one-loop integral with Gamma functions (<a href="../fundamentals-of-mathematics-for-physicists/part-i-04-complex-analysis.html#def-gamma-function">Definition 18 of Complex analysis</a>).</p>
+<p>For more on this topic, see <span class="citation" data-cites="buchbinder2021introduction">Buchbinder and Shapiro (<a href="#ref-buchbinder2021introduction" role="doc-biblioref">2021</a>, Ch. 8)</span>, <span class="citation" data-cites="talagrand2022what">Talagrand (<a href="#ref-talagrand2022what" role="doc-biblioref">2022</a>, Ch. 11-14)</span> and <span class="citation" data-cites="williams2023introduction">Williams (<a href="#ref-williams2023introduction" role="doc-biblioref">2023</a>, Ch. 7)</span>.</p>
 <section id="interactions" class="level3">
 <h3 class="anchored" data-anchor-id="interactions">Interactions</h3>
 <p>The simplest interaction of a real scalar that respects <span class="math inline">\phi \to -\phi</span> and keeps the energy bounded below is a quartic term. The definition fixes its normalisation and states in outline how correlators of the interacting theory are expanded in the coupling.</p>
@@ -5751,11 +5756,47 @@ exchanged by beta &lt;-&gt; L: True</code></pre>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-aitchison2024gauge" class="csl-entry" role="listitem">
+Aitchison, Ian J. R., and Anthony J. G. Hey. 2024. <em>Gauge Theories in Particle Physics: A Practical Introduction, Volume 1: From Relativistic Quantum Mechanics to QED</em>. Fifth. CRC Press.
+</div>
 <div id="ref-alvarezgaume2005" class="csl-entry" role="listitem">
 Alvarez-Gaume, Luis, and Miguel A. Vazquez-Mozo. 2005. <em>Introductory Lectures on Quantum Field Theory</em>. <a href="https://arxiv.org/abs/hep-th/0510040">https://arxiv.org/abs/hep-th/0510040</a>.
 </div>
 <div id="ref-boudreau2018applied" class="csl-entry" role="listitem">
 Boudreau, Joseph F., and Eric S. Swanson. 2018. <em>Applied Computational Physics</em>. Oxford University Press.
+</div>
+<div id="ref-buchbinder2021introduction" class="csl-entry" role="listitem">
+Buchbinder, Iosif L., and Ilya L. Shapiro. 2021. <em>Introduction to Quantum Field Theory with Applications to Quantum Gravity</em>. Oxford University Press.
+</div>
+<div id="ref-derezinski2022mathematics" class="csl-entry" role="listitem">
+Dereziński, Jan, and Christian Gérard. 2022. <em>Mathematics of Quantization and Quantum Fields</em>. Cambridge Monographs on Mathematical Physics. Cambridge University Press.
+</div>
+<div id="ref-galitski2013exploring" class="csl-entry" role="listitem">
+Galitski, Victor, Boris Karnakov, Vladimir Kogan, and Jr. Victor Galitski. 2013. <em>Exploring Quantum Mechanics: A Collection of 700+ Solved Problems for Students, Lecturers, and Researchers</em>. Oxford University Press.
+</div>
+<div id="ref-gelis2021problems" class="csl-entry" role="listitem">
+Gelis, François. 2021. <em>Problems in Quantum Field Theory: With Fully-Worked Solutions</em>. Cambridge University Press.
+</div>
+<div id="ref-nastase2023quantum" class="csl-entry" role="listitem">
+Năstase, Horaţiu. 2023. <em>Quantum Mechanics: A Graduate Course</em>. Cambridge University Press.
+</div>
+<div id="ref-paganini2023fundamentals" class="csl-entry" role="listitem">
+Paganini, Pascal. 2023. <em>Fundamentals of Particle Physics: Understanding the Standard Model</em>. Cambridge University Press.
+</div>
+<div id="ref-shankar2017quantum" class="csl-entry" role="listitem">
+Shankar, R. 2017. <em>Quantum Field Theory and Condensed Matter: An Introduction</em>. Cambridge University Press.
+</div>
+<div id="ref-strocchi2021symmetry" class="csl-entry" role="listitem">
+Strocchi, Franco. 2021. <em>Symmetry Breaking</em>. Third. Theoretical and Mathematical Physics. Springer.
+</div>
+<div id="ref-talagrand2022what" class="csl-entry" role="listitem">
+Talagrand, Michel. 2022. <em>What Is a Quantum Field Theory? A First Introduction for Mathematicians</em>. Cambridge University Press.
+</div>
+<div id="ref-tornetta2022mathematical" class="csl-entry" role="listitem">
+Tornetta, Gabriele Nunzio. 2022. <em>Mathematical Quantum Physics: A Foundational Introduction</em>. Springer.
+</div>
+<div id="ref-williams2023introduction" class="csl-entry" role="listitem">
+Williams, Anthony G. 2023. <em>Introduction to Quantum Field Theory: Classical Mechanics to Gauge Field Theories</em>. Cambridge University Press.
 </div>
 </div></section></div></main> <!-- /main -->
 <script>

@@ -61,7 +61,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -399,6 +418,7 @@ window.Quarto = {
 <section id="sec-complex-numbers" class="level2">
 <h2 class="anchored" data-anchor-id="sec-complex-numbers">Complex numbers and functions</h2>
 <p>The field <span class="math inline">\mathbb{C}</span>, modulus and argument, the exponential and the logarithm, branches and branch cuts. The six notions of this section are the vocabulary of the chapter; the single proposition at its end, on the roots of unity, exercises all of them on explicit numbers.</p>
+<p>For more on this topic, see <span class="citation" data-cites="yu2022problems">Yu (<a href="#ref-yu2022problems" role="doc-biblioref">2022</a>, Ch. 1-2, Ch. 4)</span>.</p>
 <div id="fig-complex-plane" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-complex-plane-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3321,6 +3341,7 @@ theorem split_over_eisenstein {K : Type*} [Field K] (ω₃ z : K) (h : ω₃ ^ 2
 <section id="sec-holomorphic" class="level2">
 <h2 class="anchored" data-anchor-id="sec-holomorphic">Holomorphic functions</h2>
 <p>The complex derivative, the Cauchy-Riemann equations, harmonic functions and conformal maps. A function of a complex variable is differentiable when its difference quotient has a limit that does not depend on the direction of approach; this single requirement, written out in real and imaginary parts, is the pair of Cauchy-Riemann equations, and it forces the real and imaginary parts to be harmonic and the map to preserve angles.</p>
+<p>For more on this topic, see <span class="citation" data-cites="yu2022problems">Yu (<a href="#ref-yu2022problems" role="doc-biblioref">2022</a>, Ch. 4)</span>.</p>
 <div id="fig-domain-colouring" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-domain-colouring-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -6329,6 +6350,7 @@ theorem log_deriv_by_inverse (w : ℂ) (hw : w ∈ slitPlane) : HasDerivAt Compl
 <section id="sec-contour-integration" class="level2">
 <h2 class="anchored" data-anchor-id="sec-contour-integration">Contour integration</h2>
 <p>Contour integrals, Cauchy’s theorem, Cauchy’s integral formula and Liouville’s theorem. Integrating a holomorphic function along a curve depends only on the endpoints when the function has a primitive, and Cauchy’s theorem says that it always does locally; the integral formula then expresses a holomorphic function inside a closed curve by its values on the curve, from which infinite differentiability, the Taylor series of <a href="#sec-residues" class="quarto-xref">Section&nbsp;1.4</a> and Liouville’s theorem follow.</p>
+<p>For more on this topic, see <span class="citation" data-cites="yu2022problems">Yu (<a href="#ref-yu2022problems" role="doc-biblioref">2022</a>, Ch. 6)</span>.</p>
 <div id="fig-contours-poles" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-contours-poles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -8527,6 +8549,7 @@ equal to 4 pi i: True</code></pre>
 <section id="sec-residues" class="level2">
 <h2 class="anchored" data-anchor-id="sec-residues">Series and residues</h2>
 <p>Taylor and Laurent series, poles, the residue theorem and real integrals computed by residues. Cauchy’s integral formula expands a holomorphic function in a power series on every disc where it is holomorphic, and in a two-sided series on every annulus; the coefficient of <span class="math inline">1/(z - z_0)</span> in the latter, the residue, is all that a closed contour integral sees, and the residue theorem turns the evaluation of integrals into algebra.</p>
+<p>For more on this topic, see <span class="citation" data-cites="magnus2023essential">Magnus (<a href="#ref-magnus2023essential" role="doc-biblioref">2023</a>, Ch. 3)</span> and <span class="citation" data-cites="yu2022problems">Yu (<a href="#ref-yu2022problems" role="doc-biblioref">2022</a>, Ch. 5, Ch. 9)</span>.</p>
 <div id="fig-laurent-series" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-laurent-series-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -11164,6 +11187,7 @@ theorem odd_pv (ε R : ℝ) : (∫ x in (-R)..(-ε), Real.cos x / x) + ∫ x in 
 <section id="sec-analytic-continuation" class="level2">
 <h2 class="anchored" data-anchor-id="sec-analytic-continuation">Analytic continuation and special functions</h2>
 <p>Analytic continuation, the Gamma and Beta functions, the zeta function in outline, Wick rotation as a contour deformation. A holomorphic function is determined by its values on any small set with a limit point, so a formula valid on a half-plane defines a function far beyond it; the Gamma and zeta functions are the standard examples, and the rotation of an integration contour from the real to the imaginary axis, Wick rotation, is the same principle applied to integrals.</p>
+<p>For more on this topic, see <span class="citation" data-cites="yu2022problems">Yu (<a href="#ref-yu2022problems" role="doc-biblioref">2022</a>, Ch. 7-8)</span>.</p>
 <div id="fig-gamma-function" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gamma-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -14614,10 +14638,18 @@ theorem wick_rotated_propagator (E τ : ℂ) : Complex.exp (-I * E * (-I * τ)) 
 </div>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-magnus2023essential" class="csl-entry" role="listitem">
+Magnus, Robert. 2023. <em>Essential Ordinary Differential Equations</em>. Springer Undergraduate Mathematics Series. Springer.
+</div>
+<div id="ref-yu2022problems" class="csl-entry" role="listitem">
+Yu, Kit-Wing. 2022. <em>Problems and Solutions for Undergraduate Complex Analysis i</em>. Kit-Wing Yu (self-published, Hong Kong).
+</div>
+</div></section></div></main> <!-- /main -->
 <script>
 // Turns the tags on a post page into links to the filtered Posts page.
 document.addEventListener("DOMContentLoaded", () => {

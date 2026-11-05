@@ -469,6 +469,7 @@ window.Quarto = {
 <section id="sec-banach-spaces" class="level2">
 <h2 class="anchored" data-anchor-id="sec-banach-spaces">Normed and Banach spaces</h2>
 <p>A norm measures the size of a vector and turns a vector space into a metric space in which limits, series and continuity make sense. This part defines norms and complete normed spaces, introduces the three families of spaces that the rest of the chapter works in, the sequence spaces <span class="math inline">\ell^p</span>, the function spaces <span class="math inline">L^p</span> and the continuous functions <span class="math inline">C(K)</span>, and then studies the linear maps between normed spaces and the dual space of continuous linear functionals. The line of argument follows the lecture notes of <span class="citation" data-cites="arcozzi2025">Arcozzi (<a href="#ref-arcozzi2025" role="doc-biblioref">2025</a>, Ch. 1 and 3)</span>, with the Hilbert-space special cases of <span class="citation" data-cites="picard2020primer">Rainer Picard and Waurick (<a href="#ref-picard2020primer" role="doc-biblioref">2020</a>, App. B)</span> as examples.</p>
+<p>For more on this topic, see <span class="citation" data-cites="cheung2024metric">Cheung (<a href="#ref-cheung2024metric" role="doc-biblioref">2024, sec. 4.2</a>)</span>.</p>
 <section id="norms-and-normed-spaces" class="level3">
 <h3 class="anchored" data-anchor-id="norms-and-normed-spaces">Norms and normed spaces</h3>
 <p>On <span class="math inline">\mathbb{R}^n</span> the Euclidean length is one way among many to measure a vector: the largest coordinate or the sum of the absolute values of the coordinates serve as well. The figure draws the unit balls of several such measures in the plane, and the definition below names the three properties that all of them share.</p>
@@ -3518,6 +3519,7 @@ S^k\delta^{(1)} = (1, \tfrac12, \tfrac14, \dots)</span>, of <span class="math in
 <section id="sec-four-principles" class="level2">
 <h2 class="anchored" data-anchor-id="sec-four-principles">The four principles</h2>
 <p>Four theorems carry most of the weight of functional analysis on Banach spaces. The Hahn-Banach theorem supplies enough continuous functionals to separate points; the Baire category theorem turns completeness into a statement about the size of sets; the uniform boundedness principle and the open mapping theorem, both consequences of Baire’s, turn pointwise information into uniform estimates. This part states each theorem, proves the shorter ones in the exercises, and shows by counterexamples why each hypothesis, completeness above all, is needed. The proofs follow <span class="citation" data-cites="arcozzi2025">Arcozzi (<a href="#ref-arcozzi2025" role="doc-biblioref">2025, secs. 3.2, 3.5</a> and 3.6)</span>; closed operators follow <span class="citation" data-cites="picard2020primer">Rainer Picard and Waurick (<a href="#ref-picard2020primer" role="doc-biblioref">2020, sec. B.4</a>)</span> and <span class="citation" data-cites="waterstraat2016">Waterstraat (<a href="#ref-waterstraat2016" role="doc-biblioref">2016, sec. 1.2</a>)</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="gasinski2014exercises">Gasiński and Papageorgiou (<a href="#ref-gasinski2014exercises" role="doc-biblioref">2014</a>, Ch. 5)</span>.</p>
 <section id="the-hahn-banach-theorem" class="level3">
 <h3 class="anchored" data-anchor-id="the-hahn-banach-theorem">The Hahn-Banach theorem</h3>
 <p>A functional defined on a subspace can be extended to the whole space without increasing its norm. In a Hilbert space this is an orthogonal projection followed by the Riesz representation, but in a general normed space there is no projection, and the extension needs an argument by induction on dimensions closed off by Zorn’s lemma.</p>
@@ -5258,6 +5260,7 @@ L_N\|f\|_\infty</span> for all <span class="math inline">f</span>, the norm is e
 <section id="sec-weak-topologies" class="level2">
 <h2 class="anchored" data-anchor-id="sec-weak-topologies">Weak topologies and reflexivity</h2>
 <p>In infinite dimensions the closed unit ball is never compact in norm, so bounded sequences need not have convergent subsequences. Weakening the notion of convergence restores compactness: a sequence converges weakly when every continuous functional converges along it. This part defines weak and weak-* convergence on the examples of oscillating, travelling and concentrating bumps, proves that the dual unit ball is weak-* compact (the Banach-Alaoglu theorem), and characterises the reflexive spaces, in which bounded sequences always have weakly convergent subsequences. The exposition follows <span class="citation" data-cites="ramesh2020weak">Ramesh (<a href="#ref-ramesh2020weak" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="arcozzi2025">Arcozzi (<a href="#ref-arcozzi2025" role="doc-biblioref">2025, sec. 3.4</a>)</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="borodzik2019problems">Borodzik et al. (<a href="#ref-borodzik2019problems" role="doc-biblioref">2019</a>, Ch. 4)</span> and <span class="citation" data-cites="gasinski2014exercises">Gasiński and Papageorgiou (<a href="#ref-gasinski2014exercises" role="doc-biblioref">2014</a>, Ch. 4)</span>.</p>
 <section id="weak-and-weak--convergence" class="level3">
 <h3 class="anchored" data-anchor-id="weak-and-weak--convergence">Weak and weak-* convergence</h3>
 <p>A sequence of functions can lose its norm to oscillation, escape to infinity or concentrate at a point, and in each case it converges to zero in a weaker sense. The figure shows the three mechanisms, and the definitions below make “weaker” precise.</p>
@@ -6492,6 +6495,7 @@ X)</span> by definition of that topology. Linearity is clear, and <span class="m
 <section id="sec-hilbert-spaces" class="level2">
 <h2 class="anchored" data-anchor-id="sec-hilbert-spaces">Inner product and Hilbert spaces</h2>
 <p>An inner product assigns a complex number to two vectors and gives a vector space lengths, angles and orthogonality. This section defines inner products and orthonormal systems, introduces completeness and the two model Hilbert spaces <span class="math inline">\ell^2</span> and <span class="math inline">L^2</span>, defines orthonormal bases with Parseval’s identity, and quotes the Riesz representation theorem; the Gram-Schmidt process and the orthogonal projection are then carried out on explicit vectors and functions.</p>
+<p>For more on this topic, see <span class="citation" data-cites="axler2024linear">Axler (<a href="#ref-axler2024linear" role="doc-biblioref">2024</a>, Ch. 6, Ch. 7)</span> and <span class="citation" data-cites="derezinski2022mathematics">Dereziński and Gérard (<a href="#ref-derezinski2022mathematics" role="doc-biblioref">2022</a>, Ch. 1-2)</span>.</p>
 <section id="inner-products" class="level3">
 <h3 class="anchored" data-anchor-id="inner-products">Inner products</h3>
 <p>A bilinear form (<a href="part-i-02-linear-algebra.html#def-bilinear-form">Definition 11 of Linear algebra</a>) assigns a number to two vectors, and on a real space a positive definite symmetric one gives lengths and angles. On a complex space the form must be adjusted so that <span class="math inline">\langle u, u\rangle</span> stays real and positive, and the definition below fixes the convention used throughout: the inner product is antilinear in its first slot and linear in its second, which is the convention of quantum mechanics.</p>
@@ -7637,6 +7641,7 @@ N = 5 : P_N f = 4/15*(48*cos(x)^4 - 16*cos(x)^2 + 13)*sin(x)/pi ; error = 2/225*
 <section id="sec-bounded-operators" class="level2">
 <h2 class="anchored" data-anchor-id="sec-bounded-operators">Bounded operators</h2>
 <p>A bounded operator is a linear map of a Hilbert space to itself that stretches no vector by more than a fixed factor; in finite dimensions every linear map is one. This section defines the operator norm, the adjoint and the three classes of operators that quantum mechanics and spectral theory use constantly, self-adjoint, unitary and projection operators, and ends with the commutator; the figure shows how an operator deforms the unit circle, and the proposition checks the identities in Sage.</p>
+<p>For more on this topic, see <span class="citation" data-cites="scott2023problems">Scott (<a href="#ref-scott2023problems" role="doc-biblioref">2023</a>, Ch. 4)</span>.</p>
 <section id="the-operator-norm" class="level3">
 <h3 class="anchored" data-anchor-id="the-operator-norm">The operator norm</h3>
 <p>A linear map (<a href="part-i-02-linear-algebra.html#def-linear-map">Definition 7 of Linear algebra</a>) between inner product spaces may stretch different vectors by different factors, and the largest stretching factor measures its size. The figure shows the image of the unit circle under three operators, an ellipse, a circle and a segment, whose longest radius is this factor; the definition below names it.</p>
@@ -8782,6 +8787,7 @@ x, p Hermitian: True True ; [x, p] = i [a, a^dagger]: True</code></pre>
 <section id="sec-spectral-theory" class="level2">
 <h2 class="anchored" data-anchor-id="sec-spectral-theory">Spectral theory</h2>
 <p>The spectrum of an operator is the set of numbers <span class="math inline">\lambda</span> for which <span class="math inline">A - \lambda</span> fails to be invertible; for a matrix these are the eigenvalues, and for operators on infinite-dimensional spaces the set may also contain a continuous part without eigenvectors. This section defines eigenvalues and the spectrum, proves the spectral theorem for Hermitian matrices, quotes it for compact self-adjoint operators, and builds the functional calculus that defines <span class="math inline">f(A)</span>, in particular the unitary <span class="math inline">e^{iA}</span>; the figure shows the eigenvectors and the exponential of a symmetric matrix.</p>
+<p>For more on this topic, see <span class="citation" data-cites="scott2023problems">Scott (<a href="#ref-scott2023problems" role="doc-biblioref">2023</a>, Ch. 6)</span>.</p>
 <section id="eigenvalues" class="level3">
 <h3 class="anchored" data-anchor-id="eigenvalues">Eigenvalues</h3>
 <p>A vector that an operator merely rescales is the simplest thing an operator can do, and the rescaling factor is the number attached to it. The definition below fixes the terms, including the multiplicity of an eigenvalue and the eigenspace, in a form that applies equally to matrices and to operators on function spaces.</p>
@@ -12750,6 +12756,7 @@ rho = 2: (2, 1) and (0, 3) both give 9/2 = 9/2 -&gt; multiplicity 4 + 2 = 6; lik
 <section id="sec-sobolev-spaces" class="level2">
 <h2 class="anchored" data-anchor-id="sec-sobolev-spaces">Sobolev spaces</h2>
 <p>Differential operators are unbounded on <span class="math inline">L^2</span>, but they become bounded between spaces that measure smoothness in a square-integrable way. This part defines weak derivatives, the Sobolev spaces <span class="math inline">H^s</span> on the torus through Fourier coefficients and on <span class="math inline">\mathbb{R}^n</span> through the Fourier transform, and proves the three facts the book uses: functions with more than <span class="math inline">n/2</span> derivatives in <span class="math inline">L^2</span> are continuous (the Sobolev embedding), the Laplacian gains two derivatives (elliptic regularity), and on a compact space a gain of smoothness is a compact operator (the Rellich theorem), which makes the spectra of elliptic operators discrete. The Fourier conventions are those of <a href="part-i-06-fourier-analysis.html#def-fourier-coefficient">Definition 2 of Fourier analysis</a> and <a href="part-i-06-fourier-analysis.html#def-fourier-transform">Definition 4 of Fourier analysis</a>; the compact-resolvent argument is that of <span class="citation" data-cites="waterstraat2016">Waterstraat (<a href="#ref-waterstraat2016" role="doc-biblioref">2016</a>, Thm. 1.3.5)</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="borodzik2019problems">Borodzik et al. (<a href="#ref-borodzik2019problems" role="doc-biblioref">2019</a>, Ch. 2)</span>.</p>
 <section id="weak-derivatives" class="level3">
 <h3 class="anchored" data-anchor-id="weak-derivatives">Weak derivatives</h3>
 <p>A function with a corner has no classical derivative at the corner, but integration by parts against smooth test functions still defines one. The figure shows such a weak derivative, and a continuous function that has none.</p>
@@ -14512,6 +14519,7 @@ u) = \int\bar\varphi f</span> for all <span class="math inline">\varphi \in \dot
 <section id="sec-traces-heat-kernels" class="level2">
 <h2 class="anchored" data-anchor-id="sec-traces-heat-kernels">Traces, determinants and heat kernels</h2>
 <p>The trace of a matrix is the sum of its eigenvalues, and for an operator on an infinite-dimensional space the sum may or may not converge; when it does for <span class="math inline">e^{-t(-\Delta)}</span>, the resulting function of <span class="math inline">t</span> encodes the spectrum of the Laplacian and, through its small-<span class="math inline">t</span> behaviour, the geometry of the space. This section defines trace-class operators and determinants, the heat kernel and heat trace, quotes the small-<span class="math inline">t</span> asymptotics, and introduces zeta regularisation with the Casimir energy as its application in outline; the figure shows the heat trace of the circle against its leading asymptotics.</p>
+<p>For more on this topic, see <span class="citation" data-cites="buchbinder2021introduction">Buchbinder and Shapiro (<a href="#ref-buchbinder2021introduction" role="doc-biblioref">2021, sec. 13.4</a>)</span>.</p>
 <section id="trace-class" class="level3">
 <h3 class="anchored" data-anchor-id="trace-class">Trace class</h3>
 <p>Summing the diagonal entries of an infinite matrix may give a different answer in a different basis, or no answer at all, unless the entries decay fast enough. The definition below isolates the operators for which the trace is well defined and basis independent, with the eigenvalue sum as the formula that matters.</p>
@@ -15658,6 +15666,7 @@ zeta(-2n) = 0 for n = 1..4: True</code></pre>
 <section id="sec-banach-algebras" class="level2">
 <h2 class="anchored" data-anchor-id="sec-banach-algebras">Banach and C*-algebras</h2>
 <p>Bounded operators can be added, multiplied and normed, and many of their properties depend only on these operations. A Banach algebra abstracts them; a C*-algebra adds the adjoint and the identity <span class="math inline">\|a^*a\| = \|a\|^2</span> that holds for operators on a Hilbert space. This part defines both, proves that every element of a Banach algebra has a non-empty compact spectrum whose radius is <span class="math inline">\lim\|a^n\|^{1/n}</span>, and constructs the continuous functional calculus of self-adjoint elements, which is how functions of observables are defined in quantum mechanics. The outline follows <span class="citation" data-cites="arcozzi2025">Arcozzi (<a href="#ref-arcozzi2025" role="doc-biblioref">2025, sec. 6.1</a>)</span> and <span class="citation" data-cites="landsman1998">Landsman (<a href="#ref-landsman1998" role="doc-biblioref">1998, secs. 2.1–2.5</a> and 2.8)</span>, with numerical examples from <span class="citation" data-cites="izaac2018computational">Izaac and Wang (<a href="#ref-izaac2018computational" role="doc-biblioref">2018</a>, Ch. 7)</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="derezinski2022mathematics">Dereziński and Gérard (<a href="#ref-derezinski2022mathematics" role="doc-biblioref">2022</a>, Ch. 4-6)</span> and <span class="citation" data-cites="tornetta2022mathematical">Tornetta (<a href="#ref-tornetta2022mathematical" role="doc-biblioref">2022</a>, Ch. 1)</span>.</p>
 <section id="banach-algebras" class="level3">
 <h3 class="anchored" data-anchor-id="banach-algebras">Banach algebras</h3>
 <p>In a Banach algebra the geometric series converges whenever the ratio has norm less than one, exactly as for numbers. The figure shows the partial sums of <span class="math inline">\sum A^k</span> for two matrices, one of norm less than one and one whose norm is larger but whose powers still decay, and the definition below names the setting.</p>
@@ -17641,6 +17650,24 @@ Casimir energy E = (pi/L) 2 zeta(-1) = -1/6*pi/L</code></pre>
 <div id="ref-arcozzi2025" class="csl-entry" role="listitem">
 Arcozzi, Nicola. 2025. <em>Functional Analysis and Operator Theory</em>. <a href="https://arxiv.org/abs/2505.05526">https://arxiv.org/abs/2505.05526</a>.
 </div>
+<div id="ref-axler2024linear" class="csl-entry" role="listitem">
+Axler, Sheldon. 2024. <em>Linear Algebra Done Right</em>. Fourth. Undergraduate Texts in Mathematics. Springer.
+</div>
+<div id="ref-borodzik2019problems" class="csl-entry" role="listitem">
+Borodzik, Maciej, Paweł Goldstein, Piotr Rybka, and Anna Zatorska-Goldstein. 2019. <em>Problems on Partial Differential Equations</em>. Problem Books in Mathematics. Springer.
+</div>
+<div id="ref-buchbinder2021introduction" class="csl-entry" role="listitem">
+Buchbinder, Iosif L., and Ilya L. Shapiro. 2021. <em>Introduction to Quantum Field Theory with Applications to Quantum Gravity</em>. Oxford University Press.
+</div>
+<div id="ref-cheung2024metric" class="csl-entry" role="listitem">
+Cheung, Wing-Sum. 2024. <em>Metric Space Topology: Examples, Exercises and Solutions</em>. Third. Series on Analysis, Applications and Computation, Vol. 12. World Scientific.
+</div>
+<div id="ref-derezinski2022mathematics" class="csl-entry" role="listitem">
+Dereziński, Jan, and Christian Gérard. 2022. <em>Mathematics of Quantization and Quantum Fields</em>. Cambridge Monographs on Mathematical Physics. Cambridge University Press.
+</div>
+<div id="ref-gasinski2014exercises" class="csl-entry" role="listitem">
+Gasiński, Leszek, and Nikolaos S. Papageorgiou. 2014. <em>Exercises in Analysis: Part 1</em>. Problem Books in Mathematics. Springer.
+</div>
 <div id="ref-izaac2018computational" class="csl-entry" role="listitem">
 Izaac, Joshua, and Jingbo Wang. 2018. <em>Computational Quantum Mechanics</em>. Springer.
 </div>
@@ -17655,6 +17682,12 @@ Rainer Picard, Sascha Trostorff, Des McGhee, and Marcus Waurick. 2020. <em>A Pri
 </div>
 <div id="ref-ramesh2020weak" class="csl-entry" role="listitem">
 Ramesh, G. 2020. <em>Weak Topologies</em>. <a href="https://arxiv.org/abs/2010.01660">https://arxiv.org/abs/2010.01660</a>.
+</div>
+<div id="ref-scott2023problems" class="csl-entry" role="listitem">
+Scott, Robert B. 2023. <em>Problems and Solutions on Vector Spaces for Physicists: From Part i in Mathematical Physics—a Modern Introduction to Its Foundations</em>. Springer.
+</div>
+<div id="ref-tornetta2022mathematical" class="csl-entry" role="listitem">
+Tornetta, Gabriele Nunzio. 2022. <em>Mathematical Quantum Physics: A Foundational Introduction</em>. Springer.
 </div>
 <div id="ref-waterstraat2016" class="csl-entry" role="listitem">
 Waterstraat, Nils. 2016. <em>Fredholm Operators and Spectral Flow</em>. <a href="https://arxiv.org/abs/1603.02009">https://arxiv.org/abs/1603.02009</a>.

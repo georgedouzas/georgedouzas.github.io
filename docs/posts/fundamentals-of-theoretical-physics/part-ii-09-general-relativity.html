@@ -382,6 +382,7 @@ window.Quarto = {
 <section id="sec-einstein-hilbert" class="level2">
 <h2 class="anchored" data-anchor-id="sec-einstein-hilbert">The Einstein-Hilbert action</h2>
 <p>Kaluza-Klein theory is general relativity in more than four dimensions, so its input is the action of general relativity, and Part III consists of evaluating that action on a five-dimensional metric. This section defines spacetime, states the equivalence principle, shows how the geodesic equation of Part I reproduces Newton’s law, and introduces the Einstein-Hilbert action together with the two variational formulas its variation needs. Our source is <span class="citation" data-cites="carroll1997">Carroll (<a href="#ref-carroll1997" role="doc-biblioref">1997</a>)</span>, who uses the signature <span class="math inline">(-, +, +, +)</span>; we convert to our <span class="math inline">(+, -, -, -)</span> with the rule of <a href="../kaluza-klein-theories/conventions.html#sec-conventions-indices">Coordinates, indices and signature</a>, which flips the signs of <span class="math inline">R</span> and of the gravitational Lagrangian but not those of <span class="math inline">\Gamma</span>, <span class="math inline">R^\rho{}_{\sigma\mu\nu}</span> and <span class="math inline">R_{\mu\nu}</span>, and we note his different normalisation of the action where it matters.</p>
+<p>For more on this topic, see <span class="citation" data-cites="emam2021covariant">Emam (<a href="#ref-emam2021covariant" role="doc-biblioref">2021</a>, Ch. 5-7)</span>, <span class="citation" data-cites="gray2019student">Gray (<a href="#ref-gray2019student" role="doc-biblioref">2019</a>, Ch. 1, Ch. 4)</span> and <span class="citation" data-cites="needham2021visual">Needham (<a href="#ref-needham2021visual" role="doc-biblioref">2021</a>, Ch. 30)</span>.</p>
 <section id="spacetime-and-the-equivalence-principle" class="level3">
 <h3 class="anchored" data-anchor-id="spacetime-and-the-equivalence-principle">Spacetime and the equivalence principle</h3>
 <p>The arena of general relativity is a manifold with a metric, exactly as in the geometry of <a href="../fundamentals-of-mathematics-for-physicists/part-i-09-differential-geometry.html#sec-metrics">Metrics</a>, except that the metric is not positive definite. The sign of <span class="math inline">g(v, v)</span> then sorts tangent vectors, and curves, into three classes with different physical meanings.</p>
@@ -1434,6 +1435,7 @@ g^{-1})</span>. In Sage:</p>
 <section id="sec-einstein-equations" class="level2">
 <h2 class="anchored" data-anchor-id="sec-einstein-equations">The Einstein equations</h2>
 <p>Varying the Einstein-Hilbert action with the two identities of <a href="#sec-einstein-hilbert" class="quarto-xref">Section&nbsp;1.1</a> gives the Einstein tensor, and adding matter gives the Einstein equations. This section carries the variation out in full, defines the stress tensor and the cosmological constant, and checks the equations on two explicit metrics: the sphere, where the Einstein tensor vanishes identically, and de Sitter space, the simplest curved solution, computed in full in three dimensions and, in an exercise, in four. Both return in Part VI, where internal spheres and de Sitter or anti-de Sitter spacetimes are the vacua of supergravity compactifications.</p>
+<p>For more on this topic, see <span class="citation" data-cites="nastase2019classical">Năstase (<a href="#ref-nastase2019classical" role="doc-biblioref">2019</a>, Ch. 40)</span>.</p>
 <section id="the-variation-of-the-action" class="level3">
 <h3 class="anchored" data-anchor-id="the-variation-of-the-action">The variation of the action</h3>
 <p>Matter enters the Einstein equations through a single symmetric tensor. It is defined as the response of the matter action to a change of the metric, which makes it automatically covariant.</p>
@@ -2924,6 +2926,7 @@ exp(i k (x - eta)) solves the wave equation: True</code></pre>
 <h2 class="anchored" data-anchor-id="sec-schwarzschild-flrw">Black holes and cosmology</h2>
 <p>The Einstein equations are non-linear, and exact solutions exist only under strong symmetry assumptions. Two of them carry most of the observable content of the theory. Outside a spherically symmetric mass the solution is unique, the Schwarzschild metric; it contains a horizon, describes black holes, and its geodesics give the perihelion advance of Mercury and the bending of light. A homogeneous and isotropic universe is described by the FLRW metric, whose single function <span class="math inline">a(t)</span> obeys the Friedmann equations. In this section we keep <span class="math inline">G</span> explicit in the definitions and set <span class="math inline">G = c
 = 1</span> in computations, writing <span class="math inline">m = GM</span> for the mass in units of length.</p>
+<p>For more on this topic, see <span class="citation" data-cites="boskoff2024journey">Boskoff and Capozziello (<a href="#ref-boskoff2024journey" role="doc-biblioref">2024</a>, Ch. 9-10)</span>, <span class="citation" data-cites="buchbinder2021introduction">Buchbinder and Shapiro (<a href="#ref-buchbinder2021introduction" role="doc-biblioref">2021</a>, Ch. 12)</span> and <span class="citation" data-cites="godinho2014introduction">Godinho and Natário (<a href="#ref-godinho2014introduction" role="doc-biblioref">2014</a>, Ch. 6)</span>.</p>
 <section id="the-schwarzschild-solution" class="level3">
 <h3 class="anchored" data-anchor-id="the-schwarzschild-solution">The Schwarzschild solution</h3>
 <p>The simplest source of gravity is a single spherical body, and the simplest region to study is the empty space around it. There the vacuum equations <span class="math inline">R_{\mu\nu} = 0</span> must hold, and spherical symmetry reduces them to ordinary differential equations whose solution was found by Schwarzschild in 1916.</p>
@@ -4706,8 +4709,32 @@ continuity = phi' (phi'' + 3 H phi' + V'(phi)): True</code></pre>
 <div id="ref-blennow2022relativity" class="csl-entry" role="listitem">
 Blennow, Mattias, and Tommy Ohlsson. 2022. <em>300 Problems in Special and General Relativity: With Complete Solutions</em>. Cambridge University Press.
 </div>
+<div id="ref-boskoff2024journey" class="csl-entry" role="listitem">
+Boskoff, Wladimir-Georges, and Salvatore Capozziello. 2024. <em>A Mathematical Journey to Relativity: Deriving Special and General Relativity with Basic Mathematics</em>. Springer.
+</div>
+<div id="ref-buchbinder2021introduction" class="csl-entry" role="listitem">
+Buchbinder, Iosif L., and Ilya L. Shapiro. 2021. <em>Introduction to Quantum Field Theory with Applications to Quantum Gravity</em>. Oxford University Press.
+</div>
 <div id="ref-carroll1997" class="csl-entry" role="listitem">
 Carroll, Sean M. 1997. <em>Lecture Notes on General Relativity</em>. <a href="https://arxiv.org/abs/gr-qc/9712019">https://arxiv.org/abs/gr-qc/9712019</a>.
+</div>
+<div id="ref-emam2021covariant" class="csl-entry" role="listitem">
+Emam, Moataz H. 2021. <em>Covariant Physics: From Classical Mechanics to General Relativity and Beyond</em>. Oxford University Press.
+</div>
+<div id="ref-godinho2014introduction" class="csl-entry" role="listitem">
+Godinho, Leonor, and José Natário. 2014. <em>An Introduction to Riemannian Geometry: With Applications to Mechanics and Relativity</em>. Universitext. Springer.
+</div>
+<div id="ref-gray2019student" class="csl-entry" role="listitem">
+Gray, Norman. 2019. <em>A Student’s Guide to General Relativity</em>. Cambridge University Press.
+</div>
+<div id="ref-krasnov2020formulations" class="csl-entry" role="listitem">
+Krasnov, Kirill. 2020. <em>Formulations of General Relativity: Gravity, Spinors and Differential Forms</em>. Cambridge University Press.
+</div>
+<div id="ref-nastase2019classical" class="csl-entry" role="listitem">
+Năstase, Horaţiu. 2019. <em>Classical Field Theory</em>. Cambridge University Press.
+</div>
+<div id="ref-needham2021visual" class="csl-entry" role="listitem">
+Needham, Tristan. 2021. <em>Visual Differential Geometry and Forms: A Mathematical Drama in Five Acts</em>. Princeton University Press.
 </div>
 <div id="ref-plebanski2024introduction" class="csl-entry" role="listitem">
 Plebański, Jerzy, and Andrzej Krasiński. 2024. <em>An Introduction to General Relativity and Cosmology</em>. Cambridge University Press.

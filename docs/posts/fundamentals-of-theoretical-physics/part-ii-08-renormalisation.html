@@ -2200,6 +2200,7 @@ zeta: zeta(-1) = -1/12</code></pre>
 <section id="sec-power-counting" class="level2">
 <h2 class="anchored" data-anchor-id="sec-power-counting">Power counting and renormalisability</h2>
 <p>Whether a theory can be renormalised with finitely many counterterms is decided before any integral is computed, by counting powers of momenta. Each loop brings <span class="math inline">d</span> powers in the measure, each propagator removes two (one for a fermion), and the balance tells how a graph behaves when all its loop momenta grow together. This part turns the count into a formula, states when it is enough, and sorts theories into renormalisable, super-renormalisable and non-renormalisable ones by the mass dimensions of their couplings <span class="citation" data-cites="balduf2024dyson manohar2018introduction">(<a href="#ref-balduf2024dyson" role="doc-biblioref">Balduf 2024, sec. 2.3.1</a> and 2.3.4; <a href="#ref-manohar2018introduction" role="doc-biblioref">Manohar 2018, sec. 4.2</a>)</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="buchbinder2021introduction">Buchbinder and Shapiro (<a href="#ref-buchbinder2021introduction" role="doc-biblioref">2021</a>, Ch. 9)</span> and <span class="citation" data-cites="talagrand2022what">Talagrand (<a href="#ref-talagrand2022what" role="doc-biblioref">2022</a>, Ch. 15-19)</span>.</p>
 <section id="superficial-degree-of-divergence" class="level3">
 <h3 class="anchored" data-anchor-id="superficial-degree-of-divergence">Superficial degree of divergence</h3>
 <p>Scale all loop momenta of a graph by a common factor <span class="math inline">s</span>. The integrand of a graph with <span class="math inline">L</span> loops, <span class="math inline">I_b</span> boson lines and <span class="math inline">I_f</span> fermion lines scales like <span class="math inline">s^{dL - 2I_b - I_f}</span> times the powers of momenta at derivative vertices, and the integral converges at large <span class="math inline">s</span> only if the total power is negative. The figure shows the result for the quartic theory in several dimensions and for quantum electrodynamics.</p>
@@ -2945,6 +2946,7 @@ D   amplitude    L=1  L=2  L=3
 <section id="sec-renormalised-perturbation" class="level2">
 <h2 class="anchored" data-anchor-id="sec-renormalised-perturbation">Renormalised perturbation theory</h2>
 <p>The last exercise of <a href="#sec-regularisation" class="quarto-xref">Section&nbsp;1.1</a> showed renormalisation at work: once the coupling is expressed through a measured amplitude, the regulator disappears from the prediction. Renormalised perturbation theory organises this systematically. The Lagrangian is written in terms of renormalised parameters, the difference from the bare Lagrangian is treated as a set of extra interactions, the counterterms, and their coefficients are fixed order by order so that every Green function is finite. This part does it for the quartic theory at one loop, and at two loops, where divergent subgraphs appear and the counterterms of lower order must be inserted into larger graphs <span class="citation" data-cites="balduf2024dyson grozin2005lectures">(<a href="#ref-balduf2024dyson" role="doc-biblioref">Balduf 2024, sec. 2.3.4</a>; <a href="#ref-grozin2005lectures" role="doc-biblioref">Grozin 2005, sec. 3</a>)</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="aitchison2024gauge">Aitchison and Hey (<a href="#ref-aitchison2024gauge" role="doc-biblioref">2024</a>, Ch. 10-11)</span>.</p>
 <section id="counterterms" class="level3">
 <h3 class="anchored" data-anchor-id="counterterms">Counterterms</h3>
 <p>The bare Lagrangian <span class="math inline">\mathcal L = \frac12(\partial\phi_0)^2 - \frac12m_0^2\phi_0^2 - \frac{\lambda_0}{4!}\phi_0^4</span> contains parameters that are infinite when the regulator is removed. The figure shows the bare coupling as a function of the regulator for a fixed renormalised coupling, and, conversely, how the renormalised coupling depends on the scale when the bare one is held fixed.</p>
@@ -6135,6 +6137,7 @@ coefficient of L in G: -1/6*pi^2*a^3 - a    of L^2: 1/6*pi^2*a^4 + 1/2*a^2</code
 <section id="sec-qed-one-loop" class="level2">
 <h2 class="anchored" data-anchor-id="sec-qed-one-loop">Ward identities and QED at one loop</h2>
 <p>In a gauge theory the counterterms are not independent. Gauge invariance relates the Green functions with photon legs to those without, and these relations, the Ward identities, survive renormalisation if the regulator respects the symmetry. In quantum electrodynamics they make the photon massless to all orders and make the renormalisation of the charge depend only on the photon self-energy, so that every particle’s charge is renormalised by the same factor. This part states the identities and renormalises quantum electrodynamics at one loop, following <span class="citation" data-cites="grozin2005lectures">Grozin (<a href="#ref-grozin2005lectures" role="doc-biblioref">2005, sec. 3</a>)</span> with <span class="math inline">d = 4 - \epsilon</span> in place of his <span class="math inline">d = 4 - 2\epsilon</span>, so that his <span class="math inline">\frac1\epsilon</span> is our <span class="math inline">\frac2\epsilon</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="gelis2021problems">Gelis (<a href="#ref-gelis2021problems" role="doc-biblioref">2021</a>)</span>.</p>
 <section id="ward-identities" class="level3">
 <h3 class="anchored" data-anchor-id="ward-identities">Ward identities</h3>
 <p>The Lagrangian of quantum electrodynamics is <span class="math inline">\bar\psi_0(i{D}\!\!\!/ - m_0)\psi_0 - \frac14F_{0\mu\nu}F_0^{\mu\nu} - \frac{1}{2a_0}(\partial_\mu A_0^\mu)^2</span> with <span class="math inline">D_\mu = \partial_\mu + ie_0A_{0\mu}</span> (the sign of the charge is a convention; <span class="citation" data-cites="grozin2005lectures">Grozin (<a href="#ref-grozin2005lectures" role="doc-biblioref">2005</a>)</span> writes <span class="math inline">-ie_0</span>) and a gauge-fixing parameter <span class="math inline">a_0</span>. Its renormalised fields and parameters are <span class="math inline">\psi_0 = Z_\psi^{1/2}\psi</span>, <span class="math inline">A_0 = Z_A^{1/2}A</span>, <span class="math inline">a_0 = Z_Aa</span>, <span class="math inline">m_0 = Z_mm</span> and <span class="math inline">e_0 = Z_\alpha^{1/2}\mu^{\epsilon/2}e</span> <span class="citation" data-cites="grozin2005lectures">(<a href="#ref-grozin2005lectures" role="doc-biblioref">Grozin 2005</a>, eq. 3.7)</span>. The theorem below is the statement that gauge invariance survives quantisation.</p>
@@ -7176,6 +7179,7 @@ m r = 1.00000000000000 correction 0.0359   asymptotic -1.4105</code></pre>
 <section id="sec-renormalisation-group" class="level2">
 <h2 class="anchored" data-anchor-id="sec-renormalisation-group">The renormalisation group</h2>
 <p>The bare theory knows nothing about the scale <span class="math inline">\mu</span>, so a change of <span class="math inline">\mu</span> must be compensated by a change of the renormalised parameters and of the normalisation of the fields. The transformations that do this form a group under composition, the <strong>renormalisation group</strong>, and its generators are the beta functions and anomalous dimensions. The equations they satisfy turn logarithms of fixed-order perturbation theory into running couplings, and they decide what a theory does at very high and very low energies <span class="citation" data-cites="balduf2024dyson grozin2005lectures">(<a href="#ref-balduf2024dyson" role="doc-biblioref">Balduf 2024, sec. 3.2</a>; <a href="#ref-grozin2005lectures" role="doc-biblioref">Grozin 2005, secs. 3.5–3.7</a>)</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="buchbinder2021introduction">Buchbinder and Shapiro (<a href="#ref-buchbinder2021introduction" role="doc-biblioref">2021</a>, Ch. 13-15)</span>, <span class="citation" data-cites="kivelson2024statistical">Kivelson et al. (<a href="#ref-kivelson2024statistical" role="doc-biblioref">2024</a>, Ch. 10)</span> and <span class="citation" data-cites="shankar2017quantum">Shankar (<a href="#ref-shankar2017quantum" role="doc-biblioref">2017</a>, Ch. 11-14)</span>.</p>
 <section id="the-renormalisation-group-equations" class="level3">
 <h3 class="anchored" data-anchor-id="the-renormalisation-group-equations">The renormalisation-group equations</h3>
 <p>At fixed order, perturbation theory produces powers of <span class="math inline">\lambda\log(Q/\mu)</span>, which are small only if <span class="math inline">\mu</span> is close to the energy <span class="math inline">Q</span> of the process. The renormalisation group equation says how a Green function changes when <span class="math inline">\mu</span> changes, and solving it replaces the fixed-order logarithms by the running coupling at the scale <span class="math inline">Q</span>. The figure shows the difference for the quartic theory.</p>
@@ -9307,6 +9311,7 @@ exact: 1 - lam/2 + 2/3 lam^2 - 11/8 lam^3</code></pre>
 <section id="sec-wilsonian-rg" class="level2">
 <h2 class="anchored" data-anchor-id="sec-wilsonian-rg">The Wilsonian renormalisation group</h2>
 <p>Wilson turned the renormalisation group from a statement about the arbitrariness of <span class="math inline">\mu</span> into a computational method. A system with a short-distance cutoff is described at a coarser scale by integrating out the fluctuations between the two scales, which produces a new Hamiltonian of the same kind with changed couplings. Repeating the step defines a flow in the space of couplings; a critical point is a fixed point of the flow, and the critical exponents are read off from the linearised flow near it. The same picture explains why microscopically different systems share their exponents, and why the quartic theory in four dimensions is renormalisable but trivial <span class="citation" data-cites="boudreau2018applied bauerschmidt2019renormalisation bricmont2022statistical">(<a href="#ref-boudreau2018applied" role="doc-biblioref">Boudreau and Swanson 2018, sec. 8.4</a>; <a href="#ref-bauerschmidt2019renormalisation" role="doc-biblioref">Roland Bauerschmidt and Slade 2019, sec. 1.1</a>; <a href="#ref-bricmont2022statistical" role="doc-biblioref">Bricmont 2022, sec. 9.9</a>)</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="kivelson2024statistical">Kivelson et al. (<a href="#ref-kivelson2024statistical" role="doc-biblioref">2024</a>, Ch. 8)</span>.</p>
 <section id="block-spins-and-the-flow" class="level3">
 <h3 class="anchored" data-anchor-id="block-spins-and-the-flow">Block spins and the flow</h3>
 <p>Kadanoff’s idea is to replace a block of <span class="math inline">b^d</span> spins by one effective spin and to ask which Hamiltonian the block spins obey. Wilson’s version integrates out the Fourier modes of a field in a momentum shell <span class="math inline">\Lambda/b &lt; |k| &lt; \Lambda</span>. In both, the result is a map on the space of couplings. The figure shows three such maps that can be followed by hand.</p>
@@ -13482,6 +13487,9 @@ delta m^2 = lambda_4 zeta(3)/(8 pi^2 l^2): coefficient 0.015224</code></pre>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-aitchison2024gauge" class="csl-entry" role="listitem">
+Aitchison, Ian J. R., and Anthony J. G. Hey. 2024. <em>Gauge Theories in Particle Physics: A Practical Introduction, Volume 1: From Relativistic Quantum Mechanics to QED</em>. Fifth. CRC Press.
+</div>
 <div id="ref-arkanihamed1998" class="csl-entry" role="listitem">
 Arkani-Hamed, Nima, Savas Dimopoulos, and Gia Dvali. 1998. <em>The Hierarchy Problem and New Dimensions at a Millimeter</em>. <a href="https://arxiv.org/abs/hep-ph/9803315">https://arxiv.org/abs/hep-ph/9803315</a>.
 </div>
@@ -13494,14 +13502,23 @@ Boudreau, Joseph F., and Eric S. Swanson. 2018. <em>Applied Computational Physic
 <div id="ref-bricmont2022statistical" class="csl-entry" role="listitem">
 Bricmont, Jean. 2022. <em>Making Sense of Statistical Mechanics</em>. Springer.
 </div>
+<div id="ref-buchbinder2021introduction" class="csl-entry" role="listitem">
+Buchbinder, Iosif L., and Ilya L. Shapiro. 2021. <em>Introduction to Quantum Field Theory with Applications to Quantum Gravity</em>. Oxford University Press.
+</div>
 <div id="ref-dienes1998grand" class="csl-entry" role="listitem">
 Dienes, Keith R., Emilian Dudas, and Tony Gherghetta. 1999. <span>“Grand Unification at Intermediate Mass Scales Through Extra Dimensions.”</span> <em>Nuclear Physics B</em> 537: 47–108. <a href="https://arxiv.org/abs/hep-ph/9806292">https://arxiv.org/abs/hep-ph/9806292</a>.
 </div>
 <div id="ref-fan2023electron" class="csl-entry" role="listitem">
 Fan, X., T. G. Myers, B. A. D. Sukra, and G. Gabrielse. 2023. <span>“Measurement of the Electron Magnetic Moment.”</span> <em>Physical Review Letters</em> 130: 071801. <a href="https://arxiv.org/abs/2209.13084">https://arxiv.org/abs/2209.13084</a>.
 </div>
+<div id="ref-gelis2021problems" class="csl-entry" role="listitem">
+Gelis, François. 2021. <em>Problems in Quantum Field Theory: With Fully-Worked Solutions</em>. Cambridge University Press.
+</div>
 <div id="ref-grozin2005lectures" class="csl-entry" role="listitem">
 Grozin, Andrey. 2005. <em>Lectures on <span>QED</span> and <span>QCD</span></em>. <a href="https://arxiv.org/abs/hep-ph/0508242">https://arxiv.org/abs/hep-ph/0508242</a>.
+</div>
+<div id="ref-kivelson2024statistical" class="csl-entry" role="listitem">
+Kivelson, Steven A., Jack Mingde Jiang, and Jeffrey Chang. 2024. <em>Statistical Mechanics of Phases and Phase Transitions</em>. Princeton University Press.
 </div>
 <div id="ref-kompaniets2017minimally" class="csl-entry" role="listitem">
 Kompaniets, Mikhail V., and Erik Panzer. 2017. <span>“Minimally Subtracted Six Loop Renormalization of <span class="nocase">O(n)</span>-Symmetric <span class="nocase">φ</span>^4 Theory and Critical Exponents.”</span> <em>Physical Review D</em> 96: 036016. <a href="https://arxiv.org/abs/1705.06483">https://arxiv.org/abs/1705.06483</a>.
@@ -13517,6 +13534,12 @@ Pontón, Eduardo, and Erich Poppitz. 2001. <span>“Casimir Energy and Radius St
 </div>
 <div id="ref-bauerschmidt2019renormalisation" class="csl-entry" role="listitem">
 Roland Bauerschmidt, David C. Brydges, and Gordon Slade. 2019. <em>Introduction to a Renormalisation Group Method</em>. Springer (Lecture Notes in Mathematics 2242).
+</div>
+<div id="ref-shankar2017quantum" class="csl-entry" role="listitem">
+Shankar, R. 2017. <em>Quantum Field Theory and Condensed Matter: An Introduction</em>. Cambridge University Press.
+</div>
+<div id="ref-talagrand2022what" class="csl-entry" role="listitem">
+Talagrand, Michel. 2022. <em>What Is a Quantum Field Theory? A First Introduction for Mathematicians</em>. Cambridge University Press.
 </div>
 <div id="ref-vassilevich2003heat" class="csl-entry" role="listitem">
 Vassilevich, Dmitri V. 2003. <span>“Heat Kernel Expansion: User’s Manual.”</span> <em>Physics Reports</em> 388: 279–360. <a href="https://arxiv.org/abs/hep-th/0306138">https://arxiv.org/abs/hep-th/0306138</a>.

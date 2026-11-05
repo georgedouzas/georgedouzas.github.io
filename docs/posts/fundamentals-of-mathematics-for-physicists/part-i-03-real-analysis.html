@@ -61,7 +61,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -401,6 +420,7 @@ window.Quarto = {
 <section id="sec-sequences-limits" class="level2">
 <h2 class="anchored" data-anchor-id="sec-sequences-limits">Real numbers, sequences and limits</h2>
 <p>The real numbers are the complete ordered field: every bounded set has a least upper bound. Everything else in analysis, limits, sums, derivatives and integrals, rests on this one property. This section defines suprema, the limit of a sequence and Cauchy sequences, proves the monotone convergence theorem, and checks the limits of the running examples in Sage.</p>
+<p>For more on this topic, see <span class="citation" data-cites="radozycki2020solving">Radożycki (<a href="#ref-radozycki2020solving" role="doc-biblioref">2020</a>, Ch. 3-5)</span>.</p>
 <section id="suprema" class="level3">
 <h3 class="anchored" data-anchor-id="suprema">Suprema</h3>
 <p>Before limits can be discussed at all one needs to know which numbers exist, and the answer is encoded in a single property of the real line. The definition below introduces the least upper bound of a set and states the completeness axiom, the promise that every bounded set has one.</p>
@@ -2272,6 +2292,7 @@ def HarmonicRate : Prop</code></pre>
 <section id="sec-series" class="level2">
 <h2 class="anchored" data-anchor-id="sec-series">Series</h2>
 <p>A series is a sequence of partial sums; it converges when they do. This section defines series and absolute convergence, states the comparison and ratio tests, introduces power series and their radius of convergence, and evaluates the running series exactly in Sage: the geometric series, <span class="math inline">\sum 1/n^2 = \pi^2/6</span>, the exponential series and the alternating harmonic series.</p>
+<p>For more on this topic, see <span class="citation" data-cites="radozycki2020solving">Radożycki (<a href="#ref-radozycki2020solving" role="doc-biblioref">2020</a>, Ch. 13 and 15)</span>.</p>
 <section id="series-and-partial-sums" class="level3">
 <h3 class="anchored" data-anchor-id="series-and-partial-sums">Series and partial sums</h3>
 <p>An infinite sum has no meaning until one says which sequence is supposed to converge; the figure shows the partial sums of three series, two settling down and one drifting off like <span class="math inline">\log n</span>. The definition below identifies a series with its sequence of partial sums and records the first necessary condition for convergence.</p>
@@ -4562,6 +4583,7 @@ theorem exp_remainder (m : ℕ) (hm : 1 ≤ m) :
 <section id="sec-continuity-differentiability" class="level2">
 <h2 class="anchored" data-anchor-id="sec-continuity-differentiability">Continuity and differentiability</h2>
 <p>Limits of functions are limits of sequences of values; continuity says the limit is the value, differentiability that the function is linear to first order. This section defines both, states the mean value theorem and Taylor’s theorem, and checks derivatives, Taylor polynomials and remainders in Sage, with <span class="math inline">\sin x</span> and <span class="math inline">e^x</span> as the running examples.</p>
+<p>For more on this topic, see <span class="citation" data-cites="cheung2024metric">Cheung (<a href="#ref-cheung2024metric" role="doc-biblioref">2024</a>, Ch. 2, Ch. 4)</span> and <span class="citation" data-cites="radozycki2020solving">Radożycki (<a href="#ref-radozycki2020solving" role="doc-biblioref">2020</a>, Ch. 7-8, Ch. 9-12)</span>.</p>
 <section id="limits-of-functions" class="level3">
 <h3 class="anchored" data-anchor-id="limits-of-functions">Limits of functions</h3>
 <p>What a function approaches near a point concerns the values nearby, not the value at the point itself. The definition below is the <span class="math inline">\varepsilon</span>-<span class="math inline">\delta</span> version, its reformulation through sequences, and the one-sided and infinite variants.</p>
@@ -6792,6 +6814,7 @@ theorem machin : 4 * Real.arctan 5⁻¹ - Real.arctan 239⁻¹ = π / 4</code></
 <h2 class="anchored" data-anchor-id="sec-riemann-integral">The Riemann integral</h2>
 <p>The integral measures the area under a graph as a limit of sums of rectangles; the fundamental theorem of calculus turns it into the inverse of differentiation. This section defines the Riemann integral and antiderivatives, proves the fundamental theorem, treats improper integrals, and computes the Gaussian integral <span class="math inline">\int e^{-x^2}dx =
 \sqrt\pi</span>, the integral behind every Gaussian probability and every free field theory.</p>
+<p>For more on this topic, see <span class="citation" data-cites="radozycki2020solving">Radożycki (<a href="#ref-radozycki2020solving" role="doc-biblioref">2020</a>, Ch. 14)</span>.</p>
 <section id="the-integral-as-a-limit-of-sums" class="level3">
 <h3 class="anchored" data-anchor-id="the-integral-as-a-limit-of-sums">The integral as a limit of sums</h3>
 <p>The area under a graph is approximated from below and from above by rectangles, and the figure shows both approximations for <span class="math inline">x^2</span> on <span class="math inline">[0, 1]</span> closing in as the subintervals shrink. The definition below makes this the definition of the integral, and lists the functions for which the two approximations meet and the basic properties of the result.</p>
@@ -8666,6 +8689,7 @@ theorem basel_tail (N : ℕ) (hN : 1 ≤ N) :
 <section id="sec-calculus" class="level2">
 <h2 class="anchored" data-anchor-id="sec-calculus">Calculus on <span class="math inline">\mathbb{R}^n</span></h2>
 <p>Functions of several variables are differentiated one variable at a time, and the partial derivatives assemble into the Jacobian matrix, the linear map that approximates the function near a point. This section collects the notions that differential geometry transports to manifolds through charts: partial derivatives, smooth maps, the Jacobian, the chain rule and diffeomorphisms, with the polar map of the plane as running example. The Jacobian will reappear as the transformation matrix of vector components, and its determinant as the volume factor of <a href="#thm-change-of-variables" class="quarto-xref">Theorem&nbsp;7</a>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="lee2013introduction">Lee (<a href="#ref-lee2013introduction" role="doc-biblioref">2013</a>, Appendix C)</span>.</p>
 <section id="derivatives-of-maps-of-several-variables" class="level3">
 <h3 class="anchored" data-anchor-id="derivatives-of-maps-of-several-variables">Derivatives of maps of several variables</h3>
 <p>Freezing all variables but one turns a function of several variables into a function of one, which can be differentiated as in <a href="#def-derivative" class="quarto-xref">Definition&nbsp;10</a>. The partial derivatives obtained this way are the building blocks of everything that follows.</p>
@@ -10995,6 +11019,7 @@ theorem chain_circle (t : ℝ) :
 <section id="sec-multiple-integrals" class="level2">
 <h2 class="anchored" data-anchor-id="sec-multiple-integrals">Multiple integrals and convergence of functions</h2>
 <p>Integrals over regions of the plane and of space are iterated one-variable integrals, and a change of variables costs a Jacobian factor; the Gaussian integral is the showcase, its square being a disc integral in polar coordinates. The section ends with the two notions that let limits pass through integrals and derivatives: uniform convergence, and differentiation under the integral sign.</p>
+<p>For more on this topic, see <span class="citation" data-cites="cheung2024metric">Cheung (<a href="#ref-cheung2024metric" role="doc-biblioref">2024</a>, Ch. 5)</span> and <span class="citation" data-cites="gasinski2014exercises">Gasiński and Papageorgiou (<a href="#ref-gasinski2014exercises" role="doc-biblioref">2014</a>, Ch. 1)</span>.</p>
 <section id="multiple-integrals" class="level3">
 <h3 class="anchored" data-anchor-id="multiple-integrals">Multiple integrals</h3>
 <p>Integrating a function of two variables over a rectangle can be done one variable at a time, and the order does not matter for continuous functions. The definition below records this, together with the extension to regions bounded by graphs, where the inner limits depend on the outer variable.</p>
@@ -12992,10 +13017,24 @@ theorem wallis_product (k : ℕ) :
 </div>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-cheung2024metric" class="csl-entry" role="listitem">
+Cheung, Wing-Sum. 2024. <em>Metric Space Topology: Examples, Exercises and Solutions</em>. Third. Series on Analysis, Applications and Computation, Vol. 12. World Scientific.
+</div>
+<div id="ref-gasinski2014exercises" class="csl-entry" role="listitem">
+Gasiński, Leszek, and Nikolaos S. Papageorgiou. 2014. <em>Exercises in Analysis: Part 1</em>. Problem Books in Mathematics. Springer.
+</div>
+<div id="ref-lee2013introduction" class="csl-entry" role="listitem">
+Lee, John M. 2013. <em>Introduction to Smooth Manifolds</em>. Second. Graduate Texts in Mathematics 218. Springer.
+</div>
+<div id="ref-radozycki2020solving" class="csl-entry" role="listitem">
+Radożycki, Tomasz. 2020. <em>Solving Problems in Mathematical Analysis, Part i: Sets, Functions, Limits, Derivatives, Integrals, Sequences and Series</em>. Problem Books in Mathematics. Springer.
+</div>
+</div></section></div></main> <!-- /main -->
 <script>
 // Turns the tags on a post page into links to the filtered Posts page.
 document.addEventListener("DOMContentLoaded", () => {

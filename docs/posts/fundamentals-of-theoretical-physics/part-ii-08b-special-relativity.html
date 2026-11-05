@@ -423,6 +423,7 @@ window.Quarto = {
 <section id="sec-sr-postulates" class="level2">
 <h2 class="anchored" data-anchor-id="sec-sr-postulates">Postulates and Lorentz transformations</h2>
 <p>This part starts from the physics. An observer with clocks and rulers assigns coordinates to events; observers in uniform relative motion use different coordinates, and the question is how the two sets are related. Newton’s answer, the Galilean transformation, keeps time absolute; Einstein’s two postulates force a different answer, the Lorentz transformation, in which time and space mix. The sources are <span class="citation" data-cites="maggiore2023electrodynamics">Maggiore (<a href="#ref-maggiore2023electrodynamics" role="doc-biblioref">2023, secs. 7.1–7.2</a>)</span> and <span class="citation" data-cites="boskoff2024journey">Boskoff and Capozziello (<a href="#ref-boskoff2024journey" role="doc-biblioref">2024, secs. 9.1–9.3</a>)</span>, and most examples and exercises come from <span class="citation" data-cites="blennow2022relativity">Blennow and Ohlsson (<a href="#ref-blennow2022relativity" role="doc-biblioref">2022, secs. 1.1–1.4</a>)</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="macchi2023problems">Macchi et al. (<a href="#ref-macchi2023problems" role="doc-biblioref">2023</a>, Ch. 9)</span>.</p>
 <section id="inertial-frames-and-the-interval" class="level3">
 <h3 class="anchored" data-anchor-id="inertial-frames-and-the-interval">Inertial frames and the interval</h3>
 <p>An <strong>event</strong> is something that happens at a point and at an instant: a flash, a collision, the tick of a clock. To describe events an observer needs a way of labelling them by four numbers, and the labelling must be physically realisable with clocks and rulers. The frames in which the laws of motion take their simplest form are singled out first.</p>
@@ -2459,6 +2460,7 @@ u = 1e-4, v = 2e-4 (Galilean u' = |u - v|): 0.000264575127893761 0.0002645751311
 <section id="sec-sr-minkowski" class="level2">
 <h2 class="anchored" data-anchor-id="sec-sr-minkowski">Minkowski spacetime</h2>
 <p>The invariance of the interval suggests a change of viewpoint. Instead of comparing the coordinates of different observers, one studies the set of all events with the interval as its geometry; observers are then choices of coordinates in a single four-dimensional space, as Cartesian frames are choices of coordinates in Euclidean space. This part describes that space, its light cones, the clocks carried along worldlines and the hyperbolic geometry of boosts. The sources are <span class="citation" data-cites="maggiore2023electrodynamics">Maggiore (<a href="#ref-maggiore2023electrodynamics" role="doc-biblioref">2023, secs. 7.2.2–7.2.3</a>)</span>, <span class="citation" data-cites="boskoff2024journey">Boskoff and Capozziello (<a href="#ref-boskoff2024journey" role="doc-biblioref">2024, secs. 9.2–9.3</a>)</span> and <span class="citation" data-cites="blennow2022relativity">Blennow and Ohlsson (<a href="#ref-blennow2022relativity" role="doc-biblioref">2022, secs. 1.1–1.4</a>)</span>; the bilinear form itself is the Minkowski form of <a href="../fundamentals-of-mathematics-for-physicists/part-i-02-linear-algebra.html#prp-minkowski-values">Proposition 5 of Linear algebra</a>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="gourgoulhon2013special">Gourgoulhon (<a href="#ref-gourgoulhon2013special" role="doc-biblioref">2013</a>, Ch. 1-5, Ch. 12-13)</span>.</p>
 <section id="minkowski-spacetime-and-its-light-cones" class="level3">
 <h3 class="anchored" data-anchor-id="minkowski-spacetime-and-its-light-cones">Minkowski spacetime and its light cones</h3>
 <p>The events form an affine space: there is no preferred origin, but two events determine a displacement, and displacements can be added and scaled. The interval makes the space of displacements a vector space with a non-degenerate symmetric bilinear form of signature <span class="math inline">(1, 3)</span> (<a href="../fundamentals-of-mathematics-for-physicists/part-i-02-linear-algebra.html#def-signature">Definition 14 of Linear algebra</a>).</p>
@@ -4440,6 +4442,7 @@ rotation angle of the loop: 0.4208 rad about the axis [ 0.     0.    -0.817]</co
 <section id="sec-sr-lorentz-poincare" class="level2">
 <h2 class="anchored" data-anchor-id="sec-sr-lorentz-poincare">The Lorentz and Poincaré groups</h2>
 <p>The first two parts used Lorentz transformations one at a time. This part studies them all together, as a group, and becomes formal step by step. It starts with boosts along one axis, which already show most features in a group that is just the real line. It then fixes the conventions for transforming vectors, tensors, fields and spinors, defines the Lorentz group <span class="math inline">O(1, 3)</span> as the isometry group of the Minkowski form and proves that it is a Lie group with four connected components. Every proper orthochronous transformation is shown to be a boost times a rotation; the Lie algebra, its complexification and its exponential map follow, then the group <span class="math inline">SL(2, \mathbb{C})</span>, which covers the Lorentz group twice and carries the spinors, and the finite-dimensional representations <span class="math inline">(j_1, j_2)</span>. The composition of two boosts produces a rotation, the Thomas-Wigner rotation, derived exactly. Adding translations gives the Poincaré group, its Lie algebra and its two Casimir operators, and the part ends with Wigner’s classification of the unitary irreducible representations by little groups, which is the group-theoretical definition of a particle. The general theory of matrix Lie groups, algebras and exponentials is that of <a href="../fundamentals-of-mathematics-for-physicists/part-i-11-lie-groups-algebras.html#sec-lie-groups-algebras">Lie groups and Lie algebras</a>; spin groups in all dimensions are in <a href="../fundamentals-of-mathematics-for-physicists/part-i-13-spinors-dirac-operator.html#sec-spin-groups">Spin groups and spinor representations</a>. The sources are <span class="citation" data-cites="maggiore2023electrodynamics">Maggiore (<a href="#ref-maggiore2023electrodynamics" role="doc-biblioref">2023, sec. 7.3</a>)</span>, <span class="citation" data-cites="boudreau2018applied">Boudreau and Swanson (<a href="#ref-boudreau2018applied" role="doc-biblioref">2018, secs. 14.3–14.5</a>)</span>, <span class="citation" data-cites="odonnell2011wigner">O’Donnell and Visser (<a href="#ref-odonnell2011wigner" role="doc-biblioref">2011</a>)</span> for the Wigner rotation and <span class="citation" data-cites="bekaert2006unitary">Bekaert and Boulanger (<a href="#ref-bekaert2006unitary" role="doc-biblioref">2006, secs. 1–3</a>)</span> for the Poincaré group and its representations.</p>
+<p>For more on this topic, see <span class="citation" data-cites="gourgoulhon2013special">Gourgoulhon (<a href="#ref-gourgoulhon2013special" role="doc-biblioref">2013</a>, Ch. 6-8, Ch. 9-11, Ch. 17-20)</span>, <span class="citation" data-cites="mukunda2022continuous">Mukunda and Chaturvedi (<a href="#ref-mukunda2022continuous" role="doc-biblioref">2022</a>, Ch. 10)</span>, <span class="citation" data-cites="talagrand2022what">Talagrand (<a href="#ref-talagrand2022what" role="doc-biblioref">2022</a>, Ch. 4, Ch. 8-9)</span> and <span class="citation" data-cites="tornetta2022mathematical">Tornetta (<a href="#ref-tornetta2022mathematical" role="doc-biblioref">2022</a>, Ch. 2)</span>.</p>
 <section id="boosts-along-one-axis" class="level3">
 <h3 class="anchored" data-anchor-id="boosts-along-one-axis">Boosts along one axis</h3>
 <p>In one space dimension the Lorentz transformations are <span class="math inline">2 \times 2</span> matrices, and the group they form can be described completely. It is the model for everything that follows: a continuous part parametrised by the rapidity, and discrete reflections of space and of time that split the group into pieces.</p>
@@ -12165,6 +12168,7 @@ probability of +x: 0.9818, cos^2(Omega/2) = 0.9818</code></pre>
 <section id="sec-sr-kinematics" class="level2">
 <h2 class="anchored" data-anchor-id="sec-sr-kinematics">Relativistic kinematics</h2>
 <p>The group theory of the previous part says how four-vectors transform; this part uses the four-vectors of a particle. Velocity and acceleration become four-vectors, energy and momentum combine into one, and their conservation in collisions and decays becomes a single vector equation whose invariant content is computed with Minkowski products. The results are the working tools of particle physics: invariant masses, decay momenta, thresholds and the Mandelstam variables. The examples and exercises follow <span class="citation" data-cites="blennow2022relativity">Blennow and Ohlsson (<a href="#ref-blennow2022relativity" role="doc-biblioref">2022, sec. 1.4</a> and 1.6)</span>, with masses from the particle-physics tables; units are <span class="math inline">c = 1</span> and energies in MeV unless stated.</p>
+<p>For more on this topic, see <span class="citation" data-cites="godinho2014introduction">Godinho and Natário (<a href="#ref-godinho2014introduction" role="doc-biblioref">2014</a>, Ch. 6)</span>, <span class="citation" data-cites="gray2019student">Gray (<a href="#ref-gray2019student" role="doc-biblioref">2019</a>, Appendix A)</span>, <span class="citation" data-cites="knauf2018mathematical">Knauf (<a href="#ref-knauf2018mathematical" role="doc-biblioref">2018</a>, Ch. 16)</span>, <span class="citation" data-cites="moretti2023analytical">Moretti (<a href="#ref-moretti2023analytical" role="doc-biblioref">2023</a>, Ch. 10)</span>, <span class="citation" data-cites="paganini2023fundamentals">Paganini (<a href="#ref-paganini2023fundamentals" role="doc-biblioref">2023</a>, Ch. 2, Ch. 3)</span>, <span class="citation" data-cites="pal2015introductory">Pal (<a href="#ref-pal2015introductory" role="doc-biblioref">2015</a>, Ch. 2)</span> and <span class="citation" data-cites="pierrus2018solved">Pierrus (<a href="#ref-pierrus2018solved" role="doc-biblioref">2018</a>, Ch. 12)</span>.</p>
 <section id="four-velocity-and-four-momentum" class="level3">
 <h3 class="anchored" data-anchor-id="four-velocity-and-four-momentum">Four-velocity and four-momentum</h3>
 <p>A worldline parametrised by its proper time has a tangent of unit length. This tangent is the relativistic velocity, and its derivative the relativistic acceleration; <a href="#fig-sr-mass-shell" class="quarto-xref">Figure&nbsp;15</a> shows the mass shell on which the corresponding momenta lie.</p>
@@ -17038,6 +17042,7 @@ traveller ages 20.0 yr; Earth time 338.4 yr; furthest distance 167.3 ly</code></
 <section id="sec-sr-electrodynamics" class="level2">
 <h2 class="anchored" data-anchor-id="sec-sr-electrodynamics">Electrodynamics in covariant form</h2>
 <p>Maxwell’s equations were the origin of special relativity: they are invariant under Lorentz transformations, not under Galilean ones. Their covariant form, with the potential <span class="math inline">A^\mu</span> and the field tensor <span class="math inline">F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu</span>, is developed in <a href="part-ii-04-classical-field-theory.html#sec-complex-vector-fields">Complex and vector fields</a> (<a href="part-ii-04-classical-field-theory.html#def-field-strength-abelian">Definition 8 of Classical field theory</a>, <a href="part-ii-04-classical-field-theory.html#exm-vector-field-strength">Example 28 of Classical field theory</a>, <a href="part-ii-04-classical-field-theory.html#exm-cfb-field-boost">Example 33 of Classical field theory</a>) and derived from an action in <a href="part-ii-04-classical-field-theory.html#sec-actions">Actions and Euler-Lagrange equations</a> (<a href="part-ii-04-classical-field-theory.html#exm-el-maxwell">Example 63 of Classical field theory</a>, <a href="part-ii-04-classical-field-theory.html#exr-cfb-lorentz-force">Exercise 63 of Classical field theory</a>); this part does not repeat that material. It adds what the group theory of this chapter gives: the transformation of the fields under an arbitrary boost, the two invariants and the classification of fields they imply, and the covariant equation of motion of a charge. The conventions are those of <a href="part-ii-04-classical-field-theory.html#sec-complex-vector-fields">Complex and vector fields</a>: Heaviside-Lorentz units with <span class="math inline">c = 1</span>, <span class="math inline">F_{0i} = E^i</span>, <span class="math inline">F_{ij} = -\epsilon_{ijk}B^k</span>, so that <span class="math inline">F^{i0} = E^i</span> and <span class="math inline">F^{ij} = -\epsilon_{ijk}B^k</span>. The sources are <span class="citation" data-cites="maggiore2023electrodynamics">Maggiore (<a href="#ref-maggiore2023electrodynamics" role="doc-biblioref">2023, secs. 8.5–8.6</a>)</span> and <span class="citation" data-cites="blennow2022relativity">Blennow and Ohlsson (<a href="#ref-blennow2022relativity" role="doc-biblioref">2022, sec. 1.7</a>)</span>. The same physics in vector form, with Maxwell’s equations, the potentials, the fields of moving charges and radiation, is in <a href="part-ii-01b-electromagnetism.html#sec-electromagnetism">Classical electromagnetism</a> (<a href="part-ii-01b-electromagnetism.html#sec-em-maxwell">Maxwell’s equations, potentials and gauge invariance</a>, <a href="part-ii-01b-electromagnetism.html#sec-em-radiation">Waves, moving charges and radiation</a>); the covariant form adds the manifest invariance under boosts.</p>
+<p>For more on this topic, see <span class="citation" data-cites="emam2021covariant">Emam (<a href="#ref-emam2021covariant" role="doc-biblioref">2021</a>, Ch. 4)</span>.</p>
 <section id="the-field-tensor-under-lorentz-transformations" class="level3">
 <h3 class="anchored" data-anchor-id="the-field-tensor-under-lorentz-transformations">The field tensor under Lorentz transformations</h3>
 <p>The electric and magnetic fields are the six components of one antisymmetric tensor, so they mix under boosts. For a boost along a coordinate axis the mixing was written in <a href="part-ii-04-classical-field-theory.html#exm-cfb-field-boost">Example 33 of Classical field theory</a>; the proposition below gives it for any direction, and <a href="#fig-sr-moving-charge" class="quarto-xref">Figure&nbsp;23</a> shows its most famous consequence, the field of a moving charge.</p>
@@ -18187,11 +18192,50 @@ Boskoff, Wladimir-Georges, and Salvatore Capozziello. 2024. <em>A Mathematical J
 <div id="ref-boudreau2018applied" class="csl-entry" role="listitem">
 Boudreau, Joseph F., and Eric S. Swanson. 2018. <em>Applied Computational Physics</em>. Oxford University Press.
 </div>
+<div id="ref-emam2021covariant" class="csl-entry" role="listitem">
+Emam, Moataz H. 2021. <em>Covariant Physics: From Classical Mechanics to General Relativity and Beyond</em>. Oxford University Press.
+</div>
+<div id="ref-godinho2014introduction" class="csl-entry" role="listitem">
+Godinho, Leonor, and José Natário. 2014. <em>An Introduction to Riemannian Geometry: With Applications to Mechanics and Relativity</em>. Universitext. Springer.
+</div>
+<div id="ref-gourgoulhon2013special" class="csl-entry" role="listitem">
+Gourgoulhon, Éric. 2013. <em>Special Relativity in General Frames: From Particles to Astrophysics</em>. Graduate Texts in Physics. Springer.
+</div>
+<div id="ref-gray2019student" class="csl-entry" role="listitem">
+Gray, Norman. 2019. <em>A Student’s Guide to General Relativity</em>. Cambridge University Press.
+</div>
+<div id="ref-knauf2018mathematical" class="csl-entry" role="listitem">
+Knauf, Andreas. 2018. <em>Mathematical Physics: Classical Mechanics</em>. UNITEXT 109. Springer.
+</div>
+<div id="ref-macchi2023problems" class="csl-entry" role="listitem">
+Macchi, Andrea, Giovanni Moruzzi, and Francesco Pegoraro. 2023. <em>Problems in Classical Electromagnetism: 203 Exercises with Solutions</em>. Second. Springer.
+</div>
 <div id="ref-maggiore2023electrodynamics" class="csl-entry" role="listitem">
 Maggiore, Michele. 2023. <em>A Modern Introduction to Classical Electrodynamics</em>. Oxford University Press.
 </div>
+<div id="ref-moretti2023analytical" class="csl-entry" role="listitem">
+Moretti, Valter. 2023. <em>Analytical Mechanics: Classical, Lagrangian and Hamiltonian Mechanics, Stability Theory, Special Relativity</em>. UNITEXT 150. Springer.
+</div>
+<div id="ref-mukunda2022continuous" class="csl-entry" role="listitem">
+Mukunda, Narasimhaiengar, and Subhash Chaturvedi. 2022. <em>Continuous Groups for Physicists</em>. Cambridge University Press.
+</div>
 <div id="ref-odonnell2011wigner" class="csl-entry" role="listitem">
 O’Donnell, Kane, and Matt Visser. 2011. <span>“Elementary Analysis of the Special Relativistic Combination of Velocities, <span>Wigner</span> Rotation, and <span>Thomas</span> Precession.”</span> <em>European Journal of Physics</em> 32: 1033–47. <a href="https://arxiv.org/abs/1102.2001">https://arxiv.org/abs/1102.2001</a>.
+</div>
+<div id="ref-paganini2023fundamentals" class="csl-entry" role="listitem">
+Paganini, Pascal. 2023. <em>Fundamentals of Particle Physics: Understanding the Standard Model</em>. Cambridge University Press.
+</div>
+<div id="ref-pal2015introductory" class="csl-entry" role="listitem">
+Pal, Palash B. 2015. <em>An Introductory Course of Particle Physics</em>. CRC Press.
+</div>
+<div id="ref-pierrus2018solved" class="csl-entry" role="listitem">
+Pierrus, J. 2018. <em>Solved Problems in Classical Electromagnetism: Analytical and Numerical Solutions with Comments</em>. Oxford University Press.
+</div>
+<div id="ref-talagrand2022what" class="csl-entry" role="listitem">
+Talagrand, Michel. 2022. <em>What Is a Quantum Field Theory? A First Introduction for Mathematicians</em>. Cambridge University Press.
+</div>
+<div id="ref-tornetta2022mathematical" class="csl-entry" role="listitem">
+Tornetta, Gabriele Nunzio. 2022. <em>Mathematical Quantum Physics: A Foundational Introduction</em>. Springer.
 </div>
 </div></section></div></main> <!-- /main -->
 <script>

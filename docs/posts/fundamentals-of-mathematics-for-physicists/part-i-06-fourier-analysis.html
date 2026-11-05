@@ -412,6 +412,7 @@ window.Quarto = {
 <section id="sec-fourier-series" class="level2">
 <h2 class="anchored" data-anchor-id="sec-fourier-series">Fourier series</h2>
 <p>A function on the circle is a periodic function on the line, and the harmonics <span class="math inline">e^{inx}</span> are the simplest periodic functions of all. This section defines periodic functions and their Fourier coefficients, studies the partial sums through the Dirichlet kernel, states the convergence theorems of Dirichlet and of the <span class="math inline">L^2</span> theory, and proves Parseval’s identity, with the square wave and the sawtooth of <a href="#fig-fourier-square-wave" class="quarto-xref">Figure&nbsp;1</a> as running examples whose coefficients, partial sums and overshoot are collected in <a href="#prp-fourier-series-values" class="quarto-xref">Proposition&nbsp;1</a>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="arrigo2023introduction">Arrigo (<a href="#ref-arrigo2023introduction" role="doc-biblioref">2023</a>, Ch. 4)</span>.</p>
 <div id="fig-fourier-square-wave" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fourier-square-wave-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2839,6 +2840,7 @@ theorem parabola_b1 : ∫ x in (0 : ℝ)..π, x * (π - x) * Real.sin x = 4</cod
 <section id="sec-fourier-transform" class="level2">
 <h2 class="anchored" data-anchor-id="sec-fourier-transform">The Fourier transform</h2>
 <p>A function on the whole line has no period, and the discrete harmonics <span class="math inline">e^{inx}</span> are replaced by the continuum of plane waves <span class="math inline">e^{ikx}</span> with the sum over <span class="math inline">n</span> replaced by an integral over <span class="math inline">k</span>. This section defines the transform and its inverse, computes it for the box, the two-sided exponential and the Gaussian, proves the convolution theorem, states Plancherel’s theorem and the uncertainty inequality, and ends with a proposition that collects the explicit transforms; the figure shows the trade-off between the width of a Gaussian and the width of its transform.</p>
+<p>For more on this topic, see <span class="citation" data-cites="aliev2024mathematical">Aliev and Lara (<a href="#ref-aliev2024mathematical" role="doc-biblioref">2024</a>, Ch. 8)</span>, <span class="citation" data-cites="arrigo2023introduction">Arrigo (<a href="#ref-arrigo2023introduction" role="doc-biblioref">2023</a>, Ch. 6)</span> and <span class="citation" data-cites="borodzik2019problems">Borodzik et al. (<a href="#ref-borodzik2019problems" role="doc-biblioref">2019</a>, Ch. 2)</span>.</p>
 <div id="fig-fourier-gaussian" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fourier-gaussian-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -8368,6 +8370,7 @@ theorem yukawa_to_coulomb (k : ℝ) (hk : k ≠ 0) :
 <section id="sec-harmonic-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="sec-harmonic-analysis">Harmonic analysis on the sphere and on compact groups</h2>
 <p>The circle is the simplest compact space, and Fourier series are the expansion of functions on it in the eigenfunctions of <span class="math inline">d^2/dx^2</span>; the sphere and the compact Lie groups are the next cases, and the same structure reappears with the Laplacian replaced by the Laplacian of the round metric and the harmonics by the spherical harmonics or the matrix coefficients of the irreducible representations. This section defines the Laplacian on <span class="math inline">S^2</span> and the spherical harmonics, connects them to the spin-<span class="math inline">l</span> representations of <span class="math inline">SU(2)</span> of <a href="part-i-11-lie-groups-algebras.html#sec-weights-su2">Weights and the representations of su(2)</a>, states the Peter-Weyl theorem, and describes the mode expansion of a function on a coset space <span class="math inline">G/H</span>; the figure shows the harmonics for <span class="math inline">l \leq 3</span>, and the eigenvalue equations, the orthonormality and the representation-theoretic identities are collected in the proposition at its end.</p>
+<p>For more on this topic, see <span class="citation" data-cites="aliev2024mathematical">Aliev and Lara (<a href="#ref-aliev2024mathematical" role="doc-biblioref">2024</a>, Ch. 7)</span>.</p>
 <div id="fig-spherical-harmonics" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-spherical-harmonics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -12163,6 +12166,15 @@ theorem plancherel (f : Lp (α</code></pre>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-aliev2024mathematical" class="csl-entry" role="listitem">
+Aliev, Farkhad G., and Antonio Lara. 2024. <em>Mathematical Methods for Physics: Problems and Solutions</em>. Jenny Stanford Publishing.
+</div>
+<div id="ref-arrigo2023introduction" class="csl-entry" role="listitem">
+Arrigo, Daniel. 2023. <em>An Introduction to Partial Differential Equations</em>. Second. Synthesis Lectures on Mathematics &amp; Statistics. Springer.
+</div>
+<div id="ref-borodzik2019problems" class="csl-entry" role="listitem">
+Borodzik, Maciej, Paweł Goldstein, Piotr Rybka, and Anna Zatorska-Goldstein. 2019. <em>Problems on Partial Differential Equations</em>. Problem Books in Mathematics. Springer.
+</div>
 <div id="ref-izaac2018computational" class="csl-entry" role="listitem">
 Izaac, Joshua, and Jingbo Wang. 2018. <em>Computational Quantum Mechanics</em>. Springer.
 </div>

@@ -410,6 +410,7 @@ window.Quarto = {
 <section id="sec-probability-spaces" class="level2">
 <h2 class="anchored" data-anchor-id="sec-probability-spaces">Probability spaces</h2>
 <p>A probability space is the arena of the subject: a set of possible outcomes, a collection of events that can be assigned probabilities, and the assignment itself. This section defines the three ingredients, then conditional probability, independence and Bayes’ rule, and checks the rational probabilities of the running examples (two dice and a diagnostic test) exactly in Sage.</p>
+<p>For more on this topic, see <span class="citation" data-cites="baldi2023probability">Baldi (<a href="#ref-baldi2023probability" role="doc-biblioref">2023</a>, Ch. 1)</span> and <span class="citation" data-cites="capinski2001probability">Capiński and Zastawniak (<a href="#ref-capinski2001probability" role="doc-biblioref">2001</a>, Ch. 1-7)</span>.</p>
 <section id="sample-spaces-and-events" class="level3">
 <h3 class="anchored" data-anchor-id="sample-spaces-and-events">Sample spaces and events</h3>
 <p>Before any probability can be assigned one must say what the possible outcomes are and which questions about them are admissible. The definition below names the set of outcomes and the family of events, which for a finite experiment is simply every subset and for a continuous one is restricted to the subsets that can be built from intervals by countable operations.</p>
@@ -1549,6 +1550,7 @@ most likely sums: [10, 11]</code></pre>
 <section id="sec-random-variables" class="level2">
 <h2 class="anchored" data-anchor-id="sec-random-variables">Random variables and distributions</h2>
 <p>Most questions about an experiment concern a number attached to the outcome, the sum of the dice, the number of decays in a second, the position of a particle, rather than the outcome itself. This section defines random variables and their distributions, the expectation, variance and moments that summarise them, the characteristic function that encodes all moments at once, and the three distributions that recur throughout physics: the binomial with its Poisson limit, and the Gaussian.</p>
+<p>For more on this topic, see <span class="citation" data-cites="baldi2023probability">Baldi (<a href="#ref-baldi2023probability" role="doc-biblioref">2023</a>, Ch. 2)</span>, <span class="citation" data-cites="capinski2001probability">Capiński and Zastawniak (<a href="#ref-capinski2001probability" role="doc-biblioref">2001</a>, Ch. 8-12)</span> and <span class="citation" data-cites="cufaropetroni2020probability">Petroni (<a href="#ref-cufaropetroni2020probability" role="doc-biblioref">2020</a>, Ch. 1-4)</span>.</p>
 <section id="random-variables" class="level3">
 <h3 class="anchored" data-anchor-id="random-variables">Random variables</h3>
 <p>A random variable is a numerical function on the sample space, and what one usually wants to know about it is not the function but the probabilities of its values, its distribution. The definition below introduces both, and the two ways a distribution is described in practice, a table of probabilities in the discrete case and a density in the continuous one.</p>
@@ -2833,6 +2835,7 @@ e^{-\lambda t}</span> for some <span class="math inline">\lambda</span>.</p>
 <section id="sec-limit-theorems" class="level2">
 <h2 class="anchored" data-anchor-id="sec-limit-theorems">Limit theorems</h2>
 <p>The reason probability is useful is that averages of many independent quantities behave predictably: they converge to the expectation, and their fluctuations around it are Gaussian with a width shrinking like <span class="math inline">1/\sqrt n</span>. This section makes the two statements precise. It defines the modes of convergence, proves Chebyshev’s inequality and the weak law of large numbers from it, states the strong law and the central limit theorem with the characteristic-function argument behind the latter, and derives Wick’s theorem for the moments of the Gaussian, whose combinatorics of pairings is used throughout field theory.</p>
+<p>For more on this topic, see <span class="citation" data-cites="baldi2023probability">Baldi (<a href="#ref-baldi2023probability" role="doc-biblioref">2023</a>, Ch. 3)</span>.</p>
 <section id="convergence-in-probability" class="level3">
 <h3 class="anchored" data-anchor-id="convergence-in-probability">Convergence in probability</h3>
 <p>A sequence of random variables can converge in several senses, and the limit theorems use three of them: the probability of a deviation tends to zero, the sequence converges for almost every outcome, or the distributions converge. The figure shows the first two at work on coin flips and the third on sums of dice; the definition distinguishes them.</p>
@@ -4714,6 +4717,7 @@ u_iu_ju_ku_l\,C_{ij}C_{kl}</span>; symmetrising the right side over the <span cl
 <section id="sec-statistics" class="level2">
 <h2 class="anchored" data-anchor-id="sec-statistics">Statistics and estimation</h2>
 <p>Statistics turns the theory around: the distribution is unknown, a sample from it is given, and one wants to infer the distribution’s parameters and say how reliable the inference is. This section treats estimators and their bias, maximum likelihood, confidence intervals from the central limit theorem, the chi-squared test of a hypothesised distribution, and Monte Carlo sampling as estimation of an integral, with the <span class="math inline">1/\sqrt N</span> error that governs every simulation.</p>
+<p>For more on this topic, see <span class="citation" data-cites="gasinski2014exercises">Gasiński and Papageorgiou (<a href="#ref-gasinski2014exercises" role="doc-biblioref">2014</a>, Ch. 3)</span>.</p>
 <section id="estimators" class="level3">
 <h3 class="anchored" data-anchor-id="estimators">Estimators</h3>
 <p>An estimator is a rule that computes a guess for a parameter from the data, and since the data are random so is the guess; the first questions are whether it is right on average and how much it fluctuates. The definition fixes these notions and introduces the two estimators used most, the sample mean and the sample variance.</p>
@@ -5928,11 +5932,23 @@ single Gaussian rejected at the 5% level: True</code></pre>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-baldi2023probability" class="csl-entry" role="listitem">
+Baldi, Paolo. 2023. <em>Probability: An Introduction Through Theory and Exercises</em>. Universitext. Springer.
+</div>
 <div id="ref-bricmont2022statistical" class="csl-entry" role="listitem">
 Bricmont, Jean. 2022. <em>Making Sense of Statistical Mechanics</em>. Springer.
 </div>
+<div id="ref-capinski2001probability" class="csl-entry" role="listitem">
+Capiński, Marek, and Tomasz Zastawniak. 2001. <em>Probability Through Problems</em>. Problem Books in Mathematics. Springer.
+</div>
 <div id="ref-foulaadvand2023computational" class="csl-entry" role="listitem">
 Foulaadvand, M. Ebrahim. 2023. <em>A Computational Approach to Physics</em>. Cambridge Scholars Publishing.
+</div>
+<div id="ref-gasinski2014exercises" class="csl-entry" role="listitem">
+Gasiński, Leszek, and Nikolaos S. Papageorgiou. 2014. <em>Exercises in Analysis: Part 1</em>. Problem Books in Mathematics. Springer.
+</div>
+<div id="ref-cufaropetroni2020probability" class="csl-entry" role="listitem">
+Petroni, Nicola Cufaro. 2020. <em>Probability and Stochastic Processes for Physicists</em>. UNITEXT for Physics. Springer.
 </div>
 </div></section></div></main> <!-- /main -->
 <script>

@@ -61,7 +61,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -389,6 +408,7 @@ window.Quarto = {
 <section id="sec-vector-spaces" class="level2">
 <h2 class="anchored" data-anchor-id="sec-vector-spaces">Vector spaces</h2>
 <p>A vector space is a set in which vectors can be added and rescaled. The six notions of this section, vector spaces, linear combinations, spans, linear independence, bases and dimension, are the vocabulary in which every later definition is phrased; the two propositions at its end record two dimension counts and the coordinates of one vector in a skewed basis.</p>
+<p>For more on this topic, see <span class="citation" data-cites="axler2024linear">Axler (<a href="#ref-axler2024linear" role="doc-biblioref">2024</a>, Ch. 1-2)</span>.</p>
 <section id="vector-spaces" class="level3">
 <h3 class="anchored" data-anchor-id="vector-spaces">Vector spaces</h3>
 <p>Everything in this chapter rests on two operations, adding two vectors and stretching one by a number, together with the rules those operations obey. The definition below lists the rules once and for all; the picture to keep is that of arrows in the plane, added tip to tail and rescaled along their own line. It also names the subsets that inherit the structure, the subspaces, which is where most of the work will happen.</p>
@@ -3597,6 +3617,7 @@ theorem change_of_basis_check :
 <section id="sec-linear-maps-dual" class="level2">
 <h2 class="anchored" data-anchor-id="sec-linear-maps-dual">Linear maps and dual spaces</h2>
 <p>A linear map is a map between vector spaces that respects addition and scaling; its matrix is the array of numbers that every computation in these lectures manipulates. The linear maps to the real numbers, the covectors, form the dual space, and the dual basis turns coordinates into functionals. Four definitions and two propositions, on a kernel vector and on the dual basis of <span class="math inline">f</span>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="axler2024linear">Axler (<a href="#ref-axler2024linear" role="doc-biblioref">2024</a>, Ch. 3)</span> and <span class="citation" data-cites="scott2023problems">Scott (<a href="#ref-scott2023problems" role="doc-biblioref">2023</a>, Ch. 2)</span>.</p>
 <section id="linear-maps" class="level3">
 <h3 class="anchored" data-anchor-id="linear-maps">Linear maps</h3>
 <p>A map between vector spaces is useful only if it respects the two operations, and the maps that do are the subject of this section. The definition also names the kernel and the image, states the rank-nullity count that ties them to the dimension, and explains how a matrix arises once bases are fixed.</p>
@@ -5870,6 +5891,7 @@ theorem dual_b_delta :
 <section id="sec-bilinear-forms" class="level2">
 <h2 class="anchored" data-anchor-id="sec-bilinear-forms">Bilinear forms</h2>
 <p>A bilinear form assigns a number to two vectors, linearly in each. This section treats bilinear forms on a fixed vector space, their symmetry, non-degeneracy and signature, with the Euclidean dot product and the Minkowski form of special relativity as the running examples; the light cone of <a href="#fig-minkowski-cone" class="quarto-xref">Figure&nbsp;3</a> is the picture to keep in mind. Four definitions and one proposition on the values of the Minkowski form; a degenerate form on the plane serves as the counterexample throughout.</p>
+<p>For more on this topic, see <span class="citation" data-cites="axler2024linear">Axler (<a href="#ref-axler2024linear" role="doc-biblioref">2024, sec. 9A</a>)</span>.</p>
 <section id="bilinear-forms" class="level3">
 <h3 class="anchored" data-anchor-id="bilinear-forms">Bilinear forms</h3>
 <p>Two vectors in, one number out, linearly in each slot: this is the structure the rest of the chapter is about. The definition fixes the component convention <span class="math inline">B_{ij} = B(e_i, e_j)</span>, under which such a map is a square matrix once a basis is chosen, and every metric tensor in the lectures follows it.</p>
@@ -7863,6 +7885,7 @@ theorem eta_mul_eta :
 <section id="sec-tensor-products" class="level2">
 <h2 class="anchored" data-anchor-id="sec-tensor-products">Multilinear maps and tensor products</h2>
 <p>A multilinear map takes several vectors and covectors and returns a number, linearly in each; equivalently it is an array of components that transforms in a fixed way under a change of basis. This section defines tensors on a single vector space <span class="math inline">V</span>: multilinear maps, the tensor product space, elementary tensors, tensors of mixed type, their components and their contractions, with a closing proposition on the dimension of a tensor product.</p>
+<p>For more on this topic, see <span class="citation" data-cites="axler2024linear">Axler (<a href="#ref-axler2024linear" role="doc-biblioref">2024</a>)</span>.</p>
 <section id="multilinear-maps" class="level3">
 <h3 class="anchored" data-anchor-id="multilinear-maps">Multilinear maps</h3>
 <p>Linear functionals take one vector and bilinear forms take two; the next step is to allow any number of arguments. The definition requires linearity in each slot separately, and the determinant is the picture to keep in mind.</p>
@@ -10633,10 +10656,18 @@ theorem field_strength_invariant (E B : ℝ) :
 </div>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-axler2024linear" class="csl-entry" role="listitem">
+Axler, Sheldon. 2024. <em>Linear Algebra Done Right</em>. Fourth. Undergraduate Texts in Mathematics. Springer.
+</div>
+<div id="ref-scott2023problems" class="csl-entry" role="listitem">
+Scott, Robert B. 2023. <em>Problems and Solutions on Vector Spaces for Physicists: From Part i in Mathematical Physics—a Modern Introduction to Its Foundations</em>. Springer.
+</div>
+</div></section></div></main> <!-- /main -->
 <script>
 // Turns the tags on a post page into links to the filtered Posts page.
 document.addEventListener("DOMContentLoaded", () => {
