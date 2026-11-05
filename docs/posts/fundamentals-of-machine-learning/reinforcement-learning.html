@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Reinforcement Learning – Georgios Douzas</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../posts/fundamentals-of-machine-learning/reinforcement-learning-and-llm-agents.html" rel="next">
+<link href="../../posts/fundamentals-of-machine-learning/unsupervised-learning.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-62ab7622601dc1281cac47bf0cf453d3.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c9bb40c08a066f1d1a0f0931099edcc8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Georgios Douzas</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../open-source.html"> 
+<span class="menu-text">Open source</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/georgedouzas"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/gdouzas"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=-A4zUTUAAAAJ&amp;hl=en"> <i class="bi bi-mortarboard-fill" role="img" aria-label="Google Scholar">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/fundamentals-of-machine-learning/reinforcement-learning.html">Reinforcement Learning</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/foundations-of-learning-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations of Learning Theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/supervised-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/unsupervised-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Unsupervised Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/reinforcement-learning.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Reinforcement Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/reinforcement-learning-and-llm-agents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reinforcement Learning and LLM-based Agents</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/mathematical-foundations-of-reinforcement-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mathematical Foundations of Reinforcement Learning</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec-reinforcement-learning" id="toc-sec-reinforcement-learning" class="nav-link active" data-scroll-target="#sec-reinforcement-learning">Reinforcement Learning</a>
+  <ul class="collapse">
+  <li><a href="#sec-rl-foundations" id="toc-sec-rl-foundations" class="nav-link" data-scroll-target="#sec-rl-foundations">Foundations of RL</a>
+  <ul class="collapse">
+  <li><a href="#markov-decision-processes" id="toc-markov-decision-processes" class="nav-link" data-scroll-target="#markov-decision-processes">Markov Decision Processes</a></li>
+  <li><a href="#value-functions" id="toc-value-functions" class="nav-link" data-scroll-target="#value-functions">Value Functions</a></li>
+  <li><a href="#bellman-equations" id="toc-bellman-equations" class="nav-link" data-scroll-target="#bellman-equations">Bellman Equations</a></li>
+  <li><a href="#dynamic-programming" id="toc-dynamic-programming" class="nav-link" data-scroll-target="#dynamic-programming">Dynamic Programming</a></li>
+  <li><a href="#monte-carlo-methods" id="toc-monte-carlo-methods" class="nav-link" data-scroll-target="#monte-carlo-methods">Monte Carlo Methods</a></li>
+  <li><a href="#temporal-difference-learning" id="toc-temporal-difference-learning" class="nav-link" data-scroll-target="#temporal-difference-learning">Temporal-Difference Learning</a></li>
+  </ul></li>
+  <li><a href="#sec-advanced-rl" id="toc-sec-advanced-rl" class="nav-link" data-scroll-target="#sec-advanced-rl">Advanced RL</a>
+  <ul class="collapse">
+  <li><a href="#function-approximation" id="toc-function-approximation" class="nav-link" data-scroll-target="#function-approximation">Function Approximation</a></li>
+  <li><a href="#deep-q-networks-dqn" id="toc-deep-q-networks-dqn" class="nav-link" data-scroll-target="#deep-q-networks-dqn">Deep Q-Networks (DQN)</a></li>
+  </ul></li>
+  <li><a href="#architecture-the-network-splits-into-two-streams-after-the-convolutional-layers---value-stream-outputs-scalar-vs" id="toc-architecture-the-network-splits-into-two-streams-after-the-convolutional-layers---value-stream-outputs-scalar-vs" class="nav-link" data-scroll-target="#architecture-the-network-splits-into-two-streams-after-the-convolutional-layers---value-stream-outputs-scalar-vs"><strong>Architecture:</strong> The network splits into two streams after the convolutional layers: - <strong>Value stream:</strong> Outputs scalar <span class="math inline">V(s)</span></a>
+  <ul class="collapse">
+  <li><a href="#policy-gradient-methods" id="toc-policy-gradient-methods" class="nav-link" data-scroll-target="#policy-gradient-methods">Policy Gradient Methods</a></li>
+  <li><a href="#actor-critic-methods" id="toc-actor-critic-methods" class="nav-link" data-scroll-target="#actor-critic-methods">Actor-Critic Methods</a></li>
+  <li><a href="#trust-region-and-proximal-methods" id="toc-trust-region-and-proximal-methods" class="nav-link" data-scroll-target="#trust-region-and-proximal-methods">Trust Region and Proximal Methods</a></li>
+  <li><a href="#deterministic-policy-gradient" id="toc-deterministic-policy-gradient" class="nav-link" data-scroll-target="#deterministic-policy-gradient">Deterministic Policy Gradient</a></li>
+  <li><a href="#soft-actor-critic-sac" id="toc-soft-actor-critic-sac" class="nav-link" data-scroll-target="#soft-actor-critic-sac">Soft Actor-Critic (SAC)</a></li>
+  <li><a href="#model-based-rl" id="toc-model-based-rl" class="nav-link" data-scroll-target="#model-based-rl">Model-Based RL</a></li>
+  <li><a href="#multi-agent-rl" id="toc-multi-agent-rl" class="nav-link" data-scroll-target="#multi-agent-rl">Multi-Agent RL</a></li>
+  <li><a href="#offline-reinforcement-learning" id="toc-offline-reinforcement-learning" class="nav-link" data-scroll-target="#offline-reinforcement-learning">Offline Reinforcement Learning</a></li>
+  <li><a href="#inverse-rl-and-imitation-learning" id="toc-inverse-rl-and-imitation-learning" class="nav-link" data-scroll-target="#inverse-rl-and-imitation-learning">Inverse RL and Imitation Learning</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="sec-reinforcement-learning" class="level1">
+<h1>Reinforcement Learning</h1>
+<p>Reinforcement learning (RL) represents a fundamentally different paradigm from supervised and unsupervised learning. While supervised learning (<a href="supervised-learning.html#sec-supervised-learning">Supervised Learning</a>) learns from labeled examples and unsupervised learning (<a href="unsupervised-learning.html#sec-unsupervised-learning">Unsupervised Learning</a>) discovers structure in unlabeled data, RL addresses the challenge of learning through interaction. An RL agent must discover which actions yield the highest rewards by trying them out, learning from the consequences of its choices.</p>
+<p>This trial-and-error learning mirrors how humans and animals learn: a child learns to walk by attempting steps and adjusting based on success or failure, not by being shown the “correct” muscle activations. Similarly, an RL agent learns to play chess by playing games and observing which moves lead to victory, not by being told the optimal move in each position.</p>
+<p>The mathematical framework for RL, introduced in <a href="../fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html#sec-math-stat-foundations">Mathematical and Statistical Foundations</a>, is the Markov Decision Process (MDP). This chapter develops the theory and algorithms for solving MDPs, from foundational concepts like value functions and Bellman equations to modern deep reinforcement learning methods. The connections to optimization (<a href="../fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html#sec-optimization">Optimization Foundations</a>) and probability theory (<a href="../fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html#sec-probability-statistics">Probability and Statistics</a>) will be essential throughout.</p>
+<section id="sec-rl-foundations" class="level2">
+<h2 class="anchored" data-anchor-id="sec-rl-foundations">Foundations of RL</h2>
+<p>Reinforcement learning addresses the fundamental problem of learning to make sequential decisions through interaction with an environment. Unlike supervised learning, where correct actions are explicitly provided, RL agents must discover effective behaviors through trial and error, balancing <strong>exploration</strong> (trying new actions to discover their effects) with <strong>exploitation</strong> (using known good actions to maximize reward).</p>
+<p>For more on this topic, see <span class="citation" data-cites="bishop2024deeplearning">Bishop and Bishop (<a href="#ref-bishop2024deeplearning" role="doc-biblioref">2024</a>, Ch. 19)</span>.</p>
+<p>This exploration-exploitation dilemma is central to RL and has no simple solution. Explore too much, and the agent wastes time on suboptimal actions; exploit too much, and the agent may never discover better strategies. This trade-off, absent in supervised learning, makes RL both challenging and fascinating.</p>
+<section id="markov-decision-processes" class="level3">
+<h3 class="anchored" data-anchor-id="markov-decision-processes">Markov Decision Processes</h3>
+<p>The Markov Decision Process (MDP) provides the mathematical foundation for modeling sequential decision-making problems. Introduced in <a href="../fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html#sec-probability-statistics">Probability and Statistics</a>, MDPs formalize the interaction between an agent and its environment, capturing the essential elements needed to reason about optimal behavior. The framework is remarkably general, encompassing problems from robot control to game playing to resource allocation.</p>
+<p><strong>Formal Definition:</strong> An MDP is defined by the tuple <span class="math inline">(\mathcal{S}, \mathcal{A}, P, R, \gamma)</span> where:</p>
+<ul>
+<li><p><span class="math inline">\mathcal{S}</span>: The <strong>state space</strong>, representing all possible configurations of the environment. States can be discrete (e.g., board positions in chess, with approximately <span class="math inline">10^{43}</span> possible states) or continuous (e.g., robot joint angles in <span class="math inline">\mathbb{R}^n</span>). The state should capture all information relevant for decision-making.</p></li>
+<li><p><span class="math inline">\mathcal{A}</span>: The <strong>action space</strong>, representing all possible actions the agent can take. Actions can be discrete (e.g., {up, down, left, right} for grid navigation) or continuous (e.g., motor torques in <span class="math inline">\mathbb{R}^m</span> for robot control). In some problems, available actions depend on the current state, denoted <span class="math inline">\mathcal{A}(s)</span>.</p></li>
+<li><p><span class="math inline">P: \mathcal{S} \times \mathcal{A} \times \mathcal{S} \to [0,1]</span>: The <strong>state transition probability function</strong>, where <span class="math inline">P(s'|s,a)</span> gives the probability of transitioning to state <span class="math inline">s'</span> when taking action <span class="math inline">a</span> in state <span class="math inline">s</span>. This function must satisfy <span class="math inline">\sum_{s' \in \mathcal{S}} P(s'|s,a) = 1</span> for all <span class="math inline">s, a</span>. Deterministic environments have <span class="math inline">P(s'|s,a) \in \{0,1\}</span>, while stochastic environments have probabilistic transitions.</p></li>
+<li><p><span class="math inline">R: \mathcal{S} \times \mathcal{A} \times \mathcal{S} \to \mathbb{R}</span>: The <strong>reward function</strong>, where <span class="math inline">R(s,a,s')</span> specifies the immediate reward received when transitioning from state <span class="math inline">s</span> to state <span class="math inline">s'</span> via action <span class="math inline">a</span>. Rewards encode the task objective: positive rewards for desirable outcomes, negative rewards (penalties) for undesirable ones. In some formulations, the reward depends only on <span class="math inline">(s,a)</span> or only on <span class="math inline">s</span>.</p></li>
+<li><p><span class="math inline">\gamma \in [0,1]</span>: The <strong>discount factor</strong>, which determines the present value of future rewards. A reward received <span class="math inline">k</span> steps in the future is worth <span class="math inline">\gamma^k</span> times its nominal value. This captures the intuition that immediate rewards are more valuable than distant ones, either due to uncertainty about the future or opportunity cost.</p></li>
+</ul>
+<p><strong>The Markov Property:</strong> The defining characteristic of an MDP is the Markov property, discussed in <a href="../fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html#sec-probability-statistics">Probability and Statistics</a>, which states that the future is independent of the past given the present:</p>
+<p><span class="math display">P(S_{t+1}=s'|S_t=s, A_t=a, S_{t-1}, A_{t-1}, \ldots, S_0, A_0) = P(S_{t+1}=s'|S_t=s, A_t=a)</span></p>
+<p>This “memoryless” property means that the current state contains all information necessary to make optimal decisions—the state is a <strong>sufficient statistic</strong> for the history. In practice, constructing states that satisfy the Markov property often requires careful feature engineering. For example, in Atari games, a single frame doesn’t capture ball velocity, so the state typically consists of the last 4 frames.</p>
+<p><strong>Example - Grid World Navigation:</strong> Consider a robot navigating a <span class="math inline">5 \times 5</span> grid to reach a goal while avoiding obstacles: - <strong>States:</strong> <span class="math inline">\mathcal{S} = \{(i,j): 1 \leq i,j \leq 5\} \setminus \{\text{obstacles}\}</span> (24 states after removing obstacle) - <strong>Actions:</strong> <span class="math inline">\mathcal{A} = \{\text{up, down, left, right}\}</span> - <strong>Transitions:</strong> Deterministic movement, except at walls (stay in place) and with 10% probability of moving perpendicular to intended direction (modeling slippery floor) - <strong>Rewards:</strong> <span class="math inline">R = +10</span> for reaching goal, <span class="math inline">R = -1</span> for each step (encourages efficiency), <span class="math inline">R = -5</span> for hitting obstacle - <strong>Discount:</strong> <span class="math inline">\gamma = 0.9</span> (values immediate rewards but considers future)</p>
+<p>This simple example illustrates how MDPs model real-world problems. The stochastic transitions capture uncertainty, the reward structure encodes the task objective, and the discount factor balances short-term and long-term considerations.</p>
+</section>
+<section id="value-functions" class="level3">
+<h3 class="anchored" data-anchor-id="value-functions">Value Functions</h3>
+<p>Value functions are central to reinforcement learning, providing a way to evaluate the quality of states and actions. They enable the agent to compare different courses of action and select those that lead to higher cumulative rewards.</p>
+<p><strong>State-Value Function:</strong> The state-value function <span class="math inline">v_\pi(s)</span> represents the expected return when starting from state <span class="math inline">s</span> and following policy <span class="math inline">\pi</span> thereafter:</p>
+<div id="def-state-value-function" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1</strong></span> State-Value Function</p>
+<p><span class="math display">v_\pi(s) = \mathbb{E}_\pi[G_t | S_t = s] = \mathbb{E}_\pi\left[\sum_{k=0}^\infty \gamma^k R_{t+k+1} \bigg| S_t = s\right]</span></p>
+</div>
+<p>The expectation is taken over the randomness in the policy <span class="math inline">\pi</span>, the transition dynamics <span class="math inline">P</span>, and potentially the reward function. The state-value function answers the question: “How good is it to be in this state?” It aggregates information about all possible future trajectories from that state under the given policy.</p>
+<p><strong>Action-Value Function (Q-function):</strong> The action-value function <span class="math inline">q_\pi(s,a)</span> represents the expected return when starting from state <span class="math inline">s</span>, taking action <span class="math inline">a</span>, and following policy <span class="math inline">\pi</span> thereafter:</p>
+<p><span class="math display">q_\pi(s,a) = \mathbb{E}_\pi[G_t | S_t = s, A_t = a] = \mathbb{E}_\pi\left[\sum_{k=0}^\infty \gamma^k R_{t+k+1} \bigg| S_t = s,
+A_t = a\right]</span></p>
+<p>The Q-function is particularly useful because it allows action selection without requiring a model of the environment: the agent can simply choose <span class="math inline">\arg\max_a q_\pi(s,a)</span> without needing to know the transition probabilities.</p>
+<p><strong>Relationship Between Value Functions:</strong> The state-value and action-value functions are intimately related. The value of a state is the expected value of the actions taken from that state:</p>
+<p><span class="math display">v_\pi(s) = \sum_{a \in \mathcal{A}} \pi(a|s) q_\pi(s,a) = \mathbb{E}_{a \sim \pi(\cdot|s)}[q_\pi(s,a)]</span></p>
+<p>This equation shows that <span class="math inline">v_\pi(s)</span> is a weighted average of the Q-values, where the weights are given by the policy. Conversely, the Q-function can be expressed in terms of the state-value function:</p>
+<p><span class="math display">q_\pi(s,a) = \sum_{s' \in \mathcal{S}} P(s'|s,a)[R(s,a,s') + \gamma v_\pi(s')]</span></p>
+<p>This equation decomposes the Q-value into the immediate reward plus the discounted value of the next state. It shows that the value of taking an action is the expected immediate reward plus the expected discounted value of where that action leads.</p>
+<p><strong>Optimal Value Functions:</strong> The goal of reinforcement learning is often to find an optimal policy that maximizes the expected return. The optimal state-value function is defined as:</p>
+<p><span class="math display">v_*(s) = \max_\pi v_\pi(s) = \max_\pi \mathbb{E}_\pi[G_t | S_t = s]</span></p>
+<p>Similarly, the optimal action-value function is:</p>
+<p><span class="math display">q_*(s,a) = \max_\pi q_\pi(s,a) = \max_\pi \mathbb{E}_\pi[G_t | S_t = s, A_t = a]</span></p>
+<p>These optimal value functions represent the best possible performance achievable from each state or state-action pair. A key result is that there always exists at least one deterministic optimal policy that achieves these optimal values.</p>
+<p><strong>Advantage Function:</strong> The advantage function measures how much better an action is compared to the average action under the current policy:</p>
+<p><span class="math display">A_\pi(s,a) = q_\pi(s,a) - v_\pi(s)</span></p>
+<p>The advantage function is zero on average: <span class="math inline">\mathbb{E}_{a \sim \pi}[A_\pi(s,a)] = 0</span>. Positive advantages indicate actions that are better than average, while negative advantages indicate worse-than-average actions. The advantage function is particularly useful in policy gradient methods, where it can reduce variance in gradient estimates.</p>
+</section>
+<section id="bellman-equations" class="level3">
+<h3 class="anchored" data-anchor-id="bellman-equations">Bellman Equations</h3>
+<p>The Bellman equations are fundamental recursive relationships that express the value of a state (or state-action pair) in terms of the values of successor states. These equations form the basis for most reinforcement learning algorithms and provide both a characterization of optimal policies and a computational framework for finding them.</p>
+<p><strong>Bellman Expectation Equation:</strong> For a given policy <span class="math inline">\pi</span>, the Bellman expectation equation expresses the value function recursively:</p>
+<p><span class="math display">v_\pi(s) = \sum_{a \in \mathcal{A}} \pi(a|s) \sum_{s' \in \mathcal{S}} P(s'|s,a)[R(s,a,s') + \gamma v_\pi(s')]</span></p>
+<p>This equation has an intuitive interpretation: the value of state <span class="math inline">s</span> under policy <span class="math inline">\pi</span> equals the expected immediate reward plus the expected discounted value of the next state, where both expectations are taken over the actions selected by <span class="math inline">\pi</span> and the stochastic transitions of the environment.</p>
+<p><strong>Derivation:</strong> Starting from the definition of the value function:</p>
+<p><span class="math display">\begin{align*} v_\pi(s) &amp;= \mathbb{E}_\pi[G_t | S_t = s] \\ &amp;= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1} | S_t = s] \\ &amp;=
+\mathbb{E}_\pi[R_{t+1} | S_t = s] + \gamma \mathbb{E}_\pi[G_{t+1} | S_t = s] \\ &amp;= \sum_a \pi(a|s) \sum_{s'} P(s'|s,a) R(s,a,s') +
+\gamma \sum_a \pi(a|s) \sum_{s'} P(s'|s,a) v_\pi(s') \\ &amp;= \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma v_\pi(s')]
+\end{align*}</span></p>
+<p>The key insight is that the return <span class="math inline">G_t</span> can be decomposed into the immediate reward <span class="math inline">R_{t+1}</span> plus the discounted future return <span class="math inline">\gamma G_{t+1}</span>, and by the Markov property, <span class="math inline">\mathbb{E}[G_{t+1}|S_t=s, A_t=a, S_{t+1}=s'] = v_\pi(s')</span>.</p>
+<p>For the action-value function, the Bellman expectation equation is:</p>
+<p><span class="math display">q_\pi(s,a) = \sum_{s' \in \mathcal{S}} P(s'|s,a)[R(s,a,s') + \gamma \sum_{a' \in \mathcal{A}} \pi(a'|s') q_\pi(s',a')]</span></p>
+<p>This expresses the Q-value as the expected immediate reward plus the expected discounted Q-value of the next state-action pair.</p>
+<p><strong>Matrix-Vector Form:</strong> For finite state spaces, the Bellman expectation equation can be written in matrix-vector form:</p>
+<p><span class="math display">\mathbf{v}_\pi = \mathbf{r}_\pi + \gamma \mathbf{P}_\pi \mathbf{v}_\pi</span></p>
+<p>where <span class="math inline">\mathbf{v}_\pi \in \mathbb{R}^{|\mathcal{S}|}</span> is the vector of state values, <span class="math inline">\mathbf{r}_\pi \in
+\mathbb{R}^{|\mathcal{S}|}</span> is the vector of expected immediate rewards under <span class="math inline">\pi</span>, and <span class="math inline">\mathbf{P}_\pi \in
+\mathbb{R}^{|\mathcal{S}| \times |\mathcal{S}|}</span> is the state transition matrix under <span class="math inline">\pi</span>. This linear system has a unique solution:</p>
+<p><span class="math display">\mathbf{v}_\pi = (\mathbf{I} - \gamma \mathbf{P}_\pi)^{-1} \mathbf{r}_\pi</span></p>
+<p>provided <span class="math inline">\gamma &lt; 1</span> or the MDP is episodic. The matrix <span class="math inline">(\mathbf{I} - \gamma \mathbf{P}_\pi)</span> is invertible because <span class="math inline">\gamma &lt; 1</span> ensures that the spectral radius of <span class="math inline">\gamma \mathbf{P}_\pi</span> is less than 1.</p>
+<p><strong>Bellman Optimality Equation:</strong> The Bellman optimality equation characterizes the optimal value functions:</p>
+<p><span class="math display">v_*(s) = \max_{a \in \mathcal{A}} \sum_{s' \in \mathcal{S}} P(s'|s,a)[R(s,a,s') + \gamma v_*(s')]</span></p>
+<p>This equation states that the optimal value of a state is the maximum over all actions of the expected immediate reward plus the discounted optimal value of the next state. The max operator replaces the expectation over actions in the Bellman expectation equation, reflecting that the optimal policy chooses the best action rather than following a fixed distribution.</p>
+<p>For the optimal action-value function:</p>
+<p><span class="math display">q_*(s,a) = \sum_{s' \in \mathcal{S}} P(s'|s,a)[R(s,a,s') + \gamma \max_{a' \in \mathcal{A}} q_*(s',a')]</span></p>
+<p>The Bellman optimality equation is a system of nonlinear equations (due to the max operator) with <span class="math inline">|\mathcal{S}|</span> equations and <span class="math inline">|\mathcal{S}|</span> unknowns. Unlike the Bellman expectation equation, it cannot be solved by simple linear algebra.</p>
+<p><strong>Optimal Policy Extraction:</strong> Once we have the optimal value functions, we can extract an optimal policy:</p>
+<p><span class="math display">\pi_*(s) = \arg\max_{a \in \mathcal{A}} q_*(s,a) = \arg\max_{a \in \mathcal{A}} \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma
+v_*(s')]</span></p>
+<p>This policy is greedy with respect to the optimal value function. A fundamental result in MDP theory is that there always exists at least one deterministic optimal policy, and any policy that is greedy with respect to <span class="math inline">v_*</span> is optimal.</p>
+<p><strong>Uniqueness and Existence:</strong> For any MDP: 1. There exists an optimal policy <span class="math inline">\pi_*</span> that is better than or equal to all other policies: <span class="math inline">v_{\pi_*}(s) \geq v_\pi(s)</span> for all <span class="math inline">s</span> and all <span class="math inline">\pi</span> 2. All optimal policies share the same optimal value function <span class="math inline">v_*</span> and optimal action-value function <span class="math inline">q_*</span> 3. The optimal value functions <span class="math inline">v_*</span> and <span class="math inline">q_*</span> are the unique solutions to the Bellman optimality equations 4. There always exists at least one deterministic optimal policy</p>
+<p><strong>Contraction Mapping:</strong> The Bellman expectation operator <span class="math inline">T^\pi</span> defined by:</p>
+<p><span class="math display">(T^\pi v)(s) = \sum_a \pi(a|s) \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma v(s')]</span></p>
+<p>is a <span class="math inline">\gamma</span>-contraction in the max-norm: <span class="math inline">\|T^\pi v - T^\pi u\|_\infty \leq \gamma \|v - u\|_\infty</span>. By the Banach fixed-point theorem, <span class="math inline">T^\pi</span> has a unique fixed point, which is <span class="math inline">v_\pi</span>. This property guarantees convergence of iterative methods like policy evaluation.</p>
+<p>Similarly, the Bellman optimality operator <span class="math inline">T^*</span> defined by:</p>
+<p><span class="math display">(T^* v)(s) = \max_a \sum_{s'} P(s'|s,a)[R(s,a,s') + \gamma v(s')]</span></p>
+<p>is also a <span class="math inline">\gamma</span>-contraction with unique fixed point <span class="math inline">v_*</span>. This property underlies the convergence of value iteration and Q-learning.</p>
+</section>
+<section id="dynamic-programming" class="level3">
+<h3 class="anchored" data-anchor-id="dynamic-programming">Dynamic Programming</h3>
+<p>Dynamic programming (DP) methods solve MDPs by exploiting the recursive structure of the Bellman equations. DP requires complete knowledge of the MDP (model-based approach) and is computationally feasible only for problems with relatively small state and action spaces. Despite these limitations, DP provides the foundation for understanding many reinforcement learning algorithms.</p>
+<p><strong>Policy Evaluation (Prediction):</strong> Given a policy <span class="math inline">\pi</span>, policy evaluation computes the state-value function <span class="math inline">v_\pi</span> by iteratively applying the Bellman expectation operator:</p>
+<p><span class="math display">v_{k+1}(s) = \sum_{a \in \mathcal{A}} \pi(a|s) \sum_{s' \in \mathcal{S}} P(s'|s,a)[R(s,a,s') + \gamma v_k(s')]</span></p>
+<p>Starting from an arbitrary initial value function <span class="math inline">v_0</span> (often initialized to zero), this iteration is guaranteed to converge to <span class="math inline">v_\pi</span> as <span class="math inline">k \to \infty</span>. The convergence follows from the contraction mapping property of the Bellman expectation operator.</p>
+<p><strong>Algorithm (Iterative Policy Evaluation):</strong> <code>Input: Policy π, discount factor γ, threshold θ Initialize: v(s) = 0 for all s ∈ S Repeat: Δ ← 0 For each s ∈ S: v_old ← v(s) v(s) ← Σ_a π(a|s) Σ_s' P(s'|s,a)[R(s,a,s') + γv(s')] Δ ← max(Δ, |v_old - v(s)|) Until Δ &lt; θ Return: v ≈ v_π</code></p>
+<p><strong>Convergence Rate:</strong> The error after <span class="math inline">k</span> iterations is bounded by:</p>
+<p><span class="math display">\|v_k - v_\pi\|_\infty \leq \gamma^k \|v_0 - v_\pi\|_\infty</span></p>
+<p>This shows exponential convergence with rate <span class="math inline">\gamma</span>. For <span class="math inline">\gamma</span> close to 1, convergence can be slow, requiring many iterations.</p>
+<p><strong>Computational Complexity:</strong> Each iteration requires <span class="math inline">O(|\mathcal{S}|^2 |\mathcal{A}|)</span> operations, as we must sum over all possible next states for each state-action pair. For large state spaces, this becomes computationally prohibitive.</p>
+<p><strong>Policy Improvement:</strong> Given the value function <span class="math inline">v_\pi</span> for a policy <span class="math inline">\pi</span>, we can construct an improved policy <span class="math inline">\pi'</span> by acting greedily with respect to <span class="math inline">v_\pi</span>:</p>
+<p><span class="math display">\pi'(s) = \arg\max_{a \in \mathcal{A}} \sum_{s' \in \mathcal{S}} P(s'|s,a)[R(s,a,s') + \gamma v_\pi(s')] = \arg\max_{a \in
+\mathcal{A}} q_\pi(s,a)</span></p>
+<p><strong>Policy Improvement Theorem:</strong> Let <span class="math inline">\pi</span> and <span class="math inline">\pi'</span> be any pair of deterministic policies such that <span class="math inline">q_\pi(s, \pi'(s)) \geq
+v_\pi(s)</span> for all <span class="math inline">s \in \mathcal{S}</span>. Then <span class="math inline">v_{\pi'}(s) \geq v_\pi(s)</span> for all <span class="math inline">s \in \mathcal{S}</span>. If the inequality is strict for at least one state, then <span class="math inline">v_{\pi'}(s) &gt; v_\pi(s)</span> for at least one state.</p>
+<p><strong>Proof Sketch:</strong> By repeatedly applying the Bellman equation and using the greedy improvement condition, we can show:</p>
+<p><span class="math display">\begin{align*} v_\pi(s) &amp;\leq q_\pi(s, \pi'(s)) \\ &amp;= \mathbb{E}[R_{t+1} + \gamma v_\pi(S_{t+1}) | S_t=s, A_t=\pi'(s)] \\ &amp;\leq
+\mathbb{E}[R_{t+1} + \gamma q_\pi(S_{t+1}, \pi'(S_{t+1})) | S_t=s, A_t=\pi'(s)] \\ &amp;= \mathbb{E}[R_{t+1} + \gamma R_{t+2} +
+\gamma^2 v_\pi(S_{t+2}) | S_t=s, \pi'] \\ &amp;\leq \cdots \\ &amp;\leq v_{\pi'}(s) \end{align*}</span></p>
+<p>This theorem guarantees that greedy policy improvement never makes the policy worse and will strictly improve it unless it is already optimal.</p>
+<p><strong>Policy Iteration:</strong> Policy iteration alternates between policy evaluation and policy improvement:</p>
+<p><strong>Algorithm (Policy Iteration):</strong> ``` Initialize: π(s) arbitrarily for all s ∈ S Repeat: 1. Policy Evaluation: Compute v_π using iterative policy evaluation</p>
+<pre><code>2. Policy Improvement: policy-stable ← true For each s ∈ S: old-action ← π(s) π(s) ← argmax_a Σ_s' P(s'|s,a)[R(s,a,s') +
+   γv_π(s')] If old-action ≠ π(s): policy-stable ← false Until policy-stable Return: π ≈ π*, v ≈ v* ```</code></pre>
+<p><strong>Convergence:</strong> Policy iteration converges to the optimal policy in a finite number of iterations for finite MDPs. Since there are only finitely many deterministic policies and each iteration strictly improves the policy (unless already optimal), convergence is guaranteed. In practice, policy iteration often converges in surprisingly few iterations (often less than 10 for many problems).</p>
+<p><strong>Value Iteration:</strong> Value iteration combines policy evaluation and improvement into a single update:</p>
+<p><span class="math display">v_{k+1}(s) = \max_{a \in \mathcal{A}} \sum_{s' \in \mathcal{S}} P(s'|s,a)[R(s,a,s') + \gamma v_k(s')]</span></p>
+<p>This is equivalent to performing a single sweep of policy evaluation followed by policy improvement. Value iteration can be viewed as applying the Bellman optimality operator.</p>
+<p><strong>Algorithm (Value Iteration):</strong> <code>Input: MDP (S, A, P, R, γ), threshold θ Initialize: v(s) = 0 for all s ∈ S Repeat: Δ ← 0 For each s ∈ S: v_old ← v(s) v(s) ← max_a Σ_s' P(s'|s,a)[R(s,a,s') + γv(s')] Δ ← max(Δ, |v_old - v(s)|) Until Δ &lt; θ Output policy: π(s) = argmax_a Σ_s' P(s'|s,a)[R(s,a,s') + γv(s')] Return: π ≈ π*, v ≈ v*</code></p>
+<p><strong>Convergence:</strong> Value iteration converges to <span class="math inline">v_*</span> as <span class="math inline">k \to \infty</span>, with error bound:</p>
+<p><span class="math display">\|v_k - v_*\|_\infty \leq \gamma^k \|v_0 - v_*\|_\infty</span></p>
+<p>Once <span class="math inline">v_k</span> is sufficiently close to <span class="math inline">v_*</span>, the greedy policy with respect to <span class="math inline">v_k</span> is optimal. A useful stopping criterion is:</p>
+<p><span class="math display">\|v_{k+1} - v_k\|_\infty &lt; \frac{\theta(1-\gamma)}{2\gamma}</span></p>
+<p>which guarantees that the greedy policy is within <span class="math inline">\theta</span> of optimal.</p>
+<p><strong>Policy Iteration vs.&nbsp;Value Iteration:</strong> - <strong>Policy Iteration:</strong> Each iteration requires solving a system of linear equations (policy evaluation), which can be expensive. However, it often converges in fewer iterations. - <strong>Value Iteration:</strong> Each iteration is cheaper (just a max operation), but may require more iterations to converge. - <strong>Modified Policy Iteration:</strong> A hybrid approach that performs a fixed number of policy evaluation steps (rather than converging fully) before policy improvement.</p>
+<p><strong>Asynchronous Dynamic Programming:</strong> Standard DP methods update all states in each iteration (synchronous updates). Asynchronous DP updates states in any order, potentially focusing computational effort on important states. Examples include: - <strong>In-place updates:</strong> Update <span class="math inline">v(s)</span> immediately rather than maintaining separate old and new arrays - <strong>Prioritized sweeping:</strong> Update states in order of their Bellman error - <strong>Real-time dynamic programming:</strong> Update only states visited by the agent</p>
+<p>Asynchronous methods can converge faster in practice while maintaining theoretical convergence guarantees, provided all states continue to be updated.</p>
+<p><strong>Generalized Policy Iteration:</strong> The general principle underlying both policy iteration and value iteration is <strong>generalized policy iteration (GPI)</strong>, where policy evaluation and policy improvement processes interact. Almost all RL methods can be viewed as GPI: maintaining approximate value functions and policies, and iteratively improving each based on the other. The evaluation and improvement processes can be interleaved at various granularities, from single-state updates to complete convergence <span class="citation" data-cites="zhao2025rl theodoridis2025ml">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+</section>
+<section id="monte-carlo-methods" class="level3">
+<h3 class="anchored" data-anchor-id="monte-carlo-methods">Monte Carlo Methods</h3>
+<p>Monte Carlo (MC) methods learn value functions and optimal policies from experience in the form of sample episodes. Unlike dynamic programming, MC methods do not require a model of the environment and can learn from actual or simulated interaction. MC methods are particularly useful for episodic tasks where episodes naturally terminate.</p>
+<p><strong>Key Principle:</strong> MC methods estimate value functions by averaging sample returns. The law of large numbers guarantees that these averages converge to the expected values as the number of samples increases.</p>
+<p><strong>Monte Carlo Policy Evaluation:</strong> To evaluate a policy <span class="math inline">\pi</span>, we generate episodes following <span class="math inline">\pi</span> and average the returns observed from each state:</p>
+<p><span class="math display">v_\pi(s) = \mathbb{E}_\pi[G_t | S_t = s] \approx \frac{1}{N(s)} \sum_{i=1}^{N(s)} G_t^{(i)}</span></p>
+<p>where <span class="math inline">N(s)</span> is the number of times state <span class="math inline">s</span> has been visited and <span class="math inline">G_t^{(i)}</span> is the return from the <span class="math inline">i</span>-th visit.</p>
+<p><strong>First-Visit vs.&nbsp;Every-Visit MC:</strong></p>
+<ul>
+<li><p><strong>First-Visit MC:</strong> Average returns only from the first time a state is visited in each episode. This is the most commonly used variant.</p></li>
+<li><p><strong>Every-Visit MC:</strong> Average returns from all visits to a state within episodes. Both methods converge to <span class="math inline">v_\pi(s)</span> as the number of visits approaches infinity, but first-visit MC has simpler theoretical properties.</p></li>
+</ul>
+<p><strong>Algorithm (First-Visit MC Policy Evaluation):</strong> ``` Input: Policy π to be evaluated Initialize: V(s) arbitrarily for all s ∈ S Returns(s) ← empty list for all s ∈ S</p>
+<p>Repeat forever: Generate an episode following π: S₀, A₀, R₁, S₁, A₁, R₂, …, Sₜ G ← 0 For each step t = T-1, T-2, …, 0: G ← γG + R_{t+1} If S_t does not appear in S₀, S₁, …, S_{t-1}: Append G to Returns(S_t) V(S_t) ← average(Returns(S_t)) ```</p>
+<p><strong>Incremental Implementation:</strong> Instead of maintaining a list of all returns, we can update the value estimate incrementally:</p>
+<p><span class="math display">V(S_t) \leftarrow V(S_t) + \alpha[G_t - V(S_t)]</span></p>
+<p>where <span class="math inline">\alpha</span> is a step-size parameter. This is equivalent to an exponentially weighted moving average when <span class="math inline">\alpha</span> is constant, giving more weight to recent returns. For <span class="math inline">\alpha = 1/N(s)</span>, this reduces to the sample average.</p>
+<p><strong>Monte Carlo Estimation of Action Values:</strong> For control (finding optimal policies), we need to estimate action values <span class="math inline">q_\pi(s,a)</span> rather than state values. The process is similar:</p>
+<p><span class="math display">q_\pi(s,a) \approx \frac{1}{N(s,a)} \sum_{i=1}^{N(s,a)} G_t^{(i)}</span></p>
+<p>where <span class="math inline">N(s,a)</span> is the number of times action <span class="math inline">a</span> has been taken in state <span class="math inline">s</span>.</p>
+<p><strong>The Exploration Problem:</strong> A fundamental challenge in MC control is ensuring that all state-action pairs are visited sufficiently often. If the policy is deterministic, many state-action pairs may never be visited, preventing accurate value estimation.</p>
+<p><strong>Exploring Starts:</strong> One solution is to specify that episodes start in a state-action pair, with every pair having non-zero probability of being selected as the start. This ensures all pairs are visited infinitely often.</p>
+<p><strong>Algorithm (MC Control with Exploring Starts):</strong> ``` Initialize: Q(s,a) arbitrarily for all s ∈ S, a ∈ A π(s) arbitrarily for all s ∈ S Returns(s,a) ← empty list for all s ∈ S, a ∈ A</p>
+<p>Repeat forever: Choose S₀ ∈ S, A₀ ∈ A(S₀) randomly (exploring starts) Generate episode from S₀, A₀ following π G ← 0 For each step t = T-1, T-2, …, 0: G ← γG + R_{t+1} If (S_t, A_t) does not appear in (S₀,A₀), …, (S_{t-1},A_{t-1}): Append G to Returns(S_t, A_t) Q(S_t, A_t) ← average(Returns(S_t, A_t)) π(S_t) ← argmax_a Q(S_t, a) ```</p>
+<p><strong>ε-Greedy Policies:</strong> A more practical approach is to use <span class="math inline">\epsilon</span>-greedy policies, which ensure continued exploration:</p>
+<p><span class="math display">\pi(a|s) = \begin{cases} 1-\epsilon+\epsilon/|\mathcal{A}(s)| &amp; \text{if } a = \arg\max_{a'} Q(s,a') \\
+\epsilon/|\mathcal{A}(s)| &amp; \text{otherwise} \end{cases}</span></p>
+<p>With probability <span class="math inline">1-\epsilon</span>, the greedy action is selected; with probability <span class="math inline">\epsilon</span>, a random action is chosen. This ensures all actions are tried with non-zero probability.</p>
+<p><strong>On-Policy vs.&nbsp;Off-Policy:</strong></p>
+<ul>
+<li><p><strong>On-Policy Methods:</strong> Learn the value of the policy being used to make decisions (e.g., learning the value of an <span class="math inline">\epsilon</span>-greedy policy while following it).</p></li>
+<li><p><strong>Off-Policy Methods:</strong> Learn the value of one policy (target policy) while following another policy (behavior policy). This allows learning about optimal policies while following exploratory policies.</p></li>
+</ul>
+<p><strong>Algorithm (On-Policy First-Visit MC Control):</strong> ``` Initialize: Q(s,a) arbitrarily for all s ∈ S, a ∈ A Returns(s,a) ← empty list for all s ∈ S, a ∈ A π ← ε-greedy policy derived from Q</p>
+<p>Repeat forever: Generate episode following π G ← 0 For each step t = T-1, T-2, …, 0: G ← γG + R_{t+1} If (S_t, A_t) does not appear in (S₀,A₀), …, (S_{t-1},A_{t-1}): Append G to Returns(S_t, A_t) Q(S_t, A_t) ← average(Returns(S_t, A_t)) π ← ε-greedy policy derived from Q ```</p>
+<p><strong>GLIE (Greedy in the Limit with Infinite Exploration):</strong> For convergence to the optimal policy, we need the exploration parameter <span class="math inline">\epsilon</span> to decrease over time while ensuring infinite exploration:</p>
+<ol type="1">
+<li>All state-action pairs are visited infinitely often: <span class="math inline">\lim_{k \to \infty} N_k(s,a) = \infty</span></li>
+<li>The policy converges to greedy: <span class="math inline">\lim_{k \to \infty} \epsilon_k = 0</span></li>
+</ol>
+<p>A common schedule is <span class="math inline">\epsilon_k = 1/k</span>, which satisfies GLIE conditions.</p>
+<p><strong>Off-Policy Monte Carlo:</strong> Off-policy methods use importance sampling to estimate the value of the target policy <span class="math inline">\pi</span> from episodes generated by a behavior policy <span class="math inline">b</span>:</p>
+<p><span class="math display">v_\pi(s) = \mathbb{E}_b\left[\frac{\pi(A_t|S_t)}{b(A_t|S_t)} \frac{\pi(A_{t+1}|S_{t+1})}{b(A_{t+1}|S_{t+1})} \cdots
+\frac{\pi(A_T|S_T)}{b(A_T|S_T)} G_t \bigg| S_t = s\right]</span></p>
+<p>The importance sampling ratio is:</p>
+<p><span class="math display">\rho_{t:T-1} = \prod_{k=t}^{T-1} \frac{\pi(A_k|S_k)}{b(A_k|S_k)}</span></p>
+<p><strong>Ordinary Importance Sampling:</strong> Simply scales returns by the importance sampling ratio:</p>
+<p><span class="math display">V(s) = \frac{\sum_{t \in \mathcal{T}(s)} \rho_{t:T(t)-1} G_t}{|\mathcal{T}(s)|}</span></p>
+<p>This estimator is unbiased but can have high variance.</p>
+<p><strong>Weighted Importance Sampling:</strong> Uses a weighted average:</p>
+<p><span class="math display">V(s) = \frac{\sum_{t \in \mathcal{T}(s)} \rho_{t:T(t)-1} G_t}{\sum_{t \in \mathcal{T}(s)} \rho_{t:T(t)-1}}</span></p>
+<p>This estimator is biased (though the bias converges to zero) but typically has lower variance and is preferred in practice.</p>
+<p><strong>Advantages of Monte Carlo Methods:</strong> 1. <strong>Model-free:</strong> No need for environment dynamics 2. <strong>Unbiased estimates:</strong> Returns are actual outcomes, not bootstrapped estimates 3. <strong>Focused updates:</strong> Can focus on important states 4. <strong>Simple implementation:</strong> Conceptually straightforward</p>
+<p><strong>Disadvantages:</strong> 1. <strong>High variance:</strong> Returns can vary significantly across episodes 2. <strong>Episodic only:</strong> Requires episodes to terminate 3. <strong>Delayed learning:</strong> Must wait until episode ends to update 4. <strong>Sample inefficiency:</strong> Each return updates only states in that episode</p>
+<p>Monte Carlo methods provide a foundation for understanding reinforcement learning and are particularly useful when episodes are short or when a model is unavailable <span class="citation" data-cites="zhao2025rl theodoridis2025ml">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+</section>
+<section id="temporal-difference-learning" class="level3">
+<h3 class="anchored" data-anchor-id="temporal-difference-learning">Temporal-Difference Learning</h3>
+<p>Temporal-Difference (TD) learning is one of the central ideas in reinforcement learning, combining the sampling approach of Monte Carlo methods with the bootstrapping approach of dynamic programming. TD methods can learn online from incomplete episodes and update estimates based on other estimates, making them highly practical and efficient.</p>
+<p><strong>The TD Prediction Problem:</strong> Given a policy <span class="math inline">\pi</span>, estimate the value function <span class="math inline">v_\pi</span> from experience. Unlike Monte Carlo methods that wait until the end of an episode, TD methods update value estimates immediately after each transition.</p>
+<p><strong>TD(0) Algorithm:</strong> The simplest TD method, TD(0), updates the value estimate for state <span class="math inline">S_t</span> using the observed reward and the current estimate of the next state’s value:</p>
+<p><span class="math display">V(S_t) \leftarrow V(S_t) + \alpha[R_{t+1} + \gamma V(S_{t+1}) - V(S_t)]</span></p>
+<p>The quantity in brackets is called the <strong>TD error</strong>:</p>
+<p><span class="math display">\delta_t = R_{t+1} + \gamma V(S_{t+1}) - V(S_t)</span></p>
+<p>The TD error measures the difference between the estimated value of <span class="math inline">S_t</span> and the better estimate <span class="math inline">R_{t+1} + \gamma V(S_{t+1})</span>, which is based on actual experience.</p>
+<p><strong>Algorithm (Tabular TD(0) for Policy Evaluation):</strong> ``` Input: Policy π to be evaluated Parameters: Step size α ∈ (0,1], discount γ Initialize: V(s) arbitrarily for all s ∈ S (except V(terminal) = 0)</p>
+<p>For each episode: Initialize S For each step of episode: A ← action given by π for S Take action A, observe R, S’ V(S) ← V(S) + α[R + γV(S’) - V(S)] S ← S’ Until S is terminal ```</p>
+<p><strong>TD vs.&nbsp;Monte Carlo:</strong></p>
+<ol type="1">
+<li><p><strong>Bias-Variance Tradeoff:</strong> - <strong>MC:</strong> Unbiased estimate (uses actual returns) but high variance - <strong>TD:</strong> Biased estimate (bootstraps from current value estimates) but lower variance</p></li>
+<li><p><strong>Online vs.&nbsp;Offline:</strong> - <strong>MC:</strong> Must wait until episode ends - <strong>TD:</strong> Can learn online after each step</p></li>
+<li><p><strong>Bootstrapping:</strong> - <strong>MC:</strong> Does not bootstrap (uses complete returns) - <strong>TD:</strong> Bootstraps (uses estimated values)</p></li>
+<li><p><strong>Markov Property:</strong> - <strong>MC:</strong> Does not exploit Markov property - <strong>TD:</strong> Fully exploits Markov property</p></li>
+</ol>
+<p><strong>Convergence Properties:</strong> For TD(0) with appropriate step-size schedules (e.g., <span class="math inline">\alpha_t = 1/N_t(s)</span> where <span class="math inline">N_t(s)</span> is the number of visits to state <span class="math inline">s</span>), the value estimates converge to <span class="math inline">v_\pi</span> with probability 1. For constant step sizes, TD(0) converges in the mean to a value close to <span class="math inline">v_\pi</span>.</p>
+<p><strong>Optimality of TD(0):</strong> TD(0) converges to the maximum likelihood estimate of the Markov model. If we construct an empirical MDP from the observed transitions and solve it exactly, we get the same answer as TD(0) in the limit.</p>
+<p><strong>SARSA: On-Policy TD Control:</strong> SARSA (State-Action-Reward-State-Action) extends TD(0) to action values for control:</p>
+<p><span class="math display">Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha[R_{t+1} + \gamma Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t)]</span></p>
+<p>The name SARSA comes from the quintuple <span class="math inline">(S_t, A_t, R_{t+1}, S_{t+1}, A_{t+1})</span> used in the update.</p>
+<p><strong>Algorithm (SARSA):</strong> ``` Parameters: Step size α, discount γ, exploration ε Initialize: Q(s,a) arbitrarily for all s ∈ S, a ∈ A Q(terminal, ·) = 0</p>
+<p>For each episode: Initialize S Choose A from S using policy derived from Q (e.g., ε-greedy) For each step of episode: Take action A, observe R, S’ Choose A’ from S’ using policy derived from Q Q(S,A) ← Q(S,A) + α[R + γQ(S’,A’) - Q(S,A)] S ← S’; A ← A’ Until S is terminal ```</p>
+<p>SARSA is an <strong>on-policy</strong> method: it learns the value of the policy being followed (e.g., <span class="math inline">\epsilon</span>-greedy). The convergence of SARSA to the optimal policy requires that the policy becomes greedy in the limit (GLIE conditions).</p>
+<p><strong>Q-Learning: Off-Policy TD Control:</strong> Q-learning is one of the most important breakthroughs in reinforcement learning. It learns the optimal action-value function <span class="math inline">q_*</span> directly, regardless of the policy being followed:</p>
+<p><span class="math display">Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha[R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a) - Q(S_t, A_t)]</span></p>
+<p>The key difference from SARSA is the use of <span class="math inline">\max_a Q(S_{t+1}, a)</span> instead of <span class="math inline">Q(S_{t+1}, A_{t+1})</span>. This makes Q-learning <strong>off-policy</strong>: the learned action-value function directly approximates <span class="math inline">q_*</span>, independent of the policy being followed.</p>
+<p><strong>Algorithm (Q-Learning):</strong> ``` Parameters: Step size α, discount γ, exploration ε Initialize: Q(s,a) arbitrarily for all s ∈ S, a ∈ A Q(terminal, ·) = 0</p>
+<p>For each episode: Initialize S For each step of episode: Choose A from S using policy derived from Q (e.g., ε-greedy) Take action A, observe R, S’ Q(S,A) ← Q(S,A) + α[R + γ max_a Q(S’,a) - Q(S,A)] S ← S’ Until S is terminal ```</p>
+<p><strong>Convergence of Q-Learning:</strong> Under mild conditions (all state-action pairs visited infinitely often, appropriate step-size schedule), Q-learning converges to <span class="math inline">q_*</span> with probability 1. This holds even when following an exploratory policy, making Q-learning remarkably robust.</p>
+<p><strong>Maximization Bias:</strong> Both Q-learning and SARSA can suffer from maximization bias. The max operator in Q-learning uses the same values to both select and evaluate actions, leading to overestimation:</p>
+<p><span class="math display">\mathbb{E}[\max(X_1, X_2)] \geq \max(\mathbb{E}[X_1], \mathbb{E}[X_2])</span></p>
+<p><strong>Double Q-Learning:</strong> Addresses maximization bias by maintaining two independent Q-value estimates, <span class="math inline">Q_1</span> and <span class="math inline">Q_2</span>:</p>
+<ul>
+<li>Use <span class="math inline">Q_1</span> to select the best action: <span class="math inline">A^* = \arg\max_a Q_1(S_{t+1}, a)</span></li>
+<li>Use <span class="math inline">Q_2</span> to evaluate that action: <span class="math inline">Q_2(S_{t+1}, A^*)</span></li>
+</ul>
+<p>The update alternates between updating <span class="math inline">Q_1</span> and <span class="math inline">Q_2</span>, each using the other for evaluation.</p>
+<p><strong>Expected SARSA:</strong> A variant that uses the expected value under the policy instead of sampling:</p>
+<p><span class="math display">Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha[R_{t+1} + \gamma \sum_{a} \pi(a|S_{t+1})Q(S_{t+1}, a) - Q(S_t, A_t)]</span></p>
+<p>Expected SARSA eliminates the variance due to random action selection and can perform better than SARSA. When <span class="math inline">\pi</span> is greedy, Expected SARSA becomes Q-learning.</p>
+<p><strong>n-Step TD Methods:</strong> Generalize TD(0) by looking <span class="math inline">n</span> steps into the future:</p>
+<p><span class="math display">G_t^{(n)} = R_{t+1} + \gamma R_{t+2} + \cdots + \gamma^{n-1} R_{t+n} + \gamma^n V(S_{t+n})</span></p>
+<p>The n-step TD update is:</p>
+<p><span class="math display">V(S_t) \leftarrow V(S_t) + \alpha[G_t^{(n)} - V(S_t)]</span></p>
+<p>For <span class="math inline">n=1</span>, this is TD(0); for <span class="math inline">n=\infty</span>, this is Monte Carlo. Intermediate values of <span class="math inline">n</span> can provide a good balance between bias and variance.</p>
+<p><strong>TD(<span class="math inline">\lambda</span>): Eligibility Traces:</strong> TD(<span class="math inline">\lambda</span>) provides a principled way to combine information from multiple time scales. It uses <strong>eligibility traces</strong> to assign credit to states:</p>
+<p><span class="math display">e_t(s) = \begin{cases} \gamma\lambda e_{t-1}(s) + 1 &amp; \text{if } s = S_t \\ \gamma\lambda e_{t-1}(s) &amp; \text{otherwise}
+\end{cases}</span></p>
+<p>The eligibility trace tracks which states are eligible for credit assignment. States visited recently and frequently have higher traces.</p>
+<p><strong>TD(<span class="math inline">\lambda</span>) Update:</strong></p>
+<p><span class="math display">\delta_t = R_{t+1} + \gamma V(S_{t+1}) - V(S_t)</span> <span class="math display">V(s) \leftarrow V(s) + \alpha \delta_t e_t(s) \quad \text{for all } s</span></p>
+<p>The parameter <span class="math inline">\lambda \in [0,1]</span> controls the decay rate: - <span class="math inline">\lambda = 0</span>: TD(0), only current state updated - <span class="math inline">\lambda = 1</span>: Monte Carlo, all states in episode updated equally - <span class="math inline">0 &lt; \lambda &lt; 1</span>: Intermediate, with exponentially decaying credit</p>
+<p><strong>Forward vs.&nbsp;Backward View:</strong></p>
+<ul>
+<li><p><strong>Forward view:</strong> TD(<span class="math inline">\lambda</span>) can be understood as averaging n-step returns with exponentially decaying weights: <span class="math display">G_t^\lambda
+= (1-\lambda)\sum_{n=1}^\infty \lambda^{n-1} G_t^{(n)}</span></p></li>
+<li><p><strong>Backward view:</strong> The eligibility trace formulation provides an efficient online implementation that looks backward at which states should be updated.</p></li>
+</ul>
+<p>These two views are equivalent in the offline case and nearly equivalent online.</p>
+<p><strong>SARSA(<span class="math inline">\lambda</span>):</strong> Extends TD(<span class="math inline">\lambda</span>) to action values:</p>
+<p><span class="math display">e_t(s,a) = \begin{cases} \gamma\lambda e_{t-1}(s,a) + 1 &amp; \text{if } s = S_t, a = A_t \\ \gamma\lambda e_{t-1}(s,a) &amp;
+\text{otherwise} \end{cases}</span></p>
+<p><span class="math display">Q(s,a) \leftarrow Q(s,a) + \alpha \delta_t e_t(s,a) \quad \text{for all } s,a</span></p>
+<p>where <span class="math inline">\delta_t = R_{t+1} + \gamma Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t)</span>.</p>
+<p><strong>Watkins’s Q(<span class="math inline">\lambda</span>):</strong> Extends Q-learning with eligibility traces, but cuts traces when a non-greedy action is taken to maintain off-policy learning.</p>
+<p><strong>Advantages of TD Learning:</strong> 1. <strong>Sample efficiency:</strong> Can learn from each transition 2. <strong>Online learning:</strong> No need to wait for episode termination 3. <strong>Continuing tasks:</strong> Works for non-episodic problems 4. <strong>Lower variance:</strong> Bootstrapping reduces variance compared to MC 5. <strong>Computational efficiency:</strong> Simple updates, no model required</p>
+<p><strong>Practical Considerations:</strong> - <strong>Step size:</strong> Critical for convergence and learning speed. Common choices: <span class="math inline">\alpha = 0.1</span> or decreasing schedules - <strong>Exploration:</strong> <span class="math inline">\epsilon</span>-greedy with <span class="math inline">\epsilon = 0.1</span> is common; can decay over time - <strong>Initialization:</strong> Optimistic initialization (high initial values) encourages exploration - <strong>Function approximation:</strong> Tabular methods don’t scale; need function approximation for large state spaces</p>
+<p>Temporal-difference learning represents a fundamental advance in reinforcement learning, providing practical algorithms that combine the best aspects of Monte Carlo and dynamic programming methods <span class="citation" data-cites="zhao2025rl theodoridis2025ml">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+</section>
+</section>
+<section id="sec-advanced-rl" class="level2">
+<h2 class="anchored" data-anchor-id="sec-advanced-rl">Advanced RL</h2>
+<p>For more on this topic, see <span class="citation" data-cites="bishop2024deeplearning">Bishop and Bishop (<a href="#ref-bishop2024deeplearning" role="doc-biblioref">2024</a>, Ch. 19)</span>.</p>
+<section id="function-approximation" class="level3">
+<h3 class="anchored" data-anchor-id="function-approximation">Function Approximation</h3>
+<p>Tabular methods that maintain separate values for each state or state-action pair become impractical for large or continuous state spaces. Function approximation addresses this by representing value functions with parameterized functions, enabling generalization across similar states.</p>
+<p><strong>The Function Approximation Problem:</strong> Instead of maintaining a table <span class="math inline">V(s)</span> for each state, we approximate the value function with a parameterized function:</p>
+<p><span class="math display">\hat{v}(s, \mathbf{w}) \approx v_\pi(s)</span> <span class="math display">\hat{q}(s, a, \mathbf{w}) \approx q_\pi(s,a)</span></p>
+<p>where <span class="math inline">\mathbf{w} \in \mathbb{R}^d</span> is a weight vector with <span class="math inline">d \ll |\mathcal{S}|</span>. The goal is to find weights that minimize the error between the approximate and true value functions.</p>
+<p><strong>Benefits of Function Approximation:</strong> 1. <strong>Generalization:</strong> Updates to one state affect similar states 2. <strong>Scalability:</strong> Handle large or continuous state spaces 3. <strong>Memory efficiency:</strong> Store <span class="math inline">d</span> parameters instead of <span class="math inline">|\mathcal{S}|</span> values 4. <strong>Feature engineering:</strong> Incorporate domain knowledge through features</p>
+<p><strong>Mean Squared Value Error:</strong> A natural objective is to minimize the mean squared error:</p>
+<p><span class="math display">\overline{VE}(\mathbf{w}) = \sum_{s \in \mathcal{S}} \mu(s)[v_\pi(s) - \hat{v}(s, \mathbf{w})]^2</span></p>
+<p>where <span class="math inline">\mu(s)</span> is a state distribution (often the on-policy distribution). This objective is not always achievable, and different algorithms make different tradeoffs.</p>
+<p><strong>Linear Function Approximation:</strong> The simplest form uses a linear combination of features:</p>
+<p><span class="math display">\hat{v}(s, \mathbf{w}) = \mathbf{w}^T\phi(s) = \sum_{i=1}^d w_i \phi_i(s)</span></p>
+<p>where <span class="math inline">\phi(s) = [\phi_1(s), \ldots, \phi_d(s)]^T</span> is a feature vector. Common feature constructions include:</p>
+<ol type="1">
+<li><strong>Polynomial features:</strong> <span class="math inline">\phi(s) = [1, s, s^2, s^3, \ldots]^T</span></li>
+<li><strong>Fourier basis:</strong> <span class="math inline">\phi_i(s) = \cos(i \pi s)</span></li>
+<li><strong>Radial basis functions:</strong> <span class="math inline">\phi_i(s) = \exp(-\|s - c_i\|^2 / (2\sigma^2))</span></li>
+<li><strong>Tile coding:</strong> Binary features indicating which tiles contain <span class="math inline">s</span></li>
+<li><strong>Coarse coding:</strong> Overlapping receptive fields</li>
+</ol>
+<p><strong>Gradient Descent Methods:</strong> To minimize <span class="math inline">\overline{VE}</span>, we use stochastic gradient descent. The gradient of the squared error for a single sample is:</p>
+<p><span class="math display">\nabla_{\mathbf{w}} [v_\pi(S_t) - \hat{v}(S_t, \mathbf{w})]^2 = -2[v_\pi(S_t) - \hat{v}(S_t,
+\mathbf{w})]\nabla_{\mathbf{w}}\hat{v}(S_t, \mathbf{w})</span></p>
+<p>The gradient descent update is:</p>
+<p><span class="math display">\mathbf{w}_{t+1} = \mathbf{w}_t + \alpha[v_\pi(S_t) - \hat{v}(S_t, \mathbf{w}_t)]\nabla_{\mathbf{w}}\hat{v}(S_t, \mathbf{w}_t)</span></p>
+<p>For linear approximation, <span class="math inline">\nabla_{\mathbf{w}}\hat{v}(s, \mathbf{w}) = \phi(s)</span>, giving:</p>
+<p><span class="math display">\mathbf{w}_{t+1} = \mathbf{w}_t + \alpha[v_\pi(S_t) - \mathbf{w}_t^T\phi(S_t)]\phi(S_t)</span></p>
+<p><strong>Semi-Gradient Methods:</strong> In practice, we don’t have access to the true value <span class="math inline">v_\pi(S_t)</span>. We substitute a target based on observed rewards:</p>
+<p><strong>Semi-Gradient TD(0):</strong></p>
+<p><span class="math display">\mathbf{w}_{t+1} = \mathbf{w}_t + \alpha[R_{t+1} + \gamma \hat{v}(S_{t+1}, \mathbf{w}_t) - \hat{v}(S_t,
+\mathbf{w}_t)]\nabla_{\mathbf{w}}\hat{v}(S_t, \mathbf{w}_t)</span></p>
+<p>This is called “semi-gradient” because the target <span class="math inline">R_{t+1} + \gamma \hat{v}(S_{t+1}, \mathbf{w}_t)</span> depends on <span class="math inline">\mathbf{w}_t</span>, but we don’t differentiate through it. This is not true gradient descent, but it works well in practice.</p>
+<p><strong>Convergence Properties:</strong></p>
+<ol type="1">
+<li><p><strong>Linear TD(0):</strong> Converges to a point near the global minimum of <span class="math inline">\overline{VE}</span>: <span class="math display">\overline{VE}(\mathbf{w}_{TD}) \leq
+\frac{1}{1-\gamma} \min_{\mathbf{w}} \overline{VE}(\mathbf{w})</span></p></li>
+<li><p><strong>Linear Semi-Gradient SARSA:</strong> Converges under similar conditions</p></li>
+<li><p><strong>Nonlinear methods:</strong> May diverge! The deadly triad of function approximation, bootstrapping, and off-policy learning can cause instability.</p></li>
+</ol>
+<p><strong>The Deadly Triad:</strong> The combination of: 1. <strong>Function approximation:</strong> Using parameterized functions 2. <strong>Bootstrapping:</strong> Using estimated values as targets (as in TD) 3. <strong>Off-policy learning:</strong> Learning about a different policy than the one being followed</p>
+<p>can lead to divergence. Q-learning with function approximation is particularly susceptible.</p>
+<p><strong>Example of Divergence (Baird’s Counterexample):</strong> A simple MDP with linear function approximation where off-policy TD diverges, with parameters growing without bound.</p>
+<p><strong>Solutions to Instability:</strong></p>
+<ol type="1">
+<li><p><strong>Gradient TD methods:</strong> True gradient descent on the projected Bellman error - <strong>TD(0) with gradient correction (TDC)</strong> - <strong>GTD2:</strong> Gradient temporal-difference learning</p></li>
+<li><p><strong>Emphatic TD:</strong> Reweights updates to ensure convergence</p></li>
+<li><p><strong>Experience replay:</strong> Store and reuse transitions (used in DQN)</p></li>
+<li><p><strong>Target networks:</strong> Use separate, slowly updated network for targets</p></li>
+</ol>
+<p><strong>Feature Construction:</strong> The choice of features is critical:</p>
+<p><strong>Tile Coding:</strong> Partition state space into overlapping tilings: - Multiple tilings offset from each other - Each tiling provides binary features - Provides good generalization and discrimination - Computational efficiency: sparse features</p>
+<p><strong>Coarse Coding:</strong> Similar to tile coding but with more flexible shapes: - Circular or elliptical receptive fields - Overlapping regions provide generalization - Density of features controls resolution</p>
+<p><strong>Radial Basis Functions (RBFs):</strong> Gaussian-like features centered at prototypes:</p>
+<p><span class="math display">\phi_i(s) = \exp\left(-\frac{\|s - c_i\|^2}{2\sigma_i^2}\right)</span></p>
+<p>Provides smooth interpolation but can be expensive to compute.</p>
+<p><strong>Nonlinear Function Approximation:</strong> Neural networks provide powerful nonlinear approximation:</p>
+<p><span class="math display">\hat{v}(s, \mathbf{w}) = f_{\mathbf{w}}(s)</span></p>
+<p>where <span class="math inline">f_{\mathbf{w}}</span> is a neural network. Backpropagation computes gradients:</p>
+<p><span class="math display">\nabla_{\mathbf{w}}\hat{v}(s, \mathbf{w}) = \nabla_{\mathbf{w}} f_{\mathbf{w}}(s)</span></p>
+<p><strong>Batch Methods:</strong> Instead of online updates, batch methods use the entire dataset:</p>
+<p><strong>Least-Squares TD (LSTD):</strong> Directly solves for the TD fixed point:</p>
+<p><span class="math display">\mathbf{w}_{LSTD} = \mathbf{A}^{-1}\mathbf{b}</span></p>
+<p>where: <span class="math display">\mathbf{A} = \sum_{t=1}^T \phi(S_t)[\phi(S_t) - \gamma\phi(S_{t+1})]^T</span> <span class="math display">\mathbf{b} = \sum_{t=1}^T R_{t+1}\phi(S_t)</span></p>
+<p>LSTD finds the exact solution to the linear TD fixed point but requires <span class="math inline">O(d^2)</span> memory and <span class="math inline">O(d^3)</span> computation.</p>
+<p><strong>Least-Squares Policy Iteration (LSPI):</strong> Combines LSTD with policy iteration for control.</p>
+<p><strong>Fitted Q-Iteration:</strong> Batch Q-learning using supervised learning: 1. Collect dataset of transitions 2. Form targets: <span class="math inline">y_i = R_i
++ \gamma \max_a \hat{q}(S_i', a, \mathbf{w})</span> 3. Train <span class="math inline">\hat{q}</span> to minimize <span class="math inline">\sum_i (y_i - \hat{q}(S_i, A_i, \mathbf{w}))^2</span> 4. Repeat</p>
+<p><strong>Practical Considerations:</strong></p>
+<ol type="1">
+<li><strong>Feature scaling:</strong> Normalize features to similar ranges 2. <strong>Learning rate:</strong> Critical for stability; often needs tuning 3. <strong>Feature selection:</strong> More features aren’t always better 4. <strong>Regularization:</strong> L2 regularization can improve stability 5. <strong>Initialization:</strong> Can significantly affect learning</li>
+</ol>
+<p>Function approximation is essential for scaling reinforcement learning to real-world problems, but requires careful attention to stability and convergence <span class="citation" data-cites="zhao2025rl theodoridis2025ml">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+</section>
+<section id="deep-q-networks-dqn" class="level3">
+<h3 class="anchored" data-anchor-id="deep-q-networks-dqn">Deep Q-Networks (DQN)</h3>
+<p>Deep Q-Networks (DQN) represent a watershed moment in reinforcement learning. In 2013, DeepMind demonstrated that a single algorithm could learn to play dozens of Atari games directly from pixels, achieving human-level or superhuman performance without game-specific engineering. This breakthrough showed that the combination of deep learning (<a href="supervised-learning.html#sec-neural-networks">Neural Networks and Deep Models</a>) and reinforcement learning could tackle problems previously thought intractable.</p>
+<p>The key insight was not just using neural networks for function approximation—researchers had tried this before with limited success. Rather, DQN introduced two critical innovations (experience replay and target networks) that stabilized training, overcoming the instability that had plagued earlier attempts to combine Q-learning with neural networks.</p>
+<p><strong>The Challenge:</strong> Recall from <a href="#sec-rl-foundations" class="quarto-xref">Section&nbsp;1.1</a> that Q-learning learns the optimal action-value function <span class="math inline">q_*(s,a)</span> through the Bellman optimality equation. For small state spaces, we can store Q-values in a table. But consider Atari games: - State space: <span class="math inline">84 \times 84 \times 4</span> grayscale frames = 28,224 dimensions - Each pixel can take 256 values - Total states: <span class="math inline">256^{28,224}</span> ≈ <span class="math inline">10^{67,000}</span> (more than atoms in the universe!)</p>
+<p>Clearly, we cannot store a table. We need function approximation.</p>
+<p><strong>The DQN Architecture:</strong> DQN uses a deep convolutional neural network (see <a href="supervised-learning.html#sec-neural-networks">Neural Networks and Deep Models</a> for CNN details) to approximate the action-value function:</p>
+<p><span class="math display">Q(s,a;\boldsymbol{\theta}) \approx q_*(s,a)</span></p>
+<p>where <span class="math inline">\boldsymbol{\theta}</span> represents all network parameters (weights and biases). The network takes raw pixels as input and outputs Q-values for each possible action.</p>
+<p><strong>Network Architecture (Atari DQN):</strong> 1. <strong>Input:</strong> <span class="math inline">84 \times 84 \times 4</span> (4 stacked grayscale frames to capture motion) 2. <strong>Conv1:</strong> 32 filters, <span class="math inline">8 \times 8</span> kernel, stride 4, ReLU → Output: <span class="math inline">20 \times 20 \times 32</span> 3. <strong>Conv2:</strong> 64 filters, <span class="math inline">4 \times
+4</span> kernel, stride 2, ReLU → Output: <span class="math inline">9 \times 9 \times 64</span> 4. <strong>Conv3:</strong> 64 filters, <span class="math inline">3 \times 3</span> kernel, stride 1, ReLU → Output: <span class="math inline">7 \times 7 \times 64</span> 5. <strong>Flatten:</strong> <span class="math inline">7 \times 7 \times 64 = 3,136</span> units 6. <strong>FC1:</strong> 512 units, ReLU 7. <strong>Output:</strong> <span class="math inline">|\mathcal{A}|</span> units (one Q-value per action, typically 4-18 for Atari)</p>
+<p><strong>Why this architecture?</strong> The convolutional layers extract hierarchical features: - <strong>Conv1:</strong> Detects edges, simple patterns (large receptive field due to stride 4) - <strong>Conv2:</strong> Combines patterns into game objects (paddles, balls, enemies) - <strong>Conv3:</strong> Recognizes spatial relationships between objects - <strong>FC layers:</strong> Integrate information across the entire screen to estimate action values</p>
+<p>Total parameters: approximately 1.7 million. Compare this to the <span class="math inline">10^{67,000}</span> states we’re approximating!</p>
+<p><strong>Key Innovation 1: Experience Replay</strong></p>
+<p>Naive online Q-learning with neural networks fails because: 1. <strong>Correlated samples:</strong> Consecutive frames are highly similar, leading to overfitting 2. <strong>Non-stationary targets:</strong> Q-values change as the policy changes, creating a moving target 3. <strong>Catastrophic forgetting:</strong> Learning new experiences overwrites old knowledge</p>
+<p><strong>Solution:</strong> Store experiences in a replay buffer and learn from random mini-batches.</p>
+<p><strong>Replay Buffer <span class="math inline">\mathcal{D}</span>:</strong> A circular buffer storing transitions <span class="math inline">(s_t, a_t, r_t, s_{t+1}, \text{done}_t)</span> with capacity <span class="math inline">N</span> (typically <span class="math inline">N = 10^6</span>). When full, oldest transitions are discarded (FIFO).</p>
+<p><strong>Training Process:</strong> 1. Agent interacts with environment, storing transitions in <span class="math inline">\mathcal{D}</span> 2. Sample random mini-batch of 32 transitions from <span class="math inline">\mathcal{D}</span> 3. Compute loss and update network using backpropagation (<a href="supervised-learning.html#sec-neural-networks">Neural Networks and Deep Models</a>) 4. Repeat steps 2-3 multiple times per environment step</p>
+<p><strong>Benefits:</strong> - <strong>Breaks correlations:</strong> Random sampling decorrelates training samples, reducing variance - <strong>Data efficiency:</strong> Each transition used multiple times (typically 8-10 times) - <strong>Smooths learning:</strong> Averages over many past behaviors, stabilizing updates - <strong>Enables mini-batch SGD:</strong> Efficient GPU utilization (<a href="../fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html#sec-optimization">Optimization Foundations</a>)</p>
+<p><strong>Example:</strong> In Breakout, the agent might: - Store 1M transitions (about 1 hour of gameplay at 60 fps) - Sample 32 random transitions: some from early game (learning to hit ball), some from late game (breaking bricks) - Learn from this diverse batch, rather than just the current situation</p>
+<p><strong>Key Innovation 2: Target Network</strong></p>
+<p>Using the same network for both current Q-values and target values creates instability. Consider the Q-learning update:</p>
+<p><span class="math display">Q(s,a) \leftarrow Q(s,a) + \alpha[r + \gamma \max_{a'} Q(s',a') - Q(s,a)]</span></p>
+<p>If we use the same network for both <span class="math inline">Q(s,a)</span> and <span class="math inline">\max_{a'} Q(s',a')</span>, updating one affects the other, creating a “chasing its own tail” problem. The target keeps moving as we try to reach it!</p>
+<p><strong>Solution:</strong> Maintain two networks: - <strong>Online network <span class="math inline">\boldsymbol{\theta}</span>:</strong> Updated every step, used for action selection - <strong>Target network <span class="math inline">\boldsymbol{\theta}^-</span>:</strong> Updated every <span class="math inline">C</span> steps (typically <span class="math inline">C = 10,000</span>), used for computing targets</p>
+<p><strong>Target Computation:</strong> <span class="math display">y_i = r_i + \gamma \max_{a'} Q(s_i', a'; \boldsymbol{\theta}^-)</span></p>
+<p>The target network <span class="math inline">\boldsymbol{\theta}^-</span> is frozen for <span class="math inline">C</span> steps, providing a stable target. Every <span class="math inline">C</span> steps: <span class="math display">\boldsymbol{\theta}^- \leftarrow \boldsymbol{\theta}</span></p>
+<p><strong>Intuition:</strong> Imagine learning to shoot a basketball while the hoop keeps moving. Target networks “freeze” the hoop for a while, letting you practice, then move it to a better position based on what you’ve learned.</p>
+<p><strong>Loss Function:</strong> DQN minimizes the squared temporal difference error:</p>
+<p><span class="math display">L(\boldsymbol{\theta}) = \mathbb{E}_{(s,a,r,s') \sim \mathcal{D}}\left[\left(r + \gamma \max_{a'} Q(s', a';
+\boldsymbol{\theta}^-) - Q(s,a;\boldsymbol{\theta})\right)^2\right]</span></p>
+<p>The gradient (computed via backpropagation, see <a href="supervised-learning.html#sec-neural-networks">Neural Networks and Deep Models</a>) is:</p>
+<p><span class="math display">\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbb{E}\left[\left(r + \gamma \max_{a'} Q(s', a';
+\boldsymbol{\theta}^-) - Q(s,a;\boldsymbol{\theta})\right) \nabla_{\boldsymbol{\theta}} Q(s,a;\boldsymbol{\theta})\right]</span></p>
+<p>Note: We don’t differentiate through the target <span class="math inline">\max_{a'} Q(s', a'; \boldsymbol{\theta}^-)</span>, making this a semi-gradient method (similar to TD learning).</p>
+<p><strong>DQN Training Algorithm:</strong> ``` Initialize replay buffer D with capacity N = 1,000,000 Initialize Q-network with random weights θ Initialize target network θ⁻ = θ Set ε = 1.0 (exploration rate)</p>
+<p>For episode = 1 to M: Observe initial state s (4 stacked frames) For t = 1 to T: With probability ε: select random action a (explore) Otherwise: select a = argmax_a Q(s,a;θ) (exploit) Execute action a in emulator Observe reward r and next state s’ Store transition (s,a,r,s’,done) in D</p>
+<pre><code>    If D has enough samples: Sample random mini-batch of 32 transitions from D For each transition i: If episode ended: y_i =
+        r_i Else: y_i = r_i + γ max_{a'} Q(s'_i,a';θ⁻) Perform gradient descent on (y_i - Q(s_i,a_i;θ))²
+    
+    Every C = 10,000 steps: θ⁻ ← θ Decay ε linearly from 1.0 to 0.1 over 1M frames s ← s' ```</code></pre>
+<p><strong>Concrete Example - Breakout:</strong> - <strong>State:</strong> 4 frames showing paddle position, ball trajectory - <strong>Actions:</strong> {no-op, fire, left, right} - <strong>Rewards:</strong> +1 for each brick destroyed - <strong>Episode:</strong> Ends when all lives lost</p>
+<p>Initially, Q-values are random. After 1M frames: - <span class="math inline">Q(\text{ball approaching}, \text{move left}) \approx 5.2</span> (good - will hit ball) - <span class="math inline">Q(\text{ball approaching}, \text{move right}) \approx 0.3</span> (bad - will miss) - <span class="math inline">Q(\text{ball far away}, \text{move left})
+\approx 2.1</span> (neutral - doesn’t matter much)</p>
+<p>The network has learned that moving toward the ball is valuable!</p>
+<p><strong>Double DQN (DDQN):</strong> Addresses overestimation bias in DQN by decoupling action selection and evaluation:</p>
+<p><span class="math display">y_i = r_i + \gamma Q(s_i', \arg\max_{a'} Q(s_i', a'; \boldsymbol{\theta}); \boldsymbol{\theta}^-)</span></p>
+<p>The online network <span class="math inline">\boldsymbol{\theta}</span> selects the action, while the target network <span class="math inline">\boldsymbol{\theta}^-</span> evaluates it. This simple change significantly reduces overestimation and improves performance.</p>
+<p><strong>Analysis of Overestimation:</strong> Standard Q-learning overestimates values because:</p>
+<p><span class="math display">\mathbb{E}[\max(X_1, X_2, \ldots, X_n)] \geq \max(\mathbb{E}[X_1], \mathbb{E}[X_2], \ldots, \mathbb{E}[X_n])</span></p>
+<p>When Q-values have estimation errors, the max operator selects overestimated values more often, leading to systematic overestimation that propagates through the Bellman updates.</p>
+<p><strong>Dueling DQN:</strong> Decomposes the Q-function into state value and advantage:</p>
+<p><span class="math display">Q(s,a;\boldsymbol{\theta}) = V(s;\boldsymbol{\theta}_V) + A(s,a;\boldsymbol{\theta}_A)</span></p>
+<p>However, this decomposition is not unique. To ensure identifiability, we force the advantage to have zero mean:</p>
+<p><span class="math display">Q(s,a;\boldsymbol{\theta}) = V(s;\boldsymbol{\theta}_V) + \left(A(s,a;\boldsymbol{\theta}_A) - \frac{1}{|\mathcal{A}|}\sum_{a'}
+A(s,a';\boldsymbol{\theta}_A)\right)</span></p>
+<p>Alternatively, we can subtract the maximum advantage:</p>
+<p><span class="math display">Q(s,a;\boldsymbol{\theta}) = V(s;\boldsymbol{\theta}_V) + \left(A(s,a;\boldsymbol{\theta}_A) - \max_{a'}
+A(s,a';\boldsymbol{\theta}_A)\right)</span></p>
+</section>
+</section>
+<section id="architecture-the-network-splits-into-two-streams-after-the-convolutional-layers---value-stream-outputs-scalar-vs" class="level2">
+<h2 class="anchored" data-anchor-id="architecture-the-network-splits-into-two-streams-after-the-convolutional-layers---value-stream-outputs-scalar-vs"><strong>Architecture:</strong> The network splits into two streams after the convolutional layers: - <strong>Value stream:</strong> Outputs scalar <span class="math inline">V(s)</span></h2>
+<p><strong>Advantage stream:</strong> Outputs vector <span class="math inline">A(s,a)</span> for each action</p>
+<p>These are combined using the formula above to produce Q-values.</p>
+<p><strong>Intuition:</strong> In many states, the choice of action doesn’t matter much (e.g., in Atari, when no enemies are nearby). The dueling architecture allows the value stream to learn state values without needing to learn the effect of each action, improving learning efficiency.</p>
+<p><strong>Rainbow DQN:</strong> Combines six extensions to DQN: 1. <strong>Double Q-learning:</strong> Reduces overestimation 2. <strong>Prioritized replay:</strong> Samples important transitions 3. <strong>Dueling networks:</strong> Separate value and advantage 4. <strong>Multi-step learning:</strong> Uses n-step returns 5. <strong>Distributional RL:</strong> Models return distribution 6. <strong>Noisy networks:</strong> Learned exploration</p>
+<p>Rainbow achieves state-of-the-art performance on Atari, demonstrating that these improvements are complementary.</p>
+<p><strong>Distributional RL (C51):</strong> Instead of estimating expected return, model the full distribution:</p>
+<p><span class="math display">Z(s,a) = \text{distribution of } G_t | S_t=s, A_t=a</span></p>
+<p>Represent the distribution using discrete atoms:</p>
+<p><span class="math display">Z_{\boldsymbol{\theta}}(s,a) = \sum_{i=1}^{N} p_i(s,a) \delta_{z_i}</span></p>
+<p>where <span class="math inline">z_i</span> are fixed support points and <span class="math inline">p_i(s,a)</span> are learned probabilities. The Bellman update becomes a distribution:</p>
+<p><span class="math display">Z(s,a) \stackrel{D}{=} R(s,a) + \gamma Z(s',a')</span></p>
+<p>C51 uses 51 atoms and minimizes the KL divergence between the projected Bellman distribution and the current distribution.</p>
+<p><strong>Noisy Networks:</strong> Replace <span class="math inline">\epsilon</span>-greedy exploration with learned stochastic parameters:</p>
+<p><span class="math display">\boldsymbol{\theta} = \boldsymbol{\mu} + \boldsymbol{\sigma} \odot \boldsymbol{\epsilon}</span></p>
+<p>where <span class="math inline">\boldsymbol{\mu}</span> and <span class="math inline">\boldsymbol{\sigma}</span> are learned and <span class="math inline">\boldsymbol{\epsilon} \sim \mathcal{N}(0,1)</span> is noise. This provides state-dependent exploration that improves over <span class="math inline">\epsilon</span>-greedy.</p>
+<p><strong>Limitations of DQN:</strong> 1. <strong>Sample inefficiency:</strong> Requires millions of frames 2. <strong>Discrete actions only:</strong> Cannot handle continuous action spaces 3. <strong>Overestimation:</strong> Even with Double DQN 4. <strong>Instability:</strong> Can diverge or forget 5. <strong>Hyperparameter sensitivity:</strong> Performance varies with settings</p>
+<p><strong>Practical Tips:</strong> 1. <strong>Reward clipping:</strong> Clip rewards to [-1, 1] for stability 2. <strong>Frame stacking:</strong> Use 4 consecutive frames for temporal information 3. <strong>Frame skipping:</strong> Repeat actions for 4 frames to reduce computation 4. <strong>Gradient clipping:</strong> Clip gradients to prevent exploding gradients 5. <strong>Huber loss:</strong> More robust to outliers than squared error 6. <strong>Warm-up period:</strong> Fill replay buffer before training</p>
+<p>DQN demonstrated that deep reinforcement learning could achieve human-level performance on complex tasks, opening the door to modern deep RL <span class="citation" data-cites="zhao2025rl theodoridis2025ml">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+<section id="policy-gradient-methods" class="level3">
+<h3 class="anchored" data-anchor-id="policy-gradient-methods">Policy Gradient Methods</h3>
+<p>Policy gradient methods directly parameterize and optimize the policy, rather than deriving it from a value function. This approach has several advantages: it can handle continuous action spaces, learn stochastic policies, and provide better convergence guarantees. Policy gradient methods form the foundation of modern deep reinforcement learning algorithms.</p>
+<p><strong>Policy Parameterization:</strong> Represent the policy as a parameterized function:</p>
+<p><span class="math display">\pi(a|s;\boldsymbol{\theta}): \mathcal{S} \times \mathcal{A} \to [0,1]</span></p>
+<p>where <span class="math inline">\boldsymbol{\theta} \in \mathbb{R}^d</span> are the policy parameters. Common parameterizations include:</p>
+<ol type="1">
+<li><p><strong>Softmax for discrete actions:</strong> <span class="math display">\pi(a|s;\boldsymbol{\theta}) = \frac{\exp(\phi(s,a)^T\boldsymbol{\theta})}{\sum_{a'}
+\exp(\phi(s,a')^T\boldsymbol{\theta})}</span></p></li>
+<li><p><strong>Gaussian for continuous actions:</strong> <span class="math display">\pi(a|s;\boldsymbol{\theta}) = \mathcal{N}(a | \mu_{\boldsymbol{\theta}}(s),
+\sigma_{\boldsymbol{\theta}}^2(s))</span> where both mean and variance can be parameterized by neural networks.</p></li>
+</ol>
+<p><strong>Objective Function:</strong> The goal is to maximize the expected return:</p>
+<p><span class="math display">J(\boldsymbol{\theta}) = \mathbb{E}_{\tau \sim \pi_{\boldsymbol{\theta}}}[G_0] = \mathbb{E}_{\tau \sim
+\pi_{\boldsymbol{\theta}}}\left[\sum_{t=0}^\infty \gamma^t R_{t+1}\right]</span></p>
+<p>where <span class="math inline">\tau = (S_0, A_0, R_1, S_1, A_1, \ldots)</span> is a trajectory sampled by following policy <span class="math inline">\pi_{\boldsymbol{\theta}}</span>.</p>
+<p>For episodic tasks, we can write:</p>
+<p><span class="math display">J(\boldsymbol{\theta}) = \mathbb{E}_{s_0}[v_{\pi_{\boldsymbol{\theta}}}(s_0)]</span></p>
+<p>For continuing tasks with a stationary distribution <span class="math inline">d_{\pi_{\boldsymbol{\theta}}}(s)</span>:</p>
+<p><span class="math display">J(\boldsymbol{\theta}) = \sum_s d_{\pi_{\boldsymbol{\theta}}}(s) \sum_a \pi(a|s;\boldsymbol{\theta}) r(s,a)</span></p>
+<p><strong>The Policy Gradient Theorem:</strong> The fundamental result that enables policy gradient methods is the policy gradient theorem, which provides a formula for the gradient of the objective:</p>
+<p><span class="math display">\nabla_{\boldsymbol{\theta}} J(\boldsymbol{\theta}) = \mathbb{E}_{\pi_{\boldsymbol{\theta}}}\left[\nabla_{\boldsymbol{\theta}}
+\log \pi(a|s;\boldsymbol{\theta}) \, q_{\pi_{\boldsymbol{\theta}}}(s,a)\right]</span></p>
+<p>This remarkable result shows that we can compute the gradient without differentiating through the environment dynamics or the reward function.</p>
+<p><strong>Proof Sketch:</strong> For episodic tasks:</p>
+<p><span class="math display">\begin{align*} \nabla_{\boldsymbol{\theta}} J(\boldsymbol{\theta}) &amp;= \nabla_{\boldsymbol{\theta}} \mathbb{E}_{\tau \sim
+\pi_{\boldsymbol{\theta}}}[G_0] \\ &amp;= \nabla_{\boldsymbol{\theta}} \int P(\tau;\boldsymbol{\theta}) G(\tau) d\tau \\ &amp;= \int
+\nabla_{\boldsymbol{\theta}} P(\tau;\boldsymbol{\theta}) G(\tau) d\tau \\ &amp;= \int P(\tau;\boldsymbol{\theta})
+\nabla_{\boldsymbol{\theta}} \log P(\tau;\boldsymbol{\theta}) G(\tau) d\tau \\ &amp;= \mathbb{E}_{\tau \sim
+\pi_{\boldsymbol{\theta}}}[\nabla_{\boldsymbol{\theta}} \log P(\tau;\boldsymbol{\theta}) G(\tau)] \end{align*}</span></p>
+<p>The trajectory probability is:</p>
+<p><span class="math display">P(\tau;\boldsymbol{\theta}) = \mu(s_0) \prod_{t=0}^{T-1} \pi(a_t|s_t;\boldsymbol{\theta}) P(s_{t+1}|s_t,a_t)</span></p>
+<p>Taking the log and gradient:</p>
+<p><span class="math display">\nabla_{\boldsymbol{\theta}} \log P(\tau;\boldsymbol{\theta}) = \sum_{t=0}^{T-1} \nabla_{\boldsymbol{\theta}} \log
+\pi(a_t|s_t;\boldsymbol{\theta})</span></p>
+<p>Note that the environment dynamics cancel out! Substituting back and using the definition of Q-values yields the policy gradient theorem.</p>
+<p><strong>REINFORCE Algorithm:</strong> The simplest policy gradient algorithm uses Monte Carlo sampling to estimate the gradient:</p>
+<p><span class="math display">\nabla_{\boldsymbol{\theta}} J(\boldsymbol{\theta}) \approx \frac{1}{N}\sum_{i=1}^N \sum_{t=0}^{T-1}
+\nabla_{\boldsymbol{\theta}} \log \pi(a_t^{(i)}|s_t^{(i)};\boldsymbol{\theta}) G_t^{(i)}</span></p>
+<p>The update rule is:</p>
+<p><span class="math display">\boldsymbol{\theta}_{t+1} = \boldsymbol{\theta}_t + \alpha \nabla_{\boldsymbol{\theta}} \log \pi(A_t|S_t;\boldsymbol{\theta}_t)
+G_t</span></p>
+<p><strong>Algorithm (REINFORCE):</strong> ``` Input: Differentiable policy π(a|s;θ) Parameters: Step size α, discount γ Initialize: Policy parameters θ arbitrarily</p>
+<p>For each episode: Generate episode S₀,A₀,R₁,…,Sₜ following π(·|·;θ) For each step t = 0,1,…,T-1: G ← Σ_{k=t+1}^T γ^{k-t-1} R_k θ ← θ + αγ^t G ∇_θ log π(A_t|S_t;θ) ```</p>
+<p><strong>Intuition:</strong> REINFORCE increases the probability of actions that led to high returns and decreases the probability of actions that led to low returns. The magnitude of the update is proportional to the return.</p>
+<p><strong>Variance Problem:</strong> REINFORCE has high variance because: 1. Returns <span class="math inline">G_t</span> can vary significantly across episodes 2. The gradient estimate is noisy 3. Slow convergence and instability</p>
+<p><strong>Baseline Reduction:</strong> Subtract a baseline <span class="math inline">b(s)</span> from the return to reduce variance without introducing bias:</p>
+<p><span class="math display">\nabla_{\boldsymbol{\theta}} J(\boldsymbol{\theta}) = \mathbb{E}_{\pi_{\boldsymbol{\theta}}}\left[\nabla_{\boldsymbol{\theta}}
+\log \pi(a|s;\boldsymbol{\theta}) (q_{\pi_{\boldsymbol{\theta}}}(s,a) - b(s))\right]</span></p>
+<p><strong>Proof of Unbiasedness:</strong> The baseline doesn’t introduce bias because:</p>
+<p><span class="math display">\begin{align*} \mathbb{E}_{a \sim \pi}[\nabla_{\boldsymbol{\theta}} \log \pi(a|s;\boldsymbol{\theta}) b(s)] &amp;= b(s) \sum_a
+\pi(a|s;\boldsymbol{\theta}) \nabla_{\boldsymbol{\theta}} \log \pi(a|s;\boldsymbol{\theta}) \\ &amp;= b(s) \sum_a
+\nabla_{\boldsymbol{\theta}} \pi(a|s;\boldsymbol{\theta}) \\ &amp;= b(s) \nabla_{\boldsymbol{\theta}} \sum_a
+\pi(a|s;\boldsymbol{\theta}) \\ &amp;= b(s) \nabla_{\boldsymbol{\theta}} 1 = 0 \end{align*}</span></p>
+<p><strong>Optimal Baseline:</strong> The baseline that minimizes variance is:</p>
+<p><span class="math display">b^*(s) = \frac{\mathbb{E}[\|\nabla_{\boldsymbol{\theta}} \log \pi(a|s;\boldsymbol{\theta})\|^2
+q_{\pi}(s,a)]}{\mathbb{E}[\|\nabla_{\boldsymbol{\theta}} \log \pi(a|s;\boldsymbol{\theta})\|^2]}</span></p>
+<p>In practice, we use <span class="math inline">b(s) = v_{\pi_{\boldsymbol{\theta}}}(s)</span>, which is close to optimal and easy to learn.</p>
+<p><strong>Advantage Function:</strong> Using the value function as baseline gives the advantage:</p>
+<p><span class="math display">A_{\pi}(s,a) = q_{\pi}(s,a) - v_{\pi}(s)</span></p>
+<p>The advantage measures how much better action <span class="math inline">a</span> is compared to the average action in state <span class="math inline">s</span>. This significantly reduces variance while maintaining the correct gradient direction.</p>
+<p><strong>REINFORCE with Baseline:</strong> ``` Initialize: Policy parameters θ, value function parameters w</p>
+<p>For each episode: Generate episode following π(·|·;θ) For each step t: G ← Σ_{k=t+1}^T γ^{k-t-1} R_k δ ← G - V(S_t;w) w ← w + α_w δ ∇_w V(S_t;w) θ ← θ + α_θ γ^t δ ∇_θ log π(A_t|S_t;θ) ```</p>
+<p><strong>Natural Policy Gradient:</strong> Standard gradient descent can be inefficient in the policy parameter space because the parameterization affects the geometry. The natural gradient accounts for the curvature of the policy space:</p>
+<p><span class="math display">\tilde{\nabla}_{\boldsymbol{\theta}} J(\boldsymbol{\theta}) = F(\boldsymbol{\theta})^{-1} \nabla_{\boldsymbol{\theta}}
+J(\boldsymbol{\theta})</span></p>
+<p>where <span class="math inline">F(\boldsymbol{\theta})</span> is the Fisher information matrix:</p>
+<p><span class="math display">F(\boldsymbol{\theta}) = \mathbb{E}_{s \sim d_{\pi}, a \sim \pi}[\nabla_{\boldsymbol{\theta}} \log \pi(a|s;\boldsymbol{\theta})
+\nabla_{\boldsymbol{\theta}} \log \pi(a|s;\boldsymbol{\theta})^T]</span></p>
+<p>The natural gradient is invariant to reparameterization and often converges faster.</p>
+<p><strong>Compatible Function Approximation:</strong> For the policy gradient theorem to hold with function approximation, the value function approximation must satisfy:</p>
+<ol type="1">
+<li><span class="math inline">\nabla_{\mathbf{w}} \hat{q}(s,a;\mathbf{w}) = \nabla_{\boldsymbol{\theta}} \log \pi(a|s;\boldsymbol{\theta})</span></li>
+<li><span class="math inline">\mathbf{w}</span> minimizes the mean squared error</li>
+</ol>
+<p>This ensures that using <span class="math inline">\hat{q}</span> instead of <span class="math inline">q_{\pi}</span> doesn’t bias the gradient.</p>
+<p><strong>Deterministic Policy Gradient (DPG):</strong> For continuous actions, we can use a deterministic policy <span class="math inline">\mu_{\boldsymbol{\theta}}(s)</span> and compute:</p>
+<p><span class="math display">\nabla_{\boldsymbol{\theta}} J(\boldsymbol{\theta}) = \mathbb{E}_{s \sim d_{\mu}}[\nabla_{\boldsymbol{\theta}}
+\mu_{\boldsymbol{\theta}}(s) \nabla_a Q^{\mu}(s,a)|_{a=\mu_{\boldsymbol{\theta}}(s)}]</span></p>
+<p>This is the foundation for DDPG and TD3.</p>
+<p><strong>Advantages of Policy Gradient Methods:</strong> 1. <strong>Continuous actions:</strong> Natural handling of continuous action spaces 2. <strong>Stochastic policies:</strong> Can learn inherently stochastic policies 3. <strong>Convergence guarantees:</strong> Guaranteed to converge to local optimum 4. <strong>Effective in high dimensions:</strong> Works well with function approximation 5. <strong>Direct optimization:</strong> Optimizes the objective directly</p>
+<p><strong>Disadvantages:</strong> 1. <strong>High variance:</strong> Gradient estimates can be very noisy 2. <strong>Sample inefficiency:</strong> Requires many samples 3. <strong>Local optima:</strong> Can get stuck in local optima 4. <strong>Sensitive to step size:</strong> Requires careful tuning 5. <strong>On-policy:</strong> Standard formulation requires on-policy samples</p>
+<p><strong>Practical Tips:</strong> 1. <strong>Normalize advantages:</strong> Standardize advantages to zero mean, unit variance 2. <strong>Entropy regularization:</strong> Add entropy bonus to encourage exploration 3. <strong>Gradient clipping:</strong> Clip gradients to prevent large updates 4. <strong>Learning rate scheduling:</strong> Decay learning rate over time 5. <strong>Multiple epochs:</strong> Reuse data for multiple gradient steps (with care)</p>
+<p>Policy gradient methods provide a principled approach to policy optimization and form the basis for state-of-the-art algorithms like PPO and SAC <span class="citation" data-cites="zhao2025rl theodoridis2025ml">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+</section>
+<section id="actor-critic-methods" class="level3">
+<h3 class="anchored" data-anchor-id="actor-critic-methods">Actor-Critic Methods</h3>
+<p>Actor-critic methods combine the strengths of policy gradient methods (which directly optimize the policy) and value-based methods (which learn value functions). The “actor” updates the policy parameters, while the “critic” evaluates the policy by estimating the value function. This architecture reduces variance compared to pure policy gradient methods while maintaining the ability to handle continuous actions.</p>
+<p><strong>Architecture Components:</strong></p>
+<ol type="1">
+<li><strong>Actor:</strong> A parameterized policy <span class="math inline">\pi(a|s;\boldsymbol{\theta})</span> that selects actions 2. <strong>Critic:</strong> A value function approximator that can be: - State-value function: <span class="math inline">\hat{v}(s;\mathbf{w}) \approx v_{\pi}(s)</span></li>
+</ol>
+<ul>
+<li>Action-value function: <span class="math inline">\hat{q}(s,a;\mathbf{w}) \approx q_{\pi}(s,a)</span></li>
+<li>Advantage function: <span class="math inline">\hat{A}(s,a;\mathbf{w}) \approx A_{\pi}(s,a)</span></li>
+</ul>
+<p><strong>Basic Actor-Critic Algorithm:</strong> The simplest form uses TD(0) for the critic:</p>
+<p><strong>Critic Update (TD Error):</strong></p>
+<p><span class="math display">\delta_t = R_{t+1} + \gamma \hat{v}(S_{t+1};\mathbf{w}) - \hat{v}(S_t;\mathbf{w})</span> <span class="math display">\mathbf{w} \leftarrow \mathbf{w} +
+\alpha_w \delta_t \nabla_{\mathbf{w}} \hat{v}(S_t;\mathbf{w})</span></p>
+<p>The TD error serves as an estimate of the advantage: <span class="math inline">\delta_t \approx A_{\pi}(S_t, A_t)</span>.</p>
+<p><strong>Actor Update (Policy Gradient):</strong></p>
+<p><span class="math display">\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} + \alpha_{\theta} \delta_t \nabla_{\boldsymbol{\theta}} \log
+\pi(A_t|S_t;\boldsymbol{\theta})</span></p>
+<p>The TD error acts as a baseline-reduced return estimate, reducing variance compared to REINFORCE.</p>
+<p><strong>Algorithm (One-Step Actor-Critic):</strong> ``` Input: Differentiable policy π(a|s;θ), differentiable value function V(s;w) Parameters: Step sizes α_θ, α_w, discount γ Initialize: θ, w arbitrarily</p>
+<p>For each episode: Initialize S For each step: A ~ π(·|S;θ) Take action A, observe R, S’ δ ← R + γV(S’;w) - V(S;w) w ← w + α_w δ ∇_w V(S;w) θ ← θ + α_θ δ ∇_θ log π(A|S;θ) S ← S’ Until S is terminal ```</p>
+<p><strong>Bias-Variance Tradeoff:</strong> Actor-critic methods trade off bias and variance: - <strong>REINFORCE:</strong> Unbiased but high variance (uses full returns) - <strong>Actor-Critic:</strong> Biased (due to bootstrapping) but lower variance - The bias decreases as the value function estimate improves</p>
+<p><strong>n-Step Actor-Critic:</strong> Generalize to n-step returns for better bias-variance tradeoff:</p>
+<p><span class="math display">G_t^{(n)} = R_{t+1} + \gamma R_{t+2} + \cdots + \gamma^{n-1} R_{t+n} + \gamma^n \hat{v}(S_{t+n};\mathbf{w})</span></p>
+<p>The actor update becomes:</p>
+<p><span class="math display">\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} + \alpha_{\theta} (G_t^{(n)} - \hat{v}(S_t;\mathbf{w}))
+\nabla_{\boldsymbol{\theta}} \log \pi(A_t|S_t;\boldsymbol{\theta})</span></p>
+<p><strong>Advantage Actor-Critic (A2C):</strong> A2C is a synchronous version of A3C that uses the advantage function explicitly:</p>
+<p><span class="math display">\nabla_{\boldsymbol{\theta}} J(\boldsymbol{\theta}) \approx \mathbb{E}[\nabla_{\boldsymbol{\theta}} \log
+\pi(a|s;\boldsymbol{\theta}) \hat{A}(s,a;\mathbf{w})]</span></p>
+<p><strong>Advantage Estimation:</strong> Several methods to estimate advantages:</p>
+<ol type="1">
+<li><strong>One-step TD:</strong> <span class="math inline">\hat{A}(s,a) = r + \gamma V(s') - V(s)</span></li>
+<li><strong>n-step:</strong> <span class="math inline">\hat{A}(s,a) = G_t^{(n)} - V(s)</span></li>
+<li><strong>GAE (Generalized Advantage Estimation):</strong> Exponentially weighted average of n-step advantages:</li>
+</ol>
+<p><span class="math display">\hat{A}_t^{GAE(\gamma,\lambda)} = \sum_{l=0}^\infty (\gamma\lambda)^l \delta_{t+l}</span></p>
+<p>where <span class="math inline">\delta_t = r_t + \gamma V(s_{t+1}) - V(s_t)</span>. The parameter <span class="math inline">\lambda \in [0,1]</span> controls the bias-variance tradeoff: - <span class="math inline">\lambda = 0</span>: High bias, low variance (one-step TD) - <span class="math inline">\lambda = 1</span>: Low bias, high variance (Monte Carlo) - <span class="math inline">\lambda \in (0,1)</span>: Intermediate tradeoff</p>
+<p>GAE is widely used in modern algorithms like PPO and TRPO.</p>
+<p><strong>A2C Algorithm:</strong> ``` Initialize: Policy π(a|s;θ), value function V(s;w)</p>
+<p>For each iteration: Collect trajectories using current policy For each timestep t in trajectories: Compute advantage: A_t = G_t - V(S_t;w) Compute value target: V_target = G_t</p>
+<pre><code>Update critic: w ← w - α_w ∇_w Σ_t (V(S_t;w) - V_target)^2
+
+Update actor: θ ← θ + α_θ ∇_θ Σ_t log π(A_t|S_t;θ) A_t ```</code></pre>
+<p><strong>Asynchronous Advantage Actor-Critic (A3C):</strong> A3C runs multiple agents in parallel, each interacting with its own copy of the environment:</p>
+<p><strong>Key Ideas:</strong> 1. <strong>Parallel actors:</strong> Multiple workers collect experience simultaneously 2. <strong>Asynchronous updates:</strong> Workers update shared parameters independently 3. <strong>Decorrelated experience:</strong> Different workers explore different parts of state space 4. <strong>No replay buffer:</strong> Online learning from parallel streams</p>
+<p><strong>Benefits:</strong> - <strong>Sample efficiency:</strong> Parallel collection speeds up learning - <strong>Stability:</strong> Decorrelated updates reduce correlation - <strong>Simplicity:</strong> No need for experience replay - <strong>CPU-friendly:</strong> Efficient on multi-core CPUs</p>
+<p><strong>A3C Algorithm (per worker):</strong> ``` Global shared parameters: θ, w Worker-specific parameters: θ’, w’</p>
+<p>Repeat: Synchronize: θ’ = θ, w’ = w Collect trajectory of length t_max using π(·|·;θ’)</p>
+<pre><code>Compute advantages using GAE
+
+Compute gradients: dθ = ∇_θ' Σ_t log π(a_t|s_t;θ') A_t dw = ∇_w' Σ_t (V(s_t;w') - V_target)^2
+
+Asynchronously update global parameters: θ ← θ + α_θ dθ w ← w - α_w dw ```</code></pre>
+<p><strong>Entropy Regularization:</strong> Add entropy bonus to encourage exploration:</p>
+<p><span class="math display">J(\boldsymbol{\theta}) = \mathbb{E}[\sum_t r_t + \beta H(\pi(\cdot|s_t;\boldsymbol{\theta}))]</span></p>
+<p>where <span class="math inline">H(\pi) = -\sum_a \pi(a|s) \log \pi(a|s)</span> is the policy entropy. The gradient becomes:</p>
+<p><span class="math display">\nabla_{\boldsymbol{\theta}} J \approx \mathbb{E}[\nabla_{\boldsymbol{\theta}} \log \pi(a|s;\boldsymbol{\theta}) A(s,a) + \beta
+\nabla_{\boldsymbol{\theta}} H(\pi(\cdot|s;\boldsymbol{\theta}))]</span></p>
+<p>Entropy regularization prevents premature convergence to deterministic policies.</p>
+<p><strong>Shared vs.&nbsp;Separate Networks:</strong> Two architectural choices:</p>
+<ol type="1">
+<li><p><strong>Separate networks:</strong> Independent networks for actor and critic - More flexible - Can use different architectures - No interference between objectives</p></li>
+<li><p><strong>Shared networks:</strong> Common feature extraction layers, separate heads - More sample efficient - Shared representations - Faster training - Risk of conflicting gradients</p></li>
+</ol>
+<p><strong>Typical Shared Architecture:</strong> <code>Input (state) ↓ Shared layers (CNN/MLP) ↓ / \ /   \ Policy  Value head    head |      | a V(s)</code></p>
+<p><strong>Off-Policy Actor-Critic:</strong> Standard actor-critic is on-policy, but we can make it off-policy using importance sampling:</p>
+<p><span class="math display">\nabla_{\boldsymbol{\theta}} J \approx \mathbb{E}_{s,a \sim \beta}\left[\frac{\pi(a|s;\boldsymbol{\theta})}{\beta(a|s)}
+\nabla_{\boldsymbol{\theta}} \log \pi(a|s;\boldsymbol{\theta}) A(s,a)\right]</span></p>
+<p>where <span class="math inline">\beta</span> is the behavior policy. However, importance sampling can have high variance.</p>
+<p><strong>Practical Considerations:</strong></p>
+<ol type="1">
+<li><strong>Value function fitting:</strong> Use multiple epochs of gradient descent on collected data 2. <strong>Advantage normalization:</strong> Normalize advantages to zero mean, unit variance 3. <strong>Gradient clipping:</strong> Clip gradients to prevent instability 4. <strong>Learning rate scheduling:</strong> Decay learning rates over time 5. <strong>Reward scaling:</strong> Normalize rewards for stable learning 6. <strong>Parallel environments:</strong> Use vectorized environments for efficiency</li>
+</ol>
+<p><strong>Convergence Properties:</strong> Under appropriate conditions: - The critic converges to the true value function - The actor converges to a local optimum of the policy - Two-timescale analysis: critic updates faster than actor</p>
+<p><strong>Advantages of Actor-Critic:</strong> 1. <strong>Lower variance:</strong> Compared to REINFORCE 2. <strong>Online learning:</strong> Can learn from each transition 3. <strong>Continuous actions:</strong> Natural handling 4. <strong>Flexible:</strong> Many variants and extensions 5. <strong>Parallelizable:</strong> A3C-style parallelism</p>
+<p><strong>Disadvantages:</strong> 1. <strong>Biased estimates:</strong> Due to bootstrapping 2. <strong>Two sets of parameters:</strong> More hyperparameters to tune 3. <strong>Instability:</strong> Can diverge if not careful 4. <strong>Sample inefficiency:</strong> Still requires many samples</p>
+<p>Actor-critic methods form the foundation for many state-of-the-art algorithms including PPO, SAC, and TD3, combining the benefits of policy optimization and value-based learning <span class="citation" data-cites="zhao2025rl theodoridis2025ml">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+</section>
+<section id="trust-region-and-proximal-methods" class="level3">
+<h3 class="anchored" data-anchor-id="trust-region-and-proximal-methods">Trust Region and Proximal Methods</h3>
+<p><strong>Trust Region Policy Optimization (TRPO):</strong></p>
+<p>Maximize expected return subject to KL constraint:</p>
+<p><span class="math display">\max_{\boldsymbol{\theta}} \mathbb{E}[\frac{\pi_{\boldsymbol{\theta}}(a|s)}{\pi_{\boldsymbol{\theta}_{\text{old}}}(a|s)}
+A_{\boldsymbol{\theta}_{\text{old}}}(s,a)]</span> <span class="math display">\text{s.t.} \quad
+\mathbb{E}[D_{\text{KL}}(\pi_{\boldsymbol{\theta}_{\text{old}}}(\cdot|s) \| \pi_{\boldsymbol{\theta}}(\cdot|s))] \leq \delta</span></p>
+<p><strong>Proximal Policy Optimization (PPO):</strong></p>
+<p>Clipped surrogate objective:</p>
+<p><span class="math display">L^{\text{CLIP}}(\boldsymbol{\theta}) = \mathbb{E}[\min(r_t(\boldsymbol{\theta})A_t, \text{clip}(r_t(\boldsymbol{\theta}),
+1-\epsilon, 1+\epsilon)A_t)]</span></p>
+<p>where <span class="math inline">r_t(\boldsymbol{\theta}) = \frac{\pi_{\boldsymbol{\theta}}(a_t|s_t)}{\pi_{\boldsymbol{\theta}_{\text{old}}}(a_t|s_t)}</span>.</p>
+<p>PPO is simpler than TRPO and often performs better in practice.</p>
+</section>
+<section id="deterministic-policy-gradient" class="level3">
+<h3 class="anchored" data-anchor-id="deterministic-policy-gradient">Deterministic Policy Gradient</h3>
+<p><strong>Deep Deterministic Policy Gradient (DDPG):</strong></p>
+<p>For continuous action spaces, use deterministic policy <span class="math inline">\mu(s;\boldsymbol{\theta})</span>:</p>
+<p><span class="math display">\nabla_{\boldsymbol{\theta}} J \approx \mathbb{E}[\nabla_a Q(s,a;\mathbf{w})|_{a=\mu(s;\boldsymbol{\theta})}
+\nabla_{\boldsymbol{\theta}} \mu(s;\boldsymbol{\theta})]</span></p>
+<p><strong>Components:</strong> - Actor: <span class="math inline">\mu(s;\boldsymbol{\theta})</span> - Critic: <span class="math inline">Q(s,a;\mathbf{w})</span> - Target networks for both - Experience replay - Exploration noise: <span class="math inline">a_t = \mu(s_t;\boldsymbol{\theta}) + \mathcal{N}_t</span></p>
+<p><strong>Twin Delayed DDPG (TD3):</strong> Improvements over DDPG: 1. <strong>Clipped Double Q-Learning:</strong> Use minimum of two critics 2. <strong>Delayed Policy Updates:</strong> Update policy less frequently than critic 3. <strong>Target Policy Smoothing:</strong> Add noise to target actions</p>
+</section>
+<section id="soft-actor-critic-sac" class="level3">
+<h3 class="anchored" data-anchor-id="soft-actor-critic-sac">Soft Actor-Critic (SAC)</h3>
+<p>Maximum entropy RL framework:</p>
+<p><span class="math display">J(\pi) = \sum_t \mathbb{E}_{(s_t,a_t) \sim \rho_\pi}[r(s_t,a_t) + \alpha \mathcal{H}(\pi(\cdot|s_t))]</span></p>
+<p>where <span class="math inline">\mathcal{H}(\pi(\cdot|s)) = -\mathbb{E}_{a \sim \pi}[\log \pi(a|s)]</span> is the entropy.</p>
+<p><strong>Soft Bellman Equation:</strong></p>
+<p><span class="math display">Q(s,a) = r(s,a) + \gamma \mathbb{E}_{s'}[V(s')]</span> <span class="math display">V(s) = \mathbb{E}_{a \sim \pi}[Q(s,a) - \alpha \log \pi(a|s)]</span></p>
+<p><strong>Benefits:</strong> - Improved exploration - Robustness to hyperparameters - Better sample efficiency</p>
+</section>
+<section id="model-based-rl" class="level3">
+<h3 class="anchored" data-anchor-id="model-based-rl">Model-Based RL</h3>
+<p>Learn model of environment dynamics and use for planning.</p>
+<p><strong>Dyna Architecture:</strong> 1. <strong>Direct RL:</strong> Learn from real experience 2. <strong>Model Learning:</strong> Learn model <span class="math inline">\hat{P}(s'|s,a)</span> and <span class="math inline">\hat{R}(s,a)</span> 3. <strong>Planning:</strong> Generate simulated experience using model</p>
+<p><strong>Model-Predictive Control (MPC):</strong> 1. Learn dynamics model <span class="math inline">f(s,a)</span> 2. At each step, optimize action sequence:</p>
+<p><span class="math display">a_1^*, \ldots, a_H^* = \arg\max_{a_1, \ldots, a_H} \sum_{t=1}^H r(s_t, a_t)</span></p>
+<ol start="3" type="1">
+<li>Execute first action <span class="math inline">a_1^*</span>, replan at next step</li>
+</ol>
+<p><strong>World Models:</strong> Learn compact latent representation of environment for planning.</p>
+</section>
+<section id="multi-agent-rl" class="level3">
+<h3 class="anchored" data-anchor-id="multi-agent-rl">Multi-Agent RL</h3>
+<p><strong>Independent Q-Learning:</strong> Each agent learns independently.</p>
+<p><strong>Centralized Training, Decentralized Execution (CTDE):</strong> - Training: Access to global information - Execution: Each agent uses only local observations</p>
+<p><strong>Multi-Agent DDPG (MADDPG):</strong> - Centralized critic: <span class="math inline">Q_i(\mathbf{s}, a_1, \ldots, a_N; \mathbf{w}_i)</span> - Decentralized actor: <span class="math inline">\mu_i(s_i; \boldsymbol{\theta}_i)</span></p>
+<p><strong>Communication:</strong> Agents learn to communicate via differentiable communication channels.</p>
+</section>
+<section id="offline-reinforcement-learning" class="level3">
+<h3 class="anchored" data-anchor-id="offline-reinforcement-learning">Offline Reinforcement Learning</h3>
+<p>Offline reinforcement learning (also called batch RL) represents a paradigm shift in how we think about RL. Traditional RL algorithms like DQN (<a href="#sec-advanced-rl" class="quarto-xref">Section&nbsp;1.2</a>) and policy gradients require continuous interaction with the environment—millions of steps for Atari games, potentially dangerous or expensive in real-world applications. Offline RL asks: can we learn optimal policies from fixed datasets collected by previous policies, without any additional environment interaction?</p>
+<p><strong>Why Offline RL Matters:</strong> Consider these scenarios:</p>
+<ol type="1">
+<li><p><strong>Healthcare:</strong> We have years of patient treatment records (states: symptoms, actions: treatments, rewards: outcomes). We want to learn better treatment policies, but we cannot experiment on patients.</p></li>
+<li><p><strong>Autonomous Driving:</strong> Companies have petabytes of driving data from human drivers and test vehicles. Training policies through trial-and-error on real roads is dangerous and expensive.</p></li>
+<li><p><strong>Robotics:</strong> A robot has collected data through random exploration or human demonstrations. We want to extract an optimal policy without risking damage to the robot or environment.</p></li>
+<li><p><strong>Recommendation Systems:</strong> We have logs of user interactions (states: user history, actions: recommendations, rewards: clicks/purchases). We want to improve recommendations without A/B testing every policy.</p></li>
+</ol>
+<p>In all these cases, we have data but cannot easily collect more. This is the offline RL setting.</p>
+<p><strong>Problem Setting:</strong> Given a fixed dataset <span class="math inline">\mathcal{D} = \{(s_i, a_i, r_i, s_i')\}_{i=1}^N</span> collected by one or more behavior policies <span class="math inline">\pi_\beta</span>, learn a policy <span class="math inline">\pi</span> that maximizes expected return:</p>
+<p><span class="math display">J(\pi) = \mathbb{E}_{s_0, a_t \sim \pi, s_{t+1} \sim P}\left[\sum_{t=0}^\infty \gamma^t r_t\right]</span></p>
+<p>without any additional environment interaction during training.</p>
+<p><strong>The Fundamental Challenge: Distributional Shift</strong></p>
+<p>The core difficulty in offline RL is distributional shift. The learned policy <span class="math inline">\pi</span> may visit states or take actions not well-represented in <span class="math inline">\mathcal{D}</span>. When we query the Q-function at these out-of-distribution (OOD) state-action pairs, we get unreliable estimates.</p>
+<p><strong>Concrete Example:</strong> Suppose we’re learning to drive from a dataset of cautious human drivers who always brake at yellow lights. Our Q-function learns: - <span class="math inline">Q(\text{yellow light, brake}) = 10</span> (safe, observed many times) - <span class="math inline">Q(\text{yellow light, accelerate}) =
+???</span> (never observed, Q-function guesses)</p>
+<p>If the Q-function overestimates the value of accelerating (perhaps due to extrapolation error), the learned policy might dangerously accelerate through yellow lights—a behavior never seen in the training data!</p>
+<p>This is fundamentally different from supervised learning (<a href="supervised-learning.html#sec-supervised-learning">Supervised Learning</a>) where we only evaluate the model on the training distribution. In RL, the policy changes the distribution of states we visit, creating a feedback loop that can amplify errors.</p>
+<p><strong>Three Key Challenges:</strong></p>
+<ol type="1">
+<li><p><strong>Distributional Shift:</strong> Learned policy <span class="math inline">\pi</span> may visit states <span class="math inline">s \sim d^\pi</span> where <span class="math inline">d^\pi(s) \neq d^{\pi_\beta}(s)</span>, leading to extrapolation errors in value estimation.</p></li>
+<li><p><strong>Overestimation Bias:</strong> Q-learning’s <span class="math inline">\max_a Q(s,a)</span> operator amplifies errors for OOD actions. If we overestimate some OOD action, we’ll select it, leading to poor performance.</p></li>
+<li><p><strong>Limited Coverage:</strong> Dataset may not cover all relevant state-action pairs. Unlike online RL where exploration fills gaps, offline RL must work with what it has.</p></li>
+</ol>
+<p><strong>Taxonomy of Offline RL Approaches:</strong></p>
+<ol type="1">
+<li><strong>Policy Constraint Methods:</strong> Keep learned policy close to behavior policy 2. <strong>Conservative Value Estimation:</strong> Learn pessimistic Q-functions that underestimate OOD actions 3. <strong>Model-Based Methods:</strong> Learn dynamics model, use uncertainty to avoid OOD regions 4. <strong>Hybrid Methods:</strong> Combine multiple strategies</li>
+</ol>
+<section id="batch-constrained-q-learning-bcq" class="level4">
+<h4 class="anchored" data-anchor-id="batch-constrained-q-learning-bcq">Batch Constrained Q-Learning (BCQ)</h4>
+<p>BCQ, one of the first successful offline RL algorithms, takes a direct approach: only select actions that are likely under the behavior policy.</p>
+<p><strong>Core Idea:</strong> If an action <span class="math inline">a</span> has low probability under <span class="math inline">\pi_\beta(a|s)</span>, it’s probably not in our dataset. Don’t select it!</p>
+<p><strong>Batch Constraint:</strong> Restrict learned policy to stay close to behavior policy:</p>
+<p><span class="math display">\pi^* = \arg\max_{\pi} \mathbb{E}_{s \sim \mathcal{D}, a \sim \pi}[Q(s,a)] \quad \text{s.t.} \quad D(\pi, \pi_\beta) \leq
+\epsilon</span></p>
+<p>where <span class="math inline">D</span> measures policy divergence (e.g., KL divergence, maximum mean discrepancy).</p>
+<p><strong>BCQ for Discrete Actions:</strong> Learn a generative model <span class="math inline">G_\omega(s,a)</span> that estimates <span class="math inline">\pi_\beta(a|s)</span>, then select actions with high probability:</p>
+<p><span class="math display">\pi(s) = \arg\max_{a: G_\omega(s,a) &gt; \tau} Q_\theta(s,a)</span></p>
+<p>where <span class="math inline">\tau</span> is a threshold (e.g., <span class="math inline">\tau = 0.1</span>). This filters out actions unlikely to be in the dataset.</p>
+<p><strong>BCQ for Continuous Actions:</strong> Use a generative model (VAE) to sample actions similar to those in <span class="math inline">\mathcal{D}</span>:</p>
+<ol type="1">
+<li>Train VAE to model behavior policy: <span class="math inline">a \sim G_\omega(s)</span></li>
+<li>Sample <span class="math inline">N</span> actions from VAE: <span class="math inline">\{a_i\}_{i=1}^N \sim G_\omega(s)</span></li>
+<li>Apply small perturbations: <span class="math inline">\tilde{a}_i = a_i + \xi_\phi(s, a_i)</span> where <span class="math inline">\xi_\phi</span> is a learned perturbation network 4. Select action with highest Q-value: <span class="math inline">\pi(s) = \arg\max_i Q_\theta(s, \tilde{a}_i)</span></li>
+</ol>
+<p><strong>Intuition:</strong> The VAE ensures we stay near the data distribution, while the perturbation network allows small improvements. It’s like saying “do something similar to what’s in the dataset, but slightly better.”</p>
+<p><strong>Example:</strong> In the driving scenario, BCQ would: - Learn that “brake at yellow” is common in the dataset - Never consider “accelerate at yellow” because it’s OOD - Might learn to brake slightly earlier or smoother (small perturbation)</p>
+</section>
+<section id="conservative-q-learning-cql" class="level4">
+<h4 class="anchored" data-anchor-id="conservative-q-learning-cql">Conservative Q-Learning (CQL)</h4>
+<p>CQL takes a different approach: instead of constraining the policy, learn a conservative Q-function that underestimates values for OOD actions.</p>
+<p><strong>Core Idea:</strong> If we’re uncertain about an action’s value, assume it’s bad. This pessimism prevents the policy from exploiting overestimated OOD actions.</p>
+<p><strong>CQL Objective:</strong> Minimize Q-values for OOD actions while maintaining Bellman consistency on the dataset:</p>
+<p><span class="math display">\min_Q \alpha \underbrace{\mathbb{E}_{s \sim \mathcal{D}}\left[\log \sum_a \exp(Q(s,a)) - \mathbb{E}_{a \sim
+\pi_\beta}[Q(s,a)]\right]}_{\text{Conservatism penalty}} + \underbrace{\frac{1}{2}\mathbb{E}_{(s,a,s') \sim \mathcal{D}}[(Q(s,a) -
+\mathcal{B}^\pi Q(s,a))^2]}_{\text{Bellman error}}</span></p>
+<p><strong>Understanding the Terms:</strong></p>
+<ol type="1">
+<li><p><strong>First term:</strong> Penalizes high Q-values for all actions (the <span class="math inline">\log \sum_a \exp(Q(s,a))</span> term) while encouraging high Q-values for dataset actions (the <span class="math inline">-\mathbb{E}_{a \sim \pi_\beta}[Q(s,a)]</span> term). Net effect: push down Q-values for OOD actions.</p></li>
+<li><p><strong>Second term:</strong> Standard Bellman error ensuring Q-function is accurate on the dataset (see <a href="#sec-rl-foundations" class="quarto-xref">Section&nbsp;1.1</a> for Bellman equations).</p></li>
+</ol>
+<p><strong>Continuous Action CQL:</strong> For continuous actions, replace the sum with an expectation over the current policy:</p>
+<p><span class="math display">\min_Q \alpha \left(\mathbb{E}_{s \sim \mathcal{D}, a \sim \pi(s)}[Q(s,a)] - \mathbb{E}_{s,a \sim \mathcal{D}}[Q(s,a)]\right) +
+\frac{1}{2}\mathbb{E}_{\mathcal{D}}[(Q - \mathcal{B}^\pi Q)^2]</span></p>
+<p><strong>Intuition:</strong> CQL is like a pessimistic advisor. When you ask “should I try this new action?”, it responds “probably not—stick with what we know works.” This conservatism prevents catastrophic failures from overestimated OOD actions.</p>
+<p><strong>Example:</strong> In driving: - <span class="math inline">Q(\text{yellow, brake}) = 10</span> (observed, accurate) - <span class="math inline">Q(\text{yellow, accelerate}) = -5</span> (OOD, conservatively underestimated) - Policy chooses brake, avoiding the risky OOD action</p>
+<p><strong>Comparison to BCQ:</strong> - <strong>BCQ:</strong> Hard constraint—never select OOD actions - <strong>CQL:</strong> Soft constraint—OOD actions have low Q-values, unlikely to be selected - <strong>CQL advantage:</strong> Can still select OOD actions if they’re clearly better (e.g., if dataset is very suboptimal)</p>
+</section>
+<section id="implicit-q-learning-iql" class="level4">
+<h4 class="anchored" data-anchor-id="implicit-q-learning-iql">Implicit Q-Learning (IQL)</h4>
+<p>IQL offers an elegant solution: avoid querying Q-values at OOD actions entirely during training.</p>
+<p><strong>Core Idea:</strong> Standard Q-learning requires <span class="math inline">\max_a Q(s,a)</span>, which queries all actions including OOD ones. IQL learns the value function <span class="math inline">V(s)</span> directly using expectile regression, avoiding the problematic max operator.</p>
+<p><strong>Expectile Regression:</strong> Instead of learning <span class="math inline">V(s) = \max_a Q(s,a)</span> (which requires OOD queries), learn:</p>
+<p><span class="math display">V(s) \approx \mathbb{E}_{a \sim \pi_\beta}[Q(s,a)]</span></p>
+<p>but weighted toward high-value actions using asymmetric loss:</p>
+<p><span class="math display">L_\tau(u) = |\tau - \mathbb{1}_{[u &lt; 0]}|u^2</span></p>
+<p>where <span class="math inline">\tau \in (0.5, 1)</span> (typically 0.7-0.9) controls the asymmetry. This loss penalizes negative errors more when <span class="math inline">\tau &gt; 0.5</span>, causing <span class="math inline">V(s)</span> to track upper quantiles of the Q-value distribution.</p>
+<p><strong>Training:</strong> 1. Learn Q-function: <span class="math inline">Q_\theta(s,a) \approx r + \gamma V_\psi(s')</span> (standard TD learning) 2. Learn value function: <span class="math inline">V_\psi(s)</span> via expectile regression on <span class="math inline">Q_\theta(s,a)</span> for <span class="math inline">(s,a) \in \mathcal{D}</span> 3. Extract policy: <span class="math inline">\pi(a|s) \propto
+\exp\left(\frac{Q(s,a) - V(s)}{\beta}\right)</span></p>
+<p><strong>Why This Works:</strong> By only evaluating <span class="math inline">Q(s,a)</span> for <span class="math inline">(s,a)</span> pairs in the dataset, IQL never queries OOD actions during training. The policy extraction step uses advantage weighting to prefer actions with <span class="math inline">Q(s,a) &gt; V(s)</span>.</p>
+<p><strong>Intuition:</strong> IQL is like learning from demonstrations. Instead of asking “what’s the best possible action?” (which might be OOD), it asks “among the actions in my dataset, which ones led to above-average outcomes?”</p>
+<p><strong>Advantages:</strong> - Simple and stable (no adversarial training or complex constraints) - Works well even with suboptimal datasets - Computationally efficient</p>
+<p>This approach connects to the bias-variance trade-off discussed in <a href="foundations-of-learning-theory.html#sec-learning-theory">Foundations of Learning Theory</a>: IQL accepts higher bias (not finding the true optimal policy) to reduce variance (avoiding unreliable OOD estimates).</p>
+</section>
+<section id="practical-considerations" class="level4">
+<h4 class="anchored" data-anchor-id="practical-considerations">Practical Considerations</h4>
+<p><strong>Dataset Quality:</strong> - <strong>Expert Data:</strong> High-quality demonstrations enable strong performance - <strong>Mixed Data:</strong> Combination of expert and suboptimal data - <strong>Random Data:</strong> Exploratory data with broad coverage</p>
+<p><strong>Evaluation:</strong> - <strong>In-Distribution Performance:</strong> Performance on states similar to <span class="math inline">\mathcal{D}</span> - <strong>Out-of-Distribution Robustness:</strong> Generalization to novel states - <strong>Safety:</strong> Avoiding catastrophic failures during deployment</p>
+<p><strong>Applications:</strong> - Robotics with expensive real-world interaction - Healthcare with historical patient data - Autonomous driving with logged trajectories - Recommendation systems with user interaction logs</p>
+</section>
+</section>
+<section id="inverse-rl-and-imitation-learning" class="level3">
+<h3 class="anchored" data-anchor-id="inverse-rl-and-imitation-learning">Inverse RL and Imitation Learning</h3>
+<p><strong>Inverse RL:</strong> Infer reward function from expert demonstrations.</p>
+<p><strong>Maximum Entropy IRL:</strong></p>
+<p><span class="math display">\max_R \sum_{\tau \in \mathcal{D}} \log P(\tau|R) - \lambda \|R\|</span></p>
+<p><strong>Behavioral Cloning:</strong> Supervised learning from expert demonstrations:</p>
+<p><span class="math display">\min_{\boldsymbol{\theta}} \sum_{(s,a) \in \mathcal{D}} \|\pi(s;\boldsymbol{\theta}) - a\|^2</span></p>
+<p><strong>Generative Adversarial Imitation Learning (GAIL):</strong></p>
+<p>Match state-action distribution of expert:</p>
+<p><span class="math display">\min_{\pi} \max_D \mathbb{E}_{\pi}[\log D(s,a)] + \mathbb{E}_{\pi_E}[\log(1-D(s,a))] - \lambda H(\pi)</span></p>
+<p>where <span class="math inline">\pi_E</span> is the expert policy and <span class="math inline">D</span> is a discriminator <span class="citation" data-cites="zhao2025rl theodoridis2025ml">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-bishop2024deeplearning" class="csl-entry" role="listitem">
+Bishop, Christopher M., and Hugh Bishop. 2024. <em>Deep Learning: Foundations and Concepts</em>. Springer. <a href="https://doi.org/10.1007/978-3-031-45468-4">https://doi.org/10.1007/978-3-031-45468-4</a>.
+</div>
+<div id="ref-theodoridis2025ml" class="csl-entry" role="listitem">
+Theodoridis, Sergios. 2026. <em>Machine Learning: From the Classics to Deep Networks, Transformers, and Diffusion Models</em>. Third. Elsevier.
+</div>
+<div id="ref-zhao2025rl" class="csl-entry" role="listitem">
+Zhao, Shiyu. 2025. <em>Mathematical Foundations of Reinforcement Learning</em>. Springer Nature Singapore. <a href="https://doi.org/10.1007/978-981-97-3944-8">https://doi.org/10.1007/978-981-97-3944-8</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script>
+// Turns the tags on a post page into links to the filtered Posts page.
+document.addEventListener("DOMContentLoaded", () => {
+  const postsLink = document.querySelector('.navbar a[href$="posts.html"]');
+  if (!postsLink) {
+    return;
+  }
+  const postsPage = postsLink.getAttribute("href");
+  document.querySelectorAll(".quarto-categories .quarto-category").forEach((tag) => {
+    const link = document.createElement("a");
+    link.className = "tag-chip";
+    link.textContent = tag.textContent;
+    link.href = `${postsPage}#tag=${encodeURIComponent(tag.textContent.trim())}`;
+    tag.replaceWith(link);
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../../posts/fundamentals-of-machine-learning/unsupervised-learning.html" class="pagination-link" aria-label="Unsupervised Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Unsupervised Learning</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../posts/fundamentals-of-machine-learning/reinforcement-learning-and-llm-agents.html" class="pagination-link" aria-label="Reinforcement Learning and LLM-based Agents">
+        <span class="nav-page-text">Reinforcement Learning and LLM-based Agents</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

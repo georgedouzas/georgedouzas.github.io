@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendices and Technical Background – Georgios Douzas</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../posts/fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-62ab7622601dc1281cac47bf0cf453d3.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c9bb40c08a066f1d1a0f0931099edcc8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Georgios Douzas</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../open-source.html"> 
+<span class="menu-text">Open source</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/georgedouzas"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/gdouzas"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=-A4zUTUAAAAJ&amp;hl=en"> <i class="bi bi-mortarboard-fill" role="img" aria-label="Google Scholar">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/fundamentals-of-mathematics-for-machine-learning/appendices-and-technical-background.html">Appendices and Technical Background</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-machine-learning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mathematical and Statistical Foundations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-machine-learning/appendices-and-technical-background.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Appendices and Technical Background</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec-appendices" id="toc-sec-appendices" class="nav-link active" data-scroll-target="#sec-appendices">Appendices and Technical Background</a>
+  <ul class="collapse">
+  <li><a href="#sec-tech-lemmas" id="toc-sec-tech-lemmas" class="nav-link" data-scroll-target="#sec-tech-lemmas">Technical Lemmas and Inequalities</a>
+  <ul class="collapse">
+  <li><a href="#basic-algebraic-lemmas" id="toc-basic-algebraic-lemmas" class="nav-link" data-scroll-target="#basic-algebraic-lemmas">Basic Algebraic Lemmas</a></li>
+  <li><a href="#concentration-lemmas" id="toc-concentration-lemmas" class="nav-link" data-scroll-target="#concentration-lemmas">Concentration Lemmas</a></li>
+  <li><a href="#combinatorial-lemmas" id="toc-combinatorial-lemmas" class="nav-link" data-scroll-target="#combinatorial-lemmas">Combinatorial Lemmas</a></li>
+  <li><a href="#exponential-inequalities" id="toc-exponential-inequalities" class="nav-link" data-scroll-target="#exponential-inequalities">Exponential Inequalities</a></li>
+  </ul></li>
+  <li><a href="#sec-linear-algebra-recap" id="toc-sec-linear-algebra-recap" class="nav-link" data-scroll-target="#sec-linear-algebra-recap">Linear Algebra Recap</a>
+  <ul class="collapse">
+  <li><a href="#basic-definitions-and-notation" id="toc-basic-definitions-and-notation" class="nav-link" data-scroll-target="#basic-definitions-and-notation">Basic Definitions and Notation</a></li>
+  <li><a href="#eigenvalues-and-eigenvectors" id="toc-eigenvalues-and-eigenvectors" class="nav-link" data-scroll-target="#eigenvalues-and-eigenvectors">Eigenvalues and Eigenvectors</a></li>
+  <li><a href="#positive-definite-matrices" id="toc-positive-definite-matrices" class="nav-link" data-scroll-target="#positive-definite-matrices">Positive Definite Matrices</a></li>
+  <li><a href="#singular-value-decomposition" id="toc-singular-value-decomposition" class="nav-link" data-scroll-target="#singular-value-decomposition">Singular Value Decomposition</a></li>
+  <li><a href="#additional-linear-algebra-topics" id="toc-additional-linear-algebra-topics" class="nav-link" data-scroll-target="#additional-linear-algebra-topics">Additional Linear Algebra Topics</a></li>
+  </ul></li>
+  <li><a href="#sec-measure-concentration" id="toc-sec-measure-concentration" class="nav-link" data-scroll-target="#sec-measure-concentration">Measure Concentration and Probability Inequalities</a>
+  <ul class="collapse">
+  <li><a href="#markovs-inequality" id="toc-markovs-inequality" class="nav-link" data-scroll-target="#markovs-inequality">Markov’s Inequality</a></li>
+  <li><a href="#chebyshevs-inequality" id="toc-chebyshevs-inequality" class="nav-link" data-scroll-target="#chebyshevs-inequality">Chebyshev’s Inequality</a></li>
+  <li><a href="#chernoffs-bounds" id="toc-chernoffs-bounds" class="nav-link" data-scroll-target="#chernoffs-bounds">Chernoff’s Bounds</a></li>
+  <li><a href="#hoeffdings-inequality" id="toc-hoeffdings-inequality" class="nav-link" data-scroll-target="#hoeffdings-inequality">Hoeffding’s Inequality</a></li>
+  <li><a href="#applications-to-learning-theory" id="toc-applications-to-learning-theory" class="nav-link" data-scroll-target="#applications-to-learning-theory">Applications to Learning Theory</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="sec-appendices" class="level1">
+<h1>Appendices and Technical Background</h1>
+<p>This appendix provides essential technical results and mathematical foundations that support the main chapters of these tutorials. The material is organized into three main sections: technical lemmas and inequalities used in learning theory proofs (<a href="#sec-tech-lemmas" class="quarto-xref">Section&nbsp;1.1</a>), a comprehensive review of linear algebra concepts (<a href="#sec-linear-algebra-recap" class="quarto-xref">Section&nbsp;1.2</a>), and fundamental concentration inequalities from probability theory (<a href="#sec-measure-concentration" class="quarto-xref">Section&nbsp;1.3</a>).</p>
+<p>These results are referenced throughout these tutorials, particularly in <a href="../fundamentals-of-machine-learning/foundations-of-learning-theory.html#sec-learning-theory">Foundations of Learning Theory</a> where we establish generalization bounds, and in <a href="../fundamentals-of-machine-learning/supervised-learning.html#sec-supervised-learning">Supervised Learning</a> where we analyze algorithm convergence. Readers encountering unfamiliar mathematical concepts in the main chapters should consult the relevant sections here for detailed definitions and proofs.</p>
+<section id="sec-tech-lemmas" class="level2">
+<h2 class="anchored" data-anchor-id="sec-tech-lemmas">Technical Lemmas and Inequalities</h2>
+<p>This appendix presents fundamental technical lemmas and inequalities that are frequently used throughout these tutorials. These results provide the mathematical foundation for many of the theoretical guarantees and convergence analyses in machine learning theory.</p>
+<section id="basic-algebraic-lemmas" class="level3">
+<h3 class="anchored" data-anchor-id="basic-algebraic-lemmas">Basic Algebraic Lemmas</h3>
+<p>The following lemmas establish relationships between logarithmic and linear functions that are essential for deriving sample complexity bounds.</p>
+<p><strong>Lemma A.1</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">a &gt; 0</span>. Then: <span class="math inline">x \geq 2a\log(a) \Rightarrow x \geq a\log(x)</span>. It follows that a necessary condition for the inequality <span class="math inline">x &lt; a\log(x)</span> to hold is that <span class="math inline">x &lt; 2a\log(a)</span>.</p>
+<p><em>Proof.</em> First note that for <span class="math inline">a \in (0, \sqrt{e}]</span> the inequality <span class="math inline">x \geq a\log(x)</span> holds unconditionally and therefore the claim is trivial. From now on, assume that <span class="math inline">a &gt; \sqrt{e}</span>. Consider the function <span class="math inline">f(x) = x - a\log(x)</span>. The derivative is <span class="math inline">f'(x) = 1 -
+a/x</span>. Thus, for <span class="math inline">x &gt; a</span> the derivative is positive and the function increases. In addition,</p>
+<p><span class="math display"> \begin{aligned} f(2a\log(a)) &amp;= 2a\log(a) - a\log(2a\log(a)) \\ &amp;= 2a\log(a) - a\log(a) - a\log(2\log(a)) \\ &amp;= a\log(a) -
+a\log(2\log(a)) \end{aligned} </span></p>
+<p>Since <span class="math inline">a - 2\log(a) &gt; 0</span> for all <span class="math inline">a &gt; 0</span>, the proof follows. <span class="math inline">\square</span></p>
+<p>This lemma is particularly useful when analyzing the relationship between sample size and VC dimension in PAC learning bounds.</p>
+<p><strong>Lemma A.2</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">a \geq 1</span> and <span class="math inline">b &gt; 0</span>. Then: <span class="math inline">x \geq 4a\log(2a) + 2b \Rightarrow x \geq a\log(x) + b</span>.</p>
+<p><em>Proof.</em> It suffices to prove that <span class="math inline">x \geq 4a\log(2a) + 2b</span> implies that both <span class="math inline">x \geq 2a\log(x)</span> and <span class="math inline">x \geq 2b</span>. Since we assume <span class="math inline">a \geq 1</span> we clearly have that <span class="math inline">x \geq 2b</span>. In addition, since <span class="math inline">b &gt; 0</span> we have that <span class="math inline">x \geq 4a\log(2a)</span> which using Lemma A.1 implies that <span class="math inline">x \geq 2a\log(x)</span>. This concludes our proof. <span class="math inline">\square</span></p>
+<p>This result is used to simplify sample complexity expressions in agnostic PAC learning.</p>
+</section>
+<section id="concentration-lemmas" class="level3">
+<h3 class="anchored" data-anchor-id="concentration-lemmas">Concentration Lemmas</h3>
+<p>The following lemmas relate tail bounds to expectations, which are crucial for deriving generalization bounds.</p>
+<p><strong>Lemma A.3</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">X</span> be a random variable and <span class="math inline">x' \in \mathbb{R}</span> be a scalar and assume that there exists <span class="math inline">a &gt;
+0</span> such that for all <span class="math inline">t \geq 0</span> we have <span class="math inline">\mathbb{P}[|X - x'| &gt; t] \leq 2e^{-t^2/a^2}</span>. Then, <span class="math inline">\mathbb{E}[|X - x'|] \leq 4a</span>.</p>
+<p><em>Proof.</em> For all <span class="math inline">i = 0, 1, 2, \ldots</span> denote <span class="math inline">t_i = ai</span>. Since <span class="math inline">t_i</span> is monotonically increasing we have that <span class="math inline">\mathbb{E}[|X -
+x'|]</span> is at most <span class="math inline">\sum_{i=1}^{\infty} t_i \mathbb{P}[|X - x'| &gt; t_{i-1}]</span>. Combining this with the assumption in the lemma we get that <span class="math inline">\mathbb{E}[|X - x'|] \leq 2a\sum_{i=1}^{\infty} ie^{-(i-1)^2}</span>. The proof now follows from the inequalities</p>
+<p><span class="math display"> \sum_{i=1}^{\infty} ie^{-(i-1)^2} \leq \sum_{i=1}^{5} ie^{-(i-1)^2} + \int_5^{\infty} xe^{-(x-1)^2}dx &lt; 1.8 + 10^{-7} &lt; 2 </span></p>
+<p><span class="math inline">\square</span></p>
+<p><strong>Lemma A.4</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">X</span> be a random variable and <span class="math inline">x' \in \mathbb{R}</span> be a scalar and assume that there exists <span class="math inline">a &gt;
+0</span> and <span class="math inline">b \geq e</span> such that for all <span class="math inline">t \geq 0</span> we have <span class="math inline">\mathbb{P}[|X - x'| &gt; t] \leq 2be^{-t^2/a^2}</span>. Then, <span class="math inline">\mathbb{E}[|X - x'|]
+\leq a(2 + \sqrt{\log(b)})</span>.</p>
+<p><em>Proof.</em> For all <span class="math inline">i = 0, 1, 2, \ldots</span> denote <span class="math inline">t_i = a(i + \sqrt{\log(b)})</span>. Since <span class="math inline">t_i</span> is monotonically increasing we have that</p>
+<p><span class="math display"> \mathbb{E}[|X - x'|] \leq a\sqrt{\log(b)} + \sum_{i=1}^{\infty} t_i \mathbb{P}[|X - x'| &gt; t_{i-1}] </span></p>
+<p>Using the assumption in the lemma we have</p>
+<p><span class="math display"> \begin{aligned} \sum_{i=1}^{\infty} t_i \mathbb{P}[|X - x'| &gt; t_{i-1}] &amp;\leq 2ab\sum_{i=1}^{\infty} (i +
+\sqrt{\log(b)})e^{-(i-1+\sqrt{\log(b)})^2} \\ &amp;\leq 2ab\int_{1+\sqrt{\log(b)}}^{\infty} xe^{-(x-1)^2}dx \\ &amp;=
+2ab\int_{\sqrt{\log(b)}}^{\infty} (y+1)e^{-y^2}dy \\ &amp;\leq 4ab\int_{\sqrt{\log(b)}}^{\infty} ye^{-y^2}dy \\ &amp;=
+2ab[-e^{-y^2}]_{\sqrt{\log(b)}}^{\infty} \\ &amp;= 2ab/b = 2a \end{aligned} </span></p>
+<p>Combining the preceding inequalities we conclude our proof. <span class="math inline">\square</span></p>
+<p>This lemma is essential for analyzing Rademacher complexity and deriving data-dependent generalization bounds.</p>
+</section>
+<section id="combinatorial-lemmas" class="level3">
+<h3 class="anchored" data-anchor-id="combinatorial-lemmas">Combinatorial Lemmas</h3>
+<p><strong>Lemma A.5</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">m, d</span> be two positive integers such that <span class="math inline">d \leq m - 2</span>. Then,</p>
+<p><span class="math display"> \sum_{k=0}^{d} \binom{m}{k} \leq \left(\frac{em}{d}\right)^d </span></p>
+<p><em>Proof.</em> We prove the claim by induction. For <span class="math inline">d = 1</span> the left-hand side equals <span class="math inline">1 + m</span> while the right-hand side equals <span class="math inline">em</span>; hence the claim is true. Assume that the claim holds for <span class="math inline">d</span> and let us prove it for <span class="math inline">d + 1</span>. By the induction assumption we have</p>
+<p><span class="math display"> \begin{aligned} \sum_{k=0}^{d+1} \binom{m}{k} &amp;\leq \left(\frac{em}{d}\right)^d + \binom{m}{d+1} \\ &amp;=
+\left(\frac{em}{d}\right)^d \left(1 + \left(\frac{d}{em}\right)^d \frac{m(m-1)(m-2)\cdots(m-d)}{(d+1)d!}\right) \\ &amp;\leq
+\left(\frac{em}{d}\right)^d \left(1 + \left(\frac{d}{e}\right)^d \frac{(m-d)}{(d+1)d!}\right) \end{aligned} </span></p>
+<p>Using Stirling’s approximation we further have that</p>
+<p><span class="math display"> \begin{aligned} &amp;\leq \left(\frac{em}{d}\right)^d \left(1 + \left(\frac{d}{e}\right)^d \frac{(m-d)}{(d+1)\sqrt{2\pi
+d}(d/e)^d}\right) \\ &amp;= \left(\frac{em}{d}\right)^d \left(1 + \frac{m-d}{\sqrt{2\pi d}(d+1)}\right) \\ &amp;=
+\left(\frac{em}{d}\right)^d \cdot \frac{d+1+(m-d)/\sqrt{2\pi d}}{d+1} \\ &amp;\leq \left(\frac{em}{d}\right)^d \cdot
+\frac{d+1+(m-d)/2}{d+1} \\ &amp;= \left(\frac{em}{d}\right)^d \cdot \frac{d/2+1+m/2}{d+1} \\ &amp;\leq \left(\frac{em}{d}\right)^d \cdot
+\frac{m}{d+1} \end{aligned} </span></p>
+<p>where in the last inequality we used the assumption that <span class="math inline">d \leq m - 2</span>. On the other hand,</p>
+<p><span class="math display"> \begin{aligned} \left(\frac{em}{d+1}\right)^{d+1} &amp;= \left(\frac{em}{d}\right)^d \cdot \frac{em}{d+1} \cdot
+\left(\frac{d}{d+1}\right)^d \\ &amp;= \left(\frac{em}{d}\right)^d \cdot \frac{em}{d+1} \cdot \frac{1}{(1+1/d)^d} \\ &amp;\geq
+\left(\frac{em}{d}\right)^d \cdot \frac{em}{d+1} \cdot \frac{1}{e} \\ &amp;= \left(\frac{em}{d}\right)^d \cdot \frac{m}{d+1}
+\end{aligned} </span></p>
+<p>which proves our inductive argument. <span class="math inline">\square</span></p>
+<p>This lemma provides the key bound on growth functions used in Sauer’s lemma and VC dimension analysis.</p>
+</section>
+<section id="exponential-inequalities" class="level3">
+<h3 class="anchored" data-anchor-id="exponential-inequalities">Exponential Inequalities</h3>
+<p><strong>Lemma A.6</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. For all <span class="math inline">a \in \mathbb{R}</span> we have</p>
+<p><span class="math display"> \frac{e^a + e^{-a}}{2} \leq e^{a^2/2} </span></p>
+<p><em>Proof.</em> Observe that</p>
+<p><span class="math display"> e^a = \sum_{n=0}^{\infty} \frac{a^n}{n!} </span></p>
+<p>Therefore,</p>
+<p><span class="math display"> \frac{e^a + e^{-a}}{2} = \sum_{n=0}^{\infty} \frac{a^{2n}}{(2n)!} </span></p>
+<p>and</p>
+<p><span class="math display"> e^{a^2/2} = \sum_{n=0}^{\infty} \frac{a^{2n}}{2^n n!} </span></p>
+<p>Observing that <span class="math inline">(2n)! \geq 2^n n!</span> for every <span class="math inline">n \geq 0</span> we conclude our proof. <span class="math inline">\square</span></p>
+<p>This inequality is fundamental in deriving Hoeffding’s inequality and other concentration bounds.</p>
+</section>
+</section>
+<section id="sec-linear-algebra-recap" class="level2">
+<h2 class="anchored" data-anchor-id="sec-linear-algebra-recap">Linear Algebra Recap</h2>
+<p>This section provides a comprehensive review of linear algebra concepts that are essential for understanding machine learning algorithms and their theoretical foundations. We focus on finite-dimensional Euclidean spaces and present key definitions, theorems, and decompositions. These results complement the linear algebra introduction in <a href="mathematical-and-statistical-foundations.html#sec-linear-algebra">Linear Algebra and Geometry</a> and provide the technical details needed for understanding matrix decompositions, optimization algorithms, and dimensionality reduction techniques discussed in <a href="../fundamentals-of-machine-learning/supervised-learning.html#sec-supervised-learning">Supervised Learning</a> and <a href="../fundamentals-of-machine-learning/unsupervised-learning.html#sec-unsupervised-learning">Unsupervised Learning</a>.</p>
+<p>For more on this topic, see <span class="citation" data-cites="zhao2025rl">Zhao (<a href="#ref-zhao2025rl" role="doc-biblioref">2025</a>, Appendix)</span>.</p>
+<section id="basic-definitions-and-notation" class="level3">
+<h3 class="anchored" data-anchor-id="basic-definitions-and-notation">Basic Definitions and Notation</h3>
+<p>In these tutorials, we work exclusively with linear algebra over finite-dimensional Euclidean spaces. Vectors are treated as column vectors unless otherwise specified.</p>
+<p><strong>Inner Products and Norms.</strong> Given two <span class="math inline">d</span>-dimensional vectors <span class="math inline">\mathbf{u}, \mathbf{v} \in \mathbb{R}^d</span>, their inner product is defined as</p>
+<p><span class="math display"> \langle \mathbf{u}, \mathbf{v} \rangle = \sum_{i=1}^{d} u_i v_i </span></p>
+<p>The Euclidean norm (also called the <span class="math inline">\ell_2</span> norm) is <span class="math inline">\|\mathbf{u}\| = \sqrt{\langle \mathbf{u}, \mathbf{u} \rangle}</span>. We also frequently use the <span class="math inline">\ell_1</span> norm, <span class="math inline">\|\mathbf{u}\|_1 = \sum_{i=1}^{d} |u_i|</span>, and the <span class="math inline">\ell_{\infty}</span> norm, <span class="math inline">\|\mathbf{u}\|_{\infty} = \max_i |u_i|</span>.</p>
+<p><strong>Subspaces and Span.</strong> A subspace of <span class="math inline">\mathbb{R}^d</span> is a subset of <span class="math inline">\mathbb{R}^d</span> that is closed under addition and scalar multiplication. The span of a set of vectors <span class="math inline">\mathbf{u}_1, \ldots, \mathbf{u}_k</span> is the subspace containing all vectors of the form</p>
+<p><span class="math display"> \sum_{i=1}^{k} \alpha_i \mathbf{u}_i </span></p>
+<p>where for all <span class="math inline">i</span>, <span class="math inline">\alpha_i \in \mathbb{R}</span>.</p>
+<p><strong>Linear Independence and Bases.</strong> A set of vectors <span class="math inline">U = \{\mathbf{u}_1, \ldots, \mathbf{u}_k\}</span> is independent if for every <span class="math inline">i</span>, <span class="math inline">\mathbf{u}_i</span> is not in the span of <span class="math inline">\mathbf{u}_1, \ldots, \mathbf{u}_{i-1}, \mathbf{u}_{i+1}, \ldots, \mathbf{u}_k</span>. We say that <span class="math inline">U</span> spans a subspace <span class="math inline">V</span> if <span class="math inline">V</span> is the span of the vectors in <span class="math inline">U</span>. We say that <span class="math inline">U</span> is a basis of <span class="math inline">V</span> if it is both independent and spans <span class="math inline">V</span>. The dimension of <span class="math inline">V</span> is the size of a basis of <span class="math inline">V</span>, and it can be verified that all bases of <span class="math inline">V</span> have the same size <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>.</p>
+<p><strong>Orthogonality.</strong> We say that <span class="math inline">U</span> is an orthogonal set if for all <span class="math inline">i \neq j</span>, <span class="math inline">\langle \mathbf{u}_i, \mathbf{u}_j \rangle = 0</span>. We say that <span class="math inline">U</span> is an orthonormal set if it is orthogonal and if for every <span class="math inline">i</span>, <span class="math inline">\|\mathbf{u}_i\| = 1</span>.</p>
+<p><strong>Matrix Properties.</strong> Given a matrix <span class="math inline">A \in \mathbb{R}^{n \times d}</span>, the range of <span class="math inline">A</span> is the span of its columns and the null space of <span class="math inline">A</span> is the subspace of all vectors that satisfy <span class="math inline">A\mathbf{u} = \mathbf{0}</span>. The rank of <span class="math inline">A</span> is the dimension of its range.</p>
+<p>The transpose of a matrix <span class="math inline">A</span>, denoted <span class="math inline">A^{\top}</span>, is the matrix whose <span class="math inline">(i,j)</span> entry equals the <span class="math inline">(j,i)</span> entry of <span class="math inline">A</span>. We say that <span class="math inline">A</span> is symmetric if <span class="math inline">A = A^{\top}</span>.</p>
+</section>
+<section id="eigenvalues-and-eigenvectors" class="level3">
+<h3 class="anchored" data-anchor-id="eigenvalues-and-eigenvectors">Eigenvalues and Eigenvectors</h3>
+<p>Eigenvalue decomposition is fundamental to understanding many machine learning algorithms, including principal component analysis and spectral clustering.</p>
+<p><strong>Definition.</strong> Let <span class="math inline">A \in \mathbb{R}^{d \times d}</span> be a matrix. A nonzero vector <span class="math inline">\mathbf{u}</span> is an eigenvector of <span class="math inline">A</span> with a corresponding eigenvalue <span class="math inline">\lambda</span> if</p>
+<p><span class="math display"> A\mathbf{u} = \lambda\mathbf{u} </span></p>
+<p><strong>Theorem (Spectral Decomposition)</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. If <span class="math inline">A \in \mathbb{R}^{d \times d}</span> is a symmetric matrix of rank <span class="math inline">k</span>, then there exists an orthonormal basis of <span class="math inline">\mathbb{R}^d</span>, <span class="math inline">\mathbf{u}_1, \ldots, \mathbf{u}_d</span>, such that each <span class="math inline">\mathbf{u}_i</span> is an eigenvector of <span class="math inline">A</span>. Furthermore, <span class="math inline">A</span> can be written as</p>
+<p><span class="math display"> A = \sum_{i=1}^{d} \lambda_i \mathbf{u}_i \mathbf{u}_i^{\top} </span></p>
+<p>where each <span class="math inline">\lambda_i</span> is the eigenvalue corresponding to the eigenvector <span class="math inline">\mathbf{u}_i</span>. This can be written equivalently as <span class="math inline">A =
+UDU^{\top}</span>, where the columns of <span class="math inline">U</span> are the vectors <span class="math inline">\mathbf{u}_1, \ldots, \mathbf{u}_d</span>, and <span class="math inline">D</span> is a diagonal matrix with <span class="math inline">D_{i,i} = \lambda_i</span> and for <span class="math inline">i \neq j</span>, <span class="math inline">D_{i,j} = 0</span>. Finally, the number of <span class="math inline">\lambda_i</span> which are nonzero is the rank of the matrix, the eigenvectors which correspond to the nonzero eigenvalues span the range of <span class="math inline">A</span>, and the eigenvectors which correspond to zero eigenvalues span the null space of <span class="math inline">A</span>.</p>
+<p>This decomposition is central to understanding the geometry of quadratic forms and optimization landscapes in machine learning.</p>
+</section>
+<section id="positive-definite-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="positive-definite-matrices">Positive Definite Matrices</h3>
+<p>Positive definite matrices play a crucial role in optimization theory and kernel methods.</p>
+<p><strong>Definition.</strong> A symmetric matrix <span class="math inline">A \in \mathbb{R}^{d \times d}</span> is positive definite if all its eigenvalues are positive. <span class="math inline">A</span> is positive semidefinite if all its eigenvalues are nonnegative.</p>
+<p><strong>Theorem</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">A \in \mathbb{R}^{d \times d}</span> be a symmetric matrix. Then, the following are equivalent definitions of positive semidefiniteness of <span class="math inline">A</span>:</p>
+<ol type="1">
+<li>All the eigenvalues of <span class="math inline">A</span> are nonnegative. 2. For every vector <span class="math inline">\mathbf{u}</span>, <span class="math inline">\langle \mathbf{u}, A\mathbf{u} \rangle \geq 0</span>.</li>
+<li>There exists a matrix <span class="math inline">B</span> such that <span class="math inline">A = BB^{\top}</span>.</li>
+</ol>
+<p>The second characterization is particularly useful in optimization, as it ensures that quadratic forms are convex. The third characterization connects positive semidefiniteness to the existence of matrix factorizations, which is fundamental in kernel methods and Gaussian processes.</p>
+</section>
+<section id="singular-value-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="singular-value-decomposition">Singular Value Decomposition</h3>
+<p>The Singular Value Decomposition (SVD) generalizes eigenvalue decomposition to non-square matrices and is fundamental to dimensionality reduction techniques.</p>
+<p><strong>Definition.</strong> Let <span class="math inline">A \in \mathbb{R}^{m \times n}</span> be a matrix of rank <span class="math inline">r</span>. Unit vectors <span class="math inline">\mathbf{v} \in \mathbb{R}^n</span> and <span class="math inline">\mathbf{u} \in \mathbb{R}^m</span> are called right and left singular vectors of <span class="math inline">A</span> with corresponding singular value <span class="math inline">\sigma &gt; 0</span> if</p>
+<p><span class="math display"> A\mathbf{v} = \sigma\mathbf{u} \quad \text{and} \quad A^{\top}\mathbf{u} = \sigma\mathbf{v} </span></p>
+<p><strong>Lemma</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">A \in \mathbb{R}^{m \times n}</span> be a matrix of rank <span class="math inline">r</span>. Assume that <span class="math inline">\mathbf{v}_1, \ldots,
+\mathbf{v}_r</span> is an orthonormal set of right singular vectors of <span class="math inline">A</span>, <span class="math inline">\mathbf{u}_1, \ldots, \mathbf{u}_r</span> is an orthonormal set of corresponding left singular vectors of <span class="math inline">A</span>, and <span class="math inline">\sigma_1, \ldots, \sigma_r</span> are the corresponding singular values. Then,</p>
+<p><span class="math display"> A = \sum_{i=1}^{r} \sigma_i \mathbf{u}_i \mathbf{v}_i^{\top} </span></p>
+<p>It follows that if <span class="math inline">U</span> is a matrix whose columns are the <span class="math inline">\mathbf{u}_i</span>’s, <span class="math inline">V</span> is a matrix whose columns are the <span class="math inline">\mathbf{v}_i</span>’s, and <span class="math inline">D</span> is a diagonal matrix with <span class="math inline">D_{i,i} = \sigma_i</span>, then</p>
+<p><span class="math display"> A = UDV^{\top} </span></p>
+<p><strong>Connection to Eigenvalues.</strong> The singular values of <span class="math inline">A</span> are intimately related to the eigenvalues of <span class="math inline">A^{\top}A</span> and <span class="math inline">AA^{\top}</span>.</p>
+<p><strong>Lemma</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. <span class="math inline">\mathbf{v}, \mathbf{u}</span> are right and left singular vectors of <span class="math inline">A</span> with singular value <span class="math inline">\sigma</span> if and only if <span class="math inline">\mathbf{v}</span> is an eigenvector of <span class="math inline">A^{\top}A</span> with corresponding eigenvalue <span class="math inline">\sigma^2</span> and <span class="math inline">\mathbf{u} =
+\sigma^{-1}A\mathbf{v}</span> is an eigenvector of <span class="math inline">AA^{\top}</span> with corresponding eigenvalue <span class="math inline">\sigma^2</span>.</p>
+<p><strong>Construction of Singular Vectors.</strong> The following result shows how to construct singular vectors through optimization.</p>
+<p><strong>Lemma</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">A \in \mathbb{R}^{m \times n}</span> with rank <span class="math inline">r</span>. Define the following vectors:</p>
+<p><span class="math display"> \begin{aligned} \mathbf{v}_1 &amp;= \arg\max_{\mathbf{v} \in \mathbb{R}^n: \|\mathbf{v}\| = 1} \|A\mathbf{v}\| \\ \mathbf{v}_2 &amp;=
+\arg\max_{\substack{\mathbf{v} \in \mathbb{R}^n: \|\mathbf{v}\| = 1 \\ \langle \mathbf{v}, \mathbf{v}_1 \rangle = 0}}
+\|A\mathbf{v}\| \\ &amp;\vdots \\ \mathbf{v}_r &amp;= \arg\max_{\substack{\mathbf{v} \in \mathbb{R}^n: \|\mathbf{v}\| = 1 \\ \forall i &lt;
+r, \langle \mathbf{v}, \mathbf{v}_i \rangle = 0}} \|A\mathbf{v}\| \end{aligned} </span></p>
+<p>Then, <span class="math inline">\mathbf{v}_1, \ldots, \mathbf{v}_r</span> is an orthonormal set of right singular vectors of <span class="math inline">A</span>.</p>
+<p>This construction provides the foundation for principal component analysis, where we seek directions of maximum variance in data.</p>
+<p><strong>Theorem (SVD Theorem)</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">A \in \mathbb{R}^{m \times n}</span> with rank <span class="math inline">r</span>. Then <span class="math inline">A = UDV^{\top}</span> where <span class="math inline">D</span> is an <span class="math inline">r \times r</span> matrix with nonzero singular values of <span class="math inline">A</span> and the columns of <span class="math inline">U, V</span> are orthonormal left and right singular vectors of <span class="math inline">A</span>. Furthermore, for all <span class="math inline">i</span>, <span class="math inline">D_{i,i}^2</span> is an eigenvalue of <span class="math inline">A^{\top}A</span>, the <span class="math inline">i</span>-th column of <span class="math inline">V</span> is the corresponding eigenvector of <span class="math inline">A^{\top}A</span>, and the <span class="math inline">i</span>-th column of <span class="math inline">U</span> is the corresponding eigenvector of <span class="math inline">AA^{\top}</span>.</p>
+<p>The SVD is fundamental to many machine learning techniques including:</p>
+<ul>
+<li>Principal Component Analysis (PCA) for dimensionality reduction - Low-rank matrix approximation and matrix completion - Latent semantic analysis in natural language processing - Recommender systems based on collaborative filtering - Image compression and denoising</li>
+</ul>
+<p>The optimality properties of SVD make it a cornerstone of modern data analysis and machine learning.</p>
+</section>
+<section id="additional-linear-algebra-topics" class="level3">
+<h3 class="anchored" data-anchor-id="additional-linear-algebra-topics">Additional Linear Algebra Topics</h3>
+<p><strong>Matrix Norms and Operator Norms.</strong> For matrices, we can define various norms. The Frobenius norm of a matrix <span class="math inline">A \in
+\mathbb{R}^{m \times n}</span> is defined as</p>
+<p><span class="math display"> \|A\|_F = \sqrt{\sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij}^2} </span></p>
+<p>The operator norm (or spectral norm) is defined as</p>
+<p><span class="math display"> \|A\|_2 = \max_{\|\mathbf{x}\|=1} \|A\mathbf{x}\| </span></p>
+<p>which equals the largest singular value of <span class="math inline">A</span> <span class="citation" data-cites="deisenroth2020mml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+<p><strong>Trace and Determinant.</strong> The trace of a square matrix <span class="math inline">A \in \mathbb{R}^{n \times n}</span> is the sum of its diagonal elements:</p>
+<p><span class="math display"> \text{tr}(A) = \sum_{i=1}^{n} a_{ii} </span></p>
+<p>The trace has the cyclic property: <span class="math inline">\text{tr}(ABC) = \text{tr}(CAB) = \text{tr}(BCA)</span>. The determinant of <span class="math inline">A</span> is the product of its eigenvalues and provides information about the volume scaling induced by the linear transformation.</p>
+<p>These linear algebra concepts form the mathematical foundation for understanding optimization algorithms, dimensionality reduction techniques, and the geometry of high-dimensional spaces in machine learning.</p>
+</section>
+</section>
+<section id="sec-measure-concentration" class="level2">
+<h2 class="anchored" data-anchor-id="sec-measure-concentration">Measure Concentration and Probability Inequalities</h2>
+<p>Measure concentration inequalities quantify the deviation of empirical averages from their expectations when the sample size is finite. These inequalities are fundamental to statistical learning theory and provide the basis for generalization bounds in machine learning <span class="citation" data-cites="shalev2014ml zhao2025rl">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>; <a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>)</span>. The results in this section are used extensively in <a href="../fundamentals-of-machine-learning/foundations-of-learning-theory.html#sec-learning-theory">Foundations of Learning Theory</a> to derive PAC learning bounds and in <a href="../fundamentals-of-machine-learning/supervised-learning.html#sec-supervised-learning">Supervised Learning</a> to analyze the convergence of learning algorithms.</p>
+<p>Let <span class="math inline">Z_1, \ldots, Z_m</span> be an i.i.d. sequence of random variables and let <span class="math inline">\mu</span> be their mean. The strong law of large numbers states that when <span class="math inline">m</span> tends to infinity, the empirical average, <span class="math inline">\frac{1}{m}\sum_{i=1}^{m} Z_i</span>, converges to the expected value <span class="math inline">\mu</span>, with probability 1. Measure concentration inequalities quantify this deviation for finite <span class="math inline">m</span>.</p>
+<section id="markovs-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="markovs-inequality">Markov’s Inequality</h3>
+<p>We start with Markov’s inequality, which provides a basic bound for nonnegative random variables. Let <span class="math inline">Z</span> be a nonnegative random variable. The expectation of <span class="math inline">Z</span> can be written as:</p>
+<p><span class="math display"> \mathbb{E}[Z] = \int_{x=0}^{\infty} \mathbb{P}[Z \geq x]dx </span></p>
+<p>Since <span class="math inline">\mathbb{P}[Z \geq x]</span> is monotonically nonincreasing we obtain</p>
+<p><span class="math display"> \forall a \geq 0, \quad \mathbb{E}[Z] \geq \int_{x=0}^{a} \mathbb{P}[Z \geq x]dx \geq \int_{x=0}^{a} \mathbb{P}[Z \geq a]dx =
+a\mathbb{P}[Z \geq a] </span></p>
+<p>Rearranging the inequality yields Markov’s inequality:</p>
+<p><span class="math display"> \forall a \geq 0, \quad \mathbb{P}[Z \geq a] \leq \frac{\mathbb{E}[Z]}{a} </span></p>
+<p><strong>Lemma (Markov’s Inequality for Bounded Variables)</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">Z</span> be a random variable that takes values in <span class="math inline">[0,1]</span>. Assume that <span class="math inline">\mathbb{E}[Z] = \mu</span>. Then, for any <span class="math inline">a \in (0,1)</span>,</p>
+<p><span class="math display"> \mathbb{P}[Z &gt; 1-a] \geq \frac{\mu - (1-a)}{a} </span></p>
+<p>This also implies that for every <span class="math inline">a \in (0,1)</span>,</p>
+<p><span class="math display"> \mathbb{P}[Z &gt; a] \geq \frac{\mu - a}{1-a} \geq \mu - a </span></p>
+</section>
+<section id="chebyshevs-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="chebyshevs-inequality">Chebyshev’s Inequality</h3>
+<p>Applying Markov’s inequality on the random variable <span class="math inline">(Z - \mathbb{E}[Z])^2</span> we obtain Chebyshev’s inequality:</p>
+<p><span class="math display"> \forall a &gt; 0, \quad \mathbb{P}[|Z - \mathbb{E}[Z]| \geq a] = \mathbb{P}[(Z - \mathbb{E}[Z])^2 \geq a^2] \leq
+\frac{\text{Var}[Z]}{a^2} </span></p>
+<p>where <span class="math inline">\text{Var}[Z] = \mathbb{E}[(Z - \mathbb{E}[Z])^2]</span> is the variance of <span class="math inline">Z</span>.</p>
+<p>Consider the random variable <span class="math inline">\frac{1}{m}\sum_{i=1}^{m} Z_i</span>. Since <span class="math inline">Z_1, \ldots, Z_m</span> are i.i.d. it is easy to verify that</p>
+<p><span class="math display"> \text{Var}\left[\frac{1}{m}\sum_{i=1}^{m} Z_i\right] = \frac{\text{Var}[Z_1]}{m} </span></p>
+<p><strong>Lemma</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">Z_1, \ldots, Z_m</span> be a sequence of i.i.d. random variables and assume that <span class="math inline">\mathbb{E}[Z_1] = \mu</span> and <span class="math inline">\text{Var}[Z_1] \leq 1</span>. Then, for any <span class="math inline">\delta \in (0,1)</span>, with probability of at least <span class="math inline">1-\delta</span> we have</p>
+<p><span class="math display"> \left|\frac{1}{m}\sum_{i=1}^{m} Z_i - \mu\right| \leq \sqrt{\frac{1}{\delta m}} </span></p>
+<p>The deviation between the empirical average and the mean given by Chebyshev’s inequality decreases polynomially with <span class="math inline">m</span>. It is possible to obtain significantly faster, exponential decrease using Chernoff’s bounds and Hoeffding’s inequality.</p>
+</section>
+<section id="chernoffs-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="chernoffs-bounds">Chernoff’s Bounds</h3>
+<p>Chernoff’s bounds provide exponentially decreasing tail probabilities for sums of independent Bernoulli random variables.</p>
+<p><strong>Lemma (Chernoff Bound - Upper Tail)</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">Z_1, \ldots, Z_m</span> be independent Bernoulli variables where for every <span class="math inline">i</span>, <span class="math inline">\mathbb{P}[Z_i = 1] = p_i</span> and <span class="math inline">\mathbb{P}[Z_i = 0] = 1 - p_i</span>. Let <span class="math inline">p = \sum_{i=1}^{m} p_i</span> and let <span class="math inline">Z = \sum_{i=1}^{m}
+Z_i</span>. Then, for any <span class="math inline">\delta &gt; 0</span>,</p>
+<p><span class="math display"> \mathbb{P}[Z &gt; (1+\delta)p] \leq e^{-h(\delta)p} </span></p>
+<p>where</p>
+<p><span class="math display"> h(\delta) = (1+\delta)\log(1+\delta) - \delta </span></p>
+<p>Using the inequality <span class="math inline">h(a) \geq a^2/(2 + 2a/3)</span> we obtain the simplified bound:</p>
+<p><span class="math display"> \mathbb{P}[Z &gt; (1+\delta)p] \leq e^{-p\frac{\delta^2}{2+2\delta/3}} </span></p>
+<p><strong>Lemma (Chernoff Bound - Lower Tail)</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Using the notation above, we also have</p>
+<p><span class="math display"> \mathbb{P}[Z &lt; (1-\delta)p] \leq e^{-ph(-\delta)} \leq e^{-ph(\delta)} \leq e^{-p\frac{\delta^2}{2+2\delta/3}} </span></p>
+<p>These bounds show that the probability of large deviations decreases exponentially with the sample size, which is much faster than the polynomial rate given by Chebyshev’s inequality.</p>
+</section>
+<section id="hoeffdings-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="hoeffdings-inequality">Hoeffding’s Inequality</h3>
+<p>Hoeffding’s inequality generalizes Chernoff’s bounds to arbitrary bounded random variables, not just Bernoulli variables.</p>
+<p><strong>Lemma (Hoeffding’s Inequality)</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">Z_1, \ldots, Z_m</span> be a sequence of i.i.d. random variables and let <span class="math inline">\bar{Z} = \frac{1}{m}\sum_{i=1}^{m} Z_i</span>. Assume that <span class="math inline">\mathbb{E}[\bar{Z}] = \mu</span> and <span class="math inline">\mathbb{P}[a \leq Z_i \leq b] = 1</span> for every <span class="math inline">i</span>. Then, for any <span class="math inline">\epsilon &gt; 0</span></p>
+<p><span class="math display"> \mathbb{P}\left[\left|\frac{1}{m}\sum_{i=1}^{m} Z_i - \mu\right| &gt; \epsilon\right] \leq
+2\exp\left(-\frac{2m\epsilon^2}{(b-a)^2}\right) </span></p>
+<p>This inequality is one of the most important tools in statistical learning theory. It provides a uniform bound that holds for all <span class="math inline">\epsilon &gt; 0</span> and shows that the probability of deviation decreases exponentially with both the sample size <span class="math inline">m</span> and the square of the deviation <span class="math inline">\epsilon^2</span>.</p>
+<p><strong>Lemma (Hoeffding’s Lemma)</strong> <span class="citation" data-cites="shalev2014ml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. Let <span class="math inline">X</span> be a random variable that takes values in the interval <span class="math inline">[a,b]</span> and such that <span class="math inline">\mathbb{E}[X] = 0</span>. Then, for every <span class="math inline">\lambda &gt; 0</span>,</p>
+<p><span class="math display"> \mathbb{E}[e^{\lambda X}] \leq e^{\frac{\lambda^2(b-a)^2}{8}} </span></p>
+<p>This technical lemma is the key ingredient in proving Hoeffding’s inequality and demonstrates how moment generating functions can be bounded for bounded random variables.</p>
+</section>
+<section id="applications-to-learning-theory" class="level3">
+<h3 class="anchored" data-anchor-id="applications-to-learning-theory">Applications to Learning Theory</h3>
+<p>These concentration inequalities have direct applications in learning theory:</p>
+<ul>
+<li><strong>Uniform Convergence</strong>: Hoeffding’s inequality combined with union bounds provides uniform convergence guarantees for finite hypothesis classes. - <strong>Sample Complexity</strong>: The exponential decay rate determines how many samples are needed to achieve a desired accuracy with high probability. - <strong>Generalization Bounds</strong>: These inequalities bound the difference between training error and test error, providing theoretical guarantees for learning algorithms.</li>
+</ul>
+<p>The transition from polynomial (Chebyshev) to exponential (Hoeffding) concentration is crucial for obtaining practical sample complexity bounds in PAC learning.</p>
+
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-deisenroth2020mml" class="csl-entry" role="listitem">
+Deisenroth, Marc Peter, A. Aldo Faisal, and Cheng Soon Ong. 2020. <em>Mathematics for Machine Learning</em>. Cambridge University Press.
+</div>
+<div id="ref-shalev2014ml" class="csl-entry" role="listitem">
+Shalev-Shwartz, Shai, and Shai Ben-David. 2014. <em>Understanding Machine Learning: From Theory to Algorithms</em>. Cambridge University Press.
+</div>
+<div id="ref-zhao2025rl" class="csl-entry" role="listitem">
+Zhao, Shiyu. 2025. <em>Mathematical Foundations of Reinforcement Learning</em>. Springer Nature Singapore. <a href="https://doi.org/10.1007/978-981-97-3944-8">https://doi.org/10.1007/978-981-97-3944-8</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script>
+// Turns the tags on a post page into links to the filtered Posts page.
+document.addEventListener("DOMContentLoaded", () => {
+  const postsLink = document.querySelector('.navbar a[href$="posts.html"]');
+  if (!postsLink) {
+    return;
+  }
+  const postsPage = postsLink.getAttribute("href");
+  document.querySelectorAll(".quarto-categories .quarto-category").forEach((tag) => {
+    const link = document.createElement("a");
+    link.className = "tag-chip";
+    link.textContent = tag.textContent;
+    link.href = `${postsPage}#tag=${encodeURIComponent(tag.textContent.trim())}`;
+    tag.replaceWith(link);
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../../posts/fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html" class="pagination-link" aria-label="Mathematical and Statistical Foundations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Mathematical and Statistical Foundations</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

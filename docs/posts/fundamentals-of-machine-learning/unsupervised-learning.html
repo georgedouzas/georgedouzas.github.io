@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Unsupervised Learning – Georgios Douzas</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../posts/fundamentals-of-machine-learning/reinforcement-learning.html" rel="next">
+<link href="../../posts/fundamentals-of-machine-learning/supervised-learning.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-62ab7622601dc1281cac47bf0cf453d3.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c9bb40c08a066f1d1a0f0931099edcc8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Georgios Douzas</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../open-source.html"> 
+<span class="menu-text">Open source</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/georgedouzas"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/gdouzas"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=-A4zUTUAAAAJ&amp;hl=en"> <i class="bi bi-mortarboard-fill" role="img" aria-label="Google Scholar">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/fundamentals-of-machine-learning/unsupervised-learning.html">Unsupervised Learning</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/foundations-of-learning-theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foundations of Learning Theory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/supervised-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Supervised Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/unsupervised-learning.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Unsupervised Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/reinforcement-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reinforcement Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/reinforcement-learning-and-llm-agents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reinforcement Learning and LLM-based Agents</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-machine-learning/mathematical-foundations-of-reinforcement-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mathematical Foundations of Reinforcement Learning</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec-unsupervised-learning" id="toc-sec-unsupervised-learning" class="nav-link active" data-scroll-target="#sec-unsupervised-learning">Unsupervised Learning</a>
+  <ul class="collapse">
+  <li><a href="#sec-clustering" id="toc-sec-clustering" class="nav-link" data-scroll-target="#sec-clustering">Clustering Methods</a>
+  <ul class="collapse">
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering">K-Means Clustering</a></li>
+  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering">Hierarchical Clustering</a></li>
+  <li><a href="#density-based-clustering" id="toc-density-based-clustering" class="nav-link" data-scroll-target="#density-based-clustering">Density-Based Clustering</a></li>
+  <li><a href="#gaussian-mixture-models-gmms" id="toc-gaussian-mixture-models-gmms" class="nav-link" data-scroll-target="#gaussian-mixture-models-gmms">Gaussian Mixture Models (GMMs)</a></li>
+  <li><a href="#spectral-clustering" id="toc-spectral-clustering" class="nav-link" data-scroll-target="#spectral-clustering">Spectral Clustering</a></li>
+  </ul></li>
+  <li><a href="#sec-dimensionality-reduction" id="toc-sec-dimensionality-reduction" class="nav-link" data-scroll-target="#sec-dimensionality-reduction">Dimensionality Reduction</a>
+  <ul class="collapse">
+  <li><a href="#principal-component-analysis-pca" id="toc-principal-component-analysis-pca" class="nav-link" data-scroll-target="#principal-component-analysis-pca">Principal Component Analysis (PCA)</a></li>
+  <li><a href="#multidimensional-scaling-mds" id="toc-multidimensional-scaling-mds" class="nav-link" data-scroll-target="#multidimensional-scaling-mds">Multidimensional Scaling (MDS)</a></li>
+  <li><a href="#manifold-learning" id="toc-manifold-learning" class="nav-link" data-scroll-target="#manifold-learning">Manifold Learning</a></li>
+  <li><a href="#random-projections" id="toc-random-projections" class="nav-link" data-scroll-target="#random-projections">Random Projections</a></li>
+  </ul></li>
+  <li><a href="#sec-generative-latent" id="toc-sec-generative-latent" class="nav-link" data-scroll-target="#sec-generative-latent">Generative Models and Latent Variables</a>
+  <ul class="collapse">
+  <li><a href="#latent-variable-models" id="toc-latent-variable-models" class="nav-link" data-scroll-target="#latent-variable-models">Latent Variable Models</a></li>
+  <li><a href="#factor-analysis" id="toc-factor-analysis" class="nav-link" data-scroll-target="#factor-analysis">Factor Analysis</a></li>
+  <li><a href="#autoencoders" id="toc-autoencoders" class="nav-link" data-scroll-target="#autoencoders">Autoencoders</a></li>
+  <li><a href="#variational-autoencoders-vaes" id="toc-variational-autoencoders-vaes" class="nav-link" data-scroll-target="#variational-autoencoders-vaes">Variational Autoencoders (VAEs)</a></li>
+  <li><a href="#generative-adversarial-networks-gans" id="toc-generative-adversarial-networks-gans" class="nav-link" data-scroll-target="#generative-adversarial-networks-gans">Generative Adversarial Networks (GANs)</a></li>
+  <li><a href="#normalizing-flows" id="toc-normalizing-flows" class="nav-link" data-scroll-target="#normalizing-flows">Normalizing Flows</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="sec-unsupervised-learning" class="level1">
+<h1>Unsupervised Learning</h1>
+<p>Unsupervised learning addresses a fundamental challenge: discovering structure in data without the guidance of labels. Unlike supervised learning (<a href="supervised-learning.html#sec-supervised-learning">Supervised Learning</a>) where we have input-output pairs, unsupervised learning works with inputs alone, seeking to uncover hidden patterns, groupings, or low-dimensional representations. This paradigm is crucial in practice because labeled data is often expensive or impossible to obtain, while unlabeled data is abundant.</p>
+<p>The methods in this chapter serve different purposes: clustering (<a href="#sec-clustering" class="quarto-xref">Section&nbsp;1.1</a>) groups similar data points together, dimensionality reduction (1) finds compact representations that preserve essential structure, and generative models (<a href="#sec-generative-latent" class="quarto-xref">Section&nbsp;1.3</a>) learn probability distributions that can generate new data. These techniques are foundational for exploratory data analysis, data preprocessing, and understanding complex datasets.</p>
+<section id="sec-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="sec-clustering">Clustering Methods</h2>
+<p>Clustering is the task of partitioning data into groups (clusters) such that points within a cluster are more similar to each other than to points in other clusters. This is one of the most fundamental problems in unsupervised learning, with applications ranging from customer segmentation in marketing to gene expression analysis in biology.</p>
+<p>For more on this topic, see <span class="citation" data-cites="james2023statistical">James et al. (<a href="#ref-james2023statistical" role="doc-biblioref">2023</a>, Ch. 12)</span> and <span class="citation" data-cites="theodoridis2025ml">Theodoridis (<a href="#ref-theodoridis2025ml" role="doc-biblioref">2026</a>, Ch. 12)</span>.</p>
+<p>The challenge is that “similarity” is subjective and problem-dependent. Different clustering algorithms make different assumptions about cluster structure, leading to different solutions. Understanding these assumptions is crucial for choosing the right algorithm.</p>
+<section id="k-means-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="k-means-clustering">K-Means Clustering</h3>
+<p>K-means is the workhorse of clustering algorithms. Developed in the 1950s, it remains one of the most widely used methods due to its simplicity, efficiency, and effectiveness. The algorithm’s elegance lies in its iterative refinement: alternately assign points to clusters and update cluster centers, guaranteed to converge to a local optimum.</p>
+<p><strong>Problem Formulation:</strong> Given a dataset <span class="math inline">\mathcal{X} = \{\mathbf{x}_1, \ldots, \mathbf{x}_n\}</span> where <span class="math inline">\mathbf{x}_i \in
+\mathbb{R}^d</span>, we want to partition the data into <span class="math inline">K</span> clusters. We represent this partition by: - Cluster centers <span class="math inline">\{\boldsymbol{\mu}_1, \ldots, \boldsymbol{\mu}_K\}</span> where <span class="math inline">\boldsymbol{\mu}_k \in \mathbb{R}^d</span> - Assignments <span class="math inline">\{c_1, \ldots,
+c_n\}</span> where <span class="math inline">c_i \in \{1, \ldots, K\}</span> indicates which cluster contains <span class="math inline">\mathbf{x}_i</span></p>
+<p><strong>Objective Function:</strong> K-means minimizes the within-cluster sum of squares (WCSS), also called inertia or distortion:</p>
+<div id="def-kmeans-objective" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1</strong></span> K-Means Objective Function</p>
+<p><span class="math display">J(\mathbf{C}, \boldsymbol{\mu}) = \sum_{k=1}^K \sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2 = \sum_{i=1}^n \|\mathbf{x}_i - \boldsymbol{\mu}_{c_i}\|^2</span></p>
+</div>
+<p>where <span class="math inline">C_k = \{i : c_i = k\}</span> is the set of indices of points assigned to cluster <span class="math inline">k</span>. This objective measures cluster compactness: we want points close to their cluster centers.</p>
+<p><strong>Intuition:</strong> Imagine you have customer data and want to identify <span class="math inline">K=3</span> market segments. K-means finds three “prototype” customers (the centers <span class="math inline">\boldsymbol{\mu}_k</span>) and assigns each actual customer to their nearest prototype. The objective ensures that customers within a segment are similar (close to the prototype) while segments are distinct.</p>
+<p><strong>Lloyd’s Algorithm (Standard K-Means):</strong></p>
+<p>The algorithm alternates between two steps that each decrease the objective:</p>
+<ol type="1">
+<li><p><strong>Initialization:</strong> Choose <span class="math inline">K</span> initial cluster centers <span class="math inline">\boldsymbol{\mu}_1^{(0)}, \ldots, \boldsymbol{\mu}_K^{(0)}</span> (initialization strategies discussed below)</p></li>
+<li><p><strong>Repeat until convergence:</strong></p>
+<ol type="a">
+<li><strong>Assignment Step:</strong> Assign each point to the nearest center: <span class="math display">c_i^{(t)} = \arg\min_{k \in \{1,\ldots,K\}} \|\mathbf{x}_i -
+\boldsymbol{\mu}_k^{(t)}\|^2</span></li>
+</ol>
+<p>This is optimal for fixed centers: each point goes to its closest center, minimizing its contribution to the objective.</p>
+<ol start="2" type="a">
+<li><strong>Update Step:</strong> Recompute cluster centers as the mean of assigned points: <span class="math display">\boldsymbol{\mu}_k^{(t+1)} =
+\frac{1}{|C_k^{(t)}|}\sum_{i \in C_k^{(t)}} \mathbf{x}_i</span></li>
+</ol>
+<p>This is optimal for fixed assignments: the mean minimizes the sum of squared distances (see proof below).</p></li>
+<li><p><strong>Convergence:</strong> Stop when assignments no longer change or centers move less than a threshold <span class="math inline">\epsilon</span>.</p></li>
+</ol>
+<p><strong>Example:</strong> Consider 2D data with three natural clusters. Starting with random centers, the algorithm iteratively refines them: - Iteration 1: Centers are random, assignments are poor - Iteration 2: Centers move toward cluster means, assignments improve - Iteration 3-5: Centers converge to cluster centroids - Convergence: Assignments stabilize, centers no longer move</p>
+<p><strong>Convergence Properties:</strong></p>
+<ol type="1">
+<li><p><strong>Monotonic Decrease:</strong> Each iteration decreases (or maintains) the objective <span class="math inline">J^{(t+1)} \leq J^{(t)}</span> because: - Assignment step: Choosing the nearest center minimizes distance for each point - Update step: The mean minimizes sum of squared distances (proven below)</p></li>
+<li><p><strong>Finite Convergence:</strong> Since there are finitely many possible assignments (<span class="math inline">K^n</span> possibilities) and the objective strictly decreases except at convergence, the algorithm must terminate in finite time.</p></li>
+<li><p><strong>Local Minimum:</strong> K-means converges to a local minimum, not necessarily the global optimum. The solution depends critically on initialization, which is why multiple runs with different initializations are recommended.</p></li>
+</ol>
+<p><strong>Proof of Update Step Optimality:</strong> For fixed assignments, the optimal center for cluster <span class="math inline">k</span> minimizes:</p>
+<p><span class="math display">\boldsymbol{\mu}_k^* = \arg\min_{\boldsymbol{\mu}} \sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}\|^2</span></p>
+<p>Taking the derivative with respect to <span class="math inline">\boldsymbol{\mu}</span> and setting to zero:</p>
+<p><span class="math display">\frac{\partial}{\partial \boldsymbol{\mu}} \sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}\|^2 = \frac{\partial}{\partial
+\boldsymbol{\mu}} \sum_{i \in C_k} (\mathbf{x}_i - \boldsymbol{\mu})^T(\mathbf{x}_i - \boldsymbol{\mu}) = -2\sum_{i \in C_k}
+(\mathbf{x}_i - \boldsymbol{\mu}) = 0</span></p>
+<p>Solving for <span class="math inline">\boldsymbol{\mu}</span>: <span class="math display">\sum_{i \in C_k} \mathbf{x}_i = |C_k|\boldsymbol{\mu} \implies \boldsymbol{\mu}^* =
+\frac{1}{|C_k|}\sum_{i \in C_k} \mathbf{x}_i</span></p>
+<p>This is the sample mean of the cluster, justifying the name “K-means.”</p>
+<p><strong>Initialization Methods:</strong></p>
+<ol type="1">
+<li><p><strong>Random Initialization:</strong> Select <span class="math inline">K</span> random points as initial centers - Simple but can lead to poor solutions - Highly sensitive to outliers</p></li>
+<li><p><strong>Forgy Method:</strong> Randomly assign points to clusters, then compute initial centers</p></li>
+<li><p><strong>Random Partition:</strong> Randomly partition data, compute centers</p></li>
+<li><p><strong>K-Means++ (Recommended):</strong> Probabilistic initialization that spreads out initial centers:</p>
+<ol type="a">
+<li><p>Choose first center <span class="math inline">\boldsymbol{\mu}_1</span> uniformly at random from data</p></li>
+<li><p>For <span class="math inline">k = 2, \ldots, K</span>: - For each point <span class="math inline">\mathbf{x}_i</span>, compute distance to nearest existing center: <span class="math display">D(\mathbf{x}_i) =
+\min_{j &lt; k} \|\mathbf{x}_i - \boldsymbol{\mu}_j\|^2</span></p></li>
+</ol></li>
+</ol>
+<ul>
+<li><p>Choose next center <span class="math inline">\boldsymbol{\mu}_k</span> with probability proportional to <span class="math inline">D(\mathbf{x}_i)^2</span></p>
+<p><strong>Guarantee:</strong> K-means++ initialization ensures that the objective is <span class="math inline">O(\log K)</span>-competitive with the optimal clustering in expectation.</p></li>
+</ul>
+<p><strong>Computational Complexity:</strong></p>
+<ul>
+<li><strong>Per iteration:</strong> <span class="math inline">O(nKd)</span> for assignment step, <span class="math inline">O(nd)</span> for update step - <strong>Total:</strong> <span class="math inline">O(nKdT)</span> where <span class="math inline">T</span> is the number of iterations - <strong>Typical behavior:</strong> <span class="math inline">T</span> is often small (10-100), but can be large for difficult datasets - <strong>Space:</strong> <span class="math inline">O(nd + Kd)</span> to store data and centers</li>
+</ul>
+<p><strong>Choosing the Number of Clusters <span class="math inline">K</span>:</strong></p>
+<ol type="1">
+<li><p><strong>Elbow Method:</strong> Plot WCSS vs.&nbsp;<span class="math inline">K</span> and look for an “elbow” where the rate of decrease sharply changes: <span class="math display">\text{WCSS}(K) =
+\sum_{k=1}^K \sum_{i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|^2</span> The elbow indicates a good tradeoff between fit and complexity.</p></li>
+<li><p><strong>Silhouette Analysis:</strong> For each point <span class="math inline">i</span>, compute: <span class="math display">s_i = \frac{b_i - a_i}{\max(a_i, b_i)}</span> where: - <span class="math inline">a_i</span>: Average distance to points in same cluster - <span class="math inline">b_i</span>: Average distance to points in nearest other cluster</p>
+<p>The silhouette coefficient ranges from -1 to 1: - <span class="math inline">s_i \approx 1</span>: Well clustered - <span class="math inline">s_i \approx 0</span>: On cluster boundary - <span class="math inline">s_i
+&lt; 0</span>: Possibly misclassified</p>
+<p>Choose <span class="math inline">K</span> that maximizes average silhouette score.</p></li>
+<li><p><strong>Gap Statistic:</strong> Compare WCSS to expected WCSS under null reference distribution: <span class="math display">\text{Gap}(K) =
+\mathbb{E}[\log(\text{WCSS}_0(K))] - \log(\text{WCSS}(K))</span> Choose smallest <span class="math inline">K</span> such that <span class="math inline">\text{Gap}(K) \geq \text{Gap}(K+1) -
+s_{K+1}</span> where <span class="math inline">s_{K+1}</span> is the standard error.</p></li>
+<li><p><strong>Cross-Validation:</strong> Use clustering quality metrics on held-out data.</p></li>
+</ol>
+<p><strong>Assumptions and Limitations:</strong></p>
+<ol type="1">
+<li><strong>Spherical Clusters:</strong> K-means assumes clusters are roughly spherical (isotropic Gaussian) 2. <strong>Similar Sizes:</strong> Works best when clusters have similar numbers of points 3. <strong>Similar Variances:</strong> Assumes clusters have similar spread 4. <strong>Convex Boundaries:</strong> Cannot capture non-convex cluster shapes 5. <strong>Sensitive to Outliers:</strong> Outliers can significantly affect cluster centers 6. <strong>Euclidean Distance:</strong> Assumes Euclidean distance is appropriate</li>
+</ol>
+<p><strong>Variants and Extensions:</strong></p>
+<ol type="1">
+<li><p><strong>K-Medoids (PAM):</strong> Use actual data points as centers instead of means - More robust to outliers - Works with arbitrary distance metrics - More computationally expensive</p></li>
+<li><p><strong>K-Means with Different Distances:</strong> Generalize to other distance metrics - Manhattan distance: K-medians - Cosine distance: Spherical K-means</p></li>
+<li><p><strong>Fuzzy C-Means:</strong> Soft assignments with membership degrees: <span class="math display">u_{ik} = \frac{1}{\sum_{j=1}^K (\|\mathbf{x}_i -
+\boldsymbol{\mu}_k\| / \|\mathbf{x}_i - \boldsymbol{\mu}_j\|)^{2/(m-1)}}</span> where <span class="math inline">m &gt; 1</span> is the fuzziness parameter.</p></li>
+<li><p><strong>Mini-Batch K-Means:</strong> Use random mini-batches for scalability: - Much faster for large datasets - Slightly lower quality - <span class="math inline">O(nKd)</span> complexity per epoch</p></li>
+<li><p><strong>K-Means++:</strong> Improved initialization (described above)</p></li>
+<li><p><strong>X-Means:</strong> Automatically determines <span class="math inline">K</span> by splitting clusters</p></li>
+</ol>
+<p><strong>Practical Considerations:</strong></p>
+<ol type="1">
+<li><p><strong>Feature Scaling:</strong> Standardize features to have zero mean and unit variance: <span class="math display">\mathbf{x}_i' = \frac{\mathbf{x}_i -
+\boldsymbol{\mu}}{\boldsymbol{\sigma}}</span> Otherwise, features with larger scales dominate.</p></li>
+<li><p><strong>Multiple Runs:</strong> Run K-means multiple times with different initializations and choose the best result (lowest WCSS).</p></li>
+<li><p><strong>Convergence Criteria:</strong> Stop when: - Assignments don’t change - Centers move less than threshold: <span class="math inline">\max_k
+\|\boldsymbol{\mu}_k^{(t+1)} - \boldsymbol{\mu}_k^{(t)}\| &lt; \epsilon</span></p></li>
+</ol>
+<ul>
+<li>Maximum iterations reached</li>
+</ul>
+<ol start="4" type="1">
+<li><p><strong>Empty Clusters:</strong> If a cluster becomes empty: - Reinitialize its center - Split the largest cluster - Remove the empty cluster</p></li>
+<li><p><strong>High-Dimensional Data:</strong> K-means can struggle in high dimensions due to the curse of dimensionality. Consider dimensionality reduction first.</p></li>
+</ol>
+<p><strong>Applications:</strong> - Image compression (color quantization) - Customer segmentation - Document clustering - Anomaly detection - Feature learning (as preprocessing) - Vector quantization</p>
+<p>K-means remains one of the most practical and widely used clustering algorithms despite its limitations, particularly when combined with good initialization and appropriate preprocessing <span class="citation" data-cites="james2023statistical shalev2014ml">(<a href="#ref-james2023statistical" role="doc-biblioref">James et al. 2023</a>; <a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>.</p>
+</section>
+<section id="hierarchical-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="hierarchical-clustering">Hierarchical Clustering</h3>
+<p>Hierarchical clustering builds a hierarchy of clusters, producing a tree structure (dendrogram) that represents nested groupings at different scales. Unlike K-means (see <a href="#sec-clustering" class="quarto-xref">Section&nbsp;1.1</a>), hierarchical methods don’t require specifying the number of clusters in advance and provide a complete clustering hierarchy.</p>
+<p><strong>Two Approaches:</strong></p>
+<ol type="1">
+<li><strong>Agglomerative (Bottom-Up):</strong> Start with individual points and merge clusters 2. <strong>Divisive (Top-Down):</strong> Start with all points in one cluster and recursively split</li>
+</ol>
+<p>Agglomerative methods are more common and computationally tractable.</p>
+<p><strong>Agglomerative Hierarchical Clustering Algorithm:</strong></p>
+<p>``` Input: Data points {x₁, …, xₙ}, distance metric d, linkage criterion L Initialize: Each point as its own cluster: C = {{x₁}, {x₂}, …, {xₙ}}</p>
+<p>While |C| &gt; 1: Find pair of closest clusters: (Cᵢ, Cⱼ) = argmin_{Cₐ,Cᵦ∈C, a≠b} L(Cₐ, Cᵦ) Merge clusters: C_new = Cᵢ ∪ Cⱼ C = (C<br>
+{Cᵢ, Cⱼ}) ∪ {C_new} Record merge in dendrogram</p>
+<p>Return: Dendrogram encoding merge sequence ```</p>
+<p><strong>Linkage Criteria:</strong> The linkage criterion <span class="math inline">L(C_i, C_j)</span> defines the distance between clusters:</p>
+<p><strong>1. Single Linkage (Minimum Linkage):</strong> <span class="math display">d_{\text{single}}(C_i, C_j) = \min_{\mathbf{x} \in C_i, \mathbf{x}' \in C_j}
+d(\mathbf{x}, \mathbf{x}')</span></p>
+<p>Distance between closest points in the two clusters.</p>
+<p><strong>Properties:</strong> - Can find non-convex clusters - Sensitive to noise and outliers (chaining effect) - Tends to produce elongated clusters - Computationally efficient</p>
+<p><strong>2. Complete Linkage (Maximum Linkage):</strong> <span class="math display">d_{\text{complete}}(C_i, C_j) = \max_{\mathbf{x} \in C_i, \mathbf{x}' \in C_j}
+d(\mathbf{x}, \mathbf{x}')</span></p>
+<p>Distance between farthest points in the two clusters.</p>
+<p><strong>Properties:</strong> - Produces compact, spherical clusters - Less sensitive to outliers than single linkage - Breaks large clusters - Preferred for well-separated clusters</p>
+<p><strong>3. Average Linkage (UPGMA):</strong> <span class="math display">d_{\text{average}}(C_i, C_j) = \frac{1}{|C_i||C_j|}\sum_{\mathbf{x} \in C_i}\sum_{\mathbf{x}'
+\in C_j} d(\mathbf{x}, \mathbf{x}')</span></p>
+<p>Average distance between all pairs of points.</p>
+<p><strong>Properties:</strong> - Compromise between single and complete linkage - Less sensitive to outliers - Produces relatively balanced clusters - Widely used in practice</p>
+<p><strong>4. Centroid Linkage:</strong> <span class="math display">d_{\text{centroid}}(C_i, C_j) = d(\boldsymbol{\mu}_i, \boldsymbol{\mu}_j)</span></p>
+<p>where <span class="math inline">\boldsymbol{\mu}_i = \frac{1}{|C_i|}\sum_{\mathbf{x} \in C_i} \mathbf{x}</span> is the centroid.</p>
+<p><strong>Properties:</strong> - Intuitive interpretation - Can produce inversions in dendrogram - Similar to K-means distance (see <a href="#sec-clustering" class="quarto-xref">Section&nbsp;1.1</a>)</p>
+<p><strong>5. Ward’s Method (Minimum Variance):</strong></p>
+<p>Minimize increase in total within-cluster variance: <span class="math display">d_{\text{Ward}}(C_i, C_j) = \frac{|C_i||C_j|}{|C_i| + |C_j|}
+\|\boldsymbol{\mu}_i - \boldsymbol{\mu}_j\|^2</span></p>
+<p>Equivalently, minimize: <span class="math display">\Delta(C_i, C_j) = \sum_{\mathbf{x} \in C_i \cup C_j} \|\mathbf{x} - \boldsymbol{\mu}_{ij}\|^2 -
+\sum_{\mathbf{x} \in C_i} \|\mathbf{x} - \boldsymbol{\mu}_i\|^2 - \sum_{\mathbf{x} \in C_j} \|\mathbf{x} -
+\boldsymbol{\mu}_j\|^2</span></p>
+<p>where <span class="math inline">\boldsymbol{\mu}_{ij}</span> is the centroid of the merged cluster.</p>
+<p><strong>Properties:</strong> - Produces compact, spherical clusters - Minimizes same objective as K-means - Most popular linkage method - Tends to create equal-sized clusters</p>
+<p><strong>Dendrograms:</strong> A dendrogram is a tree diagram that records the sequence of merges:</p>
+<ul>
+<li><strong>Vertical axis:</strong> Distance or dissimilarity at which clusters merge - <strong>Horizontal axis:</strong> Individual data points - <strong>Branches:</strong> Connect clusters that merge - <strong>Height:</strong> Indicates merge distance</li>
+</ul>
+<p><strong>Cutting the Dendrogram:</strong> To obtain <span class="math inline">k</span> clusters, cut the dendrogram at a height that produces <span class="math inline">k</span> branches:</p>
+<ol type="1">
+<li><strong>Fixed number of clusters:</strong> Cut to produce exactly <span class="math inline">k</span> clusters 2. <strong>Distance threshold:</strong> Cut at height <span class="math inline">h</span> to get clusters with maximum within-cluster distance <span class="math inline">\leq h</span></li>
+<li><strong>Inconsistency criterion:</strong> Cut where merge distances increase sharply</li>
+</ol>
+<p><strong>Computational Complexity:</strong></p>
+<ul>
+<li><p><strong>Naive implementation:</strong> <span class="math inline">O(n^3)</span> time, <span class="math inline">O(n^2)</span> space - <span class="math inline">O(n^2)</span> to compute all pairwise distances - <span class="math inline">O(n)</span> iterations, each requiring <span class="math inline">O(n^2)</span> to find minimum</p></li>
+<li><p><strong>Efficient implementation (SLINK for single linkage):</strong> <span class="math inline">O(n^2)</span> time</p></li>
+<li><p><strong>Space:</strong> <span class="math inline">O(n^2)</span> to store distance matrix</p></li>
+</ul>
+<p><strong>Lance-Williams Update Formula:</strong> For efficient computation, update distances after each merge:</p>
+<p><span class="math display">d(C_k, C_i \cup C_j) = \alpha_i d(C_k, C_i) + \alpha_j d(C_k, C_j) + \beta d(C_i, C_j) + \gamma |d(C_k, C_i) - d(C_k, C_j)|</span></p>
+<p>Different linkage methods correspond to different values of <span class="math inline">\alpha_i, \alpha_j, \beta, \gamma</span>:</p>
+<ul>
+<li><strong>Single:</strong> <span class="math inline">\alpha_i = \alpha_j = 0.5</span>, <span class="math inline">\beta = 0</span>, <span class="math inline">\gamma = -0.5</span></li>
+<li><strong>Complete:</strong> <span class="math inline">\alpha_i = \alpha_j = 0.5</span>, <span class="math inline">\beta = 0</span>, <span class="math inline">\gamma = 0.5</span></li>
+<li><strong>Average:</strong> <span class="math inline">\alpha_i = |C_i|/(|C_i|+|C_j|)</span>, <span class="math inline">\alpha_j = |C_j|/(|C_i|+|C_j|)</span>, <span class="math inline">\beta = \gamma = 0</span></li>
+<li><strong>Ward’s:</strong> More complex formula involving cluster sizes</li>
+</ul>
+<p><strong>Advantages of Hierarchical Clustering:</strong></p>
+<ol type="1">
+<li><strong>No need to specify <span class="math inline">k</span>:</strong> Produces complete hierarchy 2. <strong>Deterministic:</strong> No random initialization (unlike K-means) 3. <strong>Dendrogram visualization:</strong> Provides insight into data structure 4. <strong>Flexible:</strong> Can cut at any level to get different granularities 5. <strong>Works with any distance metric:</strong> Not limited to Euclidean distance</li>
+</ol>
+<p><strong>Disadvantages:</strong></p>
+<ol type="1">
+<li><strong>Computational cost:</strong> <span class="math inline">O(n^2)</span> or <span class="math inline">O(n^3)</span> time and <span class="math inline">O(n^2)</span> space 2. <strong>Not scalable:</strong> Impractical for large datasets (<span class="math inline">n &gt;
+10,000</span>) 3. <strong>Greedy:</strong> Merges are irreversible, no global optimization 4. <strong>Sensitive to noise:</strong> Especially single linkage 5. <strong>Difficulty with high dimensions:</strong> Distance metrics become less meaningful</li>
+</ol>
+<p><strong>Comparison with K-Means:</strong></p>
+<div class="line-block">Aspect | K-Means | Hierarchical | |——–|———|————-| | Number of clusters | Must specify | Flexible | |</div>
+<p>Complexity | <span class="math inline">O(nkdT)</span> | <span class="math inline">O(n^2)</span> to <span class="math inline">O(n^3)</span> | | Scalability | Good | Poor | | Cluster shape | Spherical | Flexible (depends on linkage) | | Deterministic | No (random init) | Yes | | Visualization | Limited | Dendrogram |</p>
+<p><strong>Practical Considerations:</strong></p>
+<ol type="1">
+<li><p><strong>Distance metric:</strong> Choice significantly affects results - Euclidean: For continuous features - Manhattan: For mixed features</p>
+<ul>
+<li>Cosine: For text data - Correlation: For time series</li>
+</ul></li>
+<li><p><strong>Feature scaling:</strong> Standardize features to equal importance (see <a href="../fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html#sec-linear-algebra">Linear Algebra and Geometry</a> for normalization)</p></li>
+<li><p><strong>Linkage selection:</strong> - Ward’s: Default choice for most applications - Complete: When clusters are well-separated - Average: Compromise between single and complete - Single: For non-convex clusters (use with caution)</p></li>
+<li><p><strong>Determining number of clusters:</strong> - Look for large gaps in dendrogram heights - Use silhouette analysis - Domain knowledge</p></li>
+<li><p><strong>Handling large datasets:</strong> - Sample data first - Use mini-batch hierarchical clustering - Consider BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies)</p></li>
+</ol>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>Taxonomy construction in biology - Document organization - Gene expression analysis - Social network analysis - Image segmentation</li>
+</ul>
+<p>Hierarchical clustering provides a rich representation of data structure at multiple scales, complementing partition-based methods like K-means <span class="citation" data-cites="james2023statistical shalev2014ml">(<a href="#ref-james2023statistical" role="doc-biblioref">James et al. 2023</a>; <a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>.</p>
+</section>
+<section id="density-based-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="density-based-clustering">Density-Based Clustering</h3>
+<p>Density-based clustering identifies clusters as regions of high density separated by regions of low density. Unlike K-means (see <a href="#sec-clustering" class="quarto-xref">Section&nbsp;1.1</a>) which assumes spherical clusters, density-based methods can discover clusters of arbitrary shape and automatically identify outliers.</p>
+<p><strong>DBSCAN (Density-Based Spatial Clustering of Applications with Noise):</strong></p>
+<p>DBSCAN is the most widely used density-based clustering algorithm. It groups together points that are closely packed while marking points in low-density regions as outliers.</p>
+<p><strong>Key Definitions:</strong></p>
+<ol type="1">
+<li><p><strong><span class="math inline">\epsilon</span>-neighborhood:</strong> The set of points within distance <span class="math inline">\epsilon</span> of a point <span class="math inline">\mathbf{x}</span>: <span class="math display">N_\epsilon(\mathbf{x}) =
+\{\mathbf{x}' \in \mathcal{X} : d(\mathbf{x}, \mathbf{x}') \leq \epsilon\}</span></p></li>
+<li><p><strong>Core point:</strong> A point with at least MinPts neighbors in its <span class="math inline">\epsilon</span>-neighborhood: <span class="math display">|N_\epsilon(\mathbf{x})| \geq
+\text{MinPts}</span> Core points are in dense regions.</p></li>
+<li><p><strong>Border point:</strong> A point that is not a core point but lies in the <span class="math inline">\epsilon</span>-neighborhood of a core point. Border points are on the edge of clusters.</p></li>
+<li><p><strong>Noise point (Outlier):</strong> A point that is neither a core point nor a border point.</p></li>
+<li><p><strong>Directly density-reachable:</strong> Point <span class="math inline">\mathbf{x}'</span> is directly density-reachable from <span class="math inline">\mathbf{x}</span> if: - <span class="math inline">\mathbf{x}'</span> is in <span class="math inline">N_\epsilon(\mathbf{x})</span></p></li>
+</ol>
+<ul>
+<li><p><span class="math inline">\mathbf{x}</span> is a core point</p>
+<p>Note: This relation is not symmetric.</p></li>
+</ul>
+<ol start="6" type="1">
+<li><p><strong>Density-reachable:</strong> Point <span class="math inline">\mathbf{x}'</span> is density-reachable from <span class="math inline">\mathbf{x}</span> if there exists a chain of points <span class="math inline">\mathbf{p}_1, \ldots, \mathbf{p}_n</span> where <span class="math inline">\mathbf{p}_1 = \mathbf{x}</span>, <span class="math inline">\mathbf{p}_n = \mathbf{x}'</span>, and each <span class="math inline">\mathbf{p}_{i+1}</span> is directly density-reachable from <span class="math inline">\mathbf{p}_i</span>.</p></li>
+<li><p><strong>Density-connected:</strong> Points <span class="math inline">\mathbf{x}</span> and <span class="math inline">\mathbf{x}'</span> are density-connected if there exists a point <span class="math inline">\mathbf{o}</span> such that both <span class="math inline">\mathbf{x}</span> and <span class="math inline">\mathbf{x}'</span> are density-reachable from <span class="math inline">\mathbf{o}</span>. This relation is symmetric.</p></li>
+</ol>
+<p><strong>Cluster Definition:</strong> A cluster <span class="math inline">C</span> satisfies: 1. <strong>Maximality:</strong> If <span class="math inline">\mathbf{x} \in C</span> and <span class="math inline">\mathbf{x}'</span> is density-reachable from <span class="math inline">\mathbf{x}</span>, then <span class="math inline">\mathbf{x}' \in C</span> 2. <strong>Connectivity:</strong> All points in <span class="math inline">C</span> are density-connected</p>
+<p><strong>DBSCAN Algorithm:</strong></p>
+<p>``` Input: Dataset X, parameters ε, MinPts Output: Cluster assignments</p>
+<p>Initialize: All points as unvisited Cluster_ID = 0</p>
+<p>For each unvisited point x in X: Mark x as visited N = get_neighbors(x, ε) // Find ε-neighborhood</p>
+<pre><code>If |N| &lt; MinPts: Mark x as noise Else: Cluster_ID = Cluster_ID + 1 expand_cluster(x, N, Cluster_ID, ε, MinPts)</code></pre>
+<p>Function expand_cluster(x, N, Cluster_ID, ε, MinPts): Add x to Cluster_ID</p>
+<pre><code>For each point x' in N: If x' is unvisited: Mark x' as visited N' = get_neighbors(x', ε) If |N'| ≥ MinPts: N = N ∪ N'  //
+    Expand neighborhood
+    
+    If x' is not yet in any cluster: Add x' to Cluster_ID ```</code></pre>
+<p><strong>Computational Complexity:</strong></p>
+<ul>
+<li><p><strong>Without spatial index:</strong> <span class="math inline">O(n^2)</span> time - Each point requires checking all other points</p></li>
+<li><p>**With spatial index (R*-tree, KD-tree):** <span class="math inline">O(n \log n)</span> average case - Neighborhood queries become <span class="math inline">O(\log n)</span></p></li>
+<li><p><strong>Space:</strong> <span class="math inline">O(n)</span> for storing cluster assignments</p></li>
+</ul>
+<p><strong>Parameter Selection:</strong></p>
+<p>Choosing <span class="math inline">\epsilon</span> and MinPts is crucial:</p>
+<p><strong>1. MinPts:</strong> - <strong>Rule of thumb:</strong> MinPts <span class="math inline">\geq d + 1</span> where <span class="math inline">d</span> is the dimensionality - <strong>Common choice:</strong> MinPts = 4 for 2D data, MinPts = 5-10 for higher dimensions - <strong>Larger MinPts:</strong> More robust to noise, but may merge clusters - <strong>Smaller MinPts:</strong> More sensitive to noise, may split clusters</p>
+<p><strong>2. <span class="math inline">\epsilon</span> (k-distance graph method):</strong></p>
+<ol type="1">
+<li>For each point, compute distance to its <span class="math inline">k</span>-th nearest neighbor (use <span class="math inline">k</span> = MinPts) 2. Sort these distances in ascending order</li>
+<li>Plot the sorted k-distances 4. Look for an “elbow” or sharp change in the curve 5. Choose <span class="math inline">\epsilon</span> at the elbow point</li>
+</ol>
+<p><strong>Intuition:</strong> The elbow indicates the transition from dense regions (small k-distances) to sparse regions (large k-distances).</p>
+<p><strong>Advantages of DBSCAN:</strong></p>
+<ol type="1">
+<li><strong>Arbitrary cluster shapes:</strong> Can find non-convex clusters (unlike K-means) 2. <strong>Automatic outlier detection:</strong> Identifies noise points naturally 3. <strong>No need to specify number of clusters:</strong> Determined automatically 4. <strong>Robust to outliers:</strong> Outliers don’t affect cluster formation 5. <strong>Single scan:</strong> Only requires one pass through data 6. <strong>Deterministic:</strong> Same result every time (no random initialization)</li>
+</ol>
+<p><strong>Disadvantages:</strong></p>
+<ol type="1">
+<li><strong>Parameter sensitivity:</strong> Results depend heavily on <span class="math inline">\epsilon</span> and MinPts 2. <strong>Varying densities:</strong> Struggles with clusters of different densities 3. <strong>High-dimensional data:</strong> Distance becomes less meaningful (curse of dimensionality, see</li>
+</ol>
+<ol class="example" type="1">
+<li><ol start="4" type="1">
+<li><strong>Border point ambiguity:</strong> Border points may be assigned to different clusters 5. <strong>Memory requirements:</strong> Spatial index can be memory-intensive</li>
+</ol></li>
+</ol>
+<p><strong>Variants and Extensions:</strong></p>
+<p><strong>1. HDBSCAN (Hierarchical DBSCAN):</strong> - Builds hierarchy of clusters at different density levels - Automatically selects optimal <span class="math inline">\epsilon</span> for each cluster - More robust to varying densities - Uses minimum spanning tree approach</p>
+<p><strong>2. OPTICS (Ordering Points To Identify Clustering Structure):</strong> - Produces ordering of points representing density-based clustering structure - Creates reachability plot showing cluster hierarchy - Doesn’t require explicit <span class="math inline">\epsilon</span> parameter - Can extract clusters at multiple scales</p>
+<p><strong>3. DENCLUE (DENsity-based CLUstEring):</strong> - Uses kernel density estimation - Models clusters as density attractors - Can handle arbitrary shapes and noise</p>
+<p><strong>Comparison with Other Methods:</strong></p>
+<div class="line-block">Aspect | DBSCAN | K-Means | Hierarchical | |——–|——–|———|————-| | Cluster shape | Arbitrary | Spherical |</div>
+<p>Depends on linkage | | Number of clusters | Automatic | Must specify | Flexible | | Outlier handling | Explicit | Assigns all | Assigns all | | Complexity | <span class="math inline">O(n \log n)</span> | <span class="math inline">O(nkdT)</span> | <span class="math inline">O(n^2)</span> | | Parameters | <span class="math inline">\epsilon</span>, MinPts | <span class="math inline">k</span> | Linkage, cut height | | Varying density | Poor | Poor | Depends on linkage |</p>
+<p><strong>Practical Considerations:</strong></p>
+<ol type="1">
+<li><p><strong>Feature scaling:</strong> Standardize features so distances are comparable (see <a href="../fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html#sec-linear-algebra">Linear Algebra and Geometry</a>)</p></li>
+<li><p><strong>Distance metric:</strong> - Euclidean: Default for continuous features - Manhattan: For mixed feature types - Cosine: For high-dimensional sparse data</p></li>
+<li><p><strong>Spatial indexing:</strong> Use R*-tree or KD-tree for large datasets</p></li>
+<li><p><strong>Validation:</strong> - Silhouette score - Davies-Bouldin index - Visual inspection</p></li>
+<li><p><strong>Handling varying densities:</strong> - Use HDBSCAN instead - Apply DBSCAN to subsets with similar density - Use local density estimates</p></li>
+</ol>
+<p><strong>Example Application - Anomaly Detection:</strong></p>
+<p>DBSCAN naturally identifies outliers, making it useful for anomaly detection:</p>
+<ol type="1">
+<li>Run DBSCAN on data 2. Points marked as noise are potential anomalies 3. Can combine with other methods (see <a href="supervised-learning.html#sec-supervised-learning">Supervised Learning</a> for classification approaches)</li>
+</ol>
+<p><strong>Connection to Graph Theory:</strong></p>
+<p>DBSCAN can be viewed as finding connected components in a graph: - <strong>Nodes:</strong> Data points - <strong>Edges:</strong> Connect points within <span class="math inline">\epsilon</span> distance - <strong>Core points:</strong> Nodes with degree <span class="math inline">\geq</span> MinPts - <strong>Clusters:</strong> Connected components of core points</p>
+<p>This perspective connects to spectral clustering (see <a href="#sec-clustering" class="quarto-xref">Section&nbsp;1.1</a>) and graph-based methods.</p>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>Spatial data analysis (GIS) - Anomaly detection in network traffic - Image segmentation - Customer segmentation with outlier detection - Astronomical data analysis - Trajectory clustering</li>
+</ul>
+<p>DBSCAN provides a powerful alternative to centroid-based methods when clusters have complex shapes or when outlier detection is important <span class="citation" data-cites="james2023statistical shalev2014ml">(<a href="#ref-james2023statistical" role="doc-biblioref">James et al. 2023</a>; <a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>.</p>
+</section>
+<section id="gaussian-mixture-models-gmms" class="level3">
+<h3 class="anchored" data-anchor-id="gaussian-mixture-models-gmms">Gaussian Mixture Models (GMMs)</h3>
+<p>Gaussian Mixture Models provide a probabilistic approach to clustering by modeling the data as a mixture of multiple Gaussian distributions. Unlike K-means (see <a href="#sec-clustering" class="quarto-xref">Section&nbsp;1.1</a>) which performs hard assignment, GMMs provide soft assignments through posterior probabilities, making them more flexible and statistically principled.</p>
+<p><strong>Model Definition:</strong> A GMM represents the data distribution as a weighted sum of <span class="math inline">K</span> Gaussian components:</p>
+<p><span class="math display">p(\mathbf{x}) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)</span></p>
+<p>where: - <span class="math inline">\pi_k</span> are mixing coefficients (weights) with <span class="math inline">\pi_k \geq 0</span> and <span class="math inline">\sum_{k=1}^K \pi_k = 1</span> - <span class="math inline">\boldsymbol{\mu}_k \in
+\mathbb{R}^d</span> is the mean of component <span class="math inline">k</span> - <span class="math inline">\boldsymbol{\Sigma}_k \in \mathbb{R}^{d \times d}</span> is the covariance matrix of component <span class="math inline">k</span> - <span class="math inline">\mathcal{N}(\mathbf{x}|\boldsymbol{\mu}, \boldsymbol{\Sigma})</span> is the multivariate Gaussian density (see <a href="../fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html#sec-probability-statistics">Probability and Statistics</a>)</p>
+<p><strong>Latent Variable Interpretation:</strong> Introduce latent variable <span class="math inline">z_i \in \{1, \ldots, K\}</span> indicating which component generated <span class="math inline">\mathbf{x}_i</span>:</p>
+<p><span class="math display">p(z_i = k) = \pi_k</span> <span class="math display">p(\mathbf{x}_i | z_i = k) = \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)</span></p>
+<p>The marginal distribution is:</p>
+<p><span class="math display">p(\mathbf{x}_i) = \sum_{k=1}^K p(z_i = k) p(\mathbf{x}_i | z_i = k) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}_i |
+\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)</span></p>
+<p><strong>Maximum Likelihood Estimation:</strong> Given data <span class="math inline">\mathcal{X} = \{\mathbf{x}_1, \ldots, \mathbf{x}_n\}</span>, maximize the log-likelihood:</p>
+<p><span class="math display">\log p(\mathcal{X} | \boldsymbol{\theta}) = \sum_{i=1}^n \log \left(\sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}_i |
+\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)\right)</span></p>
+<p>where <span class="math inline">\boldsymbol{\theta} = \{\pi_k, \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k\}_{k=1}^K</span> are the parameters.</p>
+<p>Direct optimization is difficult due to the sum inside the logarithm. The Expectation-Maximization (EM) algorithm provides an iterative solution.</p>
+<p><strong>Expectation-Maximization (EM) Algorithm:</strong></p>
+<p>EM alternates between computing the expected complete-data log-likelihood (E-step) and maximizing it (M-step).</p>
+<p><strong>E-Step (Expectation):</strong> Compute the posterior probability (responsibility) that component <span class="math inline">k</span> generated point <span class="math inline">\mathbf{x}_i</span>:</p>
+<p><span class="math display">\gamma_{ik} = p(z_i = k | \mathbf{x}_i, \boldsymbol{\theta}^{(t)}) = \frac{\pi_k^{(t)} \mathcal{N}(\mathbf{x}_i |
+\boldsymbol{\mu}_k^{(t)}, \boldsymbol{\Sigma}_k^{(t)})}{\sum_{j=1}^K \pi_j^{(t)} \mathcal{N}(\mathbf{x}_i |
+\boldsymbol{\mu}_j^{(t)}, \boldsymbol{\Sigma}_j^{(t)})}</span></p>
+<p>This follows from Bayes’ theorem (see <a href="../fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html#sec-probability-statistics">Probability and Statistics</a>):</p>
+<p><span class="math display">p(z_i = k | \mathbf{x}_i) = \frac{p(\mathbf{x}_i | z_i = k) p(z_i = k)}{p(\mathbf{x}_i)} = \frac{p(\mathbf{x}_i | z_i = k) p(z_i
+= k)}{\sum_{j=1}^K p(\mathbf{x}_i | z_i = j) p(z_i = j)}</span></p>
+<p>The responsibilities satisfy <span class="math inline">\sum_{k=1}^K \gamma_{ik} = 1</span> for each <span class="math inline">i</span>.</p>
+<p><strong>M-Step (Maximization):</strong> Update parameters to maximize the expected complete-data log-likelihood:</p>
+<p><strong>Effective number of points assigned to component <span class="math inline">k</span>:</strong> <span class="math display">N_k = \sum_{i=1}^n \gamma_{ik}</span></p>
+<p><strong>Update mixing coefficients:</strong> <span class="math display">\pi_k^{(t+1)} = \frac{N_k}{n}</span></p>
+<p><strong>Update means:</strong> <span class="math display">\boldsymbol{\mu}_k^{(t+1)} = \frac{1}{N_k} \sum_{i=1}^n \gamma_{ik} \mathbf{x}_i</span></p>
+<p><strong>Update covariances:</strong> <span class="math display">\boldsymbol{\Sigma}_k^{(t+1)} = \frac{1}{N_k} \sum_{i=1}^n \gamma_{ik} (\mathbf{x}_i -
+\boldsymbol{\mu}_k^{(t+1)})(\mathbf{x}_i - \boldsymbol{\mu}_k^{(t+1)})^T</span></p>
+<p><strong>Derivation of M-Step Updates:</strong> The M-step maximizes:</p>
+<p><span class="math display">Q(\boldsymbol{\theta}, \boldsymbol{\theta}^{(t)}) = \sum_{i=1}^n \sum_{k=1}^K \gamma_{ik} \log[\pi_k \mathcal{N}(\mathbf{x}_i |
+\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)]</span></p>
+<p>For <span class="math inline">\boldsymbol{\mu}_k</span>, taking the derivative and setting to zero:</p>
+<p><span class="math display">\frac{\partial Q}{\partial \boldsymbol{\mu}_k} = \sum_{i=1}^n \gamma_{ik} \boldsymbol{\Sigma}_k^{-1}(\mathbf{x}_i -
+\boldsymbol{\mu}_k) = 0</span></p>
+<p>Solving: <span class="math inline">\boldsymbol{\mu}_k = \frac{\sum_i \gamma_{ik} \mathbf{x}_i}{\sum_i \gamma_{ik}}</span></p>
+<p>Similar derivations yield the updates for <span class="math inline">\boldsymbol{\Sigma}_k</span> and <span class="math inline">\pi_k</span> (with Lagrange multiplier for the constraint <span class="math inline">\sum_k
+\pi_k = 1</span>).</p>
+<p><strong>Complete EM Algorithm:</strong></p>
+<p>``` Input: Data X = {x₁, …, xₙ}, number of components K Initialize: πₖ, μₖ, Σₖ for k = 1, …, K</p>
+<p>Repeat until convergence: # E-Step For i = 1 to n: For k = 1 to K: γᵢₖ = πₖ N(xᵢ|μₖ,Σₖ) / Σⱼ πⱼ N(xᵢ|μⱼ,Σⱼ)</p>
+<pre><code># M-Step For k = 1 to K: Nₖ = Σᵢ γᵢₖ πₖ = Nₖ / n μₖ = (Σᵢ γᵢₖ xᵢ) / Nₖ Σₖ = (Σᵢ γᵢₖ (xᵢ-μₖ)(xᵢ-μₖ)ᵀ) / Nₖ
+
+# Check convergence If change in log-likelihood &lt; threshold: Break</code></pre>
+<p>Return: πₖ, μₖ, Σₖ ```</p>
+<p><strong>Convergence Properties:</strong></p>
+<ol type="1">
+<li><p><strong>Monotonic increase:</strong> EM guarantees that the log-likelihood increases (or stays the same) at each iteration: <span class="math display">\log
+p(\mathcal{X} | \boldsymbol{\theta}^{(t+1)}) \geq \log p(\mathcal{X} | \boldsymbol{\theta}^{(t)})</span></p></li>
+<li><p><strong>Local maximum:</strong> EM converges to a local maximum of the likelihood, not necessarily global</p></li>
+<li><p><strong>Convergence criterion:</strong> Stop when: - Change in log-likelihood <span class="math inline">&lt; \epsilon</span></p></li>
+</ol>
+<ul>
+<li>Change in parameters <span class="math inline">&lt; \epsilon</span></li>
+<li>Maximum iterations reached</li>
+</ul>
+<p><strong>Initialization Strategies:</strong></p>
+<ol type="1">
+<li><strong>K-means initialization:</strong> Run K-means first, use cluster centers as initial means 2. <strong>Random initialization:</strong> Randomly select <span class="math inline">K</span> data points as initial means 3. <strong>Multiple random starts:</strong> Run EM multiple times with different initializations, keep best result 4. <strong>Hierarchical clustering:</strong> Use hierarchical clustering to initialize</li>
+</ol>
+<p><strong>Covariance Matrix Constraints:</strong></p>
+<p>To reduce parameters and improve stability:</p>
+<ol type="1">
+<li><strong>Full covariance:</strong> <span class="math inline">\boldsymbol{\Sigma}_k</span> is unconstrained (<span class="math inline">d(d+1)/2</span> parameters per component) 2. <strong>Diagonal covariance:</strong> <span class="math inline">\boldsymbol{\Sigma}_k = \text{diag}(\sigma_{k1}^2, \ldots, \sigma_{kd}^2)</span> (<span class="math inline">d</span> parameters) 3. <strong>Spherical covariance:</strong> <span class="math inline">\boldsymbol{\Sigma}_k = \sigma_k^2 \mathbf{I}</span> (1 parameter) 4. <strong>Tied covariance:</strong> All components share the same <span class="math inline">\boldsymbol{\Sigma}</span></li>
+</ol>
+<p><strong>Model Selection:</strong> Choose the number of components <span class="math inline">K</span>:</p>
+<p><strong>1. Bayesian Information Criterion (BIC):</strong> <span class="math display">\text{BIC} = -2\log p(\mathcal{X} | \hat{\boldsymbol{\theta}}) + p \log n</span></p>
+<p>where <span class="math inline">p</span> is the number of free parameters: - Full covariance: <span class="math inline">p = K(1 + d + d(d+1)/2) - 1</span> - Diagonal: <span class="math inline">p = K(1 + 2d) - 1</span> - Spherical: <span class="math inline">p = K(1 + d + 1) - 1</span></p>
+<p>Choose <span class="math inline">K</span> that minimizes BIC.</p>
+<p><strong>2. Akaike Information Criterion (AIC):</strong> <span class="math display">\text{AIC} = -2\log p(\mathcal{X} | \hat{\boldsymbol{\theta}}) + 2p</span></p>
+<p>AIC tends to favor more complex models than BIC.</p>
+<p><strong>3. Cross-Validation:</strong> Evaluate held-out log-likelihood</p>
+<p><strong>4. Silhouette Score:</strong> Assign points to most likely component, compute silhouette</p>
+<p><strong>Relationship to K-Means:</strong></p>
+<p>K-means is a special case of GMM: - Set all <span class="math inline">\boldsymbol{\Sigma}_k = \sigma^2 \mathbf{I}</span> with <span class="math inline">\sigma \to 0</span> - Hard assignments: <span class="math inline">\gamma_{ik} \in \{0, 1\}</span> - K-means objective emerges as limiting case</p>
+<p>GMM generalizes K-means by: - Allowing elliptical clusters (full covariance) - Providing soft assignments (probabilities) - Having probabilistic interpretation</p>
+<p><strong>Advantages of GMMs:</strong></p>
+<ol type="1">
+<li><strong>Probabilistic framework:</strong> Provides uncertainty estimates 2. <strong>Soft clustering:</strong> Points can belong to multiple clusters 3. <strong>Flexible cluster shapes:</strong> Can model elliptical clusters 4. <strong>Generative model:</strong> Can sample new data points 5. <strong>Principled model selection:</strong> Use BIC/AIC 6. <strong>Density estimation:</strong> Models full data distribution</li>
+</ol>
+<p><strong>Disadvantages:</strong></p>
+<ol type="1">
+<li><strong>Computational cost:</strong> <span class="math inline">O(nKd^2T)</span> where <span class="math inline">T</span> is number of EM iterations 2. <strong>Local optima:</strong> Sensitive to initialization 3. <strong>Number of components:</strong> Must specify <span class="math inline">K</span></li>
+<li><strong>Singularities:</strong> Covariance matrices can become singular 5. <strong>Overfitting:</strong> Can overfit with too many components 6. <strong>Assumes Gaussian:</strong> May not fit non-Gaussian data well</li>
+</ol>
+<p><strong>Regularization Techniques:</strong></p>
+<ol type="1">
+<li><strong>Add small constant to diagonal:</strong> <span class="math inline">\boldsymbol{\Sigma}_k + \epsilon \mathbf{I}</span> to prevent singularities 2. <strong>Minimum covariance:</strong> Enforce minimum eigenvalues 3. <strong>Bayesian GMM:</strong> Place priors on parameters (Dirichlet process mixture models) 4. <strong>Constrain covariance:</strong> Use diagonal or spherical covariances</li>
+</ol>
+<p><strong>Extensions:</strong></p>
+<ol type="1">
+<li><strong>Variational Bayesian GMM:</strong> Bayesian treatment with variational inference 2. <strong>Dirichlet Process Mixture Models:</strong> Infinite mixture models 3. <strong>Student’s t-Mixture Models:</strong> More robust to outliers 4. <strong>Factor Analysis:</strong> GMM with low-rank covariance structure (see <a href="#sec-generative-latent" class="quarto-xref">Section&nbsp;1.3</a>)</li>
+</ol>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>Image segmentation - Speaker recognition (GMM-UBM) - Anomaly detection - Density estimation - Background subtraction in video - Bioinformatics (gene expression clustering)</li>
+</ul>
+<p><strong>Connection to Other Methods:</strong></p>
+<ul>
+<li><strong>K-means:</strong> Special case with spherical, equal-variance components - <strong>PCA:</strong> Related through factor analysis (see</li>
+</ul>
+<ol class="example" type="1">
+<li><ul>
+<li><strong>Hidden Markov Models:</strong> GMMs for emission distributions - <strong>Variational Autoencoders:</strong> Can use GMM prior (see <a href="#sec-generative-latent" class="quarto-xref">Section&nbsp;1.3</a>)</li>
+</ul></li>
+</ol>
+<p>GMMs provide a flexible, probabilistic framework for clustering and density estimation, bridging the gap between simple methods like K-means and more complex generative models <span class="citation" data-cites="bishop2024deeplearning deisenroth2020mml">(<a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>; <a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+</section>
+<section id="spectral-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="spectral-clustering">Spectral Clustering</h3>
+<p><strong>Algorithm:</strong> 1. Construct similarity graph with weights <span class="math inline">w_{ij} = \exp(-\|\mathbf{x}_i - \mathbf{x}_j\|^2/(2\sigma^2))</span> 2. Compute graph Laplacian: <span class="math inline">\mathbf{L} = \mathbf{D} - \mathbf{W}</span> where <span class="math inline">D_{ii} = \sum_j w_{ij}</span> 3. Compute first <span class="math inline">K</span> eigenvectors of <span class="math inline">\mathbf{L}</span> 4. Apply K-means to rows of eigenvector matrix</p>
+<p><strong>Normalized Spectral Clustering:</strong> Use normalized Laplacian <span class="math inline">\mathbf{L}_{\text{norm}} =
+\mathbf{D}^{-1/2}\mathbf{L}\mathbf{D}^{-1/2}</span>.</p>
+<p><strong>Advantages:</strong> Can find non-convex clusters by working in spectral space <span class="citation" data-cites="james2023statistical shalev2014ml">(<a href="#ref-james2023statistical" role="doc-biblioref">James et al. 2023</a>; <a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>.</p>
+</section>
+</section>
+<section id="sec-dimensionality-reduction" class="level2">
+<h2 class="anchored" data-anchor-id="sec-dimensionality-reduction">Dimensionality Reduction</h2>
+<p>Dimensionality reduction finds low-dimensional representations of high-dimensional data.</p>
+<p>For more on this topic, see <span class="citation" data-cites="bishop2024deeplearning">Bishop and Bishop (<a href="#ref-bishop2024deeplearning" role="doc-biblioref">2024</a>, Ch. 16)</span>, <span class="citation" data-cites="james2023statistical">James et al. (<a href="#ref-james2023statistical" role="doc-biblioref">2023</a>, Ch. 12)</span> and <span class="citation" data-cites="theodoridis2025ml">Theodoridis (<a href="#ref-theodoridis2025ml" role="doc-biblioref">2026</a>, Ch. 20)</span>.</p>
+<section id="principal-component-analysis-pca" class="level3">
+<h3 class="anchored" data-anchor-id="principal-component-analysis-pca">Principal Component Analysis (PCA)</h3>
+<p>Principal Component Analysis (PCA) is a fundamental technique for dimensionality reduction that finds a low-dimensional representation of data that captures most of the variance. PCA identifies orthogonal directions (principal components) along which the data varies most, providing both a method for visualization and a preprocessing step for other algorithms.</p>
+<p><strong>Problem Setup:</strong> Given data <span class="math inline">\mathbf{X} = [\mathbf{x}_1, \ldots, \mathbf{x}_n]^T \in \mathbb{R}^{n \times d}</span> where each <span class="math inline">\mathbf{x}_i \in \mathbb{R}^d</span>, find a lower-dimensional representation <span class="math inline">\mathbf{Z} \in \mathbb{R}^{n \times k}</span> with <span class="math inline">k &lt; d</span> that preserves as much information as possible.</p>
+<p><strong>Two Equivalent Formulations:</strong></p>
+<p><strong>1. Maximum Variance Formulation:</strong> Find directions that maximize the variance of projected data.</p>
+<p>For the first principal component, solve:</p>
+<p><span class="math display">\max_{\mathbf{w}_1: \|\mathbf{w}_1\|=1} \text{Var}(\mathbf{X}\mathbf{w}_1) = \max_{\mathbf{w}_1: \|\mathbf{w}_1\|=1}
+\mathbf{w}_1^T\mathbf{S}\mathbf{w}_1</span></p>
+<p>where <span class="math inline">\mathbf{S} = \frac{1}{n}\sum_{i=1}^n (\mathbf{x}_i - \bar{\mathbf{x}})(\mathbf{x}_i - \bar{\mathbf{x}})^T</span> is the sample covariance matrix and <span class="math inline">\bar{\mathbf{x}} = \frac{1}{n}\sum_{i=1}^n \mathbf{x}_i</span> is the sample mean.</p>
+<p><strong>Solution via Lagrange Multipliers:</strong> Form the Lagrangian:</p>
+<p><span class="math display">\mathcal{L}(\mathbf{w}_1, \lambda) = \mathbf{w}_1^T\mathbf{S}\mathbf{w}_1 - \lambda(\mathbf{w}_1^T\mathbf{w}_1 - 1)</span></p>
+<p>Taking the derivative and setting to zero:</p>
+<p><span class="math display">\frac{\partial \mathcal{L}}{\partial \mathbf{w}_1} = 2\mathbf{S}\mathbf{w}_1 - 2\lambda\mathbf{w}_1 = 0</span></p>
+<p>This gives the eigenvalue equation:</p>
+<p><span class="math display">\mathbf{S}\mathbf{w}_1 = \lambda\mathbf{w}_1</span></p>
+<p>The variance along <span class="math inline">\mathbf{w}_1</span> is:</p>
+<p><span class="math display">\mathbf{w}_1^T\mathbf{S}\mathbf{w}_1 = \mathbf{w}_1^T(\lambda\mathbf{w}_1) = \lambda\mathbf{w}_1^T\mathbf{w}_1 = \lambda</span></p>
+<p>To maximize variance, choose <span class="math inline">\mathbf{w}_1</span> as the eigenvector corresponding to the largest eigenvalue <span class="math inline">\lambda_1</span>.</p>
+<p>For subsequent components, maximize variance subject to orthogonality:</p>
+<p><span class="math display">\max_{\mathbf{w}_j: \|\mathbf{w}_j\|=1, \mathbf{w}_j \perp \mathbf{w}_i \forall i&lt;j} \mathbf{w}_j^T\mathbf{S}\mathbf{w}_j</span></p>
+<p>The solution is the eigenvector corresponding to the <span class="math inline">j</span>-th largest eigenvalue.</p>
+<p><strong>2. Minimum Reconstruction Error Formulation:</strong> Find a <span class="math inline">k</span>-dimensional subspace that minimizes reconstruction error.</p>
+<p><span class="math display">\min_{\mathbf{W}_k, \mathbf{Z}} \sum_{i=1}^n \|\mathbf{x}_i - \bar{\mathbf{x}} - \mathbf{W}_k\mathbf{z}_i\|^2</span></p>
+<p>where <span class="math inline">\mathbf{W}_k \in \mathbb{R}^{d \times k}</span> has orthonormal columns and <span class="math inline">\mathbf{z}_i \in \mathbb{R}^k</span>.</p>
+<p><strong>Solution:</strong> The optimal <span class="math inline">\mathbf{W}_k</span> consists of the first <span class="math inline">k</span> eigenvectors of <span class="math inline">\mathbf{S}</span>, and:</p>
+<p><span class="math display">\mathbf{z}_i = \mathbf{W}_k^T(\mathbf{x}_i - \bar{\mathbf{x}})</span></p>
+<p><strong>Equivalence:</strong> These two formulations are equivalent. Maximizing variance in the projection is equivalent to minimizing reconstruction error.</p>
+<p><strong>Algorithm (PCA via Eigendecomposition):</strong></p>
+<ol type="1">
+<li><p><strong>Center the data:</strong> <span class="math inline">\tilde{\mathbf{X}} = \mathbf{X} - \mathbf{1}\bar{\mathbf{x}}^T</span> where <span class="math inline">\mathbf{1}</span> is a vector of ones</p></li>
+<li><p><strong>Compute covariance matrix:</strong> <span class="math inline">\mathbf{S} = \frac{1}{n}\tilde{\mathbf{X}}^T\tilde{\mathbf{X}}</span></p></li>
+<li><p><strong>Eigendecomposition:</strong> Compute eigenvalues and eigenvectors: <span class="math display">\mathbf{S} = \mathbf{W}\boldsymbol{\Lambda}\mathbf{W}^T</span> where <span class="math inline">\boldsymbol{\Lambda} = \text{diag}(\lambda_1, \ldots, \lambda_d)</span> with <span class="math inline">\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_d
+\geq 0</span></p></li>
+<li><p><strong>Select components:</strong> Choose first <span class="math inline">k</span> eigenvectors: <span class="math inline">\mathbf{W}_k = [\mathbf{w}_1, \ldots, \mathbf{w}_k]</span></p></li>
+<li><p><strong>Project data:</strong> <span class="math inline">\mathbf{Z} = \tilde{\mathbf{X}}\mathbf{W}_k</span></p></li>
+</ol>
+<p><strong>Algorithm (PCA via SVD - Preferred):</strong></p>
+<p>For numerical stability and efficiency, use Singular Value Decomposition:</p>
+<ol type="1">
+<li><p><strong>Center the data:</strong> <span class="math inline">\tilde{\mathbf{X}} = \mathbf{X} - \mathbf{1}\bar{\mathbf{x}}^T</span></p></li>
+<li><p><strong>SVD:</strong> Compute <span class="math inline">\tilde{\mathbf{X}} = \mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^T</span></p></li>
+</ol>
+<ul>
+<li><span class="math inline">\mathbf{U} \in \mathbb{R}^{n \times n}</span>: Left singular vectors - <span class="math inline">\boldsymbol{\Sigma} \in \mathbb{R}^{n \times d}</span>: Singular values (diagonal) - <span class="math inline">\mathbf{V} \in
+\mathbb{R}^{d \times d}</span>: Right singular vectors (principal components)</li>
+</ul>
+<ol start="3" type="1">
+<li><p><strong>Principal components:</strong> <span class="math inline">\mathbf{W}_k = \mathbf{V}_{:,1:k}</span> (first <span class="math inline">k</span> columns of <span class="math inline">\mathbf{V}</span>)</p></li>
+<li><p><strong>Eigenvalues:</strong> <span class="math inline">\lambda_j = \sigma_j^2 / n</span> where <span class="math inline">\sigma_j</span> are singular values</p></li>
+<li><p><strong>Project data:</strong> <span class="math inline">\mathbf{Z} = \mathbf{U}_{:,1:k}\boldsymbol{\Sigma}_{1:k,1:k} = \tilde{\mathbf{X}}\mathbf{W}_k</span></p></li>
+</ol>
+<p><strong>Advantages of SVD:</strong> - More numerically stable - Avoids forming <span class="math inline">\mathbf{S}</span> explicitly (saves memory) - Faster for <span class="math inline">n \ll d</span> or <span class="math inline">d \ll n</span> - Directly provides principal components</p>
+<p><strong>Dimensionality Reduction and Reconstruction:</strong></p>
+<p><strong>Projection (Encoding):</strong> <span class="math display">\mathbf{z}_i = \mathbf{W}_k^T(\mathbf{x}_i - \bar{\mathbf{x}}) \in \mathbb{R}^k</span></p>
+<p><strong>Reconstruction (Decoding):</strong> <span class="math display">\tilde{\mathbf{x}}_i = \bar{\mathbf{x}} + \mathbf{W}_k\mathbf{z}_i \in \mathbb{R}^d</span></p>
+<p><strong>Reconstruction Error:</strong> <span class="math display">\text{Error} = \sum_{i=1}^n \|\mathbf{x}_i - \tilde{\mathbf{x}}_i\|^2 = \sum_{j=k+1}^d \lambda_j</span></p>
+<p>The reconstruction error equals the sum of discarded eigenvalues.</p>
+<p><strong>Choosing the Number of Components <span class="math inline">k</span>:</strong></p>
+<ol type="1">
+<li><p><strong>Proportion of Variance Explained (PVE):</strong> <span class="math display">\text{PVE}(k) = \frac{\sum_{j=1}^k \lambda_j}{\sum_{j=1}^d \lambda_j}</span></p>
+<p>Choose <span class="math inline">k</span> such that PVE<span class="math inline">(k) \geq 0.9</span> (or 0.95, 0.99)</p></li>
+<li><p><strong>Scree Plot:</strong> Plot eigenvalues vs.&nbsp;component number and look for an “elbow”</p></li>
+<li><p><strong>Kaiser Criterion:</strong> Keep components with <span class="math inline">\lambda_j &gt; \bar{\lambda}</span> (average eigenvalue)</p></li>
+<li><p><strong>Cross-Validation:</strong> Use downstream task performance</p></li>
+<li><p><strong>Parallel Analysis:</strong> Compare eigenvalues to those from random data</p></li>
+</ol>
+<p><strong>Geometric Interpretation:</strong></p>
+<ul>
+<li>PCA finds the best-fitting <span class="math inline">k</span>-dimensional hyperplane through the data - Principal components are orthogonal axes of this hyperplane - First PC points in direction of maximum variance - Each subsequent PC is orthogonal and captures maximum remaining variance - Data points are projected onto this hyperplane</li>
+</ul>
+<p><strong>Properties of PCA:</strong></p>
+<ol type="1">
+<li><p><strong>Orthogonality:</strong> Principal components are orthogonal: <span class="math inline">\mathbf{w}_i^T\mathbf{w}_j = \delta_{ij}</span></p></li>
+<li><p><strong>Uncorrelated Projections:</strong> Projected data has diagonal covariance: <span class="math display">\text{Cov}(\mathbf{Z}) = \boldsymbol{\Lambda}_k =
+\text{diag}(\lambda_1, \ldots, \lambda_k)</span></p></li>
+<li><p><strong>Optimal Linear Projection:</strong> PCA is optimal among all linear projections for: - Maximizing variance - Minimizing reconstruction error</p></li>
+<li><p><strong>Rotation Invariant:</strong> PCA is invariant to rotations of the coordinate system</p></li>
+<li><p><strong>Not Scale Invariant:</strong> Sensitive to feature scales (requires standardization)</p></li>
+</ol>
+<p><strong>Standardization:</strong> For features with different scales, standardize first:</p>
+<p><span class="math display">\mathbf{x}_i' = \frac{\mathbf{x}_i - \boldsymbol{\mu}}{\boldsymbol{\sigma}}</span></p>
+<p>where <span class="math inline">\boldsymbol{\mu}</span> and <span class="math inline">\boldsymbol{\sigma}</span> are feature-wise means and standard deviations. This is equivalent to PCA on the correlation matrix instead of covariance matrix.</p>
+<p><strong>Computational Complexity:</strong></p>
+<ul>
+<li><strong>Covariance matrix:</strong> <span class="math inline">O(nd^2)</span></li>
+<li><strong>Eigendecomposition:</strong> <span class="math inline">O(d^3)</span></li>
+<li><strong>SVD:</strong> <span class="math inline">O(\min(nd^2, n^2d))</span></li>
+<li><strong>Total:</strong> <span class="math inline">O(nd^2 +
+d^3)</span> for eigendecomposition, <span class="math inline">O(\min(nd^2, n^2d))</span> for SVD - <strong>Projection:</strong> <span class="math inline">O(ndk)</span> for projecting <span class="math inline">n</span> points</li>
+</ul>
+<p><strong>Kernel PCA (Nonlinear Extension):</strong></p>
+<p>For nonlinear dimensionality reduction, apply PCA in a high-dimensional feature space <span class="math inline">\phi(\mathbf{x})</span> using the kernel trick.</p>
+<p><strong>Kernel Matrix:</strong> <span class="math inline">\mathbf{K}_{ij} = k(\mathbf{x}_i, \mathbf{x}_j) = \phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)</span></p>
+<p><strong>Centering:</strong> Center the kernel matrix: <span class="math display">\tilde{\mathbf{K}} = \mathbf{K} - \mathbf{1}_n\mathbf{K} - \mathbf{K}\mathbf{1}_n +
+\mathbf{1}_n\mathbf{K}\mathbf{1}_n</span></p>
+<p>where <span class="math inline">\mathbf{1}_n = \frac{1}{n}\mathbf{1}\mathbf{1}^T</span>.</p>
+<p><strong>Eigendecomposition:</strong> Solve <span class="math inline">\tilde{\mathbf{K}}\boldsymbol{\alpha} = \lambda\boldsymbol{\alpha}</span></p>
+<p><strong>Projection:</strong> For a new point <span class="math inline">\mathbf{x}</span>: <span class="math display">z_j = \sum_{i=1}^n \alpha_{ij} k(\mathbf{x}_i, \mathbf{x})</span></p>
+<p><strong>Common Kernels:</strong> - <strong>RBF:</strong> <span class="math inline">k(\mathbf{x}, \mathbf{x}') = \exp(-\gamma\|\mathbf{x} - \mathbf{x}'\|^2)</span> - <strong>Polynomial:</strong> <span class="math inline">k(\mathbf{x}, \mathbf{x}') = (\mathbf{x}^T\mathbf{x}' + c)^p</span></p>
+<p><strong>Applications of PCA:</strong></p>
+<ol type="1">
+<li><strong>Visualization:</strong> Project high-dimensional data to 2D or 3D 2. <strong>Noise reduction:</strong> Remove components with small eigenvalues</li>
+<li><strong>Feature extraction:</strong> Create uncorrelated features 4. <strong>Preprocessing:</strong> Reduce dimensionality before applying other algorithms 5. <strong>Compression:</strong> Reduce storage requirements 6. <strong>Anomaly detection:</strong> Points far from the principal subspace are anomalies 7. <strong>Face recognition:</strong> Eigenfaces for face representation</li>
+</ol>
+<p><strong>Limitations:</strong></p>
+<ol type="1">
+<li><strong>Linearity:</strong> Only captures linear relationships 2. <strong>Global Method:</strong> Finds global structure, may miss local patterns 3. <strong>Variance ≠ Information:</strong> High variance directions may not be most informative 4. <strong>Interpretability:</strong> Principal components are linear combinations, hard to interpret 5. <strong>Outlier Sensitivity:</strong> Sensitive to outliers (use robust PCA variants) 6. <strong>Assumes Gaussian:</strong> Implicitly assumes data is Gaussian-distributed</li>
+</ol>
+<p><strong>Practical Tips:</strong></p>
+<ol type="1">
+<li><strong>Always center data:</strong> Essential for PCA 2. <strong>Standardize features:</strong> When features have different scales 3. <strong>Check for outliers:</strong> Remove or use robust PCA 4. <strong>Visualize:</strong> Plot first 2-3 components 5. <strong>Validate:</strong> Check if downstream tasks improve 6. <strong>Consider alternatives:</strong> t-SNE, UMAP for visualization; autoencoders for nonlinear reduction</li>
+</ol>
+<p>PCA remains one of the most fundamental and widely used techniques in machine learning, providing a principled approach to dimensionality reduction with strong theoretical foundations <span class="citation" data-cites="james2023statistical deisenroth2020mml">(<a href="#ref-james2023statistical" role="doc-biblioref">James et al. 2023</a>; <a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+</section>
+<section id="multidimensional-scaling-mds" class="level3">
+<h3 class="anchored" data-anchor-id="multidimensional-scaling-mds">Multidimensional Scaling (MDS)</h3>
+<p><strong>Classical MDS:</strong> Find configuration preserving pairwise distances.</p>
+<p>Given distance matrix <span class="math inline">\mathbf{D}</span> with <span class="math inline">D_{ij} = d(\mathbf{x}_i, \mathbf{x}_j)</span>, find <span class="math inline">\mathbf{z}_1, \ldots, \mathbf{z}_n \in
+\mathbb{R}^k</span> minimizing:</p>
+<p><span class="math display">\text{Stress} = \sqrt{\sum_{i&lt;j}(d_{ij} - \|\mathbf{z}_i - \mathbf{z}_j\|)^2}</span></p>
+<p><strong>Metric MDS:</strong> Preserve distances exactly (when possible).</p>
+<p><strong>Non-metric MDS:</strong> Preserve rank order of distances.</p>
+</section>
+<section id="manifold-learning" class="level3">
+<h3 class="anchored" data-anchor-id="manifold-learning">Manifold Learning</h3>
+<p><strong>Isomap (Isometric Mapping):</strong> 1. Construct <span class="math inline">k</span>-nearest neighbor graph 2. Compute geodesic distances using shortest paths 3. Apply classical MDS to geodesic distance matrix</p>
+<p><strong>Locally Linear Embedding (LLE):</strong> 1. Find <span class="math inline">k</span> nearest neighbors for each point 2. Compute reconstruction weights: <span class="math inline">\min_{\mathbf{W}} \sum_i \|\mathbf{x}_i - \sum_j W_{ij}\mathbf{x}_j\|^2</span> 3. Find low-dimensional embedding preserving weights: <span class="math inline">\min_{\mathbf{Z}} \sum_i \|\mathbf{z}_i - \sum_j W_{ij}\mathbf{z}_j\|^2</span></p>
+<p><strong>t-SNE (t-Distributed Stochastic Neighbor Embedding):</strong></p>
+<p>Define similarity in high-dimensional space:</p>
+<p><span class="math display">p_{j|i} = \frac{\exp(-\|\mathbf{x}_i - \mathbf{x}_j\|^2/(2\sigma_i^2))}{\sum_{k \neq i}\exp(-\|\mathbf{x}_i -
+\mathbf{x}_k\|^2/(2\sigma_i^2))}</span></p>
+<p>Define similarity in low-dimensional space using t-distribution:</p>
+<p><span class="math display">q_{ij} = \frac{(1 + \|\mathbf{z}_i - \mathbf{z}_j\|^2)^{-1}}{\sum_{k \neq l}(1 + \|\mathbf{z}_k - \mathbf{z}_l\|^2)^{-1}}</span></p>
+<p>Minimize KL divergence: <span class="math inline">\text{KL}(P||Q) = \sum_{i,j} p_{ij}\log(p_{ij}/q_{ij})</span></p>
+<p><strong>UMAP (Uniform Manifold Approximation and Projection):</strong> Based on Riemannian geometry and algebraic topology. Often faster than t-SNE with better global structure preservation.</p>
+</section>
+<section id="random-projections" class="level3">
+<h3 class="anchored" data-anchor-id="random-projections">Random Projections</h3>
+<p><strong>Johnson-Lindenstrauss Lemma:</strong> For any <span class="math inline">\epsilon \in (0,1)</span> and set of <span class="math inline">n</span> points in <span class="math inline">\mathbb{R}^d</span>, there exists a linear map <span class="math inline">f: \mathbb{R}^d \to \mathbb{R}^k</span> with <span class="math inline">k = O(\epsilon^{-2}\log n)</span> such that:</p>
+<p><span class="math display">(1-\epsilon)\|\mathbf{x}_i - \mathbf{x}_j\|^2 \leq \|f(\mathbf{x}_i) - f(\mathbf{x}_j)\|^2 \leq (1+\epsilon)\|\mathbf{x}_i -
+\mathbf{x}_j\|^2</span></p>
+<p><strong>Random Projection Matrix:</strong> Sample entries from <span class="math inline">\mathcal{N}(0, 1/k)</span> or <span class="math inline">\{-1/\sqrt{k}, +1/\sqrt{k}\}</span>.</p>
+<p><strong>Applications:</strong> Fast approximate nearest neighbor search, compressed sensing <span class="citation" data-cites="james2023statistical shalev2014ml">(<a href="#ref-james2023statistical" role="doc-biblioref">James et al. 2023</a>; <a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>.</p>
+</section>
+</section>
+<section id="sec-generative-latent" class="level2">
+<h2 class="anchored" data-anchor-id="sec-generative-latent">Generative Models and Latent Variables</h2>
+<p>Generative models learn the data distribution <span class="math inline">p(\mathbf{x})</span> and can generate new samples.</p>
+<p>For more on this topic, see <span class="citation" data-cites="deisenroth2020mml">Deisenroth et al. (<a href="#ref-deisenroth2020mml" role="doc-biblioref">2020</a>, Ch. 11)</span>, <span class="citation" data-cites="james2023statistical">James et al. (<a href="#ref-james2023statistical" role="doc-biblioref">2023</a>, Ch. 4)</span> and <span class="citation" data-cites="shalev2014ml">Shalev-Shwartz and Ben-David (<a href="#ref-shalev2014ml" role="doc-biblioref">2014</a>, Ch. 24)</span>.</p>
+<section id="latent-variable-models" class="level3">
+<h3 class="anchored" data-anchor-id="latent-variable-models">Latent Variable Models</h3>
+<p><strong>General Framework:</strong> Introduce latent variables <span class="math inline">\mathbf{z}</span>:</p>
+<p><span class="math display">p(\mathbf{x}) = \int p(\mathbf{x}|\mathbf{z})p(\mathbf{z})d\mathbf{z}</span></p>
+</section>
+<section id="factor-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="factor-analysis">Factor Analysis</h3>
+<p><strong>Model:</strong></p>
+<p><span class="math display">\mathbf{x} = \mathbf{W}\mathbf{z} + \boldsymbol{\mu} + \boldsymbol{\epsilon}</span></p>
+<p>where <span class="math inline">\mathbf{z} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})</span> and <span class="math inline">\boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0},
+\boldsymbol{\Psi})</span> with <span class="math inline">\boldsymbol{\Psi}</span> diagonal.</p>
+<p><strong>Marginal Distribution:</strong></p>
+<p><span class="math display">p(\mathbf{x}) = \mathcal{N}(\boldsymbol{\mu}, \mathbf{W}\mathbf{W}^T + \boldsymbol{\Psi})</span></p>
+<p><strong>Estimation:</strong> Use EM algorithm or variational methods.</p>
+<p><strong>Difference from PCA:</strong> Factor analysis is probabilistic and models observation noise.</p>
+</section>
+<section id="autoencoders" class="level3">
+<h3 class="anchored" data-anchor-id="autoencoders">Autoencoders</h3>
+<p><strong>Architecture:</strong> Encoder-decoder network: - <strong>Encoder:</strong> <span class="math inline">\mathbf{z} = f_{\text{enc}}(\mathbf{x};
+\boldsymbol{\theta}_{\text{enc}})</span> - <strong>Decoder:</strong> <span class="math inline">\hat{\mathbf{x}} = f_{\text{dec}}(\mathbf{z};
+\boldsymbol{\theta}_{\text{dec}})</span></p>
+<p><strong>Objective:</strong> Minimize reconstruction error:</p>
+<p><span class="math display">L = \sum_{i=1}^n \|\mathbf{x}_i - f_{\text{dec}}(f_{\text{enc}}(\mathbf{x}_i))\|^2</span></p>
+<p><strong>Variants:</strong> - <strong>Sparse autoencoders:</strong> Add sparsity penalty on <span class="math inline">\mathbf{z}</span> - <strong>Denoising autoencoders:</strong> Reconstruct from corrupted input - <strong>Contractive autoencoders:</strong> Penalize sensitivity to input perturbations</p>
+</section>
+<section id="variational-autoencoders-vaes" class="level3">
+<h3 class="anchored" data-anchor-id="variational-autoencoders-vaes">Variational Autoencoders (VAEs)</h3>
+<p><strong>Probabilistic Formulation:</strong> - <strong>Prior:</strong> <span class="math inline">p(\mathbf{z}) = \mathcal{N}(\mathbf{0}, \mathbf{I})</span> - <strong>Decoder:</strong> <span class="math inline">p_{\boldsymbol{\theta}}(\mathbf{x}|\mathbf{z}) = \mathcal{N}(\boldsymbol{\mu}_{\boldsymbol{\theta}}(\mathbf{z}),
+\boldsymbol{\sigma}_{\boldsymbol{\theta}}^2(\mathbf{z})\mathbf{I})</span> - <strong>Encoder (recognition model):</strong> <span class="math inline">q_{\boldsymbol{\phi}}(\mathbf{z}|\mathbf{x}) = \mathcal{N}(\boldsymbol{\mu}_{\boldsymbol{\phi}}(\mathbf{x}),
+\boldsymbol{\sigma}_{\boldsymbol{\phi}}^2(\mathbf{x})\mathbf{I})</span></p>
+<p><strong>Evidence Lower Bound (ELBO):</strong></p>
+<p><span class="math display">\log p(\mathbf{x}) \geq \mathbb{E}_{q_{\boldsymbol{\phi}}(\mathbf{z}|\mathbf{x})}[\log
+p_{\boldsymbol{\theta}}(\mathbf{x}|\mathbf{z})] - D_{\text{KL}}(q_{\boldsymbol{\phi}}(\mathbf{z}|\mathbf{x}) \| p(\mathbf{z}))</span></p>
+<p><strong>Reparameterization Trick:</strong> Sample <span class="math inline">\mathbf{z} = \boldsymbol{\mu}_{\boldsymbol{\phi}}(\mathbf{x}) +
+\boldsymbol{\sigma}_{\boldsymbol{\phi}}(\mathbf{x}) \odot \boldsymbol{\epsilon}</span> where <span class="math inline">\boldsymbol{\epsilon} \sim
+\mathcal{N}(\mathbf{0}, \mathbf{I})</span>.</p>
+</section>
+<section id="generative-adversarial-networks-gans" class="level3">
+<h3 class="anchored" data-anchor-id="generative-adversarial-networks-gans">Generative Adversarial Networks (GANs)</h3>
+<p><strong>Framework:</strong> Two networks compete: - <strong>Generator:</strong> <span class="math inline">G(\mathbf{z}; \boldsymbol{\theta}_G)</span> maps noise to data - <strong>Discriminator:</strong> <span class="math inline">D(\mathbf{x}; \boldsymbol{\theta}_D)</span> distinguishes real from fake</p>
+<p><strong>Objective (Minimax Game):</strong></p>
+<p><span class="math display">\min_G \max_D V(D, G) = \mathbb{E}_{\mathbf{x} \sim p_{\text{data}}}[\log D(\mathbf{x})] + \mathbb{E}_{\mathbf{z} \sim
+p(\mathbf{z})}[\log(1 - D(G(\mathbf{z})))]</span></p>
+<p><strong>Training:</strong> 1. Update <span class="math inline">D</span> to maximize <span class="math inline">V(D, G)</span> 2. Update <span class="math inline">G</span> to minimize <span class="math inline">V(D, G)</span></p>
+<p><strong>Challenges:</strong> - Mode collapse: Generator produces limited variety - Training instability: Difficult to balance <span class="math inline">D</span> and <span class="math inline">G</span></p>
+<p><strong>Variants:</strong> - <strong>DCGAN:</strong> Deep convolutional architecture - <strong>Wasserstein GAN:</strong> Uses Wasserstein distance - <strong>StyleGAN:</strong> Disentangled style-based generation - <strong>Conditional GAN:</strong> Condition on labels or other information</p>
+</section>
+<section id="normalizing-flows" class="level3">
+<h3 class="anchored" data-anchor-id="normalizing-flows">Normalizing Flows</h3>
+<p><strong>Idea:</strong> Transform simple distribution through invertible mappings.</p>
+<p>Given invertible <span class="math inline">f: \mathbb{R}^d \to \mathbb{R}^d</span>:</p>
+<p><span class="math display">p_{\mathbf{x}}(\mathbf{x}) = p_{\mathbf{z}}(f^{-1}(\mathbf{x}))\left|\det\frac{\partial f^{-1}}{\partial \mathbf{x}}\right|</span></p>
+<p><strong>Composition:</strong> Chain multiple transformations:</p>
+<p><span class="math display">\mathbf{x} = f_K \circ f_{K-1} \circ \cdots \circ f_1(\mathbf{z})</span></p>
+<p><strong>Requirements:</strong> - Easy to compute <span class="math inline">f</span> and <span class="math inline">f^{-1}</span> - Easy to compute Jacobian determinant</p>
+<p><strong>Examples:</strong> - <strong>RealNVP:</strong> Affine coupling layers - <strong>Glow:</strong> Invertible 1×1 convolutions - <strong>Neural Spline Flows:</strong> Monotonic spline transformations</p>
+<p><strong>Advantages:</strong> Exact likelihood computation, stable training <span class="citation" data-cites="bishop2024deeplearning theodoridis2025ml">(<a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-bishop2024deeplearning" class="csl-entry" role="listitem">
+Bishop, Christopher M., and Hugh Bishop. 2024. <em>Deep Learning: Foundations and Concepts</em>. Springer. <a href="https://doi.org/10.1007/978-3-031-45468-4">https://doi.org/10.1007/978-3-031-45468-4</a>.
+</div>
+<div id="ref-deisenroth2020mml" class="csl-entry" role="listitem">
+Deisenroth, Marc Peter, A. Aldo Faisal, and Cheng Soon Ong. 2020. <em>Mathematics for Machine Learning</em>. Cambridge University Press.
+</div>
+<div id="ref-james2023statistical" class="csl-entry" role="listitem">
+James, Gareth, Daniela Witten, Trevor Hastie, Robert Tibshirani, and Jonathan Taylor. 2023. <em>An Introduction to Statistical Learning: With Applications in Python</em>. Springer Texts in Statistics. Springer.
+</div>
+<div id="ref-shalev2014ml" class="csl-entry" role="listitem">
+Shalev-Shwartz, Shai, and Shai Ben-David. 2014. <em>Understanding Machine Learning: From Theory to Algorithms</em>. Cambridge University Press.
+</div>
+<div id="ref-theodoridis2025ml" class="csl-entry" role="listitem">
+Theodoridis, Sergios. 2026. <em>Machine Learning: From the Classics to Deep Networks, Transformers, and Diffusion Models</em>. Third. Elsevier.
+</div>
+</div></section></div></main> <!-- /main -->
+<script>
+// Turns the tags on a post page into links to the filtered Posts page.
+document.addEventListener("DOMContentLoaded", () => {
+  const postsLink = document.querySelector('.navbar a[href$="posts.html"]');
+  if (!postsLink) {
+    return;
+  }
+  const postsPage = postsLink.getAttribute("href");
+  document.querySelectorAll(".quarto-categories .quarto-category").forEach((tag) => {
+    const link = document.createElement("a");
+    link.className = "tag-chip";
+    link.textContent = tag.textContent;
+    link.href = `${postsPage}#tag=${encodeURIComponent(tag.textContent.trim())}`;
+    tag.replaceWith(link);
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../../posts/fundamentals-of-machine-learning/supervised-learning.html" class="pagination-link" aria-label="Supervised Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Supervised Learning</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../posts/fundamentals-of-machine-learning/reinforcement-learning.html" class="pagination-link" aria-label="Reinforcement Learning">
+        <span class="nav-page-text">Reinforcement Learning</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

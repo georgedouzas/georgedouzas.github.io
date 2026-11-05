@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Mathematical and Statistical Foundations – Georgios Douzas</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../posts/fundamentals-of-mathematics-for-machine-learning/appendices-and-technical-background.html" rel="next">
+<link href="../../posts/fundamentals-of-mathematics-for-machine-learning/index.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-62ab7622601dc1281cac47bf0cf453d3.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c9bb40c08a066f1d1a0f0931099edcc8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Georgios Douzas</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../open-source.html"> 
+<span class="menu-text">Open source</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/georgedouzas"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/gdouzas"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=-A4zUTUAAAAJ&amp;hl=en"> <i class="bi bi-mortarboard-fill" role="img" aria-label="Google Scholar">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html">Mathematical and Statistical Foundations</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-machine-learning/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-machine-learning/mathematical-and-statistical-foundations.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Mathematical and Statistical Foundations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/fundamentals-of-mathematics-for-machine-learning/appendices-and-technical-background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendices and Technical Background</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec-math-stat-foundations" id="toc-sec-math-stat-foundations" class="nav-link active" data-scroll-target="#sec-math-stat-foundations">Mathematical and Statistical Foundations</a>
+  <ul class="collapse">
+  <li><a href="#sec-notation" id="toc-sec-notation" class="nav-link" data-scroll-target="#sec-notation">Notation</a>
+  <ul class="collapse">
+  <li><a href="#general-mathematical-notation" id="toc-general-mathematical-notation" class="nav-link" data-scroll-target="#general-mathematical-notation">General Mathematical Notation</a></li>
+  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link" data-scroll-target="#linear-algebra">Linear Algebra</a></li>
+  <li><a href="#probability-statistics" id="toc-probability-statistics" class="nav-link" data-scroll-target="#probability-statistics">Probability &amp; Statistics</a></li>
+  <li><a href="#machine-learning" id="toc-machine-learning" class="nav-link" data-scroll-target="#machine-learning">Machine Learning</a></li>
+  </ul></li>
+  <li><a href="#sec-linear-algebra" id="toc-sec-linear-algebra" class="nav-link" data-scroll-target="#sec-linear-algebra">Linear Algebra and Geometry</a>
+  <ul class="collapse">
+  <li><a href="#systems-of-linear-equations" id="toc-systems-of-linear-equations" class="nav-link" data-scroll-target="#systems-of-linear-equations">Systems of Linear Equations</a></li>
+  <li><a href="#vectors-and-vector-spaces" id="toc-vectors-and-vector-spaces" class="nav-link" data-scroll-target="#vectors-and-vector-spaces">Vectors and Vector Spaces</a></li>
+  <li><a href="#linear-independence-span-basis-and-rank" id="toc-linear-independence-span-basis-and-rank" class="nav-link" data-scroll-target="#linear-independence-span-basis-and-rank">Linear Independence, Span, Basis, and Rank</a></li>
+  <li><a href="#inner-products-and-norms" id="toc-inner-products-and-norms" class="nav-link" data-scroll-target="#inner-products-and-norms">Inner Products and Norms</a></li>
+  <li><a href="#orthogonality-and-projections" id="toc-orthogonality-and-projections" class="nav-link" data-scroll-target="#orthogonality-and-projections">Orthogonality and Projections</a></li>
+  <li><a href="#matrix-decompositions" id="toc-matrix-decompositions" class="nav-link" data-scroll-target="#matrix-decompositions">Matrix Decompositions</a></li>
+  <li><a href="#linear-algebra-in-reinforcement-learning-the-bellman-equation" id="toc-linear-algebra-in-reinforcement-learning-the-bellman-equation" class="nav-link" data-scroll-target="#linear-algebra-in-reinforcement-learning-the-bellman-equation">Linear Algebra in Reinforcement Learning: The Bellman Equation</a></li>
+  </ul></li>
+  <li><a href="#sec-probability-statistics" id="toc-sec-probability-statistics" class="nav-link" data-scroll-target="#sec-probability-statistics">Probability and Statistics</a>
+  <ul class="collapse">
+  <li><a href="#basic-probability-concepts" id="toc-basic-probability-concepts" class="nav-link" data-scroll-target="#basic-probability-concepts">Basic Probability Concepts</a></li>
+  <li><a href="#common-probability-distributions" id="toc-common-probability-distributions" class="nav-link" data-scroll-target="#common-probability-distributions">Common Probability Distributions</a></li>
+  <li><a href="#stochastic-processes-and-markov-decision-processes" id="toc-stochastic-processes-and-markov-decision-processes" class="nav-link" data-scroll-target="#stochastic-processes-and-markov-decision-processes">Stochastic Processes and Markov Decision Processes</a></li>
+  <li><a href="#statistical-concepts" id="toc-statistical-concepts" class="nav-link" data-scroll-target="#statistical-concepts">Statistical Concepts</a></li>
+  </ul></li>
+  <li><a href="#sec-optimization" id="toc-sec-optimization" class="nav-link" data-scroll-target="#sec-optimization">Optimization Foundations</a>
+  <ul class="collapse">
+  <li><a href="#gradient-based-optimization" id="toc-gradient-based-optimization" class="nav-link" data-scroll-target="#gradient-based-optimization">Gradient-Based Optimization</a></li>
+  <li><a href="#stochastic-approximation" id="toc-stochastic-approximation" class="nav-link" data-scroll-target="#stochastic-approximation">Stochastic Approximation</a></li>
+  <li><a href="#convex-optimization" id="toc-convex-optimization" class="nav-link" data-scroll-target="#convex-optimization">Convex Optimization</a></li>
+  <li><a href="#constrained-optimization" id="toc-constrained-optimization" class="nav-link" data-scroll-target="#constrained-optimization">Constrained Optimization</a></li>
+  </ul></li>
+  <li><a href="#sec-information-theory" id="toc-sec-information-theory" class="nav-link" data-scroll-target="#sec-information-theory">Information Theory and Inference</a>
+  <ul class="collapse">
+  <li><a href="#entropy" id="toc-entropy" class="nav-link" data-scroll-target="#entropy">Entropy</a></li>
+  <li><a href="#kullback-leibler-kl-divergence" id="toc-kullback-leibler-kl-divergence" class="nav-link" data-scroll-target="#kullback-leibler-kl-divergence">Kullback-Leibler (KL) Divergence</a></li>
+  <li><a href="#mutual-information" id="toc-mutual-information" class="nav-link" data-scroll-target="#mutual-information">Mutual Information</a></li>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation">Maximum Likelihood Estimation</a></li>
+  <li><a href="#maximum-a-posteriori-estimation" id="toc-maximum-a-posteriori-estimation" class="nav-link" data-scroll-target="#maximum-a-posteriori-estimation">Maximum A Posteriori Estimation</a></li>
+  <li><a href="#cross-entropy" id="toc-cross-entropy" class="nav-link" data-scroll-target="#cross-entropy">Cross-Entropy</a></li>
+  <li><a href="#information-theory-in-reinforcement-learning" id="toc-information-theory-in-reinforcement-learning" class="nav-link" data-scroll-target="#information-theory-in-reinforcement-learning">Information Theory in Reinforcement Learning</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="sec-math-stat-foundations" class="level1">
+<h1>Mathematical and Statistical Foundations</h1>
+<p>This chapter lays the mathematical and statistical groundwork for the rest of these tutorials. A solid understanding of these foundational concepts is essential for comprehending the machine learning algorithms and theoretical discussions that follow. We will cover key topics in linear algebra, probability and statistics, optimization, and information theory, with a focus on providing the formal definitions and mathematical rigor necessary for a deep understanding of the field.</p>
+<section id="sec-notation" class="level2">
+<h2 class="anchored" data-anchor-id="sec-notation">Notation</h2>
+<p>To ensure clarity and consistency, we will adopt the following notational conventions throughout this chapter and the remainder of these tutorials. This list is a consolidation of notations used in the primary reference textbooks.</p>
+<p>For more on this topic, see <span class="citation" data-cites="bishop2024deeplearning">Bishop and Bishop (<a href="#ref-bishop2024deeplearning" role="doc-biblioref">2024</a>, Preface)</span>, <span class="citation" data-cites="deisenroth2020mml">Deisenroth et al. (<a href="#ref-deisenroth2020mml" role="doc-biblioref">2020</a>, Table of Symbols)</span>, <span class="citation" data-cites="james2023statistical">James et al. (<a href="#ref-james2023statistical" role="doc-biblioref">2023</a>, Ch. 1)</span>, <span class="citation" data-cites="shalev2014ml">Shalev-Shwartz and Ben-David (<a href="#ref-shalev2014ml" role="doc-biblioref">2014</a>, Ch. 1)</span>, <span class="citation" data-cites="theodoridis2025ml">Theodoridis (<a href="#ref-theodoridis2025ml" role="doc-biblioref">2026</a>)</span> <a href="#sec-notation">Notation</a> and <span class="citation" data-cites="zhao2025rl">Zhao (<a href="#ref-zhao2025rl" role="doc-biblioref">2025</a>, Symbols)</span>.</p>
+<section id="general-mathematical-notation" class="level3">
+<h3 class="anchored" data-anchor-id="general-mathematical-notation">General Mathematical Notation</h3>
+<ul>
+<li>Scalars: Lowercase letters e.g., <span class="math inline">a, b, c, \alpha, \beta, \gamma</span>.</li>
+<li>Sets: Calligraphic uppercase letters e.g., <span class="math inline">\mathcal{X}, \mathcal{Y}, \mathcal{H}</span>.</li>
+<li>Sets membership: <span class="math inline">a \in \mathcal{A}</span>.</li>
+<li><span class="math inline">\mathbb{R}</span>: Set of real numbers.</li>
+<li><span class="math inline">\mathbb{C}</span>: Set of complex numbers.</li>
+<li><span class="math inline">\mathbb{Z}</span>: Set of integers.</li>
+<li><span class="math inline">\mathbb{N}</span>: Set of natural numbers.</li>
+<li>Indicator function: <span class="math inline">\mathbb{1}_{\cdot}</span> with value 1 if its argument is true, and 0 otherwise.</li>
+<li>Argument minimum and maximum functions: <span class="math inline">\arg\min_x f(x)</span> and <span class="math inline">\arg\max_x f(x)</span>, respectively.</li>
+<li>Logarithms: <span class="math inline">\log</span> is the natural logarithm (base <span class="math inline">e</span>), unless otherwise specified.</li>
+</ul>
+</section>
+<section id="linear-algebra" class="level3">
+<h3 class="anchored" data-anchor-id="linear-algebra">Linear Algebra</h3>
+<ul>
+<li>Vectors: Old lowercase letters e.g.&nbsp;<span class="math inline">\mathbf{x}, \mathbf{y}, \mathbf{w}</span>. Vectors are assumed to be column vectors unless otherwise specified. The <span class="math inline">i</span>-th element of a vector <span class="math inline">\mathbf{x}</span> is denoted by <span class="math inline">x_i</span>.</li>
+<li>Matrices: Bold uppercase letters e.g.&nbsp;<span class="math inline">\mathbf{A}, \mathbf{B}, \mathbf{X}</span>. The element in the <span class="math inline">i</span>-th row and <span class="math inline">j</span>-th column of matrix <span class="math inline">\mathbf{A}</span> is denoted <span class="math inline">A_{ij}</span> or <span class="math inline">a_{ij}</span>.</li>
+<li>Transpose of a matrix or vector: <span class="math inline">\mathbf{A}^T</span>.</li>
+<li>Inverse of a square matrix: <span class="math inline">\mathbf{A}^{-1}</span>.</li>
+<li>Identity matrix: <span class="math inline">\mathbf{I}</span>.</li>
+<li>Inner product (or dot product) of two vectors <span class="math inline">\mathbf{x}</span> and <span class="math inline">\mathbf{y}</span>: <span class="math inline">\langle\mathbf{x}, \mathbf{y}\rangle</span> or <span class="math inline">\mathbf{x}^T\mathbf{y}</span>.</li>
+<li>Euclidean <span class="math inline">\ell_2</span> norm: <span class="math inline">\|\mathbf{x}\|</span> or <span class="math inline">\|\mathbf{x}\|_2</span>.</li>
+<li><span class="math inline">\ell_p</span> norm: <span class="math inline">\|\mathbf{x}\|_p</span>.</li>
+<li>Trace of a square matrix <span class="math inline">\mathbf{A}</span>: <span class="math inline">\text{tr}(\mathbf{A})</span>.</li>
+<li>Determinant of square matrix <span class="math inline">\mathbf{A}</span>: <span class="math inline">\det(\mathbf{A})</span> or <span class="math inline">|\mathbf{A}|</span>.</li>
+<li>Rank of matrix <span class="math inline">\mathbf{A}</span>: <span class="math inline">\text{rk}(\mathbf{A})</span>.</li>
+<li>Span of a set of vectors: <span class="math inline">\text{span}[\cdot]</span>.</li>
+</ul>
+</section>
+<section id="probability-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="probability-statistics">Probability &amp; Statistics</h3>
+<ul>
+<li>Random variables: Uppercase letters e.g.&nbsp;<span class="math inline">X, Y</span>.</li>
+<li>Random vectors: Bold uppercase letters e.g.&nbsp;<span class="math inline">\mathbf{X}, \mathbf{Y}</span>).</li>
+<li>Probability of an event <span class="math inline">A</span>: <span class="math inline">P(A)</span>.</li>
+<li>Conditional probability of event <span class="math inline">A</span> given event <span class="math inline">B</span>: <span class="math inline">P(A|B)</span>.</li>
+<li>Probability Mass Function (PMF) for a discrete random variable: <span class="math inline">p(x)</span>.</li>
+<li>Probability Density Function (PDF) for a continuous random variable: <span class="math inline">p(x)</span>.</li>
+<li>Expected value of a random variable <span class="math inline">X</span>: <span class="math inline">\mathbb{E}[X]</span>.</li>
+<li>Variance of a random variable <span class="math inline">X</span>: <span class="math inline">\text{Var}(X)</span>.</li>
+<li>Covariance of two random variables <span class="math inline">X</span> and <span class="math inline">Y</span>: <span class="math inline">\text{Cov}(X, Y)</span>.</li>
+<li>Sampling <span class="math inline">x</span> from a distribution <span class="math inline">\mathcal{D}</span>: <span class="math inline">x \sim \mathcal{D}</span>.</li>
+</ul>
+</section>
+<section id="machine-learning" class="level3">
+<h3 class="anchored" data-anchor-id="machine-learning">Machine Learning</h3>
+<ul>
+<li>Number of data points or observations: <span class="math inline">n</span>.</li>
+<li>Number of features or dimensions: <span class="math inline">p</span> or <span class="math inline">d</span>.</li>
+<li>Matrix of observations: <span class="math inline">\mathbf{X}</span>.</li>
+<li>Feature vector for the <span class="math inline">i</span>-th observation<span class="math inline">: \mathbf{x}_i</span>.</li>
+<li>Response or label for the <span class="math inline">i</span>-th observation: <span class="math inline">y_i</span>.</li>
+<li>Vector of all <span class="math inline">n</span> response values: <span class="math inline">\mathbf{y}</span>.</li>
+<li>Hypothesis class: <span class="math inline">\mathcal{H}</span>.</li>
+<li>Hypothesis or predictor: <span class="math inline">h</span>.</li>
+<li>Vector of model parameters: <span class="math inline">\boldsymbol{\theta}</span> or <span class="math inline">\mathbf{w}</span>.</li>
+<li>Loss function: <span class="math inline">\ell(h, z)</span>.</li>
+<li>True error or risk: <span class="math inline">L_{\mathcal{D}}(h)</span>.</li>
+<li>Empirical error or risk: <span class="math inline">L_{S}(h)</span>.</li>
+</ul>
+</section>
+</section>
+<section id="sec-linear-algebra" class="level2">
+<h2 class="anchored" data-anchor-id="sec-linear-algebra">Linear Algebra and Geometry</h2>
+<p>Linear algebra is the mathematical language of data. In machine learning, we represent data as vectors and collections of data as matrices. Linear algebra provides a powerful set of tools for manipulating these objects and understanding their properties. This section reviews the fundamental concepts of linear algebra that are essential for understanding machine learning algorithms.</p>
+<p>For more on this topic, see <span class="citation" data-cites="theodoridis2025ml">Theodoridis (<a href="#ref-theodoridis2025ml" role="doc-biblioref">2026</a>, Chs. 3, 11)</span>.</p>
+<section id="systems-of-linear-equations" class="level3">
+<h3 class="anchored" data-anchor-id="systems-of-linear-equations">Systems of Linear Equations</h3>
+<p>A system of linear equations is a collection of linear equations involving the same set of variables. For a system with <span class="math inline">m</span> equations and <span class="math inline">n</span> unknowns, the general form is:</p>
+<div id="def-linear-system-general" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1</strong></span> System of Linear Equations General Form</p>
+<p><span class="math display">\begin{gather*}
+a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n = b_1 \\
+a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n = b_2 \\
+\vdots \\
+a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n = b_m
+\end{gather*}</span></p>
+<p>where <span class="math inline">x_1, x_2, \dots, x_n</span> are the unknown variables, <span class="math inline">a_{ij}</span> are the coefficients of the variables, and <span class="math inline">b_i</span> are the constant terms.</p>
+</div>
+<p>A solution to the system is an <span class="math inline">n</span>-tuple <span class="math inline">(x_1, \dots, x_n)</span> that satisfies all <span class="math inline">m</span> equations simultaneously. This system can be expressed more compactly using matrix notation.</p>
+<div id="def-linear-system-matrix" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2</strong></span> System of Linear Equations Matrix Form</p>
+<p>Let <span class="math inline">\mathbf{A}</span> be the <span class="math inline">m \times n</span> matrix of coefficients, <span class="math inline">\mathbf{x}</span> be the <span class="math inline">n \times 1</span> column vector of unknowns, and <span class="math inline">\mathbf{b}</span> be the <span class="math inline">m \times 1</span> column vector of constants:</p>
+<p><span class="math display"> \mathbf{A} = \begin{bmatrix} a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \dots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp;
+\vdots \\ a_{m1} &amp; a_{m2} &amp; \dots &amp; a_{mn} \end{bmatrix}, \quad \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}, \quad \mathbf{b} = \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_m \end{bmatrix} </span></p>
+<p>The system of linear equations can then be written as:</p>
+<p><span class="math display"> \mathbf{Ax} = \mathbf{b} </span></p>
+</div>
+<p>Geometrically, each linear equation in the system represents a hyperplane in an <span class="math inline">n</span>-dimensional space. For example, in a two-dimensional space (<span class="math inline">n=2</span>), each equation represents a line. In a three-dimensional space (<span class="math inline">n=3</span>), each equation represents a plane. The solution to the system of equations is the set of points that lie at the intersection of all these hyperplanes. For a system of two equations with two variables, the solution is the intersection of two lines, which can be a single point (unique solution), a line (infinitely many solutions), or an empty set (no solution) if the lines are parallel <span class="citation" data-cites="deisenroth2020mml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>. This geometric interpretation extends to higher dimensions, where the solution set is the intersection of <span class="math inline">m</span> hyperplanes in <span class="math inline">\mathbb{R}^n</span>.</p>
+</section>
+<section id="vectors-and-vector-spaces" class="level3">
+<h3 class="anchored" data-anchor-id="vectors-and-vector-spaces">Vectors and Vector Spaces</h3>
+<p>A vector space is a fundamental concept in linear algebra. It is a set of objects called vectors, which can be added together and multiplied by scalars. To be a vector space, this set and its operations must satisfy a set of axioms.</p>
+<div id="def-vector-space" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3</strong></span> Vector Space</p>
+<p>A real vector space is a set <span class="math inline">\mathcal{V}</span> with two operations, vector addition <span class="math inline">+</span> and scalar multiplication <span class="math inline">\cdot</span>, that satisfy the following axioms for all vectors <span class="math inline">\mathbf{u}, \mathbf{v}, \mathbf{w} \in \mathcal{V}</span> and all scalars <span class="math inline">\alpha, \beta
+\in \mathbb{R}</span>:</p>
+<ul>
+<li>Closure under addition: <span class="math inline">\mathbf{u} + \mathbf{v} \in \mathcal{V}</span>.</li>
+<li>Commutativity of addition: <span class="math inline">\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}</span>.</li>
+<li>Associativity of addition: <span class="math inline">(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})</span>.</li>
+<li>Additive identity: There exists a zero vector <span class="math inline">\mathbf{0} \in \mathcal{V}</span> such that <span class="math inline">\mathbf{v} + \mathbf{0} = \mathbf{v}</span> for all <span class="math inline">\mathbf{v} \in \mathcal{V}</span>.</li>
+<li>Additive inverse: For every <span class="math inline">\mathbf{v} \in \mathcal{V}</span>, there exists an additive inverse <span class="math inline">-\mathbf{v} \in \mathcal{V}</span> such that <span class="math inline">\mathbf{v} + (-\mathbf{v}) = \mathbf{0}</span>.</li>
+<li>Closure under scalar multiplication: <span class="math inline">\alpha \cdot \mathbf{v} \in \mathcal{V}</span>.</li>
+<li>Distributivity of scalar multiplication with respect to vector addition: <span class="math inline">\alpha \cdot (\mathbf{u} + \mathbf{v}) = \alpha \cdot
+\mathbf{u} + \alpha \cdot \mathbf{v}</span>.</li>
+<li>Distributivity of scalar multiplication with respect to scalar addition: <span class="math inline">(\alpha + \beta) \cdot \mathbf{v} = \alpha \cdot
+\mathbf{v} + \beta \cdot \mathbf{v}</span>.</li>
+<li>Compatibility of scalar multiplication: <span class="math inline">\alpha(\beta \cdot \mathbf{v}) = (\alpha\beta) \cdot \mathbf{v}</span>.</li>
+<li>Identity element of scalar multiplication: <span class="math inline">1 \cdot \mathbf{v} = \mathbf{v}</span>.</li>
+</ul>
+</div>
+<p>The most common vector space in machine learning is <span class="math inline">\mathbb{R}^d</span>, the space of <span class="math inline">d</span>-dimensional vectors of real numbers. However, other sets, such as the set of all <span class="math inline">m \times n</span> matrices or the set of all polynomials, can also form vector spaces. The abstract nature of vector spaces allows us to apply the same linear algebra tools to a wide variety of objects <span class="citation" data-cites="deisenroth2020mml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+</section>
+<section id="linear-independence-span-basis-and-rank" class="level3">
+<h3 class="anchored" data-anchor-id="linear-independence-span-basis-and-rank">Linear Independence, Span, Basis, and Rank</h3>
+<p>These concepts <span class="citation" data-cites="deisenroth2020mml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span> are central to understanding the structure of vector spaces. A vector <span class="math inline">\mathbf{v}</span> is a linear combination of a set of vectors <span class="math inline">{\mathbf{x}_1, \dots, \mathbf{x}_k}</span> if it can be expressed as a sum of scalar multiples of these vectors: <span class="math inline">\mathbf{v} = \sum_{i=1}^k \lambda_i \mathbf{x}_i</span>, where <span class="math inline">\lambda_i</span> are scalars.</p>
+<div id="def-linear-independence" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4</strong></span> Linear Independence</p>
+<p>A set of vectors <span class="math inline">{\mathbf{x}_1, \dots, \mathbf{x}_k}</span> is linearly independent if the only solution to the equation <span class="math inline">\sum_{i=1}^k
+\lambda_i \mathbf{x}_i = \mathbf{0}</span> is <span class="math inline">\lambda_1 = \dots = \lambda_k = 0</span>. If there is any non-trivial solution (where at least one <span class="math inline">\lambda_i \neq 0</span>), the vectors are linearly dependent. In a set of linearly dependent vectors, at least one vector can be expressed as a linear combination of the others.</p>
+</div>
+<div id="def-span" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5</strong></span> Span of Vectors</p>
+<p>The span of a set of vectors <span class="math inline">{\mathbf{x}_1, \dots, \mathbf{x}_k}</span> is the set of all possible linear combinations of these vectors. The span forms a subspace of the original vector space.</p>
+</div>
+<div id="def-basis" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 6</strong></span> Basis of a Vector Space</p>
+<p>A basis of a vector space is a set of linearly independent vectors that span the entire space. A basis is a minimal generating set for the vector space. While a vector space can have many different bases, the number of vectors in any basis is the same. This number is called the dimension of the vector space.</p>
+</div>
+<div id="def-matrix-rank" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 7</strong></span> Matrix Rank</p>
+<p>The rank of a matrix <span class="math inline">\mathbf{A}</span> is the dimension of the vector space spanned by its columns (column space). It is also equal to the dimension of the space spanned by its rows (row space). The rank represents the number of linearly independent columns (or rows) of the matrix. A matrix is said to have full rank if its rank is equal to the maximum possible rank for a matrix of its dimensions.</p>
+</div>
+</section>
+<section id="inner-products-and-norms" class="level3">
+<h3 class="anchored" data-anchor-id="inner-products-and-norms">Inner Products and Norms</h3>
+<p>Inner products and norms introduce geometric concepts like length, distance, and angle into vector spaces.</p>
+<div id="def-inner-product" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 8</strong></span> An inner product is a function that takes two vectors and returns a scalar. For a real vector space, an inner product <span class="math inline">\langle\cdot, \cdot\rangle</span> must satisfy the following properties for all vectors <span class="math inline">\mathbf{x}, \mathbf{y}, \mathbf{z}</span> and scalar <span class="math inline">\alpha</span>:</p>
+<ul>
+<li>Symmetry: <span class="math inline">\langle\mathbf{x}, \mathbf{y}\rangle = \langle\mathbf{y}, \mathbf{x}\rangle</span>.</li>
+<li>Linearity: <span class="math inline">\langle\alpha\mathbf{x} + \mathbf{y}, \mathbf{z}\rangle = \alpha\langle\mathbf{x}, \mathbf{z}\rangle +
+\langle\mathbf{y}, \mathbf{z}\rangle</span>.</li>
+<li>Positive-definiteness: <span class="math inline">\langle\mathbf{x}, \mathbf{x}\rangle \ge 0</span>, with equality if and only if <span class="math inline">\mathbf{x} = \mathbf{0}</span>.</li>
+</ul>
+</div>
+<p>The most common inner product is the dot product, defined as <span class="math inline">\langle\mathbf{x}, \mathbf{y}\rangle = \mathbf{x}^T\mathbf{y} =
+\sum_i x_i y_i</span>.</p>
+<div id="def-norm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 9</strong></span> Norm</p>
+<p>A norm is a function that assigns a strictly positive length or size to each vector in a vector space, with the zero vector being the only vector with a length of zero. A norm <span class="math inline">\|\cdot\|</span> must satisfy:</p>
+<ul>
+<li>Positive-definiteness: <span class="math inline">\|\mathbf{x}\| \ge 0</span>, with equality if and only if <span class="math inline">\mathbf{x} = \mathbf{0}</span>.</li>
+<li>Absolute homogeneity: <span class="math inline">\|\alpha\mathbf{x}\| = |\alpha| \|\mathbf{x}\|</span>.</li>
+<li>Triangle inequality: <span class="math inline">\|\mathbf{x} + \mathbf{y}\| \le \|\mathbf{x}\| + \|\mathbf{y}\|</span>.</li>
+</ul>
+</div>
+<p>An inner product induces a norm.</p>
+<div id="def-inner-product-induced-norm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 10</strong></span> Norm Induced by Inner Product</p>
+<p><span class="math inline">\|\mathbf{x}\| = \sqrt{\langle\mathbf{x}, \mathbf{x}\rangle}</span>.</p>
+</div>
+<p>The angle <span class="math inline">\theta</span> between two vectors can be defined using the inner product.</p>
+<div id="def-vectors-angle" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 11</strong></span> Angle Between Vectors</p>
+<p><span class="math inline">\cos(\theta) = \frac{\langle \mathbf{x}, \mathbf{y} \rangle}{\|\mathbf{x}\| \|\mathbf{y}\|}</span>.</p>
+</div>
+<p>A widely used class of norms is the <span class="math inline">\ell_p</span> norm.</p>
+<div id="def-norm-p" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 12</strong></span> <span class="math inline">\ell_p</span> Norm</p>
+<p><span class="math inline">\|\mathbf{x}\|_p = (\sum_{i=1}^d |x_i|^p)^{1/p}</span> for <span class="math inline">p \ge 1</span>.</p>
+</div>
+<p>Important special cases include:</p>
+<ul>
+<li><span class="math inline">p=1</span>: The <span class="math inline">\ell_1</span> norm, or Manhattan norm.</li>
+<li><span class="math inline">p=2</span>: The <span class="math inline">\ell_2</span> norm, or Euclidean norm.</li>
+<li><span class="math inline">p=\infty</span>: The <span class="math inline">\ell_\infty</span> norm, or max norm, defined as <span class="math inline">\|\mathbf{x}\|_\infty = \max_i |x_i|</span>.</li>
+</ul>
+<p>The geometric shape of the unit ball (the set of all vectors with norm 1) depends on the value of <span class="math inline">p</span>. For <span class="math inline">p=2</span>, it is a sphere; for <span class="math inline">p=1</span>, it is a diamond; and for <span class="math inline">p=\infty</span>, it is a square <span class="citation" data-cites="deisenroth2020mml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+</section>
+<section id="orthogonality-and-projections" class="level3">
+<h3 class="anchored" data-anchor-id="orthogonality-and-projections">Orthogonality and Projections</h3>
+<section id="orthogonality" class="level4">
+<h4 class="anchored" data-anchor-id="orthogonality">Orthogonality</h4>
+<p>Two vectors <span class="math inline">\mathbf{x}</span> and <span class="math inline">\mathbf{y}</span> are orthogonal if their inner product is zero, i.e., <span class="math inline">\langle\mathbf{x},
+\mathbf{y}\rangle = 0</span>. A set of vectors is orthogonal if every pair of distinct vectors in the set is orthogonal. If, in addition, all vectors in the set have a norm of 1, the set is orthonormal.</p>
+<p>An orthonormal basis is a basis of a vector space whose vectors are orthonormal. Working with an orthonormal basis simplifies many calculations, as the coordinates of a vector can be found by taking the inner product with the basis vectors.</p>
+<p>The orthogonal projection of a vector <span class="math inline">\mathbf{y}</span> onto a subspace <span class="math inline">\mathcal{U}</span> is the vector in <span class="math inline">\mathcal{U}</span> that is closest to <span class="math inline">\mathbf{y}</span>. If <span class="math inline">{\mathbf{u}_1, \dots, \mathbf{u}_n}</span> is an orthonormal basis for <span class="math inline">\mathcal{U}</span>, the projection of <span class="math inline">\mathbf{y}</span> onto <span class="math inline">\mathcal{U}</span> is given by:</p>
+<p><span class="math display"> \text{proj}_{\mathcal{U}}(\mathbf{y}) = \sum_{i=1}^n \langle \mathbf{y}, \mathbf{u}_i \rangle \mathbf{u}_i </span></p>
+<p>Projections are fundamental to many machine learning algorithms, including least squares regression, where the goal is to find the vector in the column space of a matrix that is closest to a target vector <span class="citation" data-cites="deisenroth2020mml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+</section>
+</section>
+<section id="matrix-decompositions" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-decompositions">Matrix Decompositions</h3>
+<p>Matrix decompositions are factorizations of a matrix into a product of matrices with specific properties. They are essential for understanding the properties of linear transformations and for solving systems of linear equations.</p>
+<div id="def-eigenvalue-eigenvector" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 13</strong></span> Eigenvalue and Eigenvector</p>
+<p>For a square matrix <span class="math inline">\mathbf{A}</span>, an eigenvector <span class="math inline">\mathbf{v}</span> and its corresponding eigenvalue <span class="math inline">\lambda</span> satisfy:</p>
+<p><span class="math display"> \mathbf{Av} = \lambda\mathbf{v} </span></p>
+</div>
+<p>This means that when the linear transformation <span class="math inline">\mathbf{A}</span> is applied to an eigenvector <span class="math inline">\mathbf{v}</span>, the result is a scaled version of <span class="math inline">\mathbf{v}</span>. The eigenvectors are the directions that are only stretched or compressed by the transformation. If a matrix <span class="math inline">\mathbf{A}</span> is symmetric, it can be decomposed as:</p>
+<div id="def-eigendecomposition" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 14</strong></span> Eigendecomposition</p>
+<p>For a symmetric matrix <span class="math inline">\mathbf{A}</span>:</p>
+<p><span class="math display"> \mathbf{A} = \mathbf{PDP}^T </span></p>
+<p>where <span class="math inline">\mathbf{P}</span> is an orthogonal matrix whose columns are the eigenvectors of <span class="math inline">\mathbf{A}</span>, and <span class="math inline">\mathbf{D}</span> is a diagonal matrix whose diagonal entries are the corresponding eigenvalues.</p>
+</div>
+<p>This decomposition is fundamental to Principal Component Analysis (PCA), a widely used dimensionality reduction technique <span class="citation" data-cites="deisenroth2020mml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+<div id="def-svd" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 15</strong></span> Singular Value Decomposition (SVD)</p>
+<p>The SVD is a generalization of the eigendecomposition to any <span class="math inline">m \times n</span> matrix <span class="math inline">\mathbf{A}</span>. It is given by:</p>
+<p><span class="math display"> \mathbf{A} = \mathbf{U\Sigma V}^T </span></p>
+</div>
+<p>where <span class="math inline">\mathbf{U}</span> is an <span class="math inline">m \times m</span> orthogonal matrix, <span class="math inline">\mathbf{\Sigma}</span> is an <span class="math inline">m \times n</span> rectangular diagonal matrix of singular values, and <span class="math inline">\mathbf{V}</span> is an <span class="math inline">n \times n</span> orthogonal matrix. The columns of <span class="math inline">\mathbf{U}</span> are the left-singular vectors, and the columns of <span class="math inline">\mathbf{V}</span> are the right-singular vectors. The SVD provides a complete geometric characterization of a linear transformation: it decomposes the transformation into a rotation (<span class="math inline">\mathbf{V}^T</span>), a scaling along the axes (<span class="math inline">\mathbf{\Sigma}</span>), and another rotation (<span class="math inline">\mathbf{U}</span>) <span class="citation" data-cites="deisenroth2020mml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+</section>
+<section id="linear-algebra-in-reinforcement-learning-the-bellman-equation" class="level3">
+<h3 class="anchored" data-anchor-id="linear-algebra-in-reinforcement-learning-the-bellman-equation">Linear Algebra in Reinforcement Learning: The Bellman Equation</h3>
+<p>The Bellman equation is a central component of reinforcement learning. For a given policy <span class="math inline">\pi</span>, the state-value function <span class="math inline">v_\pi(s)</span> is the expected return from state <span class="math inline">s</span>. The Bellman equation expresses this value recursively:</p>
+<div id="def-bellman-equation" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 16</strong></span> Bellman Equation</p>
+<p>For a policy <span class="math inline">\pi</span>, the state-value function satisfies:</p>
+<p><span class="math display"> v_\pi(s) = \mathbb{E}_\pi[R_{t+1} + \gamma v_\pi(S_{t+1}) | S_t = s] </span></p>
+</div>
+<p>This can be written as a system of linear equations, one for each state. In matrix-vector form, this is:</p>
+<p><span class="math display"> \mathbf{v}_\pi = \mathbf{r}_\pi + \gamma P_\pi \mathbf{v}_\pi </span></p>
+<p>where <span class="math inline">\mathbf{v}_\pi</span> is the vector of state values, <span class="math inline">\mathbf{r}_\pi</span> is the vector of expected immediate rewards, and <span class="math inline">P_\pi</span> is the state transition probability matrix. The solution is given by:</p>
+<p><span class="math display"> \mathbf{v}_\pi = (I - \gamma P_\pi)^{-1} \mathbf{r}_\pi </span></p>
+<p>This demonstrates how linear algebra is used to solve for the value function in reinforcement learning <span class="citation" data-cites="zhao2025rl">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>)</span>.</p>
+</section>
+</section>
+<section id="sec-probability-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="sec-probability-statistics">Probability and Statistics</h2>
+<p>Probability theory provides the framework for quantifying uncertainty, which is inherent in most real-world data and in the predictions made by machine learning models. Statistics provides the tools for analyzing and interpreting data, and for drawing inferences about the underlying processes that generate the data.</p>
+<p>For more on this topic, see <span class="citation" data-cites="james2023statistical">James et al. (<a href="#ref-james2023statistical" role="doc-biblioref">2023</a>, Ch. 2)</span> and <span class="citation" data-cites="theodoridis2025ml">Theodoridis (<a href="#ref-theodoridis2025ml" role="doc-biblioref">2026</a>, Chs. 4, 5)</span>.</p>
+<section id="basic-probability-concepts" class="level3">
+<h3 class="anchored" data-anchor-id="basic-probability-concepts">Basic Probability Concepts</h3>
+<p>Probability theory provides a formal framework for reasoning about uncertainty. The two fundamental rules of probability are the sum rule and the product rule.</p>
+<div id="def-sum-rule" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 17</strong></span> Sum Rule of Probability</p>
+<p>For any two events <span class="math inline">A</span> and <span class="math inline">B</span>, the probability that either <span class="math inline">A</span> or <span class="math inline">B</span> will occur is given by:</p>
+<p><span class="math display"> P(A \cup B) = P(A) + P(B) - P(A \cap B) </span></p>
+<p>If the events are mutually exclusive, then <span class="math inline">P(A \cap B) = 0</span>, and the rule simplifies to <span class="math inline">P(A \cup B) = P(A) + P(B)</span>. For a random variable <span class="math inline">X</span>, the sum rule allows us to compute its marginal probability by summing (or integrating) over all possible values of another variable <span class="math inline">Y</span>:</p>
+<p><span class="math display"> P(X) = \sum_Y P(X, Y) \quad \text{(for discrete Y)} </span><span class="math display"> p(x) = \int p(x, y) dy \quad \text{(for continuous Y)} </span></p>
+</div>
+<section id="product-rule-and-conditional-probability" class="level4">
+<h4 class="anchored" data-anchor-id="product-rule-and-conditional-probability">Product Rule and Conditional Probability</h4>
+<p>The joint probability of two events <span class="math inline">A</span> and <span class="math inline">B</span> occurring is given by:</p>
+<p><span class="math display"> P(A \cap B) = P(A|B)P(B) = P(B|A)P(A) </span></p>
+<p>where <span class="math inline">P(A|B)</span> is the conditional probability of <span class="math inline">A</span> given that <span class="math inline">B</span> has occurred. This rule is fundamental for connecting joint, conditional, and marginal probabilities.</p>
+</section>
+<section id="bayes-theorem" class="level4">
+<h4 class="anchored" data-anchor-id="bayes-theorem">Bayes Theorem</h4>
+<p>Derived from the product rule, Bayes’ theorem is a cornerstone of machine learning and inference. It allows us to update our beliefs about a hypothesis in light of new evidence:</p>
+<p><span class="math display"> P(H|E) = \frac{P(E|H)P(H)}{P(E)} </span></p>
+<p>In this formula:</p>
+<ul>
+<li><span class="math inline">H</span> represents a hypothesis, and <span class="math inline">E</span> represents the evidence.</li>
+<li><span class="math inline">P(H)</span> is the prior probability of the hypothesis, which is our belief before observing the evidence.</li>
+<li><span class="math inline">P(H|E)</span> is the posterior probability, which is our updated belief after observing the evidence.</li>
+<li><span class="math inline">P(E|H)</span> is the likelihood, which is the probability of observing the evidence given that the hypothesis is true.</li>
+<li><span class="math inline">P(E)</span> is the marginal likelihood or evidence, which is the total probability of observing the evidence. It acts as a normalization constant.</li>
+</ul>
+<p>Bayes’ theorem is central to Bayesian inference, where we treat model parameters as random variables and update their distributions as we observe more data <span class="citation" data-cites="deisenroth2020mml bishop2024deeplearning">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>; <a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>)</span>.</p>
+</section>
+</section>
+<section id="common-probability-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="common-probability-distributions">Common Probability Distributions</h3>
+<p>Probability distributions are mathematical functions that describe the likelihood of different outcomes in a random experiment. In machine learning, we use these distributions to model uncertainty in data, represent prior beliefs about parameters, and characterize the behavior of learning algorithms. Understanding these distributions is essential for both theoretical analysis and practical implementation of machine learning methods.</p>
+<section id="bernoulli-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="bernoulli-distribution">Bernoulli Distribution</h4>
+<p>The simplest probability distribution models a single binary outcome, such as a coin flip. Consider an experiment where we observe whether an email is spam (1) or not spam (0). If the probability of spam is <span class="math inline">p = 0.3</span>, then the Bernoulli distribution describes this random variable:</p>
+<div id="def-bernoulli" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 18</strong></span> Bernoulli Distribution</p>
+<p>The Bernoulli distribution for a binary random variable <span class="math inline">x \in \{0,1\}</span> with success probability <span class="math inline">p</span>:</p>
+<p><span class="math display"> \text{Bern}(x|p) = p^x (1-p)^{1-x} </span></p>
+</div>
+<p>The Bernoulli distribution has mean <span class="math inline">\mathbb{E}[x] = p</span> and variance <span class="math inline">\text{Var}(x) = p(1-p)</span>. In machine learning, Bernoulli distributions appear in binary classification problems and as building blocks for more complex models like naive Bayes classifiers.</p>
+<p>When we repeat a Bernoulli trial multiple times independently, the total number of successes follows a binomial distribution. For example, if we send 10 emails and each has a 0.3 probability of being spam, the number of spam emails <span class="math inline">k</span> follows:</p>
+<div id="def-binomial" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 19</strong></span> Binomial Distribution</p>
+<p>The binomial distribution for <span class="math inline">k</span> successes in <span class="math inline">n</span> independent Bernoulli trials with success probability <span class="math inline">p</span>:</p>
+<p><span class="math display"> \text{Bin}(k|n, p) = \binom{n}{k} p^k (1-p)^{n-k} </span></p>
+<p>where <span class="math inline">\binom{n}{k} = \frac{n!}{k!(n-k)!}</span>.</p>
+</div>
+<p>For our email example with <span class="math inline">n=10</span> and <span class="math inline">p=0.3</span>, the probability of exactly 3 spam emails is <span class="math inline">\binom{10}{3}(0.3)^3(0.7)^7 \approx
+0.267</span>. The binomial distribution has mean <span class="math inline">np</span> and variance <span class="math inline">np(1-p)</span>. This distribution is fundamental in analyzing the sample complexity of learning algorithms, as discussed in <a href="../../posts/fundamentals-of-machine-learning/foundations-of-learning-theory.html#sec-pac-learning">PAC Learning Framework</a>.</p>
+</section>
+<section id="gaussian-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="gaussian-distribution">Gaussian Distribution</h4>
+<p>The Gaussian distribution is the most important continuous distribution in statistics and machine learning. Its ubiquity stems from the Central Limit Theorem, which states that sums of independent random variables tend toward a Gaussian distribution regardless of the original distribution.</p>
+<p>For a single continuous variable <span class="math inline">x</span>, such as a person’s height, the univariate Gaussian is:</p>
+<div id="def-gaussian-univariate" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 20</strong></span> Univariate Gaussian Distribution</p>
+<p>The univariate Gaussian distribution with mean <span class="math inline">\mu</span> and variance <span class="math inline">\sigma^2</span>:</p>
+<p><span class="math display"> \mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}} </span></p>
+</div>
+<p>The factor <span class="math inline">\frac{1}{\sqrt{2\pi\sigma^2}}</span> ensures the distribution integrates to 1. For example, if human heights follow <span class="math inline">\mathcal{N}(170,
+100)</span> (mean 170cm, standard deviation 10cm), approximately 68% of people have heights between 160cm and 180cm (within one standard deviation of the mean).</p>
+<p>For multivariate data, such as feature vectors <span class="math inline">\mathbf{x} \in \mathbb{R}^d</span>, we use the multivariate Gaussian:</p>
+<div id="def-gaussian-multivariate" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 21</strong></span> Multivariate Gaussian Distribution</p>
+<p>The multivariate Gaussian distribution with mean vector <span class="math inline">\boldsymbol{\mu} \in \mathbb{R}^d</span> and covariance matrix <span class="math inline">\Sigma \in \mathbb{R}^{d \times d}</span>:</p>
+<p><span class="math display"> \mathcal{N}(\mathbf{x} | \boldsymbol{\mu}, \Sigma) = \frac{1}{\sqrt{(2\pi)^d |\Sigma|}} e^{-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^T\Sigma^{-1}(\mathbf{x}-\boldsymbol{\mu})} </span></p>
+</div>
+<p>The covariance matrix must be positive semidefinite (see <a href="../../posts/fundamentals-of-mathematics-for-machine-learning/appendices-and-technical-background.html#sec-linear-algebra-recap">Linear Algebra Recap</a>). The Gaussian distribution is central to linear regression (<a href="../../posts/fundamentals-of-machine-learning/supervised-learning.html#sec-linear-models">Linear Models</a>), Gaussian processes, and many other machine learning models <span class="citation" data-cites="deisenroth2020mml bishop2024deeplearning">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>; <a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>)</span>.</p>
+</section>
+<section id="multinomial-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="multinomial-distribution">Multinomial Distribution</h4>
+<p>The multinomial distribution generalizes the binomial to cases with more than two outcomes. Consider rolling a six-sided die <span class="math inline">n</span> times: the counts of each face follow a multinomial distribution. If we roll the die 60 times, the expected count for each face is 10, but the actual counts will vary according to:</p>
+<div id="def-multinomial" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 22</strong></span> Multinomial Distribution</p>
+<p>The multinomial distribution for counts <span class="math inline">(x_1, \ldots, x_k)</span> of <span class="math inline">k</span> outcomes in <span class="math inline">n</span> trials with probabilities <span class="math inline">(p_1, \ldots, p_k)</span>:</p>
+<p><span class="math display"> \text{Mult}(x_1, \ldots, x_k | n, p_1, \ldots, p_k) = \frac{n!}{x_1! \cdots x_k!} p_1^{x_1} \cdots p_k^{x_k} </span></p>
+<p>where <span class="math inline">\sum_{i=1}^k x_i = n</span> and <span class="math inline">\sum_{i=1}^k p_i = 1</span>.</p>
+</div>
+<p>This distribution is fundamental in text classification and topic modeling, where we model word counts in documents.</p>
+</section>
+</section>
+<section id="stochastic-processes-and-markov-decision-processes" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-processes-and-markov-decision-processes">Stochastic Processes and Markov Decision Processes</h3>
+<section id="stochastic-processes" class="level4">
+<h4 class="anchored" data-anchor-id="stochastic-processes">Stochastic Processes</h4>
+<p>A stochastic process is a collection of random variables indexed by time, representing the evolution of a system with inherent randomness. For example, the daily closing price of a stock, the position of a robot navigating a room, or the state of a game being played all constitute stochastic processes. Understanding these processes is crucial for sequential decision-making problems, which form the foundation of reinforcement learning (<a href="../../posts/fundamentals-of-machine-learning/reinforcement-learning.html#sec-reinforcement-learning">Reinforcement Learning</a>).</p>
+</section>
+<section id="markov-property" class="level4">
+<h4 class="anchored" data-anchor-id="markov-property">Markov Property</h4>
+<p>Many stochastic processes satisfy a special property that greatly simplifies their analysis: the future depends only on the present, not on the past. This is called the Markov property or “memorylessness.” Formally, for a sequence of states <span class="math inline">S_0, S_1,
+S_2, \ldots</span>:</p>
+<div id="def-markov-property" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 23</strong></span> Markov Property</p>
+<p><span class="math display"> P(S_{t+1} | S_t, S_{t-1}, \ldots, S_0) = P(S_{t+1} | S_t) </span></p>
+</div>
+<p>To understand this intuitively, consider a chess game. If we know the current board position (the present state), we can determine all legal moves and their consequences without knowing how the game reached this position. The history of moves doesn’t matter—only the current configuration. This property dramatically reduces the complexity of modeling sequential processes.</p>
+<p>As a counterexample, consider predicting tomorrow’s weather. If we only know today’s weather (sunny), our prediction might be less accurate than if we also knew yesterday’s weather (rainy). In this case, the Markov property might not hold perfectly, though it often serves as a useful approximation.</p>
+</section>
+<section id="markov-decision-processes" class="level4">
+<h4 class="anchored" data-anchor-id="markov-decision-processes">Markov Decision Processes</h4>
+<p>A Markov Decision Process (MDP) extends the Markov property to include decision-making. An MDP models situations where an agent interacts with an environment: the agent observes the current state, chooses an action, receives a reward, and transitions to a new state. This framework is fundamental to reinforcement learning (<a href="../../posts/fundamentals-of-machine-learning/reinforcement-learning.html#sec-rl-foundations">Reinforcement Learning Foundations</a>).</p>
+<div id="def-mdp" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 24</strong></span> Markov Decision Process (MDP)</p>
+<p>A Markov Decision Process (MDP) is a tuple <span class="math inline">(\mathcal{S}, \mathcal{A}, P, R, \gamma)</span> where:</p>
+</div>
+<ul>
+<li><p><span class="math inline">\mathcal{S}</span> is the state space, the set of all possible states the system can be in. For a robot navigating a grid, this might be all possible positions.</p></li>
+<li><p><span class="math inline">\mathcal{A}</span> is the action space, the set of all possible actions. For the robot, this might be {move north, south, east, west}.</p></li>
+<li><p><span class="math inline">P(s' | s, a)</span> is the state transition probability function, giving the probability of reaching state <span class="math inline">s'</span> when taking action <span class="math inline">a</span> in state <span class="math inline">s</span>. For example, if the robot tries to move north, it might succeed with probability 0.9 but slip and move east with probability 0.1 due to wheel slippage.</p></li>
+<li><p><span class="math inline">R(s, a, s')</span> is the reward function, specifying the immediate reward received after transitioning from state <span class="math inline">s</span> to state <span class="math inline">s'</span> via action <span class="math inline">a</span>. The robot might receive +10 for reaching a goal location, -1 for each step (to encourage efficiency), and -100 for hitting an obstacle.</p></li>
+<li><p><span class="math inline">\gamma \in [0, 1]</span> is the discount factor, which determines how much the agent values future rewards compared to immediate ones. With <span class="math inline">\gamma = 0</span>, the agent is myopic and only cares about immediate rewards. With <span class="math inline">\gamma</span> close to 1, the agent is far-sighted and values future rewards almost as much as immediate ones.</p></li>
+</ul>
+<p>The objective in an MDP is to find a policy <span class="math inline">\pi: \mathcal{S} \rightarrow \mathcal{A}</span>, a mapping from states to actions, that maximizes the expected cumulative discounted reward:</p>
+<p><span class="math display"> \mathbb{E}\left[\sum_{t=0}^{\infty} \gamma^t R(S_t, A_t, S_{t+1})\right] </span></p>
+<p>This framework provides the mathematical foundation for reinforcement learning algorithms discussed in <a href="../../posts/fundamentals-of-machine-learning/reinforcement-learning.html#sec-reinforcement-learning">Reinforcement Learning</a> <span class="citation" data-cites="zhao2025rl">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>)</span>.</p>
+</section>
+</section>
+<section id="statistical-concepts" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-concepts">Statistical Concepts</h3>
+<p>Statistical concepts provide the tools for summarizing, analyzing, and making inferences from data. These concepts are essential for understanding how machine learning algorithms learn from finite samples and generalize to new data.</p>
+<div id="def-expected-value" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 25</strong></span> Expected Value</p>
+<p>The expected value (or expectation) of a random variable represents its long-run average value. Imagine rolling a fair six-sided die many times: while any single roll is unpredictable, the average value converges to 3.5. This is the expected value.</p>
+<p>For a discrete random variable <span class="math inline">X</span> taking values <span class="math inline">x_1, x_2, \ldots</span> with probabilities <span class="math inline">P(x_i)</span>:</p>
+<p><span class="math display"> \mathbb{E}[X] = \sum_i x_i P(x_i) </span></p>
+<p>For example, if <span class="math inline">X</span> represents the outcome of rolling a die, <span class="math inline">\mathbb{E}[X] = 1 \cdot \frac{1}{6} + 2 \cdot \frac{1}{6} + \cdots +
+6 \cdot \frac{1}{6} = 3.5</span>.</p>
+<p>For a continuous random variable with probability density function <span class="math inline">p(x)</span>:</p>
+<p><span class="math display"> \mathbb{E}[X] = \int x p(x) dx </span></p>
+</div>
+<p>The expectation is linear: <span class="math inline">\mathbb{E}[aX + bY] = a\mathbb{E}[X] + b\mathbb{E}[Y]</span> for any constants <span class="math inline">a, b</span> and random variables <span class="math inline">X, Y</span>. This property is fundamental in analyzing learning algorithms, where we often need to compute expected losses or errors.</p>
+<p>While the expected value tells us the center of a distribution, the variance measures its spread. A distribution with high variance has values that are typically far from the mean, while low variance indicates values cluster tightly around the mean.</p>
+<div id="def-variance" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 26</strong></span> Variance</p>
+<p>The variance is defined as the expected squared deviation from the mean:</p>
+<p><span class="math display"> \text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 </span></p>
+</div>
+<p>The second equality provides a computational shortcut: we can compute the variance from the expectation of <span class="math inline">X^2</span> and the square of the expectation of <span class="math inline">X</span>.</p>
+<p>For our die example, <span class="math inline">\mathbb{E}[X^2] = 1^2 \cdot \frac{1}{6} + 2^2 \cdot \frac{1}{6} + \cdots + 6^2 \cdot \frac{1}{6} = 15.17</span>, so <span class="math inline">\text{Var}(X) = 15.17 - 3.5^2 = 2.92</span>. The standard deviation <span class="math inline">\sigma = \sqrt{\text{Var}(X)} \approx 1.71</span> provides a measure of spread in the same units as <span class="math inline">X</span>.</p>
+<div id="def-covariance" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 27</strong></span> Covariance</p>
+<p>The covariance measures how two random variables vary together. If <span class="math inline">X</span> and <span class="math inline">Y</span> tend to be large together and small together, their covariance is positive. If one tends to be large when the other is small, the covariance is negative. If they vary independently, the covariance is zero (though zero covariance doesn’t guarantee independence).</p>
+<p><span class="math display"> \text{Cov}(X, Y) = \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] </span></p>
+</div>
+<p>For example, consider height <span class="math inline">X</span> and weight <span class="math inline">Y</span> in humans. These variables have positive covariance because taller people tend to weigh more. The covariance matrix <span class="math inline">\Sigma</span> for a random vector <span class="math inline">\mathbf{X} = [X_1, \ldots, X_d]^T</span> has entries <span class="math inline">\Sigma_{ij} =
+\text{Cov}(X_i, X_j)</span>. This matrix appears in the multivariate Gaussian distribution and is central to dimensionality reduction techniques like PCA (<a href="../../posts/fundamentals-of-machine-learning/unsupervised-learning.html#sec-dimensionality-reduction">Dimensionality Reduction</a>).</p>
+<section id="bias-variance-decomposition" class="level4">
+<h4 class="anchored" data-anchor-id="bias-variance-decomposition">Bias-Variance Decomposition</h4>
+<p>Bias-Variance Decomposition. One of the most important concepts in machine learning is the bias-variance decomposition, which explains why models fail to generalize. Consider a regression problem where we want to predict <span class="math inline">y = f(x) + \epsilon</span>, where <span class="math inline">f(x)</span> is the true function and <span class="math inline">\epsilon</span> is irreducible noise with <span class="math inline">\mathbb{E}[\epsilon] = 0</span> and <span class="math inline">\text{Var}(\epsilon) = \sigma^2</span>.</p>
+<p>Suppose we train a model <span class="math inline">\hat{f}(x)</span> on a training set. If we could repeat this process with many different training sets drawn from the same distribution, the expected squared error at a point <span class="math inline">x</span> decomposes as:</p>
+<p><span class="math display"> \mathbb{E}[(y - \hat{f}(x))^2] = \underbrace{(f(x) - \mathbb{E}[\hat{f}(x)])^2}_{\text{Bias}^2} +
+\underbrace{\mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]}_{\text{Variance}} + \underbrace{\sigma^2}_{\text{Irreducible
+Error}} </span></p>
+<p>Let’s understand each term through an example. Suppose the true relationship is <span class="math inline">f(x) = x^2</span>, but we fit a linear model <span class="math inline">\hat{f}(x) = ax + b</span>:</p>
+<p>The bias <span class="math inline">(f(x) - \mathbb{E}[\hat{f}(x)])^2</span> measures how far the average prediction is from the truth. A linear model cannot capture the quadratic relationship, so it will systematically underpredict or overpredict. This is high bias—the model is too simple.</p>
+<ul>
+<li>The variance <span class="math inline">\mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]</span> measures how much the predictions vary across different training sets. A linear model has relatively low variance because its predictions don’t change dramatically with different training data.</li>
+</ul>
+<p>This is the noise <span class="math inline">\sigma^2</span> in the data itself, which no model can eliminate.</p>
+<p>Now consider fitting a high-degree polynomial. This flexible model can fit <span class="math inline">f(x) = x^2</span> well (low bias), but it’s sensitive to the specific training data and might fit the noise (high variance). The bias-variance trade-off is fundamental: simple models have high bias but low variance, while complex models have low bias but high variance. The goal is to find the sweet spot that minimizes total error, as discussed in <a href="../../posts/fundamentals-of-machine-learning/foundations-of-learning-theory.html#sec-learning-theory">Foundations of Learning Theory</a> <span class="citation" data-cites="james2023statistical">(<a href="#ref-james2023statistical" role="doc-biblioref">James et al. 2023</a>)</span>.</p>
+</section>
+</section>
+</section>
+<section id="sec-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="sec-optimization">Optimization Foundations</h2>
+<p>Optimization is the engine that powers machine learning. Nearly every learning algorithm can be framed as an optimization problem: find the parameters <span class="math inline">\mathbf{w}</span> that minimize a loss function <span class="math inline">L(\mathbf{w})</span>. For example, in linear regression we minimize the squared error, in logistic regression we minimize the cross-entropy loss, and in neural networks we minimize task-specific objectives. Understanding optimization is therefore essential for both implementing and analyzing machine learning algorithms.</p>
+<section id="gradient-based-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-based-optimization">Gradient-Based Optimization</h3>
+<section id="gradient-descent" class="level4">
+<h4 class="anchored" data-anchor-id="gradient-descent">Gradient Descent</h4>
+<p>Gradient-based optimization is the workhorse of modern machine learning, used to train everything from simple linear models to massive neural networks with billions of parameters. The fundamental insight is beautifully simple: if we want to minimize a function, we should move in the direction where it decreases most rapidly. The gradient tells us this direction.</p>
+<div id="def-gradient" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 28</strong></span> Gradient</p>
+<p>The gradient <span class="math inline">\nabla L(\mathbf{w})</span> is a vector pointing in the direction of steepest increase of the loss function <span class="math inline">L(\mathbf{w})</span>. To minimize the loss, we move in the opposite direction:</p>
+<p><span class="math display"> \mathbf{w}_{t+1} = \mathbf{w}_t - \eta \nabla L(\mathbf{w}_t) </span></p>
+</div>
+<p>The learning rate <span class="math inline">\eta &gt; 0</span> controls the step size. If <span class="math inline">\eta</span> is too small, we take tiny steps and convergence is painfully slow—imagine taking millimeter steps down the mountain. If <span class="math inline">\eta</span> is too large, we might overshoot the minimum and even diverge—like taking such large steps that we leap past the valley and up the other side.</p>
+<p>For example, consider minimizing <span class="math inline">L(w) = w^2</span>. The gradient is <span class="math inline">\nabla L(w) = 2w</span>, so the update rule becomes <span class="math inline">w_{t+1} = w_t -
+2\eta w_t = (1 - 2\eta)w_t</span>. Starting from <span class="math inline">w_0 = 1</span> with <span class="math inline">\eta = 0.1</span>, we get the sequence <span class="math inline">1, 0.8, 0.64, 0.512, \ldots</span> converging to 0. But with <span class="math inline">\eta = 0.6</span>, we get <span class="math inline">1, -0.2, 0.04, -0.008, \ldots</span> which oscillates but still converges. With <span class="math inline">\eta =
+1</span>, we get <span class="math inline">1, -1, 1, -1, \ldots</span> which oscillates forever.</p>
+</section>
+<section id="stochastic-gradient-descent" class="level4">
+<h4 class="anchored" data-anchor-id="stochastic-gradient-descent">Stochastic Gradient Descent</h4>
+<p>In machine learning, the loss function typically has the form <span class="math inline">L(\mathbf{w}) = \frac{1}{n}\sum_{i=1}^n L_i(\mathbf{w})</span>, where <span class="math inline">L_i</span> is the loss on the <span class="math inline">i</span>-th training example and <span class="math inline">n</span> might be millions or billions. Computing the full gradient <span class="math inline">\nabla
+L(\mathbf{w}) = \frac{1}{n}\sum_{i=1}^n \nabla L_i(\mathbf{w})</span> requires processing the entire dataset at each step—prohibitively expensive for large datasets.</p>
+<div id="def-sgd" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 29</strong></span> Stochastic Gradient Descent (SGD) approximates the gradient using a single randomly selected example:</p>
+<p><span class="math display"> \mathbf{w}_{t+1} = \mathbf{w}_t - \eta \nabla L_i(\mathbf{w}_t) </span></p>
+</div>
+<p>This gradient estimate is noisy—sometimes it points in the wrong direction—but it’s unbiased: <span class="math inline">\mathbb{E}[\nabla L_i(\mathbf{w})]
+= \nabla L(\mathbf{w})</span>. On average, we’re moving in the right direction, and we can take many more steps in the time it would take to compute one full gradient. The noise can even be beneficial, helping the algorithm escape shallow local minima.</p>
+<p>Mini-batch Gradient Descent strikes a balance between full-batch gradient descent and SGD. Instead of using one example or all examples, we use a small random subset (mini-batch) of size <span class="math inline">b</span> (typically 32, 64, or 256):</p>
+<div id="def-minibatch-gd" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 30</strong></span> Mini-batch gradient descent uses a subset of size <span class="math inline">b</span>:</p>
+<p><span class="math display"> \mathbf{w}_{t+1} = \mathbf{w}_t - \eta \frac{1}{b}\sum_{i \in \text{batch}} \nabla L_i(\mathbf{w}_t) </span></p>
+</div>
+<p>Mini-batches reduce the noise in the gradient estimate while remaining computationally efficient. They also enable efficient parallel computation on modern hardware (GPUs), where processing 64 examples simultaneously is nearly as fast as processing one.</p>
+</section>
+<section id="advanced-optimizers" class="level4">
+<h4 class="anchored" data-anchor-id="advanced-optimizers">Advanced Optimizers</h4>
+<p>Standard gradient descent treats all parameters equally and uses a fixed learning rate. Modern optimizers improve on this in various ways:</p>
+<p>Momentum adds a velocity term that accumulates gradients over time, helping the optimizer build up speed in consistent directions and dampen oscillations. Think of a ball rolling down a hill: it doesn’t just respond to the current slope but also has momentum from previous motion.</p>
+<p>RMSProp and Adam adapt the learning rate for each parameter individually based on the history of gradients. Parameters with large, consistent gradients get smaller learning rates (to avoid overshooting), while parameters with small or inconsistent gradients get larger learning rates (to make progress). Adam (Adaptive Moment Estimation) combines momentum with adaptive learning rates and has become the default optimizer for many deep learning applications.</p>
+<p>These advanced optimizers are essential for training deep neural networks (<a href="../../posts/fundamentals-of-machine-learning/supervised-learning.html#sec-neural-networks">Neural Networks</a>), where the loss landscape can be highly non-convex with many saddle points and plateaus <span class="citation" data-cites="deisenroth2020mml bishop2024deeplearning shalev2014ml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>; <a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>; <a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>. using a small random subset (a mini-batch) of the training data. This reduces the noise in the gradient estimate while remaining computationally efficient.</p>
+<p>Several advanced optimizers have been developed to improve upon standard gradient descent. These include methods like Momentum, which helps accelerate gradients vectors in the right direction, thus leading to faster converging, and RMSProp and Adam, which adapt the learning rate for each parameter, often leading to faster convergence and better performance <span class="citation" data-cites="deisenroth2020mml bishop2024deeplearning shalev2014ml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>; <a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>; <a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>)</span>.</p>
+</section>
+</section>
+<section id="stochastic-approximation" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-approximation">Stochastic Approximation</h3>
+<section id="robbins-monro-conditions" class="level4">
+<h4 class="anchored" data-anchor-id="robbins-monro-conditions">Robbins-Monro Conditions</h4>
+<p>Stochastic approximation methods are a class of iterative algorithms used to find the root or optimum of a function that can only be observed with noise. These methods are fundamental to online learning and are widely used in reinforcement learning for updating value functions and policies.</p>
+<p>The general form of a stochastic approximation algorithm is:</p>
+<p><span class="math display"> \mathbf{w}_{k+1} = \mathbf{w}_k - \alpha_k \hat{g}(\mathbf{w}_k) </span></p>
+<p>where <span class="math inline">\hat{g}(\mathbf{w}_k)</span> is a noisy estimate of the gradient of the objective function, and <span class="math inline">\{\alpha_k\}</span> is a sequence of step sizes. For the algorithm to converge, the step sizes must satisfy the Robbins-Monro conditions:</p>
+<p><span class="math display"> \sum_{k=1}^\infty \alpha_k = \infty \quad \text{and} \quad \sum_{k=1}^\infty \alpha_k^2 &lt; \infty </span></p>
+<p>The first condition ensures that the algorithm can reach any point, while the second condition ensures that the noise in the gradient estimates eventually cancels out.</p>
+<p>Stochastic Gradient Descent (SGD) can be viewed as a special case of stochastic approximation. In reinforcement learning, stochastic approximation is used in algorithms like Temporal-Difference (TD) learning to update value function estimates based on noisy returns from the environment <span class="citation" data-cites="zhao2025rl theodoridis2025ml">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+</section>
+</section>
+<section id="convex-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="convex-optimization">Convex Optimization</h3>
+<p>Convex optimization is a subfield of optimization that deals with minimizing convex functions over convex sets. A key property of convex optimization problems is that any local minimum is also a global minimum, which makes them particularly well-suited for efficient optimization algorithms.</p>
+<div id="def-convex-set" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 31</strong></span> Convex Set</p>
+<p>A set <span class="math inline">\mathcal{C}</span> is convex if for any two points <span class="math inline">\mathbf{x}, \mathbf{y} \in \mathcal{C}</span>, the line segment connecting them is also in <span class="math inline">\mathcal{C}</span>. That is, for any <span class="math inline">\alpha \in [0, 1]</span>, <span class="math inline">\alpha \mathbf{x} + (1-\alpha)\mathbf{y} \in \mathcal{C}</span>.</p>
+</div>
+<div id="def-convex-function" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 32</strong></span> Convex Function</p>
+<p>A function <span class="math inline">f</span> is convex if its domain is a convex set and for any two points <span class="math inline">\mathbf{x}, \mathbf{y}</span> in its domain and any <span class="math inline">\alpha \in [0, 1]</span>:</p>
+<p><span class="math display"> f(\alpha \mathbf{x} + (1-\alpha)\mathbf{y}) \le \alpha f(\mathbf{x}) + (1-\alpha)f(\mathbf{y}) </span></p>
+</div>
+<p>Geometrically, this means that the line segment connecting any two points on the function’s graph lies on or above the graph.</p>
+<section id="applications-in-machine-learning" class="level4">
+<h4 class="anchored" data-anchor-id="applications-in-machine-learning">Applications in Machine Learning</h4>
+<p>Many machine learning problems can be formulated as convex optimization problems. For example, training a Support Vector Machine (SVM) involves minimizing a convex loss function. The efficiency and guarantees of convex optimization make it a powerful tool in the machine learning practitioner’s toolbox <span class="citation" data-cites="shalev2014ml deisenroth2020mml">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>; <a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+</section>
+</section>
+<section id="constrained-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="constrained-optimization">Constrained Optimization</h3>
+<p>Constrained optimization problems involve minimizing or maximizing a function subject to constraints on the variables. A common method for solving such problems is the method of Lagrange multipliers.</p>
+<section id="lagrange-multipliers" class="level4">
+<h4 class="anchored" data-anchor-id="lagrange-multipliers">Lagrange Multipliers</h4>
+<p>For a problem of the form:</p>
+<p>minimize <span class="math inline">f(\mathbf{x})</span> subject to <span class="math inline">g(\mathbf{x}) = 0</span></p>
+<p>we introduce a new variable <span class="math inline">\lambda</span>, called a Lagrange multiplier, and define the Lagrangian function:</p>
+<div id="def-lagrangian" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 33</strong></span> Lagrangian</p>
+<p>For a constrained optimization problem with objective <span class="math inline">f(\mathbf{x})</span> and constraint <span class="math inline">g(\mathbf{x}) = 0</span>, the Lagrangian is:</p>
+<p><span class="math display"> \mathcal{L}(\mathbf{x}, \lambda) = f(\mathbf{x}) - \lambda g(\mathbf{x}) </span></p>
+<p>where <span class="math inline">\lambda</span> is the Lagrange multiplier.</p>
+</div>
+<p>The solution to the constrained optimization problem can be found by finding the stationary points of the Lagrangian, which involves solving the system of equations:</p>
+<p><span class="math display"> \nabla_{\mathbf{x}, \lambda} \mathcal{L}(\mathbf{x}, \lambda) = 0 </span></p>
+<p>This method can be extended to handle inequality constraints as well, using the Karush-Kuhn-Tucker (KKT) conditions. Constrained optimization is used in many machine learning algorithms, such as Support Vector Machines (SVMs) <span class="citation" data-cites="deisenroth2020mml">(<a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+</section>
+</section>
+</section>
+<section id="sec-information-theory" class="level2">
+<h2 class="anchored" data-anchor-id="sec-information-theory">Information Theory and Inference</h2>
+<p>Information theory provides a mathematical framework for quantifying information.</p>
+<section id="entropy" class="level3">
+<h3 class="anchored" data-anchor-id="entropy">Entropy</h3>
+<p>Entropy is a key concept in information theory that measures the uncertainty of a random variable. It quantifies the average amount of information needed to specify the state of a random variable.</p>
+<p>For a discrete random variable <span class="math inline">X</span> with probability mass function <span class="math inline">P(x)</span>, the Shannon entropy is defined as:</p>
+<p><span class="math display"> H(X) = -\sum_{i=1}^n P(x_i) \log_2 P(x_i) </span></p>
+<p>The logarithm is typically base 2, in which case the entropy is measured in bits. A distribution that is sharply peaked around a few values will have a low entropy, while a distribution that is spread more evenly across many values will have a higher entropy.</p>
+<p>For a continuous random variable with probability density function <span class="math inline">p(x)</span>, the differential entropy is:</p>
+<p><span class="math display"> h(X) = -\int p(x) \log_2 p(x) dx </span></p>
+<p>Unlike Shannon entropy, differential entropy can be negative. The Gaussian distribution has the maximum differential entropy among all distributions with the same variance <span class="citation" data-cites="theodoridis2025ml bishop2024deeplearning">(<a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>; <a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>)</span>.</p>
+</section>
+<section id="kullback-leibler-kl-divergence" class="level3">
+<h3 class="anchored" data-anchor-id="kullback-leibler-kl-divergence">Kullback-Leibler (KL) Divergence</h3>
+<p>The Kullback-Leibler (KL) divergence, also known as relative entropy, is a measure of how one probability distribution diverges from a second, expected probability distribution. For two discrete probability distributions <span class="math inline">P</span> and <span class="math inline">Q</span>, the KL divergence is defined as:</p>
+<p><span class="math display"> D_{KL}(P || Q) = \sum_{i} P(i) \log\left(\frac{P(i)}{Q(i)}\right) </span></p>
+<p>For continuous distributions <span class="math inline">p(x)</span> and <span class="math inline">q(x)</span>, it is:</p>
+<p><span class="math display"> D_{KL}(p || q) = \int_{-\infty}^{\infty} p(x) \log\left(\frac{p(x)}{q(x)}\right) dx </span></p>
+<p>The KL divergence is always non-negative (<span class="math inline">D_{KL}(P || Q) \ge 0</span>) and is zero if and only if <span class="math inline">P</span> and <span class="math inline">Q</span> are the same distribution. However, it is not a true distance metric because it is not symmetric, i.e., <span class="math inline">D_{KL}(P || Q) \neq D_{KL}(Q || P)</span>. In machine learning, the KL divergence is often used as a loss function to measure the dissimilarity between a model’s predicted distribution and the true data distribution <span class="citation" data-cites="bishop2024deeplearning">(<a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>)</span>.</p>
+</section>
+<section id="mutual-information" class="level3">
+<h3 class="anchored" data-anchor-id="mutual-information">Mutual Information</h3>
+<p>Mutual information measures the mutual dependence between two random variables. It quantifies the amount of information obtained about one random variable through observing the other random variable. The mutual information of two random variables <span class="math inline">X</span> and <span class="math inline">Y</span> is the KL divergence between their joint distribution and the product of their marginal distributions:</p>
+<p><span class="math display"> I(X; Y) = D_{KL}(P(x,y) || P(x)P(y)) = \sum_{x,y} P(x,y) \log\left(\frac{P(x,y)}{P(x)P(y)}\right) </span></p>
+<p>It can also be expressed in terms of entropy:</p>
+<div id="def-mutual-information" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 34</strong></span> Mutual Information</p>
+<p>The mutual information between random variables <span class="math inline">X</span> and <span class="math inline">Y</span>:</p>
+<p><span class="math display"> I(X; Y) = H(X) - H(X|Y) = H(Y) - H(Y|X) </span></p>
+</div>
+<p>where <span class="math inline">H(X|Y)</span> is the conditional entropy of <span class="math inline">X</span> given <span class="math inline">Y</span>. This shows that the mutual information is the reduction in uncertainty about one variable given knowledge of the other. Mutual information is always non-negative and is zero if and only if the two variables are independent <span class="citation" data-cites="theodoridis2025ml bishop2024deeplearning">(<a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>; <a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>)</span>.</p>
+</section>
+<section id="maximum-likelihood-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-likelihood-estimation">Maximum Likelihood Estimation</h3>
+<p>Maximum Likelihood Estimation (MLE) is a method for estimating the parameters of a statistical model. Given a set of i.i.d. (independent and identically distributed) data points <span class="math inline">D = \{x_1, \dots, x_n\}</span> drawn from a distribution <span class="math inline">P(x|\theta)</span> parameterized by <span class="math inline">\theta</span>, the likelihood function is the probability of observing the data as a function of the parameters:</p>
+<p><span class="math display"> L(\theta | D) = P(D | \theta) = \prod_{i=1}^n P(x_i | \theta) </span></p>
+<p>The principle of Maximum Likelihood Estimation is to choose the parameters <span class="math inline">\theta</span> that maximize the likelihood function. This is equivalent to finding the parameters that make the observed data most probable.</p>
+<p>In practice, it is often easier to work with the log-likelihood function, since the logarithm converts the product into a sum and does not change the location of the maximum. The Maximum Likelihood Estimate (MLE) of <span class="math inline">\theta</span> is therefore given by:</p>
+<p><span class="math display"> \hat{\theta}_{MLE} = \arg\max_{\theta} \log L(\theta | D) = \arg\max_{\theta} \sum_{i=1}^n \log P(x_i | \theta) </span></p>
+<p>MLE is a cornerstone of statistical inference and is widely used to train machine learning models <span class="citation" data-cites="shalev2014ml bishop2024deeplearning">(<a href="#ref-shalev2014ml" role="doc-biblioref">Shalev-Shwartz and Ben-David 2014</a>; <a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>)</span>.</p>
+</section>
+<section id="maximum-a-posteriori-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-a-posteriori-estimation">Maximum A Posteriori Estimation</h3>
+<p>Maximum A Posteriori (MAP) estimation is a Bayesian alternative to MLE that incorporates prior knowledge about the parameters. Using Bayes’ theorem, the posterior distribution of the parameters given the data is:</p>
+<p><span class="math display"> P(\theta | D) = \frac{P(D | \theta) P(\theta)}{P(D)} </span></p>
+<p>The MAP estimate is the mode of the posterior distribution:</p>
+<p><span class="math display"> \hat{\theta}_{MAP} = \arg\max_{\theta} P(\theta | D) = \arg\max_{\theta} P(D | \theta) P(\theta) </span></p>
+<p>Since the denominator <span class="math inline">P(D)</span> does not depend on <span class="math inline">\theta</span>, it can be ignored in the optimization. Taking logarithms, we get:</p>
+<p><span class="math display"> \hat{\theta}_{MAP} = \arg\max_{\theta} [\log P(D | \theta) + \log P(\theta)] </span></p>
+<p>The MAP estimate reduces to the MLE when the prior <span class="math inline">P(\theta)</span> is uniform (i.e., when we have no prior preference for any particular parameter value). The prior allows us to incorporate domain knowledge or regularization into the estimation process. For example, a Gaussian prior on the parameters corresponds to <span class="math inline">\ell_2</span> regularization, while a Laplace prior corresponds to <span class="math inline">\ell_1</span> regularization <span class="citation" data-cites="bishop2024deeplearning deisenroth2020mml">(<a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>; <a href="#ref-deisenroth2020mml" role="doc-biblioref">Deisenroth et al. 2020</a>)</span>.</p>
+</section>
+<section id="cross-entropy" class="level3">
+<h3 class="anchored" data-anchor-id="cross-entropy">Cross-Entropy</h3>
+<p>Cross-entropy is a measure from information theory that quantifies the difference between two probability distributions. It is widely used as a loss function in classification tasks. For two discrete probability distributions <span class="math inline">P</span> and <span class="math inline">Q</span>, the cross-entropy is defined as:</p>
+<div id="def-cross-entropy-discrete" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 35</strong></span> Cross-Entropy (Discrete)</p>
+<p><span class="math display"> H(P, Q) = -\sum_{i} P(i) \log Q(i) </span></p>
+</div>
+<p>For continuous distributions:</p>
+<div id="def-cross-entropy-continuous" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 36</strong></span> Cross-Entropy (Continuous)</p>
+<p><span class="math display"> H(p, q) = -\int p(x) \log q(x) dx </span></p>
+</div>
+<p>The cross-entropy can be decomposed as:</p>
+<p><span class="math display"> H(P, Q) = H(P) + D_{KL}(P || Q) </span></p>
+<p>where <span class="math inline">H(P)</span> is the entropy of <span class="math inline">P</span> and <span class="math inline">D_{KL}(P || Q)</span> is the KL divergence from <span class="math inline">P</span> to <span class="math inline">Q</span>. Since <span class="math inline">H(P)</span> is constant with respect to <span class="math inline">Q</span>, minimizing the cross-entropy is equivalent to minimizing the KL divergence.</p>
+<p>In machine learning, particularly in classification problems, we often use cross-entropy as a loss function. For a binary classification problem with true labels <span class="math inline">y \in \{0, 1\}</span> and predicted probabilities <span class="math inline">\hat{y}</span>, the binary cross-entropy loss is:</p>
+<p><span class="math display"> L = -[y \log \hat{y} + (1-y) \log(1-\hat{y})] </span></p>
+<p>For multi-class classification with <span class="math inline">K</span> classes, the categorical cross-entropy is:</p>
+<p><span class="math display"> L = -\sum_{k=1}^K y_k \log \hat{y}_k </span></p>
+<p>where <span class="math inline">y_k</span> is 1 if the true class is <span class="math inline">k</span> and 0 otherwise (one-hot encoding), and <span class="math inline">\hat{y}_k</span> is the predicted probability for class <span class="math inline">k</span>. Cross-entropy loss encourages the model to assign high probability to the correct class <span class="citation" data-cites="bishop2024deeplearning theodoridis2025ml">(<a href="#ref-bishop2024deeplearning" role="doc-biblioref">Bishop and Bishop 2024</a>; <a href="#ref-theodoridis2025ml" role="doc-biblioref">Theodoridis 2026</a>)</span>.</p>
+</section>
+<section id="information-theory-in-reinforcement-learning" class="level3">
+<h3 class="anchored" data-anchor-id="information-theory-in-reinforcement-learning">Information Theory in Reinforcement Learning</h3>
+<p>Information theory concepts play an important role in reinforcement learning, particularly in understanding exploration-exploitation trade-offs and in developing entropy-regularized algorithms.</p>
+<p>The entropy of a policy <span class="math inline">\pi</span> measures its randomness or uncertainty. For a discrete action space, the entropy of a policy at state <span class="math inline">s</span> is:</p>
+<div id="def-policy-entropy" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 37</strong></span> Policy Entropy</p>
+<p><span class="math display"> H(\pi(\cdot|s)) = -\sum_{a \in \mathcal{A}} \pi(a|s) \log \pi(a|s) </span></p>
+</div>
+<p>A deterministic policy has zero entropy, while a uniform random policy has maximum entropy. Entropy regularization adds an entropy bonus to the objective function, encouraging the agent to explore more:</p>
+<div id="def-entropy-regularization" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 38</strong></span> Entropy Regularization</p>
+<p><span class="math display"> J(\pi) = \mathbb{E}_{\tau \sim \pi}\left[\sum_{t=0}^\infty \gamma^t (R_t + \alpha H(\pi(\cdot|S_t)))\right] </span></p>
+<p>where <span class="math inline">\alpha</span> is a temperature parameter that controls the strength of the entropy regularization.</p>
+</div>
+<p>This approach is used in modern reinforcement learning algorithms such as Soft Actor-Critic (SAC) and has been shown to improve exploration and robustness <span class="citation" data-cites="zhao2025rl">(<a href="#ref-zhao2025rl" role="doc-biblioref">Zhao 2025</a>)</span>.</p>
+
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-bishop2024deeplearning" class="csl-entry" role="listitem">
+Bishop, Christopher M., and Hugh Bishop. 2024. <em>Deep Learning: Foundations and Concepts</em>. Springer. <a href="https://doi.org/10.1007/978-3-031-45468-4">https://doi.org/10.1007/978-3-031-45468-4</a>.
+</div>
+<div id="ref-deisenroth2020mml" class="csl-entry" role="listitem">
+Deisenroth, Marc Peter, A. Aldo Faisal, and Cheng Soon Ong. 2020. <em>Mathematics for Machine Learning</em>. Cambridge University Press.
+</div>
+<div id="ref-james2023statistical" class="csl-entry" role="listitem">
+James, Gareth, Daniela Witten, Trevor Hastie, Robert Tibshirani, and Jonathan Taylor. 2023. <em>An Introduction to Statistical Learning: With Applications in Python</em>. Springer Texts in Statistics. Springer.
+</div>
+<div id="ref-shalev2014ml" class="csl-entry" role="listitem">
+Shalev-Shwartz, Shai, and Shai Ben-David. 2014. <em>Understanding Machine Learning: From Theory to Algorithms</em>. Cambridge University Press.
+</div>
+<div id="ref-theodoridis2025ml" class="csl-entry" role="listitem">
+Theodoridis, Sergios. 2026. <em>Machine Learning: From the Classics to Deep Networks, Transformers, and Diffusion Models</em>. Third. Elsevier.
+</div>
+<div id="ref-zhao2025rl" class="csl-entry" role="listitem">
+Zhao, Shiyu. 2025. <em>Mathematical Foundations of Reinforcement Learning</em>. Springer Nature Singapore. <a href="https://doi.org/10.1007/978-981-97-3944-8">https://doi.org/10.1007/978-981-97-3944-8</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script>
+// Turns the tags on a post page into links to the filtered Posts page.
+document.addEventListener("DOMContentLoaded", () => {
+  const postsLink = document.querySelector('.navbar a[href$="posts.html"]');
+  if (!postsLink) {
+    return;
+  }
+  const postsPage = postsLink.getAttribute("href");
+  document.querySelectorAll(".quarto-categories .quarto-category").forEach((tag) => {
+    const link = document.createElement("a");
+    link.className = "tag-chip";
+    link.textContent = tag.textContent;
+    link.href = `${postsPage}#tag=${encodeURIComponent(tag.textContent.trim())}`;
+    tag.replaceWith(link);
+  });
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../../posts/fundamentals-of-mathematics-for-machine-learning/index.html" class="pagination-link" aria-label="Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Overview</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../posts/fundamentals-of-mathematics-for-machine-learning/appendices-and-technical-background.html" class="pagination-link" aria-label="Appendices and Technical Background">
+        <span class="nav-page-text">Appendices and Technical Background</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
