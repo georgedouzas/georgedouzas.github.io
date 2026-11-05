@@ -1,0 +1,88 @@
+{"target": "KaluzaKlein.RealAnalysis.MultipleIntegrals.uniform_limit_integral",
+ "statement":
+ "∀ (f : ℕ → ℝ → ℝ) (g : ℝ → ℝ) (a b : ℝ),\n  a ≤ b →\n    (∀ (n : ℕ), Continuous (f n)) →\n      TendstoUniformlyOn f g atTop (Icc a b) →\n        Tendsto (fun n => ∫ (x : ℝ) in a..b, f n x) atTop (𝓝 (∫ (x : ℝ) in a..b, g x))",
+ "seed": 0,
+ "script_hash": "10935025504826590425",
+ "script":
+ "# name: ra-uniform-limit-integral-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.MultipleIntegrals.uniform_limit_integral file \"ra-uniform-limit-integral-test.sage\"\n# description: Sage's lim ∫ f_n = ∫ lim f_n under uniform convergence on [a, b]\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx, n = var('x n')\nassume(n > 0)\ninstances = []\nfor f, g, a, b, edge in [(sin(n * x) / n, SR(0), 0, pi, False), (x + 1 / n, x, 0, 1, False), (x ** 2 * (1 + 1 / n), x ** 2, -1, 2, False), (SR(0) * n, SR(0), 0, 1, True)]:\n    instances.append(O([f'(fun n x => {f})', str(g), str(a), str(b), '(by norm_num)', '‹_›', '‹_›'],\n                       limit(integrate(f, x, a, b), n=oo), integrate(g, x, a, b), edge=edge))\nforget()\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1"],
+  "universal":
+  [{"type": "ℕ → ℝ → ℝ", "name": "f"},
+   {"type": "ℝ → ℝ", "name": "g"},
+   {"type": "ℝ", "name": "a"},
+   {"type": "ℝ", "name": "b"},
+   {"type": "a ≤ b", "name": "hab"},
+   {"type": "∀ (n : ℕ), Continuous (f n)", "name": "hf"},
+   {"type": "TendstoUniformlyOn f g atTop (Icc a b)", "name": "h"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "a ≤ b",
+    "rel": "le",
+    "poly": "(x0) - (x1)",
+    "name": "hab",
+    "expr": "(x0) - (x1)"},
+   {"text": "∀ (n : ℕ), Continuous (f n)", "name": "hf"},
+   {"text": "TendstoUniformlyOn f g atTop (Icc a b)", "name": "h"}],
+  "goal":
+  {"text":
+   "Tendsto (fun n => ∫ (x : ℝ) in a..b, f n x) atTop (𝓝 (∫ (x : ℝ) in a..b, g x))",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["a", "b"],
+  "atom_types": ["ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values":
+   ["(fun n x => sin(n*x)/n)", "0", "0", "pi", "(by norm_num)", "‹_›", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun n x => x + 1/n)", "x", "0", "1", "(by norm_num)", "‹_›", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.5000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 0.5000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.5000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 0.5000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun n x => x^2*(1/n + 1))",
+    "x^2",
+    "-1",
+    "2",
+    "(by norm_num)",
+    "‹_›",
+    "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[3.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 3.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [3.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 3.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun n x => 0)", "0", "0", "1", "(by norm_num)", "‹_›", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true}]}

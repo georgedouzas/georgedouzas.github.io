@@ -1,0 +1,76 @@
+{"target": "KaluzaKlein.RealAnalysis.Calculus.inverse_function_theorem",
+ "statement":
+ "∀ (f : ℝ → ℝ) (a f' : ℝ) (hf : HasStrictDerivAt f f' a) (hf' : f' ≠ 0),\n  HasStrictDerivAt (HasStrictDerivAt.localInverse f f' a hf hf') f'⁻¹ (f a)",
+ "seed": 0,
+ "script_hash": "15515502609581014409",
+ "script":
+ "# name: ra-inverse-function-theorem-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Calculus.inverse_function_theorem file \"ra-inverse-function-theorem-test.sage\"\n# description: Sage's derivative of the inverse (log for exp, √ for x² at 2, arcsin for sin at 0) is 1/f'(a)\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx, y = var('x y')\ninstances = []\nfor f, g, a, edge in [(exp(x), log(y), 0, False), (x ** 2, sqrt(y), 2, False), (sin(x), arcsin(y), 0, False), (x, y, 1, True)]:\n    instances.append(O([str(f), str(a), str(diff(f, x).subs(x=a)), '‹_›', '(by norm_num)'], diff(g, y).subs(y=f.subs(x=a)), 1 / diff(f, x).subs(x=a), edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal":
+  [{"type": "ℝ → ℝ", "name": "f"},
+   {"type": "ℝ", "name": "a"},
+   {"type": "ℝ", "name": "f'"},
+   {"type": "HasStrictDerivAt f f' a", "name": "hf"},
+   {"type": "f' ≠ 0", "name": "hf'"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "f' ≠ 0",
+    "rel": "ne",
+    "poly": "(x0) - (0)",
+    "name": "hf'",
+    "expr": "(x0) - (0)"},
+   {"text": "HasStrictDerivAt f f' a", "name": "hf"}],
+  "goal":
+  {"text":
+   "HasStrictDerivAt (HasStrictDerivAt.localInverse f f' a hf hf') f'⁻¹ (f a)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["f'"],
+  "atom_types": ["ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["e^x", "0", "1", "‹_›", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["x^2", "2", "4", "‹_›", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.2500000000000000000000000000000000000000000000000000000000000000000000000000000 .. 0.2500000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.2500000000000000000000000000000000000000000000000000000000000000000000000000000 .. 0.2500000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["sin(x)", "0", "1", "‹_›", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["x", "1", "1", "‹_›", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true}]}

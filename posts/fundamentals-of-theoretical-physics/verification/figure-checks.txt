@@ -1,0 +1,350 @@
+== boltzmann_distribution.sage
+[PASS] canonical ensemble of the levels 0, e1, e2: <E> = -d log Z/d beta and Var E = d^2 log Z/d beta^2: True
+[PASS] Gibbs entropy -sum p log p = beta <E> + log Z and F = -T log Z = <E> - T S: True
+[PASS] the Boltzmann distribution is a stationary point of -sum p log p - alpha sum p - beta sum p E, and the Hessian diag(-1/p_i) is negative definite: True
+[PASS] microcanonical spins: 1/T = dS/dE with S = N H(n/N) gives n/N = 1/(e^{eps/T} + 1), and 0 <= N H(n/N) - log binom(N, n) <= log(N + 1) for N = 100: True
+[PASS] grand canonical orbital: Xi = 1 + e^{-beta(eps - mu)} (fermions), sum_n y^n = 1/(1 - y) (bosons), <N> = T d log Xi/d mu gives the Fermi-Dirac and Bose-Einstein occupations: True
+[PASS] N independent two-level systems: (Delta E/<E>)^2 = e^{beta eps}/N, so the relative fluctuation falls as 1/sqrt(N): True
+wrote tutorial/figures/boltzmann_distribution.svg
+== carnot_cycle.sage
+[PASS] Maxwell relations: the mixed second derivatives of F(T, V), G(T, p), U(S, V), H(S, p) commute: True
+[PASS] ideal gas: F = -N T (log(V/N) + 3/2 log T + c) gives p V = N T, U = 3 N T/2 and (dS/dV)_T = (dp/dT)_V = N/V: True
+[PASS] van der Waals: p = N T/(V - N b) - a N^2/V^2 from F, Maxwell relation holds, critical point T_c = 8a/(27b), V_c = 3Nb, p_c = a/(27b^2): True
+[PASS] Carnot cycle: T V^(2/3) is constant on the adiabats, the entropy change over the cycle is 0 and the efficiency W/Q_h = 1 - T_c/T_h: True
+[PASS] the drawn cycle: V_C = 4 sqrt 2, V_D = 2 sqrt 2, W = log 2, efficiency 1/2: True
+[PASS] C_p - C_v = -T (dp/dT)_V^2/(dp/dV)_T equals N for the ideal gas and N/(1 - 2aN(V - Nb)^2/(T V^3)) for van der Waals: True
+[PASS] Euler relation U = T S - p V + mu N for the ideal gas U(S, V, N) = (3/2) N (N/V)^(2/3) exp(2S/(3N) - s0), with U = 3NT/2: True
+wrote tutorial/figures/carnot_cycle.svg
+== complex_field_phase.sage
+[PASS] the lower-index current j_mu = i(phib d_mu phi - phi d_mu phib) of the plane wave is (j_t, j_x) = (2 omega, -2 k), proportional to (omega, -k): True
+[PASS] the phase rotation preserves |phi|^2: True
+wrote tutorial/figures/complex_field_phase.svg
+[PASS] every slider frame keeps |e^{i alpha} phi| = 1.3: True
+wrote tutorial/figures/interactive/complex_field_phase.html
+== coupled_oscillators.sage
+[PASS] two masses m with springs k, kappa, k: omega^2 = k/m and (k + 2 kappa)/m, with modes (1, 1) and (1, -1): True
+[PASS] the beat x = ((cos w1 t + cos w2 t)/2, (cos w1 t - cos w2 t)/2) solves M x'' + K x = 0 with x(0) = (1, 0), x'(0) = 0: True
+[PASS] the energies of the two normal modes are separately conserved and add up to the total energy: True
+[PASS] the linear triatomic molecule (masses m, M, m, springs k): omega^2 = 0, k/m, k(1/m + 2/M): True
+[PASS] spherical pendulum: at the bottom of the sphere g^{-1} V'' = (g/l) times the identity, two modes of frequency sqrt(g/l): True
+[PASS] particle on SU(2) with V = k(1 - Re tr U/2): at U = 1, g^{-1} V'' = k times the identity, three degenerate modes: True
+[PASS] U = a0 + i a.sigma has U^dagger U = det U = a0^2 + |a|^2 (so U is in SU(2) on the unit S^3) and Re tr U/2 = a0: True
+wrote tutorial/figures/coupled_oscillators.svg
+wrote tutorial/figures/interactive/coupled_oscillators.html
+== de_sitter.sage
+[PASS] the embedding lies on the hyperboloid X0^2 - X1^2 - X2^2 = -1/H^2: True
+[PASS] induced metric is dt^2 - e^{2Ht} dx^2: True
+wrote tutorial/figures/de_sitter.png
+== feynman_diagrams.sage
+[PASS] symmetry factors from counting Wick contractions: figure eight 1/8, tree vertex 1, one-loop self-energy 1/2, s-channel bubble 1/2: True
+[PASS] the two-loop sunset self-energy has symmetry factor 1/6 (both assignments of the external points counted): True
+[PASS] int d^d l/(2 pi)^d 1/(l^2 + Delta)^n = Gamma(n - d/2)/((4 pi)^{d/2} Gamma(n)) Delta^{d/2 - n} by radial integration for (d, n) in [(1, 1), (1, 2), (2, 2), (3, 2), (3, 3), (4, 3), (5, 4)] : True
+[PASS] at d = 4 - eps the bubble coefficient Gamma(2 - d/2) = 2/eps - gamma_E + O(eps): True
+[PASS] Feynman parameters: 1/(A B) = int_0^1 dx 1/(x A + (1 - x) B)^2: True
+wrote tutorial/figures/feynman_diagrams.svg
+== feynman_poles.sage
+[PASS] the poles of i/(p0^2 - omega^2 + i eps) sit at +-sqrt(omega^2 - i eps), in the fourth and second quadrants, with residues +-i/(2 sqrt(omega^2 - i eps)): True
+[PASS] int dp0/(2 pi) i e^{-i p0 t}/(p0^2 - omega^2 + i eps) = e^{-i Omega |t|}/(2 Omega) for t > 0 and t < 0, -> e^{-i omega |t|}/(2 omega) as eps -> 0: True
+[PASS] Wick rotation: int dp0 i/(p0^2 - omega^2 + i eps) = pi/sqrt(omega^2 - i eps) -> pi/omega = int dp4 1/(p4^2 + omega^2): True
+[PASS] substituting p0 = i p4 (dp0 = i dp4) turns i/(p^2 - m^2) dp0 into 1/(p_E^2 + m^2) dp4: True
+[PASS] the Euclidean propagator int dp/(2 pi) e^{i p tau}/(p^2 + omega^2) = e^{-omega |tau|}/(2 omega) solves (-d^2/dtau^2 + omega^2) G = delta(tau) (slope jump -1): True
+wrote tutorial/figures/feynman_poles.svg
+wrote tutorial/figures/interactive/feynman_poles.html
+== field_action.sage
+[PASS] the solution satisfies phi'' = m^2 phi with the boundary values 0 and 1: True
+[PASS] E(eps) has no linear term: dE/deps = 0 at eps = 0: True
+[PASS] E(eps) - E(0) = eps^2 (pi^2 + m^2)/4 > 0 for eps != 0, so the solution is a minimum: True
+wrote tutorial/figures/field_action.svg
+wrote tutorial/figures/interactive/field_action.html
+== flrw_scale_factor.sage
+[PASS] FLRW Einstein tensor: G_tt = 3(adot^2 + k)/a^2, G_ij = -(2 a addot + adot^2 + k) gamma_ij, off-diagonal zero (SageManifolds): True
+[PASS] scalar curvature R = -6 (a addot + adot^2 + k)/a^2 (negative for de Sitter in this signature): True
+[PASS] the ij equation minus the tt equation gives addot/a = -(4 pi G/3)(rho + 3p): True
+[PASS] the two Friedmann equations imply the continuity equation rhodot + 3 (adot/a)(rho + p) = 0: True
+[PASS] for k = 0: a ~ t^(2/3) solves the equations with p = 0 (matter), a ~ t^(1/2) with p = rho/3 (radiation), a ~ e^(Ht) with p = -rho (cosmological constant): True
+[PASS] a = (Om/OL)^(1/3) sinh^(2/3)(3 sqrt(OL) H0 t/2) solves adot^2/a^2 = H0^2 (Om/a^3 + OL) with OL = 1 - Om: True
+[PASS] the age of the universe is H0 t0 = 2/3 for matter alone and 0.964 for Om = 0.3, OL = 0.7: True (0.9641)
+wrote tutorial/figures/flrw_scale_factor.svg
+wrote tutorial/figures/interactive/flrw_scale_factor.html
+== free_field_modes.sage
+[PASS] truncated oscillators of different modes commute and [a_n, a_n^dagger] = 1 off the truncation: True
+[PASS] the mode functions e^{i k_n x}/sqrt(L) are orthonormal on the circle: True
+[PASS] the mode sum of [phi(x), pi(y)] on the vacuum is i times the Dirichlet kernel (1/L) sum_{|n|<=N} e^{i k_n (x-y)}: True
+[PASS] (1/L) sum_{|n|<=N} e^{i k_n s} = sin((2N+1) pi s/L)/(L sin(pi s/L)) for N = 1..5: True
+[PASS] the Dirichlet kernel integrates to 1 over the circle for N = 1..5: True
+[PASS] on the Fock states |n_0, n_1, n_2> the Hamiltonian sum omega_n (a_n^dagger a_n + 1/2) is diagonal with energy E_0 + sum n_k omega_k: True
+wrote tutorial/figures/free_field_modes.svg
+== gauge_covariant.sage
+[PASS] D phi = (d + i A) phi transforms covariantly, D'(e^{i alpha} phi) = e^{i alpha} D phi, when A -> A - alpha': True
+[PASS] the ordinary derivative does not: d(e^{i alpha} phi) - e^{i alpha} d phi = i alpha' e^{i alpha} phi: True
+wrote tutorial/figures/gauge_covariant.svg
+[PASS] in every slider frame |D' phi'| equals |D phi| pointwise (covariance), while |d phi'| changes: True
+wrote tutorial/figures/interactive/gauge_covariant.html
+== higgs_potential.sage
+[PASS] V has its minimum value 0 on the circle r = mu: True
+[PASS] expansion V(mu + h) = lam mu^2 h^2 + lam mu h^3 + lam/4 h^4: True
+wrote tutorial/figures/higgs_potential.png
+[PASS] in every slider frame the grid minimum of V sits at |phi| = sqrt(max(mu^2, 0)) to grid accuracy: True
+wrote tutorial/figures/interactive/higgs_potential.html
+== higgs_spectrum.sage
+[PASS] the degrees of freedom are conserved, 1 + 1 + 2 = 1 + 3: True
+[PASS] m_h^2 = lambda mu^2 and m_A^2 = 2 e^2 mu^2 for the chosen parameters: True
+wrote tutorial/figures/higgs_spectrum.svg
+[PASS] m_sigma = m_A exactly when lam = 2 e^2 (sqrt(lam) mu = sqrt(2) e mu): True
+wrote tutorial/figures/interactive/higgs_spectrum.html
+== kepler_orbits.sage
+[PASS] the conic r = p/(1 + e cos phi) solves the orbit equation u'' + u = mk/L^2 with p = L^2/(mk): True
+[PASS] the energy of the conic of eccentricity e is E = k(e^2 - 1)/(2p): True
+[PASS] the Laplace-Runge-Lenz vector A = p x L - mk r/|r| has dA/dt = 0 under F = -k r/r^3: True
+[PASS] A is orthogonal to L and |A|^2 = m^2 k^2 + 2 m E L^2: True
+[PASS] the numerical orbit of eccentricity 1/2 closes after T = 2 pi a^(3/2) (Kepler's third law), to 1e-6: True
+wrote tutorial/figures/kepler_orbits.svg
+wrote tutorial/figures/interactive/kepler_orbits.html
+== landau_free_energy.sage
+[PASS] Landau minimisation: f'(m) = 4 b m (m^2 - m_0^2) with m_0^2 = a (T_c - T)/(2b), f(m_0) = -a^2 (T_c - T)^2/(4b), and f - f(m_0) = b (m^2 - m_0^2)^2 >= 0 (sum of squares): True
+[PASS] above T_c: f = m^2 (a (T - T_c) + b m^2) >= 0 with equality only at m = 0: True
+[PASS] heat capacity: C = -T d^2 f/dT^2 is 0 above T_c and T a^2/(2b) below, a jump of a^2 T_c/(2b) at T_c: True
+[PASS] critical exponents of Landau theory: m_0 ~ (T_c - T)^(1/2) (beta = 1/2), chi = 1/(2a(T - T_c)) above and 1/(4a(T_c - T)) below (gamma = 1), m = (h/4b)^(1/3) at T_c (delta = 3): True
+[PASS] mean-field Ising: df_MF/dm = Jz (m - tanh(Jz m/T)), and f_MF = -T log 2 + (Jz/2)(1 - Jz/T) m^2 + (Jz)^4 m^4/(12 T^3) + O(m^6), so T_c = J z: True
+[PASS] mean-field Ising near T_c: at T = 0.99 T_c the root of m = tanh(m T_c/T) is 0.17251, against sqrt(3 (1 - T/T_c)) (T/T_c) = 0.17147: True
+wrote tutorial/figures/landau_free_energy.svg
+wrote tutorial/figures/interactive/landau_free_energy.html
+== matsubara_frequencies.sage
+[PASS] periodicity: e^{-i omega_n beta} = 1 for omega_n = 2 pi n/beta and -1 for omega_n = (2n + 1) pi/beta (n = -6..6): True
+[PASS] orthonormality: (1/beta) int_0^beta e^{i (omega_p - omega_q) tau} d tau = delta_pq for the bosonic and the fermionic modes: True
+[PASS] residue sums: sum_n 1/(n^2 + a^2) = pi coth(pi a)/a and sum_n 1/((n + 1/2)^2 + a^2) = pi tanh(pi a)/a (numerically checked with 40000 terms): True
+[PASS] Matsubara sums: (1/beta) sum_n 1/(omega_n^2 + omega^2) = coth(beta omega/2)/(2 omega) (bosons) and tanh(beta omega/2)/(2 omega) (fermions): True
+[PASS] the oscillator from the thermal circle: d log Z/d omega = -omega sum_n 1/(omega_n^2 + omega^2) = d/d omega [-log(2 sinh(beta omega/2))], and the T -> 0 limit is the zero-point energy omega/2: True
+[PASS] thermal Green's function G(tau) = cosh(omega(tau - beta/2))/(2 omega sinh(beta omega/2)): (-d_tau^2 + omega^2) G = 0 on (0, beta), G(0) = G(beta) = the Matsubara sum, unit jump of G' at tau = 0: True
+[PASS] spectrum on the thermal circle: -d_tau^2 e^{-i omega_n tau} = omega_n^2 e^{-i omega_n tau}; masses M_n^2 = m^2 + (2 pi n T)^2 for bosons, the lowest fermionic value being (pi T)^2: True
+wrote tutorial/figures/matsubara_frequencies.svg
+== newtonian_limit.sage
+[PASS] to first order in Phi, Gamma^i_tt = d_i Phi for i = x, y, z (SageManifolds connection): True
+[PASS] the weak-field geodesic stays within 0.05 of the Newtonian orbit over the plotted time (the residual is the perihelion shift, of order Phi): True (max deviation 0.0269)
+wrote tutorial/figures/newtonian_limit.svg
+== noether_current_flow.sage
+[PASS] the charge Q = int j^0 dx is the same at the three times (to 1e-6): True [5.604991, 5.604991, 5.604991]
+[PASS] the divergence of j = 2(u dv - v du) is 2(u Box v - v Box u), vanishing on the Klein-Gordon equation: True
+wrote tutorial/figures/noether_current_flow.svg
+wrote tutorial/figures/interactive/noether_current_flow.html
+== noether_orbit.sage
+[PASS] the numerical angular momentum stays constant to 1e-6 along the orbit: (1.61026747491633e-12) < (1.00000000000000e-6)
+[PASS] dL/dt vanishes identically for any central force: True
+wrote tutorial/figures/noether_orbit.svg
+== occupation_numbers.sage
+[PASS] Stefan-Boltzmann integral: int_0^oo x^3/(e^x - 1) dx = sum_n 6/n^4 = Gamma(4) zeta(4) = pi^4/15: True
+[PASS] photon gas: u = pi^2 T^4/15, f = -pi^2 T^4/45 = -p (integration by parts), so p = u/3 and s = 4 pi^2 T^3/45: True
+[PASS] Wien's law: d/dx [x^3/(e^x - 1)] = 0 is x = 3(1 - e^{-x}), x = 2.8214: True
+[PASS] photon number density: n = (1/pi^2) int omega^2/(e^{omega/T} - 1) d omega = 2 zeta(3) T^3/pi^2, since int x^2/(e^x - 1) = 2 zeta(3): True
+[PASS] fermions: int_0^oo x^3/(e^x + 1) dx = 7 pi^4/120 = (7/8)(pi^4/15): True
+[PASS] Bose condensation: int_0^oo x^(1/2)/(e^x - 1) dx = Gamma(3/2) zeta(3/2), so n lambda^3 = zeta(3/2) = 2.6124 at T_c: True
+[PASS] n_FD < n_MB < n_BE for x > 0, both quantum occupations approach e^{-x} as x -> oo, and n_BE - n_FD = 2/(e^{2x} - 1): True
+[PASS] Fermi gas at T = 0 (spin 1/2, m = 1): N = V k_F^3/(3 pi^2) and E = (3/5) N eps_F with eps_F = k_F^2/2: True
+wrote tutorial/figures/occupation_numbers.svg
+wrote tutorial/figures/interactive/occupation_numbers.html
+== oraifeartaigh.sage
+[PASS] F_1 = 0 and F_2 = 0 have no common solution (F_2 = 0 forces phi_3 = 0, then F_1 = k != 0): True
+[PASS] V >= k^2 ... V at the origin is k^2 and the gradient vanishes there: True
+[PASS] the phi_3 mass-squared eigenvalues at the origin are m^2 - yk and m^2 + yk (Martin eq. 7.3.9), split from the fermion mass m^2: True
+wrote tutorial/figures/oraifeartaigh.svg
+[PASS] for m^2 < yk the minimum is at phi_3^2 = 2(yk - m^2)/y^2 with V_min = m^2(2yk - m^2)/y^2, positive and below k^2: True
+wrote tutorial/figures/interactive/oraifeartaigh.html
+== oscillator_spectrum.sage
+[PASS] [a, a^dagger] = 1 on the truncated space (all but the last diagonal entry): True
+[PASS] the spectrum of H = a^dagger a + 1/2 is n + 1/2: True
+wrote tutorial/figures/oscillator_spectrum.svg
+== pendulum_liouville.sage
+[PASS] the pendulum flow preserves the area of a disc of initial conditions (pi 0.4^2) to 1e-3 at t = 0, 1.5, 3, 4.5: True
+[PASS] the Hamiltonian vector field of any H(q, p) has zero divergence (Liouville): True
+[PASS] the Poisson bracket is antisymmetric and satisfies the Leibniz rule and the Jacobi identity for arbitrary functions F, G, K of (q, p): True
+[PASS] the angular momentum components satisfy {L_i, L_j} = eps_ijk L_k and {L^2, L_i} = 0: True
+[PASS] {L_i, H} = 0 for a central potential V(r): True
+[PASS] the oscillator flow (q, p) -> (q cos t + p sin t, -q sin t + p cos t) has Jacobian determinant 1 and {Q, P} = 1: True
+[PASS] the action-angle map q = sqrt(2I) sin theta, p = sqrt(2I) cos theta is canonical ({q, p}_(theta, I) = 1) and turns H = (p^2 + q^2)/2 into I: True
+[PASS] the generating function F2 = q^2 P/2 gives the canonical map Q = q^2/2, P = p/q, with {Q, P} = 1: True
+[PASS] W(q) = int sqrt(2E - q^2) dq solves the Hamilton-Jacobi equation (W')^2/2 + q^2/2 = E of the oscillator: True
+[PASS] S = sqrt(2mE) q - E t solves the time-dependent Hamilton-Jacobi equation dS/dt + (dS/dq)^2/(2m) = 0 of the free particle: True
+wrote tutorial/figures/pendulum_liouville.svg
+wrote tutorial/figures/interactive/pendulum_liouville.html
+== phase_portrait.sage
+[PASS] (q, p) = (cos t, -sin t) solves Hamilton's equations of the oscillator and conserves H: True
+[PASS] H is conserved along every solution of Hamilton's equations (dH/dt = H_q q' + H_p p' = 0): True
+wrote tutorial/figures/phase_portrait.svg
+== plane_wave.sage
+[PASS] the Klein-Gordon operator (Box + m^2) on the plane wave gives (k^2 + m^2 - omega^2) cos(kx - omega t): True
+[PASS] it vanishes exactly on the dispersion relation: True
+wrote tutorial/figures/plane_wave.svg
+[PASS] at every slider mass the phase and group velocities at k = 2 multiply to 1: True
+wrote tutorial/figures/interactive/plane_wave.html
+== qm_bloch_sphere.sage
+[PASS] the Pauli algebra sigma_i sigma_j = delta_ij 1 + i eps_ijk sigma_k for all i, j: True
+[PASS] the spin-s matrices (s = 1/2, 1, 3/2, 2) satisfy [J_x, J_y] = i hbar J_z (cyclic) and J^2 = hbar^2 s(s + 1): True
+[PASS] the rotation by 2 pi, exp(-2 pi i J_z/hbar), is (-1)^(2s) (s = 1/2, 1, 3/2, 2): True
+[PASS] exp(-i theta sigma_x/2) = cos(theta/2) 1 - i sin(theta/2) sigma_x: True
+[PASS] under H = (hbar omega/2) sigma_z the Bloch vector precesses: <sigma>(t) = (sin th cos(ph + omega t), sin th sin(ph + omega t), cos th): True
+[PASS] Clebsch-Gordan for 1 x 1/2: |3/2, 1/2> = sqrt(1/3)|1, -1/2> + sqrt(2/3)|0, 1/2>, |1/2, 1/2> = sqrt(2/3)|1, -1/2> - sqrt(1/3)|0, 1/2>: True
+[PASS] the Clebsch-Gordan matrices of 1/2 x 1/2, 1 x 1/2, 1 x 1 and 3/2 x 1 are orthogonal (C^T C = 1 to 1e-14): True
+[PASS] dimension count: sum over j = |j1 - j2|..j1 + j2 of (2j + 1) = (2 j1 + 1)(2 j2 + 1) for 2 j1, 2 j2 <= 6: True
+[PASS] for two spins 1/2, S1.S2 has eigenvalues hbar^2/4 (three times, the triplet) and -3 hbar^2/4 (once, the singlet): True
+wrote tutorial/figures/qm_bloch_sphere.svg
+wrote tutorial/figures/interactive/qm_bloch_sphere.html
+== qm_coherent_state.sage
+[PASS] a psi_alpha = alpha psi_alpha for a = (xi + d/dxi)/sqrt 2 and psi_alpha = pi^(-1/4) exp(-xi^2/2 + sqrt 2 alpha xi - alpha^2/2): True
+[PASS] e^(-i t/2) psi_(alpha e^(-i t)) solves i d/dt psi = (-(1/2) d^2/dxi^2 + xi^2/2) psi (the coherent state stays coherent): True
+[PASS] the number-state series e^(-|alpha|^2/2) sum alpha^n/sqrt(n!) |n> (40 terms, alpha = 3/2) equals the Gaussian wave function at five points: True
+[PASS] for the truncated 40 x 40 ladder matrix, ||a v - alpha v|| < 1e-15 and ||v|| = 1 to 1e-15 (alpha = 3/2): True
+[PASS] the photon-number distribution |c_n|^2 = e^(-|alpha|^2) |alpha|^(2n)/n! is Poisson with mean and variance |alpha|^2 = 9/4: True
+[PASS] for alpha = 2 the density is pi^(-1/2) exp(-(xi - 2 sqrt 2 cos t)^2): <x>(t) = sqrt 2 |alpha| cos(omega t) ell, Delta x = ell/sqrt 2: True
+[PASS] for real alpha, beta: <beta|alpha> = exp(-(alpha - beta)^2/2), so |<beta|alpha>|^2 = exp(-|alpha - beta|^2): True
+wrote tutorial/figures/qm_coherent_state.svg
+wrote tutorial/figures/interactive/qm_coherent_state.html
+== qm_hydrogen_levels.sage
+[PASS] R_nl = rho^l e^(-rho/2) L^(2l+1)_(n-l-1)(rho), rho = 2r/(n a), a = hbar^2/(m k), solves the radial equation with E_n = -m k^2/(2 hbar^2 n^2) for all l < n <= 4: True
+[PASS] radial functions of equal l and different n are orthogonal: int R_10 R_20 r^2 dr = int R_21 R_31 r^2 dr = 0: True
+[PASS] sum over l = 0..n-1 of (2l + 1) = n^2: True
+[PASS] so(4) = su(2) + su(2): the diagonal su(2) content of (j, j) with n = 2j + 1 is l = 0, 1, ..., n - 1, dimension n^2 (n <= 6): True
+[PASS] the Pauli relation H = -m k^2/(2 hbar^2 (4 j(j + 1) + 1)) gives E_n with n = 2j + 1: True
+[PASS] classical Kepler: {H, A_i} = 0 for A = p x L - m k x/r, A.L = 0 and A^2 = m^2 k^2 + 2 m H L^2: True
+[PASS] the translation operator exp(-a d/dx) = exp(-i a P/hbar) shifts a polynomial: sum_k (-a)^k f^(k)/k! = f(x - a): True
+[PASS] time reversal T = -i sigma_y K on spin 1/2: T sigma_i T^(-1) = -sigma_i and T^2 = -1: True
+wrote tutorial/figures/qm_hydrogen_levels.svg
+== qm_oscillator.sage
+[PASS] H psi_n = hbar omega (n + 1/2) psi_n for the Hermite functions psi_n, n = 0..6, with hbar, m, omega symbolic: True
+[PASS] the Hermite functions h_0..h_5 are orthonormal in L^2(R): True
+[PASS] a h_n = sqrt(n) h_(n-1) and a^dagger h_n = sqrt(n+1) h_(n+1) for a = (xi + d/dxi)/sqrt 2, n = 0..6: True
+[PASS] truncated N = 6 ladder matrices: [a, a^dagger] = diag(1, 1, 1, 1, 1, -5) (= 1 except the last entry, -(N - 1)): True
+[PASS] the truncated H = a^dagger a + 1/2 is diagonal with entries n + 1/2, and x = (a + a^dagger)/sqrt 2, p = i(a^dagger - a)/sqrt 2 give H = (p^2 + x^2)/2 except in the last entry: True
+[PASS] in |n>, (Delta x)^2 = (hbar/(m omega))(n + 1/2), (Delta p)^2 = hbar m omega (n + 1/2), so Delta x Delta p = hbar (n + 1/2), n = 0..4: True
+[PASS] the parity psi_n(-x) = (-1)^n psi_n(x), n = 0..6: True
+[PASS] the 3D isotropic oscillator level hbar omega (n + 3/2) has degeneracy (n + 1)(n + 2)/2, n = 0..9: True
+wrote tutorial/figures/qm_oscillator.svg
+wrote tutorial/figures/interactive/qm_oscillator.html
+== qm_particle_box.sage
+[PASS] -hbar^2/(2m) phi_n'' = E_n phi_n with E_n = n^2 pi^2 hbar^2/(2 m L^2) and phi_n(0) = phi_n(L) = 0, n = 1..6: True
+[PASS] the box eigenfunctions phi_1..phi_5 are orthonormal in L^2(0, L): True
+[PASS] psi = sqrt(30/L^5) x (L - x) is normalised: True
+[PASS] its box coefficients are c_n = 8 sqrt(15)/(n^3 pi^3) for odd n and 0 for even n (n <= 7): True
+[PASS] the probabilities |c_n|^2 = 960/(n^6 pi^6) over odd n sum to 1, and P(E_1) = 960/pi^6 = 0.99856: True
+[PASS] for (phi_1 + phi_2)/sqrt 2, <x>(t) = L/2 - (16 L/(9 pi^2)) cos(omega t) with omega = (E_2 - E_1)/hbar = 3 pi^2 hbar/(2 m L^2): True
+[PASS] i hbar d/dt Psi = H Psi for that superposition: True
+wrote tutorial/figures/qm_particle_box.svg
+== qm_perturbation.sage
+[PASS] <n|x^4|n> = (hbar/(m omega))^2 (3/4)(2n^2 + 2n + 1) from truncated ladder matrices (n <= 8), so the first-order shift of lambda x^4 is lambda (3/4)(hbar/(m omega))^2 (2n^2 + 2n + 1): True
+[PASS] second order for the ground state of x^2/2 + p^2/2 + lambda x^4: sum |<k|x^4|0>|^2/(E_0 - E_k) = -21/8 (only k = 2, 4 contribute): True
+[PASS] for the perturbation F x the first-order shift vanishes and the second-order shift is -F^2/2 for n = 0..5, the exact shift of the completed square: True
+[PASS] completing the square: x^2/2 + F x = (x + F)^2/2 - F^2/2: True
+[PASS] two-level system: the exact lower eigenvalue expands as E1 - v^2/(E2 - E1) + v^4/(E2 - E1)^3 + O(v^6), the second-order formula plus the next term: True
+[PASS] in the box with V = eps x, the first-order shifts <n|eps x|n> = eps L/2 for n = 1..6: True
+[PASS] at lambda = 0.01 the numerical ground state 0.50726 agrees with second order to 3e-5 and with first order only to 3e-4: True
+[PASS] at lambda = 0.01 the first-order formula n + 1/2 + (3/4) lambda (2n^2 + 2n + 1) is within 1% of the numerical levels n = 0..3: True
+wrote tutorial/figures/qm_perturbation.svg
+== qm_propagator.sage
+[PASS] the free propagator K = sqrt(m/(2 pi i hbar t)) exp(i m (x - y)^2/(2 hbar t)) solves i hbar K_t = -(hbar^2/2m) K_xx: True
+[PASS] Euclidean composition: int K_E(x, z; tau1) K_E(z, y; tau2) dz = K_E(x, y; tau1 + tau2) (a Gaussian integral): True
+[PASS] real-time composition by the Fresnel formula int exp(-A z^2 + B z + C) dz = sqrt(pi/A) exp(B^2/(4A) + C): exponent and squared prefactor of K(t1) * K(t2) match K(t1 + t2): True
+[PASS] the time-sliced Euclidean path integral with N = 2, 3, 4 slices, (m/(2 pi hbar eps))^(N/2) int prod dz_k exp(-sum m (z_(k+1) - z_k)^2/(2 hbar eps)), equals K_E(x, y; tau): True
+[PASS] int K(x, y; t) psi_0(y) dy reproduces the spreading Gaussian packet (hbar = m = sigma = 1) at (x, t) = (0, 1), (1, 1), (2, 3) to 1e-8: True
+[PASS] the oscillator's classical path from y to x in time T has action S_cl = m omega ((x^2 + y^2) cos(omega T) - 2 x y)/(2 sin(omega T)): True
+[PASS] along x_cl + a sin(pi s/T), S - S_cl = m a^2 (pi^2 - omega^2 T^2)/(4T): no linear term in a, the classical path is stationary: True
+[PASS] the oscillator (Mehler) kernel sqrt(m omega/(2 pi i hbar sin omega t)) exp(i S_cl/hbar) solves i hbar K_t = -(hbar^2/2m) K_xx + (m omega^2 x^2/2) K: True
+wrote tutorial/figures/qm_propagator.svg
+== qm_uncertainty.sage
+[PASS] the Gaussian packet is normalised with <x> = x0, <p> = p0: True
+[PASS] the Gaussian packet has (Delta x)^2 = sigma^2, (Delta p)^2 = hbar^2/(4 sigma^2), Delta x Delta p = hbar/2: True
+[PASS] the momentum wave function of the centred Gaussian is (2 sigma^2/(pi hbar^2))^(1/4) exp(-sigma^2 p^2/hbar^2), normalised: True
+[PASS] the box eigenstates n = 1..5 have <x> = L/2, <p> = 0 and (Delta x Delta p)^2 = (hbar^2/4)(n^2 pi^2/3 - 2): True
+[PASS] the box ground state has Delta x Delta p = 0.5679 hbar > hbar/2: True
+[PASS] the spin-1/2 state (cos(theta/2), e^(i phi) sin(theta/2)) has Bloch vector <sigma> = (sin th cos ph, sin th sin ph, cos th): True
+[PASS] Robertson for sigma_x, sigma_y: (Delta sx)^2 (Delta sy)^2 - <sz>^2 = sin^4 th cos^2 ph sin^2 ph >= 0: True
+[PASS] tr[X, P] = 0 for matrices, so [X, P] = i hbar 1 (trace 4 i hbar) has no finite-dimensional solution: True
+wrote tutorial/figures/qm_uncertainty.svg
+wrote tutorial/figures/interactive/qm_uncertainty.html
+== qm_wave_packet.sage
+[PASS] the spreading Gaussian packet solves the free Schroedinger equation i hbar psi_t = -(hbar^2/2m) psi_xx: True
+[PASS] at t = 0 it reduces to the Gaussian (2 pi sigma^2)^(-1/4) exp(-x^2/(4 sigma^2) + i p0 x/hbar): True
+[PASS] |psi(x, t)|^2 is the Gaussian of mean p0 t/m and width sigma(t) = sigma sqrt(1 + (hbar t/(2 m sigma^2))^2) (three parameter sets): True
+[PASS] numerically (hbar = m = sigma = 1, p0 = 2): norm 1, <x>(t) = 2t, (Delta x)^2 = 1 + t^2/4 at t = 0, 1, 3: True
+wrote tutorial/figures/qm_wave_packet.svg
+wrote tutorial/figures/interactive/qm_wave_packet.html
+== running_coupling.sage
+[PASS] lambda(t) = lambda_0/(1 - 3 lambda_0 t/(16 pi^2)) solves d lambda/d log mu = 3 lambda^2/(16 pi^2) with lambda(0) = lambda_0: True
+[PASS] the coupling has a Landau pole at log(mu/mu_0) = 16 pi^2/(3 lambda_0) and tends to 0 as mu -> 0: True
+[PASS] the one-loop beta function of lambda phi^4/4! is (3 channels) x (symmetry factor 1/2) x (the 1/eps residue 2/(16 pi^2) of Gamma(2 - d/2)/(4 pi)^2) x lambda^2 = 3 lambda^2/(16 pi^2): True
+[PASS] Phi = phi_n(x) e^{i n y/R} solves the five-dimensional Klein-Gordon equation iff (box + m^2 + n^2/R^2) phi_n = 0: masses sqrt(m^2 + n^2/R^2): True
+[PASS] the number of tower modes with m_n <= E is 2 floor(R sqrt(E^2 - m^2)) + 1 (checked by enumeration), only n = 0 when E < sqrt(m^2 + 1/R^2): True
+[PASS] reducing (lambda_5/4!) phi^4 on the zero mode phi = phi_0/sqrt(2 pi R) gives the four-dimensional coupling lambda_4 = lambda_5/(2 pi R): True
+wrote tutorial/figures/running_coupling.svg
+wrote tutorial/figures/interactive/running_coupling.html
+== schottky_peak.sage
+[PASS] two-level system: Z = 1 + e^{-eps/T}, U = eps/(e^{eps/T} + 1), C = x^2 e^x/(1 + e^x)^2 with x = eps/T: True
+[PASS] Schottky peak: dC/dx = 0 is x tanh(x/2) = 2, at x = 2.3994, i.e. T = 0.4168 eps, with C_max = 0.4392: True
+[PASS] quantum oscillator: sum_n e^{-beta omega (n + 1/2)} = 1/(2 sinh(beta omega/2)), U = omega/2 + omega/(e^{beta omega} - 1), C = -T d^2F/dT^2 = x^2 e^x/(e^x - 1)^2: True
+[PASS] limits: C -> 1 (oscillator) and C -> 0 (two-level) as T -> oo; both C ~ x^2 e^{-x} as T -> 0: True
+[PASS] third law: S -> 0 as T -> 0 for both systems; S -> log 2 for the two-level system as T -> oo; oscillator S = x/(e^x - 1) - log(1 - e^{-x}): True
+[PASS] ideal gas: int e^{-beta p^2/2m} dp = sqrt(2 pi m/beta), Z_1 = V/lambda^3, and with log N! ~ N log N - N: p V = N T, U = 3NT/2, S = N(log(V/(N lambda^3)) + 5/2) (Sackur-Tetrode): True
+[PASS] equipartition: <a p^2> = T/2 for every a > 0, and <b q^4> = T/4: True
+wrote tutorial/figures/schottky_peak.svg
+== schwarzschild.sage
+[PASS] the Schwarzschild metric is Ricci-flat, R_mu nu = 0 (SageManifolds): True
+[PASS] Kretschmann scalar R_abcd R^abcd = 48 m^2/r^6 (finite at r = 2m, divergent at r = 0): True
+[PASS] radial light rays have dr/dt = +-(1 - 2m/r), closing the light cone at r = 2m: True
+[PASS] in (v, r) the metric is (1 - 2m/r) dv^2 - 2 dv dr - r^2 dOmega^2, regular at r = 2m: True
+[PASS] in (r, v - r) the cone has slopes -1 (ingoing) and (1 + 2m/r)/(1 - 2m/r) (outgoing), negative inside r = 2m: True
+[PASS] the r-component of the geodesic equation is r'' = -V'(r)/2 with V = (1 - 2m/r)(1 + L^2/r^2): True
+[PASS] circular orbits at m r^2 - L^2 r + 3 m L^2 = 0; the innermost stable one is at r = 6m, L^2 = 12 m^2: True
+[PASS] differentiating (du/dph)^2 = (E^2 - V)/L^2 gives the orbit equation u'' + u = m/L^2 + 3 m u^2: True
+[PASS] the numerical perihelion shift agrees with 6 pi m/p (p = L^2/m, e = 0.3) to 3% for p = 300, 1000, 3000 m: True (worst relative error 0.0261)
+[PASS] the numerical deflection of light agrees with 4m/b to 5% for b = 200, 1000, 5000 m: True (worst relative error 0.0150)
+wrote tutorial/figures/schwarzschild.svg
+wrote tutorial/figures/interactive/schwarzschild.html
+== spinor_dimensions.sage
+{2: (1, ['W', 'M', 'pM', 'MW']), 3: (2, ['M']), 4: (4, ['W', 'M']), 5: (8, []), 6: (8, ['W']), 7: (16, []), 8: (16, ['W', 'pM']), 9: (16, ['pM']), 10: (16, ['W', 'M', 'pM', 'MW']), 11: (32, ['M'])}
+[PASS] the computed minimal real spinor dimensions agree with the standard table for d = 2, ..., 11: True
+[PASS] the eleven-dimensional Majorana spinor has 32 real components, the maximal number of supercharges: True
+wrote tutorial/figures/spinor_dimensions.svg
+== spinor_rotation.sage
+[PASS] the rotated spinor at 2 pi is -psi and at 4 pi is psi: True
+[PASS] <sigma_3> = cos(theta), periodic with period 2 pi: True
+wrote tutorial/figures/spinor_rotation.svg
+[PASS] <sigma_2> = -sin(theta) for the rotated spinor (the spin turns in the (y, z)-plane): True
+wrote tutorial/figures/interactive/spinor_rotation.html
+== stationary_action.sage
+[PASS] S(eps) is a quadratic polynomial in eps with no linear term, dS/deps = 0 at eps = 0: True
+[PASS] the classical path solves x'' + x = 0: True
+wrote tutorial/figures/stationary_action.svg
+== sugra11_dof.sage
+d = 11: {'graviton $e_\\mu{}^a$': 44, '3-form $B_{\\mu\\nu\\rho}$': 84} {'gravitino $\\psi_\\mu$': 128}
+d = 4, N = 8: {'graviton': 2, '28 vectors': 56, '70 scalars': 70} {'8 gravitini': 16, '56 spin-1/2': 112}
+[PASS] eleven-dimensional supergravity has 44 + 84 = 128 bosonic and 128 fermionic degrees of freedom: True
+[PASS] the N = 8, d = 4 multiplet has 2 + 56 + 70 = 128 bosonic and 16 + 112 = 128 fermionic degrees of freedom: True
+wrote tutorial/figures/sugra11_dof.svg
+== supermultiplets.sage
+[PASS] the massless multiplet from a Clifford vacuum has binomial(N, k) states of helicity lambda_0 + k/2, 2^N in all, half of them bosons, for N = 1..8: True
+[PASS] the N = 8 gravity multiplet has multiplicities 1, 8, 28, 56, 70, 56, 28, 8, 1 at helicities 2, ..., -2 and is self-conjugate (128 + 128): True
+[PASS] the N = 4 vector multiplet 1, 4, 6, 4, 1 at helicities 1, ..., -1 is self-conjugate (8 + 8): True
+[PASS] a ladder spans N/2 units of helicity, so |lambda| <= 2 allows N <= 8 and |lambda| <= 1 allows N <= 4: True
+[PASS] the CPT-completed N = 1 gravity multiplet has helicities +-2, +-3/2 with one state each (2 + 2): True
+wrote tutorial/figures/supermultiplets.svg
+wrote tutorial/figures/interactive/supermultiplets.html
+== susy_oscillator.sage
+[PASS] {b, b^dag} = 1 and b^2 = 0 for the fermionic mode: True
+[PASS] Q^2 = 0 and {Q, Q^dag} = H (away from the truncation level): True
+[PASS] the spectrum is n omega with the ground state unique and every excited level doubly degenerate: True
+wrote tutorial/figures/susy_oscillator.svg
+== thermal_propagator.sage
+[PASS] int d^2x exp(-x.A.x/2 + J.x) = (2 pi)/sqrt(det A) exp(J.A^{-1}.J/2) for A = [[2,1],[1,3]]: True
+[PASS] derivatives of exp(J.G.J/2): <x_i x_j x_k x_l> = G_ij G_kl + G_ik G_jl + G_il G_jk and odd moments vanish: True
+[PASS] the number of Wick pairings of 2n points is (2n-1)!! = 1, 3, 15, 105, 945, 10395 for n = 1..6, and <y^6> = 15 for a unit Gaussian: True
+[PASS] sum over images sum_k e^{-omega|tau + k beta|}/(2 omega) = cosh(omega(beta/2 - tau))/(2 omega sinh(omega beta/2)) for 0 < tau < beta: True
+[PASS] Matsubara sum (1/beta) sum_n 1/(omega_n^2 + omega^2) with omega_n = 2 pi n/beta equals coth(beta omega/2)/(2 omega) (to 45 digits at four points), which is exactly (n_B + 1/2)/omega: True
+[PASS] G_beta solves -G'' + omega^2 G = 0 on (0, beta), is periodic, and tends to e^{-omega tau}/(2 omega) as beta -> oo: True
+wrote tutorial/figures/thermal_propagator.svg
+== wz_potential.sage
+[PASS] V = |W'|^2 vanishes at phi = 0 and at phi = -2m/y and nowhere else (solve W' = 0): True
+[PASS] at phi = 0 the scalar mass matrix is |m|^2 times the identity, equal to the fermion mass squared |W''(0)|^2: True
+wrote tutorial/figures/wz_potential.svg
+wrote tutorial/figures/interactive/wz_potential.html
+== yang_mills_field.sage
+[PASS] the field strength of the constant potential is [A_x, A_y] = c1 c2 T_3: True
+[PASS] for an abelian potential (both components along T_3) the commutator vanishes: True
+wrote tutorial/figures/yang_mills_field.svg

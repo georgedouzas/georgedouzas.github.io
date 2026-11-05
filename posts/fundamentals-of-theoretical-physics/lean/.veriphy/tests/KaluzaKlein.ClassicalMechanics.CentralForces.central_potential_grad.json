@@ -1,0 +1,103 @@
+{"target":
+ "KaluzaKlein.ClassicalMechanics.CentralForces.central_potential_grad",
+ "statement":
+ "∀ (V f : ℝ → ℝ),\n  (∀ (r : ℝ), HasDerivAt V (-f r) r) →\n    ∀ (x y z : ℝ),\n      0 < x ^ 2 + y ^ 2 + z ^ 2 →\n        deriv (fun x => V √(x ^ 2 + y ^ 2 + z ^ 2)) x = -(f √(x ^ 2 + y ^ 2 + z ^ 2) * x / √(x ^ 2 + y ^ 2 + z ^ 2))",
+ "seed": 0,
+ "script_hash": "10777979140446156183",
+ "script":
+ "# name: cm-central-potential-grad-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly (test_fallback recipe, oracle\n#   instances; the binders are functions)\n# goal: sage_test KaluzaKlein.ClassicalMechanics.CentralForces.central_potential_grad file \"cm-central-potential-grad-test.sage\"\n# description: ∂_x V(|x|) = -f(|x|) x/|x| for V' = -f, at (V, f) = (0, 0) at (1, 0, 0) (edge), (r²/2, -r) at (1, 2, 2),\n#   (-r³/3, r²) at (3, 4, 0)\nSEED = 0  # the instances are listed by hand\nX, Y, Z, r = SR.var('X Y Z r')\ndef inst(Vl, fl, V, f, x, y, z, edge):\n    rr = sqrt(X**2 + Y**2 + Z**2)\n    lhs = diff(SR(V).subs(r=rr), X).subs({X: x, Y: y, Z: z})\n    R = sqrt(x**2 + y**2 + z**2)\n    rhs = -(SR(f).subs(r=R) * x / R)\n    return oracle_instance(Vl, fl, '_', str(x), str(y), str(z), '_', lhs=lhs, rhs=rhs, relation='==', edge=edge)\ninstances = [inst('fun _ : ℝ => (0 : ℝ)', 'fun _ : ℝ => (0 : ℝ)', 0, 0, 1, 0, 0, True),\n             inst('fun r : ℝ => r ^ 2 / 2', 'fun r : ℝ => -r', r**2 / 2, -r, 1, 2, 2, False),\n             inst('fun r : ℝ => -r ^ 3 / 3', 'fun r : ℝ => r ^ 2', -r**3 / 3, r**2, 3, 4, 0, False)]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4"],
+  "universal":
+  [{"type": "ℝ → ℝ", "name": "V"},
+   {"type": "ℝ → ℝ", "name": "f"},
+   {"type": "∀ (r : ℝ), HasDerivAt V (-f r) r", "name": "hV"},
+   {"type": "ℝ", "name": "x"},
+   {"type": "ℝ", "name": "y"},
+   {"type": "ℝ", "name": "z"},
+   {"type": "0 < x ^ 2 + y ^ 2 + z ^ 2", "name": "h"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < x ^ 2 + y ^ 2 + z ^ 2",
+    "rel": "lt",
+    "poly": "(0) - ((((x2)^2 + (x3)^2) + (x4)^2))",
+    "name": "h",
+    "expr": "(0) - ((((x2)^(2) + (x3)^(2)) + (x4)^(2)))"},
+   {"text": "∀ (r : ℝ), HasDerivAt V (-f r) r", "name": "hV"}],
+  "goal":
+  {"text":
+   "deriv (fun x => V √(x ^ 2 + y ^ 2 + z ^ 2)) x = -(f √(x ^ 2 + y ^ 2 + z ^ 2) * x / √(x ^ 2 + y ^ 2 + z ^ 2))",
+   "rhs_poly": "(-x1)",
+   "rhs": "-(f √(x ^ 2 + y ^ 2 + z ^ 2) * x / √(x ^ 2 + y ^ 2 + z ^ 2))",
+   "rel": "eq",
+   "poly": "(x0) - ((-x1))",
+   "lhs_poly": "x0",
+   "lhs": "deriv (fun x => V √(x ^ 2 + y ^ 2 + z ^ 2)) x",
+   "kind": "rel",
+   "expr":
+   "(diff(F_V(sqrt((((d0_)^(2) + (x3)^(2)) + (x4)^(2)))), d0_).subs({d0_: x2})) - ((-((F_f(sqrt((((x2)^(2) + (x3)^(2)) + (x4)^(2)))) * x2) / sqrt((((x2)^(2) + (x3)^(2)) + (x4)^(2))))))"},
+  "functions":
+  [{"sage": "F_V", "lean": "V", "arity": 1},
+   {"sage": "F_f", "lean": "f", "arity": 1}],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "0 < x ^ 2 + y ^ 2 + z ^ 2",
+    "kind": "pos",
+    "expr": "(((x2)^(2) + (x3)^(2)) + (x4)^(2))",
+    "discharged_by": "h"},
+   {"text": "√(x ^ 2 + y ^ 2 + z ^ 2) ≠ 0",
+    "kind": "ne",
+    "expr": "sqrt((((x2)^(2) + (x3)^(2)) + (x4)^(2)))"},
+   {"text": "0 ≤ x ^ 2 + y ^ 2 + z ^ 2",
+    "kind": "nonneg",
+    "expr": "(((x2)^(2) + (x3)^(2)) + (x4)^(2))",
+    "discharged_by": "h"}],
+  "derivatives":
+  [{"var": "d0_",
+    "point": "x2",
+    "function": "fun x => V √(x ^ 2 + y ^ 2 + z ^ 2)",
+    "body": "F_V(sqrt((((d0_)^(2) + (x3)^(2)) + (x4)^(2))))",
+    "at": "x"}],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["deriv (fun x => V √(x ^ 2 + y ^ 2 + z ^ 2)) x",
+   "f √(x ^ 2 + y ^ 2 + z ^ 2) * x / √(x ^ 2 + y ^ 2 + z ^ 2)",
+   "x",
+   "y",
+   "z"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values":
+   ["fun _ : ℝ => (0 : ℝ)", "fun _ : ℝ => (0 : ℝ)", "_", "1", "0", "0", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["fun r : ℝ => r ^ 2 / 2", "fun r : ℝ => -r", "_", "1", "2", "2", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "1 == 1 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["fun r : ℝ => -r ^ 3 / 3", "fun r : ℝ => r ^ 2", "_", "3", "4", "0", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "-15 == -15 (exact)",
+   "edge": false,
+   "accepted": true}]}

@@ -1,0 +1,25 @@
+name = "kaluza_klein_mathematics"
+defaultTargets = ["kaluza_klein_mathematics_lib"]
+
+# `lake build` compiles the root module, as the book did. Modules it does not import are unfinished.
+[[lean_lib]]
+name = "kaluza_klein_mathematics_lib"
+roots = ["KaluzaKleinMathematics", "KaluzaKlein.Geometry", "KaluzaKlein.Groups", "KaluzaKlein.PartI", "KaluzaKlein.Conventions", "KaluzaKlein.Foundations.Linear"]
+globs = ["KaluzaKleinMathematics"]
+
+# Veriphy recipe assets copied into `.veriphy/lean/` (mathlib only).
+[[lean_lib]]
+name = "TutorialAssets"
+srcDir = ".veriphy/lean"
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.34.1"
+
+# Veriphy authors the certificates (`sage_run`) and the tests (`sage_test`); the committed proofs are their Sage-free
+# replacements and build with mathlib and Veriphy's Sage-free libraries alone.
+[[require]]
+name = "veriphy"
+git = "https://github.com/georgedouzas/veriphy"
+rev = "0.3.1"

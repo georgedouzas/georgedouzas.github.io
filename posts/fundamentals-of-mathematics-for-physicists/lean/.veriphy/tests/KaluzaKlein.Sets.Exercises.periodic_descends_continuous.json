@@ -1,0 +1,61 @@
+{"target": "KaluzaKlein.Sets.Exercises.periodic_descends_continuous",
+ "statement":
+ "∀ (T : ℝ) (f : ℝ → ℝ), Continuous f → Function.Periodic f T → ∃ g, Continuous g ∧ ∀ (x : ℝ), g ⟦x⟧ = f x",
+ "seed": 0,
+ "script_hash": "1101694357164016494",
+ "script":
+ "# name: set-periodic-descends-test\n# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand\n# goal: sage_test KaluzaKlein.Sets.Exercises.periodic_descends_continuous\n# description: the claim at the instances below, each proved independently of the claim\nSEED = 0\nCASES = [\n    (['2 * Real.pi', 'Real.cos', 'Real.continuous_cos', 'Real.cos_periodic'], False, \"have key : ∀ (T : ℝ) (f : ℝ → ℝ) (hf : Continuous f) (hp : Function.Periodic f T), ∃ g : Quotient (angleSetoid T) → ℝ, Continuous g ∧ ∀ x, g (Quotient.mk _ x) = f x := by\\n  intro T f hf hp\\n  have hc : ∀ a b, angleSetoid T a b → f a = f b := fun a b h => (descends_iff_periodic T f).2 hp a b h\\n  refine ⟨Quotient.lift f hc, ?_, fun x => rfl⟩\\n  rw [isQuotientMap_quotient_mk'.continuous_iff]\\n  exact hf\\nexact @key (2 * Real.pi) (Real.cos) (Real.continuous_cos) (Real.cos_periodic)\"),\n    (['1', 'fun _ => 0', 'continuous_const', '(fun _ => rfl)'], True, \"have key : ∀ (T : ℝ) (f : ℝ → ℝ) (hf : Continuous f) (hp : Function.Periodic f T), ∃ g : Quotient (angleSetoid T) → ℝ, Continuous g ∧ ∀ x, g (Quotient.mk _ x) = f x := by\\n  intro T f hf hp\\n  have hc : ∀ a b, angleSetoid T a b → f a = f b := fun a b h => (descends_iff_periodic T f).2 hp a b h\\n  refine ⟨Quotient.lift f hc, ?_, fun x => rfl⟩\\n  rw [isQuotientMap_quotient_mk'.continuous_iff]\\n  exact hf\\nexact @key (1) (fun _ => 0) (continuous_const) ((fun _ => rfl))\"),\n    (['2 * Real.pi', 'Real.sin', 'Real.continuous_sin', 'Real.sin_periodic'], False, \"have key : ∀ (T : ℝ) (f : ℝ → ℝ) (hf : Continuous f) (hp : Function.Periodic f T), ∃ g : Quotient (angleSetoid T) → ℝ, Continuous g ∧ ∀ x, g (Quotient.mk _ x) = f x := by\\n  intro T f hf hp\\n  have hc : ∀ a b, angleSetoid T a b → f a = f b := fun a b h => (descends_iff_periodic T f).2 hp a b h\\n  refine ⟨Quotient.lift f hc, ?_, fun x => rfl⟩\\n  rw [isQuotientMap_quotient_mk'.continuous_iff]\\n  exact hf\\nexact @key (2 * Real.pi) (Real.sin) (Real.continuous_sin) (Real.sin_periodic)\"),\n]\ninstances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal":
+  [{"type": "ℝ", "name": "T"},
+   {"type": "ℝ → ℝ", "name": "f"},
+   {"type": "Continuous f", "name": "hf"},
+   {"type": "Function.Periodic f T", "name": "hp"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "Continuous f", "name": "hf"},
+   {"text": "Function.Periodic f T", "name": "hp"}],
+  "goal":
+  {"text": "∃ g, Continuous g ∧ ∀ (x : ℝ), g ⟦x⟧ = f x", "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "Quotient (angleSetoid T) → ℝ",
+  "atoms": ["g"],
+  "atom_types": ["other"]},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["2 * Real.pi", "Real.cos", "Real.continuous_cos", "Real.cos_periodic"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1", "fun _ => 0", "continuous_const", "(fun _ => rfl)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["2 * Real.pi", "Real.sin", "Real.continuous_sin", "Real.sin_periodic"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

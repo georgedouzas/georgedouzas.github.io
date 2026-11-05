@@ -1,0 +1,13 @@
+# name: la-lowering-bijective-test
+# technique: test a claim no recipe certifies, at instances the kernel checks by computation (test_fallback)
+# goal: sage_test KaluzaKlein.LinearAlgebra.NondegenerateForms.lowering_bijective file "la-lowering-bijective-test.sage"
+# description: v ↦ B v is bijective for det B ≠ 0, at n = 0, the Gram matrix of f and η: Sage supplies B⁻¹, Lean checks both compositions are the identity.
+SEED = 0  # EDIT: the sampler's seed, kept in the test record
+PROOF = None  # EDIT: the tactic block proving the claim at one instance
+CASES = [  # EDIT: the instances as ([values as Lean text], edge?[, proof]) tuples
+    (['0', '0', '(by simp)'], True, 'exact ⟨fun v w _ => funext fun i => i.elim0, fun v => ⟨v, funext fun i => i.elim0⟩⟩'),
+    (['2', '!![5, 4; 4, 5]', '(by norm_num [Matrix.det_succ_row_zero, Fin.sum_univ_succ, Fin.succAbove_of_castSucc_lt, Fin.succAbove_of_le_castSucc])'], False, "refine Function.bijective_iff_has_inverse.mpr ⟨Matrix.toLin' !![(5 / 9), (-4 / 9); (-4 / 9), (5 / 9)], fun v => ?_, fun v => ?_⟩\n· simp only [Matrix.toLin'_apply, Matrix.mulVec_mulVec]\n  rw [show (!![(5 / 9), (-4 / 9); (-4 / 9), (5 / 9)] * !![5, 4; 4, 5] : Matrix (Fin 2) (Fin 2) ℝ) = 1 by\n    ext i j; fin_cases i <;> fin_cases j <;> norm_num [Matrix.mul_apply, Fin.sum_univ_succ], Matrix.one_mulVec]\n· simp only [Matrix.toLin'_apply, Matrix.mulVec_mulVec]\n  rw [show (!![5, 4; 4, 5] * !![(5 / 9), (-4 / 9); (-4 / 9), (5 / 9)] : Matrix (Fin 2) (Fin 2) ℝ) = 1 by\n    ext i j; fin_cases i <;> fin_cases j <;> norm_num [Matrix.mul_apply, Fin.sum_univ_succ], Matrix.one_mulVec]"),
+    (['4', '!![1, 0, 0, 0; 0, -1, 0, 0; 0, 0, -1, 0; 0, 0, 0, -1]', '(by norm_num [Matrix.det_succ_row_zero, Fin.sum_univ_succ, Fin.succAbove_of_castSucc_lt, Fin.succAbove_of_le_castSucc])'], False, "refine Function.bijective_iff_has_inverse.mpr ⟨Matrix.toLin' !![1, 0, 0, 0; 0, -1, 0, 0; 0, 0, -1, 0; 0, 0, 0, -1], fun v => ?_, fun v => ?_⟩\n· simp only [Matrix.toLin'_apply, Matrix.mulVec_mulVec]\n  rw [show (!![1, 0, 0, 0; 0, -1, 0, 0; 0, 0, -1, 0; 0, 0, 0, -1] * !![1, 0, 0, 0; 0, -1, 0, 0; 0, 0, -1, 0; 0, 0, 0, -1] : Matrix (Fin 4) (Fin 4) ℝ) = 1 by\n    ext i j; fin_cases i <;> fin_cases j <;> norm_num [Matrix.mul_apply, Fin.sum_univ_succ], Matrix.one_mulVec]\n· simp only [Matrix.toLin'_apply, Matrix.mulVec_mulVec]\n  rw [show (!![1, 0, 0, 0; 0, -1, 0, 0; 0, 0, -1, 0; 0, 0, 0, -1] * !![1, 0, 0, 0; 0, -1, 0, 0; 0, 0, -1, 0; 0, 0, 0, -1] : Matrix (Fin 4) (Fin 4) ℝ) = 1 by\n    ext i j; fin_cases i <;> fin_cases j <;> norm_num [Matrix.mul_apply, Fin.sum_univ_succ], Matrix.one_mulVec]"),
+]
+cases = CASES
+instances = [kernel_instance(*c[0], proof=c[2] if len(c) > 2 else PROOF, edge=c[1]) for c in cases]

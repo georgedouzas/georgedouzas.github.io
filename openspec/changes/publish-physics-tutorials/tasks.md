@@ -25,6 +25,12 @@
 
 - [x] 4.1 Produce a review report with page counts, render time, repository growth, registry counts and anything unresolved, then give it to the owner before pushing.
 
+## 5. Move everything into the posts
+
+- [x] 5.1 Copy each Lean module, certificate, test, figure script, Sage check, manifest and checker into the post that owns it, then verify by checksum that only throwaway files remain unplaced and that the text checkers run from each post.
+- [x] 5.2 Add a citation or listed reference for each source a chapter's notes name, trim each post's bibliography to its own works, then verify every chapter page ends with References and `check_bib` reports no problems.
+- [ ] 5.3 Build each Lean package with `lake build`, then verify each package's root module compiles.
+
 ## Workflow follow-up
 
 - Deploy to `docs/`, commit and push after the owner approves the report.

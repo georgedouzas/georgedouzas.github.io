@@ -1,0 +1,77 @@
+{"target": "KaluzaKlein.ComplexAnalysis.CauchyIntegralFormula.mean_value",
+ "statement":
+ "∀ (f : ℂ → ℂ) (c : ℂ) (r : ℝ),\n  0 < r → DifferentiableOn ℂ f (closedBall c r) → f c = (2 * π)⁻¹ • ∫ (t : ℝ) in 0..2 * π, f (circleMap c r t)",
+ "seed": 0,
+ "script_hash": "14461993575290763203",
+ "script":
+ "# name: ca-contour-mean-value-test\n# technique: test fallback; oracle instances: Sage encloses the average of f over the circle in ball arithmetic\n# goal: sage_test KaluzaKlein.ComplexAnalysis.CauchyIntegralFormula.mean_value\n# description: instances of mean_value (Contour integration, part I chapter 4), edge case first or marked\nSEED = 0\nt = var('t', domain='real')\nz = var('z')\nCB = ComplexBallField(128)\nRI = RealIntervalField(128)\nJ = CB(0, 1)\ndef ex(e):\n    return SR(e).rectform().simplify_full()\ndef pint(f, g, a, b):\n    # the parametrised contour integral of f (an expression in z) along g(t), t in [a, b], exactly\n    return integrate(f.subs(z=g) * diff(g, t), t, a, b)\ndef speed(g):\n    d = diff(g, t)\n    return sqrt(d.real_part() ** 2 + d.imag_part() ** 2).simplify_full()\ndef bint(F, a, b):\n    # a rigorous ball enclosure of the integral of F (a function on balls) over [a, b]\n    return CB.integral(lambda x, _: F(x), CB(a), CB(b))\ndef circ(F, c, R):\n    # a rigorous ball enclosure of the circle integral of F over |z - c| = R\n    return bint(lambda x: F(CB(c) + CB(R) * (J * x).exp()) * CB(R) * J * (J * x).exp(), 0, 2 * CB.pi())\ndef gap(*pairs):\n    # an interval enclosing the sum of |x - y| over the pairs: it contains 0 when every pair agrees\n    return sum(RI(abs(CB(x) - CB(y))) for x, y in pairs)\ncases = [('Complex.exp', lambda u: u.exp(), '0', 0, '1', 1, True), ('(fun u : ℂ => u ^ 2 + 3 * u)', lambda u: u ** 2 + 3 * u, '(1 + Complex.I)', 1 + I, '2', 2, False),\n         ('Complex.sin', lambda u: u.sin(), '(-1)', -1, '(1 / 2)', QQ(1) / 2, False)]\ninstances = [oracle_instance(fl, cl, rl, '(by norm_num)', '_', lhs=gap((F(CB(c)), bint(lambda x: F(CB(c) + CB(r) * (J * x).exp()), 0, 2 * CB.pi()) / (2 * CB.pi()))), rhs=RI(0), edge=e)\n             for fl, F, cl, c, rl, r, e in cases]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℂ → ℂ", "name": "f"},
+   {"type": "ℂ", "name": "c"},
+   {"type": "ℝ", "name": "r"},
+   {"type": "0 < r", "name": "hr"},
+   {"type": "DifferentiableOn ℂ f (closedBall c r)", "name": "hf"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < r", "rel": "lt", "name": "hr", "expr": "(0) - (x2)"},
+   {"text": "DifferentiableOn ℂ f (closedBall c r)", "name": "hf"}],
+  "goal":
+  {"text": "f c = (2 * π)⁻¹ • ∫ (t : ℝ) in 0..2 * π, f (circleMap c r t)",
+   "rhs_poly": "x1",
+   "rhs": "(2 * π)⁻¹ • ∫ (t : ℝ) in 0..2 * π, f (circleMap c r t)",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs": "f c",
+   "kind": "rel",
+   "expr": "(F_f(x3)) - (x1)"},
+  "functions": [{"sage": "F_f", "lean": "f", "arity": 1}],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms":
+  ["f c", "(2 * π)⁻¹ • ∫ (t : ℝ) in 0..2 * π, f (circleMap c r t)", "r", "c"],
+  "atom_types": ["ℂ", "ℂ", "ℝ", "ℂ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["Complex.exp", "0", "1", "(by norm_num)", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 2.682944859234670646283835165855177008523e-37] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["(fun u : ℂ => u ^ 2 + 3 * u)",
+    "(1 + Complex.I)",
+    "2",
+    "(by norm_num)",
+    "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.400555366959573335029555296881734155076e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["Complex.sin", "(-1)", "(1 / 2)", "(by norm_num)", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 2.760930142075783497073571235111836789223e-37] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

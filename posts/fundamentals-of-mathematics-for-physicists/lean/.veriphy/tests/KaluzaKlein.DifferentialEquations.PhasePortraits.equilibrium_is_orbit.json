@@ -1,0 +1,66 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.PhasePortraits.equilibrium_is_orbit",
+ "statement":
+ "∀ {n : ℕ} (F : (Fin n → ℝ) → Fin n → ℝ) (x₀ : Fin n → ℝ), F x₀ = 0 → ∀ (t : ℝ), HasDerivAt (fun x => x₀) (F x₀) t",
+ "seed": 0,
+ "script_hash": "6031091504202129083",
+ "script":
+ "# name: de-equilibrium-orbit-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.PhasePortraits.equilibrium_is_orbit file \"de-equilibrium-orbit-test.sage\"\n# description: the constant at an equilibrium solves ẋ = F(x): Lotka-Volterra at (0, 0) (edge) and (1, 1), pendulum at (π, 0)\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\ninstances = [\n    oracle_instance('2', 'fun v => ![v 0 - v 0 * v 1, -v 1 + v 0 * v 1]', '![0, 0]', '_', '0',\n                    lhs=vector([0-0*0, -0+0*0]),\n                    rhs=vector([0, 0]), relation='==', edge=True),\n    oracle_instance('2', 'fun v => ![v 0 - v 0 * v 1, -v 1 + v 0 * v 1]', '![1, 1]', '_', '1',\n                    lhs=vector([1-1*1, -1+1*1]),\n                    rhs=vector([0, 0]), relation='==', edge=False),\n    oracle_instance('2', 'fun v => ![v 1, -Real.sin (v 0)]', '![Real.pi, 0]', '_', '2',\n                    lhs=vector(SR, [0, -sin(pi)]),\n                    rhs=vector(SR, [0, 0]), relation='==', edge=False),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal":
+  [{"type": "ℕ", "name": "n"},
+   {"type": "(Fin n → ℝ) → Fin n → ℝ", "name": "F"},
+   {"type": "Fin n → ℝ", "name": "x₀"},
+   {"type": "F x₀ = 0", "name": "h"},
+   {"type": "ℝ", "name": "t"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "F x₀ = 0",
+    "rel": "eq",
+    "poly": "(x0) - (0)",
+    "name": "h",
+    "expr": "(x0) - (0)"}],
+  "goal": {"text": "HasDerivAt (fun x => x₀) (F x₀) t", "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "Fin n → ℝ",
+  "atoms": ["F x₀"],
+  "atom_types": ["other"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values":
+   ["2", "fun v => ![v 0 - v 0 * v 1, -v 1 + v 0 * v 1]", "![0, 0]", "_", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "(0, 0) == (0, 0) (exact)",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["2", "fun v => ![v 0 - v 0 * v 1, -v 1 + v 0 * v 1]", "![1, 1]", "_", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "(0, 0) == (0, 0) (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["2", "fun v => ![v 1, -Real.sin (v 0)]", "![Real.pi, 0]", "_", "2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "(0, 0) == (0, 0) (exact)",
+   "edge": false,
+   "accepted": true}]}

@@ -1,0 +1,76 @@
+{"target": "KaluzaKlein.FourierAnalysis.Plancherel.poisson_gaussian",
+ "statement":
+ "∀ (σ : ℝ),\n  0 < σ → ∑' (n : ℤ), rexp (-2 * π ^ 2 * ↑n ^ 2 / σ ^ 2) = σ / √(2 * π) * ∑' (n : ℤ), rexp (-σ ^ 2 * ↑n ^ 2 / 2)",
+ "seed": 0,
+ "script_hash": "6091231680003017793",
+ "script":
+ "# name: fa-poisson-gaussian-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.Plancherel.poisson_gaussian file \"fa-poisson-gaussian-test.sage\"\n# description: Sage sums |n| ≤ 40 in 128-bit intervals (tails below e^{-σ²·800})\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ndef L_(s):\n    return sum(RI(exp(-2*pi**2*n**2/s**2)) for n in range(-40, 41))\ndef R_(s):\n    return RI(s/sqrt(2*pi))*sum(RI(exp(-s**2*n**2/2)) for n in range(-40, 41))\ninstances = []\nCASES = [(['1', 'one_pos'], True, {'s': '1'}), (['2', '_'], False, {'s': '2'}), (['7/2', '_'], False, {'s': '7/2'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('L_(s)', scope))\n    R = side(eval('R_(s)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal": [{"type": "ℝ", "name": "σ"}, {"type": "0 < σ", "name": "hσ"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < σ",
+    "rel": "lt",
+    "poly": "(0) - (x3)",
+    "name": "hσ",
+    "expr": "(0) - (x3)"}],
+  "goal":
+  {"text":
+   "∑' (n : ℤ), rexp (-2 * π ^ 2 * ↑n ^ 2 / σ ^ 2) = σ / √(2 * π) * ∑' (n : ℤ), rexp (-σ ^ 2 * ↑n ^ 2 / 2)",
+   "rhs_poly": "(x1 * x2)",
+   "rhs": "σ / √(2 * π) * ∑' (n : ℤ), rexp (-σ ^ 2 * ↑n ^ 2 / 2)",
+   "rel": "eq",
+   "poly": "(x0) - ((x1 * x2))",
+   "lhs_poly": "x0",
+   "lhs": "∑' (n : ℤ), rexp (-2 * π ^ 2 * ↑n ^ 2 / σ ^ 2)",
+   "kind": "rel",
+   "expr": "(x0) - (((x3 / sqrt((2 * pi))) * x2))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "√(2 * π) ≠ 0", "kind": "ne", "expr": "sqrt((2 * pi))"},
+   {"text": "0 ≤ 2 * π", "kind": "nonneg", "expr": "(2 * pi)"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["∑' (n : ℤ), rexp (-2 * π ^ 2 * ↑n ^ 2 / σ ^ 2)",
+   "σ / √(2 * π)",
+   "∑' (n : ℤ), rexp (-σ ^ 2 * ↑n ^ 2 / 2)",
+   "σ"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "one_pos"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000005350575982148479362482248080526 .. 1.000000005350575982148479362482248080768] == [1.000000005350575982148479362482248080491 .. 1.000000005350575982148479362482248080709] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.014383772062228713467029098964917682977 .. 1.014383772062228713467029098964917683219] == [1.014383772062228713467029098964917682959 .. 1.014383772062228713467029098964917683184] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["7/2", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.402406760334277736107574916662508900694 .. 1.402406760334277736107574916662508900954] == [1.402406760334277736107574916662508900712 .. 1.402406760334277736107574916662508901077] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

@@ -1,0 +1,81 @@
+{"target": "KaluzaKlein.FourierAnalysis.PeriodicFunctions.trig_pair",
+ "statement":
+ "∀ (a b t : ℝ),\n  (↑a - ↑b * Complex.I) / 2 * Complex.exp (↑t * Complex.I) +\n      (↑a + ↑b * Complex.I) / 2 * Complex.exp (↑(-t) * Complex.I) =\n    ↑(a * cos t + b * sin t)",
+ "seed": 0,
+ "script_hash": "10373472333506889211",
+ "script":
+ "# name: fa-trig-pair-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.PeriodicFunctions.trig_pair file \"fa-trig-pair-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ninstances = []\nCASES = [(['0', '0', '0'], True, {'a': '0', 'b': '0', 't': '0'}), (['1', '2', '1/3'], False, {'a': '1', 'b': '2', 't': '1/3'}), (['-3/2', '1/2', '5'], False, {'a': '-3/2', 'b': '1/2', 't': '5'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('((a - b*I)/2)*exp(t*I) + ((a + b*I)/2)*exp(-t*I)', scope))\n    R = side(eval('a*cos(t) + b*sin(t)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8"],
+  "universal":
+  [{"type": "ℝ", "name": "a"},
+   {"type": "ℝ", "name": "b"},
+   {"type": "ℝ", "name": "t"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "(↑a - ↑b * Complex.I) / 2 * Complex.exp (↑t * Complex.I) + (↑a + ↑b * Complex.I) / 2 * Complex.exp (↑(-t) * Complex.I) =\n  ↑(a * cos t + b * sin t)",
+   "rhs_poly": "x5",
+   "rhs": "↑(a * cos t + b * sin t)",
+   "rel": "eq",
+   "poly":
+   "(((((x0 - (x1 * x2)) / 2) * x3) + (((x0 + (x1 * x2)) / 2) * x4))) - (x5)",
+   "lhs_poly":
+   "((((x0 - (x1 * x2)) / 2) * x3) + (((x0 + (x1 * x2)) / 2) * x4))",
+   "lhs":
+   "(↑a - ↑b * Complex.I) / 2 * Complex.exp (↑t * Complex.I) + (↑a + ↑b * Complex.I) / 2 * Complex.exp (↑(-t) * Complex.I)",
+   "kind": "rel",
+   "expr":
+   "(((((x6 - (x7 * I)) / 2) * exp((x8 * I))) + (((x6 + (x7 * I)) / 2) * exp(((-x8) * I))))) - (((x6 * cos(x8)) + (x7 * sin(x8))))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms":
+  ["↑a",
+   "↑b",
+   "Complex.I",
+   "Complex.exp (↑t * Complex.I)",
+   "Complex.exp (↑(-t) * Complex.I)",
+   "↑(a * cos t + b * sin t)",
+   "a",
+   "b",
+   "t"],
+  "atom_types": ["ℂ", "ℂ", "ℂ", "ℂ", "ℂ", "ℂ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "0", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1", "2", "1/3"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.599346339907042152734972178211121819971 .. 1.599346339907042152734972178211121819984] == [1.599346339907042152734972178211121819971 .. 1.599346339907042152734972178211121819984] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-3/2", "1/2", "5"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-0.9049554155264086311465359603483329491820 .. -0.9049554155264086311465359603483329491760] == [-0.9049554155264086311465359603483329491820 .. -0.9049554155264086311465359603483329491760] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

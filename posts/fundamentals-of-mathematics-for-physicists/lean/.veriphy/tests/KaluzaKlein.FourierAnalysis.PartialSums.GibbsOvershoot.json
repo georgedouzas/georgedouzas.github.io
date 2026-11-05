@@ -1,0 +1,67 @@
+{"target": "KaluzaKlein.FourierAnalysis.PartialSums.GibbsOvershoot",
+ "statement":
+ "∀ (M : ℕ),\n  1 ≤ M →\n    1.1789 < 2 / π * siPi ∧\n      2 / π * siPi < 1.179 ∧\n        0 < squarePartial (2 * M) (π / (2 * ↑M)) - 2 / π * siPi ∧\n          squarePartial (2 * M) (π / (2 * ↑M)) - 2 / π * siPi < 1 / ↑M ^ 2",
+ "seed": 0,
+ "script_hash": "9252246204445395135",
+ "script":
+ "# name: fa-gibbs-overshoot-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.PartialSums.GibbsOvershoot file \"fa-gibbs-overshoot-test.sage\"\n# description: Sage computes Si(π) with Arb balls and S_{2M}(π/2M) in 128-bit intervals; 1 means the four strict inequalities hold\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\nRB = RealBallField(128)\nG = RI(RB(2) / RB(pi) * RB(pi).Si())\ndef gibbs(M):\n    M = int(M)\n    S = sum(RI(2 * (1 - (-1) ** (n + 1))) / (RI(pi) * (n + 1)) * RI(sin((n + 1) * pi / (2 * M))) for n in range(2 * M))\n    ok = (RI('1.1789') < G) and (G < RI('1.179')) and (S - G > 0) and (S - G < RI(1) / M ** 2)\n    print('M', M, 'S', S, 'G', G)\n    return 1 if ok else 0\ninstances = []\nCASES = [(['1', 'le_refl 1'], True, {'M': '1'}), (['5', '(by norm_num)'], False, {'M': '5'}), (['100', '(by norm_num)'], False, {'M': '100'}), (['500', '(by norm_num)'], False, {'M': '500'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('gibbs(M)', scope))\n    R = side(eval('1', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℕ", "name": "M"},
+   {"type": "1 ≤ M", "name": "a._@._internal._hyg.0"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "1.1789 < 2 / π * siPi ∧\n  2 / π * siPi < 1.179 ∧\n    0 < squarePartial (2 * M) (π / (2 * ↑M)) - 2 / π * siPi ∧\n      squarePartial (2 * M) (π / (2 * ↑M)) - 2 / π * siPi < 1 / ↑M ^ 2",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "le_refl 1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["5", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["100", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["500", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

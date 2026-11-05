@@ -1,0 +1,64 @@
+{"target": "KaluzaKlein.FourierAnalysis.Convergence.pointwise_of_summable",
+ "statement":
+ "∀ {T : ℝ} [inst : Fact (0 < T)] (f : C(AddCircle T, ℂ)),\n  Summable (fourierCoeff ⇑f) → ∀ (x : AddCircle T), HasSum (fun i => fourierCoeff (⇑f) i • (fourier i) x) (f x)",
+ "seed": 0,
+ "script_hash": "17035902721980246025",
+ "script":
+ "# name: fa-pointwise-of-summable-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.Convergence.pointwise_of_summable file \"fa-pointwise-of-summable-test.sage\"\n# description: for f = cos on the circle (c_{±1} = 1/2) Sage evaluates the series c_1 e^{ix} + c_{-1} e^{-ix} against f(x)\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ninstances = []\nCASES = [(['2 * π', '⟨Real.two_pi_pos⟩', 'cosOnCircle', '_', '0'], True, {'x': '0'}), (['2 * π', '_', 'cosOnCircle', '_', '1'], False, {'x': '1'}), (['2 * π', '_', 'cosOnCircle', '_', '5/2'], False, {'x': '5/2'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('(exp(I*x) + exp(-I*x))/2', scope))\n    R = side(eval('cos(x)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℝ", "name": "T"},
+   {"type": "Fact (0 < T)",
+    "name":
+    "inst._@..veriphy._authoring_KaluzaKlein_PartI_FourierAnalysis_Dev1b.25198604._hygCtx._hyg.5"},
+   {"type": "C(AddCircle T, ℂ)", "name": "f"},
+   {"type": "Summable (fourierCoeff ⇑f)", "name": "h"},
+   {"type": "AddCircle T", "name": "x"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [{"text": "Summable (fourierCoeff ⇑f)", "name": "h"}],
+  "goal":
+  {"text": "HasSum (fun i => fourierCoeff (⇑f) i • (fourier i) x) (f x)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["2 * π", "⟨Real.two_pi_pos⟩", "cosOnCircle", "_", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2 * π", "_", "cosOnCircle", "_", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.5403023058681397174009366074429766037304 .. 0.5403023058681397174009366074429766037334] == [0.5403023058681397174009366074429766037304 .. 0.5403023058681397174009366074429766037334] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["2 * π", "_", "cosOnCircle", "_", "5/2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-0.8011436155469337148335027904673516644312 .. -0.8011436155469337148335027904673516644282] == [-0.8011436155469337148335027904673516644312 .. -0.8011436155469337148335027904673516644282] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

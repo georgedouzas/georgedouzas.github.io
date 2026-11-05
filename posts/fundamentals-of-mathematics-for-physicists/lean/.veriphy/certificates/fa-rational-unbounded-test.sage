@@ -1,0 +1,37 @@
+# name: fa-rational-unbounded-test
+# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic
+# goal: sage_test KaluzaKlein.FourierAnalysis.TestFunctions.rational_unbounded file "fa-rational-unbounded-test.sage"
+# description: Sage evaluates x^n/(1 + x²) at x = 10⁶: above 10⁵
+SEED = 0
+RI = RealIntervalField(128)
+CI = ComplexIntervalField(128)
+def num(e):
+    try:
+        return RI(e)
+    except (TypeError, ValueError):
+        pass
+    e = SR(e)
+    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):
+        try:
+            return RI(f(e))
+        except (TypeError, ValueError):
+            pass
+    try:
+        return CI(e)
+    except (TypeError, ValueError):
+        return RI(e.n(prec=256))
+def side(e):
+    v = num(e)
+    return v
+instances = []
+CASES = [(['3', 'le_refl 3'], True, {'n': '3'}), (['4', '_'], False, {'n': '4'}), (['7', '_'], False, {'n': '7'})]
+for values, edge, env in CASES:
+    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}
+    scope = dict(globals()); scope.update(env)
+    L = side(eval('SR(10)**(6*n)/(1 + SR(10)**12)', scope))
+    R = side(eval('SR(10)**5', scope))
+    if L.parent() is CI or R.parent() is CI:
+        d = CI(L) - CI(R)
+        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)
+    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='>', edge=edge))
+    print(values, L, R)

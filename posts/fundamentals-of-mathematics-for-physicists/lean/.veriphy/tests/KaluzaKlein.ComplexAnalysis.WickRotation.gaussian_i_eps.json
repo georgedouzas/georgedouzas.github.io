@@ -1,0 +1,67 @@
+{"target": "KaluzaKlein.ComplexAnalysis.WickRotation.gaussian_i_eps",
+ "statement":
+ "∀ (a ε : ℝ),\n  0 < ε → ∫ (x : ℝ), cexp (I / 2 * (↑a + ↑ε * I) * ↑x ^ 2) = (↑(2 * π / (ε ^ 2 + a ^ 2)) * (↑ε + ↑a * I)) ^ (1 / 2)",
+ "seed": 0,
+ "script_hash": "3299770730262878889",
+ "script":
+ "# name: ca-spec-gauss-ieps-test\n# technique: test fallback (Veriphy test_fallback recipe): oracle instances (Sage integrates exactly)\n# goal: sage_test KaluzaKlein.ComplexAnalysis.WickRotation.gaussian_i_eps file \"ca-spec-gauss-ieps-test.sage\"\n# description: Sage integrates e^((i/2)(a + i eps) x^2) over R and compares with (2 pi/(eps - i a))^(1/2).\nSEED = 0\n\n# shared oracle helpers: exact comparison when Sage decides it, else rigorous balls (160 bits)\nfrom sage.all import (SR, ZZ, QQ, I, pi, oo, sqrt, exp, log, sin, cos, gamma, zeta, psi, factorial, bernoulli,\n                      harmonic_number, euler_gamma, integrate, limit, var, assume, forget, diff, conjugate, beta,\n                      ComplexBallField, RealIntervalField, real_part, imag_part)\nfrom sage.all import sum as ssum\n_C = ComplexBallField(160)\n_R = RealIntervalField(160)\nfrom sage.rings.complex_arb import ComplexBall as _CB\nfrom sage.rings.real_arb import RealBall as _RB\ndef _ball(v):\n    if isinstance(v, (_CB, _RB)):\n        return _C(v)\n    return _C(SR(v))\ndef babs(v):\n    \"\"\"|v| as a rigorous ball (Sage's symbolic abs may drop the absolute value of a complex power)\"\"\"\n    return _ball(v).abs()\ndef _ri(rb):\n    return _R(rb.lower(), rb.upper())\ndef eq(values, L, R, edge=False):\n    \"\"\"the claim's two sides at the values: exact when Sage simplifies the difference to 0, else |L - R| in balls\"\"\"\n    try:\n        if isinstance(L, (_CB, _RB)) or isinstance(R, (_CB, _RB)):\n            raise ValueError('balls')\n        Ls, Rs = SR(L).simplify_full(), SR(R).simplify_full()\n        if bool(Ls - Rs == 0):\n            return oracle_instance(*values, lhs=Ls, rhs=Rs, edge=edge)\n    except Exception:\n        pass\n    d = (_ball(L) - _ball(R)).abs()\n    return oracle_instance(*values, lhs=_ri(d), rhs=_R(0), edge=edge)\ndef rel(values, L, R, relation, edge=False):\n    \"\"\"a real inequality between the sides, decided on rigorous intervals\"\"\"\n    return oracle_instance(*values, lhs=_ri(_ball(L).real()), rhs=_ri(_ball(R).real()), relation=relation, edge=edge)\nx = var('x')\npts = [('1', '1', SR(1), SR(1), True), ('2', '1 / 2', SR(2), SR(1)/2, False), ('1 / 2', '3', SR(1)/2, SR(3), False)]\ninstances = [eq([at, et, '(by norm_num)'], integrate(exp(I/2*(a + ep*I)*x**2), x, -oo, oo), sqrt(2*pi/(ep**2 + a**2)*(ep + a*I)), edge=e)\n             for at, et, a, ep, e in pts]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2"],
+  "universal":
+  [{"type": "ℝ", "name": "a"},
+   {"type": "ℝ", "name": "ε"},
+   {"type": "0 < ε", "name": "hε"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [{"text": "0 < ε", "rel": "lt", "name": "hε", "expr": "(0) - (x0)"}],
+  "goal":
+  {"text":
+   "∫ (x : ℝ), cexp (I / 2 * (↑a + ↑ε * I) * ↑x ^ 2) = (↑(2 * π / (ε ^ 2 + a ^ 2)) * (↑ε + ↑a * I)) ^ (1 / 2)",
+   "rel": "eq",
+   "kind": "other",
+   "expr":
+   "(x1) - (((((2 * pi) / ((x0)^(2) + (x2)^(2))) * (x0 + (x2 * I))))^((1 / 2)))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "ε ^ 2 + a ^ 2 ≠ 0",
+    "kind": "ne",
+    "expr": "((x0)^(2) + (x2)^(2))"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms": ["ε", "∫ (x : ℝ), cexp (I / 2 * (↑a + ↑ε * I) * ↑x ^ 2)", "a"],
+  "atom_types": ["ℝ", "ℂ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.0000000000000000000000000000000000000000000000000 .. 1.4291320315278245421693212869339611173128192109194e-47] == [0.0000000000000000000000000000000000000000000000000 .. -0.0000000000000000000000000000000000000000000000000] at 160 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "1 / 2", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.0000000000000000000000000000000000000000000000000 .. 1.4801597411783307190069269607231269512140289782619e-47] == [0.0000000000000000000000000000000000000000000000000 .. -0.0000000000000000000000000000000000000000000000000] at 160 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1 / 2", "3", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.0000000000000000000000000000000000000000000000000 .. 1.0763391667068146297729921738064849067788690477909e-47] == [0.0000000000000000000000000000000000000000000000000 .. -0.0000000000000000000000000000000000000000000000000] at 160 bits",
+   "edge": false,
+   "accepted": true}]}

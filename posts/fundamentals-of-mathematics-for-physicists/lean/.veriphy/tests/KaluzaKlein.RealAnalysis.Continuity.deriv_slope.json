@@ -1,0 +1,68 @@
+{"target": "KaluzaKlein.RealAnalysis.Continuity.deriv_slope",
+ "statement":
+ "∀ (f : ℝ → ℝ) (a f' : ℝ), HasDerivAt f f' a ↔ Tendsto (fun h => (f (a + h) - f a) / h) (𝓝[≠] 0) (𝓝 f')",
+ "seed": 0,
+ "script_hash": "14750744406278364274",
+ "script":
+ "# name: ra-deriv-slope-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Continuity.deriv_slope file \"ra-deriv-slope-test.sage\"\n# description: Sage's limit of the difference quotient equals Sage's derivative\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx = var('x')\nF = {'(fun x : ℝ => x ^ 2)': x ** 2, '(fun x : ℝ => Real.sin x)': sin(x), '(fun x : ℝ => Real.exp x)': exp(x),\n     '(fun x : ℝ => x ^ 3 - 2 * x)': x ** 3 - 2 * x, '(fun x : ℝ => (1 : ℝ))': SR(1), '(fun x : ℝ => Real.cos x)': cos(x),\n     '(fun x : ℝ => x ^ 3)': x ** 3, '(fun x : ℝ => Real.log (1 + x ^ 2))': log(1 + x ** 2), '(fun x : ℝ => x)': x}\n\nh = var('h')\ninstances = []\nfor f, a, edge in [('(fun x : ℝ => x ^ 2)', 3, False), ('(fun x : ℝ => Real.exp x)', 0, False), ('(fun x : ℝ => (1 : ℝ))', 2, True),\n                   ('(fun x : ℝ => Real.sin x)', 1, False)]:\n    d = diff(F[f], x).subs(x=a)\n    q = limit((F[f].subs(x=a + h) - F[f].subs(x=a)) / h, h=0)\n    instances.append(O([f, str(a), str(d)], q, d, edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℝ → ℝ", "name": "f"},
+   {"type": "ℝ", "name": "a"},
+   {"type": "ℝ", "name": "f'"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "HasDerivAt f f' a ↔ Tendsto (fun h => (f (a + h) - f a) / h) (𝓝[≠] 0) (𝓝 f')",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["(fun x : ℝ => x ^ 2)", "3", "6"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[6.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 6.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [6.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 6.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun x : ℝ => Real.exp x)", "0", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun x : ℝ => (1 : ℝ))", "2", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["(fun x : ℝ => Real.sin x)", "1", "cos(1)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.5403023058681397174009366074429766037323104206179222276700972553811003947744666 .. 0.5403023058681397174009366074429766037323104206179222276700972553811003947744754] == [0.5403023058681397174009366074429766037323104206179222276700972553811003947744666 .. 0.5403023058681397174009366074429766037323104206179222276700972553811003947744754] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

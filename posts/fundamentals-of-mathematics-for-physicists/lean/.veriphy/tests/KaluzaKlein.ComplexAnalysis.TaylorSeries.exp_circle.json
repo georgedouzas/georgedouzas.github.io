@@ -1,0 +1,70 @@
+{"target": "KaluzaKlein.ComplexAnalysis.TaylorSeries.exp_circle",
+ "statement":
+ "∀ (R : ℝ), 0 < R → ∮ (z : ℂ) in C(0, R), cexp z / z = 2 * ↑π * I ∧ ∮ (z : ℂ) in C(0, R), cexp z / z ^ 2 = 2 * ↑π * I",
+ "seed": 0,
+ "script_hash": "7750143604486314743",
+ "script":
+ "# name: ca-res-exp-circle-test\n# technique: test fallback (instances; oracle instances are evaluated by Sage exactly or in Arb's\n#   rigorous ball arithmetic, kernel instances are checked by Lean)\n# goal: KaluzaKlein.ComplexAnalysis.TaylorSeries.exp_circle: the integrals of e^z/z and e^z/z^2 over |z| = R\n# description: Arb's rigorous circle integrals of both, compared with 2πi\nSEED = 0\ndef V(*named, **kw):\n    \"\"\"The binders' values as Lean text, by binder name ('_' for an oracle instance's hypotheses).\"\"\"\n    for d in named:\n        kw.update(d)\n    return [kw.get(name, '_') for name, _ in universal]\ndef X(v):\n    \"\"\"An exact symbolic value, radicals canonicalised (Sage's exact comparison then succeeds).\"\"\"\n    return SR(v).canonicalize_radical().simplify_full()\nCBF = ComplexBallField(128)\nRIFp = RealIntervalField(128)\nCI = CBF(0, 1)\nTWO_PI_I = 2 * CBF.pi() * CI\ndef circ(f, c, rho):\n    \"\"\"Arb's rigorous enclosure of the circle integral of f over |z - c| = rho.\"\"\"\n    c = CBF(c); rho = CBF(rho)\n    return CBF.integral(lambda t, _: f(c + rho * (CI * t).exp()) * CI * rho * (CI * t).exp(), 0, 2 * CBF.pi().real())\ndef seg(f, a, b):\n    \"\"\"Arb's rigorous enclosure of the integral of f(t) dt over [a, b].\"\"\"\n    return CBF.integral(lambda t, _: f(t), CBF(a), CBF(b))\ndef gap(x, y):\n    \"\"\"The interval of |x - y| (contains 0 exactly when the enclosures are compatible).\"\"\"\n    d = (CBF(x) - CBF(y)).abs()\n    return RIFp(d.lower(), d.upper())\ndef bnd(x):\n    \"\"\"The interval of |x|.\"\"\"\n    d = CBF(x).abs()\n    return RIFp(d.lower(), d.upper())\ndef eq(x, y, *values, edge=False):\n    return oracle_instance(*values, lhs=gap(x, y), rhs=RIFp(0), relation='==', edge=edge)\n\ndef inst(R, edge=False):\n    d = gap(circ(lambda w: w.exp() / w, 0, R), TWO_PI_I) + gap(circ(lambda w: w.exp() / w^2, 0, R), TWO_PI_I)\n    return oracle_instance(*V(R=str(R)), lhs=d, rhs=RIFp(0), relation='==', edge=edge)\ninstances = [inst(1, True), inst(1/2), inst(3), inst(1/100)]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal": [{"type": "ℝ", "name": "R"}, {"type": "0 < R", "name": "hR"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < R",
+    "rel": "lt",
+    "poly": "(0) - (x0)",
+    "name": "hR",
+    "expr": "(0) - (x0)"}],
+  "goal":
+  {"text":
+   "∮ (z : ℂ) in C(0, R), cexp z / z = 2 * ↑π * I ∧ ∮ (z : ℂ) in C(0, R), cexp z / z ^ 2 = 2 * ↑π * I",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["R"],
+  "atom_types": ["ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.490551219435939811921392002092556764015e-35] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1/2", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.856834870039607025689246052989777829280e-35] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["3", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 3.924104276379337674057301220560678649429e-35] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1/100", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 6.074682201266798808546823645989062209200e-34] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

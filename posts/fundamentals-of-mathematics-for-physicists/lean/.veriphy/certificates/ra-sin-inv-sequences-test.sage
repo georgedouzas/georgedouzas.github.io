@@ -1,0 +1,8 @@
+# name: ra-sin-inv-sequences-test
+# technique: test a claim no recipe certifies, at instances the kernel checks by computation
+# goal: sage_test KaluzaKlein.RealAnalysis.Continuity.sin_inv_sequences file "ra-sin-inv-sequences-test.sage"
+# description: sin(1/x_n) = 0 and sin(1/x'_n) = 1 at n = 0, 1, 4
+SEED = 0  # the instances are listed, no sampling
+PROOF = None
+CASES = [(['0'], True, 'constructor\n· rw [one_div_one_div, show (2 : ℝ) * Real.pi * (((0 : ℕ) : ℝ) + 1) = ((2 * (0 + 1) : ℕ) : ℝ) * Real.pi by push_cast; ring]\n  exact Real.sin_nat_mul_pi _\n· rw [one_div_one_div, add_comm, show (2 : ℝ) * Real.pi * (((0 : ℕ) : ℝ) + 1) = (((0 + 1 : ℕ)) : ℝ) * (2 * Real.pi) by push_cast; ring,\n    Real.sin_add_nat_mul_two_pi, Real.sin_pi_div_two]'), (['1'], False, 'constructor\n· rw [one_div_one_div, show (2 : ℝ) * Real.pi * (((1 : ℕ) : ℝ) + 1) = ((2 * (1 + 1) : ℕ) : ℝ) * Real.pi by push_cast; ring]\n  exact Real.sin_nat_mul_pi _\n· rw [one_div_one_div, add_comm, show (2 : ℝ) * Real.pi * (((1 : ℕ) : ℝ) + 1) = (((1 + 1 : ℕ)) : ℝ) * (2 * Real.pi) by push_cast; ring,\n    Real.sin_add_nat_mul_two_pi, Real.sin_pi_div_two]'), (['4'], False, 'constructor\n· rw [one_div_one_div, show (2 : ℝ) * Real.pi * (((4 : ℕ) : ℝ) + 1) = ((2 * (4 + 1) : ℕ) : ℝ) * Real.pi by push_cast; ring]\n  exact Real.sin_nat_mul_pi _\n· rw [one_div_one_div, add_comm, show (2 : ℝ) * Real.pi * (((4 : ℕ) : ℝ) + 1) = (((4 + 1 : ℕ)) : ℝ) * (2 * Real.pi) by push_cast; ring,\n    Real.sin_add_nat_mul_two_pi, Real.sin_pi_div_two]')]
+instances = [kernel_instance(*values, proof=(p if p is not None else PROOF), edge=edge) for values, edge, p in CASES]

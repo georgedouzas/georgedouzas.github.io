@@ -34,7 +34,7 @@ The Kaluza-Klein lecture notes hold about 1.46 million words that nobody can rea
 
 - **New content**: three post folders holding about 1.3 million words of chapters, their figures, recorded Sage outputs, Lean statements, filters, bibliography and styles.
 - **Site source**: three sidebars in `_quarto.yml`, three thumbnails, and renumbered `order` values on normal posts.
-- **Draft folder**: stays ignored, keeps the Lean library, Sage scripts and checkers, and has two figures converted to PNG.
+- **Draft folder**: replaced. Its Lean library, Sage scripts, manifests and checkers move into the post that owns them, and two figures are converted to PNG.
 - **Repository size**: chapters, figures and rendered output in `docs/` add several hundred MB. Each rebuild that changes pages adds to permanent history.
 - **Render time**: a full `quarto render` takes about 12 minutes or more. `quarto preview` only re-renders what is being edited.
 - **Homepage**: the Posts card summarises the posts in general, with a combined thumbnail, instead of showing the latest post. All three cards share one form and show no counts.

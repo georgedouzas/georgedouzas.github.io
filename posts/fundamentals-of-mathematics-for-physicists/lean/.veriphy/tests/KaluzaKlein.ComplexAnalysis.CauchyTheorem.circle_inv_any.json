@@ -1,0 +1,68 @@
+{"target": "KaluzaKlein.ComplexAnalysis.CauchyTheorem.circle_inv_any",
+ "statement":
+ "∀ (c : ℂ) (R : ℝ), ‖c‖ < R → ∮ (z : ℂ) in C(c, R), z⁻¹ = 2 * ↑π * I",
+ "seed": 0,
+ "script_hash": "7989870708390592542",
+ "script":
+ "# name: ca-contour-circle-inv-any-test\n# technique: test fallback; oracle instances: Sage encloses the circle integral of 1/z in ball arithmetic\n# goal: sage_test KaluzaKlein.ComplexAnalysis.CauchyTheorem.circle_inv_any\n# description: instances of circle_inv_any (Contour integration, part I chapter 4), edge case first or marked\nSEED = 0\nt = var('t', domain='real')\nz = var('z')\nCB = ComplexBallField(128)\nRI = RealIntervalField(128)\nJ = CB(0, 1)\ndef ex(e):\n    return SR(e).rectform().simplify_full()\ndef pint(f, g, a, b):\n    # the parametrised contour integral of f (an expression in z) along g(t), t in [a, b], exactly\n    return integrate(f.subs(z=g) * diff(g, t), t, a, b)\ndef speed(g):\n    d = diff(g, t)\n    return sqrt(d.real_part() ** 2 + d.imag_part() ** 2).simplify_full()\ndef bint(F, a, b):\n    # a rigorous ball enclosure of the integral of F (a function on balls) over [a, b]\n    return CB.integral(lambda x, _: F(x), CB(a), CB(b))\ndef circ(F, c, R):\n    # a rigorous ball enclosure of the circle integral of F over |z - c| = R\n    return bint(lambda x: F(CB(c) + CB(R) * (J * x).exp()) * CB(R) * J * (J * x).exp(), 0, 2 * CB.pi())\ndef gap(*pairs):\n    # an interval enclosing the sum of |x - y| over the pairs: it contains 0 when every pair agrees\n    return sum(RI(abs(CB(x) - CB(y))) for x, y in pairs)\ncases = [('0', 0, '1', 1, True), ('(1 / 2)', QQ(1) / 2, '1', 1, False), ('(1 + Complex.I)', 1 + I, '3', 3, False)]\ninstances = [oracle_instance(cl, Rl, '(by norm_num)', lhs=gap((circ(lambda w: 1 / w, c, R), 2 * CB.pi() * J)), rhs=RI(0), edge=e) for cl, c, Rl, R, e in cases]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4"],
+  "universal":
+  [{"type": "ℂ", "name": "c"},
+   {"type": "ℝ", "name": "R"},
+   {"type": "‖c‖ < R", "name": "h"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "‖c‖ < R", "rel": "lt", "name": "h", "expr": "(x3) - (x4)"}],
+  "goal":
+  {"text": "∮ (z : ℂ) in C(c, R), z⁻¹ = 2 * ↑π * I",
+   "rhs_poly": "((2 * x1) * x2)",
+   "rhs": "2 * ↑π * I",
+   "rel": "eq",
+   "poly": "(x0) - (((2 * x1) * x2))",
+   "lhs_poly": "x0",
+   "lhs": "∮ (z : ℂ) in C(c, R), z⁻¹",
+   "kind": "rel",
+   "expr": "(x0) - (((2 * pi) * I))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms": ["∮ (z : ℂ) in C(c, R), z⁻¹", "↑π", "I", "‖c‖", "R"],
+  "atom_types": ["ℂ", "ℂ", "ℂ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 2.753321406006004981299887805851863993216e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["(1 / 2)", "1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 3.459875396006222287139601307045379108493e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(1 + Complex.I)", "3", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 3.806527976723989659327397473833866914007e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

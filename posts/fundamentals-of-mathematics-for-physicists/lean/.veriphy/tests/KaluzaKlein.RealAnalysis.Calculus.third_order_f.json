@@ -1,0 +1,82 @@
+{"target": "KaluzaKlein.RealAnalysis.Calculus.third_order_f",
+ "statement":
+ "∀ (x y : ℝ), |y| ≤ 1 → |x ^ 2 * y + sin y - (y + x ^ 2 * y - y ^ 3 / 6)| ≤ |y| ^ 4 * (5 / 96)",
+ "seed": 0,
+ "script_hash": "3692411101502399300",
+ "script":
+ "# name: ra-third-order-f-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Calculus.third_order_f file \"ra-third-order-f-test.sage\"\n# description: |x²y + sin y - (y + x²y - y³/6)| ≤ |y|⁴ · 5/96 for |y| ≤ 1, by 128-bit intervals\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\ninstances = []\nfor xv, yv, edge in [(0, 0, True), (1, 1, False), (2, QQ(-1) / 2, False), (5, QQ(1) / 10, False)]:\n    lhs = abs(R(xv) ** 2 * yv + R(sin(yv)) - (R(yv) + R(xv) ** 2 * yv - R(yv) ** 3 / 6))\n    instances.append(O([str(xv), str(yv), '(by norm_num)'], lhs, R(abs(QQ(yv)) ** 4 * QQ(5) / 96), rel='<=', edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℝ", "name": "x"},
+   {"type": "ℝ", "name": "y"},
+   {"type": "|y| ≤ 1", "name": "hy"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "|y| ≤ 1",
+    "rel": "le",
+    "poly": "(x1) - (1)",
+    "name": "hy",
+    "expr": "(abs(x2)) - (1)"}],
+  "goal":
+  {"text":
+   "|x ^ 2 * y + sin y - (y + x ^ 2 * y - y ^ 3 / 6)| ≤ |y| ^ 4 * (5 / 96)",
+   "rhs_poly": "((x1)^4 * (5 / 96))",
+   "rhs": "|y| ^ 4 * (5 / 96)",
+   "rel": "le",
+   "poly": "(x0) - (((x1)^4 * (5 / 96)))",
+   "lhs_poly": "x0",
+   "lhs": "|x ^ 2 * y + sin y - (y + x ^ 2 * y - y ^ 3 / 6)|",
+   "kind": "rel",
+   "expr":
+   "(abs(((((x3)^(2) * x2) + sin(x2)) - ((x2 + ((x3)^(2) * x2)) - ((x2)^(3) / 6))))) - (((abs(x2))^(4) * (5 / 96)))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["|x ^ 2 * y + sin y - (y + x ^ 2 * y - y ^ 3 / 6)|", "|y|", "y", "x"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "0", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] <= [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1", "1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.008137651474563173319168988296965666285687 .. 0.008137651474563173319168988296965666297443] <= [0.05208333333333333333333333333333333333327 .. 0.05208333333333333333333333333333333333346] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["2", "-1/2", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.0002588719375363336066212685489047214065926 .. 0.0002588719375363336066212685489047214301026] <= [0.003255208333333333333333333333333333333329 .. 0.003255208333333333333333333333333333333341] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["5", "1/10", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[8.331349481897348086507728869360606211045e-8 .. 8.331349481897348086507728869368834671502e-8] <= [5.208333333333333333333333333333333333311e-6 .. 5.208333333333333333333333333333333333335e-6] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

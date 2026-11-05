@@ -1,0 +1,21 @@
+# Figure: f(x) = e^{-x} and sqrt(x) with the spectrum of the tridiagonal matrix A = [[2,1,0],[1,2,1],[0,1,2]] marked.
+# Output: figures/fa2-functional-calculus.svg.
+import os
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fa2-functional-calculus.svg")
+A = matrix(QQ, [[2, 1, 0], [1, 2, 1], [0, 1, 2]])
+ev = sorted(A.change_ring(RDF).eigenvalues())
+x = var("x")
+P = plot(exp(-x), (0, 4), color="royalblue", legend_label=r"$e^{-x}$") + plot(sqrt(x), (0, 4), color="firebrick", legend_label=r"$\sqrt{x}$")
+P += point([(l, exp(-l)) for l in ev], color="royalblue", size=40) + point([(l, sqrt(l)) for l in ev], color="firebrick", size=40)
+P += point([(l, 0) for l in ev], color="black", size=40, marker="x")
+P.set_legend_options(loc="upper center", font_size=9); P.axes_labels([r"$x$", ""])
+P.save(OUT, figsize=[6, 4.5])
+D, Q = A.change_ring(RDF).eigenmatrix_right()
+f = lambda g: Q * diagonal_matrix(RDF, [g(d) for d in D.diagonal()]) * Q.inverse()
+print("[PASS] the eigenvalues are 2 - sqrt(2), 2, 2 + sqrt(2):", all(abs(a - b) < 1e-12 for a, b in zip(ev, [2 - sqrt(2.0), 2.0, 2 + sqrt(2.0)])))
+print("[PASS] ||e^{-A}|| = e^{-(2 - sqrt 2)} and ||sqrt A|| = sqrt(2 + sqrt 2):", abs(f(lambda t: exp(-t)).norm(2) - exp(-(2 - sqrt(2.0)))) < 1e-12 and abs(f(sqrt).norm(2) - sqrt(2 + sqrt(2.0))) < 1e-12)
+print("[PASS] sqrt(A)^2 = A and the exponential from the calculus equals Sage's exp():", (f(sqrt) ^ 2 - A).norm() < 1e-12 and (f(lambda t: exp(-t)) - (-A.change_ring(RDF)).exp()).norm() < 1e-12)
+print("[PASS] ||A|| = r(A) = 2 + sqrt 2 and ||A^{-1}|| = 1 + 1/sqrt 2:", abs(A.change_ring(RDF).norm(2) - (2 + sqrt(2.0))) < 1e-12 and abs(A.inverse().change_ring(RDF).norm(2) - (1 + 1 / sqrt(2.0))) < 1e-12)
+P2 = matrix(QQ, [[5, 4], [4, 5]])
+print("[PASS] sqrt([[5,4],[4,5]]) = [[2,1],[1,2]]:", matrix(QQ, [[2, 1], [1, 2]]) ^ 2 == P2)
+print("wrote", os.path.relpath(OUT))

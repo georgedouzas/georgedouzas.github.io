@@ -24,6 +24,8 @@ algebraic identities behind the stereographic atlas, the $SU(2)$ determinant and
 as propositions. The reader who knows this material can skim the definitions and try the exercises; the conventions for
 indices are those of @sec-conventions.
 
+For more on this topic, see @gadea2013analysis [Ch. 1], @godinho2014introduction [Ch. 1, Ch. 3], @lee2013introduction [Ch. 1-3], @rudolph2013differential [Ch. 1] and @torresdelcastillo2020differentiable [Ch. 1, Ch. 5-6].
+
 ### Charts and atlases {#sec-charts}
 
 A sphere cannot be covered by a single coordinate system without singular points, and on a circle any angle
@@ -2577,6 +2579,8 @@ $G_{aa} + 4G_{bb} = 1 + 4(2 + \cos t)^2$, which agrees with $|dE/dt|^2$ computed
 ## Vector fields, forms and tensors {#sec-vector-fields-forms-tensors}
 
 Tangent vectors are the velocities of curves, vector fields assign one to every point, one-forms are their duals, tensor fields combine them, and differential forms are the antisymmetric tensors that can be integrated and differentiated. Five sections.
+
+For more on this topic, see @emam2021covariant [Ch. 1-2, Ch. 9], @gadea2013analysis [Ch. 2], @godinho2014introduction [Ch. 2], @gray2019student [Ch. 2], @keskivakkuri2022mathematical [Ch. 4], @lee2013introduction [Ch. 8-9, Ch. 11-14], @rudolph2013differential [Ch. 3, Ch. 4] and @torresdelcastillo2020differentiable [Ch. 3].
 
 ### Tangent vectors {#sec-tangent-vectors}
 
@@ -9105,6 +9109,8 @@ SageManifolds. The running
 metrics (circle, plane, sphere, torus, $SU(2)$) are all positive definite, and the conventions for the Christoffel
 symbols and the curvature tensors are those of @sec-conventions-curvature.
 
+For more on this topic, see @godinho2014introduction [Ch. 4], @gray2019student [Ch. 3] and @needham2021visual [Acts II-III, Act IV , Act V].
+
 ### The covariant derivative {#sec-covariant-derivative}
 
 The partial derivative of a function is a tensor, the one-form $df$, but the partial derivative of the
@@ -14201,6 +14207,8 @@ the Lie derivative of the metric vanishes, solves it for the plane, the circle a
 solutions form a Lie algebra, $\mathfrak{so}(3)$ for the sphere; it ends with maximally symmetric spaces. Every
 statement is followed by three examples and three exercises with hidden solutions; the propositions are proved from
 the coordinate formulas and the exercises use SageManifolds.
+
+For more on this topic, see @torresdelcastillo2020differentiable [Ch. 2].
 
 ### Flows and the Lie derivative {#sec-flows}
 

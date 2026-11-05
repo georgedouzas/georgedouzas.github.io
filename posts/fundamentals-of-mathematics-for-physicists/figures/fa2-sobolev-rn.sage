@@ -1,0 +1,17 @@
+# Figure: Fourier transforms of the Gaussian, e^{-|x|} and the indicator of [-1, 1]. Output: figures/fa2-sobolev-rn.svg.
+import os
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fa2-sobolev-rn.svg")
+xi = var("xi")
+P = plot(sqrt(2 * pi) * exp(-xi ^ 2 / 2), (0.1, 60), color="darkgreen", scale="loglog", legend_label=r"Gaussian", ymin=1e-6)
+P += plot(2 / (1 + xi ^ 2), (0.1, 60), color="royalblue", scale="loglog", legend_label=r"$e^{-|x|}$")
+P += plot(abs(2 * sin(xi) / xi), (0.1, 60), color="firebrick", scale="loglog", legend_label=r"$\mathbf{1}_{[-1,1]}$", plot_points=2000)
+P += plot(2 / xi ^ 2, (1, 60), color="gray", linestyle="dashed", scale="loglog") + plot(2 / xi, (1, 60), color="gray", linestyle="dotted", scale="loglog")
+P.set_legend_options(loc="lower left", font_size=8); P.axes_labels([r"$\xi$", r"$|\hat f(\xi)|$"])
+P.save(OUT, figsize=[6, 4.5], ymin=1e-5, ymax=10)
+x = var("x")
+print("[PASS] the transform of e^{-|x|} is 2/(1 + xi^2):", bool((2 * integrate(exp(-x) * cos(xi * x), x, 0, oo) - 2 / (1 + xi ^ 2)).simplify_full() == 0))
+print("[PASS] the transform of the indicator of [-1, 1] is 2 sin(xi)/xi:", bool((integrate(exp(-I * xi * x), x, -1, 1) - 2 * sin(xi) / xi).simplify_full().simplify_trig() == 0))
+print("[PASS] ||e^{-|x|}||_{H^1}^2 = 2 in both pictures:", bool(2 * integrate(exp(-2 * x), x, 0, oo) * 2 == 2) and bool(integrate((1 + xi ^ 2) * (2 / (1 + xi ^ 2)) ^ 2, xi, -oo, oo) / (2 * pi) == 2))
+u_in = 1 - exp(-1) * cosh(x); u_out = sinh(1) * exp(-x)
+print("[PASS] the screened box u solves u - u'' = 1 inside, 0 outside, is C^1 at x = 1 and u'' jumps by 1:", abs((u_in - diff(u_in, x, 2)).subs(x=0.3).n() - 1) < 1e-12 and abs((u_out - diff(u_out, x, 2)).subs(x=1.7).n()) < 1e-12 and abs((u_in - u_out).subs(x=1).n()) < 1e-12 and abs(diff(u_in - u_out, x).subs(x=1).n()) < 1e-12 and abs((diff(u_out, x, 2) - diff(u_in, x, 2)).subs(x=1).n() - 1) < 1e-12)
+print("wrote", os.path.relpath(OUT))

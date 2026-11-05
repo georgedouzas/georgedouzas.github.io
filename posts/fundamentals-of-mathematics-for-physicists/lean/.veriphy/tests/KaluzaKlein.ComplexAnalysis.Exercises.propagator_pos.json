@@ -1,0 +1,66 @@
+{"target": "KaluzaKlein.ComplexAnalysis.Exercises.propagator_pos",
+ "statement":
+ "∀ (E t : ℝ),\n  0 < E →\n    Tendsto (fun δ => 1 / (2 * ↑π) * (-2 * ↑π * I) * (cexp (-I * (↑E - I * ↑δ) * ↑t) / (2 * (↑E - I * ↑δ)))) (𝓝 0)\n      (𝓝 (-(I / (2 * ↑E)) * cexp (-I * ↑E * ↑t)))",
+ "seed": 0,
+ "script_hash": "13033401577848995737",
+ "script":
+ "# name: ca-ex-propagator-pos-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates exactly or in interval arithmetic\n# goal: sage_test KaluzaKlein.ComplexAnalysis.Exercises.propagator_pos file \"ca-ex-propagator-pos-test.sage\"\n# description: the limit δ → 0 of a function continuous at δ = 0: Sage evaluates both sides at δ = 0; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\ninstances = []\nCI = ComplexIntervalField(128)\ndef cdiff(a, b):\n    d = CI(a) - CI(b)\n    return RI(d.real().abs() + d.imag().abs())\nCB = ComplexBallField(128)\ndef bdiff(a, b):\n    d = a - b\n    return RI(d.real().abs()) + RI(d.imag().abs())\ninstances.append(oracle_instance(*['1', '1', 'one_pos'], lhs=cdiff(1/(2*pi)*(-2*pi*I)*(exp(-I*1*1)/(2*1)), -(I/2)*exp(-I*1)), rhs=RI(0), relation='==', edge=True))\ninstances.append(oracle_instance(*['2', '(1 / 2)', 'two_pos'], lhs=cdiff(1/(2*pi)*(-2*pi*I)*(exp(-I*2*(1/2))/(2*2)), -(I/4)*exp(-I)), rhs=RI(0), relation='==', edge=False))\ninstances.append(oracle_instance(*['(1 / 2)', '3', '(by norm_num)'], lhs=cdiff(1/(2*pi)*(-2*pi*I)*(exp(-I*(1/2)*3)/(2*(1/2))), -(I)*exp(-I*3/2)), rhs=RI(0), relation='==', edge=False))\nprint([(x.values, x.kind, x.verdict) for x in instances])\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal":
+  [{"type": "ℝ", "name": "E"},
+   {"type": "ℝ", "name": "t"},
+   {"type": "0 < E", "name": "hE"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < E",
+    "rel": "lt",
+    "poly": "(0) - (x0)",
+    "name": "hE",
+    "expr": "(0) - (x0)"}],
+  "goal":
+  {"text":
+   "Tendsto (fun δ => 1 / (2 * ↑π) * (-2 * ↑π * I) * (cexp (-I * (↑E - I * ↑δ) * ↑t) / (2 * (↑E - I * ↑δ)))) (𝓝 0)\n  (𝓝 (-(I / (2 * ↑E)) * cexp (-I * ↑E * ↑t)))",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["E"],
+  "atom_types": ["ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "1", "one_pos"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 2.938735877055718769921841343055614194547e-39] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "(1 / 2)", "two_pos"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.469367938527859384960920671527807097274e-39] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(1 / 2)", "3", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 3.306077861687683616162071510937565968865e-39] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

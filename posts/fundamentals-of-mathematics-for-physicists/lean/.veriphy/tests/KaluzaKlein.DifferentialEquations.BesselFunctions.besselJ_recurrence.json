@@ -1,0 +1,81 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.BesselFunctions.besselJ_recurrence",
+ "statement":
+ "∀ (n : ℕ) (x : ℝ), x ≠ 0 → besselJ n x + besselJ (n + 2) x = 2 * (↑n + 1) / x * besselJ (n + 1) x",
+ "seed": 0,
+ "script_hash": "579948119775712415",
+ "script":
+ "# name: de-bessel-recurrence-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.BesselFunctions.besselJ_recurrence file \"de-bessel-recurrence-test.sage\"\n# description: Jₙ + Jₙ₊₂ = (2(n+1)/x)Jₙ₊₁ with Sage's bessel_J at 200 bits (residual below 10⁻⁴⁰) at x = 0.7, 1.7, 5.3 (exr-plb-bessel-recurrence's points) for n + 1 = 1 (edge), 2, 3\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\ninstances = [\n    oracle_instance('0', '7/10', '_',\n                    lhs=RIF(abs((bessel_J(0, 7/10) + bessel_J(2, 7/10) - 2*1/(7/10)*bessel_J(1, 7/10)).n(prec=200))),\n                    rhs=RIF(10^-40), relation='<', edge=True),\n    oracle_instance('1', '17/10', '_',\n                    lhs=RIF(abs((bessel_J(1, 17/10) + bessel_J(3, 17/10) - 2*2/(17/10)*bessel_J(2, 17/10)).n(prec=200))),\n                    rhs=RIF(10^-40), relation='<', edge=False),\n    oracle_instance('2', '53/10', '_',\n                    lhs=RIF(abs((bessel_J(2, 53/10) + bessel_J(4, 53/10) - 2*3/(53/10)*bessel_J(3, 53/10)).n(prec=200))),\n                    rhs=RIF(10^-40), relation='<', edge=False),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4", "x5"],
+  "universal":
+  [{"type": "ℕ", "name": "n"},
+   {"type": "ℝ", "name": "x"},
+   {"type": "x ≠ 0", "name": "hx"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "x ≠ 0",
+    "rel": "ne",
+    "poly": "(x4) - (0)",
+    "name": "hx",
+    "expr": "(x4) - (0)"}],
+  "goal":
+  {"text":
+   "besselJ n x + besselJ (n + 2) x = 2 * (↑n + 1) / x * besselJ (n + 1) x",
+   "rhs_poly": "(x2 * x3)",
+   "rhs": "2 * (↑n + 1) / x * besselJ (n + 1) x",
+   "rel": "eq",
+   "poly": "((x0 + x1)) - ((x2 * x3))",
+   "lhs_poly": "(x0 + x1)",
+   "lhs": "besselJ n x + besselJ (n + 2) x",
+   "kind": "rel",
+   "expr": "((x0 + x1)) - ((((2 * (x5 + 1)) / x4) * x3))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "x ≠ 0", "kind": "ne", "expr": "x4", "discharged_by": "hx"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["besselJ n x",
+   "besselJ (n + 2) x",
+   "2 * (↑n + 1) / x",
+   "besselJ (n + 1) x",
+   "x",
+   "n"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ", "ℝ", "ℕ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "7/10", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[4.66726145839585628035e-61 .. 4.66726145839585628036e-61] < [9.99999999999999999986e-41 .. 1.00000000000000000009e-40] at 64 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1", "17/10", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.01123998265243552741e-60 .. 1.01123998265243552742e-60] < [9.99999999999999999986e-41 .. 1.00000000000000000009e-40] at 64 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["2", "53/10", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[3.11150763893057085357e-61 .. 3.11150763893057085358e-61] < [9.99999999999999999986e-41 .. 1.00000000000000000009e-40] at 64 bits",
+   "edge": false,
+   "accepted": true}]}

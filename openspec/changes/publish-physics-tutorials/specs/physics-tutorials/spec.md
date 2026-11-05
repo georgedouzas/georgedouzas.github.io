@@ -21,7 +21,7 @@ The Posts page SHALL list three tutorials: Fundamentals of Mathematics for Physi
 Each tutorial SHALL keep everything it needs to preview or render inside its own post folder, using only standard Quarto commands from the site, with no central book, shared tutorial folder, or copy step.
 
 #### Scenario: Rendering the site
-- **WHEN** `quarto render` runs on the site with the draft folder absent
+- **WHEN** `quarto render` runs on the site
 - **THEN** all three tutorials render completely
 
 #### Scenario: Previewing a chapter

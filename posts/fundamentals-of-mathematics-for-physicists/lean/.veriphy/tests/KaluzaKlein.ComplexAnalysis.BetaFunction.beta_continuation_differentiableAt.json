@@ -1,0 +1,68 @@
+{"target":
+ "KaluzaKlein.ComplexAnalysis.BetaFunction.beta_continuation_differentiableAt",
+ "statement":
+ "∀ (a b : ℂ), (∀ (m : ℕ), a ≠ -↑m) → DifferentiableAt ℂ (fun s => Gamma s * Gamma b * (Gamma (s + b))⁻¹) a",
+ "seed": 0,
+ "script_hash": "4734161791069313800",
+ "script":
+ "# name: ca-spec-beta-mero-test\n# technique: test fallback (Veriphy test_fallback recipe): kernel-checked instances\n# goal: sage_test KaluzaKlein.ComplexAnalysis.BetaFunction.beta_continuation_differentiableAt file \"ca-spec-beta-mero-test.sage\"\n# description: points a off the poles; Lean composes differentiableAt_Gamma and the entire 1/Gamma.\nSEED = 0\n\n# shared oracle helpers: exact comparison when Sage decides it, else rigorous balls (160 bits)\nfrom sage.all import (SR, ZZ, QQ, I, pi, oo, sqrt, exp, log, sin, cos, gamma, zeta, psi, factorial, bernoulli,\n                      harmonic_number, euler_gamma, integrate, limit, var, assume, forget, diff, conjugate, beta,\n                      ComplexBallField, RealIntervalField, real_part, imag_part)\nfrom sage.all import sum as ssum\n_C = ComplexBallField(160)\n_R = RealIntervalField(160)\nfrom sage.rings.complex_arb import ComplexBall as _CB\nfrom sage.rings.real_arb import RealBall as _RB\ndef _ball(v):\n    if isinstance(v, (_CB, _RB)):\n        return _C(v)\n    return _C(SR(v))\ndef babs(v):\n    \"\"\"|v| as a rigorous ball (Sage's symbolic abs may drop the absolute value of a complex power)\"\"\"\n    return _ball(v).abs()\ndef _ri(rb):\n    return _R(rb.lower(), rb.upper())\ndef eq(values, L, R, edge=False):\n    \"\"\"the claim's two sides at the values: exact when Sage simplifies the difference to 0, else |L - R| in balls\"\"\"\n    try:\n        if isinstance(L, (_CB, _RB)) or isinstance(R, (_CB, _RB)):\n            raise ValueError('balls')\n        Ls, Rs = SR(L).simplify_full(), SR(R).simplify_full()\n        if bool(Ls - Rs == 0):\n            return oracle_instance(*values, lhs=Ls, rhs=Rs, edge=edge)\n    except Exception:\n        pass\n    d = (_ball(L) - _ball(R)).abs()\n    return oracle_instance(*values, lhs=_ri(d), rhs=_R(0), edge=edge)\ndef rel(values, L, R, relation, edge=False):\n    \"\"\"a real inequality between the sides, decided on rigorous intervals\"\"\"\n    return oracle_instance(*values, lhs=_ri(_ball(L).real()), rhs=_ri(_ball(R).real()), relation=relation, edge=edge)\nH = '(fun m h => by have h\\' := congrArg Complex.re h; simp at h\\' <;> linarith [(Nat.cast_nonneg m : (0 : ℝ) ≤ m)])'\nP = ('have h1 : DifferentiableAt ℂ (fun s => Complex.Gamma s * Complex.Gamma @B@) @A@ := '\n     '(Complex.differentiableAt_Gamma @A@ ' + H + ').mul_const _\\n'\n     'have h2 : DifferentiableAt ℂ (fun s => (Complex.Gamma (s + @B@))⁻¹) @A@ := '\n     'DifferentiableAt.comp (g := fun s => (Complex.Gamma s)⁻¹) (f := fun s => s + @B@) @A@ '\n     '(Complex.differentiable_one_div_Gamma (@A@ + @B@)) (differentiableAt_id.add_const @B@)\\n'\n     'exact h1.mul h2')\npts = [('1', '1', True), ('1 / 2', '2', False), ('2 + Complex.I', '-1 / 2', False)]\ninstances = [kernel_instance(a, b, H, proof=P.replace('@A@', '(' + a + ' : ℂ)').replace('@B@', '(' + b + ' : ℂ)'), edge=e)\n             for a, b, e in pts]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℂ", "name": "a"},
+   {"type": "ℂ", "name": "b"},
+   {"type": "∀ (m : ℕ), a ≠ -↑m", "name": "ha"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [{"text": "∀ (m : ℕ), a ≠ -↑m", "name": "ha"}],
+  "goal":
+  {"text":
+   "DifferentiableAt ℂ (fun s => Gamma s * Gamma b * (Gamma (s + b))⁻¹) a",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["1",
+    "1",
+    "(fun m h => by have h' := congrArg Complex.re h; simp at h' <;> linarith [(Nat.cast_nonneg m : (0 : ℝ) ≤ m)])"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["1 / 2",
+    "2",
+    "(fun m h => by have h' := congrArg Complex.re h; simp at h' <;> linarith [(Nat.cast_nonneg m : (0 : ℝ) ≤ m)])"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["2 + Complex.I",
+    "-1 / 2",
+    "(fun m h => by have h' := congrArg Complex.re h; simp at h' <;> linarith [(Nat.cast_nonneg m : (0 : ℝ) ≤ m)])"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

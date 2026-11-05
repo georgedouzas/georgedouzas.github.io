@@ -1,0 +1,86 @@
+{"target": "KaluzaKlein.ComplexAnalysis.Residues.pole_order_residue",
+ "statement":
+ "∀ (phi : ℂ → ℂ) (c : ℂ) (ρ : ℝ),\n  0 < ρ →\n    DifferentiableOn ℂ phi (closedBall c ρ) →\n      ∀ (m : ℕ), residue (fun z => phi z / (z - c) ^ (m + 1)) c ρ = iteratedDeriv m phi c / ↑m !",
+ "seed": 0,
+ "script_hash": "5643234256105506989",
+ "script":
+ "# name: ca-res-pole-order-test\n# technique: test fallback (instances; oracle instances are evaluated by Sage exactly or in Arb's\n#   rigorous ball arithmetic, kernel instances are checked by Lean)\n# goal: KaluzaKlein.ComplexAnalysis.Residues.pole_order_residue: the residue at a pole of order m + 1 is φ^(m)(c)/m!\n# description: Arb's rigorous circle integrals of φ/(z - c)^(m+1) compared with the exact derivatives\nSEED = 0\ndef V(*named, **kw):\n    \"\"\"The binders' values as Lean text, by binder name ('_' for an oracle instance's hypotheses).\"\"\"\n    for d in named:\n        kw.update(d)\n    return [kw.get(name, '_') for name, _ in universal]\ndef X(v):\n    \"\"\"An exact symbolic value, radicals canonicalised (Sage's exact comparison then succeeds).\"\"\"\n    return SR(v).canonicalize_radical().simplify_full()\nCBF = ComplexBallField(128)\nRIFp = RealIntervalField(128)\nCI = CBF(0, 1)\nTWO_PI_I = 2 * CBF.pi() * CI\ndef circ(f, c, rho):\n    \"\"\"Arb's rigorous enclosure of the circle integral of f over |z - c| = rho.\"\"\"\n    c = CBF(c); rho = CBF(rho)\n    return CBF.integral(lambda t, _: f(c + rho * (CI * t).exp()) * CI * rho * (CI * t).exp(), 0, 2 * CBF.pi().real())\ndef seg(f, a, b):\n    \"\"\"Arb's rigorous enclosure of the integral of f(t) dt over [a, b].\"\"\"\n    return CBF.integral(lambda t, _: f(t), CBF(a), CBF(b))\ndef gap(x, y):\n    \"\"\"The interval of |x - y| (contains 0 exactly when the enclosures are compatible).\"\"\"\n    d = (CBF(x) - CBF(y)).abs()\n    return RIFp(d.lower(), d.upper())\ndef bnd(x):\n    \"\"\"The interval of |x|.\"\"\"\n    d = CBF(x).abs()\n    return RIFp(d.lower(), d.upper())\ndef eq(x, y, *values, edge=False):\n    return oracle_instance(*values, lhs=gap(x, y), rhs=RIFp(0), relation='==', edge=edge)\n\ndef inst(phi, pt, c, rho, m, exact, edge=False):\n    return eq(circ(lambda w: phi(w)/(w - CBF(c))^(m + 1), c, rho) / TWO_PI_I, exact, *V(phi=pt, c=str(c), ρ=str(rho), m=str(m)), edge=edge)\ninstances = [inst(lambda w: w.exp(), 'Complex.exp', 0, 1, 1, 1), inst(lambda w: (w^2 + 1)/w, 'fun w => (w ^ 2 + 1) / w', 1, 1/2, 1, 0),\n             inst(lambda w: CBF(3), 'fun _ => 3', 2, 1, 0, 3, True), inst(lambda w: w.sin(), 'Complex.sin', 0, 2, 2, 0)]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4"],
+  "universal":
+  [{"type": "ℂ → ℂ", "name": "phi"},
+   {"type": "ℂ", "name": "c"},
+   {"type": "ℝ", "name": "ρ"},
+   {"type": "0 < ρ", "name": "hρ"},
+   {"type": "DifferentiableOn ℂ phi (closedBall c ρ)", "name": "hphi"},
+   {"type": "ℕ", "name": "m"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < ρ", "rel": "lt", "name": "hρ", "expr": "(0) - (x2)"},
+   {"text": "DifferentiableOn ℂ phi (closedBall c ρ)", "name": "hphi"}],
+  "goal":
+  {"text":
+   "residue (fun z => phi z / (z - c) ^ (m + 1)) c ρ = iteratedDeriv m phi c / ↑m !",
+   "rhs_poly": "x1",
+   "rhs": "iteratedDeriv m phi c / ↑m !",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs": "residue (fun z => phi z / (z - c) ^ (m + 1)) c ρ",
+   "kind": "rel",
+   "expr": "(x0) - ((x3 / typed(factorial(x4), 'ℕ')))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "↑m ! ≠ 0", "kind": "ne", "expr": "typed(factorial(x4), 'ℕ')"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms":
+  ["residue (fun z => phi z / (z - c) ^ (m + 1)) c ρ",
+   "iteratedDeriv m phi c / ↑m !",
+   "ρ",
+   "iteratedDeriv m phi c",
+   "m"],
+  "atom_types": ["ℂ", "ℂ", "ℝ", "ℂ", "ℕ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["Complex.exp", "0", "1", "_", "_", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.542879529078116702370360858144872780512e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["fun w => (w ^ 2 + 1) / w", "1", "1/2", "_", "_", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 4.604125398543417074425267871783129513828e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["fun _ => 3", "2", "1", "_", "_", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.436014655672136315133549478952674667072e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["Complex.sin", "0", "2", "_", "_", "2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.097754654645487599481990812579299746306e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

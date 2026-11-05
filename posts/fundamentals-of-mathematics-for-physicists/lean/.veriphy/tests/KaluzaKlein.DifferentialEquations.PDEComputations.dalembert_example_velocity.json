@@ -1,0 +1,85 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.PDEComputations.dalembert_example_velocity",
+ "statement":
+ "∀ (c x : ℝ),\n  c ≠ 0 → deriv (fun s => (rexp (-(x - c * s) ^ 2) + rexp (-(x + c * s) ^ 2)) / 2 + cos x * sin (c * s) / c) 0 = cos x",
+ "seed": 0,
+ "script_hash": "7566425441393031472",
+ "script":
+ "# name: de-dalembert-example-velocity-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.PDEComputations.dalembert_example_velocity file \"de-dalembert-example-velocity-test.sage\"\n# description: u_t at t = 0 for d'Alembert's solution of the Gaussian-plus-cosine data by Sage, exactly, at (c, x) = (1, 0) (edge), (2, 1), (-1/2, 3)\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\nxs, ys, zs, rs, s_, th, ph, xi, tt, kk, ms, ks = var('xs ys zs rs s_ th ph xi tt kk ms ks')\ninstances = [\n    oracle_instance('1', '0', '_',\n                    lhs=(diff(((exp(-(xs-(1)*tt)^2) + exp(-(xs+(1)*tt)^2))/2 + cos(xs)*sin((1)*tt)/(1)), tt).subs(tt=0) - cos(xs)).subs(xs=0).simplify_full(),\n                    rhs=0, relation='==', edge=True),\n    oracle_instance('2', '1', '_',\n                    lhs=(diff(((exp(-(xs-(2)*tt)^2) + exp(-(xs+(2)*tt)^2))/2 + cos(xs)*sin((2)*tt)/(2)), tt).subs(tt=0) - cos(xs)).subs(xs=1).simplify_full(),\n                    rhs=0, relation='==', edge=False),\n    oracle_instance('-1/2', '3', '_',\n                    lhs=(diff(((exp(-(xs-(-1/2)*tt)^2) + exp(-(xs+(-1/2)*tt)^2))/2 + cos(xs)*sin((-1/2)*tt)/(-1/2)), tt).subs(tt=0) - cos(xs)).subs(xs=3).simplify_full(),\n                    rhs=0, relation='==', edge=False),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℝ", "name": "c"},
+   {"type": "ℝ", "name": "x"},
+   {"type": "c ≠ 0", "name": "hc"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "c ≠ 0",
+    "rel": "ne",
+    "poly": "(x2) - (0)",
+    "name": "hc",
+    "expr": "(x2) - (0)"}],
+  "goal":
+  {"text":
+   "deriv (fun s => (rexp (-(x - c * s) ^ 2) + rexp (-(x + c * s) ^ 2)) / 2 + cos x * sin (c * s) / c) 0 = cos x",
+   "rhs_poly": "x1",
+   "rhs": "cos x",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs":
+   "deriv (fun s => (rexp (-(x - c * s) ^ 2) + rexp (-(x + c * s) ^ 2)) / 2 + cos x * sin (c * s) / c) 0",
+   "kind": "rel",
+   "expr":
+   "(diff((((exp((-((x3 - (x2 * d0_)))^(2))) + exp((-((x3 + (x2 * d0_)))^(2)))) / 2) + ((cos(x3) * sin((x2 * d0_))) / x2)), d0_).subs({d0_: 0})) - (cos(x3))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "c ≠ 0", "kind": "ne", "expr": "x2", "discharged_by": "hc"}],
+  "derivatives":
+  [{"var": "d0_",
+    "point": "0",
+    "function":
+    "fun s => (rexp (-(x - c * s) ^ 2) + rexp (-(x + c * s) ^ 2)) / 2 + cos x * sin (c * s) / c",
+    "body":
+    "(((exp((-((x3 - (x2 * d0_)))^(2))) + exp((-((x3 + (x2 * d0_)))^(2)))) / 2) + ((cos(x3) * sin((x2 * d0_))) / x2))",
+    "at": "0"}],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["deriv (fun s => (rexp (-(x - c * s) ^ 2) + rexp (-(x + c * s) ^ 2)) / 2 + cos x * sin (c * s) / c) 0",
+   "cos x",
+   "c",
+   "x"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "0", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "1", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-1/2", "3", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": false,
+   "accepted": true}]}

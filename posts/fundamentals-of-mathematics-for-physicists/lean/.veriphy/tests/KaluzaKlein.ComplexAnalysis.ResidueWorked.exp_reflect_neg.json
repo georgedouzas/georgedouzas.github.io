@@ -1,0 +1,73 @@
+{"target": "KaluzaKlein.ComplexAnalysis.ResidueWorked.exp_reflect_neg",
+ "statement":
+ "∀ (θ : ℝ), cexp (-(↑θ * I)) + cexp (-(↑(π - θ) * I)) = -2 * ↑(Real.sin θ) * I",
+ "seed": 0,
+ "script_hash": "8270354838587319489",
+ "script":
+ "# name: ca-res-exp-reflect-neg-test\n# technique: test fallback (instances; oracle instances are evaluated by Sage exactly or in Arb's\n#   rigorous ball arithmetic, kernel instances are checked by Lean)\n# goal: KaluzaKlein.ComplexAnalysis.ResidueWorked.exp_reflect_neg: e^(-iθ) + e^(-i(π - θ)) = -2i sin θ\n# description: Sage evaluates both sides exactly\nSEED = 0\ndef V(*named, **kw):\n    \"\"\"The binders' values as Lean text, by binder name ('_' for an oracle instance's hypotheses).\"\"\"\n    for d in named:\n        kw.update(d)\n    return [kw.get(name, '_') for name, _ in universal]\ndef X(v):\n    \"\"\"An exact symbolic value, radicals canonicalised (Sage's exact comparison then succeeds).\"\"\"\n    return SR(v).canonicalize_radical().simplify_full()\nRIq = RealIntervalField(128); CIq = ComplexIntervalField(128)\ndef G(a, b):\n    return RIq(abs(CIq(a) - CIq(b)))\ninstances = [oracle_instance(*V(θ=tt), lhs=G(exp(-I*t) + exp(-I*(pi - t)), -2*sin(t)*I), rhs=RIq(0), edge=(tt == '0')) for tt, t in\n             [('0', 0), ('Real.pi / 4', pi/4), ('Real.pi / 3', pi/3), ('1', 1)]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4"],
+  "universal": [{"type": "ℝ", "name": "θ"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text": "cexp (-(↑θ * I)) + cexp (-(↑(π - θ) * I)) = -2 * ↑(Real.sin θ) * I",
+   "rhs_poly": "(((-2) * x2) * x3)",
+   "rhs": "-2 * ↑(Real.sin θ) * I",
+   "rel": "eq",
+   "poly": "((x0 + x1)) - ((((-2) * x2) * x3))",
+   "lhs_poly": "(x0 + x1)",
+   "lhs": "cexp (-(↑θ * I)) + cexp (-(↑(π - θ) * I))",
+   "kind": "rel",
+   "expr":
+   "((exp((-(x4 * I))) + exp((-((pi - x4) * I))))) - ((((-2) * sin(x4)) * I))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms":
+  ["cexp (-(↑θ * I))", "cexp (-(↑(π - θ) * I))", "↑(Real.sin θ)", "I", "θ"],
+  "atom_types": ["ℂ", "ℂ", "ℂ", "ℂ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["Real.pi / 4"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 5.877471754111437539843682686111228389094e-39] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["Real.pi / 3"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.175494350822287507968736537222245677819e-38] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.662400053425835967818721046626440716289e-38] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

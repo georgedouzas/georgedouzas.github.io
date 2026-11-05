@@ -1,0 +1,85 @@
+{"target": "KaluzaKlein.FourierAnalysis.ConvolutionProduct.triangle_transform",
+ "statement":
+ "∀ (a k : ℝ), k ≠ 0 → 2 * ∫ (x : ℝ) in 0..2 * a, (2 * a - x) * Real.cos (k * x) = (2 - 2 * Real.cos (2 * a * k)) / k ^ 2",
+ "seed": 0,
+ "script_hash": "12975144128683614781",
+ "script":
+ "# name: fa-triangle-transform-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.ConvolutionProduct.triangle_transform file \"fa-triangle-transform-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ny = var('y'); k_ = var('k_'); x_ = var('x_'); assume(y, 'real')\ninstances = []\nCASES = [(['1', '1', 'one_ne_zero'], True, {'a': '1', 'k': '1'}), (['2', '3', '_'], False, {'a': '2', 'k': '3'}), (['1/2', '-5', '_'], False, {'a': '1/2', 'k': '-5'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('2*integrate((2*a - y)*cos(k*y), y, 0, 2*a)', scope))\n    R = side(eval('(2 - 2*cos(2*a*k))/k**2', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℝ", "name": "a"},
+   {"type": "ℝ", "name": "k"},
+   {"type": "k ≠ 0", "name": "hk"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals":
+  [{"var": "i0_",
+    "upper_text": "2 * a",
+    "upper": "(2 * x3)",
+    "lower_text": "0",
+    "lower": "0",
+    "function": "fun x => (2 * a - x) * Real.cos (k * x)",
+    "body": "(((2 * x3) - i0_) * cos((x2 * i0_)))"}],
+  "hyps":
+  [{"text": "k ≠ 0",
+    "rel": "ne",
+    "poly": "(x2) - (0)",
+    "name": "hk",
+    "expr": "(x2) - (0)"}],
+  "goal":
+  {"text":
+   "2 * ∫ (x : ℝ) in 0..2 * a, (2 * a - x) * Real.cos (k * x) = (2 - 2 * Real.cos (2 * a * k)) / k ^ 2",
+   "rhs_poly": "x1",
+   "rhs": "(2 - 2 * Real.cos (2 * a * k)) / k ^ 2",
+   "rel": "eq",
+   "poly": "((2 * x0)) - (x1)",
+   "lhs_poly": "(2 * x0)",
+   "lhs": "2 * ∫ (x : ℝ) in 0..2 * a, (2 * a - x) * Real.cos (k * x)",
+   "kind": "rel",
+   "expr":
+   "((2 * definite_integral((((2 * x3) - i0_) * cos((x2 * i0_))), i0_, 0, (2 * x3)))) - (((2 - (2 * cos(((2 * x3) * x2)))) / (x2)^(2)))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [{"text": "k ^ 2 ≠ 0", "kind": "ne", "expr": "(x2)^(2)"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["∫ (x : ℝ) in 0..2 * a, (2 * a - x) * Real.cos (k * x)",
+   "(2 - 2 * Real.cos (2 * a * k)) / k ^ 2",
+   "k",
+   "a"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "1", "one_ne_zero"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.832293673094284773995136459001524379531 .. 2.832293673094284773995136459001524379544] == [2.832293673094284773995136459001524379531 .. 2.832293673094284773995136459001524379544] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "3", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.03469912028166842118800993485030627040577 .. 0.03469912028166842118800993485030627040798] == [0.03469912028166842118800993485030627040577 .. 0.03469912028166842118800993485030627040798] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1/2", "-5", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.05730702516294189884266886627891541533277 .. 0.05730702516294189884266886627891541533351] == [0.05730702516294189884266886627891541533277 .. 0.05730702516294189884266886627891541533351] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

@@ -1,0 +1,96 @@
+{"target": "KaluzaKlein.HilbertSpaces.InnerProducts.cauchy_schwarz",
+ "statement":
+ "∀ (E : Type) [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℂ E] (u v : E), ‖inner ℂ u v‖ ≤ ‖u‖ * ‖v‖",
+ "seed": 0,
+ "script_hash": "8254975731111163296",
+ "script":
+ "# name: hs-ip-cauchy-schwarz-test\n# technique: test fallback (Veriphy test_fallback recipe): oracle instances: |⟪u, v⟫| against ‖u‖ ‖v‖ in ℂ² and ℂ³ exactly\n# goal: sage_test KaluzaKlein.HilbertSpaces.InnerProducts.cauchy_schwarz file \"hs-ip-cauchy-schwarz-test.sage\"\n# description: Cauchy-Schwarz at (1, i), (i, 1); at (1, i, 0), (1, 1, 1) with its sharp constant; at u = v (edge)\nSEED = 0\n\n# shared oracle helpers: exact comparison when Sage decides it, else rigorous balls (160 bits)\nfrom sage.all import (SR, ZZ, QQ, I, pi, oo, sqrt, exp, log, sin, cos, gamma, zeta, factorial, bernoulli, integrate,\n                      limit, var, assume, forget, diff, conjugate, matrix, vector, identity_matrix, zero_matrix,\n                      ComplexBallField, RealIntervalField, real_part, imag_part, e, binomial, hurwitz_zeta, floor)\nfrom sage.all import sum as ssum\n_C = ComplexBallField(160)\n_R = RealIntervalField(160)\nfrom sage.rings.complex_arb import ComplexBall as _CB\nfrom sage.rings.real_arb import RealBall as _RB\ndef _ball(v):\n    if isinstance(v, (_CB, _RB)):\n        return _C(v)\n    return _C(SR(v))\ndef _ri(rb):\n    return _R(rb.lower(), rb.upper())\ndef eq(values, L, R, edge=False):\n    \"\"\"the claim's two sides at the values: exact when Sage simplifies the difference to 0, else |L - R| in balls\"\"\"\n    try:\n        if isinstance(L, (_CB, _RB)) or isinstance(R, (_CB, _RB)):\n            raise ValueError('balls')\n        Ls, Rs = SR(L).simplify_full(), SR(R).simplify_full()\n        if bool(Ls - Rs == 0):\n            return oracle_instance(*values, lhs=Ls, rhs=Rs, edge=edge)\n    except Exception:\n        pass\n    d = (_ball(L) - _ball(R)).abs()\n    return oracle_instance(*values, lhs=_ri(d), rhs=_R(0), edge=edge)\ndef rel(values, L, R, relation, edge=False):\n    \"\"\"a real inequality between the sides, decided on rigorous intervals\"\"\"\n    return oracle_instance(*values, lhs=_ri(_ball(L).real()), rhs=_ri(_ball(R).real()), relation=relation, edge=edge)\ndef K(values, proof, edge=False):\n    return kernel_instance(*values, proof=proof, edge=edge)\ndef meq(values, L, R, edge=False):\n    \"\"\"exact equality of two Sage matrices or vectors\"\"\"\n    return oracle_instance(*values, lhs=matrix(L) if not hasattr(L, 'nrows') else L, rhs=matrix(R) if not hasattr(R, 'nrows') else R, edge=edge)\n\ndef ip(u, v):\n    return ssum(conjugate(SR(a)) * b for a, b in zip(u, v))\ndef nrm(u):\n    return sqrt(ssum(abs(SR(a)) ** 2 for a in u))\ncases = [(['EuclideanSpace ℂ (Fin 2)', 'inferInstance', 'inferInstance'], '!₂[(1 : ℂ), Complex.I]', '!₂[(Complex.I : ℂ), 1]', [1, I], [I, 1], False),\n         (['EuclideanSpace ℂ (Fin 3)', 'inferInstance', 'inferInstance'], '!₂[(1 : ℂ), Complex.I, 0]', '!₂[(1 : ℂ), 1, 1]', [1, I, 0], [1, 1, 1], False),\n         (['EuclideanSpace ℂ (Fin 2)', 'inferInstance', 'inferInstance'], '!₂[(1 : ℂ), 2]', '!₂[(1 : ℂ), 2]', [1, 2], [1, 2], True),\n         (['ℂ', 'inferInstance', 'inferInstance'], '(3 : ℂ)', '(Complex.I : ℂ)', [3], [I], False)]\ninstances = [rel(E + [ut, vt], abs(ip(u, v)), nrm(u) * nrm(v), '<=', edge=e) for E, ut, vt, u, v, e in cases]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2"],
+  "universal":
+  [{"type": "Type", "name": "E"},
+   {"type": "NormedAddCommGroup E",
+    "name":
+    "inst._@..veriphy._authoring_KaluzaKlein_PartI_HilbertSpaces_InnerProducts.736923472._hygCtx._hyg.3"},
+   {"type": "InnerProductSpace ℂ E",
+    "name":
+    "inst._@..veriphy._authoring_KaluzaKlein_PartI_HilbertSpaces_InnerProducts.736923472._hygCtx._hyg.6"},
+   {"type": "E", "name": "u"},
+   {"type": "E", "name": "v"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text": "‖inner ℂ u v‖ ≤ ‖u‖ * ‖v‖",
+   "rhs_poly": "(x1 * x2)",
+   "rhs": "‖u‖ * ‖v‖",
+   "rel": "le",
+   "poly": "(x0) - ((x1 * x2))",
+   "lhs_poly": "x0",
+   "lhs": "‖inner ℂ u v‖",
+   "kind": "rel",
+   "expr": "(x0) - ((x1 * x2))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["‖inner ℂ u v‖", "‖u‖", "‖v‖"],
+  "atom_types": ["ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values":
+   ["EuclideanSpace ℂ (Fin 2)",
+    "inferInstance",
+    "inferInstance",
+    "!₂[(1 : ℂ), Complex.I]",
+    "!₂[(Complex.I : ℂ), 1]"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.0000000000000000000000000000000000000000000000000 .. -0.0000000000000000000000000000000000000000000000000] <= [2.0000000000000000000000000000000000000000000000000 .. 2.0000000000000000000000000000000000000000000000000] at 160 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["EuclideanSpace ℂ (Fin 3)",
+    "inferInstance",
+    "inferInstance",
+    "!₂[(1 : ℂ), Complex.I, 0]",
+    "!₂[(1 : ℂ), 1, 1]"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.4142135623730950488016887242096980785696718753721 .. 1.4142135623730950488016887242096980785696718753804] <= [2.4494897427831780981972840747058913919659474806389 .. 2.4494897427831780981972840747058913919659474806663] at 160 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["EuclideanSpace ℂ (Fin 2)",
+    "inferInstance",
+    "inferInstance",
+    "!₂[(1 : ℂ), 2]",
+    "!₂[(1 : ℂ), 2]"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[5.0000000000000000000000000000000000000000000000000 .. 5.0000000000000000000000000000000000000000000000000] <= [5.0000000000000000000000000000000000000000000000000 .. 5.0000000000000000000000000000000000000000000000000] at 160 bits",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["ℂ", "inferInstance", "inferInstance", "(3 : ℂ)", "(Complex.I : ℂ)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[3.0000000000000000000000000000000000000000000000000 .. 3.0000000000000000000000000000000000000000000000000] <= [3.0000000000000000000000000000000000000000000000000 .. 3.0000000000000000000000000000000000000000000000000] at 160 bits",
+   "edge": false,
+   "accepted": true}]}

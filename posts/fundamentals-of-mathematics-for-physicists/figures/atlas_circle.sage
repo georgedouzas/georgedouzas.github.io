@@ -1,0 +1,30 @@
+# Figure: an atlas of the circle. Left: the two angle charts, phi in (0, 2pi) missing the point (1, 0) (blue arc)
+# and phi' in (-pi, pi) missing (-1, 0) (red arc, drawn slightly inside); their domains overlap in two open arcs.
+# Right: the transition map phi' = phi on the upper overlap and phi' = phi - 2pi on the lower one, smooth on each
+# piece. Output: figures/atlas_circle.svg.
+import os
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "atlas_circle.svg")
+left = Graphics()
+left += parametric_plot((cos(x), sin(x)), (x, 0.08, 2 * pi - 0.08), color="royalblue", thickness=3)
+left += parametric_plot((0.88 * cos(x), 0.88 * sin(x)), (x, -pi + 0.08, pi - 0.08), color="firebrick", thickness=3)
+left += point((1, 0), color="royalblue", size=50, faceted=True, marker="o") + point((-0.88, 0), color="firebrick", size=50)
+left += text(r"chart $\varphi\in(0,2\pi)$ misses $(1,0)$", (0, 1.3), color="royalblue", fontsize=10)
+left += text(r"chart $\varphi'\in(-\pi,\pi)$ misses $(-1,0)$", (0, -1.3), color="firebrick", fontsize=10)
+left.axes(False); left.set_aspect_ratio(1)
+right = Graphics()
+right += line([(0, 0), (pi, pi)], color="black", thickness=2) + line([(pi, -pi), (2 * pi, 0)], color="black", thickness=2)
+right += point((pi, pi), color="black", size=40, faceted=True) + point((pi, -pi), color="black", size=40, faceted=True)
+right += line([(0, -pi), (2 * pi, -pi)], color="grey") + line([(0, pi), (2 * pi, pi)], color="grey") + line([(0, -pi), (0, pi)], color="grey") + line([(2 * pi, -pi), (2 * pi, pi)], color="grey")
+right += text(r"$\varphi$", (2 * pi + 0.4, 0), fontsize=11) + text(r"$\varphi'$", (0, pi + 0.5), fontsize=11)
+right += text(r"$\varphi'=\varphi$", (1.2, 2.2), fontsize=10) + text(r"$\varphi'=\varphi-2\pi$", (5.0, -2.4), fontsize=10)
+right += text(r"$\pi$", (pi, -pi - 0.5), fontsize=9) + text(r"$2\pi$", (2 * pi, -pi - 0.5), fontsize=9)
+right.axes(False); right.set_aspect_ratio(1)
+g = graphics_array([left, right])
+g.save(OUT, figsize=[8, 3.6])
+S1 = Manifold(1, "S^1", structure="topological")
+U = S1.open_subset("U"); V = S1.open_subset("V"); S1.declare_union(U, V)
+c1 = U.chart("ph:(0,2*pi)"); c2 = V.chart("phd:(-pi,pi)")
+ph = c1[0]
+print("[PASS] the two angle charts form the atlas of the circle in SageManifolds:", S1.atlas() == [c1, c2])
+print("[PASS] both pieces of the transition map, phi' = phi and phi' = phi - 2*pi, have derivative 1:", bool(diff(ph, ph) == 1 and diff(ph - 2*pi, ph) == 1))
+print("wrote", os.path.relpath(OUT))

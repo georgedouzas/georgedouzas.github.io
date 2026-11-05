@@ -1,0 +1,11 @@
+# name: set-caps-entries-test
+# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand
+# goal: sage_test KaluzaKlein.Sets.Subspace.caps_and_entries_open
+# description: the claim at the instances below, each proved independently of the claim
+SEED = 0
+CASES = [
+    (['KaluzaKlein.Sets.Sets.northPole', '1/2', '0', '1', '0', '0'], False, "set_option maxHeartbeats 2000000 in\nhave key : ∀ (n : Fin 3 → ℝ) (t a b : ℝ) (i j : Fin 3), IsOpen ((Subtype.val : sphere → (Fin 3 → ℝ)) ⁻¹' {p | t < p ⬝ᵥ n}) ∧ IsOpen ((Subtype.val : SO3 → Matrix (Fin 3) (Fin 3) ℝ) ⁻¹' {g | g i j ∈ Ioo a b}) := by\n  intro n t a b i j\n  constructor\n  · refine (isOpen_lt continuous_const ?_).preimage continuous_subtype_val\n    simp only [dotProduct]\n    fun_prop\n  · refine IsOpen.preimage continuous_subtype_val ?_\n    exact isOpen_Ioo.preimage (continuous_id.matrix_elem i j)\nexact @key (KaluzaKlein.Sets.Sets.northPole) (1/2) (0) (1) (0) (0)"),
+    (['0', '0', '0', '0', '0', '0'], True, "set_option maxHeartbeats 2000000 in\nhave key : ∀ (n : Fin 3 → ℝ) (t a b : ℝ) (i j : Fin 3), IsOpen ((Subtype.val : sphere → (Fin 3 → ℝ)) ⁻¹' {p | t < p ⬝ᵥ n}) ∧ IsOpen ((Subtype.val : SO3 → Matrix (Fin 3) (Fin 3) ℝ) ⁻¹' {g | g i j ∈ Ioo a b}) := by\n  intro n t a b i j\n  constructor\n  · refine (isOpen_lt continuous_const ?_).preimage continuous_subtype_val\n    simp only [dotProduct]\n    fun_prop\n  · refine IsOpen.preimage continuous_subtype_val ?_\n    exact isOpen_Ioo.preimage (continuous_id.matrix_elem i j)\nexact @key (0) (0) (0) (0) (0) (0)"),
+    (['![1, 0, 0]', '-1', '-1/2', '1/2', '2', '1'], False, "set_option maxHeartbeats 2000000 in\nhave key : ∀ (n : Fin 3 → ℝ) (t a b : ℝ) (i j : Fin 3), IsOpen ((Subtype.val : sphere → (Fin 3 → ℝ)) ⁻¹' {p | t < p ⬝ᵥ n}) ∧ IsOpen ((Subtype.val : SO3 → Matrix (Fin 3) (Fin 3) ℝ) ⁻¹' {g | g i j ∈ Ioo a b}) := by\n  intro n t a b i j\n  constructor\n  · refine (isOpen_lt continuous_const ?_).preimage continuous_subtype_val\n    simp only [dotProduct]\n    fun_prop\n  · refine IsOpen.preimage continuous_subtype_val ?_\n    exact isOpen_Ioo.preimage (continuous_id.matrix_elem i j)\nexact @key (![1, 0, 0]) (-1) (-1/2) (1/2) (2) (1)"),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]

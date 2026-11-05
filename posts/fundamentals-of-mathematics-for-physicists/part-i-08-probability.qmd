@@ -32,6 +32,8 @@ assigned probabilities, and the assignment itself. This section defines the thre
 probability, independence and Bayes' rule, and checks the rational probabilities of the running examples (two dice
 and a diagnostic test) exactly in Sage.
 
+For more on this topic, see @baldi2023probability [Ch. 1] and @capinski2001probability [Ch. 1-7].
+
 ### Sample spaces and events
 
 Before any probability can be assigned one must say what the possible outcomes are and which questions about them
@@ -902,6 +904,8 @@ decays in a second, the position of a particle, rather than the outcome itself. 
 variables and their distributions, the expectation, variance and moments that summarise them, the characteristic
 function that encodes all moments at once, and the three distributions that recur throughout physics: the
 binomial with its Poisson limit, and the Gaussian.
+
+For more on this topic, see @baldi2023probability [Ch. 2], @capinski2001probability [Ch. 8-12] and @cufaropetroni2020probability [Ch. 1-4].
 
 ### Random variables
 
@@ -1932,6 +1936,8 @@ $1/\sqrt n$. This section makes the two statements precise. It defines the modes
 Chebyshev's inequality and the weak law of large numbers from it, states the strong law and the central limit
 theorem with the characteristic-function argument behind the latter, and derives Wick's theorem for the moments of
 the Gaussian, whose combinatorics of pairings is used throughout field theory.
+
+For more on this topic, see @baldi2023probability [Ch. 3].
 
 ### Convergence in probability
 
@@ -3345,6 +3351,8 @@ the distribution's parameters and say how reliable the inference is. This sectio
 bias, maximum likelihood, confidence intervals from the central limit theorem, the chi-squared test of a
 hypothesised distribution, and Monte Carlo sampling as estimation of an integral, with the $1/\sqrt N$ error that
 governs every simulation.
+
+For more on this topic, see @gasinski2014exercises [Ch. 3].
 
 ### Estimators
 

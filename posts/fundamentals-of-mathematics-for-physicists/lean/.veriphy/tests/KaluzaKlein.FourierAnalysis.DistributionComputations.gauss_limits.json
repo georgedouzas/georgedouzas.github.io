@@ -1,0 +1,58 @@
+{"target": "KaluzaKlein.FourierAnalysis.DistributionComputations.gauss_limits",
+ "statement":
+ "∀ (c : ℝ), Tendsto (fun ε => c * rexp (-ε ^ 2 / 4)) (𝓝 0) (𝓝 c) ∧ Tendsto (fun ε => c * (1 + ε ^ 2 / 2)) (𝓝 0) (𝓝 c)",
+ "seed": 0,
+ "script_hash": "5902922310190335170",
+ "script":
+ "# name: fa-gauss-limits-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.DistributionComputations.gauss_limits file \"fa-gauss-limits-test.sage\"\n# description: Sage evaluates both expressions at ε = 10⁻⁶: within 10⁻¹¹ |c| of c\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ninstances = []\nCASES = [(['0'], True, {'c': '0'}), (['1'], False, {'c': '1'}), (['-4'], False, {'c': '-4'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('abs(c*exp(-SR(10)**(-12)/4) - c) + abs(c*(1 + SR(10)**(-12)/2) - c)', scope))\n    R = side(eval('abs(c)*SR(10)**(-11)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='<=', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal": [{"type": "ℝ", "name": "c"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "Tendsto (fun ε => c * rexp (-ε ^ 2 / 4)) (𝓝 0) (𝓝 c) ∧ Tendsto (fun ε => c * (1 + ε ^ 2 / 2)) (𝓝 0) (𝓝 c)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] <= [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[7.499999999999687500000000013783881364049e-13 .. 7.499999999999687500000000043171240134634e-13] <= [9.999999999999999999999999999999999999959e-12 .. 1.000000000000000000000000000000000000001e-11] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-4"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.999999999999875000000000005513552545619e-12 .. 2.999999999999875000000000017268496053854e-12] <= [3.999999999999999999999999999999999999983e-11 .. 4.000000000000000000000000000000000000001e-11] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

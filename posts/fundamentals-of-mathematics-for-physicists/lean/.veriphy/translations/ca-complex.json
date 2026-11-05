@@ -1,0 +1,7 @@
+{
+  "functions": [
+    {"lean": "Complex.arg", "sage": "arg", "arity": 1, "types": ["ℂ"], "result": "ℝ",
+     "conditions": [],
+     "example": "Complex.arg z"}
+  ]
+}

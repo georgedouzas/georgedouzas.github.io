@@ -1,0 +1,97 @@
+{"target": "KaluzaKlein.ComplexAnalysis.CauchyTheorem.cauchy_rect",
+ "statement":
+ "∀ (f : ℂ → ℂ) (z w : ℂ),\n  DifferentiableOn ℂ f (Set.uIcc z.re w.re ×ℂ Set.uIcc z.im w.im) →\n    (((∫ (x : ℝ) in z.re..w.re, f (↑x + ↑z.im * I)) - ∫ (x : ℝ) in z.re..w.re, f (↑x + ↑w.im * I)) +\n          I • ∫ (y : ℝ) in z.im..w.im, f (↑w.re + ↑y * I)) -\n        I • ∫ (y : ℝ) in z.im..w.im, f (↑z.re + ↑y * I) =\n      0",
+ "seed": 0,
+ "script_hash": "12869716024906845513",
+ "script":
+ "# name: ca-contour-cauchy-rect-test\n# technique: test fallback; oracle instances: Sage encloses the four side integrals in ball arithmetic\n# goal: sage_test KaluzaKlein.ComplexAnalysis.CauchyTheorem.cauchy_rect\n# description: instances of cauchy_rect (Contour integration, part I chapter 4), edge case first or marked\nSEED = 0\nt = var('t', domain='real')\nz = var('z')\nCB = ComplexBallField(128)\nRI = RealIntervalField(128)\nJ = CB(0, 1)\ndef ex(e):\n    return SR(e).rectform().simplify_full()\ndef pint(f, g, a, b):\n    # the parametrised contour integral of f (an expression in z) along g(t), t in [a, b], exactly\n    return integrate(f.subs(z=g) * diff(g, t), t, a, b)\ndef speed(g):\n    d = diff(g, t)\n    return sqrt(d.real_part() ** 2 + d.imag_part() ** 2).simplify_full()\ndef bint(F, a, b):\n    # a rigorous ball enclosure of the integral of F (a function on balls) over [a, b]\n    return CB.integral(lambda x, _: F(x), CB(a), CB(b))\ndef circ(F, c, R):\n    # a rigorous ball enclosure of the circle integral of F over |z - c| = R\n    return bint(lambda x: F(CB(c) + CB(R) * (J * x).exp()) * CB(R) * J * (J * x).exp(), 0, 2 * CB.pi())\ndef gap(*pairs):\n    # an interval enclosing the sum of |x - y| over the pairs: it contains 0 when every pair agrees\n    return sum(RI(abs(CB(x) - CB(y))) for x, y in pairs)\ndef rect(F, z0, w0):\n    x0, y0, x1, y1 = CB(z0).real(), CB(z0).imag(), CB(w0).real(), CB(w0).imag()\n    a = bint(lambda x: F(x + y0 * J), x0, x1)\n    b = bint(lambda x: F(x + y1 * J), x0, x1)\n    c = bint(lambda y: F(x1 + y * J), y0, y1)\n    d = bint(lambda y: F(x0 + y * J), y0, y1)\n    return a - b + J * c - J * d\ncases = [('Complex.exp', lambda w: w.exp(), '0', 0, '(1 + Complex.I)', 1 + I, False),\n         ('(fun w : ℂ => w ^ 3)', lambda w: w ** 3, '(-1 - 2 * Complex.I)', -1 - 2 * I, '(2 + Complex.I)', 2 + I, False),\n         ('Complex.sin', lambda w: w.sin(), '(1 + Complex.I)', 1 + I, '(1 + Complex.I)', 1 + I, True)]\ninstances = [oracle_instance(fl, zl, wl, '_', lhs=gap((rect(F, z0, w0), 0)), rhs=RI(0), edge=e) for fl, F, zl, z0, wl, w0, e in cases]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4", "x5", "x6", "x7"],
+  "universal":
+  [{"type": "ℂ → ℂ", "name": "f"},
+   {"type": "ℂ", "name": "z"},
+   {"type": "ℂ", "name": "w"},
+   {"type": "DifferentiableOn ℂ f (Set.uIcc z.re w.re ×ℂ Set.uIcc z.im w.im)",
+    "name": "hf"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals":
+  [{"var": "i0_",
+    "upper_text": "w.re",
+    "upper": "x6",
+    "lower_text": "z.re",
+    "lower": "x5",
+    "function": "fun x => f (↑x + ↑z.im * I)",
+    "body": "F_f((i0_ + (x4 * I)))"},
+   {"var": "i0_",
+    "upper_text": "w.re",
+    "upper": "x6",
+    "lower_text": "z.re",
+    "lower": "x5",
+    "function": "fun x => f (↑x + ↑w.im * I)",
+    "body": "F_f((i0_ + (x7 * I)))"}],
+  "hyps":
+  [{"text": "DifferentiableOn ℂ f (Set.uIcc z.re w.re ×ℂ Set.uIcc z.im w.im)",
+    "name": "hf"}],
+  "goal":
+  {"text":
+   "(((∫ (x : ℝ) in z.re..w.re, f (↑x + ↑z.im * I)) - ∫ (x : ℝ) in z.re..w.re, f (↑x + ↑w.im * I)) +\n      I • ∫ (y : ℝ) in z.im..w.im, f (↑w.re + ↑y * I)) -\n    I • ∫ (y : ℝ) in z.im..w.im, f (↑z.re + ↑y * I) =\n  0",
+   "rhs_poly": "0",
+   "rhs": "0",
+   "rel": "eq",
+   "poly": "((((x0 - x1) + x2) - x3)) - (0)",
+   "lhs_poly": "(((x0 - x1) + x2) - x3)",
+   "lhs":
+   "(((∫ (x : ℝ) in z.re..w.re, f (↑x + ↑z.im * I)) - ∫ (x : ℝ) in z.re..w.re, f (↑x + ↑w.im * I)) +\n    I • ∫ (y : ℝ) in z.im..w.im, f (↑w.re + ↑y * I)) -\n  I • ∫ (y : ℝ) in z.im..w.im, f (↑z.re + ↑y * I)",
+   "kind": "rel",
+   "expr":
+   "((((definite_integral(F_f((i0_ + (x4 * I))), i0_, x5, x6) - definite_integral(F_f((i0_ + (x7 * I))), i0_, x5, x6)) + x2) - x3)) - (0)"},
+  "functions": [{"sage": "F_f", "lean": "f", "arity": 1}],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms":
+  ["∫ (x : ℝ) in z.re..w.re, f (↑x + ↑z.im * I)",
+   "∫ (x : ℝ) in z.re..w.re, f (↑x + ↑w.im * I)",
+   "I • ∫ (y : ℝ) in z.im..w.im, f (↑w.re + ↑y * I)",
+   "I • ∫ (y : ℝ) in z.im..w.im, f (↑z.re + ↑y * I)",
+   "z.im",
+   "z.re",
+   "w.re",
+   "w.im"],
+  "atom_types": ["ℂ", "ℂ", "ℂ", "ℂ", "ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["Complex.exp", "0", "(1 + Complex.I)", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 3.552294430679816889298052404955047721977e-37] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun w : ℂ => w ^ 3)", "(-1 - 2 * Complex.I)", "(2 + Complex.I)", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 2.950866074279703187764951373972945857966e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["Complex.sin", "(1 + Complex.I)", "(1 + Complex.I)", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true}]}

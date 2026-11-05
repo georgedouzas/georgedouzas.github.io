@@ -1,0 +1,67 @@
+{"target": "KaluzaKlein.RealAnalysis.MultipleIntegrals.sqrt_exp_integral",
+ "statement":
+ "∀ (a : ℝ), 0 < a → ∫ (x : ℝ) in Ioi 0, √x * rexp (-(a * x)) = (1 / a) ^ (3 / 2) * Gamma (3 / 2)",
+ "seed": 0,
+ "script_hash": "3009177439762245244",
+ "script":
+ "# name: ra-sqrt-exp-integral-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.MultipleIntegrals.sqrt_exp_integral file \"ra-sqrt-exp-integral-test.sage\"\n# description: Sage's ∫₀^∞ √x e^(-ax) dx = a^(-3/2) Γ(3/2) (√π/2 at a = 1)\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx = var('x')\ninstances = [O([str(av), '(by norm_num)'], integrate(sqrt(x) * exp(-av * x), x, 0, oo), (1 / SR(av)) ** (QQ(3) / 2) * gamma(QQ(3) / 2), edge=bool(av == 1)) for av in [1, 2, 4]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2"],
+  "universal": [{"type": "ℝ", "name": "a"}, {"type": "0 < a", "name": "ha"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < a",
+    "rel": "lt",
+    "poly": "(0) - (x0)",
+    "name": "ha",
+    "expr": "(0) - (x0)"}],
+  "goal":
+  {"text":
+   "∫ (x : ℝ) in Ioi 0, √x * rexp (-(a * x)) = (1 / a) ^ (3 / 2) * Gamma (3 / 2)",
+   "rel": "eq",
+   "kind": "other",
+   "expr": "(x1) - ((((1 / x0))^((3 / 2)) * x2))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "0 < 1 / a", "kind": "pos", "expr": "(1 / x0)"},
+   {"text": "a ≠ 0", "kind": "ne", "expr": "x0", "discharged_by": "ha"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["a", "∫ (x : ℝ) in Ioi 0, √x * rexp (-(a * x))", "Gamma (3 / 2)"],
+  "atom_types": ["ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.8862269254527580136490837416705725913987747280611935641069038949264556422955038 .. 0.8862269254527580136490837416705725913987747280611935641069038949264556422955298] == [0.8862269254527580136490837416705725913987747280611935641069038949264556422955038 .. 0.8862269254527580136490837416705725913987747280611935641069038949264556422955298] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.3133285343288750628019706606013806566258733425762422895787404470427867068259680 .. 0.3133285343288750628019706606013806566258733425762422895787404470427867068259897] == [0.3133285343288750628019706606013806566258733425762422895787404470427867068259723 .. 0.3133285343288750628019706606013806566258733425762422895787404470427867068259897] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["4", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.1107783656815947517061354677088215739248468410076491955133629868658069552869379 .. 0.1107783656815947517061354677088215739248468410076491955133629868658069552869413] == [0.1107783656815947517061354677088215739248468410076491955133629868658069552869379 .. 0.1107783656815947517061354677088215739248468410076491955133629868658069552869413] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

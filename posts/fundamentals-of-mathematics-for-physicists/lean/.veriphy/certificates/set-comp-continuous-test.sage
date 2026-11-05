@@ -1,0 +1,11 @@
+# name: set-comp-continuous-test
+# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand
+# goal: sage_test KaluzaKlein.Sets.Continuous.comp_continuous
+# description: the claim at the instances below, each proved independently of the claim
+SEED = 0
+CASES = [
+    (['ℝ', 'ℝ', 'ℝ', 'inferInstance', 'inferInstance', 'inferInstance', 'Real.sin', 'Real.exp', 'Real.continuous_sin', 'Real.continuous_exp'], False, "set_option maxHeartbeats 2000000 in\nhave key : ∀ (X Y Z : Type) [inst1 : TopologicalSpace X] [inst2 : TopologicalSpace Y] [inst3 : TopologicalSpace Z] (f : X → Y) (g : Y → Z) (hf : Continuous f) (hg : Continuous g), Continuous (g ∘ f) ∧ ∀ W : Set Z, (g ∘ f) ⁻¹' W = f ⁻¹' (g ⁻¹' W) := by\n  intro X Y Z inst1 inst2 inst3 f g hf hg\n  exact (⟨hg.comp hf, fun _ => rfl⟩)\nexact @key (ℝ) (ℝ) (ℝ) (inferInstance) (inferInstance) (inferInstance) (Real.sin) (Real.exp) (Real.continuous_sin) (Real.continuous_exp)"),
+    (['ℝ', 'ℝ', 'ℝ', 'inferInstance', 'inferInstance', 'inferInstance', 'id', 'id', 'continuous_id', 'continuous_id'], True, "set_option maxHeartbeats 2000000 in\nhave key : ∀ (X Y Z : Type) [inst1 : TopologicalSpace X] [inst2 : TopologicalSpace Y] [inst3 : TopologicalSpace Z] (f : X → Y) (g : Y → Z) (hf : Continuous f) (hg : Continuous g), Continuous (g ∘ f) ∧ ∀ W : Set Z, (g ∘ f) ⁻¹' W = f ⁻¹' (g ⁻¹' W) := by\n  intro X Y Z inst1 inst2 inst3 f g hf hg\n  exact (⟨hg.comp hf, fun _ => rfl⟩)\nexact @key (ℝ) (ℝ) (ℝ) (inferInstance) (inferInstance) (inferInstance) (id) (id) (continuous_id) (continuous_id)"),
+    (['ℝ', 'ℝ × ℝ', 'ℝ', 'inferInstance', 'inferInstance', 'inferInstance', 'fun t => (t, t)', 'fun p => p.1 * p.2', '(by fun_prop)', '(by fun_prop)'], False, "set_option maxHeartbeats 2000000 in\nhave key : ∀ (X Y Z : Type) [inst1 : TopologicalSpace X] [inst2 : TopologicalSpace Y] [inst3 : TopologicalSpace Z] (f : X → Y) (g : Y → Z) (hf : Continuous f) (hg : Continuous g), Continuous (g ∘ f) ∧ ∀ W : Set Z, (g ∘ f) ⁻¹' W = f ⁻¹' (g ⁻¹' W) := by\n  intro X Y Z inst1 inst2 inst3 f g hf hg\n  exact (⟨hg.comp hf, fun _ => rfl⟩)\nexact @key (ℝ) (ℝ × ℝ) (ℝ) (inferInstance) (inferInstance) (inferInstance) (fun t => (t, t)) (fun p => p.1 * p.2) ((by fun_prop)) ((by fun_prop))"),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]

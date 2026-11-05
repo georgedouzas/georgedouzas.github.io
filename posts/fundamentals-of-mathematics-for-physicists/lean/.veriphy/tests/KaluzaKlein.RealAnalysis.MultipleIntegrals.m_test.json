@@ -1,0 +1,62 @@
+{"target": "KaluzaKlein.RealAnalysis.MultipleIntegrals.m_test",
+ "statement":
+ "∀ (f : ℕ → ℝ → ℝ) (M : ℕ → ℝ),\n  Summable M →\n    (∀ (k : ℕ) (x : ℝ), |f k x| ≤ M k) →\n      TendstoUniformly (fun n x => ∑ k ∈ Finset.range n, f k x) (fun x => ∑' (k : ℕ), f k x) atTop",
+ "seed": 0,
+ "script_hash": "11511348695676332483",
+ "script":
+ "# name: ra-m-test-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.MultipleIntegrals.m_test file \"ra-m-test-test.sage\"\n# description: the M-test bound: Sage sums ∑ M_k (2^-k, 1/k², 0) and checks |f_k| ≤ M_k on a grid\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nk, x = var('k x')\ninstances = []\nfor f, M, edge in [(sin(k * x) / 2 ** k, QQ(1) / 2 ** k, False), (cos(k * x) / (k + 1) ** 2, 1 / (k + 1) ** 2, False), (SR(0), SR(0), True)]:\n    Ms = sum(M, k, 0, oo) if M != 0 else SR(0)\n    ok = all((abs(RI(f.subs(k=j, x=QQ(xv) / 7))) - RI(M.subs(k=j))).upper() <= 2 ** -100 for j in range(8) for xv in range(-7, 8))\n    instances.append(O([f'(fun k x => {f})', f'(fun k => {M})', '‹_›', '‹_›'], B(ok and RI(Ms).is_finite() if hasattr(RI(Ms), 'is_finite') else ok), QQ(1), edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℕ → ℝ → ℝ", "name": "f"},
+   {"type": "ℕ → ℝ", "name": "M"},
+   {"type": "Summable M", "name": "hM"},
+   {"type": "∀ (k : ℕ) (x : ℝ), |f k x| ≤ M k", "name": "h"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "Summable M", "name": "hM"},
+   {"text": "∀ (k : ℕ) (x : ℝ), |f k x| ≤ M k", "name": "h"}],
+  "goal":
+  {"text":
+   "TendstoUniformly (fun n x => ∑ k ∈ Finset.range n, f k x) (fun x => ∑' (k : ℕ), f k x) atTop",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["(fun k x => sin(k*x)/2^k)", "(fun k => 1/(2^k))", "‹_›", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "1 == 1 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun k x => cos(k*x)/(k + 1)^2)", "(fun k => (k + 1)^(-2))", "‹_›", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "1 == 1 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun k x => 0)", "(fun k => 0)", "‹_›", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "1 == 1 (exact)",
+   "edge": true,
+   "accepted": true}]}

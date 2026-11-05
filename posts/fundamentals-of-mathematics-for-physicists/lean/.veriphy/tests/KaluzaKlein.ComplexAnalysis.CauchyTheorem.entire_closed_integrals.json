@@ -1,0 +1,88 @@
+{"target": "KaluzaKlein.ComplexAnalysis.CauchyTheorem.entire_closed_integrals",
+ "statement":
+ "∀ (p : Polynomial ℂ) (γ : ℝ → ℂ) (a b : ℝ),\n  ContDiff ℝ 1 γ → γ a = γ b → cint cexp γ a b = 0 ∧ cint cos γ a b = 0 ∧ cint (fun z => Polynomial.eval z p) γ a b = 0",
+ "seed": 0,
+ "script_hash": "14392662013607348903",
+ "script":
+ "# name: ca-contour-entire-closed-integrals-test\n# technique: test fallback; oracle instances: Sage encloses the three closed integrals in ball arithmetic\n# goal: sage_test KaluzaKlein.ComplexAnalysis.CauchyTheorem.entire_closed_integrals\n# description: instances of entire_closed_integrals (Contour integration, part I chapter 4), edge case first or marked\nSEED = 0\nt = var('t', domain='real')\nz = var('z')\nCB = ComplexBallField(128)\nRI = RealIntervalField(128)\nJ = CB(0, 1)\ndef ex(e):\n    return SR(e).rectform().simplify_full()\ndef pint(f, g, a, b):\n    # the parametrised contour integral of f (an expression in z) along g(t), t in [a, b], exactly\n    return integrate(f.subs(z=g) * diff(g, t), t, a, b)\ndef speed(g):\n    d = diff(g, t)\n    return sqrt(d.real_part() ** 2 + d.imag_part() ** 2).simplify_full()\ndef bint(F, a, b):\n    # a rigorous ball enclosure of the integral of F (a function on balls) over [a, b]\n    return CB.integral(lambda x, _: F(x), CB(a), CB(b))\ndef circ(F, c, R):\n    # a rigorous ball enclosure of the circle integral of F over |z - c| = R\n    return bint(lambda x: F(CB(c) + CB(R) * (J * x).exp()) * CB(R) * J * (J * x).exp(), 0, 2 * CB.pi())\ndef gap(*pairs):\n    # an interval enclosing the sum of |x - y| over the pairs: it contains 0 when every pair agrees\n    return sum(RI(abs(CB(x) - CB(y))) for x, y in pairs)\ndef ints(p, g, dg, a, b):\n    return [bint(lambda x: F(g(x)) * dg(x), a, b) for F in (lambda w: w.exp(), lambda w: w.cos(), p)]\ncircle = (lambda x: (J * x).exp(), lambda x: J * (J * x).exp())\nellipse = (lambda x: 2 * x.cos() + J * x.sin(), lambda x: -2 * x.sin() + J * x.cos())\npoint = (lambda x: CB(1), lambda x: CB(0))\ncases = [('(Polynomial.X ^ 5 - 3 * Polynomial.X + 2 : Polynomial ℂ)', lambda w: w ** 5 - 3 * w + 2, '(fun s : ℝ => Complex.exp (s * Complex.I))', circle, False),\n         ('(Polynomial.X ^ 2 : Polynomial ℂ)', lambda w: w ** 2, '(fun s : ℝ => 2 * Real.cos s + Complex.I * Real.sin s)', ellipse, False),\n         ('(1 : Polynomial ℂ)', lambda w: CB(1), '(fun _ : ℝ => (1 : ℂ))', point, True)]\ninstances = [oracle_instance(pl, gl, '0', '(2 * Real.pi)', '_', '_', lhs=gap(*[(v, 0) for v in ints(p, g[0], g[1], 0, 2 * CB.pi())]), rhs=RI(0), edge=e)\n             for pl, p, gl, g, e in cases]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "Polynomial ℂ", "name": "p"},
+   {"type": "ℝ → ℂ", "name": "γ"},
+   {"type": "ℝ", "name": "a"},
+   {"type": "ℝ", "name": "b"},
+   {"type": "ContDiff ℝ 1 γ", "name": "hγ"},
+   {"type": "γ a = γ b", "name": "hclosed"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "γ a = γ b",
+    "rel": "eq",
+    "poly": "(x0) - (x1)",
+    "name": "hclosed",
+    "expr": "(F__(x2)) - (F__(x3))"},
+   {"text": "ContDiff ℝ 1 γ", "name": "hγ"}],
+  "goal":
+  {"text":
+   "cint cexp γ a b = 0 ∧ cint cos γ a b = 0 ∧ cint (fun z => Polynomial.eval z p) γ a b = 0",
+   "kind": "other"},
+  "functions": [{"sage": "F__", "lean": "γ", "arity": 1}],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms": ["γ a", "γ b", "a", "b"],
+  "atom_types": ["ℂ", "ℂ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values":
+   ["(Polynomial.X ^ 5 - 3 * Polynomial.X + 2 : Polynomial ℂ)",
+    "(fun s : ℝ => Complex.exp (s * Complex.I))",
+    "0",
+    "(2 * Real.pi)",
+    "_",
+    "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 8.071335088417127558402437802035188463187e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(Polynomial.X ^ 2 : Polynomial ℂ)",
+    "(fun s : ℝ => 2 * Real.cos s + Complex.I * Real.sin s)",
+    "0",
+    "(2 * Real.pi)",
+    "_",
+    "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.122559336678554701910521028318023959182e-35] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(1 : Polynomial ℂ)",
+    "(fun _ : ℝ => (1 : ℂ))",
+    "0",
+    "(2 * Real.pi)",
+    "_",
+    "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true}]}

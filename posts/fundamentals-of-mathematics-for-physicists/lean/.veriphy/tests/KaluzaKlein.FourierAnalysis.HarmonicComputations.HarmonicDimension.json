@@ -1,0 +1,67 @@
+{"target": "KaluzaKlein.FourierAnalysis.HarmonicComputations.HarmonicDimension",
+ "statement":
+ "∀ l ≤ 6, (l + 2).choose 2 - l.choose 2 = 2 * l + 1 ∧ l.choose 2 ≤ (l + 2).choose 2",
+ "seed": 0,
+ "script_hash": "8863200984413685120",
+ "script":
+ "# name: fa-harmonic-dimension-prop-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.HarmonicComputations.HarmonicDimension file \"fa-harmonic-dimension-prop-test.sage\"\n# description: Sage builds the matrix of ∇² from the monomials of degree l to those of degree l - 2 over ℚ, computes its rank C(l, 2) and the kernel dimension 2l + 1\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\nRx = PolynomialRing(QQ, 'x,y,z')\ndef kerdim(l):\n    l = int(l)\n    mons = [m for m in Rx.monomials_of_degree(l)]\n    if l < 2:\n        return len(mons)\n    low = Rx.monomials_of_degree(l - 2)\n    M = matrix(QQ, [[(sum(m.derivative(v, 2) for v in Rx.gens())).monomial_coefficient(mo) for m in mons] for mo in low])\n    return len(mons) - M.rank()\ninstances = []\nCASES = [(['0', '_'], True, {'l': '0'}), (['4', '_'], False, {'l': '4'}), (['5', '_'], False, {'l': '5'}), (['6', '_'], False, {'l': '6'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('kerdim(l)', scope))\n    R = side(eval('2*l + 1', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℕ", "name": "l"},
+   {"type": "l ≤ 6", "name": "a._@._internal._hyg.0"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "(l + 2).choose 2 - l.choose 2 = 2 * l + 1 ∧ l.choose 2 ≤ (l + 2).choose 2",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["4", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[9.000000000000000000000000000000000000000 .. 9.000000000000000000000000000000000000000] == [9.000000000000000000000000000000000000000 .. 9.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["5", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[11.00000000000000000000000000000000000000 .. 11.00000000000000000000000000000000000000] == [11.00000000000000000000000000000000000000 .. 11.00000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["6", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[13.00000000000000000000000000000000000000 .. 13.00000000000000000000000000000000000000] == [13.00000000000000000000000000000000000000 .. 13.00000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

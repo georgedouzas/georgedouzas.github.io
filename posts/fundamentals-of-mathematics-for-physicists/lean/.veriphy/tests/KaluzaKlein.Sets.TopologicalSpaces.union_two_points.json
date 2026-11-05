@@ -1,0 +1,63 @@
+{"target": "KaluzaKlein.Sets.TopologicalSpaces.union_two_points",
+ "statement":
+ "∀ (F G : Finset (Finset (Fin 2))), IsFinTop F → IsFinTop G → IsFinTop (F ∪ G)",
+ "seed": 0,
+ "script_hash": "12232664815309854529",
+ "script":
+ "# name: set-union-two-points-test\n# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand\n# goal: sage_test KaluzaKlein.Sets.TopologicalSpaces.union_two_points\n# description: the claim at the instances below, each proved independently of the claim\nSEED = 0\nCASES = [\n    (['{∅, {0}, Finset.univ}', '{∅, {1}, Finset.univ}', '(by decide)', '(by decide)'], False, 'decide'),\n    (['{∅, Finset.univ}', '{∅, Finset.univ}', '(by decide)', '(by decide)'], True, 'decide'),\n    (['Finset.univ', '{∅, {0}, Finset.univ}', '(by decide)', '(by decide)'], False, 'decide'),\n]\ninstances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "Finset (Finset (Fin 2))", "name": "F"},
+   {"type": "Finset (Finset (Fin 2))", "name": "G"},
+   {"type": "IsFinTop F", "name": "hF"},
+   {"type": "IsFinTop G", "name": "hG"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "IsFinTop F", "name": "hF"}, {"text": "IsFinTop G", "name": "hG"}],
+  "goal": {"text": "IsFinTop (F ∪ G)", "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["{∅, {0}, Finset.univ}",
+    "{∅, {1}, Finset.univ}",
+    "(by decide)",
+    "(by decide)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["{∅, Finset.univ}", "{∅, Finset.univ}", "(by decide)", "(by decide)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["Finset.univ", "{∅, {0}, Finset.univ}", "(by decide)", "(by decide)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

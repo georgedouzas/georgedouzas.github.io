@@ -1,0 +1,11 @@
+# name: ca-holo-log-cut-test
+# technique: test fallback (kernel-checked instances)
+# goal: sage_test KaluzaKlein.ComplexAnalysis.HolomorphicFunctions.log_not_continuousAt
+# description: Log is discontinuous at x = -1, -2, -1/2; each instance proved by computation or mathlib, independently of the claim.
+SEED = 0
+CASES = [
+    (['(-1)', '(by norm_num)'], 'have hx := (by norm_num : (-1 : ℝ) < 0)\nintro h\nobtain ⟨h1, h3⟩ := log_limit_below (-1 : ℝ) hx\nhave hcl : ((-1 : ℝ) : ℂ) ∈ closure {z : ℂ | z.im < 0} := by\n  rw [closure_setOfPred_im_lt]\n  simp\nhaveI : (𝓝[{z : ℂ | z.im < 0}] ((-1 : ℝ) : ℂ)).NeBot := mem_closure_iff_nhdsWithin_neBot.mp hcl\nhave h2 := tendsto_nhds_unique (h.tendsto.mono_left nhdsWithin_le_nhds) h1\nrw [h2] at h3\nsimp only [Complex.sub_im, Complex.ofReal_im, Complex.mul_im, Complex.ofReal_re, Complex.I_re, Complex.I_im,\n  mul_zero, mul_one, zero_add, zero_sub] at h3\nlinarith [Real.pi_pos]', True),
+    (['(-2)', '(by norm_num)'], 'have hx := (by norm_num : (-2 : ℝ) < 0)\nintro h\nobtain ⟨h1, h3⟩ := log_limit_below (-2 : ℝ) hx\nhave hcl : ((-2 : ℝ) : ℂ) ∈ closure {z : ℂ | z.im < 0} := by\n  rw [closure_setOfPred_im_lt]\n  simp\nhaveI : (𝓝[{z : ℂ | z.im < 0}] ((-2 : ℝ) : ℂ)).NeBot := mem_closure_iff_nhdsWithin_neBot.mp hcl\nhave h2 := tendsto_nhds_unique (h.tendsto.mono_left nhdsWithin_le_nhds) h1\nrw [h2] at h3\nsimp only [Complex.sub_im, Complex.ofReal_im, Complex.mul_im, Complex.ofReal_re, Complex.I_re, Complex.I_im,\n  mul_zero, mul_one, zero_add, zero_sub] at h3\nlinarith [Real.pi_pos]', False),
+    (['(-1 / 2)', '(by norm_num)'], 'have hx := (by norm_num : (-1 / 2 : ℝ) < 0)\nintro h\nobtain ⟨h1, h3⟩ := log_limit_below (-1 / 2 : ℝ) hx\nhave hcl : ((-1 / 2 : ℝ) : ℂ) ∈ closure {z : ℂ | z.im < 0} := by\n  rw [closure_setOfPred_im_lt]\n  simp\nhaveI : (𝓝[{z : ℂ | z.im < 0}] ((-1 / 2 : ℝ) : ℂ)).NeBot := mem_closure_iff_nhdsWithin_neBot.mp hcl\nhave h2 := tendsto_nhds_unique (h.tendsto.mono_left nhdsWithin_le_nhds) h1\nrw [h2] at h3\nsimp only [Complex.sub_im, Complex.ofReal_im, Complex.mul_im, Complex.ofReal_re, Complex.I_re, Complex.I_im,\n  mul_zero, mul_one, zero_add, zero_sub] at h3\nlinarith [Real.pi_pos]', False),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, proof, edge in CASES]

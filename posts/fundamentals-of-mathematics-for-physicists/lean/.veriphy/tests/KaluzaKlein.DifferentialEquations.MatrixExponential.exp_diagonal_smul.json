@@ -1,0 +1,71 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.MatrixExponential.exp_diagonal_smul",
+ "statement":
+ "∀ {n : ℕ} (d : Fin n → ℝ) (t : ℝ), NormedSpace.exp (t • diagonal d) = diagonal fun i => rexp (t * d i)",
+ "seed": 0,
+ "script_hash": "8456308092529170613",
+ "script":
+ "# name: de-exp-diagonal-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.MatrixExponential.exp_diagonal_smul file \"de-exp-diagonal-test.sage\"\n# description: e^{t diag(d)} = diag(e^{tdᵢ}) by Sage: d = (1, -1), (2, 0, -3), (0) (edge), at t = 1/2\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\ninstances = [\n    oracle_instance('2', '![1, -1]', '1/2',\n                    lhs=(1/2*diagonal_matrix(QQ,[1,-1])).exp(),\n                    rhs=diagonal_matrix(SR,[exp(1/2), exp(-1/2)]), relation='==', edge=False),\n    oracle_instance('3', '![2, 0, -3]', '1/2',\n                    lhs=(1/2*diagonal_matrix(QQ,[2,0,-3])).exp(),\n                    rhs=diagonal_matrix(SR,[exp(1), 1, exp(-3/2)]), relation='==', edge=False),\n    oracle_instance('1', '![0]', '1/2',\n                    lhs=matrix(SR,[[exp(1/2*0)]]),\n                    rhs=identity_matrix(QQ,1), relation='==', edge=True),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2"],
+  "universal":
+  [{"type": "ℕ", "name": "n"},
+   {"type": "Fin n → ℝ", "name": "d"},
+   {"type": "ℝ", "name": "t"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "NormedSpace.exp (t • diagonal d) = diagonal fun i => rexp (t * d i)",
+   "rhs_poly": "x1",
+   "rhs": "diagonal fun i => rexp (t * d i)",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs": "NormedSpace.exp (t • diagonal d)",
+   "kind": "rel",
+   "expr": "(x0) - (diagonal_matrix((x2).list()))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "Matrix (Fin n) (Fin n) ℝ",
+  "atoms":
+  ["NormedSpace.exp (t • diagonal d)",
+   "diagonal fun i => rexp (t * d i)",
+   "fun i => rexp (t * d i)"],
+  "atom_types": ["matrix", "matrix", "other"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["2", "![1, -1]", "1/2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[  sqrt(e)         0]\n[        0 1/sqrt(e)] == [ e^(1/2)        0]\n[       0 e^(-1/2)] (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values": ["3", "![2, 0, -3]", "1/2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[       e        0        0]\n[       0        1        0]\n[       0        0 e^(-3/2)] == [       e        0        0]\n[       0        1        0]\n[       0        0 e^(-3/2)] (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1", "![0]", "1/2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "[1] == [1] (exact)",
+   "edge": true,
+   "accepted": true}]}

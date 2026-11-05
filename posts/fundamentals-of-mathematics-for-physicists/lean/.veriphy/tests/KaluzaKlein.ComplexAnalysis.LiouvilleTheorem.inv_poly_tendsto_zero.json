@@ -1,0 +1,66 @@
+{"target": "KaluzaKlein.ComplexAnalysis.LiouvilleTheorem.inv_poly_tendsto_zero",
+ "statement":
+ "∀ (p : ℂ[X]), 0 < p.natDegree → Tendsto (fun z => (eval z p)⁻¹) (cocompact ℂ) (𝓝 0)",
+ "seed": 0,
+ "script_hash": "14085757897569755960",
+ "script":
+ "# name: ca-contour-inv-poly-tendsto-zero-test\n# technique: test fallback; kernel instances: |p| tends to infinity, so 1/p tends to 0\n# goal: sage_test KaluzaKlein.ComplexAnalysis.LiouvilleTheorem.inv_poly_tendsto_zero\n# description: instances of inv_poly_tendsto_zero (Contour integration, part I chapter 4), edge case first or marked\nSEED = 0\nt = var('t', domain='real')\nz = var('z')\nCB = ComplexBallField(128)\nRI = RealIntervalField(128)\nJ = CB(0, 1)\ndef ex(e):\n    return SR(e).rectform().simplify_full()\ndef pint(f, g, a, b):\n    # the parametrised contour integral of f (an expression in z) along g(t), t in [a, b], exactly\n    return integrate(f.subs(z=g) * diff(g, t), t, a, b)\ndef speed(g):\n    d = diff(g, t)\n    return sqrt(d.real_part() ** 2 + d.imag_part() ** 2).simplify_full()\ndef bint(F, a, b):\n    # a rigorous ball enclosure of the integral of F (a function on balls) over [a, b]\n    return CB.integral(lambda x, _: F(x), CB(a), CB(b))\ndef circ(F, c, R):\n    # a rigorous ball enclosure of the circle integral of F over |z - c| = R\n    return bint(lambda x: F(CB(c) + CB(R) * (J * x).exp()) * CB(R) * J * (J * x).exp(), 0, 2 * CB.pi())\ndef gap(*pairs):\n    # an interval enclosing the sum of |x - y| over the pairs: it contains 0 when every pair agrees\n    return sum(RI(abs(CB(x) - CB(y))) for x, y in pairs)\nP = 'have hd : 0 < (PVAL).degree := Polynomial.natDegree_pos_iff_degree_pos.1 HP\\nrw [tendsto_zero_iff_norm_tendsto_zero]\\nsimpa [norm_inv, Function.comp_def] using tendsto_inv_atTop_zero.comp (Polynomial.tendsto_norm_atTop PVAL hd tendsto_norm_cocompact_atTop)'\ncases = [('(Polynomial.X : Polynomial ℂ)', '(by rw [Polynomial.natDegree_X]; norm_num)', True),\n         ('(Polynomial.X ^ 2 : Polynomial ℂ)', '(by rw [Polynomial.natDegree_X_pow]; norm_num)', False),\n         ('(Polynomial.X ^ 3 : Polynomial ℂ)', '(by rw [Polynomial.natDegree_X_pow]; norm_num)', False)]\ninstances = [kernel_instance(p, hp, proof=P.replace('PVAL', p).replace('HP', hp), edge=e) for p, hp, e in cases]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1"],
+  "universal":
+  [{"type": "ℂ[X]", "name": "p"}, {"type": "0 < p.natDegree", "name": "hp"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < p.natDegree",
+    "rel": "lt",
+    "poly": "(0) - (x0)",
+    "name": "hp",
+    "expr": "(0) - ((x1).degree(X))"}],
+  "goal":
+  {"text": "Tendsto (fun z => (eval z p)⁻¹) (cocompact ℂ) (𝓝 0)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℕ",
+  "atoms": ["p.natDegree", "p"],
+  "atom_types": ["ℕ", "other"]},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["(Polynomial.X : Polynomial ℂ)",
+    "(by rw [Polynomial.natDegree_X]; norm_num)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["(Polynomial.X ^ 2 : Polynomial ℂ)",
+    "(by rw [Polynomial.natDegree_X_pow]; norm_num)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(Polynomial.X ^ 3 : Polynomial ℂ)",
+    "(by rw [Polynomial.natDegree_X_pow]; norm_num)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

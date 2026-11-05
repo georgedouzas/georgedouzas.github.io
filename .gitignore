@@ -51,5 +51,12 @@ posts/_*/
 .env
 .coverage
 
-# Copyrighted reference PDFs and reading notes kept beside each tutorial
-posts/*/_references/
+# Copyrighted reference PDFs kept beside each tutorial
+posts/*/_references/**/*.pdf
+
+# Lean build output and generated Sage files in the tutorials
+**/.lake/
+*.sage.py
+
+# Earlier chapter versions and the original book files
+posts/*/_archive/

@@ -1,0 +1,81 @@
+{"target": "KaluzaKlein.RealAnalysis.MultipleIntegrals.cone_volume",
+ "statement":
+ "∀ (R h : ℝ), h ≠ 0 → ∫ (z : ℝ) in 0..h, π * (R * z / h) ^ 2 = π * R ^ 2 * h / 3",
+ "seed": 0,
+ "script_hash": "13863378269459089976",
+ "script":
+ "# name: ra-cone-volume-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.MultipleIntegrals.cone_volume file \"ra-cone-volume-test.sage\"\n# description: Sage's ∫₀ʰ π(Rz/h)² dz = πR²h/3 (π/3 at R = h = 1)\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nz = var('z')\ninstances = [O([str(Rr), str(hh), '(by norm_num)'], integrate(pi * (Rr * z / hh) ** 2, z, 0, hh), pi * Rr ** 2 * hh / 3, edge=bool(Rr == 1 and hh == 1)) for Rr, hh in [(1, 1), (2, 3), (QQ(1) / 2, 5)]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℝ", "name": "R"},
+   {"type": "ℝ", "name": "h"},
+   {"type": "h ≠ 0", "name": "hh"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals":
+  [{"var": "i0_",
+    "upper_text": "h",
+    "upper": "x3",
+    "lower_text": "0",
+    "lower": "0",
+    "function": "fun z => π * (R * z / h) ^ 2",
+    "body": "(pi * (((x2 * i0_) / x3))^(2))"}],
+  "hyps":
+  [{"text": "h ≠ 0",
+    "rel": "ne",
+    "poly": "(x3) - (0)",
+    "name": "hh",
+    "expr": "(x3) - (0)"}],
+  "goal":
+  {"text": "∫ (z : ℝ) in 0..h, π * (R * z / h) ^ 2 = π * R ^ 2 * h / 3",
+   "rhs_poly": "(((x1 * (x2)^2) * x3) / 3)",
+   "rhs": "π * R ^ 2 * h / 3",
+   "rel": "eq",
+   "poly": "(x0) - ((((x1 * (x2)^2) * x3) / 3))",
+   "lhs_poly": "x0",
+   "lhs": "∫ (z : ℝ) in 0..h, π * (R * z / h) ^ 2",
+   "kind": "rel",
+   "expr":
+   "(definite_integral((pi * (((x2 * i0_) / x3))^(2)), i0_, 0, x3)) - ((((pi * (x2)^(2)) * x3) / 3))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "h ≠ 0", "kind": "ne", "expr": "x3", "discharged_by": "hh"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["∫ (z : ℝ) in 0..h, π * (R * z / h) ^ 2", "π", "R", "h"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.047197551196597746154214461093167628065723133125035273658314864102605468762042 .. 1.047197551196597746154214461093167628065723133125035273658314864102605468762095] == [1.047197551196597746154214461093167628065723133125035273658314864102605468762042 .. 1.047197551196597746154214461093167628065723133125035273658314864102605468762095] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "3", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[12.56637061435917295385057353311801153678867759750042328389977836923126562514479 .. 12.56637061435917295385057353311801153678867759750042328389977836923126562514494] == [12.56637061435917295385057353311801153678867759750042328389977836923126562514479 .. 12.56637061435917295385057353311801153678867759750042328389977836923126562514494] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1/2", "5", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.308996938995747182692768076366459535082153916406294092072893580128256835952570 .. 1.308996938995747182692768076366459535082153916406294092072893580128256835952623] == [1.308996938995747182692768076366459535082153916406294092072893580128256835952570 .. 1.308996938995747182692768076366459535082153916406294092072893580128256835952623] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

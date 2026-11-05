@@ -1,0 +1,68 @@
+{"target": "KaluzaKlein.RealAnalysis.Integral.leibniz_kernel",
+ "statement":
+ "∀ (f : ℝ → ℝ),\n  Continuous f → ∀ (x : ℝ), HasDerivAt (fun x => ∫ (t : ℝ) in 0..x, (x - t) * f t) (∫ (t : ℝ) in 0..x, f t) x",
+ "seed": 0,
+ "script_hash": "13260943569386096598",
+ "script":
+ "# name: ra-leibniz-kernel-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Integral.leibniz_kernel file \"ra-leibniz-kernel-test.sage\"\n# description: Sage differentiates ∫₀ˣ (x - t) f(t) dt and compares with ∫₀ˣ f, for f = cos, eᵗ, t²\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx, s = var('x s')\ninstances = []\nfor f, xv, edge in [(cos(s), 1, False), (exp(s), 2, False), (s ** 2, -1, False), (SR(0), 0, True)]:\n    assume(x > 0)\n    G = integrate((x - s) * f, s, 0, x)\n    forget()\n    lhs = diff(G, x).subs(x=xv); rhs = integrate(f, s, 0, xv)\n    instances.append(O([f'(fun t => {f})', '(by fun_prop)', str(xv)], lhs, rhs, edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℝ → ℝ", "name": "f"},
+   {"type": "Continuous f", "name": "hf"},
+   {"type": "ℝ", "name": "x"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [{"text": "Continuous f", "name": "hf"}],
+  "goal":
+  {"text":
+   "HasDerivAt (fun x => ∫ (t : ℝ) in 0..x, (x - t) * f t) (∫ (t : ℝ) in 0..x, f t) x",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["(fun t => cos(s))", "(by fun_prop)", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.8414709848078965066525023216302989996225630607983710656727517099919104043912311 .. 0.8414709848078965066525023216302989996225630607983710656727517099919104043912399] == [0.8414709848078965066525023216302989996225630607983710656727517099919104043912311 .. 0.8414709848078965066525023216302989996225630607983710656727517099919104043912399] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun t => e^s)", "(by fun_prop)", "2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[6.389056098930650227230427460575007813180315570551847324087127822522573796079053 .. 6.389056098930650227230427460575007813180315570551847324087127822522573796079123] == [6.389056098930650227230427460575007813180315570551847324087127822522573796079053 .. 6.389056098930650227230427460575007813180315570551847324087127822522573796079123] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun t => s^2)", "(by fun_prop)", "-1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-0.3333333333333333333333333333333333333333333333333333333333333333333333333333348 .. -0.3333333333333333333333333333333333333333333333333333333333333333333333333333304] == [-0.3333333333333333333333333333333333333333333333333333333333333333333333333333348 .. -0.3333333333333333333333333333333333333333333333333333333333333333333333333333304] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun t => 0)", "(by fun_prop)", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true}]}

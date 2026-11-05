@@ -1,0 +1,59 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.ODEComputations.picard_linear_converges",
+ "statement":
+ "∀ (a x : ℝ), Tendsto (fun k => ∑ j ∈ Finset.range k, (a * x) ^ j / ↑j.factorial) atTop (𝓝 (rexp (a * x)))",
+ "seed": 0,
+ "script_hash": "16211429812953615535",
+ "script":
+ "# name: de-picard-converges-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.ODEComputations.picard_linear_converges file \"de-picard-converges-test.sage\"\n# description: the Taylor sums of e^{ax} converge: the partial sum of 80 terms is within 10⁻¹⁵ of e^{ax} in interval arithmetic at (a, x) = (0, 5) (edge), (1, 1), (-2, 3/2)\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\ninstances = [\n    oracle_instance('0', '5',\n                    lhs=RIF(abs(sum((QQ(0)*QQ(5))^j/factorial(j) for j in range(80)) - exp(QQ(0)*QQ(5)))),\n                    rhs=RIF(10^-15), relation='<', edge=True),\n    oracle_instance('1', '1',\n                    lhs=RIF(abs(sum((QQ(1)*QQ(1))^j/factorial(j) for j in range(80)) - exp(QQ(1)*QQ(1)))),\n                    rhs=RIF(10^-15), relation='<', edge=False),\n    oracle_instance('-2', '3/2',\n                    lhs=RIF(abs(sum((QQ(-2)*QQ(3/2))^j/factorial(j) for j in range(80)) - exp(QQ(-2)*QQ(3/2)))),\n                    rhs=RIF(10^-15), relation='<', edge=False),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal": [{"type": "ℝ", "name": "a"}, {"type": "ℝ", "name": "x"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "Tendsto (fun k => ∑ j ∈ Finset.range k, (a * x) ^ j / ↑j.factorial) atTop (𝓝 (rexp (a * x)))",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "5"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.00000000000000000000 .. -0.00000000000000000000] < [9.99999999999999999994e-16 .. 1.00000000000000000010e-15] at 64 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.00000000000000000000 .. 2.16840434497100886802e-19] < [9.99999999999999999994e-16 .. 1.00000000000000000010e-15] at 64 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-2", "3/2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.00000000000000000000 .. 3.38813178901720135628e-21] < [9.99999999999999999994e-16 .. 1.00000000000000000010e-15] at 64 bits",
+   "edge": false,
+   "accepted": true}]}

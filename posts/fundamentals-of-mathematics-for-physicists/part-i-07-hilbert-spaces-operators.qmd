@@ -30,6 +30,8 @@ functions $C(K)$, and then studies the linear maps between normed spaces and the
 functionals. The line of argument follows the lecture notes of @arcozzi2025 [Ch. 1 and 3], with the Hilbert-space
 special cases of @picard2020primer [App. B] as examples.
 
+For more on this topic, see @cheung2024metric [Sec. 4.2].
+
 ### Norms and normed spaces
 
 On $\mathbb{R}^n$ the Euclidean length is one way among many to measure a vector: the largest coordinate or the sum
@@ -2034,6 +2036,8 @@ exercises, and shows by counterexamples why each hypothesis, completeness above 
 @arcozzi2025 [Sec. 3.2, 3.5 and 3.6]; closed operators follow @picard2020primer [Sec. B.4] and @waterstraat2016 [Sec.
 1.2].
 
+For more on this topic, see @gasinski2014exercises [Ch. 5].
+
 ### The Hahn-Banach theorem
 
 A functional defined on a subspace can be extended to the whole space without increasing its norm. In a Hilbert space
@@ -3170,6 +3174,8 @@ oscillating, travelling and concentrating bumps, proves that the dual unit ball 
 theorem), and characterises the reflexive spaces, in which bounded sequences always have weakly convergent
 subsequences. The exposition follows @ramesh2020weak and @arcozzi2025 [Sec. 3.4].
 
+For more on this topic, see @borodzik2019problems [Ch. 4] and @gasinski2014exercises [Ch. 4].
+
 ### Weak and weak-* convergence
 
 A sequence of functions can lose its norm to oscillation, escape to infinity or concentrate at a point, and in each
@@ -3984,6 +3990,8 @@ This section defines inner products and orthonormal systems, introduces complete
 spaces $\ell^2$ and $L^2$, defines orthonormal bases with Parseval's identity, and quotes the Riesz representation
 theorem; the Gram-Schmidt process and the orthogonal projection are then carried out on explicit vectors and
 functions.
+
+For more on this topic, see @axler2024linear [Ch. 6, Ch. 7] and @derezinski2022mathematics [Ch. 1-2].
 
 ### Inner products
 
@@ -4925,6 +4933,8 @@ three classes of operators that quantum mechanics and spectral theory use consta
 projection operators, and ends with the commutator; the figure shows how an operator deforms the unit circle, and
 the proposition checks the identities in Sage.
 
+For more on this topic, see @scott2023problems [Ch. 4].
+
 ### The operator norm
 
 A linear map (@def-linear-map) between inner product spaces may stretch different vectors by different factors, and
@@ -5854,6 +5864,8 @@ continuous part without eigenvectors. This section defines eigenvalues and the s
 theorem for Hermitian matrices, quotes it for compact self-adjoint operators, and builds the functional calculus
 that defines $f(A)$, in particular the unitary $e^{iA}$; the figure shows the eigenvectors and the exponential of a
 symmetric matrix.
+
+For more on this topic, see @scott2023problems [Ch. 6].
 
 ### Eigenvalues
 
@@ -8787,6 +8799,8 @@ regularity), and on a compact space a gain of smoothness is a compact operator (
 spectra of elliptic operators discrete. The Fourier conventions are those of @def-fourier-coefficient and
 @def-fourier-transform; the compact-resolvent argument is that of @waterstraat2016 [Thm. 1.3.5].
 
+For more on this topic, see @borodzik2019problems [Ch. 2].
+
 ### Weak derivatives
 
 A function with a corner has no classical derivative at the corner, but integration by parts against smooth test functions
@@ -9890,6 +9904,8 @@ operators and determinants, the heat kernel and heat trace, quotes the small-$t$
 regularisation with the Casimir energy as its application in outline; the figure shows the heat trace of the
 circle against its leading asymptotics.
 
+For more on this topic, see @buchbinder2021introduction [Sec. 13.4].
+
 ### Trace class
 
 Summing the diagonal entries of an infinite matrix may give a different answer in a different basis, or no answer
@@ -10867,6 +10883,8 @@ space. This part defines both, proves that every element of a Banach algebra has
 $\lim\|a^n\|^{1/n}$, and constructs the continuous functional calculus of self-adjoint elements, which is how functions of
 observables are defined in quantum mechanics. The outline follows @arcozzi2025 [Sec. 6.1] and @landsman1998 [Sec. 2.1-2.5 and
 2.8], with numerical examples from @izaac2018computational [Ch. 7].
+
+For more on this topic, see @derezinski2022mathematics [Ch. 4-6] and @tornetta2022mathematical [Ch. 1].
 
 ### Banach algebras
 

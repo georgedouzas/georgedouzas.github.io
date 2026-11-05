@@ -1,0 +1,11 @@
+# name: set-discrete-hausdorff-test
+# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand
+# goal: sage_test KaluzaKlein.Sets.Hausdorff.discrete_indiscrete_hausdorff
+# description: the claim at the instances below, each proved independently of the claim
+SEED = 0
+CASES = [
+    (['Fin 2', '0', '1', '(by decide)'], True, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (X : Type) (x y : X) (hxy : x ≠ y), @T2Space X ⊥ ∧ ¬ @T2Space X ⊤ := by\n  intro X x y hxy\n  refine ⟨by letI : TopologicalSpace X := ⊥; haveI : DiscreteTopology X := ⟨rfl⟩; infer_instance, fun h => ?_⟩\n  obtain ⟨U, V, hU, hV, hxU, hyV, hUV⟩ := @t2_separation X ⊤ h x y hxy\n  rw [@TopologicalSpace.isOpen_top_iff] at hU hV\n  rcases hU with rfl | rfl\n  · exact hxU\n  · rcases hV with rfl | rfl\n    · exact hyV\n    · exact (Set.nonempty_of_mem hxU).ne_empty (Set.disjoint_univ.1 hUV)\nexact @key (Fin 2) (0) (1) ((by decide))'),
+    (['Fin 3', '0', '2', '(by decide)'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (X : Type) (x y : X) (hxy : x ≠ y), @T2Space X ⊥ ∧ ¬ @T2Space X ⊤ := by\n  intro X x y hxy\n  refine ⟨by letI : TopologicalSpace X := ⊥; haveI : DiscreteTopology X := ⟨rfl⟩; infer_instance, fun h => ?_⟩\n  obtain ⟨U, V, hU, hV, hxU, hyV, hUV⟩ := @t2_separation X ⊤ h x y hxy\n  rw [@TopologicalSpace.isOpen_top_iff] at hU hV\n  rcases hU with rfl | rfl\n  · exact hxU\n  · rcases hV with rfl | rfl\n    · exact hyV\n    · exact (Set.nonempty_of_mem hxU).ne_empty (Set.disjoint_univ.1 hUV)\nexact @key (Fin 3) (0) (2) ((by decide))'),
+    (['ℕ', '0', '1', '(by decide)'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (X : Type) (x y : X) (hxy : x ≠ y), @T2Space X ⊥ ∧ ¬ @T2Space X ⊤ := by\n  intro X x y hxy\n  refine ⟨by letI : TopologicalSpace X := ⊥; haveI : DiscreteTopology X := ⟨rfl⟩; infer_instance, fun h => ?_⟩\n  obtain ⟨U, V, hU, hV, hxU, hyV, hUV⟩ := @t2_separation X ⊤ h x y hxy\n  rw [@TopologicalSpace.isOpen_top_iff] at hU hV\n  rcases hU with rfl | rfl\n  · exact hxU\n  · rcases hV with rfl | rfl\n    · exact hyV\n    · exact (Set.nonempty_of_mem hxU).ne_empty (Set.disjoint_univ.1 hUV)\nexact @key (ℕ) (0) (1) ((by decide))'),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]

@@ -1,0 +1,79 @@
+{"target": "KaluzaKlein.RealAnalysis.Calculus.SchwarzSymmetry",
+ "statement":
+ "∀ (f : ℝ × ℝ → ℝ),\n  ContDiff ℝ 2 f →\n    ∀ (x y : ℝ), deriv (fun y => deriv (fun x => f (x, y)) x) y = deriv (fun x => deriv (fun y => f (x, y)) y) x",
+ "seed": 0,
+ "script_hash": "5511819969412772506",
+ "script":
+ "# name: ra-schwarzsymmetry-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Calculus.SchwarzSymmetry file \"ra-schwarzsymmetry-test.sage\"\n# description: Sage's mixed partials agree for C² functions (x² y + sin y, e^(xy), x³y² + cos(x - y)) at sample points\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx, y = var('x y')\ninstances = []\nfor f, p, edge in [(x ** 2 * y + sin(y), (1, 2), False), (exp(x * y), (0, 1), False), (x ** 3 * y ** 2 + cos(x - y), (2, -1), False), (SR(0), (0, 0), True)]:\n    a = diff(diff(f, x), y).subs(x=p[0], y=p[1]); b = diff(diff(f, y), x).subs(x=p[0], y=p[1])\n    instances.append(O([f'(fun p : ℝ × ℝ => {f})', '(by fun_prop)', str(p[0]), str(p[1])], a, b, edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1"],
+  "universal":
+  [{"type": "ℝ × ℝ → ℝ", "name": "f"},
+   {"type": "ContDiff ℝ 2 f", "name": "a._@._internal._hyg.0"},
+   {"type": "ℝ", "name": "x"},
+   {"type": "ℝ", "name": "y"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "deriv (fun y => deriv (fun x => f (x, y)) x) y = deriv (fun x => deriv (fun y => f (x, y)) y) x",
+   "rhs_poly": "x1",
+   "rhs": "deriv (fun x => deriv (fun y => f (x, y)) y) x",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs": "deriv (fun y => deriv (fun x => f (x, y)) x) y",
+   "kind": "rel",
+   "expr": "(x0) - (x1)"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["deriv (fun y => deriv (fun x => f (x, y)) x) y",
+   "deriv (fun x => deriv (fun y => f (x, y)) y) x"],
+  "atom_types": ["ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["(fun p : ℝ × ℝ => x^2*y + sin(y))", "(by fun_prop)", "1", "2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 2.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [2.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 2.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun p : ℝ × ℝ => e^(x*y))", "(by fun_prop)", "0", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun p : ℝ × ℝ => x^3*y^2 + cos(x - y))", "(by fun_prop)", "2", "-1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-24.98999249660044545727157279473126130239367909661558832881408593292832919751318 .. -24.98999249660044545727157279473126130239367909661558832881408593292832919751289] == [-24.98999249660044545727157279473126130239367909661558832881408593292832919751318 .. -24.98999249660044545727157279473126130239367909661558832881408593292832919751289] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun p : ℝ × ℝ => 0)", "(by fun_prop)", "0", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true}]}

@@ -1,0 +1,5 @@
+# Pinned tool versions checked by scripts/check_versions.py before a render (`make versions`).
+# Lean, mathlib and the Veriphy Lake package are pinned in lean-toolchain and lakefile.toml.
+sage = 10.9
+quarto = 1.10
+veriphy = 0.3.1

@@ -1,0 +1,79 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.SeparableEquations.tan_sin_solves",
+ "statement":
+ "∀ (y : ℝ → ℝ), (y = fun s => sin (sin s) / cos (sin s)) → ∀ (x : ℝ), deriv y x = (1 + y x ^ 2) * cos x",
+ "seed": 0,
+ "script_hash": "18272328110639510398",
+ "script":
+ "# name: de-tan-sin-solves-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.SeparableEquations.tan_sin_solves file \"de-tan-sin-solves-test.sage\"\n# description: y = tan(sin x) has y' = (1 + y²) cos x by Sage at x = 0 (edge), 1, -2\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\ns_ = var('s_')\ninstances = [\n    oracle_instance('fun s => Real.sin (Real.sin s) / Real.cos (Real.sin s)', '_', '0',\n                    lhs=((diff(sin(sin(s_))/cos(sin(s_)), s_) - ((1 + (sin(sin(s_))/cos(sin(s_)))^2)*cos(s_))).subs(s_=0).simplify_full()).simplify_trig(),\n                    rhs=0, relation='==', edge=True),\n    oracle_instance('fun s => Real.sin (Real.sin s) / Real.cos (Real.sin s)', '_', '1',\n                    lhs=((diff(sin(sin(s_))/cos(sin(s_)), s_) - ((1 + (sin(sin(s_))/cos(sin(s_)))^2)*cos(s_))).subs(s_=1).simplify_full()).simplify_trig(),\n                    rhs=0, relation='==', edge=False),\n    oracle_instance('fun s => Real.sin (Real.sin s) / Real.cos (Real.sin s)', '_', '-2',\n                    lhs=((diff(sin(sin(s_))/cos(sin(s_)), s_) - ((1 + (sin(sin(s_))/cos(sin(s_)))^2)*cos(s_))).subs(s_=-2).simplify_full()).simplify_trig(),\n                    rhs=0, relation='==', edge=False),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4", "x5"],
+  "universal":
+  [{"type": "ℝ → ℝ", "name": "y"},
+   {"type": "y = fun s => sin (sin s) / cos (sin s)", "name": "hy"},
+   {"type": "ℝ", "name": "x"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "y = fun s => sin (sin s) / cos (sin s)",
+    "rel": "eq",
+    "name": "hy",
+    "expr": "(x3) - (x4)"}],
+  "goal":
+  {"text": "deriv y x = (1 + y x ^ 2) * cos x",
+   "rhs_poly": "((1 + (x1)^2) * x2)",
+   "rhs": "(1 + y x ^ 2) * cos x",
+   "rel": "eq",
+   "poly": "(x0) - (((1 + (x1)^2) * x2))",
+   "lhs_poly": "x0",
+   "lhs": "deriv y x",
+   "kind": "rel",
+   "expr":
+   "(diff(F_y(s_), s_, 1).subs({s_: x5})) - (((1 + (F_y(x5))^(2)) * cos(x5)))"},
+  "functions": [{"sage": "F_y", "lean": "y", "arity": 1}],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions":
+  [{"var": "s_",
+    "text": "fun s => sin (sin s) / cos (sin s)",
+    "hyp": "hy",
+    "function": "F_y",
+    "body": "(sin(sin(s_)) / cos(sin(s_)))"}],
+  "carrier": "ℝ",
+  "atoms":
+  ["deriv y x", "y x", "cos x", "y", "fun s => sin (sin s) / cos (sin s)", "x"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "other", "other", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values":
+   ["fun s => Real.sin (Real.sin s) / Real.cos (Real.sin s)", "_", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["fun s => Real.sin (Real.sin s) / Real.cos (Real.sin s)", "_", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["fun s => Real.sin (Real.sin s) / Real.cos (Real.sin s)", "_", "-2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": false,
+   "accepted": true}]}

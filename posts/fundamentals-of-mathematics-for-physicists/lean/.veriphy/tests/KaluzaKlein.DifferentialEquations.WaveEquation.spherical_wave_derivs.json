@@ -1,0 +1,73 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.WaveEquation.spherical_wave_derivs",
+ "statement":
+ "∀ (f f' f'' : ℝ → ℝ),\n  (∀ (y : ℝ), HasDerivAt f (f' y) y) →\n    (∀ (y : ℝ), HasDerivAt f' (f'' y) y) →\n      ∀ (r t : ℝ),\n        r ≠ 0 →\n          HasDerivAt (fun s => f (s - t) / s) (f' (r - t) / r - f (r - t) / r ^ 2) r ∧\n            HasDerivAt (fun s => f' (s - t) / s - f (s - t) / s ^ 2)\n                (f'' (r - t) / r - 2 * f' (r - t) / r ^ 2 + 2 * f (r - t) / r ^ 3) r ∧\n              HasDerivAt (fun s => f (r - s) / r) (-f' (r - t) / r) t ∧\n                HasDerivAt (fun s => -f' (r - s) / r) (f'' (r - t) / r) t",
+ "seed": 0,
+ "script_hash": "17436624429714339134",
+ "script":
+ "# name: de-spherical-derivs-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.WaveEquation.spherical_wave_derivs file \"de-spherical-derivs-test.sage\"\n# description: the radial derivatives of f(r - t)/r by Sage for generic f, and f = 0 (edge)\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\nr_, t_ = var('r_ t_'); ff = function('ff')\ninstances = [\n    oracle_instance('_', '_', '_', '_', '_', 'r_', 't_', '_',\n                    lhs=diff(ff(r_ - t_)/r_, r_),\n                    rhs=diff(ff(r_ - t_), r_)/r_ - ff(r_ - t_)/r_^2, relation='==', edge=False),\n    oracle_instance('_', '_', '_', '_', '_', 'r_', 't_', '_',\n                    lhs=(diff(ff(r_ - t_)/r_, t_, 2) - diff(ff(r_ - t_)/r_, r_, 2) - 2/r_*diff(ff(r_ - t_)/r_, r_)).simplify_full(),\n                    rhs=0, relation='==', edge=False),\n    oracle_instance('fun _ => 0', 'fun _ => 0', 'fun _ => 0', '_', '_', '1', '0', '_',\n                    lhs=0,\n                    rhs=0, relation='==', edge=True),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal":
+  [{"type": "ℝ → ℝ", "name": "f"},
+   {"type": "ℝ → ℝ", "name": "f'"},
+   {"type": "ℝ → ℝ", "name": "f''"},
+   {"type": "∀ (y : ℝ), HasDerivAt f (f' y) y", "name": "hf"},
+   {"type": "∀ (y : ℝ), HasDerivAt f' (f'' y) y", "name": "hf'"},
+   {"type": "ℝ", "name": "r"},
+   {"type": "ℝ", "name": "t"},
+   {"type": "r ≠ 0", "name": "hr"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "r ≠ 0",
+    "rel": "ne",
+    "poly": "(x0) - (0)",
+    "name": "hr",
+    "expr": "(x0) - (0)"},
+   {"text": "∀ (y : ℝ), HasDerivAt f (f' y) y", "name": "hf"},
+   {"text": "∀ (y : ℝ), HasDerivAt f' (f'' y) y", "name": "hf'"}],
+  "goal":
+  {"text":
+   "HasDerivAt (fun s => f (s - t) / s) (f' (r - t) / r - f (r - t) / r ^ 2) r ∧\n  HasDerivAt (fun s => f' (s - t) / s - f (s - t) / s ^ 2)\n      (f'' (r - t) / r - 2 * f' (r - t) / r ^ 2 + 2 * f (r - t) / r ^ 3) r ∧\n    HasDerivAt (fun s => f (r - s) / r) (-f' (r - t) / r) t ∧ HasDerivAt (fun s => -f' (r - s) / r) (f'' (r - t) / r) t",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["r"],
+  "atom_types": ["ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["_", "_", "_", "_", "_", "r_", "t_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "D[0](ff)(r_ - t_)/r_ - ff(r_ - t_)/r_^2 == D[0](ff)(r_ - t_)/r_ - ff(r_ - t_)/r_^2 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values": ["_", "_", "_", "_", "_", "r_", "t_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["fun _ => 0", "fun _ => 0", "fun _ => 0", "_", "_", "1", "0", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": true,
+   "accepted": true}]}

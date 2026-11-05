@@ -1,4 +1,6 @@
 ---
+nocite: |
+  @emam2021covariant
 pagetitle: "Classical mechanics"
 ---
 
@@ -23,6 +25,8 @@ This section introduces momentum and the second law, the energy of a conservativ
 conserved angular momentum, and solves the problem that founded the subject: the motion of a planet about the Sun,
 whose orbits are conic sections. The later sections recast all of this in a form that generalises to constrained
 systems, to fields and to quantum mechanics.
+
+For more on this topic, see @knauf2018mathematical [Ch. 11], @kotkin2020exploring [§1, §2] and @moretti2023analytical [Ch. 3-4].
 
 ### Momentum and force
 
@@ -510,6 +514,8 @@ configuration space and the action is an integral along it, and everything later
 is the same idea with the particle's position replaced by a field. This section defines configuration spaces,
 Lagrangians, actions and the Euler-Lagrange equations, and works them on the oscillator, the pendulum and a
 particle on the sphere.
+
+For more on this topic, see @godinho2014introduction [Ch. 5], @knauf2018mathematical [Ch. 8], @kotkin2020exploring [§4, §9], @lee2018global [Ch. 3, Ch. 4-5, Ch. 9] and @moretti2023analytical [Ch. 7-9, Ch. 5].
 
 ### Configuration space and the Lagrangian
 
@@ -1646,6 +1652,8 @@ on phase space, with the energy as generator, and gives mechanics the algebraic 
 that quantisation replaces by commutators. This section defines momenta, the Hamiltonian, Hamilton's equations,
 phase space and the Poisson bracket, with the oscillator and the pendulum as examples.
 
+For more on this topic, see @knauf2018mathematical [Ch. 6], @moretti2023analytical [Ch. 11-13], @rudolph2013differential [Ch. 7-8, Ch. 9], @torresdelcastillo2020differentiable [Ch. 8] and @williams2023introduction [Sec. 2.9].
+
 ### Momenta and the Hamiltonian
 
 The Euler-Lagrange equation involves the derivative of the Lagrangian with respect to a velocity. This quantity
@@ -2437,6 +2445,8 @@ transformations of phase space that respect it are the natural changes of variab
 section studies the algebra of the bracket, the canonical transformations and their generating functions, Liouville's
 theorem on the conservation of phase-space volume, and, in outline, the Hamilton-Jacobi equation, which solves the
 equations of motion by finding a canonical transformation to constants.
+
+For more on this topic, see @kotkin2020exploring [§10-13], @lee2013introduction [Ch. 22] and @rudolph2013differential [Ch. 10].
 
 ### The Poisson algebra
 
@@ -3752,6 +3762,8 @@ Near a stable equilibrium every mechanical system behaves like a set of independ
 section defines equilibria and their stability, expands the Lagrangian to second order about a stable equilibrium,
 and decomposes the resulting linear motion into normal modes, first for coupled oscillators and molecules, then on
 curved configuration spaces: a particle on a sphere and on the group $SU(2)$.
+
+For more on this topic, see @kotkin2020exploring [§5-8].
 
 ### Equilibria
 

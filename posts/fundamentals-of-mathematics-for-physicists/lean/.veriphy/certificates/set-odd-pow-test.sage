@@ -1,0 +1,11 @@
+# name: set-odd-pow-test
+# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand
+# goal: sage_test KaluzaKlein.Sets.Surjective.odd_pow_surjective
+# description: the claim at the instances below, each proved independently of the claim
+SEED = 0
+CASES = [
+    (['0'], True, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (k : ℕ), Function.Surjective (fun x : ℝ => x ^ (2 * k + 1)) := by\n  intro k\n  intro y\n  have hn : (2 * k + 1 : ℕ) ≠ 0 := by omega\n  rcases le_or_gt 0 y with hy | hy\n  · refine ⟨y ^ ((2 * k + 1 : ℕ) : ℝ)⁻¹, ?_⟩\n    simp only\n    rw [← Real.rpow_natCast, ← Real.rpow_mul hy, inv_mul_cancel₀ (by exact_mod_cast hn), Real.rpow_one]\n  · refine ⟨-((-y) ^ ((2 * k + 1 : ℕ) : ℝ)⁻¹), ?_⟩\n    simp only\n    rw [Odd.neg_pow ⟨k, rfl⟩, ← Real.rpow_natCast, ← Real.rpow_mul (by linarith),\n      inv_mul_cancel₀ (by exact_mod_cast hn), Real.rpow_one, neg_neg]\nexact @key (0)'),
+    (['1'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (k : ℕ), Function.Surjective (fun x : ℝ => x ^ (2 * k + 1)) := by\n  intro k\n  intro y\n  have hn : (2 * k + 1 : ℕ) ≠ 0 := by omega\n  rcases le_or_gt 0 y with hy | hy\n  · refine ⟨y ^ ((2 * k + 1 : ℕ) : ℝ)⁻¹, ?_⟩\n    simp only\n    rw [← Real.rpow_natCast, ← Real.rpow_mul hy, inv_mul_cancel₀ (by exact_mod_cast hn), Real.rpow_one]\n  · refine ⟨-((-y) ^ ((2 * k + 1 : ℕ) : ℝ)⁻¹), ?_⟩\n    simp only\n    rw [Odd.neg_pow ⟨k, rfl⟩, ← Real.rpow_natCast, ← Real.rpow_mul (by linarith),\n      inv_mul_cancel₀ (by exact_mod_cast hn), Real.rpow_one, neg_neg]\nexact @key (1)'),
+    (['2'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (k : ℕ), Function.Surjective (fun x : ℝ => x ^ (2 * k + 1)) := by\n  intro k\n  intro y\n  have hn : (2 * k + 1 : ℕ) ≠ 0 := by omega\n  rcases le_or_gt 0 y with hy | hy\n  · refine ⟨y ^ ((2 * k + 1 : ℕ) : ℝ)⁻¹, ?_⟩\n    simp only\n    rw [← Real.rpow_natCast, ← Real.rpow_mul hy, inv_mul_cancel₀ (by exact_mod_cast hn), Real.rpow_one]\n  · refine ⟨-((-y) ^ ((2 * k + 1 : ℕ) : ℝ)⁻¹), ?_⟩\n    simp only\n    rw [Odd.neg_pow ⟨k, rfl⟩, ← Real.rpow_natCast, ← Real.rpow_mul (by linarith),\n      inv_mul_cancel₀ (by exact_mod_cast hn), Real.rpow_one, neg_neg]\nexact @key (2)'),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]

@@ -1,0 +1,11 @@
+# name: ca-holo-normsq-not-re-test
+# technique: test fallback (kernel-checked instances)
+# goal: sage_test KaluzaKlein.ComplexAnalysis.HarmonicFunctions.normSq_not_re
+# description: x^2 + y^2 + c is the real part of no entire function, c = 0, 1, -3/2; each instance proved by computation or mathlib, independently of the claim.
+SEED = 0
+CASES = [
+    (['0'], "rintro ⟨f, hf, hre⟩\nhave hH : HarmonicOnNhd (fun z => (f z).re) (closedBall 0 |1|) := fun z _ => (hf.analyticAt z).harmonicAt_re\nhave h1 := hH.circleAverage_eq\nhave h2 : circleAverage (fun z => (f z).re) 0 1 = 1 + (0 : ℝ) := by\n  apply circleAverage_const_on_circle\n  intro z hz\n  rw [hre]\n  have hz' : ‖z‖ = 1 := by simpa using hz\n  have : z.re ^ 2 + z.im ^ 2 = 1 := by\n    have h1 : Complex.normSq z = 1 := by rw [Complex.normSq_eq_norm_sq, hz']; norm_num\n    rw [Complex.normSq_apply] at h1\n    nlinarith [h1]\n  linarith\nrw [h1, hre] at h2\nsimp at h2", True),
+    (['1'], "rintro ⟨f, hf, hre⟩\nhave hH : HarmonicOnNhd (fun z => (f z).re) (closedBall 0 |1|) := fun z _ => (hf.analyticAt z).harmonicAt_re\nhave h1 := hH.circleAverage_eq\nhave h2 : circleAverage (fun z => (f z).re) 0 1 = 1 + (1 : ℝ) := by\n  apply circleAverage_const_on_circle\n  intro z hz\n  rw [hre]\n  have hz' : ‖z‖ = 1 := by simpa using hz\n  have : z.re ^ 2 + z.im ^ 2 = 1 := by\n    have h1 : Complex.normSq z = 1 := by rw [Complex.normSq_eq_norm_sq, hz']; norm_num\n    rw [Complex.normSq_apply] at h1\n    nlinarith [h1]\n  linarith\nrw [h1, hre] at h2\nsimp at h2", False),
+    (['(-3 / 2)'], "rintro ⟨f, hf, hre⟩\nhave hH : HarmonicOnNhd (fun z => (f z).re) (closedBall 0 |1|) := fun z _ => (hf.analyticAt z).harmonicAt_re\nhave h1 := hH.circleAverage_eq\nhave h2 : circleAverage (fun z => (f z).re) 0 1 = 1 + (-3 / 2 : ℝ) := by\n  apply circleAverage_const_on_circle\n  intro z hz\n  rw [hre]\n  have hz' : ‖z‖ = 1 := by simpa using hz\n  have : z.re ^ 2 + z.im ^ 2 = 1 := by\n    have h1 : Complex.normSq z = 1 := by rw [Complex.normSq_eq_norm_sq, hz']; norm_num\n    rw [Complex.normSq_apply] at h1\n    nlinarith [h1]\n  linarith\nrw [h1, hre] at h2\nsimp at h2", False),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, proof, edge in CASES]

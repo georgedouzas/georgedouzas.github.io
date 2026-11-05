@@ -1,0 +1,64 @@
+{"target":
+ "KaluzaKlein.HilbertSpaces.InnerProducts.linearIndependent_of_trace_orthogonal",
+ "statement":
+ "∀ (v : Fin 4 → Matrix (Fin 2) (Fin 2) ℂ),\n  (∀ (a b : Fin 4), ((v a)ᴴ * v b).trace = if a = b then 2 else 0) → LinearIndependent ℂ v",
+ "seed": 0,
+ "script_hash": "4773605914484274246",
+ "script":
+ "# name: hs-ip-pauli-independent-test\n# technique: test fallback (Veriphy test_fallback recipe): oracle instances: Sage computes the rank of the four matrices (flattened) for trace-orthogonal families\n# goal: sage_test KaluzaKlein.HilbertSpaces.InnerProducts.linearIndependent_of_trace_orthogonal file \"hs-ip-pauli-independent-test.sage\"\n# description: the Pauli basis 1, σ₁, σ₂, σ₃ (edge), the same family reordered, and the family 1, -σ₁, iσ₂, σ₃ (the hypothesis is checked by simp)\nSEED = 0\n\n# shared oracle helpers: exact comparison when Sage decides it, else rigorous balls (160 bits)\nfrom sage.all import (SR, ZZ, QQ, I, pi, oo, sqrt, exp, log, sin, cos, gamma, zeta, factorial, bernoulli, integrate,\n                      limit, var, assume, forget, diff, conjugate, matrix, vector, identity_matrix, zero_matrix,\n                      ComplexBallField, RealIntervalField, real_part, imag_part, e, binomial, hurwitz_zeta, floor)\nfrom sage.all import sum as ssum\n_C = ComplexBallField(160)\n_R = RealIntervalField(160)\nfrom sage.rings.complex_arb import ComplexBall as _CB\nfrom sage.rings.real_arb import RealBall as _RB\ndef _ball(v):\n    if isinstance(v, (_CB, _RB)):\n        return _C(v)\n    return _C(SR(v))\ndef _ri(rb):\n    return _R(rb.lower(), rb.upper())\ndef eq(values, L, R, edge=False):\n    \"\"\"the claim's two sides at the values: exact when Sage simplifies the difference to 0, else |L - R| in balls\"\"\"\n    try:\n        if isinstance(L, (_CB, _RB)) or isinstance(R, (_CB, _RB)):\n            raise ValueError('balls')\n        Ls, Rs = SR(L).simplify_full(), SR(R).simplify_full()\n        if bool(Ls - Rs == 0):\n            return oracle_instance(*values, lhs=Ls, rhs=Rs, edge=edge)\n    except Exception:\n        pass\n    d = (_ball(L) - _ball(R)).abs()\n    return oracle_instance(*values, lhs=_ri(d), rhs=_R(0), edge=edge)\ndef rel(values, L, R, relation, edge=False):\n    \"\"\"a real inequality between the sides, decided on rigorous intervals\"\"\"\n    return oracle_instance(*values, lhs=_ri(_ball(L).real()), rhs=_ri(_ball(R).real()), relation=relation, edge=edge)\ndef K(values, proof, edge=False):\n    return kernel_instance(*values, proof=proof, edge=edge)\ndef meq(values, L, R, edge=False):\n    \"\"\"exact equality of two Sage matrices or vectors\"\"\"\n    return oracle_instance(*values, lhs=matrix(L) if not hasattr(L, 'nrows') else L, rhs=matrix(R) if not hasattr(R, 'nrows') else R, edge=edge)\n\ns1 = matrix(QQbar, [[0, 1], [1, 0]]); s2 = matrix(QQbar, [[0, -I], [I, 0]]); s3 = matrix(QQbar, [[1, 0], [0, -1]]); one = identity_matrix(QQbar, 2)\nH = '(by intro a b; fin_cases a <;> fin_cases b <;> simp [KaluzaKlein.HilbertSpaces.Basic.pauliFour, KaluzaKlein.HilbertSpaces.Basic.σ1, KaluzaKlein.HilbertSpaces.Basic.σ2, KaluzaKlein.HilbertSpaces.Basic.σ3, Matrix.trace, Matrix.mul_apply, Fin.sum_univ_succ, Matrix.conjTranspose_apply] <;> norm_num)'\ndef rk(ms):\n    return ZZ(matrix(QQbar, [list(m.list()) for m in ms]).rank())\nfams = [('KaluzaKlein.HilbertSpaces.Basic.pauliFour', [one, s1, s2, s3], True),\n        ('![KaluzaKlein.HilbertSpaces.Basic.σ3, KaluzaKlein.HilbertSpaces.Basic.σ2, KaluzaKlein.HilbertSpaces.Basic.σ1, 1]', [s3, s2, s1, one], False),\n        ('![1, -KaluzaKlein.HilbertSpaces.Basic.σ1, Complex.I • KaluzaKlein.HilbertSpaces.Basic.σ2, KaluzaKlein.HilbertSpaces.Basic.σ3]', [one, -s1, I * s2, s3], False)]\ninstances = [oracle_instance(t, H, lhs=rk(ms), rhs=ZZ(4), edge=e) for t, ms, e in fams]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "Fin 4 → Matrix (Fin 2) (Fin 2) ℂ", "name": "v"},
+   {"type": "∀ (a b : Fin 4), ((v a)ᴴ * v b).trace = if a = b then 2 else 0",
+    "name": "h"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "∀ (a b : Fin 4), ((v a)ᴴ * v b).trace = if a = b then 2 else 0",
+    "name": "h"}],
+  "goal": {"text": "LinearIndependent ℂ v", "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values":
+   ["KaluzaKlein.HilbertSpaces.Basic.pauliFour",
+    "(by intro a b; fin_cases a <;> fin_cases b <;> simp [KaluzaKlein.HilbertSpaces.Basic.pauliFour, KaluzaKlein.HilbertSpaces.Basic.σ1, KaluzaKlein.HilbertSpaces.Basic.σ2, KaluzaKlein.HilbertSpaces.Basic.σ3, Matrix.trace, Matrix.mul_apply, Fin.sum_univ_succ, Matrix.conjTranspose_apply] <;> norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "4 == 4 (exact)",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["![KaluzaKlein.HilbertSpaces.Basic.σ3, KaluzaKlein.HilbertSpaces.Basic.σ2, KaluzaKlein.HilbertSpaces.Basic.σ1, 1]",
+    "(by intro a b; fin_cases a <;> fin_cases b <;> simp [KaluzaKlein.HilbertSpaces.Basic.pauliFour, KaluzaKlein.HilbertSpaces.Basic.σ1, KaluzaKlein.HilbertSpaces.Basic.σ2, KaluzaKlein.HilbertSpaces.Basic.σ3, Matrix.trace, Matrix.mul_apply, Fin.sum_univ_succ, Matrix.conjTranspose_apply] <;> norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "4 == 4 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["![1, -KaluzaKlein.HilbertSpaces.Basic.σ1, Complex.I • KaluzaKlein.HilbertSpaces.Basic.σ2, KaluzaKlein.HilbertSpaces.Basic.σ3]",
+    "(by intro a b; fin_cases a <;> fin_cases b <;> simp [KaluzaKlein.HilbertSpaces.Basic.pauliFour, KaluzaKlein.HilbertSpaces.Basic.σ1, KaluzaKlein.HilbertSpaces.Basic.σ2, KaluzaKlein.HilbertSpaces.Basic.σ3, Matrix.trace, Matrix.mul_apply, Fin.sum_univ_succ, Matrix.conjTranspose_apply] <;> norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "4 == 4 (exact)",
+   "edge": false,
+   "accepted": true}]}

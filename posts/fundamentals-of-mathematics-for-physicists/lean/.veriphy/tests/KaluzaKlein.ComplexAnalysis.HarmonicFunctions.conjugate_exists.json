@@ -1,0 +1,68 @@
+{"target": "KaluzaKlein.ComplexAnalysis.HarmonicFunctions.conjugate_exists",
+ "statement":
+ "∀ (u : ℂ → ℝ) (c : ℂ) (R : ℝ),\n  HarmonicOnNhd u (ball c R) → ∃ F, DifferentiableOn ℂ F (ball c R) ∧ ∀ z ∈ ball c R, (F z).re = u z",
+ "seed": 0,
+ "script_hash": "926013078117445441",
+ "script":
+ "# name: ca-holo-conj-exists-test\n# technique: test fallback (kernel-checked instances)\n# goal: sage_test KaluzaKlein.ComplexAnalysis.HarmonicFunctions.conjugate_exists\n# description: harmonic conjugates of Re z and Im z on discs; each instance proved by computation or mathlib, independently of the claim.\nSEED = 0\nCASES = [\n    (['(fun z : ℂ => z.re)', '0', '0', '(fun z hz => absurd hz (by simp))'], 'exact ⟨fun z => z, by fun_prop, fun _ _ => rfl⟩', True),\n    (['(fun z : ℂ => z.re)', '0', '1', '(fun _ _ => analyticAt_id.harmonicAt_re)'], 'exact ⟨fun z => z, by fun_prop, fun _ _ => rfl⟩', False),\n    (['(fun z : ℂ => z.im)', 'Complex.I', '2', '(fun _ _ => analyticAt_id.harmonicAt_im)'], 'exact ⟨fun z => -Complex.I * z, by fun_prop, fun _ _ => by simp⟩', False),\n]\ninstances = [kernel_instance(*values, proof=proof, edge=edge) for values, proof, edge in CASES]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal":
+  [{"type": "ℂ → ℝ", "name": "u"},
+   {"type": "ℂ", "name": "c"},
+   {"type": "ℝ", "name": "R"},
+   {"type": "HarmonicOnNhd u (ball c R)", "name": "hu"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [{"text": "HarmonicOnNhd u (ball c R)", "name": "hu"}],
+  "goal":
+  {"text":
+   "∃ F, DifferentiableOn ℂ F (ball c R) ∧ ∀ z ∈ ball c R, (F z).re = u z",
+   "kind": "other"},
+  "functions": [{"sage": "F_F", "lean": "F", "arity": 1}],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": {"lean": "F", "function": "F_F", "conjuncts": []},
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ → ℂ",
+  "atoms": ["F"],
+  "atom_types": ["other"]},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["(fun z : ℂ => z.re)", "0", "0", "(fun z hz => absurd hz (by simp))"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["(fun z : ℂ => z.re)",
+    "0",
+    "1",
+    "(fun _ _ => analyticAt_id.harmonicAt_re)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun z : ℂ => z.im)",
+    "Complex.I",
+    "2",
+    "(fun _ _ => analyticAt_id.harmonicAt_im)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

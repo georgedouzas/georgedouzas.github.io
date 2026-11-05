@@ -1,0 +1,72 @@
+{"target": "KaluzaKlein.RealAnalysis.Calculus.polar_jacobian_inverse",
+ "statement":
+ "∀ (r φ : ℝ), r ≠ 0 → !![cos φ, sin φ; -sin φ / r, cos φ / r] * !![cos φ, -r * sin φ; sin φ, r * cos φ] = 1",
+ "seed": 0,
+ "script_hash": "17849862076349418743",
+ "script":
+ "# name: ra-polar-jacobian-inverse-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Calculus.polar_jacobian_inverse file \"ra-polar-jacobian-inverse-test.sage\"\n# description: Sage multiplies J⁻¹ J and simplifies to 1 (with cos² + sin² = 1)\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\ninstances = []\nfor rv, pv, edge in [(1, 0, True), (2, pi / 3, False), (-3, 1, False)]:\n    Ji = matrix(SR, [[cos(pv), sin(pv)], [-sin(pv) / rv, cos(pv) / rv]]); J = matrix(SR, [[cos(pv), -rv * sin(pv)], [sin(pv), rv * cos(pv)]])\n    P = (Ji * J).simplify_full()\n    instances.append(O([str(rv), str(pv), '(by norm_num)'], B(P == identity_matrix(2)), QQ(1), edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℝ", "name": "r"},
+   {"type": "ℝ", "name": "φ"},
+   {"type": "r ≠ 0", "name": "hr"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [{"text": "r ≠ 0", "rel": "ne", "name": "hr", "expr": "(x2) - (0)"}],
+  "goal":
+  {"text":
+   "!![cos φ, sin φ; -sin φ / r, cos φ / r] * !![cos φ, -r * sin φ; sin φ, r * cos φ] = 1",
+   "rhs_poly": "1",
+   "rhs": "1",
+   "rel": "eq",
+   "poly": "((x0 * x1)) - (1)",
+   "lhs_poly": "(x0 * x1)",
+   "lhs":
+   "!![cos φ, sin φ; -sin φ / r, cos φ / r] * !![cos φ, -r * sin φ; sin φ, r * cos φ]",
+   "kind": "rel",
+   "expr":
+   "((matrix(SR, [[cos(x3), sin(x3)], [((-sin(x3)) / x2), (cos(x3) / x2)]])).__mul__(matrix(SR, [[cos(x3), ((-x2) * sin(x3))], [sin(x3), (x2 * cos(x3))]]))) - (1)"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "r ≠ 0", "kind": "ne", "expr": "x2", "discharged_by": "hr"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "Matrix (Fin 2) (Fin 2) ℝ",
+  "atoms":
+  ["!![cos φ, sin φ; -sin φ / r, cos φ / r]",
+   "!![cos φ, -r * sin φ; sin φ, r * cos φ]",
+   "r",
+   "φ"],
+  "atom_types": ["matrix", "matrix", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "0", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "1 == 1 (exact)",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "1/3*pi", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "1 == 1 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-3", "1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "1 == 1 (exact)",
+   "edge": false,
+   "accepted": true}]}

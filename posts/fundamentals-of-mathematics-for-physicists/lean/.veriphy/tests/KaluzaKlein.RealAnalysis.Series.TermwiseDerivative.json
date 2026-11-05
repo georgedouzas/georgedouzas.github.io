@@ -1,0 +1,65 @@
+{"target": "KaluzaKlein.RealAnalysis.Series.TermwiseDerivative",
+ "statement":
+ "∀ (c : ℕ → ℝ) (R : ℝ),\n  (∀ (r : ℝ), 0 ≤ r → r < R → Summable fun k => |c k| * r ^ k) →\n    ∀ (x : ℝ), |x| < R → HasDerivAt (fun y => ∑' (k : ℕ), c k * y ^ k) (∑' (k : ℕ), (↑k + 1) * c (k + 1) * x ^ k) x",
+ "seed": 0,
+ "script_hash": "869356646792856171",
+ "script":
+ "# name: ra-termwisederivative-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Series.TermwiseDerivative file \"ra-termwisederivative-test.sage\"\n# description: Sage differentiates the sums of ∑ x^k (R = 1) and ∑ x^k/k! (R = ∞) and the term-by-term series, at sample points\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx, k = var('x k')\ninstances = []\nfor c, R0, pt, edge in [('(fun _ : ℕ => (1 : ℝ))', '1', QQ(1) / 2, False), ('(fun k : ℕ => 1 / (k ! : ℝ))', '10', 1, False),\n                        ('(fun _ : ℕ => (0 : ℝ))', '1', 0, True)]:\n    if c.startswith('(fun _ : ℕ => (1'):\n        f = 1 / (1 - x); termwise = sum((k + 1) * x ** k, k, 0, oo)\n    elif 'k !' in c:\n        f = exp(x); termwise = exp(x)   # ∑ (k+1) x^k/(k+1)! = ∑ x^k/k!\n    else:\n        f = 0 * x; termwise = 0 * x\n    instances.append(O([c, R0, '‹_›', str(pt), '(by norm_num)'], diff(f, x).subs(x=pt), termwise.subs(x=pt), edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℕ → ℝ", "name": "c"},
+   {"type": "ℝ", "name": "R"},
+   {"type": "∀ (r : ℝ), 0 ≤ r → r < R → Summable fun k => |c k| * r ^ k",
+    "name": "a._@._internal._hyg.0"},
+   {"type": "ℝ", "name": "x"},
+   {"type": "|x| < R", "name": "a._@._internal._hyg.0"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "HasDerivAt (fun y => ∑' (k : ℕ), c k * y ^ k) (∑' (k : ℕ), (↑k + 1) * c (k + 1) * x ^ k) x",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["(fun _ : ℕ => (1 : ℝ))", "1", "‹_›", "1/2", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[4.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 4.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [4.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 4.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun k : ℕ => 1 / (k ! : ℝ))", "10", "‹_›", "1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.718281828459045235360287471352662497757247093699959574966967627724076630353519 .. 2.718281828459045235360287471352662497757247093699959574966967627724076630353555] == [2.718281828459045235360287471352662497757247093699959574966967627724076630353519 .. 2.718281828459045235360287471352662497757247093699959574966967627724076630353555] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun _ : ℕ => (0 : ℝ))", "1", "‹_›", "0", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true}]}

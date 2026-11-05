@@ -26,6 +26,8 @@ says what quantisation adds, one notion at a time, at the level needed to read t
 free field are harmonic oscillators, their quanta are particles, and the quantum consistency of the Higgs
 mechanism and of the fermion content constrains the models of Part V.
 
+For more on this topic, see @derezinski2022mathematics [Ch. 18-19], @galitski2013exploring [Ch. 10], @talagrand2022what [Ch. 3] and @williams2023introduction [Ch. 6].
+
 ### Canonical quantisation
 
 Classical mechanics in Hamiltonian form (@sec-hamiltonian) describes a system by coordinates and momenta whose Poisson
@@ -739,6 +741,8 @@ operator obeying canonical commutation relations, its plane-wave modes become in
 states they generate from the vacuum form the Fock space, whose vectors are states of finitely many particles. On a
 circle of length $L$ every step reduces to finite sums, and the commutators can be computed there exactly.
 
+For more on this topic, see @aitchison2024gauge [Ch. 5-7], @buchbinder2021introduction [Ch. 5], @derezinski2022mathematics [Ch. 3], @gelis2021problems and @talagrand2022what [Ch. 5-7, Ch. 10].
+
 ### Field operators
 
 A classical field assigns a number to every point of space at each time, and its momentum density is $\pi =
@@ -1244,6 +1248,8 @@ yields the Feynman propagator, and the Euclidean correlator obtained by rotating
 of the propagator, their residues and the rotation itself are computed with the tools of @sec-residues and
 @def-wick-rotation.
 
+For more on this topic, see @buchbinder2021introduction [Ch. 6, Ch. 7] and @paganini2023fundamentals [Ch. 5].
+
 ### Vacuum correlators
 
 The field operators do not commute at different times, so the order of a product matters. The definition takes the
@@ -1736,6 +1742,8 @@ functional of correlation functions, evaluates the Gaussian integral that gives 
 theorem from it, and returns to the thermal circle of @sec-thermal-circle, where Euclidean time is periodic. It ends
 with the path integral on a lattice: exactly for a free field, through the spectral decomposition of Euclidean
 correlators, and by Metropolis sampling when the integral is not Gaussian.
+
+For more on this topic, see @derezinski2022mathematics [Ch. 20-21], @gelis2021problems [problems 18-25], @nastase2023quantum [Ch. 56], @shankar2017quantum [Ch. 3-6], @strocchi2021symmetry and @tornetta2022mathematical [Ch. 4].
 
 ### The generating functional
 
@@ -2904,6 +2912,8 @@ series in the coupling. Each term of the series is a Gaussian integral of the pr
 theorem, and the pairings are drawn as diagrams whose lines are propagators and whose vertices are interactions. This
 section introduces the quartic interaction, states the Feynman rules in outline, explains the symmetry factors and
 evaluates the basic one-loop integral with Gamma functions (@def-gamma-function).
+
+For more on this topic, see @buchbinder2021introduction [Ch. 8], @talagrand2022what [Ch. 11-14] and @williams2023introduction [Ch. 7].
 
 ### Interactions
 

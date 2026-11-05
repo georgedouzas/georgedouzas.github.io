@@ -1,0 +1,56 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.BesselFunctions.besselJ0_continuousOn",
+ "statement": "∀ (R : ℝ), ContinuousOn (besselJ 0) (Set.Icc (-R) R)",
+ "seed": 0,
+ "script_hash": "7883243546654842799",
+ "script":
+ "# name: de-bessel-continuous-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.BesselFunctions.besselJ0_continuousOn file \"de-bessel-continuous-test.sage\"\n# description: J₀ is continuous on [-R, R]: Sage's bessel_J has J₀(x) → J₀(x₀) (difference below 10⁻⁶ at x₀ ± 10⁻⁸, interval arithmetic) at x₀ = 0 (edge), R/2, R for R = 4\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\ninstances = [\n    oracle_instance('4',\n                    lhs=RealIntervalField(100)(abs(bessel_J(0, 0 + 1/10^8) - bessel_J(0, 0))),\n                    rhs=RealIntervalField(100)(1/10^6), relation='<', edge=True),\n    oracle_instance('4',\n                    lhs=RealIntervalField(100)(abs(bessel_J(0, 2 + 1/10^8) - bessel_J(0, 2))),\n                    rhs=RealIntervalField(100)(1/10^6), relation='<', edge=False),\n    oracle_instance('4',\n                    lhs=RealIntervalField(100)(abs(bessel_J(0, 4 + 1/10^8) - bessel_J(0, 4))),\n                    rhs=RealIntervalField(100)(1/10^6), relation='<', edge=False),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal": [{"type": "ℝ", "name": "R"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text": "ContinuousOn (besselJ 0) (Set.Icc (-R) R)", "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["4"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.5000000000000209018622617432125e-17 .. 2.5000000000000209018622617432126e-17] < [9.9999999999999999999999999999974e-7 .. 1.0000000000000000000000000000013e-6] at 100 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["4"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[5.7672480743451525684460621541331e-9 .. 5.7672480743451525684460621541332e-9] < [9.9999999999999999999999999999974e-7 .. 1.0000000000000000000000000000013e-6] at 100 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["4"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[6.6043329926744022815016932997373e-10 .. 6.6043329926744022815016932997374e-10] < [9.9999999999999999999999999999974e-7 .. 1.0000000000000000000000000000013e-6] at 100 bits",
+   "edge": false,
+   "accepted": true}]}

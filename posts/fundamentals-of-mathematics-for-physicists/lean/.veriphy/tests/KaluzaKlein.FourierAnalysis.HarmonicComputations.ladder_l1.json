@@ -1,0 +1,81 @@
+{"target": "KaluzaKlein.FourierAnalysis.HarmonicComputations.ladder_l1",
+ "statement":
+ "∀ (θ : ℝ), deriv (fun t => √(3 / (4 * π)) * cos t) θ = √2 * -(√(3 / (8 * π)) * sin θ)",
+ "seed": 0,
+ "script_hash": "16742997210588681442",
+ "script":
+ "# name: fa-ladder-l1-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.HarmonicComputations.ladder_l1 file \"fa-ladder-l1-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\nz_ = var('z_'); y = var('y'); assume(y, 'real')\ninstances = []\nCASES = [(['0'], True, {'t': '0'}), (['1'], False, {'t': '1'}), (['-5/2'], False, {'t': '-5/2'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('diff(sqrt(3/(4*pi))*cos(z_), z_).subs(z_=t)', scope))\n    R = side(eval('sqrt(2)*(-(sqrt(3/(8*pi))*sin(t)))', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4"],
+  "universal": [{"type": "ℝ", "name": "θ"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "deriv (fun t => √(3 / (4 * π)) * cos t) θ = √2 * -(√(3 / (8 * π)) * sin θ)",
+   "rhs_poly": "(x1 * (-(x2 * x3)))",
+   "rhs": "√2 * -(√(3 / (8 * π)) * sin θ)",
+   "rel": "eq",
+   "poly": "(x0) - ((x1 * (-(x2 * x3))))",
+   "lhs_poly": "x0",
+   "lhs": "deriv (fun t => √(3 / (4 * π)) * cos t) θ",
+   "kind": "rel",
+   "expr":
+   "(diff((sqrt((3 / (4 * pi))) * cos(d0_)), d0_).subs({d0_: x4})) - ((sqrt(2) * (-(sqrt((3 / (8 * pi))) * sin(x4)))))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "0 < 3 / (4 * π)", "kind": "pos", "expr": "(3 / (4 * pi))"},
+   {"text": "4 * π ≠ 0", "kind": "ne", "expr": "(4 * pi)"},
+   {"text": "0 ≤ 2", "kind": "nonneg", "expr": "2"},
+   {"text": "0 ≤ 3 / (8 * π)", "kind": "nonneg", "expr": "(3 / (8 * pi))"},
+   {"text": "8 * π ≠ 0", "kind": "ne", "expr": "(8 * pi)"}],
+  "derivatives":
+  [{"var": "d0_",
+    "point": "x4",
+    "function": "fun t => √(3 / (4 * π)) * cos t",
+    "body": "(sqrt((3 / (4 * pi))) * cos(d0_))",
+    "at": "θ"}],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["deriv (fun t => √(3 / (4 * π)) * cos t) θ",
+   "√2",
+   "√(3 / (8 * π))",
+   "sin θ",
+   "θ"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-0.4111448368705620013985045988007378908209 .. -0.4111448368705620013985045988007378908076] == [-0.4111448368705620013985045988007378908224 .. -0.4111448368705620013985045988007378908076] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-5/2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.2924149929131194094544726475917090798051 .. 0.2924149929131194094544726475917090798141] == [0.2924149929131194094544726475917090798051 .. 0.2924149929131194094544726475917090798141] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

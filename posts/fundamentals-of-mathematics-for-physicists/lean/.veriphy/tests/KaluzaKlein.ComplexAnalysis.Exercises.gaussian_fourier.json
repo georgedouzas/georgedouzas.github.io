@@ -1,0 +1,60 @@
+{"target": "KaluzaKlein.ComplexAnalysis.Exercises.gaussian_fourier",
+ "statement":
+ "∀ (k : ℝ), ∫ (x : ℝ), cexp (-↑x ^ 2 / 2) * cexp (I * ↑k * ↑x) = ↑(2 * π) ^ (1 / 2) * cexp (-↑k ^ 2 / 2)",
+ "seed": 0,
+ "script_hash": "10966247765150359162",
+ "script":
+ "# name: ca-ex-gaussian-fourier-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates exactly or in interval arithmetic\n# goal: sage_test KaluzaKlein.ComplexAnalysis.Exercises.gaussian_fourier file \"ca-ex-gaussian-fourier-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\ninstances = []\nCI = ComplexIntervalField(128)\ndef cdiff(a, b):\n    d = CI(a) - CI(b)\n    return RI(d.real().abs() + d.imag().abs())\nCB = ComplexBallField(128)\ndef bdiff(a, b):\n    d = a - b\n    return RI(d.real().abs()) + RI(d.imag().abs())\nx = var('x')\ninstances.append(oracle_instance(*['0'], lhs=cdiff(integrate(exp(-x^2/2), x, -oo, oo), sqrt(2*pi)), rhs=RI(0), relation='==', edge=True))\ninstances.append(oracle_instance(*['1'], lhs=cdiff(integrate(exp(-x^2/2)*exp(I*x), x, -oo, oo), sqrt(2*pi)*exp(-1/2)), rhs=RI(0), relation='==', edge=False))\ninstances.append(oracle_instance(*['3'], lhs=cdiff(integrate(exp(-x^2/2)*exp(3*I*x), x, -oo, oo), sqrt(2*pi)*exp(-9/2)), rhs=RI(0), relation='==', edge=False))\nprint([(x.values, x.kind, x.verdict) for x in instances])\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1"],
+  "universal": [{"type": "ℝ", "name": "k"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "∫ (x : ℝ), cexp (-↑x ^ 2 / 2) * cexp (I * ↑k * ↑x) = ↑(2 * π) ^ (1 / 2) * cexp (-↑k ^ 2 / 2)",
+   "rel": "eq",
+   "kind": "other",
+   "expr": "(x0) - ((((2 * pi))^((1 / 2)) * exp(((-(x1)^(2)) / 2))))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms": ["∫ (x : ℝ), cexp (-↑x ^ 2 / 2) * cexp (I * ↑k * ↑x)", "k"],
+  "atom_types": ["ℂ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 5.877471754111437539843682686111228389094e-38] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 4.701977403289150031874946148888982711275e-38] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["3"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 8.265194654219209040405178777343914922163e-40] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

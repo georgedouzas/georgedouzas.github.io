@@ -1,0 +1,72 @@
+{"target": "KaluzaKlein.FourierAnalysis.PeriodicFunctions.euler_harmonic",
+ "statement":
+ "∀ (n x : ℝ), Complex.exp (↑(n * x) * Complex.I) = ↑(cos (n * x)) + ↑(sin (n * x)) * Complex.I",
+ "seed": 0,
+ "script_hash": "3446148412893818757",
+ "script":
+ "# name: fa-euler-harmonic-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.PeriodicFunctions.euler_harmonic file \"fa-euler-harmonic-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ninstances = []\nCASES = [(['0', '0'], True, {'n': '0', 'x': '0'}), (['2', '1/3'], False, {'n': '2', 'x': '1/3'}), (['-1', '5/2'], False, {'n': '-1', 'x': '5/2'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('exp(n*x*I)', scope))\n    R = side(eval('cos(n*x) + I*sin(n*x)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4", "x5"],
+  "universal": [{"type": "ℝ", "name": "n"}, {"type": "ℝ", "name": "x"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "Complex.exp (↑(n * x) * Complex.I) = ↑(cos (n * x)) + ↑(sin (n * x)) * Complex.I",
+   "rhs_poly": "(x1 + (x2 * x3))",
+   "rhs": "↑(cos (n * x)) + ↑(sin (n * x)) * Complex.I",
+   "rel": "eq",
+   "poly": "(x0) - ((x1 + (x2 * x3)))",
+   "lhs_poly": "x0",
+   "lhs": "Complex.exp (↑(n * x) * Complex.I)",
+   "kind": "rel",
+   "expr":
+   "(exp(((x4 * x5) * I))) - ((cos((x4 * x5)) + (sin((x4 * x5)) * I)))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms":
+  ["Complex.exp (↑(n * x) * Complex.I)",
+   "↑(cos (n * x))",
+   "↑(sin (n * x))",
+   "Complex.I",
+   "n",
+   "x"],
+  "atom_types": ["ℂ", "ℂ", "ℂ", "ℂ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "1/3"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 8.816207631167156309765524029166842583640e-39] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-1", "5/2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 5.877471754111437539843682686111228389094e-39] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

@@ -1,0 +1,65 @@
+{"target": "KaluzaKlein.RealAnalysis.Continuity.one_sub_cos_div_limit",
+ "statement":
+ "∀ (c : ℝ), Tendsto (fun x => (1 - cos (c * x)) / x ^ 2) (𝓝[≠] 0) (𝓝 (c ^ 2 / 2))",
+ "seed": 0,
+ "script_hash": "18181901753789446509",
+ "script":
+ "# name: ra-one-sub-cos-div-limit-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Continuity.one_sub_cos_div_limit file \"ra-one-sub-cos-div-limit-test.sage\"\n# description: Sage's limit of (1 - cos(cx))/x² at 0 is c²/2\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx = var('x')\ninstances = [O([str(c)], limit((1 - cos(c * x)) / x ** 2, x=0), SR(c) ** 2 / 2, edge=(c == 0)) for c in [0, 1, 2, -3]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal": [{"type": "ℝ", "name": "c"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "Tendsto (fun x => (1 - cos (c * x)) / x ^ 2) (𝓝[≠] 0) (𝓝 (c ^ 2 / 2))",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.5000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 0.5000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.5000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 0.5000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 2.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [2.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 2.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-3"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[4.500000000000000000000000000000000000000000000000000000000000000000000000000000 .. 4.500000000000000000000000000000000000000000000000000000000000000000000000000000] == [4.500000000000000000000000000000000000000000000000000000000000000000000000000000 .. 4.500000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

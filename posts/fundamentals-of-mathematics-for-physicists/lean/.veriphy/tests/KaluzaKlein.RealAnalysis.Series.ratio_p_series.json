@@ -1,0 +1,65 @@
+{"target": "KaluzaKlein.RealAnalysis.Series.ratio_p_series",
+ "statement":
+ "∀ (p : ℝ), Tendsto (fun n => 1 / (↑n + 2) ^ p / (1 / (↑n + 1) ^ p)) atTop (𝓝 1)",
+ "seed": 0,
+ "script_hash": "5609298089197225742",
+ "script":
+ "# name: ra-ratio-p-series-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Series.ratio_p_series file \"ra-ratio-p-series-test.sage\"\n# description: Sage's limit of the ratio of 1/n^p is 1 for every p\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nn = var('n')\ninstances = [O([str(p)], limit((n + 1) ** p / (n + 2) ** p, n=oo), QQ(1), edge=(p == 0)) for p in [0, 1, 2, QQ(1) / 2]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal": [{"type": "ℝ", "name": "p"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "Tendsto (fun n => 1 / (↑n + 2) ^ p / (1 / (↑n + 1) ^ p)) atTop (𝓝 1)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1/2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

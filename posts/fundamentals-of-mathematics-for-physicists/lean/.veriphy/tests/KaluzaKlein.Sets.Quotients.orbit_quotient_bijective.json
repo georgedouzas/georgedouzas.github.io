@@ -1,0 +1,61 @@
+{"target": "KaluzaKlein.Sets.Quotients.orbit_quotient_bijective",
+ "statement":
+ "∀ p₀ ∈ sphere, ∃ F, Function.Bijective F ∧ ∀ (g : ↥SO3t), ↑(F ⟦g⟧) = ↑g *ᵥ p₀",
+ "seed": 0,
+ "script_hash": "18134504257091765025",
+ "script":
+ "# name: set-orbit-quotient-test\n# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand\n# goal: sage_test KaluzaKlein.Sets.Quotients.orbit_quotient_bijective\n# description: the claim at the instances below, each proved independently of the claim\nSEED = 0\nCASES = [\n    (['KaluzaKlein.Sets.Sets.northPole', '(by norm_num [KaluzaKlein.Sets.Sets.sphere, KaluzaKlein.Sets.Sets.northPole])'], True, \"set_option maxHeartbeats 2000000 in\\nhave key : ∀ (p₀ : Fin 3 → ℝ) (hp₀ : p₀ ∈ sphere), ∃ F : Quotient (orbitSetoid p₀) → sphere, Function.Bijective F ∧ ∀ g : SO3t, (F ⟦g⟧ : Fin 3 → ℝ) = (g : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ p₀ := by\\n  intro p₀ hp₀\\n  have hmem : ∀ g : SO3t, (g : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ p₀ ∈ sphere := fun g => by\\n    rw [mem_sphere_iff_dot, rot_dot _ g.2, ← mem_sphere_iff_dot]; exact hp₀\\n  refine ⟨Quotient.lift (fun g : SO3t => (⟨_, hmem g⟩ : sphere)) (fun _ _ h => Subtype.ext h), ⟨?_, ?_⟩,\\n    fun g => rfl⟩\\n  · intro p q h\\n    induction p using Quotient.ind\\n    induction q using Quotient.ind\\n    exact Quotient.sound (congrArg Subtype.val h)\\n  · rintro ⟨p, hp⟩\\n    have h1 := rotTo_mem p hp\\n    have h0 := rotTo_mem p₀ hp₀\\n    have h0' := h0\\n    rw [mem_SO3_iff] at h0'\\n    have hback : (rotTo p₀)ᵀ *ᵥ p₀ = northPole := by\\n      have h := rotTo_orbit p₀ hp₀\\n      unfold orbit at h\\n      calc (rotTo p₀)ᵀ *ᵥ p₀ = (rotTo p₀)ᵀ *ᵥ (rotTo p₀ *ᵥ northPole) := by rw [h]\\n        _ = northPole := by rw [Matrix.mulVec_mulVec, h0'.1, Matrix.one_mulVec]\\n    have hT : (rotTo p₀)ᵀ ∈ SO3 := by\\n      rw [mem_SO3_iff] at h0 ⊢\\n      refine ⟨?_, by rw [Matrix.det_transpose, h0.2]⟩\\n      rw [Matrix.transpose_transpose]; exact mul_eq_one_comm.1 h0.1\\n    refine ⟨⟦⟨rotTo p * (rotTo p₀)ᵀ, (Matrix.specialOrthogonalGroup (Fin 3) ℝ).mul_mem h1 hT⟩⟧, Subtype.ext ?_⟩\\n    simp only [Quotient.lift_mk]\\n    rw [← Matrix.mulVec_mulVec, hback]\\n    exact rotTo_orbit p hp\\nexact @key (KaluzaKlein.Sets.Sets.northPole) ((by norm_num [KaluzaKlein.Sets.Sets.sphere, KaluzaKlein.Sets.Sets.northPole]))\"),\n    (['![1, 0, 0]', '(by norm_num [KaluzaKlein.Sets.Sets.sphere, KaluzaKlein.Sets.Sets.northPole])'], False, \"set_option maxHeartbeats 2000000 in\\nhave key : ∀ (p₀ : Fin 3 → ℝ) (hp₀ : p₀ ∈ sphere), ∃ F : Quotient (orbitSetoid p₀) → sphere, Function.Bijective F ∧ ∀ g : SO3t, (F ⟦g⟧ : Fin 3 → ℝ) = (g : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ p₀ := by\\n  intro p₀ hp₀\\n  have hmem : ∀ g : SO3t, (g : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ p₀ ∈ sphere := fun g => by\\n    rw [mem_sphere_iff_dot, rot_dot _ g.2, ← mem_sphere_iff_dot]; exact hp₀\\n  refine ⟨Quotient.lift (fun g : SO3t => (⟨_, hmem g⟩ : sphere)) (fun _ _ h => Subtype.ext h), ⟨?_, ?_⟩,\\n    fun g => rfl⟩\\n  · intro p q h\\n    induction p using Quotient.ind\\n    induction q using Quotient.ind\\n    exact Quotient.sound (congrArg Subtype.val h)\\n  · rintro ⟨p, hp⟩\\n    have h1 := rotTo_mem p hp\\n    have h0 := rotTo_mem p₀ hp₀\\n    have h0' := h0\\n    rw [mem_SO3_iff] at h0'\\n    have hback : (rotTo p₀)ᵀ *ᵥ p₀ = northPole := by\\n      have h := rotTo_orbit p₀ hp₀\\n      unfold orbit at h\\n      calc (rotTo p₀)ᵀ *ᵥ p₀ = (rotTo p₀)ᵀ *ᵥ (rotTo p₀ *ᵥ northPole) := by rw [h]\\n        _ = northPole := by rw [Matrix.mulVec_mulVec, h0'.1, Matrix.one_mulVec]\\n    have hT : (rotTo p₀)ᵀ ∈ SO3 := by\\n      rw [mem_SO3_iff] at h0 ⊢\\n      refine ⟨?_, by rw [Matrix.det_transpose, h0.2]⟩\\n      rw [Matrix.transpose_transpose]; exact mul_eq_one_comm.1 h0.1\\n    refine ⟨⟦⟨rotTo p * (rotTo p₀)ᵀ, (Matrix.specialOrthogonalGroup (Fin 3) ℝ).mul_mem h1 hT⟩⟧, Subtype.ext ?_⟩\\n    simp only [Quotient.lift_mk]\\n    rw [← Matrix.mulVec_mulVec, hback]\\n    exact rotTo_orbit p hp\\nexact @key (![1, 0, 0]) ((by norm_num [KaluzaKlein.Sets.Sets.sphere, KaluzaKlein.Sets.Sets.northPole]))\"),\n    (['![0, 0, -1]', '(by norm_num [KaluzaKlein.Sets.Sets.sphere, KaluzaKlein.Sets.Sets.northPole])'], False, \"set_option maxHeartbeats 2000000 in\\nhave key : ∀ (p₀ : Fin 3 → ℝ) (hp₀ : p₀ ∈ sphere), ∃ F : Quotient (orbitSetoid p₀) → sphere, Function.Bijective F ∧ ∀ g : SO3t, (F ⟦g⟧ : Fin 3 → ℝ) = (g : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ p₀ := by\\n  intro p₀ hp₀\\n  have hmem : ∀ g : SO3t, (g : Matrix (Fin 3) (Fin 3) ℝ) *ᵥ p₀ ∈ sphere := fun g => by\\n    rw [mem_sphere_iff_dot, rot_dot _ g.2, ← mem_sphere_iff_dot]; exact hp₀\\n  refine ⟨Quotient.lift (fun g : SO3t => (⟨_, hmem g⟩ : sphere)) (fun _ _ h => Subtype.ext h), ⟨?_, ?_⟩,\\n    fun g => rfl⟩\\n  · intro p q h\\n    induction p using Quotient.ind\\n    induction q using Quotient.ind\\n    exact Quotient.sound (congrArg Subtype.val h)\\n  · rintro ⟨p, hp⟩\\n    have h1 := rotTo_mem p hp\\n    have h0 := rotTo_mem p₀ hp₀\\n    have h0' := h0\\n    rw [mem_SO3_iff] at h0'\\n    have hback : (rotTo p₀)ᵀ *ᵥ p₀ = northPole := by\\n      have h := rotTo_orbit p₀ hp₀\\n      unfold orbit at h\\n      calc (rotTo p₀)ᵀ *ᵥ p₀ = (rotTo p₀)ᵀ *ᵥ (rotTo p₀ *ᵥ northPole) := by rw [h]\\n        _ = northPole := by rw [Matrix.mulVec_mulVec, h0'.1, Matrix.one_mulVec]\\n    have hT : (rotTo p₀)ᵀ ∈ SO3 := by\\n      rw [mem_SO3_iff] at h0 ⊢\\n      refine ⟨?_, by rw [Matrix.det_transpose, h0.2]⟩\\n      rw [Matrix.transpose_transpose]; exact mul_eq_one_comm.1 h0.1\\n    refine ⟨⟦⟨rotTo p * (rotTo p₀)ᵀ, (Matrix.specialOrthogonalGroup (Fin 3) ℝ).mul_mem h1 hT⟩⟧, Subtype.ext ?_⟩\\n    simp only [Quotient.lift_mk]\\n    rw [← Matrix.mulVec_mulVec, hback]\\n    exact rotTo_orbit p hp\\nexact @key (![0, 0, -1]) ((by norm_num [KaluzaKlein.Sets.Sets.sphere, KaluzaKlein.Sets.Sets.northPole]))\"),\n]\ninstances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal":
+  [{"type": "Fin 3 → ℝ", "name": "p₀"}, {"type": "p₀ ∈ sphere", "name": "hp₀"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [{"text": "p₀ ∈ sphere", "name": "hp₀"}],
+  "goal":
+  {"text": "∃ F, Function.Bijective F ∧ ∀ (g : ↥SO3t), ↑(F ⟦g⟧) = ↑g *ᵥ p₀",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "Quotient (orbitSetoid p₀) → ↑sphere",
+  "atoms": ["F"],
+  "atom_types": ["other"]},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["KaluzaKlein.Sets.Sets.northPole",
+    "(by norm_num [KaluzaKlein.Sets.Sets.sphere, KaluzaKlein.Sets.Sets.northPole])"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["![1, 0, 0]",
+    "(by norm_num [KaluzaKlein.Sets.Sets.sphere, KaluzaKlein.Sets.Sets.northPole])"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["![0, 0, -1]",
+    "(by norm_num [KaluzaKlein.Sets.Sets.sphere, KaluzaKlein.Sets.Sets.northPole])"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

@@ -1,4 +1,6 @@
 ---
+nocite: |
+  @cufaropetroni2020probability, @knauf2018mathematical
 pagetitle: "Thermodynamics and statistical mechanics"
 ---
 
@@ -33,6 +35,8 @@ as heat and work. This section defines the thermodynamic state and its variables
 conservation with heat included) and the second law (through entropy), introduces the thermodynamic potentials as
 Legendre transforms of the energy, and derives the Maxwell relations from the symmetry of mixed second derivatives;
 the ideal gas, the van der Waals gas and the Carnot cycle serve as worked examples throughout.
+
+For more on this topic, see @shankar2017quantum [Ch. 1].
 
 ### State variables and equilibrium
 
@@ -923,6 +927,8 @@ thermodynamic variables are expectations (@def-expectation), and their fluctuati
 isolated system, the canonical ensemble of a system at fixed temperature with its partition function and Boltzmann
 distribution, and the grand-canonical ensemble of a system that also exchanges particles, together with the identities that relate
 their partition functions to the thermodynamic variables.
+
+For more on this topic, see @gelis2021problems, @kivelson2024statistical [Ch. 2, Ch. 3], @shankar2017quantum [Ch. 2] and @skacej2019solved [Ch. 8-10, Ch. 11-12].
 
 ### Microstates and the microcanonical ensemble
 
@@ -2575,6 +2581,8 @@ orbitals independent. This section derives the Bose-Einstein and Fermi-Dirac dis
 blackbody radiation and to Bose-Einstein condensation and the second to the electron gas, and checks the integrals
 that appear, beginning with $\int_0^\infty x^3/(e^x - 1)\,dx = \pi^4/15$.
 
+For more on this topic, see @strocchi2021symmetry [Ch. 23].
+
 ![Left: mean occupation numbers against $x = (\epsilon - \mu)/T$: Bose-Einstein $1/(e^x - 1)$ (red), Maxwell-Boltzmann
 $e^{-x}$ (dashed) and Fermi-Dirac $1/(e^x + 1)$ (blue); the three agree for $x \gg 1$, the Bose occupation diverges as
 $x \to 0^+$, and the Fermi occupation is a smoothed step at $\epsilon = \mu$. Right: the Planck spectral energy density
@@ -3231,6 +3239,8 @@ field values are computed and whose true values are quoted. Two exactly solvable
 Curie-Weiss model, in which every spin interacts with every other and mean field theory is exact, and the Gaussian free
 field, whose correlations are sums over random walks; between them the correlation length adds the exponents $\nu$
 and $\eta$.
+
+For more on this topic, see @kivelson2024statistical [Ch. 4, Ch. 5, Ch. 6, Ch. 7], @shankar2017quantum [Ch. 7-8], @skacej2019solved [Ch. 1-5] and @strocchi2021symmetry [Ch. 21].
 
 ![Left: the Landau free energy $f(m) - f_0 = (T - T_c)m^2 + m^4$ ($a = b = T_c = 1$) at $T = 1.3\,T_c$ (one minimum at
 $m = 0$), at $T_c$ (a flat quartic minimum) and at $T = 0.7\,T_c$ (two minima at $m = \pm\sqrt{0.15}$, dots, and a

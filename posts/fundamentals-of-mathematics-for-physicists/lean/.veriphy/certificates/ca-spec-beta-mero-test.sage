@@ -1,0 +1,49 @@
+# name: ca-spec-beta-mero-test
+# technique: test fallback (Veriphy test_fallback recipe): kernel-checked instances
+# goal: sage_test KaluzaKlein.ComplexAnalysis.BetaFunction.beta_continuation_differentiableAt file "ca-spec-beta-mero-test.sage"
+# description: points a off the poles; Lean composes differentiableAt_Gamma and the entire 1/Gamma.
+SEED = 0
+
+# shared oracle helpers: exact comparison when Sage decides it, else rigorous balls (160 bits)
+from sage.all import (SR, ZZ, QQ, I, pi, oo, sqrt, exp, log, sin, cos, gamma, zeta, psi, factorial, bernoulli,
+                      harmonic_number, euler_gamma, integrate, limit, var, assume, forget, diff, conjugate, beta,
+                      ComplexBallField, RealIntervalField, real_part, imag_part)
+from sage.all import sum as ssum
+_C = ComplexBallField(160)
+_R = RealIntervalField(160)
+from sage.rings.complex_arb import ComplexBall as _CB
+from sage.rings.real_arb import RealBall as _RB
+def _ball(v):
+    if isinstance(v, (_CB, _RB)):
+        return _C(v)
+    return _C(SR(v))
+def babs(v):
+    """|v| as a rigorous ball (Sage's symbolic abs may drop the absolute value of a complex power)"""
+    return _ball(v).abs()
+def _ri(rb):
+    return _R(rb.lower(), rb.upper())
+def eq(values, L, R, edge=False):
+    """the claim's two sides at the values: exact when Sage simplifies the difference to 0, else |L - R| in balls"""
+    try:
+        if isinstance(L, (_CB, _RB)) or isinstance(R, (_CB, _RB)):
+            raise ValueError('balls')
+        Ls, Rs = SR(L).simplify_full(), SR(R).simplify_full()
+        if bool(Ls - Rs == 0):
+            return oracle_instance(*values, lhs=Ls, rhs=Rs, edge=edge)
+    except Exception:
+        pass
+    d = (_ball(L) - _ball(R)).abs()
+    return oracle_instance(*values, lhs=_ri(d), rhs=_R(0), edge=edge)
+def rel(values, L, R, relation, edge=False):
+    """a real inequality between the sides, decided on rigorous intervals"""
+    return oracle_instance(*values, lhs=_ri(_ball(L).real()), rhs=_ri(_ball(R).real()), relation=relation, edge=edge)
+H = '(fun m h => by have h\' := congrArg Complex.re h; simp at h\' <;> linarith [(Nat.cast_nonneg m : (0 : ℝ) ≤ m)])'
+P = ('have h1 : DifferentiableAt ℂ (fun s => Complex.Gamma s * Complex.Gamma @B@) @A@ := '
+     '(Complex.differentiableAt_Gamma @A@ ' + H + ').mul_const _\n'
+     'have h2 : DifferentiableAt ℂ (fun s => (Complex.Gamma (s + @B@))⁻¹) @A@ := '
+     'DifferentiableAt.comp (g := fun s => (Complex.Gamma s)⁻¹) (f := fun s => s + @B@) @A@ '
+     '(Complex.differentiable_one_div_Gamma (@A@ + @B@)) (differentiableAt_id.add_const @B@)\n'
+     'exact h1.mul h2')
+pts = [('1', '1', True), ('1 / 2', '2', False), ('2 + Complex.I', '-1 / 2', False)]
+instances = [kernel_instance(a, b, H, proof=P.replace('@A@', '(' + a + ' : ℂ)').replace('@B@', '(' + b + ' : ℂ)'), edge=e)
+             for a, b, e in pts]

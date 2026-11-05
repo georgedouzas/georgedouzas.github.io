@@ -1,0 +1,78 @@
+{"target": "KaluzaKlein.RealAnalysis.Series.log_series",
+ "statement":
+ "∀ (x : ℝ),\n  -1 < x → x ≤ 1 → Tendsto (fun n => ∑ k ∈ Finset.range n, (-1) ^ k * x ^ (k + 1) / (↑k + 1)) atTop (𝓝 (log (1 + x)))",
+ "seed": 0,
+ "script_hash": "16866492464411507179",
+ "script":
+ "# name: ra-log-series-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Series.log_series file \"ra-log-series-test.sage\"\n# description: Sage sums ∑ (-1)^k x^(k+1)/(k+1) = log(1 + x), log 2 at x = 1\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nk = var('k')\ninstances = []\nfor x, edge in [(1, True), (QQ(1) / 2, False), (QQ(-1) / 2, False), (0, False)]:\n    s = sum((-1) ** k * SR(x) ** (k + 1) / (k + 1), k, 0, oo) if x != 0 else SR(0)\n    instances.append(O([str(x), '(by norm_num)', '(by norm_num)'], s, log(1 + x), edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal":
+  [{"type": "ℝ", "name": "x"},
+   {"type": "-1 < x", "name": "hx"},
+   {"type": "x ≤ 1", "name": "hx1"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "-1 < x",
+    "rel": "lt",
+    "poly": "((-1)) - (x0)",
+    "name": "hx",
+    "expr": "((-1)) - (x0)"},
+   {"text": "x ≤ 1",
+    "rel": "le",
+    "poly": "(x0) - (1)",
+    "name": "hx1",
+    "expr": "(x0) - (1)"}],
+  "goal":
+  {"text":
+   "Tendsto (fun n => ∑ k ∈ Finset.range n, (-1) ^ k * x ^ (k + 1) / (↑k + 1)) atTop (𝓝 (log (1 + x)))",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["x"],
+  "atom_types": ["ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "(by norm_num)", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.6931471805599453094172321214581765680755001343602552541206800094933936219696868 .. 0.6931471805599453094172321214581765680755001343602552541206800094933936219696956] == [0.6931471805599453094172321214581765680755001343602552541206800094933936219696868 .. 0.6931471805599453094172321214581765680755001343602552541206800094933936219696956] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1/2", "(by norm_num)", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.4054651081081643819780131154643491365719904234624941976140143241441006712489119 .. 0.4054651081081643819780131154643491365719904234624941976140143241441006712489164] == [0.4054651081081643819780131154643491365719904234624941976140143241441006712489119 .. 0.4054651081081643819780131154643491365719904234624941976140143241441006712489164] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-1/2", "(by norm_num)", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-0.6931471805599453094172321214581765680755001343602552541206800094933936219696956 .. -0.6931471805599453094172321214581765680755001343602552541206800094933936219696868] == [-0.6931471805599453094172321214581765680755001343602552541206800094933936219696956 .. -0.6931471805599453094172321214581765680755001343602552541206800094933936219696868] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["0", "(by norm_num)", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

@@ -1,0 +1,68 @@
+{"target": "KaluzaKlein.RealAnalysis.Continuity.extreme_value",
+ "statement":
+ "∀ (f : ℝ → ℝ) (a b : ℝ),\n  a ≤ b → ContinuousOn f (Icc a b) → (∃ c ∈ Icc a b, ∀ x ∈ Icc a b, f x ≤ f c) ∧ ∃ d ∈ Icc a b, ∀ x ∈ Icc a b, f d ≤ f x",
+ "seed": 0,
+ "script_hash": "7343573718244137584",
+ "script":
+ "# name: ra-extreme-value-test\n# technique: test a claim no recipe certifies, at instances the kernel checks by computation\n# goal: sage_test KaluzaKlein.RealAnalysis.Continuity.extreme_value file \"ra-extreme-value-test.sage\"\n# description: the maximum and minimum points Sage finds (x² on [-1, 2], sin on [0, π], x³ - 2x on [0, 2])\nSEED = 0  # the instances are listed, no sampling\nPROOF = None\nCASES = [(['(fun x : ℝ => x ^ 2)', '-1', '2', '(by norm_num)', '(by fun_prop)'], False, 'exact ⟨⟨2, by norm_num, fun x hx => by beta_reduce; nlinarith [hx.1, hx.2]⟩, ⟨0, by norm_num, fun x hx => by beta_reduce; nlinarith [sq_nonneg x]⟩⟩'), (['(fun x : ℝ => (1 : ℝ))', '0', '1', '(by norm_num)', '(by fun_prop)'], True, 'exact ⟨⟨0, by norm_num, fun x hx => le_rfl⟩, ⟨0, by norm_num, fun x hx => le_rfl⟩⟩'), (['(fun x : ℝ => x)', '-3', '5', '(by norm_num)', '(by fun_prop)'], False, 'exact ⟨⟨5, by norm_num, fun x hx => hx.2⟩, ⟨-3, by norm_num, fun x hx => hx.1⟩⟩')]\ninstances = [kernel_instance(*values, proof=(p if p is not None else PROOF), edge=edge) for values, edge, p in CASES]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1"],
+  "universal":
+  [{"type": "ℝ → ℝ", "name": "f"},
+   {"type": "ℝ", "name": "a"},
+   {"type": "ℝ", "name": "b"},
+   {"type": "a ≤ b", "name": "hab"},
+   {"type": "ContinuousOn f (Icc a b)", "name": "hf"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "a ≤ b",
+    "rel": "le",
+    "poly": "(x0) - (x1)",
+    "name": "hab",
+    "expr": "(x0) - (x1)"},
+   {"text": "ContinuousOn f (Icc a b)", "name": "hf"}],
+  "goal":
+  {"text":
+   "(∃ c ∈ Icc a b, ∀ x ∈ Icc a b, f x ≤ f c) ∧ ∃ d ∈ Icc a b, ∀ x ∈ Icc a b, f d ≤ f x",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["a", "b"],
+  "atom_types": ["ℝ", "ℝ"]},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["(fun x : ℝ => x ^ 2)", "-1", "2", "(by norm_num)", "(by fun_prop)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun x : ℝ => (1 : ℝ))", "0", "1", "(by norm_num)", "(by fun_prop)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values": ["(fun x : ℝ => x)", "-3", "5", "(by norm_num)", "(by fun_prop)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

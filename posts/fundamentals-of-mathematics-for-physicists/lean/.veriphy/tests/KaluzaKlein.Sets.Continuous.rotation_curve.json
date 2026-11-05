@@ -1,0 +1,69 @@
+{"target": "KaluzaKlein.Sets.Continuous.rotation_curve",
+ "statement":
+ "∀ (R : ℝ → Matrix (Fin 3) (Fin 3) ℝ),\n  Continuous R → (∀ (t : ℝ), R t ∈ SO3) → (Continuous fun t => orbit (R t)) ∧ ∀ (t : ℝ), orbit (R t) ∈ Sets.sphere",
+ "seed": 0,
+ "script_hash": "11387450862760832210",
+ "script":
+ "# name: set-rotation-curve-test\n# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand\n# goal: sage_test KaluzaKlein.Sets.Continuous.rotation_curve\n# description: the claim at the instances below, each proved independently of the claim\nSEED = 0\nCASES = [\n    (['fun t => KaluzaKlein.Sets.Surjective.Rz t', '(by refine continuous_pi fun i => continuous_pi fun j => ?_; fin_cases i <;> fin_cases j <;> simp [KaluzaKlein.Sets.Surjective.Rz] <;> fun_prop)', 'fun t => ((KaluzaKlein.Sets.Surjective.stabilizer_eq _).2 ⟨_, rfl⟩).1'], False, 'have key : ∀ (R : ℝ → Matrix (Fin 3) (Fin 3) ℝ) (hR : Continuous R) (hSO : ∀ t, R t ∈ SO3), Continuous (fun t => orbit (R t)) ∧ ∀ t, orbit (R t) ∈ sphere := by\\n  intro R hR hSO\\n  refine ⟨hR.matrix_mulVec continuous_const, fun t => (orbit_image _).2 ⟨R t, hSO t, rfl⟩⟩\\nexact @key (fun t => KaluzaKlein.Sets.Surjective.Rz t) ((by refine continuous_pi fun i => continuous_pi fun j => ?_; fin_cases i <;> fin_cases j <;> simp [KaluzaKlein.Sets.Surjective.Rz] <;> fun_prop)) (fun t => ((KaluzaKlein.Sets.Surjective.stabilizer_eq _).2 ⟨_, rfl⟩).1)'),\n    (['fun _ => 1', 'continuous_const', 'fun _ => (Matrix.specialOrthogonalGroup (Fin 3) ℝ).one_mem'], True, 'have key : ∀ (R : ℝ → Matrix (Fin 3) (Fin 3) ℝ) (hR : Continuous R) (hSO : ∀ t, R t ∈ SO3), Continuous (fun t => orbit (R t)) ∧ ∀ t, orbit (R t) ∈ sphere := by\\n  intro R hR hSO\\n  refine ⟨hR.matrix_mulVec continuous_const, fun t => (orbit_image _).2 ⟨R t, hSO t, rfl⟩⟩\\nexact @key (fun _ => 1) (continuous_const) (fun _ => (Matrix.specialOrthogonalGroup (Fin 3) ℝ).one_mem)'),\n    (['fun t => KaluzaKlein.Sets.Surjective.Rz (2 * t)', '(by refine continuous_pi fun i => continuous_pi fun j => ?_; fin_cases i <;> fin_cases j <;> simp [KaluzaKlein.Sets.Surjective.Rz] <;> fun_prop)', 'fun t => ((KaluzaKlein.Sets.Surjective.stabilizer_eq _).2 ⟨_, rfl⟩).1'], False, 'have key : ∀ (R : ℝ → Matrix (Fin 3) (Fin 3) ℝ) (hR : Continuous R) (hSO : ∀ t, R t ∈ SO3), Continuous (fun t => orbit (R t)) ∧ ∀ t, orbit (R t) ∈ sphere := by\\n  intro R hR hSO\\n  refine ⟨hR.matrix_mulVec continuous_const, fun t => (orbit_image _).2 ⟨R t, hSO t, rfl⟩⟩\\nexact @key (fun t => KaluzaKlein.Sets.Surjective.Rz (2 * t)) ((by refine continuous_pi fun i => continuous_pi fun j => ?_; fin_cases i <;> fin_cases j <;> simp [KaluzaKlein.Sets.Surjective.Rz] <;> fun_prop)) (fun t => ((KaluzaKlein.Sets.Surjective.stabilizer_eq _).2 ⟨_, rfl⟩).1)'),\n]\ninstances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℝ → Matrix (Fin 3) (Fin 3) ℝ", "name": "R"},
+   {"type": "Continuous R", "name": "hR"},
+   {"type": "∀ (t : ℝ), R t ∈ SO3", "name": "hSO"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "Continuous R", "name": "hR"},
+   {"text": "∀ (t : ℝ), R t ∈ SO3", "name": "hSO"}],
+  "goal":
+  {"text":
+   "(Continuous fun t => orbit (R t)) ∧ ∀ (t : ℝ), orbit (R t) ∈ Sets.sphere",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["fun t => KaluzaKlein.Sets.Surjective.Rz t",
+    "(by refine continuous_pi fun i => continuous_pi fun j => ?_; fin_cases i <;> fin_cases j <;> simp [KaluzaKlein.Sets.Surjective.Rz] <;> fun_prop)",
+    "fun t => ((KaluzaKlein.Sets.Surjective.stabilizer_eq _).2 ⟨_, rfl⟩).1"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["fun _ => 1",
+    "continuous_const",
+    "fun _ => (Matrix.specialOrthogonalGroup (Fin 3) ℝ).one_mem"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["fun t => KaluzaKlein.Sets.Surjective.Rz (2 * t)",
+    "(by refine continuous_pi fun i => continuous_pi fun j => ?_; fin_cases i <;> fin_cases j <;> simp [KaluzaKlein.Sets.Surjective.Rz] <;> fun_prop)",
+    "fun t => ((KaluzaKlein.Sets.Surjective.stabilizer_eq _).2 ⟨_, rfl⟩).1"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

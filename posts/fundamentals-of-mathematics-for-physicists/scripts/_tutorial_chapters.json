@@ -1,0 +1,43 @@
+{
+"kaluza-klein-theories": [
+"preface.qmd",
+"conventions.qmd",
+"part-iii-01-kaluza-klein-reduction.qmd",
+"part-iii-02-gauge-tower.qmd",
+"part-iv-01-isometries-gauge-fields.qmd",
+"part-iv-02-reduced-theory.qmd",
+"part-v-01-symmetric-fields.qmd",
+"part-v-02-four-dimensional-theory.qmd",
+"part-vi-01-consistent-reductions.qmd",
+"part-vi-02-compactifications.qmd"
+],
+"fundamentals-of-mathematics-for-physicists": [
+"part-i-01-sets-relations-topology.qmd",
+"part-i-02-linear-algebra.qmd",
+"part-i-03-real-analysis.qmd",
+"part-i-04-complex-analysis.qmd",
+"part-i-05-differential-equations.qmd",
+"part-i-06-fourier-analysis.qmd",
+"part-i-07-hilbert-spaces-operators.qmd",
+"part-i-08-probability.qmd",
+"part-i-09-differential-geometry.qmd",
+"part-i-10-group-theory.qmd",
+"part-i-11-lie-groups-algebras.qmd",
+"part-i-12-homogeneous-spaces-bundles.qmd",
+"part-i-13-spinors-dirac-operator.qmd"
+],
+"fundamentals-of-theoretical-physics": [
+"part-ii-01-classical-mechanics.qmd",
+"part-ii-01b-electromagnetism.qmd",
+"part-ii-02-thermodynamics-statistical-mechanics.qmd",
+"part-ii-03-quantum-mechanics.qmd",
+"part-ii-04-classical-field-theory.qmd",
+"part-ii-05-dirac-equation.qmd",
+"part-ii-07-quantum-field-theory.qmd",
+"part-ii-06-gauge-theories.qmd",
+"part-ii-08-renormalisation.qmd",
+"part-ii-08b-special-relativity.qmd",
+"part-ii-09-general-relativity.qmd",
+"part-ii-10-supersymmetry-supergravity.qmd"
+]
+}

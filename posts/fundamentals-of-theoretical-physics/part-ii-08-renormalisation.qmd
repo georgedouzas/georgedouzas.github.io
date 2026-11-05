@@ -1259,6 +1259,8 @@ count into a formula, states when it is enough, and sorts theories into renormal
 non-renormalisable ones by the mass dimensions of their couplings [@balduf2024dyson, Secs. 2.3.1 and 2.3.4;
 @manohar2018introduction, Sec. 4.2].
 
+For more on this topic, see @buchbinder2021introduction [Ch. 9] and @talagrand2022what [Ch. 15-19].
+
 ### Superficial degree of divergence
 
 Scale all loop momenta of a graph by a common factor $s$. The integrand of a graph with $L$ loops, $I_b$ boson lines
@@ -1795,6 +1797,8 @@ Lagrangian is treated as a set of extra interactions, the counterterms, and thei
 order so that every Green function is finite. This part does it for the quartic theory at one loop, and at two loops,
 where divergent subgraphs appear and the counterterms of lower order must be inserted into larger graphs
 [@balduf2024dyson, Sec. 2.3.4; @grozin2005lectures, Sec. 3].
+
+For more on this topic, see @aitchison2024gauge [Ch. 10-11].
 
 ### Counterterms
 
@@ -3900,6 +3904,8 @@ the charge depend only on the photon self-energy, so that every particle's charg
 This part states the identities and renormalises quantum electrodynamics at one loop, following @grozin2005lectures
 [Sec. 3] with $d = 4 - \epsilon$ in place of his $d = 4 - 2\epsilon$, so that his $\frac1\epsilon$ is our $\frac2\epsilon$.
 
+For more on this topic, see @gelis2021problems.
+
 ### Ward identities
 
 The Lagrangian of quantum electrodynamics is $\bar\psi_0(i{D}\!\!\!/ - m_0)\psi_0 - \frac14F_{0\mu\nu}F_0^{\mu\nu} - \frac{1}{2a_0}(\partial_\mu A_0^\mu)^2$ with $D_\mu = \partial_\mu + ie_0A_{0\mu}$
@@ -4596,6 +4602,8 @@ renormalised parameters and of the normalisation of the fields. The transformati
 composition, the **renormalisation group**, and its generators are the beta functions and anomalous dimensions. The
 equations they satisfy turn logarithms of fixed-order perturbation theory into running couplings, and they decide
 what a theory does at very high and very low energies [@balduf2024dyson, Sec. 3.2; @grozin2005lectures, Secs. 3.5-3.7].
+
+For more on this topic, see @buchbinder2021introduction [Ch. 13-15], @kivelson2024statistical [Ch. 10] and @shankar2017quantum [Ch. 11-14].
 
 ### The renormalisation-group equations
 
@@ -5996,6 +6004,8 @@ flow in the space of couplings; a critical point is a fixed point of the flow, a
 from the linearised flow near it. The same picture explains why microscopically different systems share their
 exponents, and why the quartic theory in four dimensions is renormalisable but trivial [@boudreau2018applied, Sec.
 8.4; @bauerschmidt2019renormalisation, Sec. 1.1; @bricmont2022statistical, Sec. 9.9].
+
+For more on this topic, see @kivelson2024statistical [Ch. 8].
 
 ### Block spins and the flow
 

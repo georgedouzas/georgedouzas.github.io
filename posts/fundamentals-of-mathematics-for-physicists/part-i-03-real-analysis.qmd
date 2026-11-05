@@ -27,6 +27,8 @@ analysis, limits, sums, derivatives and integrals, rests on this one property. T
 limit of a sequence and Cauchy sequences, proves the monotone convergence theorem, and checks the limits of the
 running examples in Sage.
 
+For more on this topic, see @radozycki2020solving [Ch. 3-5].
+
 ### Suprema
 
 Before limits can be discussed at all one needs to know which numbers exist, and the answer is encoded in a single
@@ -1044,6 +1046,8 @@ A series is a sequence of partial sums; it converges when they do. This section 
 convergence, states the comparison and ratio tests, introduces power series and their radius of convergence, and
 evaluates the running series exactly in Sage: the geometric series, $\sum 1/n^2 = \pi^2/6$, the exponential series
 and the alternating harmonic series.
+
+For more on this topic, see @radozycki2020solving [Ch. 13 and 15].
 
 ### Series and partial sums
 
@@ -2235,6 +2239,8 @@ Limits of functions are limits of sequences of values; continuity says the limit
 that the function is linear to first order. This section defines both, states the mean value theorem and Taylor's
 theorem, and checks derivatives, Taylor polynomials and remainders in Sage, with $\sin x$ and $e^x$ as the running
 examples.
+
+For more on this topic, see @cheung2024metric [Ch. 2, Ch. 4] and @radozycki2020solving [Ch. 7-8, Ch. 9-12].
 
 ### Limits of functions
 
@@ -3437,6 +3443,8 @@ turns it into the inverse of differentiation. This section defines the Riemann i
 proves the fundamental theorem, treats improper integrals, and computes the Gaussian integral $\int e^{-x^2}dx =
 \sqrt\pi$, the integral behind every Gaussian probability and every free field theory.
 
+For more on this topic, see @radozycki2020solving [Ch. 14].
+
 ### The integral as a limit of sums
 
 The area under a graph is approximated from below and from above by rectangles, and the figure shows both
@@ -4437,6 +4445,8 @@ notions that differential geometry transports to manifolds through charts: parti
 Jacobian, the chain rule and diffeomorphisms, with the polar map of the plane as running example. The Jacobian will
 reappear as the transformation matrix of vector components, and its determinant as the volume factor of
 @thm-change-of-variables.
+
+For more on this topic, see @lee2013introduction [Appendix C].
 
 ### Derivatives of maps of several variables
 
@@ -5742,6 +5752,8 @@ Integrals over regions of the plane and of space are iterated one-variable integ
 costs a Jacobian factor; the Gaussian integral is the showcase, its square being a disc integral in polar
 coordinates. The section ends with the two notions that let limits pass through integrals and derivatives: uniform
 convergence, and differentiation under the integral sign.
+
+For more on this topic, see @cheung2024metric [Ch. 5] and @gasinski2014exercises [Ch. 1].
 
 ### Multiple integrals
 

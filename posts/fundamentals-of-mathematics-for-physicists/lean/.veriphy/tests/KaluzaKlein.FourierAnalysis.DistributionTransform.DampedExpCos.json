@@ -1,0 +1,68 @@
+{"target": "KaluzaKlein.FourierAnalysis.DistributionTransform.DampedExpCos",
+ "statement":
+ "∀ (ε : ℝ), 0 < ε → ∫ (k : ℝ), 2 * ε / (ε ^ 2 + k ^ 2) * Real.cos k = 2 * π * rexp (-ε)",
+ "seed": 0,
+ "script_hash": "1623845236464565917",
+ "script":
+ "# name: fa-damped-exp-cos-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.DistributionTransform.DampedExpCos file \"fa-damped-exp-cos-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ny = var('y'); z_ = var('z_'); assume(y, 'real')\ninstances = []\nCASES = [(['1', 'one_pos'], True, {'e': '1'}), (['1/10', '_'], False, {'e': '1/10'}), (['3', '_'], False, {'e': '3'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('integrate(2*e/(e**2 + y**2)*cos(y), y, -oo, oo)', scope))\n    R = side(eval('2*pi*exp(-e)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℝ", "name": "ε"},
+   {"type": "0 < ε", "name": "a._@._internal._hyg.0"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "∫ (k : ℝ), 2 * ε / (ε ^ 2 + k ^ 2) * Real.cos k = 2 * π * rexp (-ε)",
+   "rhs_poly": "((2 * x1) * x2)",
+   "rhs": "2 * π * rexp (-ε)",
+   "rel": "eq",
+   "poly": "(x0) - (((2 * x1) * x2))",
+   "lhs_poly": "x0",
+   "lhs": "∫ (k : ℝ), 2 * ε / (ε ^ 2 + k ^ 2) * Real.cos k",
+   "kind": "rel",
+   "expr": "(x0) - (((2 * pi) * exp((-x3))))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["∫ (k : ℝ), 2 * ε / (ε ^ 2 + k ^ 2) * Real.cos k", "π", "rexp (-ε)", "ε"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "one_pos"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.311454699581843435820186366625392598233 .. 2.311454699581843435820186366625392598257] == [2.311454699581843435820186366625392598233 .. 2.311454699581843435820186366625392598257] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1/10", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[5.685261170389854551846852097821544230849 .. 5.685261170389854551846852097821544230897] == [5.685261170389854551846852097821544230849 .. 5.685261170389854551846852097821544230897] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["3", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.3128213764565082817075131432080330383338 .. 0.3128213764565082817075131432080330383368] == [0.3128213764565082817075131432080330383338 .. 0.3128213764565082817075131432080330383368] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

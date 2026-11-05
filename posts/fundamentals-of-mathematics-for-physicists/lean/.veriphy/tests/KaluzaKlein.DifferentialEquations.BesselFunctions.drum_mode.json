@@ -1,0 +1,71 @@
+{"target": "KaluzaKlein.DifferentialEquations.BesselFunctions.drum_mode",
+ "statement":
+ "∀ (j x : ℝ) (F F' F'' : ℝ → ℝ),\n  (∀ (y : ℝ), HasDerivAt F (F' y) y) →\n    (∀ (y : ℝ), HasDerivAt F' (F'' y) y) →\n      (∀ (y : ℝ), y ^ 2 * F'' y + y * F' y + y ^ 2 * F y = 0) →\n        HasDerivAt (fun s => F (j * s)) (j * F' (j * x)) x ∧\n          HasDerivAt (fun s => j * F' (j * s)) (j ^ 2 * F'' (j * x)) x ∧\n            x ^ 2 * (j ^ 2 * F'' (j * x)) + x * (j * F' (j * x)) + j ^ 2 * x ^ 2 * F (j * x) = 0",
+ "seed": 0,
+ "script_hash": "3459741935605000461",
+ "script":
+ "# name: de-drum-mode-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.BesselFunctions.drum_mode file \"de-drum-mode-test.sage\"\n# description: u = F(jx) for F = J₀ satisfies x²u'' + xu' + j²x²u = 0: Sage's bessel_J at (j, x) = (1, 1) (edge), (2, 1/2), (5, 3/10), residual below 10⁻²⁰\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\ny_ = var('y_')\ninstances = [\n    oracle_instance('1', '1', '_', '_', '_', '_', '_', '_',\n                    lhs=RIF(abs(((1)^2*diff(bessel_J(0, (1)*y_), y_, 2) + (1)*diff(bessel_J(0, (1)*y_), y_) + (1)^2*(1)^2*bessel_J(0, (1)*y_)).subs(y_=1).n(prec=120))),\n                    rhs=RIF(10^-20), relation='<', edge=True),\n    oracle_instance('2', '1/2', '_', '_', '_', '_', '_', '_',\n                    lhs=RIF(abs(((1/2)^2*diff(bessel_J(0, (2)*y_), y_, 2) + (1/2)*diff(bessel_J(0, (2)*y_), y_) + (2)^2*(1/2)^2*bessel_J(0, (2)*y_)).subs(y_=1/2).n(prec=120))),\n                    rhs=RIF(10^-20), relation='<', edge=False),\n    oracle_instance('5', '3/10', '_', '_', '_', '_', '_', '_',\n                    lhs=RIF(abs(((3/10)^2*diff(bessel_J(0, (5)*y_), y_, 2) + (3/10)*diff(bessel_J(0, (5)*y_), y_) + (5)^2*(3/10)^2*bessel_J(0, (5)*y_)).subs(y_=3/10).n(prec=120))),\n                    rhs=RIF(10^-20), relation='<', edge=False),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℝ", "name": "j"},
+   {"type": "ℝ", "name": "x"},
+   {"type": "ℝ → ℝ", "name": "F"},
+   {"type": "ℝ → ℝ", "name": "F'"},
+   {"type": "ℝ → ℝ", "name": "F''"},
+   {"type": "∀ (y : ℝ), HasDerivAt F (F' y) y", "name": "hF"},
+   {"type": "∀ (y : ℝ), HasDerivAt F' (F'' y) y", "name": "hF'"},
+   {"type": "∀ (y : ℝ), y ^ 2 * F'' y + y * F' y + y ^ 2 * F y = 0",
+    "name": "hB"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "∀ (y : ℝ), HasDerivAt F (F' y) y", "name": "hF"},
+   {"text": "∀ (y : ℝ), HasDerivAt F' (F'' y) y", "name": "hF'"},
+   {"text": "∀ (y : ℝ), y ^ 2 * F'' y + y * F' y + y ^ 2 * F y = 0",
+    "name": "hB"}],
+  "goal":
+  {"text":
+   "HasDerivAt (fun s => F (j * s)) (j * F' (j * x)) x ∧\n  HasDerivAt (fun s => j * F' (j * s)) (j ^ 2 * F'' (j * x)) x ∧\n    x ^ 2 * (j ^ 2 * F'' (j * x)) + x * (j * F' (j * x)) + j ^ 2 * x ^ 2 * F (j * x) = 0",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "1", "_", "_", "_", "_", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[3.76158192263132002549e-37 .. 3.76158192263132002550e-37] < [9.99999999999999999960e-21 .. 1.00000000000000000004e-20] at 64 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "1/2", "_", "_", "_", "_", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[3.76158192263132002549e-37 .. 3.76158192263132002550e-37] < [9.99999999999999999960e-21 .. 1.00000000000000000004e-20] at 64 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["5", "3/10", "_", "_", "_", "_", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[7.52316384526264005099e-37 .. 7.52316384526264005100e-37] < [9.99999999999999999960e-21 .. 1.00000000000000000004e-20] at 64 bits",
+   "edge": false,
+   "accepted": true}]}

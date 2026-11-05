@@ -1,0 +1,9 @@
+# Python packages for the check scripts (scripts/) and the Quarto pre-render hook.
+#
+#     uv venv .venv && uv pip install --python .venv/bin/python -r requirements.txt
+#
+# SageMath (10.9) runs the figure scripts and the certificate oracle with its own interpreter. Veriphy's Sage daemon
+# is installed into Sage, not into this venv, and must match the `veriphy` rev pinned in lakefile.toml:
+#
+#     sage -pip install veriphy==0.2.0
+pyyaml==6.0.3

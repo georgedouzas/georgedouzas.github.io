@@ -1,0 +1,82 @@
+{"target": "KaluzaKlein.ComplexAnalysis.CauchyTheorem.circle_inv_sub",
+ "statement":
+ "∀ (w : ℂ) (R : ℝ), 0 ≤ R → ‖w‖ ≠ R → ∮ (z : ℂ) in C(0, R), (z - w)⁻¹ = if ‖w‖ < R then 2 * ↑π * I else 0",
+ "seed": 0,
+ "script_hash": "9298189168254590854",
+ "script":
+ "# name: ca-contour-circle-inv-sub-test\n# technique: test fallback; oracle instances: Sage encloses the circle integral of 1/(z - w) in ball arithmetic\n# goal: sage_test KaluzaKlein.ComplexAnalysis.CauchyTheorem.circle_inv_sub\n# description: instances of circle_inv_sub (Contour integration, part I chapter 4), edge case first or marked\nSEED = 0\nt = var('t', domain='real')\nz = var('z')\nCB = ComplexBallField(128)\nRI = RealIntervalField(128)\nJ = CB(0, 1)\ndef ex(e):\n    return SR(e).rectform().simplify_full()\ndef pint(f, g, a, b):\n    # the parametrised contour integral of f (an expression in z) along g(t), t in [a, b], exactly\n    return integrate(f.subs(z=g) * diff(g, t), t, a, b)\ndef speed(g):\n    d = diff(g, t)\n    return sqrt(d.real_part() ** 2 + d.imag_part() ** 2).simplify_full()\ndef bint(F, a, b):\n    # a rigorous ball enclosure of the integral of F (a function on balls) over [a, b]\n    return CB.integral(lambda x, _: F(x), CB(a), CB(b))\ndef circ(F, c, R):\n    # a rigorous ball enclosure of the circle integral of F over |z - c| = R\n    return bint(lambda x: F(CB(c) + CB(R) * (J * x).exp()) * CB(R) * J * (J * x).exp(), 0, 2 * CB.pi())\ndef gap(*pairs):\n    # an interval enclosing the sum of |x - y| over the pairs: it contains 0 when every pair agrees\n    return sum(RI(abs(CB(x) - CB(y))) for x, y in pairs)\ncases = [('3', 3, '1', 1, False), ('3', 3, '4', 4, False), ('(1 + Complex.I)', 1 + I, '2', 2, False), ('0', 0, '1', 1, True)]\ninstances = []\nfor wl, w0, Rl, R, e in cases:\n    val = circ(lambda w: 1 / (w - CB(w0)), 0, R)\n    expected = 2 * CB.pi() * J if abs(CC(w0)) < R else CB(0)\n    instances.append(oracle_instance(wl, Rl, '(by norm_num)', '(by norm_num)', lhs=gap((val, expected)), rhs=RI(0), edge=e))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℂ", "name": "w"},
+   {"type": "ℝ", "name": "R"},
+   {"type": "0 ≤ R", "name": "hR"},
+   {"type": "‖w‖ ≠ R", "name": "hw"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 ≤ R", "rel": "le", "name": "hR", "expr": "(0) - (x2)"},
+   {"text": "‖w‖ ≠ R", "rel": "ne", "name": "hw", "expr": "(x3) - (x2)"}],
+  "goal":
+  {"text":
+   "∮ (z : ℂ) in C(0, R), (z - w)⁻¹ = if ‖w‖ < R then 2 * ↑π * I else 0",
+   "rhs_poly": "x1",
+   "rhs": "if ‖w‖ < R then 2 * ↑π * I else 0",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs": "∮ (z : ℂ) in C(0, R), (z - w)⁻¹",
+   "kind": "rel",
+   "expr": "(x0) - (x1)"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms":
+  ["∮ (z : ℂ) in C(0, R), (z - w)⁻¹",
+   "if ‖w‖ < R then 2 * ↑π * I else 0",
+   "R",
+   "‖w‖"],
+  "atom_types": ["ℂ", "ℂ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["3", "1", "(by norm_num)", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 5.247342243588358798932458024685670788748e-37] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["3", "4", "(by norm_num)", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 4.599382782363623733238482480737341456917e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(1 + Complex.I)", "2", "(by norm_num)", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 3.019306603908307927413620640262114494011e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["0", "1", "(by norm_num)", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 2.753321406006004981299887805851863993216e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true}]}

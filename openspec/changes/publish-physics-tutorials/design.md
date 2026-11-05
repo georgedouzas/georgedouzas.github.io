@@ -31,7 +31,7 @@ See proposal.md for motivation. The source is one Quarto book with 35 chapter fi
 
 **Sidebars are declared in `_quarto.yml`.** Quarto only reads sidebars from the project configuration, so this site-level navigation is the one thing outside the post folders. It holds chapter order only, not content.
 
-**The draft folder keeps the tooling.** The Lean library, Sage scripts, verification manifests and checkers are not needed to render, and stay in the ignored draft folder under its original name. The posts are what get published. The migration scripts are kept there, so the posts can be regenerated after further work on the book.
+**Each post keeps its own tooling and verification work.** The Lean package, certificates, Sage scripts, verification manifests and checkers move into the post that owns them, replacing the draft folder. Lean packages depend one way: physics and Kaluza-Klein on mathematics. `lake build` compiles each package's root module, which imports the modules the book's build compiled, and modules outside it are unfinished. PDFs and earlier chapter versions stay out of git.
 
 **References live with the tutorial that uses them.** Each tutorial keeps the PDFs and reading notes for its chapters in `posts/<slug>/_references/`, placed by citation and by the chapters each note names. A file used by several tutorials is hard-linked into each. These folders are ignored by git because the PDFs are copyrighted, and Quarto skips them because of the leading underscore.
 
@@ -49,4 +49,4 @@ See proposal.md for motivation. The source is one Quarto book with 35 chapter fi
 - [Prose mentions such as "Part I" now span tutorials] → Left as written, since the parts remain a meaningful order. The owner can revise them.
 - [The site's search index grows greatly] → Its size is measured, and search is excluded from chapters if it is too large to load.
 - [Repository growth from chapters, figures and rendered output in `docs/`] → Accepted by the owner, and reported before pushing. History growth cannot be undone without a rewrite, so the push is the last step.
-- [The tooling stays out of git, so has no backup] → Reported to the owner, who can choose to back it up.
+- [The Lean split has not been fully built, as the owner stopped the build to save time] → The modules are byte-identical to the book's, and building each package remains a follow-up. Three unfinished mathematics modules failed before it stopped.

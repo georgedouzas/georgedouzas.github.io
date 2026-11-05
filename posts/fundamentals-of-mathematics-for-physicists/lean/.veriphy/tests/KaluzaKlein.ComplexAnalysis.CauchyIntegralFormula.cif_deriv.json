@@ -1,0 +1,88 @@
+{"target": "KaluzaKlein.ComplexAnalysis.CauchyIntegralFormula.cif_deriv",
+ "statement":
+ "∀ (f : ℂ → ℂ) (c : ℂ) (R : ℝ) (n : ℕ),\n  0 < R →\n    DifferentiableOn ℂ f (closedBall c R) →\n      2 * ↑π * I * iteratedDeriv n f c = ↑n.factorial * ∮ (z : ℂ) in C(c, R), f z / (z - c) ^ (n + 1)",
+ "seed": 0,
+ "script_hash": "12791049977817018343",
+ "script":
+ "# name: ca-contour-cif-deriv-test\n# technique: test fallback; oracle instances: Sage differentiates f exactly and encloses n!/(2 pi i) times the circle integral in ball arithmetic\n# goal: sage_test KaluzaKlein.ComplexAnalysis.CauchyIntegralFormula.cif_deriv\n# description: instances of cif_deriv (Contour integration, part I chapter 4), edge case first or marked\nSEED = 0\nt = var('t', domain='real')\nz = var('z')\nCB = ComplexBallField(128)\nRI = RealIntervalField(128)\nJ = CB(0, 1)\ndef ex(e):\n    return SR(e).rectform().simplify_full()\ndef pint(f, g, a, b):\n    # the parametrised contour integral of f (an expression in z) along g(t), t in [a, b], exactly\n    return integrate(f.subs(z=g) * diff(g, t), t, a, b)\ndef speed(g):\n    d = diff(g, t)\n    return sqrt(d.real_part() ** 2 + d.imag_part() ** 2).simplify_full()\ndef bint(F, a, b):\n    # a rigorous ball enclosure of the integral of F (a function on balls) over [a, b]\n    return CB.integral(lambda x, _: F(x), CB(a), CB(b))\ndef circ(F, c, R):\n    # a rigorous ball enclosure of the circle integral of F over |z - c| = R\n    return bint(lambda x: F(CB(c) + CB(R) * (J * x).exp()) * CB(R) * J * (J * x).exp(), 0, 2 * CB.pi())\ndef gap(*pairs):\n    # an interval enclosing the sum of |x - y| over the pairs: it contains 0 when every pair agrees\n    return sum(RI(abs(CB(x) - CB(y))) for x, y in pairs)\nu = var('u')\ncases = [('Complex.exp', exp(u), lambda v: v.exp(), '0', 0, '1', 1, 0, True), ('Complex.exp', exp(u), lambda v: v.exp(), '0', 0, '1', 1, 3, False),\n         ('Complex.sin', sin(u), lambda v: v.sin(), '(1 + Complex.I)', 1 + I, '2', 2, 2, False),\n         ('(fun v : ℂ => v ^ 4)', u ** 4, lambda v: v ** 4, '1', 1, '(1 / 2)', QQ(1) / 2, 4, False)]\ninstances = [oracle_instance(fl, cl, Rl, str(n), '(by norm_num)', '_', lhs=gap((2 * CB.pi() * J * CB(diff(f, u, n).subs(u=c)), factorial(n) * circ(lambda v: F(v) / (v - CB(c)) ** (n + 1), c, R))), rhs=RI(0), edge=e)\n             for fl, f, F, cl, c, Rl, R, n, e in cases]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4", "x5", "x6"],
+  "universal":
+  [{"type": "ℂ → ℂ", "name": "f"},
+   {"type": "ℂ", "name": "c"},
+   {"type": "ℝ", "name": "R"},
+   {"type": "ℕ", "name": "n"},
+   {"type": "0 < R", "name": "hR"},
+   {"type": "DifferentiableOn ℂ f (closedBall c R)", "name": "hf"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < R", "rel": "lt", "name": "hR", "expr": "(0) - (x5)"},
+   {"text": "DifferentiableOn ℂ f (closedBall c R)", "name": "hf"}],
+  "goal":
+  {"text":
+   "2 * ↑π * I * iteratedDeriv n f c = ↑n.factorial * ∮ (z : ℂ) in C(c, R), f z / (z - c) ^ (n + 1)",
+   "rhs_poly": "(x3 * x4)",
+   "rhs": "↑n.factorial * ∮ (z : ℂ) in C(c, R), f z / (z - c) ^ (n + 1)",
+   "rel": "eq",
+   "poly": "((((2 * x0) * x1) * x2)) - ((x3 * x4))",
+   "lhs_poly": "(((2 * x0) * x1) * x2)",
+   "lhs": "2 * ↑π * I * iteratedDeriv n f c",
+   "kind": "rel",
+   "expr": "((((2 * pi) * I) * x2)) - ((typed(factorial(x6), 'ℕ') * x4))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms":
+  ["↑π",
+   "I",
+   "iteratedDeriv n f c",
+   "↑n.factorial",
+   "∮ (z : ℂ) in C(c, R), f z / (z - c) ^ (n + 1)",
+   "R",
+   "n"],
+  "atom_types": ["ℂ", "ℂ", "ℂ", "ℂ", "ℂ", "ℝ", "ℕ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["Complex.exp", "0", "1", "0", "(by norm_num)", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 5.240045241075603214126780823770661459129e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["Complex.exp", "0", "1", "3", "(by norm_num)", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.364022581720913219348536140376378270480e-34] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["Complex.sin", "(1 + Complex.I)", "2", "2", "(by norm_num)", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.521235429488484902126335773998182724903e-35] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun v : ℂ => v ^ 4)", "1", "(1 / 2)", "4", "(by norm_num)", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 2.043950989180546947970916826806748580844e-32] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

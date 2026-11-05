@@ -34,6 +34,8 @@ the system, and observables, which are the quantities that can be measured. This
 the Hilbert space of states, observables as self-adjoint operators and their expectation values, and proves the
 uncertainty relation, which is then evaluated on the Gaussian wave packet, the particle in a box and a spin one-half.
 
+For more on this topic, see @demilio2017problems [Ch. 5], @derezinski2022mathematics [Ch. 8] and @tornetta2022mathematical [Ch. 1 and 3].
+
 ### State vectors
 
 In classical mechanics the state of a particle is a point of phase space, a position together with a momentum
@@ -775,6 +777,8 @@ States and observables become physics through two rules: one says what a measure
 the state, the other how an unobserved state evolves in time. This section states the Born rule and the projection
 postulate, defines the time-evolution operator, the Schrödinger equation and stationary states, and solves the free
 particle and the particle in a box exactly.
+
+For more on this topic, see @demilio2017problems [Ch. 4, Ch. 6, Ch. 7, Ch. 16], @galitski2013exploring [Ch. 2, Ch. 7], @guidry2022symmetry [Ch. 27] and @zettili2009quantum [Ch. 4].
 
 ### The Born rule
 
@@ -2410,6 +2414,8 @@ are harmonic oscillators, and a free quantum field is a collection of them. This
 oscillator algebraically with ladder operators, obtains the evenly spaced spectrum and the Hermite functions, and
 introduces the coherent states that move like a classical particle.
 
+For more on this topic, see @nastase2023quantum [Ch. 1-9].
+
 ### The quantum oscillator
 
 The classical oscillator of @def-harmonic-oscillator (undamped, undriven) has the Hamiltonian $p^2/2m +
@@ -3153,6 +3159,8 @@ momentum. Their commutation relations are those of $\mathfrak{su}(2)$, so the re
 @sec-weights-su2 classifies the possible values at once, including the half-integer ones that orbital motion cannot
 produce. This section defines angular momentum, identifies spin with the spin-$j$ representations, treats spin
 one-half with the Pauli matrices and the Bloch sphere, and adds angular momenta with Clebsch-Gordan coefficients.
+
+For more on this topic, see @demilio2017problems [Ch. 8, Ch. 12], @galitski2013exploring [Ch. 3, Ch. 5], @nastase2023quantum and @zettili2009quantum [Ch. 5-7].
 
 ### The angular momentum algebra
 
@@ -4027,6 +4035,8 @@ with the Hamiltonian are conserved and force degeneracies of the spectrum. This 
 quotes Wigner's theorem, and ends with the most striking example: the hidden $\mathfrak{so}(4)$ symmetry of the
 hydrogen atom, which explains its spectrum in outline.
 
+For more on this topic, see @foulaadvand2023computational [Ch. 8], @galitski2013exploring [Ch. 4, Ch. 6], @mukunda2022continuous [Ch. 9], @nastase2023quantum [Ch. 22] and @talagrand2022what [Ch. 2].
+
 ### Unitary representations
 
 A group acts on the states of a quantum system when each group element moves states around compatibly with the group
@@ -4753,6 +4763,8 @@ section develops Rayleigh-Schrödinger perturbation theory for energy levels, th
 kernel of the time-evolution operator, and to Feynman's representation of it as an integral over paths, which makes the
 classical limit $\hbar \to 0$ transparent. The perturbative shifts and the Gaussian integrals behind the free path
 integral are all computed exactly.
+
+For more on this topic, see @demilio2017problems [Ch. 11], @galitski2013exploring [Ch. 8], @nastase2023quantum [Ch. 37-38] and @zettili2009quantum [Ch. 9-10].
 
 ### Perturbation series
 

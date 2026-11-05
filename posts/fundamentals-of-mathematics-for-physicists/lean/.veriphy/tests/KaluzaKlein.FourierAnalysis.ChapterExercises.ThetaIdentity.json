@@ -1,0 +1,71 @@
+{"target": "KaluzaKlein.FourierAnalysis.ChapterExercises.ThetaIdentity",
+ "statement":
+ "∀ (t x : ℝ),\n  0 < t →\n    1 / (2 * π) * ∑' (n : ℤ), rexp (-↑n ^ 2 * t) * cos (↑n * x) =\n      ∑' (k : ℤ), rexp (-(x - 2 * π * ↑k) ^ 2 / (4 * t)) / √(4 * π * t)",
+ "seed": 0,
+ "script_hash": "5416516537186470547",
+ "script":
+ "# name: fa-theta-identity-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.ChapterExercises.ThetaIdentity file \"fa-theta-identity-test.sage\"\n# description: Sage sums both series in 128-bit intervals with |n|, |k| ≤ 60 (tails below e^{-36} at t = 1/10 and e^{-3600}... at t = 1)\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ndef lhs_(t, x):\n    return RI(1/(2*pi))*sum(RI(exp(-n**2*t)*cos(n*x)) for n in range(-60, 61))\ndef rhs_(t, x):\n    return sum(RI(exp(-(x - 2*pi*k)**2/(4*t))/sqrt(4*pi*t)) for k in range(-60, 61))\ninstances = []\nCASES = [(['1', '0', 'one_pos'], True, {'t': '1', 'x': '0'}), (['1/10', '1', '_'], False, {'t': '1/10', 'x': '1'}), (['1', '5/2', '_'], False, {'t': '1', 'x': '5/2'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('lhs_(t, x)', scope))\n    R = side(eval('rhs_(t, x)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2"],
+  "universal":
+  [{"type": "ℝ", "name": "t"},
+   {"type": "ℝ", "name": "x"},
+   {"type": "0 < t", "name": "a._@._internal._hyg.0"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "1 / (2 * π) * ∑' (n : ℤ), rexp (-↑n ^ 2 * t) * cos (↑n * x) =\n  ∑' (k : ℤ), rexp (-(x - 2 * π * ↑k) ^ 2 / (4 * t)) / √(4 * π * t)",
+   "rhs_poly": "x2",
+   "rhs": "∑' (k : ℤ), rexp (-(x - 2 * π * ↑k) ^ 2 / (4 * t)) / √(4 * π * t)",
+   "rel": "eq",
+   "poly": "((x0 * x1)) - (x2)",
+   "lhs_poly": "(x0 * x1)",
+   "lhs": "1 / (2 * π) * ∑' (n : ℤ), rexp (-↑n ^ 2 * t) * cos (↑n * x)",
+   "kind": "rel",
+   "expr": "(((1 / (2 * pi)) * x1)) - (x2)"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [{"text": "2 * π ≠ 0", "kind": "ne", "expr": "(2 * pi)"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["1 / (2 * π)",
+   "∑' (n : ℤ), rexp (-↑n ^ 2 * t) * cos (↑n * x)",
+   "∑' (k : ℤ), rexp (-(x - 2 * π * ↑k) ^ 2 / (4 * t)) / √(4 * π * t)"],
+  "atom_types": ["ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "0", "one_pos"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.2821239734567622394304767403607764730514 .. 0.2821239734567622394304767403607764731117] == [0.2821239734567622394304767403607764730528 .. 0.2821239734567622394304767403607764731455] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1/10", "1", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.07322491280963243556600147819144810394892 .. 0.07322491280963243556600147819144810396987] == [0.07322491280963243556600147819144810395810 .. 0.07322491280963243556600147819144810398309] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1", "5/2", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.06700864674953043638843073242239526344253 .. 0.06700864674953043638843073242239526345871] == [0.06700864674953043638843073242239526344951 .. 0.06700864674953043638843073242239526347340] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

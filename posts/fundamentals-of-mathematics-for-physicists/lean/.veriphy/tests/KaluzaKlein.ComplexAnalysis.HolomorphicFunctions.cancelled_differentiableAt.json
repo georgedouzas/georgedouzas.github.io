@@ -1,0 +1,72 @@
+{"target":
+ "KaluzaKlein.ComplexAnalysis.HolomorphicFunctions.cancelled_differentiableAt",
+ "statement":
+ "∀ (z : ℂ), z ≠ 1 → z ≠ -1 → DifferentiableAt ℂ (fun w => 1 / (w ^ 2 - 1)) z",
+ "seed": 0,
+ "script_hash": "7436949082448783694",
+ "script":
+ "# name: ca-holo-cancelled-test\n# technique: test fallback (kernel-checked instances)\n# goal: sage_test KaluzaKlein.ComplexAnalysis.HolomorphicFunctions.cancelled_differentiableAt\n# description: 1/(z^2 - 1) differentiable at z = 0, i, 2; each instance proved by computation or mathlib, independently of the claim.\nSEED = 0\nCASES = [\n    (['0', '(by norm_num [Complex.ext_iff])', '(by norm_num [Complex.ext_iff])'], 'exact DifferentiableAt.div (by fun_prop) (by fun_prop) (by norm_num [Complex.ext_iff, pow_two])', True),\n    (['Complex.I', '(by norm_num [Complex.ext_iff])', '(by norm_num [Complex.ext_iff])'], 'exact DifferentiableAt.div (by fun_prop) (by fun_prop) (by norm_num [Complex.ext_iff, pow_two])', False),\n    (['2', '(by norm_num [Complex.ext_iff])', '(by norm_num [Complex.ext_iff])'], 'exact DifferentiableAt.div (by fun_prop) (by fun_prop) (by norm_num [Complex.ext_iff, pow_two])', False),\n]\ninstances = [kernel_instance(*values, proof=proof, edge=edge) for values, proof, edge in CASES]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal":
+  [{"type": "ℂ", "name": "z"},
+   {"type": "z ≠ 1", "name": "h1"},
+   {"type": "z ≠ -1", "name": "h2"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "z ≠ 1",
+    "rel": "ne",
+    "poly": "(x0) - (1)",
+    "name": "h1",
+    "expr": "(x0) - (1)"},
+   {"text": "z ≠ -1",
+    "rel": "ne",
+    "poly": "(x0) - ((-1))",
+    "name": "h2",
+    "expr": "(x0) - ((-1))"}],
+  "goal":
+  {"text": "DifferentiableAt ℂ (fun w => 1 / (w ^ 2 - 1)) z", "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms": ["z"],
+  "atom_types": ["ℂ"]},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["0", "(by norm_num [Complex.ext_iff])", "(by norm_num [Complex.ext_iff])"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["Complex.I",
+    "(by norm_num [Complex.ext_iff])",
+    "(by norm_num [Complex.ext_iff])"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["2", "(by norm_num [Complex.ext_iff])", "(by norm_num [Complex.ext_iff])"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

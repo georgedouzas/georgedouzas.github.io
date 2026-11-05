@@ -1,0 +1,63 @@
+{"target": "KaluzaKlein.ComplexAnalysis.CauchyIntegralFormula.cif_exp",
+ "statement":
+ "∀ (R : ℝ), 0 < R → ∮ (z : ℂ) in C(0, R), cexp z / z = 2 * ↑π * I ∧ ∮ (z : ℂ) in C(0, R), cexp z / z ^ 2 = 2 * ↑π * I",
+ "seed": 0,
+ "script_hash": "2243806512961930979",
+ "script":
+ "# name: ca-contour-cif-exp-test\n# technique: test fallback; oracle instances: Sage encloses both circle integrals in ball arithmetic\n# goal: sage_test KaluzaKlein.ComplexAnalysis.CauchyIntegralFormula.cif_exp\n# description: instances of cif_exp (Contour integration, part I chapter 4), edge case first or marked\nSEED = 0\nt = var('t', domain='real')\nz = var('z')\nCB = ComplexBallField(128)\nRI = RealIntervalField(128)\nJ = CB(0, 1)\ndef ex(e):\n    return SR(e).rectform().simplify_full()\ndef pint(f, g, a, b):\n    # the parametrised contour integral of f (an expression in z) along g(t), t in [a, b], exactly\n    return integrate(f.subs(z=g) * diff(g, t), t, a, b)\ndef speed(g):\n    d = diff(g, t)\n    return sqrt(d.real_part() ** 2 + d.imag_part() ** 2).simplify_full()\ndef bint(F, a, b):\n    # a rigorous ball enclosure of the integral of F (a function on balls) over [a, b]\n    return CB.integral(lambda x, _: F(x), CB(a), CB(b))\ndef circ(F, c, R):\n    # a rigorous ball enclosure of the circle integral of F over |z - c| = R\n    return bint(lambda x: F(CB(c) + CB(R) * (J * x).exp()) * CB(R) * J * (J * x).exp(), 0, 2 * CB.pi())\ndef gap(*pairs):\n    # an interval enclosing the sum of |x - y| over the pairs: it contains 0 when every pair agrees\n    return sum(RI(abs(CB(x) - CB(y))) for x, y in pairs)\ninstances = [oracle_instance(Rl, '(by norm_num)', lhs=gap((circ(lambda u: u.exp() / u, 0, R), 2 * CB.pi() * J), (circ(lambda u: u.exp() / u ** 2, 0, R), 2 * CB.pi() * J)), rhs=RI(0), edge=e)\n             for Rl, R, e in [('1', 1, True), ('2', 2, False), ('(1 / 4)', QQ(1) / 4, False)]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal": [{"type": "ℝ", "name": "R"}, {"type": "0 < R", "name": "hR"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < R",
+    "rel": "lt",
+    "poly": "(0) - (x0)",
+    "name": "hR",
+    "expr": "(0) - (x0)"}],
+  "goal":
+  {"text":
+   "∮ (z : ℂ) in C(0, R), cexp z / z = 2 * ↑π * I ∧ ∮ (z : ℂ) in C(0, R), cexp z / z ^ 2 = 2 * ↑π * I",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["R"],
+  "atom_types": ["ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.490551219435939811921392002092556764015e-35] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.965748794927643305337649797612600789163e-35] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(1 / 4)", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 2.888404260779776739419426858201772980067e-35] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

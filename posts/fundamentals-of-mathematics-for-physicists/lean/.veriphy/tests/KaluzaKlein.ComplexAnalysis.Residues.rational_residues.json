@@ -1,0 +1,70 @@
+{"target": "KaluzaKlein.ComplexAnalysis.Residues.rational_residues",
+ "statement":
+ "∀ (a : ℂ),\n  a ≠ 0 →\n    ∀ (ρ : ℝ),\n      0 < ρ →\n        ρ < ‖a‖ →\n          residue (fun z => (z ^ 2 + 1) / (z * (z - a) ^ 2)) 0 ρ = 1 / a ^ 2 ∧\n            Tendsto (fun z => (z - 0) * ((z ^ 2 + 1) / (z * (z - a) ^ 2))) (𝓝[≠] 0) (𝓝 (1 / a ^ 2)) ∧\n              residue (fun z => (z ^ 2 + 1) / (z * (z - a) ^ 2)) a ρ = 1 - 1 / a ^ 2",
+ "seed": 0,
+ "script_hash": "11840198855888057951",
+ "script":
+ "# name: ca-res-rational-residues-test\n# technique: test fallback (instances; oracle instances are evaluated by Sage exactly or in Arb's\n#   rigorous ball arithmetic, kernel instances are checked by Lean)\n# goal: KaluzaKlein.ComplexAnalysis.Residues.rational_residues: the residues 1/a^2 at 0 and 1 - 1/a^2 at a\n# description: Arb's rigorous small circle integrals compared with 1/a^2 and 1 - 1/a^2\nSEED = 0\ndef V(*named, **kw):\n    \"\"\"The binders' values as Lean text, by binder name ('_' for an oracle instance's hypotheses).\"\"\"\n    for d in named:\n        kw.update(d)\n    return [kw.get(name, '_') for name, _ in universal]\ndef X(v):\n    \"\"\"An exact symbolic value, radicals canonicalised (Sage's exact comparison then succeeds).\"\"\"\n    return SR(v).canonicalize_radical().simplify_full()\nCBF = ComplexBallField(128)\nRIFp = RealIntervalField(128)\nCI = CBF(0, 1)\nTWO_PI_I = 2 * CBF.pi() * CI\ndef circ(f, c, rho):\n    \"\"\"Arb's rigorous enclosure of the circle integral of f over |z - c| = rho.\"\"\"\n    c = CBF(c); rho = CBF(rho)\n    return CBF.integral(lambda t, _: f(c + rho * (CI * t).exp()) * CI * rho * (CI * t).exp(), 0, 2 * CBF.pi().real())\ndef seg(f, a, b):\n    \"\"\"Arb's rigorous enclosure of the integral of f(t) dt over [a, b].\"\"\"\n    return CBF.integral(lambda t, _: f(t), CBF(a), CBF(b))\ndef gap(x, y):\n    \"\"\"The interval of |x - y| (contains 0 exactly when the enclosures are compatible).\"\"\"\n    d = (CBF(x) - CBF(y)).abs()\n    return RIFp(d.lower(), d.upper())\ndef bnd(x):\n    \"\"\"The interval of |x|.\"\"\"\n    d = CBF(x).abs()\n    return RIFp(d.lower(), d.upper())\ndef eq(x, y, *values, edge=False):\n    return oracle_instance(*values, lhs=gap(x, y), rhs=RIFp(0), relation='==', edge=edge)\n\ndef inst(a, at, rho, edge=False):\n    A = CBF(a); f = lambda w: (w^2 + 1)/(w*(w - A)^2)\n    d = gap(circ(f, 0, rho) / TWO_PI_I, 1/A^2) + gap(circ(f, a, rho) / TWO_PI_I, 1 - 1/A^2)\n    return oracle_instance(*V(a=at, ρ=str(rho)), lhs=d, rhs=RIFp(0), relation='==', edge=edge)\ninstances = [inst(1, '1', 1/2, True), inst(2, '2', 1), inst(CBF(0, 1), 'Complex.I', 1/2)]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2"],
+  "universal":
+  [{"type": "ℂ", "name": "a"},
+   {"type": "a ≠ 0", "name": "ha"},
+   {"type": "ℝ", "name": "ρ"},
+   {"type": "0 < ρ", "name": "hρ"},
+   {"type": "ρ < ‖a‖", "name": "hρa"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "a ≠ 0",
+    "rel": "ne",
+    "poly": "(x0) - (0)",
+    "name": "ha",
+    "expr": "(x0) - (0)"},
+   {"text": "0 < ρ", "rel": "lt", "name": "hρ", "expr": "(0) - (x1)"},
+   {"text": "ρ < ‖a‖", "rel": "lt", "name": "hρa", "expr": "(x1) - (x2)"}],
+  "goal":
+  {"text":
+   "residue (fun z => (z ^ 2 + 1) / (z * (z - a) ^ 2)) 0 ρ = 1 / a ^ 2 ∧\n  Tendsto (fun z => (z - 0) * ((z ^ 2 + 1) / (z * (z - a) ^ 2))) (𝓝[≠] 0) (𝓝 (1 / a ^ 2)) ∧\n    residue (fun z => (z ^ 2 + 1) / (z * (z - a) ^ 2)) a ρ = 1 - 1 / a ^ 2",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms": ["a", "ρ", "‖a‖"],
+  "atom_types": ["ℂ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "_", "1/2", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 8.363366799612101645562880289710366533850e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "_", "1", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 5.138308888834805043774733592437923195892e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["Complex.I", "_", "1/2", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 5.492319500014747810876462759488502190163e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

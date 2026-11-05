@@ -1,0 +1,2913 @@
+# Verification manifest of tutorial/part-i-02-linear-algebra.qmd (design D28): every block, its claims, the Lean
+# theorem of each, and the Veriphy recipe and certificate script, or `mathlib` with the reason no recipe applies
+# (each such reason names the missing recipe; see verification/pilot-report.md). Checked by
+# scripts/check_verification.py.
+chapter: part-i-02-linear-algebra
+blocks:
+- label: def-vector-space
+  claims:
+  - claim: the scalar rules hold in R^n
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.rn_axioms
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.rn_axioms
+    level: kernel-test
+    instances: 3
+- label: exm-vs-rn
+  claims:
+  - claim: the plane x^3 = 0 is a subspace
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.mem_planeX3
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.mem_planeX3
+    level: kernel-test
+    instances: 3
+  - claim: e1 + e2 has squared length 2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.unit_sum_sq_length
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: the unit sphere is not a subspace
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.sphere_not_subspace
+    recipe: infeasibility
+    certificate: la-infeasible.sage
+- label: exm-vs-matrices
+  claims:
+  - claim: the n x n matrices have dimension n^2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_matrix_sq
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_matrix_sq
+    level: kernel-test
+    instances: 4
+  - claim: the antisymmetric matrices form a subspace
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.antisym_add_smul
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.antisym_add_smul
+    level: kernel-test
+    instances: 3
+  - claim: R1 is a rotation (orthogonal)
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.R1_orthogonal
+    recipe: matrix_from_goal
+    certificate: la-vs-symmetric-matrices.sage
+  - claim: R2 is a rotation (orthogonal)
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.R2_orthogonal
+    recipe: matrix_from_goal
+    certificate: la-vs-symmetric-matrices.sage
+  - claim: (R1 + R2)^T (R1 + R2) computed
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.rot_sum_gram
+    recipe: matrix_from_goal
+    certificate: la-vs-symmetric-matrices.sage
+  - claim: R1 + R2 is not a rotation
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.rot_sum_not_orthogonal
+    recipe: infeasibility
+    certificate: la-infeasible.sage
+- label: exm-vs-functions
+  claims:
+  - claim: the polynomials of degree at most 2 form a 3-dimensional subspace
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_poly_deg_le_two
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: the functions on an infinite set form an infinite-dimensional space
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.not_finiteDimensional_functions
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.not_finiteDimensional_functions
+    level: kernel-test
+    instances: 3
+- label: exr-vs-subspace-check
+  claims:
+  - claim: x + y + z = 0 is closed under addition
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.plane0_add
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: x + y + z = 0 is closed under scaling
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.plane0_smul
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: x + y + z = 1 misses 0
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.plane1_zero_not_mem
+    recipe: infeasibility
+    certificate: la-infeasible.sage
+  - claim: two points of x + y + z = 1 add to coordinate sum 2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.plane1_add
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: (1, 0, 0) + (0, 1, 0) = (1, 1, 0)
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.axes_sum
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+  - claim: (1, 1, 0) lies on neither axis
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.axes_union_not_closed
+    recipe: infeasibility
+    certificate: la-infeasible.sage
+- label: exr-vs-symmetric-matrices
+  claims:
+  - claim: A + B is symmetric
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.sym_example_sum
+    recipe: matrix_from_goal
+    certificate: la-vs-symmetric-matrices.sage
+  - claim: the symmetric n x n matrices have dimension n(n+1)/2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym
+    level: kernel-test
+    instances: 5
+  - claim: Gauss sum behind the count
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.gauss_sum_succ
+    recipe: sum_induction
+    certificate: la-gauss-sum.sage
+  - claim: the symmetric 3 x 3 matrices have dimension 6
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym
+    level: kernel-test
+    instances: 5
+  - claim: det R1 = 1
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.R1_det
+    recipe: matrix_from_goal
+    certificate: la-vs-symmetric-matrices.sage
+  - claim: det R2 = 1
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.R2_det
+    recipe: matrix_from_goal
+    certificate: la-vs-symmetric-matrices.sage
+  - claim: R1 + R2 is not a rotation
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.rot_sum_not_orthogonal
+    recipe: infeasibility
+    certificate: la-infeasible.sage
+- label: exr-vs-polynomials-axioms
+  claims:
+  - claim: degree at most 2 is closed under the operations
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.deg_le_two_closed
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.deg_le_two_closed
+    level: kernel-test
+    instances: 3
+  - claim: x^2 + (-x^2 + x) has degree 1
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.deg_two_sum_natDegree
+    recipe: ideal_membership
+    certificate: la-polynomial.sage
+  - claim: the zero polynomial does not have degree 2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.zero_degree_ne
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.zero_degree_ne
+    level: kernel-test
+    instances: 4
+- label: def-linear-combination
+  claims:
+  - claim: (1, 3, 1) = 1 (1, 2, 0) + 1 (0, 1, 1)
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.combination_r3
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: the same combination through the definition
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.linComb_example
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exm-combination-r3
+  claims:
+  - claim: (1, 3, 1) = (1, 2, 0) + (0, 1, 1)
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.combination_r3
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: (x, y, z) = x e1 + y e2 + z e3
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.standard_combination
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exm-combination-matrices
+  claims:
+  - claim: a L1 + b L2 + c L3 in components
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.so3_combination_literal
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: the combination is antisymmetric
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.so3_combination_antisymm
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: every antisymmetric matrix is such a combination
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.antisym_eq_combination
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.LinearCombinations.antisym_eq_combination
+    level: kernel-test
+    instances: 4
+- label: exm-combination-fourier
+  claims:
+  - claim: a cos + b sin is a combination of cos and sin
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.fourier_combination
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.LinearCombinations.fourier_combination
+    level: kernel-test
+    instances: 4
+- label: exr-combination-solve
+  claims:
+  - claim: coefficients exist
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.combination_solve_exists
+    recipe: witness
+    certificate: la-combination-solve.sage
+  - claim: the coefficients are (4, -1, 3)
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.combination_solve_unique
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: 4 v1 - v2 + 3 v4 = (4, 7, 2)
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.combination_solve_check
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exr-combination-fourier
+  claims:
+  - claim: cos^2 = 1/2 + 1/2 cos 2phi
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.cos_sq_combination
+    recipe: transcendental_rewrite
+    certificate: la-trig-cos-sq.sage
+  - claim: sin^3 = 3/4 sin - 1/4 sin 3phi
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.sin_cube_combination
+    recipe: transcendental_rewrite
+    certificate: la-trig-sin-cube.sage
+- label: exr-combination-so3
+  claims:
+  - claim: X = 7 L1 + 2 L2 + 5 L3
+    lean: KaluzaKlein.LinearAlgebra.LinearCombinations.combination_so3_literal
+    recipe: matrix_from_goal
+    certificate: la-combination-so3.sage
+- label: def-span
+  claims:
+  - claim: coefficients writing v3 in terms of v1, v2
+    lean: KaluzaKlein.Linear.v3_combination_coefficients
+    recipe: witness
+    certificate: witness.sage
+  - claim: v3 lies in the span of v1, v2
+    lean: KaluzaKlein.LinearAlgebra.Spans.v3_mem_spanOf
+    recipe: independence
+    certificate: la-span-member.sage
+- label: exm-span-plane
+  claims:
+  - claim: v1, v2 are independent
+    lean: KaluzaKlein.LinearAlgebra.Spans.v12_independent_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: span(v1, v2) is a plane
+    lean: KaluzaKlein.LinearAlgebra.Spans.finrank_span_v12
+    recipe: dimension
+    certificate: la-dim-span.sage
+  - claim: v3 = v1 + v2
+    lean: KaluzaKlein.Linear.v3_combination_coefficients
+    recipe: witness
+    certificate: witness.sage
+  - claim: adding v3 does not enlarge the span
+    lean: KaluzaKlein.LinearAlgebra.Spans.span_v123_eq
+    recipe: independence
+    certificate: la-span-eq.sage
+- label: exm-span-pauli
+  claims:
+  - claim: L1 is antisymmetric
+    lean: KaluzaKlein.LinearAlgebra.Spans.L1_antisymm
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: L2 is antisymmetric
+    lean: KaluzaKlein.LinearAlgebra.Spans.L2_antisymm
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: L3 is antisymmetric
+    lean: KaluzaKlein.LinearAlgebra.Spans.L3_antisymm
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: so(3) is the span of L1, L2, L3
+    lean: KaluzaKlein.LinearAlgebra.Spans.so3_eq_span
+    recipe: independence
+    certificate: la-span-so3.sage
+- label: exm-span-functions
+  claims:
+  - claim: a cos + b sin = 0 forces a = b = 0
+    lean: KaluzaKlein.LinearAlgebra.Spans.cos_sin_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: span(cos, sin) is two-dimensional
+    lean: KaluzaKlein.LinearAlgebra.Spans.finrank_span_cos_sin
+    recipe: independence
+    certificate: la-independence-eval.sage
+  - claim: its elements are a cos + b sin
+    lean: KaluzaKlein.LinearAlgebra.Spans.mem_span_cos_sin
+    recipe: mathlib
+    why: a statement about arbitrary real functions; no recipe certifies a claim quantified over functions
+    test: KaluzaKlein.LinearAlgebra.Spans.mem_span_cos_sin
+    level: kernel-test
+    instances: 3
+  - claim: the Fourier modes are independent
+    lean: KaluzaKlein.LinearAlgebra.Dimension.fourierModes_truncation_linearIndependent
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Dimension.fourierModes_truncation_linearIndependent
+    level: kernel-test
+    instances: 4
+  - claim: the span of all modes is infinite-dimensional
+    lean: KaluzaKlein.LinearAlgebra.Dimension.fourier_span_finrank_ne
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Dimension.fourier_span_finrank_ne
+    level: kernel-test
+    instances: 4
+- label: exr-span-membership
+  claims:
+  - claim: (2, 5, 1) = a v1 + b v2 is solvable
+    lean: KaluzaKlein.LinearAlgebra.Spans.membership_exists
+    recipe: witness
+    certificate: la-span-membership.sage
+  - claim: (2, 5, 1) = 2 v1 + v2
+    lean: KaluzaKlein.LinearAlgebra.Spans.membership_check
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: (1, 1, 1) is not in the span
+    lean: KaluzaKlein.LinearAlgebra.Spans.nonmember_contradiction
+    recipe: farkas
+    certificate: farkas.sage
+  - claim: the plane is 2x - y + z = 0
+    lean: KaluzaKlein.LinearAlgebra.Spans.plane_normal
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exr-span-line-plane
+  claims:
+  - claim: a dependent third vector leaves the span unchanged
+    lean: KaluzaKlein.LinearAlgebra.Spans.span_three_reduce
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.Spans.span_three_reduce
+    level: kernel-test
+    instances: 3
+- label: exr-span-polynomials
+  claims:
+  - claim: (x + 1)^2 = 1 + 2x + x^2
+    lean: KaluzaKlein.LinearAlgebra.Spans.shifted_square
+    recipe: ideal_membership
+    certificate: la-polynomial.sage
+  - claim: x^3 is not in span(1, x, x^2)
+    lean: KaluzaKlein.LinearAlgebra.Spans.X_pow_not_mem
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Spans.X_pow_not_mem
+    level: kernel-test
+    instances: 4
+  - claim: x and x^2 in terms of 1, x + 1, (x + 1)^2
+    lean: KaluzaKlein.LinearAlgebra.Spans.powers_from_shifted
+    recipe: ideal_membership
+    certificate: la-polynomial.sage
+- label: def-linear-independence
+  claims:
+  - claim: 'f1, f2: a vanishing combination has zero coefficients'
+    lean: KaluzaKlein.Linear.f_independent_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: f1, f2 are independent
+    lean: KaluzaKlein.Linear.f_linearIndependent
+    recipe: independence
+    certificate: la-independence.sage
+- label: exm-independent-r3
+  claims:
+  - claim: det of (1, 2, 0), (0, 1, 1), (0, 0, 1) is 1
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.det_v124
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: (1, 2, 0), (0, 1, 1), (0, 0, 1) are independent
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.v124_linearIndependent
+    recipe: independence
+    certificate: la-independence.sage
+  - claim: v1 + v2 - v3 = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.v123_relation
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: v1, v2, v3 are dependent
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.v123_dependent
+    recipe: independence
+    certificate: la-independence.sage
+- label: exm-independent-basis-change
+  claims:
+  - claim: the component equations force lambda = mu = 0
+    lean: KaluzaKlein.Linear.f_independent_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: f1, f2 are independent
+    lean: KaluzaKlein.Linear.f_linearIndependent
+    recipe: independence
+    certificate: la-independence.sage
+  - claim: 2 (2, 1) - (4, 2) = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.pair_relation
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: (2, 1), (4, 2) are dependent
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.pair_dependent
+    recipe: independence
+    certificate: la-independence.sage
+- label: exm-independent-functions
+  claims:
+  - claim: values at 0, pi, pi/2 force a = b = c = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.trig_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: 1, cos, sin are independent
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.one_cos_sin_linearIndependent
+    recipe: independence
+    certificate: la-independence-eval.sage
+  - claim: cos^2 + sin^2 = 1
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.cos_sq_add_sin_sq
+    recipe: transcendental_rewrite
+    certificate: la-trig-pythagoras.sage
+  - claim: 1, cos^2, sin^2 are dependent
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.one_cos_sq_sin_sq_dependent
+    recipe: independence
+    certificate: la-dependence-functions.sage
+- label: exr-independence-functions
+  claims:
+  - claim: a + b = 0, a - b = 0, a + c = 0 force a = b = c = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.trig_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: 1, cos, sin are independent
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.one_cos_sin_linearIndependent
+    recipe: independence
+    certificate: la-independence-eval.sage
+  - claim: cos^2 + sin^2 = 1
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.cos_sq_add_sin_sq
+    recipe: transcendental_rewrite
+    certificate: la-trig-pythagoras.sage
+  - claim: 1, cos^2, sin^2 are dependent
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.one_cos_sq_sin_sq_dependent
+    recipe: independence
+    certificate: la-dependence-functions.sage
+- label: exr-independence-determinant
+  claims:
+  - claim: the first family has determinant 2
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.det_family_F
+    recipe: matrix_from_goal
+    certificate: la-independence-determinant.sage
+  - claim: the same determinant with the vectors as rows
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.det_family_F_rows
+    recipe: matrix_from_goal
+    certificate: la-independence-determinant.sage
+  - claim: the first family is independent
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.family_F_independent
+    recipe: independence
+    certificate: la-independence.sage
+  - claim: the second family has determinant 0
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.det_family_G
+    recipe: matrix_from_goal
+    certificate: la-independence-determinant.sage
+  - claim: v1 + v2 - v3 - v4 = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.family_G_relation
+    recipe: matrix_from_goal
+    certificate: la-independence-determinant.sage
+  - claim: the second family is dependent
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.family_G_dependent
+    recipe: independence
+    certificate: la-independence.sage
+- label: exr-independence-extend
+  claims:
+  - claim: extending by a vector outside the span keeps independence
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.extend_independent
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.LinearIndependence.extend_independent
+    level: kernel-test
+    instances: 3
+- label: def-basis
+  claims:
+  - claim: coordinates (2, 1) of (5, 4) solve the system
+    lean: KaluzaKlein.Linear.coordinates_f_exist
+    recipe: witness
+    certificate: witness.sage
+  - claim: the coordinates of (5, 4) in f are (2, 1)
+    lean: KaluzaKlein.LinearAlgebra.Bases.fBasis_coords
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exm-basis-standard
+  claims:
+  - claim: the coordinates in the standard basis are the entries
+    lean: KaluzaKlein.LinearAlgebra.Bases.standard_coords
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Bases.standard_coords
+    level: kernel-test
+    instances: 3
+- label: exm-basis-f
+  claims:
+  - claim: coordinates (2, 1) solve the system
+    lean: KaluzaKlein.Linear.coordinates_f_exist
+    recipe: witness
+    certificate: witness.sage
+  - claim: (5, 4) = 2 f1 + f2
+    lean: KaluzaKlein.Linear.coordinates_f
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: the coordinates of (5, 4) in f are (2, 1)
+    lean: KaluzaKlein.LinearAlgebra.Bases.fBasis_coords
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exm-basis-so3
+  claims:
+  - claim: a L1 + b L2 + c L3 = 0 forces a = b = c = 0
+    lean: KaluzaKlein.LinearAlgebra.Bases.so3_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: L1, L2, L3 are independent
+    lean: KaluzaKlein.LinearAlgebra.Bases.so3_linearIndependent
+    recipe: independence
+    certificate: la-independence-eval.sage
+  - claim: they span so(3)
+    lean: KaluzaKlein.LinearAlgebra.Spans.so3_eq_span
+    recipe: independence
+    certificate: la-span-so3.sage
+  - claim: dim so(3) = 3
+    lean: KaluzaKlein.LinearAlgebra.Bases.so3_basis_card
+    recipe: independence
+    certificate: la-independence-eval.sage
+  - claim: 1, cos, sin span a 3-dimensional space
+    lean: KaluzaKlein.LinearAlgebra.Bases.fourier_one_basis_card
+    recipe: independence
+    certificate: la-independence-eval.sage
+- label: exr-basis-coordinates
+  claims:
+  - claim: det(b1, b2, b3) = 2
+    lean: KaluzaKlein.LinearAlgebra.Bases.det_basis_b
+    recipe: matrix_from_goal
+    certificate: la-basis-coordinates-check.sage
+  - claim: b1, b2, b3 are independent
+    lean: KaluzaKlein.LinearAlgebra.Bases.basis_b_independent
+    recipe: independence
+    certificate: la-independence.sage
+  - claim: coordinates of (2, 3, 4) exist
+    lean: KaluzaKlein.LinearAlgebra.Bases.basis_b_coords_exist
+    recipe: witness
+    certificate: la-basis-coordinates.sage
+  - claim: (2, 3, 4) = 1/2 b1 + 5/2 b2 + 3/2 b3
+    lean: KaluzaKlein.LinearAlgebra.Bases.basis_b_coords
+    recipe: matrix_from_goal
+    certificate: la-basis-coordinates-check.sage
+- label: exr-basis-so3
+  claims:
+  - claim: (X12, X13, X23) = (-c, b, -a)
+    lean: KaluzaKlein.LinearAlgebra.Bases.so3_upper_entries
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: independence from the entries
+    lean: KaluzaKlein.LinearAlgebra.Bases.so3_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: L1, L2, L3 are independent
+    lean: KaluzaKlein.LinearAlgebra.Bases.so3_linearIndependent
+    recipe: independence
+    certificate: la-independence-eval.sage
+  - claim: L1, L2, L3 span so(3)
+    lean: KaluzaKlein.LinearAlgebra.Spans.so3_eq_span
+    recipe: independence
+    certificate: la-span-so3.sage
+- label: exr-basis-lagrange
+  claims:
+  - claim: a(1 - x) + bx = 0 forces a = b = 0
+    lean: KaluzaKlein.LinearAlgebra.Bases.lagrange_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: 1 - x, x are independent
+    lean: KaluzaKlein.LinearAlgebra.Bases.lagrange_linearIndependent
+    recipe: independence
+    certificate: la-independence-eval.sage
+  - claim: the coordinates of 3x + 2 solve a = 2, -a + b = 3
+    lean: KaluzaKlein.LinearAlgebra.Bases.lagrange_coords_exist
+    recipe: witness
+    certificate: la-basis-lagrange.sage
+  - claim: 3x + 2 = 2(1 - x) + 5x, and spanning
+    lean: KaluzaKlein.LinearAlgebra.Bases.lagrange_coords
+    recipe: ideal_membership
+    certificate: la-polynomial.sage
+  - claim: p(0) = 2, p(1) = 5
+    lean: KaluzaKlein.LinearAlgebra.Bases.lagrange_values
+    recipe: ideal_membership
+    certificate: la-polynomial.sage
+- label: def-dimension
+  claims:
+  - claim: all bases have the same number of elements
+    lean: KaluzaKlein.LinearAlgebra.Dimension.bases_same_card
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.Dimension.bases_same_card
+    level: kernel-test
+    instances: 3
+  - claim: dim R^3 = 3
+    lean: KaluzaKlein.Linear.finrank_R3
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exm-dimension-rn
+  claims:
+  - claim: dim R^n = n
+    lean: KaluzaKlein.LinearAlgebra.Dimension.finrank_rn
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Dimension.finrank_rn
+    level: kernel-test
+    instances: 3
+  - claim: the n x n matrices have dimension n^2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_matrix_sq
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_matrix_sq
+    level: kernel-test
+    instances: 4
+  - claim: dim so(n) = n(n-1)/2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    level: kernel-test
+    instances: 5
+  - claim: Gauss sum behind the count
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.gauss_sum_id
+    recipe: sum_induction
+    certificate: la-gauss-sum.sage
+  - claim: dim so(3) = 3
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    level: kernel-test
+    instances: 5
+  - claim: dim so(4) = 6
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    level: kernel-test
+    instances: 5
+- label: exm-dimension-span
+  claims:
+  - claim: the span of v1, v2, v3 has dimension 2
+    lean: KaluzaKlein.LinearAlgebra.Dimension.finrank_span_v123
+    recipe: dimension
+    certificate: la-dim-span.sage
+  - claim: the dependence relation v3 = v1 + v2
+    lean: KaluzaKlein.Linear.v3_combination_coefficients
+    recipe: witness
+    certificate: witness.sage
+- label: exm-dimension-tangent
+  claims:
+  - claim: a tangent space has dimension n
+    lean: KaluzaKlein.LinearAlgebra.Dimension.finrank_tangentSpace
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Dimension.finrank_tangentSpace
+    level: kernel-test
+    instances: 3
+  - claim: dim so(n) = n(n-1)/2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    level: kernel-test
+    instances: 5
+  - claim: the symmetric 4 x 4 matrices have dimension 10
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym
+    level: kernel-test
+    instances: 5
+- label: exr-span-dimension
+  claims:
+  - claim: the span has dimension 2
+    lean: KaluzaKlein.LinearAlgebra.Dimension.finrank_span_v123
+    recipe: dimension
+    certificate: la-dim-span.sage
+  - claim: v1 + v2 - v3 = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.v123_relation
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: coordinates of (2, 5, 1) exist
+    lean: KaluzaKlein.LinearAlgebra.Dimension.span_dimension_coords_exist
+    recipe: witness
+    certificate: la-span-dimension.sage
+  - claim: (2, 5, 1) = 2 v1 + v2 + 0 v4
+    lean: KaluzaKlein.LinearAlgebra.Dimension.span_dimension_coords
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: det(v1, v2, v4) = 1
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.det_v124
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: v1, v2, v4 are independent
+    lean: KaluzaKlein.LinearAlgebra.LinearIndependence.v124_linearIndependent
+    recipe: independence
+    certificate: la-independence.sage
+- label: exr-dimension-symmetric
+  claims:
+  - claim: dim Sym(n) = n(n+1)/2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym
+    level: kernel-test
+    instances: 5
+  - claim: dim so(n) = n(n-1)/2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    level: kernel-test
+    instances: 5
+  - claim: Gauss sum behind the counts
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.gauss_sum_succ
+    recipe: sum_induction
+    certificate: la-gauss-sum.sage
+  - claim: the two counts add up to n^2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.sym_antisym_count
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: dim Sym(n) + dim so(n) = n^2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym_add_antisym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym_add_antisym
+    level: kernel-test
+    instances: 5
+  - claim: A = 1/2 (A + A^T) + 1/2 (A - A^T)
+    lean: KaluzaKlein.LinearAlgebra.Dimension.sym_antisym_decomposition
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Dimension.sym_antisym_decomposition
+    level: kernel-test
+    instances: 3
+  - claim: the sum is direct
+    lean: KaluzaKlein.LinearAlgebra.Dimension.sym_inf_antisym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Dimension.sym_inf_antisym
+    level: kernel-test
+    instances: 4
+- label: exr-dimension-fourier
+  claims:
+  - claim: the Fourier modes are independent
+    lean: KaluzaKlein.LinearAlgebra.Dimension.fourierModes_truncation_linearIndependent
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Dimension.fourierModes_truncation_linearIndependent
+    level: kernel-test
+    instances: 4
+  - claim: 1, cos, sin, ..., cos N, sin N span a (2N + 1)-dimensional space
+    lean: KaluzaKlein.LinearAlgebra.Dimension.finrank_span_fourier_modes
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Dimension.finrank_span_fourier_modes
+    level: kernel-test
+    instances: 4
+  - claim: the powers cos^k are independent
+    lean: KaluzaKlein.LinearAlgebra.Dimension.cos_powers_linearIndependent
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Dimension.cos_powers_linearIndependent
+    level: kernel-test
+    instances: 3
+  - claim: their span has dimension N + 1
+    lean: KaluzaKlein.LinearAlgebra.Dimension.finrank_span_cos_powers
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Dimension.finrank_span_cos_powers
+    level: kernel-test
+    instances: 4
+- label: prp-dimensions
+  claims:
+  - claim: dim R^3 = 3
+    lean: KaluzaKlein.Linear.finrank_R3
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: dim M_3(R) = 9
+    lean: KaluzaKlein.Linear.finrank_matrix3
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exm-dim-lean-pi
+  claims:
+  - claim: the functions on a finite set X have dimension abs(X)
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_functions
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_functions
+    level: kernel-test
+    instances: 4
+  - claim: the functions on five points have dimension 5
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_functions_five
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exm-dim-lean-matrix
+  claims:
+  - claim: dim M_3(R) = 3 * 3
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_matrix_3_3
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: the 2 x 3 matrices have dimension 6
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_matrix_2_3
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exm-dim-sage
+  claims:
+  - claim: the traceless 3 x 3 matrices have dimension 8
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_traceless
+    recipe: dimension
+    certificate: la-dim-ker.sage
+- label: exr-dim-matrix-lean
+  claims:
+  - claim: the 2 x 3 real matrices have dimension 6
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_matrix_2_3
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: the 2 x 2 complex matrices have complex dimension 4
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_complex_matrix
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: and real dimension 8
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_real_complex_matrix
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exr-dim-plane
+  claims:
+  - claim: the plane x + y + z = 0 has dimension 2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_planeSum0
+    recipe: dimension
+    certificate: la-dim-ker.sage
+  - claim: the four basis vectors lie in the plane
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.plane_basis_vectors
+    recipe: matrix_from_goal
+    certificate: la-dim-plane.sage
+  - claim: a(1, -1, 0) + b(0, 1, -1) = 0 forces a = b = 0
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.plane_basis_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: (1, -1, 0), (0, 1, -1) are independent
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.plane_basis_independent
+    recipe: independence
+    certificate: la-independence.sage
+  - claim: (1, 0, -1), (0, 1, -1) are independent
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.plane_echelon_independent
+    recipe: independence
+    certificate: la-independence.sage
+- label: exr-dim-sum-intersection
+  claims:
+  - claim: dim U = 2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_U
+    recipe: dimension
+    certificate: la-dim-ker.sage
+  - claim: dim W = 2
+    lean: KaluzaKlein.LinearAlgebra.Spans.finrank_span_v12
+    recipe: dimension
+    certificate: la-dim-span.sage
+  - claim: dim (U + W) = 3
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_U_sup_W
+    recipe: dimension
+    certificate: la-dim-inter.sage
+  - claim: dim (U cap W) = 1
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.finrank_U_inf_W
+    recipe: dimension
+    certificate: la-dim-inter.sage
+  - claim: (1, 2, 0) lies in U cap W
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.v1_mem_U_inf_W
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: prp-coordinates-f
+  claims:
+  - claim: coordinates solving the system exist
+    lean: KaluzaKlein.Linear.coordinates_f_exist
+    recipe: witness
+    certificate: witness.sage
+  - claim: (5, 4) = 2 f1 + f2
+    lean: KaluzaKlein.Linear.coordinates_f
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exm-coords-system
+  claims:
+  - claim: 2a + b = 5, a + 2b = 4 force a = 2, b = 1
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.coords_system
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+- label: exm-coords-witness
+  claims:
+  - claim: 'substituting back: 2 f1 + f2 = (5, 4)'
+    lean: KaluzaKlein.Linear.coordinates_f
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: det F = 3, so the solution is unique
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.det_F
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exm-coords-picture
+  claims:
+  - claim: the coordinates of (5, 4) in f are (2, 1)
+    lean: KaluzaKlein.LinearAlgebra.Bases.fBasis_coords
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exr-coords-f-other
+  claims:
+  - claim: coordinates of (1, 5) exist
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.coords_f_other_1_exist
+    recipe: witness
+    certificate: la-coords-f-other-1.sage
+  - claim: coordinates of (-1, 1) exist
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.coords_f_other_2_exist
+    recipe: witness
+    certificate: la-coords-f-other-2.sage
+  - claim: (1, 5) = -f1 + 3 f2, (-1, 1) = -f1 + f2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.coords_f_other
+    recipe: matrix_from_goal
+    certificate: la-coords-f-other.sage
+- label: exr-coords-inverse-matrix
+  claims:
+  - claim: coordinates are F^-1 v
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.coords_inverse
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaceResults.coords_inverse
+    level: kernel-test
+    instances: 3
+  - claim: det F = 3
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.det_F
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: F times 1/3 (2, -1; -1, 2) is 1
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.F_mul_inverse
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: 1/3 (2, -1; -1, 2) times F is 1
+    lean: KaluzaKlein.Linear.dual_f_mul
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+  - claim: F^-1 (5, 4) = (2, 1)
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_f_on_v
+    recipe: matrix_from_goal
+    certificate: la-dual-basis.sage
+- label: exr-change-of-basis
+  claims:
+  - claim: G M = F for M = (3/2, 3/2; 1/2, -1/2)
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.change_of_basis_M
+    recipe: matrix_from_goal
+    certificate: la-change-of-basis.sage
+  - claim: M (2, 1) = (9/2, 1/2) and G (9/2, 1/2) = (5, 4)
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaceResults.change_of_basis_check
+    recipe: matrix_from_goal
+    certificate: la-change-of-basis.sage
+- label: def-linear-map
+  claims:
+  - claim: rank-nullity
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.rank_nullity
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.LinearMaps.rank_nullity
+    level: kernel-test
+    instances: 3
+  - claim: L(v)^i = L^i_j v^j
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.matrix_map_apply
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.LinearMaps.matrix_map_apply
+    level: kernel-test
+    instances: 3
+  - claim: A (1, 1, -1) = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.A_mul_kernel
+    recipe: matrix_from_goal
+    certificate: la-kernel-image.sage
+- label: exm-linear-matrix
+  claims:
+  - claim: A (1, 1, -1) = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.A_mul_kernel
+    recipe: matrix_from_goal
+    certificate: la-kernel-image.sage
+  - claim: rank A = 1
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.rank_A
+    recipe: matrix_rank
+    certificate: la-rank.sage
+  - claim: the image is the line through (1, 2)
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.range_A
+    recipe: independence
+    certificate: la-span-eq.sage
+  - claim: nullity A = 2
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.nullity_A
+    recipe: dimension
+    certificate: la-dim-span.sage
+- label: exm-linear-rotation
+  claims:
+  - claim: a rotation has kernel {0}
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.orthogonal_ker_trivial
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.LinearMaps.orthogonal_ker_trivial
+    level: kernel-test
+    instances: 3
+  - claim: the derivative of 1, x, x^2
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.derivative_basis
+    recipe: ideal_membership
+    certificate: la-polynomial.sage
+  - claim: D (1, 0, 0) = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.D_mul_const
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: rank D = 2
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.rank_D
+    recipe: matrix_rank
+    certificate: la-rank.sage
+  - claim: the kernel of D has dimension 1
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.nullity_D
+    recipe: dimension
+    certificate: la-dim-span.sage
+- label: exm-linear-not
+  claims:
+  - claim: x -> x + 1 is not linear
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.translation_not_linear
+    recipe: nonlinearity
+    certificate: la-nonlinear.sage
+  - claim: x -> x^2 is not linear
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.square_not_linear
+    recipe: nonlinearity
+    certificate: la-nonlinear.sage
+  - claim: the circle parametrisation is not linear
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.circle_not_linear
+    recipe: nonlinearity
+    certificate: la-nonlinear.sage
+  - claim: a linear map is determined on a basis
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.determined_by_basis
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.LinearMaps.determined_by_basis
+    level: kernel-test
+    instances: 3
+- label: exr-linear-check
+  claims:
+  - claim: L(2, 2) = (4, 4) and 2 L(1, 1) = (4, 2)
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.product_map_values
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: (x + y, xy) is not linear
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.product_map_not_linear
+    recipe: nonlinearity
+    certificate: la-nonlinear.sage
+  - claim: (2x - y, 0) is linear
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.linear_example
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.LinearMaps.linear_example
+    level: kernel-test
+    instances: 3
+  - claim: the integral is additive
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.integral_additive
+    recipe: mathlib
+    why: a statement about arbitrary real functions; no recipe certifies a claim quantified over functions
+    test: KaluzaKlein.LinearAlgebra.LinearMaps.integral_additive
+    level: oracle-test
+    instances: 4
+  - claim: f -> f^2 is not additive
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.square_functional_not_additive
+    recipe: nonlinearity
+    certificate: la-nonlinear.sage
+- label: exr-kernel-image
+  claims:
+  - claim: A (1, 1, -1) = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.A_mul_kernel
+    recipe: matrix_from_goal
+    certificate: la-kernel-image.sage
+  - claim: the rows of A are proportional
+    lean: KaluzaKlein.Linear.A_rows_proportional
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: rank A = 1
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.rank_A
+    recipe: matrix_rank
+    certificate: la-rank.sage
+  - claim: the image is the line through (1, 2)
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.range_A
+    recipe: independence
+    certificate: la-span-eq.sage
+  - claim: the kernel is x + 2y + 3z = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.mem_ker_A
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.LinearMaps.mem_ker_A
+    level: kernel-test
+    instances: 4
+  - claim: nullity A = 2
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.nullity_A
+    recipe: dimension
+    certificate: la-dim-span.sage
+- label: exr-matrix-of-derivative
+  claims:
+  - claim: the derivative of 1, x, x^2
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.derivative_basis
+    recipe: ideal_membership
+    certificate: la-polynomial.sage
+  - claim: D (1, 0, 0) = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.D_mul_const
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: the constant polynomial is in the kernel
+    lean: KaluzaKlein.Linear.D_kernel_const
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: rank D = 2
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.rank_D
+    recipe: matrix_rank
+    certificate: la-rank.sage
+  - claim: the kernel has dimension 1
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.nullity_D
+    recipe: dimension
+    certificate: la-dim-span.sage
+- label: def-linear-functional
+  claims:
+  - claim: the functional 2x + y
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.alpha_apply
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.alpha_apply
+    level: kernel-test
+    instances: 3
+- label: exm-functional-coordinate
+  claims:
+  - claim: the kernel of 2x + y is y = -2x
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.mem_ker_alpha
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.mem_ker_alpha
+    level: kernel-test
+    instances: 3
+  - claim: (1, -2) is in the kernel
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.alpha_kernel_vector
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: the level sets are parallel
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.alpha_level_sets
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.alpha_level_sets
+    level: kernel-test
+    instances: 3
+  - claim: coordinates are linear functionals
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.coordinate_functional
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.coordinate_functional
+    level: kernel-test
+    instances: 3
+- label: exm-functional-row
+  claims:
+  - claim: every functional is a row
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.functional_is_row
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.functional_is_row
+    level: kernel-test
+    instances: 3
+- label: exm-functional-evaluation
+  claims:
+  - claim: evaluation at 0 is linear
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.evaluation_linear
+    recipe: mathlib
+    why: a statement about arbitrary real functions; no recipe certifies a claim quantified over functions
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.evaluation_linear
+    level: kernel-test
+    instances: 3
+  - claim: integration over [0, 2 pi] is linear
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.integration_linear
+    recipe: mathlib
+    why: a statement about arbitrary real functions; no recipe certifies a claim quantified over functions
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.integration_linear
+    level: oracle-test
+    instances: 4
+- label: exr-functional-kernel
+  claims:
+  - claim: alpha = 3x - y + 2z
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.beta_apply
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.beta_apply
+    level: kernel-test
+    instances: 3
+  - claim: the kernel has dimension 2
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.finrank_ker_beta
+    recipe: dimension
+    certificate: la-dim-ker.sage
+  - claim: (1, 3, 0), (0, 2, 1) are in the kernel
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.beta_kernel_vectors
+    recipe: matrix_from_goal
+    certificate: la-functional-kernel.sage
+  - claim: the level sets are translates of the kernel
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.beta_level_set
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.beta_level_set
+    level: kernel-test
+    instances: 3
+- label: exr-functional-rows
+  claims:
+  - claim: every functional is a row
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.functional_is_row
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.functional_is_row
+    level: kernel-test
+    instances: 3
+  - claim: the row is unique
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.row_unique
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.LinearFunctionals.row_unique
+    level: kernel-test
+    instances: 3
+- label: exr-functional-integration
+  claims:
+  - claim: I(1) = 2 pi
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.integral_one
+    recipe: definite_integral
+    certificate: la-integral.sage
+  - claim: I(cos) = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.integral_cos_circle
+    recipe: definite_integral
+    certificate: la-integral.sage
+  - claim: I(sin) = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.integral_sin_circle
+    recipe: definite_integral
+    certificate: la-integral.sage
+  - claim: I(sin 2 phi) = 0
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.integral_sin_two
+    recipe: definite_integral
+    certificate: la-integral.sage
+  - claim: I(cos^2) = pi
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.integral_cos_sq_circle
+    recipe: definite_integral
+    certificate: la-integral.sage
+  - claim: linearity on two combinations
+    lean: KaluzaKlein.LinearAlgebra.LinearFunctionals.integral_f_g
+    recipe: definite_integral
+    certificate: la-integral.sage
+- label: def-dual-space
+  claims:
+  - claim: dim V* = dim V
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.finrank_dual
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.DualSpace.finrank_dual
+    level: kernel-test
+    instances: 4
+- label: exm-dual-space-rows
+  claims:
+  - claim: the dual of R^n has dimension n
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.finrank_dual_rn
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.DualSpace.finrank_dual_rn
+    level: kernel-test
+    instances: 3
+- label: exm-dual-space-cotangent
+  claims:
+  - claim: the cotangent space has dimension n
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.finrank_cotangent
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.DualSpace.finrank_cotangent
+    level: kernel-test
+    instances: 3
+- label: exm-dual-space-dual-dual
+  claims:
+  - claim: a vector acts by evaluation
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.doubleDual_apply
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.DualSpace.doubleDual_apply
+    level: kernel-test
+    instances: 3
+- label: exr-dual-rows
+  claims:
+  - claim: alpha(v) = 4
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.alpha_v
+    recipe: matrix_from_goal
+    certificate: la-dual-rows.sage
+  - claim: beta(v) = 8
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.beta_v
+    recipe: matrix_from_goal
+    certificate: la-dual-rows.sage
+  - claim: (alpha + beta)(v) = 12
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.alpha_add_beta_v
+    recipe: matrix_from_goal
+    certificate: la-dual-rows.sage
+  - claim: (4 alpha)(v) = 16
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.four_alpha_v
+    recipe: matrix_from_goal
+    certificate: la-dual-rows.sage
+  - claim: alpha = 2 e^1 + e^2
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.alpha_in_coordinates
+    recipe: matrix_from_goal
+    certificate: la-dual-rows.sage
+- label: exr-dual-dimension
+  claims:
+  - claim: dim V* = dim V
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.finrank_dual
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.DualSpace.finrank_dual
+    level: kernel-test
+    instances: 4
+  - claim: e^i(e_j) = delta
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.dualBasis_delta
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.DualSpace.dualBasis_delta
+    level: kernel-test
+    instances: 3
+  - claim: alpha = alpha(e_i) e^i
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.dual_expansion
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.DualSpace.dual_expansion
+    level: kernel-test
+    instances: 3
+- label: exr-dual-double
+  claims:
+  - claim: evaluation is injective
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.eval_injective
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.DualSpace.eval_injective
+    level: kernel-test
+    instances: 3
+- label: def-dual-basis
+  claims:
+  - claim: e^i(v) = v^i
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dualBasis_coord
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.DualBasis.dualBasis_coord
+    level: kernel-test
+    instances: 3
+  - claim: e^i(e_j) = delta
+    lean: KaluzaKlein.LinearAlgebra.DualSpace.dualBasis_delta
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.DualSpace.dualBasis_delta
+    level: kernel-test
+    instances: 3
+  - claim: the Kronecker table for the standard basis of R^3
+    lean: KaluzaKlein.Linear.dual_basis_delta
+    recipe: mathlib
+    why: a finite family of index cases; tested exhaustively at every index
+    test: KaluzaKlein.Linear.dual_basis_delta
+    level: kernel-test
+    instances: 9
+- label: exm-dual-standard
+  claims:
+  - claim: e^2(5, 7, 9) = 7
+    lean: KaluzaKlein.Linear.coord_basisFun
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.Linear.coord_basisFun
+    level: kernel-test
+    instances: 3
+- label: exm-dual-f
+  claims:
+  - claim: f^1(5, 4) = 2, f^2(5, 4) = 1
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_f_on_v
+    recipe: matrix_from_goal
+    certificate: la-dual-basis.sage
+  - claim: f^i(f_j) = delta
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_f_delta
+    recipe: matrix_from_goal
+    certificate: la-dual-basis.sage
+- label: exm-dual-coordinate-differentials
+  claims:
+  - claim: dx^i(d_j) = delta
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.coordinate_differentials
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.DualBasis.coordinate_differentials
+    level: kernel-test
+    instances: 4
+- label: exr-dual-basis
+  claims:
+  - claim: f^i(f_j) = delta
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_f_delta
+    recipe: matrix_from_goal
+    certificate: la-dual-basis.sage
+  - claim: the coordinates of (5, 4) are (2, 1)
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_f_on_v
+    recipe: matrix_from_goal
+    certificate: la-dual-basis.sage
+- label: exr-dual-basis-r3
+  claims:
+  - claim: b^i(b_j) = delta
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_b_delta
+    recipe: matrix_from_goal
+    certificate: la-dual-basis-r3.sage
+  - claim: the coordinates of (2, 3, 4) are (1/2, 5/2, 3/2)
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_b_on_w
+    recipe: matrix_from_goal
+    certificate: la-dual-basis-r3.sage
+- label: exr-dual-basis-transform
+  claims:
+  - claim: (A^-1)^i_k A^k_j = delta
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_transform_delta
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.DualBasis.dual_transform_delta
+    level: kernel-test
+    instances: 3
+  - claim: components transform with A^-1 and A, the pairing is invariant
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.pairing_invariant
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.DualBasis.pairing_invariant
+    level: kernel-test
+    instances: 3
+- label: prp-kernel-vector
+  claims:
+  - claim: A (1, 1, -1) = 0
+    lean: KaluzaKlein.Linear.A_kernel_vector
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: A (1, 1, -1) = 0, as a matrix product
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.A_mul_kernel
+    recipe: matrix_from_goal
+    certificate: la-kernel-image.sage
+  - claim: the second row is twice the first
+    lean: KaluzaKlein.Linear.A_rows_proportional
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exm-kernel-by-hand
+  claims:
+  - claim: both rows pair to zero with (1, 1, -1)
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.A_mul_kernel
+    recipe: matrix_from_goal
+    certificate: la-kernel-image.sage
+- label: exm-kernel-rank-nullity
+  claims:
+  - claim: rank A = 1
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.rank_A
+    recipe: matrix_rank
+    certificate: la-rank.sage
+  - claim: nullity A = 2
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.nullity_A
+    recipe: dimension
+    certificate: la-dim-span.sage
+- label: exm-kernel-lean-route
+  claims:
+  - claim: (-2, 1, 0) and t(1, 1, -1) are kernel vectors
+    lean: KaluzaKlein.LinearAlgebra.DualResults.A_mul_more_kernel
+    recipe: matrix_from_goal
+    certificate: la-kernel-image.sage
+- label: exr-kernel-basis
+  claims:
+  - claim: four kernel vectors
+    lean: KaluzaKlein.LinearAlgebra.DualResults.A_mul_kernel_vectors
+    recipe: matrix_from_goal
+    certificate: la-kernel-basis.sage
+  - claim: (1, 1, -1), (3, 0, -1) in the basis (-2, 1, 0), (-3, 0, 1)
+    lean: KaluzaKlein.LinearAlgebra.DualResults.kernel_coordinates
+    recipe: matrix_from_goal
+    certificate: la-kernel-basis.sage
+  - claim: a(1, 1, -1) + b(3, 0, -1) = 0 forces a = b = 0
+    lean: KaluzaKlein.LinearAlgebra.DualResults.kernel_pair_coefficients
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: (1, 1, -1), (3, 0, -1) are independent
+    lean: KaluzaKlein.LinearAlgebra.DualResults.kernel_pair_independent
+    recipe: independence
+    certificate: la-independence.sage
+  - claim: (1, 1, -1), (3, 0, -1) span the kernel
+    lean: KaluzaKlein.LinearAlgebra.DualResults.kernel_pair_spans
+    recipe: independence
+    certificate: la-span-ker.sage
+- label: exr-kernel-rows-rank
+  claims:
+  - claim: rank 1 iff proportional rows
+    lean: KaluzaKlein.LinearAlgebra.DualResults.rank_one_iff_proportional
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.DualResults.rank_one_iff_proportional
+    level: oracle-test
+    instances: 4
+  - claim: rank A = 1
+    lean: KaluzaKlein.LinearAlgebra.LinearMaps.rank_A
+    recipe: matrix_rank
+    certificate: la-rank.sage
+- label: exr-kernel-second-vector
+  claims:
+  - claim: A (3, 0, -1) = 0
+    lean: KaluzaKlein.LinearAlgebra.DualResults.A_mul_second
+    recipe: matrix_from_goal
+    certificate: la-kernel-image.sage
+  - claim: (3, 0, -1) is not a multiple of (1, 1, -1)
+    lean: KaluzaKlein.LinearAlgebra.DualResults.kernel_pair_independent
+    recipe: independence
+    certificate: la-independence.sage
+- label: prp-dual-basis
+  claims:
+  - claim: e^2(5, 7, 9) = 7
+    lean: KaluzaKlein.Linear.coord_basisFun
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.Linear.coord_basisFun
+    level: kernel-test
+    instances: 3
+  - claim: e^i(e_j) = delta
+    lean: KaluzaKlein.Linear.dual_basis_delta
+    recipe: mathlib
+    why: a finite family of index cases; tested exhaustively at every index
+    test: KaluzaKlein.Linear.dual_basis_delta
+    level: kernel-test
+    instances: 9
+  - claim: F^-1 F = 1
+    lean: KaluzaKlein.Linear.dual_f_mul
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+  - claim: the coordinates (2, 1) of (5, 4)
+    lean: KaluzaKlein.Linear.dual_f_coordinates
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: the coordinates as a matrix product
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_f_on_v
+    recipe: matrix_from_goal
+    certificate: la-dual-basis.sage
+- label: exm-dualbasis-table
+  claims:
+  - claim: the nine values form the identity
+    lean: KaluzaKlein.Linear.dual_basis_delta
+    recipe: mathlib
+    why: a finite family of index cases; tested exhaustively at every index
+    test: KaluzaKlein.Linear.dual_basis_delta
+    level: kernel-test
+    instances: 9
+  - claim: e^2(5, 7, 9) = 7
+    lean: KaluzaKlein.Linear.coord_basisFun
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.Linear.coord_basisFun
+    level: kernel-test
+    instances: 3
+- label: exm-dualbasis-f-product
+  claims:
+  - claim: 1/3 (2, -1; -1, 2) F = 1
+    lean: KaluzaKlein.Linear.dual_f_mul
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+- label: exm-dualbasis-coordinates
+  claims:
+  - claim: f^1(5, 4) = 2, f^2(5, 4) = 1
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_f_on_v
+    recipe: matrix_from_goal
+    certificate: la-dual-basis.sage
+  - claim: the same with the mulVec form
+    lean: KaluzaKlein.Linear.dual_f_coordinates
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exr-dual-f-apply
+  claims:
+  - claim: the coordinates of (1, 5) and (-1, 1)
+    lean: KaluzaKlein.LinearAlgebra.DualResults.dual_f_apply
+    recipe: matrix_from_goal
+    certificate: la-dual-basis.sage
+- label: exr-dual-f-check
+  claims:
+  - claim: f^i(f_j) = delta
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_f_delta
+    recipe: matrix_from_goal
+    certificate: la-dual-basis.sage
+  - claim: F^-1 F = 1
+    lean: KaluzaKlein.Linear.dual_f_mul
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+- label: exr-dual-basis-general
+  claims:
+  - claim: the dual basis is the rows of B^-1
+    lean: KaluzaKlein.LinearAlgebra.DualResults.dual_basis_rows
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.DualResults.dual_basis_rows
+    level: kernel-test
+    instances: 3
+  - claim: the standard basis is self-dual
+    lean: KaluzaKlein.LinearAlgebra.DualResults.dual_standard
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.DualResults.dual_standard
+    level: kernel-test
+    instances: 3
+  - claim: the dual basis of f
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_f_delta
+    recipe: matrix_from_goal
+    certificate: la-dual-basis.sage
+  - claim: the dual basis of b
+    lean: KaluzaKlein.LinearAlgebra.DualBasis.dual_b_delta
+    recipe: matrix_from_goal
+    certificate: la-dual-basis-r3.sage
+- label: def-bilinear-form
+  claims:
+  - claim: B(v, w) = B_ij v^i w^j
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.bilin_components
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.BilinearForms.bilin_components
+    level: kernel-test
+    instances: 3
+  - claim: B(e_i, e_j) = B_ij
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.bilin_on_basis
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.BilinearForms.bilin_on_basis
+    level: kernel-test
+    instances: 3
+- label: exm-bilinear-dot
+  claims:
+  - claim: the dot product has components delta
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.dot_product_form
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.BilinearForms.dot_product_form
+    level: kernel-test
+    instances: 3
+- label: exm-bilinear-minkowski
+  claims:
+  - claim: eta(w, w) = 1
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.eta_timelike_matrix
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: eta(v, v) = 0
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.eta_null_matrix
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exm-bilinear-general
+  claims:
+  - claim: alpha(v) beta(w) has components alpha_i beta_j
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.product_of_functionals
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: the determinant form is antisymmetric
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.det_form_antisymm
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exr-bilinear-check
+  claims:
+  - claim: v1 w2 and v1 w1 - 3 v2 w1 are bilinear
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.bilinear_examples
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: v . w + 1 is not bilinear
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.dot_plus_one_not_bilinear
+    recipe: nonlinearity
+    certificate: la-nonlinear.sage
+  - claim: abs(v) abs(w) is not bilinear
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.norm_product_not_bilinear
+    recipe: nonlinearity
+    certificate: la-nonlinear-norm.sage
+- label: exr-bilinear-matrix
+  claims:
+  - claim: the components (1, 2; -1, 0)
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.bilinear_matrix_formula
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: B(v, w) = -6
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.bilinear_matrix_vw
+    recipe: matrix_from_goal
+    certificate: la-bilinear-matrix.sage
+  - claim: B(w, v) = 15
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.bilinear_matrix_wv
+    recipe: matrix_from_goal
+    certificate: la-bilinear-matrix.sage
+  - claim: B is not symmetric
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.bilinear_matrix_not_symm
+    recipe: infeasibility
+    certificate: la-infeasible.sage
+- label: exr-bilinear-change-basis
+  claims:
+  - claim: B' = A^T B A
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.change_basis_form
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.BilinearForms.change_basis_form
+    level: kernel-test
+    instances: 3
+  - claim: the Gram matrix of f is (5, 4; 4, 5)
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.gram_f
+    recipe: matrix_from_goal
+    certificate: la-bilinear-change-basis.sage
+  - claim: abs(v)^2 = 41 in both coordinates
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.norm_sq_two_ways
+    recipe: matrix_from_goal
+    certificate: la-bilinear-change-basis.sage
+- label: def-symmetric-form
+  claims:
+  - claim: symmetric form iff symmetric matrix
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.symmetric_iff
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.SymmetricForms.symmetric_iff
+    level: kernel-test
+    instances: 3
+  - claim: the algebra of polarisation
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.polarisation_core
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: the polarisation identity
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.polarisation
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.SymmetricForms.polarisation
+    level: kernel-test
+    instances: 3
+- label: exm-symmetric-dot-minkowski
+  claims:
+  - claim: the dot product is symmetric
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.identity_symm
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.SymmetricForms.identity_symm
+    level: kernel-test
+    instances: 3
+  - claim: eta is symmetric
+    lean: KaluzaKlein.Linear.eta_symm
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exm-symmetric-quadratic
+  claims:
+  - claim: Q = x^2 + 4xy + 4y^2 is the form of S
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.quadratic_form_S
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: Q >= 0
+    lean: KaluzaKlein.Linear.S_quadratic_nonneg
+    recipe: sos
+    certificate: sos.sage
+- label: exm-symmetric-not
+  claims:
+  - claim: the determinant form is antisymmetric
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.det_form_antisymm
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: its quadratic form vanishes
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.det_form_quadratic_zero
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exr-symmetric-quadratic
+  claims:
+  - claim: the symmetric matrix of Q
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.quadratic_three
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: Q(1, 2, -1) = -8
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.quadratic_three_value
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exr-symmetric-decompose
+  claims:
+  - claim: B = S + A
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.decompose_B
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: S symmetric, A antisymmetric
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.decompose_parts
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: only S contributes to the quadratic form
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.antisym_part_quadratic
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: the decomposition is unique
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.decomposition_unique
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.SymmetricForms.decomposition_unique
+    level: kernel-test
+    instances: 3
+- label: exr-polarisation
+  claims:
+  - claim: the algebra of polarisation
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.polarisation_core
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: the polarisation identity for symmetric forms
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.polarisation
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.SymmetricForms.polarisation
+    level: kernel-test
+    instances: 3
+  - claim: it fails for the antisymmetric J
+    lean: KaluzaKlein.LinearAlgebra.SymmetricForms.polarisation_fails_antisym
+    recipe: matrix_from_goal
+    certificate: la-polarisation.sage
+- label: def-nondegenerate
+  claims:
+  - claim: non-degenerate iff det != 0
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.nondegenerate_iff_det
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.NondegenerateForms.nondegenerate_iff_det
+    level: oracle-test
+    instances: 4
+  - claim: raising undoes lowering
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.raise_lower
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.NondegenerateForms.raise_lower
+    level: kernel-test
+    instances: 3
+- label: exm-nondegenerate-minkowski
+  claims:
+  - claim: det eta = -1
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.det_eta_literal
+    recipe: matrix_from_goal
+    certificate: la-nondegenerate-test.sage
+  - claim: det delta = 1
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.det_delta
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: eta(v, v) = 0 for (1, 1, 0, 0)
+    lean: KaluzaKlein.Linear.eta_null
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exm-degenerate
+  claims:
+  - claim: det S = 0
+    lean: KaluzaKlein.Linear.S_det
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+  - claim: S (2, -1) = 0
+    lean: KaluzaKlein.Linear.S_kernel
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: (2, -1) pairs to zero with e1 and e2
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.S_kernel_pairing
+    recipe: matrix_from_goal
+    certificate: la-nondegenerate-test.sage
+- label: exm-nondegenerate-lowering
+  claims:
+  - claim: v_mu = (1, -1, 0, 0)
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.lower_null
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exr-lower-index
+  claims:
+  - claim: v_mu = (2, -1, 0, -3)
+    lean: KaluzaKlein.Linear.eta_lower
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: raising returns (2, 1, 0, 3)
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.raise_back
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: v_mu v^mu = -6
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.lower_index_norm
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: eta(v, v) = -6
+    lean: KaluzaKlein.Linear.eta_spacelike
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exr-nondegenerate-test
+  claims:
+  - claim: det eta = -1
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.det_eta_literal
+    recipe: matrix_from_goal
+    certificate: la-nondegenerate-test.sage
+  - claim: det S = 0
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.det_S_test
+    recipe: matrix_from_goal
+    certificate: la-nondegenerate-test.sage
+  - claim: the tridiagonal determinant is 4
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.det_tridiagonal
+    recipe: matrix_from_goal
+    certificate: la-nondegenerate-test.sage
+  - claim: (2, -1) pairs to zero
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.S_kernel_pairing
+    recipe: matrix_from_goal
+    certificate: la-nondegenerate-test.sage
+  - claim: the kernel of S is the line through (2, -1)
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.S_kernel_line
+    recipe: independence
+    certificate: la-span-ker.sage
+- label: exr-nondegenerate-iso
+  claims:
+  - claim: lowering is a bijection when det != 0
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.lowering_bijective
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.NondegenerateForms.lowering_bijective
+    level: kernel-test
+    instances: 3
+  - claim: non-degenerate iff det != 0
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.nondegenerate_iff_det
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.NondegenerateForms.nondegenerate_iff_det
+    level: oracle-test
+    instances: 4
+- label: def-signature
+  claims:
+  - claim: eta has signature (1, 3, 0)
+    lean: KaluzaKlein.LinearAlgebra.Signature.eta_signature
+    recipe: signature
+    certificate: la-signature.sage
+- label: exm-signature-euclid
+  claims:
+  - claim: the dot product has signature (3, 0, 0)
+    lean: KaluzaKlein.LinearAlgebra.Signature.euclid_signature
+    recipe: signature
+    certificate: la-signature.sage
+  - claim: v . v > 0 for v != 0
+    lean: KaluzaKlein.LinearAlgebra.Signature.dot_self_pos
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Signature.dot_self_pos
+    level: kernel-test
+    instances: 3
+- label: exm-signature-minkowski
+  claims:
+  - claim: eta has signature (1, 3, 0)
+    lean: KaluzaKlein.LinearAlgebra.Signature.eta_signature
+    recipe: signature
+    certificate: la-signature.sage
+  - claim: timelike, spacelike and null examples
+    lean: KaluzaKlein.LinearAlgebra.Signature.minkowski_types
+    recipe: matrix_from_goal
+    certificate: la-minkowski-signature.sage
+- label: exm-signature-degenerate
+  claims:
+  - claim: P^T S P = diag(1, 0)
+    lean: KaluzaKlein.Linear.S_sylvester
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+  - claim: det P = 1
+    lean: KaluzaKlein.LinearAlgebra.Signature.det_P
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: S has signature (1, 0, 1)
+    lean: KaluzaKlein.LinearAlgebra.Signature.S_signature
+    recipe: signature
+    certificate: la-signature.sage
+  - claim: the form vanishes along (-2, 1)
+    lean: KaluzaKlein.LinearAlgebra.Signature.S_null_direction
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exr-minkowski-signature
+  claims:
+  - claim: eta(v, v) = 0, eta(w, w) = 1
+    lean: KaluzaKlein.LinearAlgebra.Signature.minkowski_types
+    recipe: matrix_from_goal
+    certificate: la-minkowski-signature.sage
+  - claim: eta is symmetric
+    lean: KaluzaKlein.Linear.eta_symm
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: det eta = -1
+    lean: KaluzaKlein.Linear.eta_det
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: eta has signature (1, 3, 0)
+    lean: KaluzaKlein.LinearAlgebra.Signature.eta_signature
+    recipe: signature
+    certificate: la-signature.sage
+  - claim: S has signature (1, 0, 1)
+    lean: KaluzaKlein.LinearAlgebra.Signature.S_signature
+    recipe: signature
+    certificate: la-signature.sage
+  - claim: the dot product has signature (3, 0, 0)
+    lean: KaluzaKlein.LinearAlgebra.Signature.euclid_signature
+    recipe: signature
+    certificate: la-signature.sage
+- label: exr-signature-complete-square
+  claims:
+  - claim: the two forms as completed squares
+    lean: KaluzaKlein.LinearAlgebra.Signature.complete_squares
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: P^T S P = diag(1, 0)
+    lean: KaluzaKlein.Linear.S_sylvester
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+  - claim: P^T S' P = diag(1, -1)
+    lean: KaluzaKlein.LinearAlgebra.Signature.Sprime_congruence
+    recipe: matrix_from_goal
+    certificate: la-signature-complete-square.sage
+  - claim: Q' has signature (1, 1, 0)
+    lean: KaluzaKlein.LinearAlgebra.Signature.Sprime_signature
+    recipe: signature
+    certificate: la-signature.sage
+- label: exr-signature-3x3
+  claims:
+  - claim: eigenvector for 2
+    lean: KaluzaKlein.LinearAlgebra.Signature.B_eigen_two
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: eigenvector for 2 + sqrt 2
+    lean: KaluzaKlein.LinearAlgebra.Signature.B_eigen_plus
+    recipe: matrix_from_goal
+    certificate: la-sqrt-eigen.sage
+  - claim: eigenvector for 2 - sqrt 2
+    lean: KaluzaKlein.LinearAlgebra.Signature.B_eigen_minus
+    recipe: matrix_from_goal
+    certificate: la-sqrt-eigen.sage
+  - claim: the three eigenvalues are positive
+    lean: KaluzaKlein.LinearAlgebra.Signature.B_eigenvalues_pos
+    recipe: infeasibility
+    certificate: la-infeasible.sage
+  - claim: P^T B P = diag(2, 3/2, 4/3)
+    lean: KaluzaKlein.LinearAlgebra.Signature.B_congruence
+    recipe: matrix_from_goal
+    certificate: la-signature-3x3.sage
+  - claim: det P = 1
+    lean: KaluzaKlein.LinearAlgebra.Signature.det_P3
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: B has signature (3, 0, 0)
+    lean: KaluzaKlein.LinearAlgebra.Signature.B_signature
+    recipe: signature
+    certificate: la-signature.sage
+  - claim: eigenvectors of C for 1, -1, -1
+    lean: KaluzaKlein.LinearAlgebra.Signature.C_eigen
+    recipe: matrix_from_goal
+    certificate: la-signature-3x3.sage
+  - claim: Q^T C Q = diag(2, -2, -1)
+    lean: KaluzaKlein.LinearAlgebra.Signature.C_congruence
+    recipe: matrix_from_goal
+    certificate: la-signature-3x3.sage
+  - claim: det Q = -2
+    lean: KaluzaKlein.LinearAlgebra.Signature.det_Q3
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: C has signature (1, 2, 0)
+    lean: KaluzaKlein.LinearAlgebra.Signature.C_signature
+    recipe: signature
+    certificate: la-signature.sage
+- label: prp-minkowski-values
+  claims:
+  - claim: eta(v, v) = 0
+    lean: KaluzaKlein.Linear.eta_null
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: eta(w, w) = 1
+    lean: KaluzaKlein.Linear.eta_timelike
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: eta^T = eta
+    lean: KaluzaKlein.Linear.eta_symm
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: det eta = -1
+    lean: KaluzaKlein.Linear.eta_det
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: eta(v, v) = 0, as a matrix product
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.eta_null_matrix
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: eta(w, w) = 1, as a matrix product
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.eta_timelike_matrix
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: det eta = -1, by Laplace expansion
+    lean: KaluzaKlein.LinearAlgebra.NondegenerateForms.det_eta_literal
+    recipe: matrix_from_goal
+    certificate: la-nondegenerate-test.sage
+- label: exm-minkowski-null-hand
+  claims:
+  - claim: eta(v, v) = 1 - 1 = 0
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.eta_null_matrix
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exm-minkowski-det-hand
+  claims:
+  - claim: det diag(1, -1, -1, -1) = 1 (-1)(-1)(-1)
+    lean: KaluzaKlein.LinearAlgebra.MinkowskiResults.det_eta_by_hand
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: det of a diagonal matrix is the product of the diagonal
+    lean: KaluzaKlein.LinearAlgebra.MinkowskiResults.det_diagonal_prod
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MinkowskiResults.det_diagonal_prod
+    level: kernel-test
+    instances: 4
+- label: exm-minkowski-sign-det
+  claims:
+  - claim: det diag(1, -1, 1, 1) = -1
+    lean: KaluzaKlein.LinearAlgebra.MinkowskiResults.det_one_negative
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: det of a +-1 diagonal is (-1)^q
+    lean: KaluzaKlein.LinearAlgebra.MinkowskiResults.det_signs
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MinkowskiResults.det_signs
+    level: kernel-test
+    instances: 4
+- label: exr-minkowski-other-vectors
+  claims:
+  - claim: the three eta-norms -6, 0, -1
+    lean: KaluzaKlein.LinearAlgebra.MinkowskiResults.minkowski_classify
+    recipe: matrix_from_goal
+    certificate: la-minkowski-other-vectors.sage
+- label: exr-lorentz-boost
+  claims:
+  - claim: Lambda^T eta Lambda = eta
+    lean: KaluzaKlein.LinearAlgebra.MinkowskiResults.boost_preserves_eta
+    recipe: matrix_from_goal
+    certificate: la-lorentz-boost.sage
+  - claim: the type of every vector is preserved
+    lean: KaluzaKlein.LinearAlgebra.MinkowskiResults.preserves_norm
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MinkowskiResults.preserves_norm
+    level: kernel-test
+    instances: 3
+- label: exr-minkowski-inverse
+  claims:
+  - claim: eta eta = 1
+    lean: KaluzaKlein.LinearAlgebra.MinkowskiResults.eta_mul_eta
+    recipe: matrix_from_goal
+    certificate: la-minkowski-inverse.sage
+  - claim: eta^-1 = eta
+    lean: KaluzaKlein.LinearAlgebra.MinkowskiResults.eta_inv
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: def-multilinear-map
+  claims:
+  - claim: det is linear in a row
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.det_linear_first_row
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: det is mathlib's alternating map of the rows
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.det_is_alternating
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MultilinearMaps.det_is_alternating
+    level: kernel-test
+    instances: 3
+- label: exm-multilinear-det
+  claims:
+  - claim: det is linear in a row
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.det_linear_first_row
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: swapping two rows changes the sign
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.det_swap_rows
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: exm-multilinear-product
+  claims:
+  - claim: the product of three functionals is trilinear
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.product_functionals_linear
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MultilinearMaps.product_functionals_linear
+    level: kernel-test
+    instances: 3
+- label: exm-multilinear-riemann
+  claims:
+  - claim: sectional curvature is scale invariant, not bilinear
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.sectional_scale_invariant
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.MultilinearMaps.sectional_scale_invariant
+    level: kernel-test
+    instances: 3
+- label: exr-multilinear-check
+  claims:
+  - claim: the triple product is a determinant
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.triple_product_det
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.MultilinearMaps.triple_product_det
+    level: kernel-test
+    instances: 3
+  - claim: abs(-u) = abs(u)
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.norm_not_linear
+    recipe: nonlinearity
+    certificate: la-nonlinear.sage
+  - claim: (u . v)(v . w) is quadratic in v
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.quadratic_in_v
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MultilinearMaps.quadratic_in_v
+    level: kernel-test
+    instances: 3
+- label: exr-trilinear-components
+  claims:
+  - claim: the components T_123 = 1, T_213 = -1
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.T_components
+    recipe: mathlib
+    why: a finite family of index cases; tested exhaustively at every index
+    test: KaluzaKlein.LinearAlgebra.MultilinearMaps.T_components
+    level: kernel-test
+    instances: 27
+  - claim: 27 components
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.card_fin_prod3
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MultilinearMaps.card_fin_prod3
+    level: kernel-test
+    instances: 6
+  - claim: T(u, v, w) = 1
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.T_value
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: linearity in the first slot
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.T_linear
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.MultilinearMaps.T_linear
+    level: kernel-test
+    instances: 3
+- label: exr-multilinear-alternating
+  claims:
+  - claim: alternating maps vanish on repeated arguments
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.alternating_repeated
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.MultilinearMaps.alternating_repeated
+    level: kernel-test
+    instances: 3
+  - claim: the algebra of the converse
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.antisym_core
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+  - claim: B(v, v) = 0 for all v gives antisymmetry
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.antisym_of_diag_zero
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.MultilinearMaps.antisym_of_diag_zero
+    level: kernel-test
+    instances: 3
+  - claim: equal rows give det 0
+    lean: KaluzaKlein.LinearAlgebra.MultilinearMaps.det_repeated_rows
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: def-tensor-product-space
+  claims:
+  - claim: dim (V (x) W) = dim V dim W
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.finrank_tensor_general
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.TensorProducts.finrank_tensor_general
+    level: kernel-test
+    instances: 3
+  - claim: its elements are e_i (x) f_a
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.tensorBasis_apply
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.TensorProducts.tensorBasis_apply
+    level: kernel-test
+    instances: 3
+- label: exm-tensor-space-dim
+  claims:
+  - claim: dim (R^3 (x) R^3) = 9
+    lean: KaluzaKlein.Linear.finrank_tensor
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: nine basis tensors
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.card_fin_prod
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.TensorProducts.card_fin_prod
+    level: kernel-test
+    instances: 6
+- label: exm-tensor-space-dual
+  claims:
+  - claim: dim (V* (x) V*) = 9
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.finrank_dual_dual
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exm-tensor-space-mixed
+  claims:
+  - claim: alpha (x) v acts as w -> alpha(w) v
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.dualTensor_apply
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.TensorProducts.dualTensor_apply
+    level: kernel-test
+    instances: 3
+  - claim: dim (V* (x) V) = 9
+    lean: KaluzaKlein.Linear.finrank_dual_tensor
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exr-tensor-components
+  claims:
+  - claim: the components of u (x) v
+    lean: KaluzaKlein.Linear.outer_product
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: dim (V (x) V) = 9
+    lean: KaluzaKlein.Linear.finrank_tensor
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: dim (V* (x) V) = 9
+    lean: KaluzaKlein.Linear.finrank_dual_tensor
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: a(u) = -2
+    lean: KaluzaKlein.Linear.contraction_a_u
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: a(u) v = (-2, 0, 2)
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.contract_a_uv
+    recipe: matrix_from_goal
+    certificate: la-tensor-components.sage
+  - claim: u = (1, 1, 3) in f
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.u_in_f
+    recipe: matrix_from_goal
+    certificate: la-tensor-components.sage
+  - claim: u (x) v in f
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.uv_in_f
+    recipe: matrix_from_goal
+    certificate: la-tensor-components.sage
+  - claim: T in f
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.T_in_f
+    recipe: matrix_from_goal
+    certificate: la-tensor-components.sage
+  - claim: tr T = 9
+    lean: KaluzaKlein.Linear.trace_T
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+  - claim: tr T' = 9
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.trace_T_in_f
+    recipe: matrix_from_goal
+    certificate: la-tensor-components.sage
+- label: exr-tensor-dim-general
+  claims:
+  - claim: 2 * 3 * 4 = 24
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.finrank_triple_tensor
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: n^k components
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.multi_index_count
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.TensorProducts.multi_index_count
+    level: kernel-test
+    instances: 6
+- label: exr-tensor-basis-r2
+  claims:
+  - claim: four basis tensors
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.card_fin_prod
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.TensorProducts.card_fin_prod
+    level: kernel-test
+    instances: 6
+  - claim: T(alpha, beta) = 3T11 - T12 + 6T21 - 2T22
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.tensor_eval_r2
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+- label: def-elementary-tensor
+  claims:
+  - claim: components v^i w^a
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.outer_components
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.ElementaryTensors.outer_components
+    level: kernel-test
+    instances: 3
+  - claim: v (x) w is bilinear
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.tmul_bilinear
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.ElementaryTensors.tmul_bilinear
+    level: kernel-test
+    instances: 3
+  - claim: the outer product of (1, 2, 3), (1, 0, -1)
+    lean: KaluzaKlein.Linear.outer_product
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: exm-elementary-outer
+  claims:
+  - claim: the outer product
+    lean: KaluzaKlein.Linear.outer_product
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: it has rank one
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.rank_outer
+    recipe: matrix_rank
+    certificate: la-rank.sage
+  - claim: diag(1, 1, 0) has rank two
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.rank_diag_110
+    recipe: matrix_rank
+    certificate: la-rank.sage
+- label: exm-elementary-metric
+  claims:
+  - claim: a metric is a sum of g_ij e^i (x) e^j
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.metric_sum_elementary
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.ElementaryTensors.metric_sum_elementary
+    level: kernel-test
+    instances: 3
+- label: exm-elementary-matrix
+  claims:
+  - claim: elementary tensors have rank at most one
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.rank_elementary_le
+    recipe: mathlib
+    why: a statement for every vector, matrix or scalar of a fixed space whose entries the recipes cannot read (opaque variables,
+      hypotheses on them, or values of a definition); tested at explicit instances
+    test: KaluzaKlein.LinearAlgebra.ElementaryTensors.rank_elementary_le
+    level: kernel-test
+    instances: 3
+  - claim: 1 = e1 (x) e1 + e2 (x) e2 + e3 (x) e3
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.identity_sum_elementary
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: the identity is not elementary
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.identity_not_elementary
+    recipe: matrix_rank
+    certificate: la-rank.sage
+- label: exr-rank-one
+  claims:
+  - claim: the first matrix is u (x) v
+    lean: KaluzaKlein.Linear.outer_product
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: it has rank one
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.rank_outer
+    recipe: matrix_rank
+    certificate: la-rank.sage
+  - claim: the identity is not elementary
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.identity_not_elementary
+    recipe: matrix_rank
+    certificate: la-rank.sage
+- label: exr-elementary-evaluate
+  claims:
+  - claim: (u (x) v)(a, b) = 2 = a(u) b(v)
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.elementary_evaluate
+    recipe: matrix_from_goal
+    certificate: la-elementary-evaluate.sage
+  - claim: the component matrix has rank 1
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.rank_outer
+    recipe: matrix_rank
+    certificate: la-rank.sage
+- label: exr-elementary-sum
+  claims:
+  - claim: u (x) v + lambda u (x) z = u (x) (v + lambda z)
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.elementary_sum_left
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.ElementaryTensors.elementary_sum_left
+    level: kernel-test
+    instances: 3
+  - claim: u (x) v + w (x) mu v = (u + mu w) (x) v
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.elementary_sum_right
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.ElementaryTensors.elementary_sum_right
+    level: kernel-test
+    instances: 3
+  - claim: diag(1, 1, 0) has rank 2
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.rank_diag_110
+    recipe: matrix_rank
+    certificate: la-rank.sage
+  - claim: e1 (x) e1 + e2 (x) e2 is not elementary
+    lean: KaluzaKlein.LinearAlgebra.ElementaryTensors.diag_110_not_elementary
+    recipe: matrix_rank
+    certificate: la-rank.sage
+- label: def-tensor-type
+  claims:
+  - claim: n^(r + s) components
+    lean: KaluzaKlein.LinearAlgebra.MixedTensors.finrank_mixed
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MixedTensors.finrank_mixed
+    level: kernel-test
+    instances: 6
+- label: exm-type-metric
+  claims:
+  - claim: delta is the identity map
+    lean: KaluzaKlein.LinearAlgebra.MixedTensors.delta_identity
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MixedTensors.delta_identity
+    level: kernel-test
+    instances: 3
+  - claim: g^ij g_jk = delta
+    lean: KaluzaKlein.LinearAlgebra.MixedTensors.inverse_metric
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MixedTensors.inverse_metric
+    level: kernel-test
+    instances: 3
+- label: exm-type-riemann
+  claims:
+  - claim: the component counts in four dimensions
+    lean: KaluzaKlein.LinearAlgebra.MixedTensors.curvature_counts
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exm-type-sage
+  claims:
+  - claim: the ranks of the tensor modules
+    lean: KaluzaKlein.LinearAlgebra.MixedTensors.rank_three_counts
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exr-type-classify
+  none: the types are read off the free indices of index expressions; the block states a notation, not a value, identity or
+    count (the component counts are verified in exr-type-count-components)
+- label: exr-type-count-components
+  claims:
+  - claim: n^(r + s) components
+    lean: KaluzaKlein.LinearAlgebra.MixedTensors.finrank_mixed
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.MixedTensors.finrank_mixed
+    level: kernel-test
+    instances: 6
+  - claim: 256 for the Riemann tensor
+    lean: KaluzaKlein.LinearAlgebra.MixedTensors.curvature_counts
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exr-tensor-type-sage
+  claims:
+  - claim: the ranks 3, 3, 9, 9, 27, 81
+    lean: KaluzaKlein.LinearAlgebra.MixedTensors.rank_three_counts
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: the identity map has the identity matrix of components
+    lean: KaluzaKlein.LinearAlgebra.MixedTensors.identity_components
+    recipe: mathlib
+    why: a finite family of index cases; tested exhaustively at every index
+    test: KaluzaKlein.LinearAlgebra.MixedTensors.identity_components
+    level: kernel-test
+    instances: 9
+- label: def-tensor-components
+  claims:
+  - claim: upper indices with A^-1, lower with A
+    lean: KaluzaKlein.LinearAlgebra.Components.upper_lower_invariant
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.upper_lower_invariant
+    level: kernel-test
+    instances: 3
+  - claim: 'two lower indices: B'' = A^T B A'
+    lean: KaluzaKlein.LinearAlgebra.Components.two_lower
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.two_lower
+    level: kernel-test
+    instances: 3
+- label: exm-components-outer
+  claims:
+  - claim: u = (1, 1, 3) in f
+    lean: KaluzaKlein.LinearAlgebra.Components.u_components_f
+    recipe: matrix_from_goal
+    certificate: la-covector-transform.sage
+  - claim: u (x) v in f
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.uv_in_f
+    recipe: matrix_from_goal
+    certificate: la-tensor-components.sage
+- label: exm-components-metric
+  claims:
+  - claim: g' = J^T g J
+    lean: KaluzaKlein.LinearAlgebra.Components.two_lower
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.two_lower
+    level: kernel-test
+    instances: 3
+  - claim: det g' = (det J)^2 det g
+    lean: KaluzaKlein.LinearAlgebra.Components.det_two_lower
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.det_two_lower
+    level: kernel-test
+    instances: 3
+- label: exm-components-basis-independent
+  claims:
+  - claim: the trace of a (1, 1) tensor
+    lean: KaluzaKlein.LinearAlgebra.Components.trace_mixed
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.trace_mixed
+    level: kernel-test
+    instances: 3
+  - claim: the determinant of a (1, 1) tensor
+    lean: KaluzaKlein.LinearAlgebra.Components.det_mixed
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.det_mixed
+    level: kernel-test
+    instances: 3
+  - claim: det of a (0, 2) tensor picks up (det A)^2
+    lean: KaluzaKlein.LinearAlgebra.Components.det_two_lower
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.det_two_lower
+    level: kernel-test
+    instances: 3
+- label: exr-transform-components
+  claims:
+  - claim: A (1, 1, 3) = u
+    lean: KaluzaKlein.LinearAlgebra.Components.u_components_f
+    recipe: matrix_from_goal
+    certificate: la-covector-transform.sage
+  - claim: the primed components are forced
+    lean: KaluzaKlein.LinearAlgebra.Components.u_components_unique
+    recipe: ideal_membership
+    certificate: ideal_membership.sage
+- label: exr-covector-transform
+  claims:
+  - claim: a' = a A = (1, 0, -1)
+    lean: KaluzaKlein.LinearAlgebra.Components.a_components_f
+    recipe: matrix_from_goal
+    certificate: la-covector-transform.sage
+  - claim: a'_i u'^i = a_i u^i = -2
+    lean: KaluzaKlein.LinearAlgebra.Components.pairing_both_bases
+    recipe: matrix_from_goal
+    certificate: la-covector-transform.sage
+  - claim: the pairing is invariant in general
+    lean: KaluzaKlein.LinearAlgebra.Components.upper_lower_invariant
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.upper_lower_invariant
+    level: kernel-test
+    instances: 3
+- label: exr-components-bilinear-transform
+  claims:
+  - claim: B' = A^T B A
+    lean: KaluzaKlein.LinearAlgebra.Components.two_lower
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.two_lower
+    level: kernel-test
+    instances: 3
+  - claim: det B' = (det A)^2 det B
+    lean: KaluzaKlein.LinearAlgebra.Components.det_two_lower
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.det_two_lower
+    level: kernel-test
+    instances: 3
+  - claim: det T' = det T
+    lean: KaluzaKlein.LinearAlgebra.Components.det_mixed
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Components.det_mixed
+    level: kernel-test
+    instances: 3
+- label: def-contraction
+  claims:
+  - claim: the pairing is a contraction
+    lean: KaluzaKlein.LinearAlgebra.Contraction.pairing_is_contraction
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Contraction.pairing_is_contraction
+    level: kernel-test
+    instances: 3
+  - claim: the trace does not depend on the basis
+    lean: KaluzaKlein.Linear.trace_basis_independent
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.Linear.trace_basis_independent
+    level: kernel-test
+    instances: 3
+- label: exm-contraction-trace
+  claims:
+  - claim: tr T = 9
+    lean: KaluzaKlein.Linear.trace_T
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+  - claim: tr (Q T P) = tr T when Q P = 1
+    lean: KaluzaKlein.Linear.trace_basis_independent
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.Linear.trace_basis_independent
+    level: kernel-test
+    instances: 3
+- label: exm-contraction-ricci
+  none: recalls the definitions of the Ricci tensor and the scalar curvature as contractions (@sec-ricci); states no value
+    or identity
+- label: exm-contraction-pairing
+  claims:
+  - claim: a(u) = -2
+    lean: KaluzaKlein.Linear.contraction_a_u
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+  - claim: -2 v = (-2, 0, 2)
+    lean: KaluzaKlein.LinearAlgebra.Contraction.contraction_pairing
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: a contracted with u (x) v
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.contract_a_uv
+    recipe: matrix_from_goal
+    certificate: la-tensor-components.sage
+- label: exr-contraction-trace-invariance
+  claims:
+  - claim: tr (XY) = tr (YX)
+    lean: KaluzaKlein.LinearAlgebra.Contraction.trace_cyclic
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Contraction.trace_cyclic
+    level: kernel-test
+    instances: 3
+  - claim: tr (A^-1 T A) = tr T
+    lean: KaluzaKlein.Linear.trace_basis_independent
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.Linear.trace_basis_independent
+    level: kernel-test
+    instances: 3
+- label: exr-contraction-count
+  claims:
+  - claim: 2 * 2 = 4 single contractions
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.card_fin_prod
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.TensorProducts.card_fin_prod
+    level: kernel-test
+    instances: 6
+  - claim: contracting i-k and j-l gives alpha(u) beta(v)
+    lean: KaluzaKlein.LinearAlgebra.Contraction.elementary_full_contraction
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Contraction.elementary_full_contraction
+    level: kernel-test
+    instances: 3
+  - claim: contracting i-l and j-k gives beta(u) alpha(v)
+    lean: KaluzaKlein.LinearAlgebra.Contraction.elementary_cross_contraction
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.Contraction.elementary_cross_contraction
+    level: kernel-test
+    instances: 3
+- label: exr-contraction-sage
+  claims:
+  - claim: tr T = 9
+    lean: KaluzaKlein.Linear.trace_T
+    recipe: matrix_from_goal
+    certificate: matrix_from_goal.sage
+  - claim: the contraction of S is (3, 3, 4)
+    lean: KaluzaKlein.LinearAlgebra.Contraction.S_contraction_component
+    recipe: mathlib
+    why: a finite family of index cases; tested exhaustively at every index
+    test: KaluzaKlein.LinearAlgebra.Contraction.S_contraction_component
+    level: kernel-test
+    instances: 3
+  - claim: a(u) = -2
+    lean: KaluzaKlein.Linear.contraction_a_u
+    recipe: matrix_from_goal
+    certificate: la-matrix-named.sage
+- label: prp-tensor-dimension
+  claims:
+  - claim: dim (R^3 (x) R^3) = 9
+    lean: KaluzaKlein.Linear.finrank_tensor
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: dim ((R^3)* (x) R^3) = 9
+    lean: KaluzaKlein.Linear.finrank_dual_tensor
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exm-tensordim-basis-count
+  claims:
+  - claim: nine elements
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.card_fin_prod
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.TensorProducts.card_fin_prod
+    level: kernel-test
+    instances: 6
+- label: exm-tensordim-lean
+  claims:
+  - claim: dim (V* (x) V*) = 9
+    lean: KaluzaKlein.LinearAlgebra.TensorProducts.finrank_dual_dual
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exm-tensordim-sage
+  claims:
+  - claim: dim (R^3 (x) R) = 3
+    lean: KaluzaKlein.LinearAlgebra.TensorResults.finrank_tensor_R
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exr-tensordim-r2-r3
+  claims:
+  - claim: dim (R^2 (x) R^3) = 6
+    lean: KaluzaKlein.LinearAlgebra.TensorResults.finrank_tensor_23
+    recipe: dimension
+    certificate: la-dim-product.sage
+  - claim: the 2 x 3 arrays have dimension 6
+    lean: KaluzaKlein.LinearAlgebra.TensorResults.finrank_matrix_23
+    recipe: dimension
+    certificate: la-dim-product.sage
+- label: exr-tensordim-lean-reading
+  claims:
+  - claim: dim (V* (x) V) = (dim V)^2
+    lean: KaluzaKlein.LinearAlgebra.TensorResults.finrank_dual_tensor_general
+    recipe: mathlib
+    why: a statement about every field, vector space or index type (types as variables); no recipe certifies a claim quantified
+      over spaces
+    test: KaluzaKlein.LinearAlgebra.TensorResults.finrank_dual_tensor_general
+    level: kernel-test
+    instances: 4
+- label: exr-symmetric-tensors-dim
+  claims:
+  - claim: the counts for n = 2, 3, 4
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym
+    level: kernel-test
+    instances: 5
+  - claim: the counts for n = 2, 3, 4
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_antisym
+    level: kernel-test
+    instances: 5
+  - claim: they add up to n^2
+    lean: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym_add_antisym
+    recipe: mathlib
+    why: a statement in every dimension or size; no recipe certifies a claim quantified over a natural-number parameter
+    test: KaluzaKlein.LinearAlgebra.VectorSpaces.finrank_sym_add_antisym
+    level: kernel-test
+    instances: 5
+- label: exr-la-gram-f
+  claims:
+  - claim: G = A^T A = (5, 4; 4, 5)
+    lean: KaluzaKlein.LinearAlgebra.BilinearForms.gram_f
+    recipe: matrix_from_goal
+    certificate: la-bilinear-change-basis.sage
+  - claim: det G = 9 = (det A)^2
+    lean: KaluzaKlein.LinearAlgebra.Exercises.det_gram
+    recipe: matrix_from_goal
+    certificate: la-la-gram-f.sage
+  - claim: P^T G P = diag(5, 9/5)
+    lean: KaluzaKlein.LinearAlgebra.Exercises.gram_congruence
+    recipe: matrix_from_goal
+    certificate: la-la-gram-f.sage
+  - claim: det P = 1
+    lean: KaluzaKlein.LinearAlgebra.Exercises.det_gram_P
+    recipe: matrix_from_goal
+    certificate: la-matrix.sage
+  - claim: G has signature (2, 0, 0)
+    lean: KaluzaKlein.LinearAlgebra.Exercises.gram_signature
+    recipe: signature
+    certificate: la-signature.sage
+  - claim: lowering to (14, 13) and raising back
+    lean: KaluzaKlein.LinearAlgebra.Exercises.gram_lower_raise
+    recipe: matrix_from_goal
+    certificate: la-la-gram-f.sage
+  - claim: v_i v^i = 41 = abs(v)^2
+    lean: KaluzaKlein.LinearAlgebra.Exercises.gram_invariant
+    recipe: matrix_from_goal
+    certificate: la-la-gram-f.sage
+- label: exr-la-map-tensor
+  claims:
+  - claim: T' = A^-1 T A
+    lean: KaluzaKlein.LinearAlgebra.Exercises.map_in_f
+    recipe: matrix_from_goal
+    certificate: la-la-map-tensor.sage
+  - claim: traces and determinants agree
+    lean: KaluzaKlein.LinearAlgebra.Exercises.map_invariants
+    recipe: matrix_from_goal
+    certificate: la-la-map-tensor.sage
+  - claim: T' acts on f-coordinates
+    lean: KaluzaKlein.LinearAlgebra.Exercises.map_on_v
+    recipe: matrix_from_goal
+    certificate: la-la-map-tensor.sage
+- label: exr-la-field-strength
+  claims:
+  - claim: F^{mu nu} = eta F eta
+    lean: KaluzaKlein.LinearAlgebra.Exercises.field_strength_raised
+    recipe: matrix_from_goal
+    certificate: la-la-field-strength.sage
+  - claim: F_{mu nu} F^{mu nu} = 2 (B^2 - E^2)
+    lean: KaluzaKlein.LinearAlgebra.Exercises.field_strength_invariant
+    recipe: matrix_from_goal
+    certificate: la-la-field-strength.sage

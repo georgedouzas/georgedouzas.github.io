@@ -32,6 +32,8 @@ The field $\mathbb{C}$, modulus and argument, the exponential and the logarithm,
 notions of this section are the vocabulary of the chapter; the single proposition at its end, on the roots of
 unity, exercises all of them on explicit numbers.
 
+For more on this topic, see @yu2022problems [Ch. 1-2, Ch. 4].
+
 ![The complex plane. Left: $z = 2 + i$, its conjugate $\bar z = 2 - i$, its modulus $|z| = \sqrt 5$, its argument,
 and the six sixth roots of unity on the unit circle. Right: the imaginary part of the principal logarithm,
 $\operatorname{Arg} z \in (-\pi, \pi]$, which jumps by $2\pi$ across the branch cut along the negative real axis.
@@ -1537,6 +1539,8 @@ complex variable is differentiable when its difference quotient has a limit that
 of approach; this single requirement, written out in real and imaginary parts, is the pair of Cauchy-Riemann
 equations, and it forces the real and imaginary parts to be harmonic and the map to preserve angles.
 
+For more on this topic, see @yu2022problems [Ch. 4].
+
 ![Holomorphic functions seen in two ways. Left: domain colouring of $f(z) = (z - 1)/(z^2 + 1)$, hue encoding
 $\arg f(z)$ and brightness $|f(z)|$; the zero at $z = 1$ and the poles at $z = \pm i$ are the points where all hues
 meet. Right: the image of the Cartesian grid under $z \mapsto z^2$; the image curves still meet at right angles,
@@ -2985,6 +2989,8 @@ that it always does locally; the integral formula then expresses a holomorphic f
 its values on the curve, from which infinite differentiability, the Taylor series of @sec-residues and
 Liouville's theorem follow.
 
+For more on this topic, see @yu2022problems [Ch. 6].
+
 ![Contours. Left: the positively oriented unit circle $|z| = 1$, enclosing the pole of $1/z$ and not that of
 $1/(z - 3)$. Right: the closed semicircular contour $[-R, R] + C_R$ used for real integrals, enclosing the pole
 $i$ of $1/(1 + z^2)$ and the poles $e^{i\pi/4}$, $e^{3i\pi/4}$ of $1/(1 + z^4)$ in the upper half-plane, but not
@@ -4195,6 +4201,8 @@ Taylor and Laurent series, poles, the residue theorem and real integrals compute
 formula expands a holomorphic function in a power series on every disc where it is holomorphic, and in a
 two-sided series on every annulus; the coefficient of $1/(z - z_0)$ in the latter, the residue, is all that a
 closed contour integral sees, and the residue theorem turns the evaluation of integrals into algebra.
+
+For more on this topic, see @magnus2023essential [Ch. 3] and @yu2022problems [Ch. 5, Ch. 9].
 
 ![Laurent series of $f(z) = 1/((z - 1)(z - 2))$. Left: the three regions $|z| < 1$, $1 < |z| < 2$ and $|z| > 2$ on
 which $f$ has three different expansions, separated by circles through the poles. Right: the error
@@ -5518,6 +5526,8 @@ deformation. A holomorphic function is determined by its values on any small set
 formula valid on a half-plane defines a function far beyond it; the Gamma and zeta functions are the standard
 examples, and the rotation of an integration contour from the real to the imaginary axis, Wick rotation, is the
 same principle applied to integrals.
+
+For more on this topic, see @yu2022problems [Ch. 7-8].
 
 ![The Gamma function and Wick rotation. Left: $\Gamma(x)$ on the real line, with its poles at $0, -1, -2, \dots$
 and the values $\Gamma(n + 1) = n!$. Right: the poles $\pm(E - i\epsilon)$ of $1/(k^2 - E^2 + i\epsilon)$ and the

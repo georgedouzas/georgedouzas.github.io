@@ -1,0 +1,76 @@
+{"target": "KaluzaKlein.RealAnalysis.MultipleIntegrals.inv_iterated_deriv",
+ "statement":
+ "∀ (n : ℕ) (a : ℝ), a ≠ 0 → (-1) ^ n * iteratedDeriv n (fun a => a⁻¹) a = ↑n ! * a⁻¹ ^ (n + 1)",
+ "seed": 0,
+ "script_hash": "15017970612161105624",
+ "script":
+ "# name: ra-inv-iterated-deriv-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.MultipleIntegrals.inv_iterated_deriv file \"ra-inv-iterated-deriv-test.sage\"\n# description: Sage's (-1)ⁿ (d/da)ⁿ a⁻¹ = n! a^(-n-1)\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\na = var('a')\ninstances = [O([str(n), str(av), '(by norm_num)'], ((-1) ** n * diff(1 / a, a, n)).subs(a=av), factorial(n) * SR(av) ** (-n - 1), edge=bool(n == 0))\n             for n, av in [(0, 1), (1, 2), (3, QQ(1) / 2), (5, -1)]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2"],
+  "universal":
+  [{"type": "ℕ", "name": "n"},
+   {"type": "ℝ", "name": "a"},
+   {"type": "a ≠ 0", "name": "ha"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "a ≠ 0",
+    "rel": "ne",
+    "poly": "(x0) - (0)",
+    "name": "ha",
+    "expr": "(x0) - (0)"}],
+  "goal":
+  {"text": "(-1) ^ n * iteratedDeriv n (fun a => a⁻¹) a = ↑n ! * a⁻¹ ^ (n + 1)",
+   "rel": "eq",
+   "kind": "other",
+   "expr":
+   "((((-1))^(x1) * x2)) - ((typed(factorial(x1), 'ℕ') * ((1 / x0))^((x1 + 1))))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "a ≠ 0", "kind": "ne", "expr": "x0", "discharged_by": "ha"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["a", "n", "iteratedDeriv n (fun a => a⁻¹) a"],
+  "atom_types": ["ℝ", "ℕ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1", "2", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.2500000000000000000000000000000000000000000000000000000000000000000000000000000 .. 0.2500000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.2500000000000000000000000000000000000000000000000000000000000000000000000000000 .. 0.2500000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["3", "1/2", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[96.00000000000000000000000000000000000000000000000000000000000000000000000000000 .. 96.00000000000000000000000000000000000000000000000000000000000000000000000000000] == [96.00000000000000000000000000000000000000000000000000000000000000000000000000000 .. 96.00000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["5", "-1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[120.0000000000000000000000000000000000000000000000000000000000000000000000000000 .. 120.0000000000000000000000000000000000000000000000000000000000000000000000000000] == [120.0000000000000000000000000000000000000000000000000000000000000000000000000000 .. 120.0000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

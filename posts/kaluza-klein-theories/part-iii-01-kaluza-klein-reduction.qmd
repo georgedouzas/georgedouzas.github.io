@@ -37,6 +37,8 @@ inverse and its determinant. Our sources are @overduin1998 [Sec. 3] and @duff199
 those of @sec-conventions, signature $(+, -, -, -, -)$ with the fifth coordinate $y$: the circle direction is spacelike,
 so the internal block of the metric carries a minus sign (@sec-conventions-indices).
 
+For more on this topic, see @emam2021covariant [Sec. 10.4] and @krasnov2020formulations [Sec. 2.6, Sec. 3.6].
+
 ### The cylinder condition
 
 A metric on $M_4 \times S^1$ may depend on all five coordinates. Kaluza's first assumption removes the dependence on

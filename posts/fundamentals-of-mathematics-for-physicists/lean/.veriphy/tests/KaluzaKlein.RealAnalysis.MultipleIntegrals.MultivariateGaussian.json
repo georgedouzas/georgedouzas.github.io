@@ -1,0 +1,75 @@
+{"target": "KaluzaKlein.RealAnalysis.MultipleIntegrals.MultivariateGaussian",
+ "statement":
+ "∀ (n : ℕ) (A : Matrix (Fin n) (Fin n) ℝ),\n  A.PosDef → ∫ (x : Fin n → ℝ), rexp (-(x ⬝ᵥ A *ᵥ x) / 2) = (2 * π) ^ (↑n / 2) / √A.det",
+ "seed": 0,
+ "script_hash": "9685710858371335437",
+ "script":
+ "# name: ra-multivariategaussian-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.MultipleIntegrals.MultivariateGaussian file \"ra-multivariategaussian-test.sage\"\n# description: Sage integrates e^(-xᵀAx/2) over ℝ² exactly for positive definite 2 × 2 matrices and compares with 2π/√det A\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx, y = var('x y')\ninstances = []\nfor A, edge in [([[1, 0], [0, 1]], True), ([[2, 1], [1, 2]], False), ([[3, -1], [-1, 1]], False)]:\n    M = matrix(QQ, A)\n    q = (M[0, 0] * x ** 2 + 2 * M[0, 1] * x * y + M[1, 1] * y ** 2) / 2\n    val = integrate(integrate(exp(-q), x, -oo, oo), y, -oo, oo)\n    instances.append(O(['2', f'!![{A[0][0]}, {A[0][1]}; {A[1][0]}, {A[1][1]}]', '‹_›'], val, 2 * pi / sqrt(M.det()), edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℕ", "name": "n"},
+   {"type": "Matrix (Fin n) (Fin n) ℝ", "name": "A"},
+   {"type": "A.PosDef", "name": "a._@._internal._hyg.0"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "∫ (x : Fin n → ℝ), rexp (-(x ⬝ᵥ A *ᵥ x) / 2) = (2 * π) ^ (↑n / 2) / √A.det",
+   "rhs_poly": "x1",
+   "rhs": "(2 * π) ^ (↑n / 2) / √A.det",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs": "∫ (x : Fin n → ℝ), rexp (-(x ⬝ᵥ A *ᵥ x) / 2)",
+   "kind": "rel",
+   "expr": "(x0) - ((((2 * pi))^((x2 / 2)) / sqrt((x3).det())))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "√A.det ≠ 0", "kind": "ne", "expr": "sqrt((x3).det())"},
+   {"text": "0 < 2 * π", "kind": "pos", "expr": "(2 * pi)"},
+   {"text": "0 ≤ A.det", "kind": "nonneg", "expr": "(x3).det()"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["∫ (x : Fin n → ℝ), rexp (-(x ⬝ᵥ A *ᵥ x) / 2)",
+   "(2 * π) ^ (↑n / 2) / √A.det",
+   "n",
+   "A"],
+  "atom_types": ["ℝ", "ℝ", "ℕ", "matrix"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["2", "!![1, 0; 0, 1]", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[6.283185307179586476925286766559005768394338798750211641949889184615632812572396 .. 6.283185307179586476925286766559005768394338798750211641949889184615632812572466] == [6.283185307179586476925286766559005768394338798750211641949889184615632812572396 .. 6.283185307179586476925286766559005768394338798750211641949889184615632812572466] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "!![2, 1; 1, 2]", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[3.627598728468435701188156515284311464568132496185481151139769870776246362252580 .. 3.627598728468435701188156515284311464568132496185481151139769870776246362252788] == [3.627598728468435701188156515284311464568132496185481151139769870776246362252580 .. 3.627598728468435701188156515284311464568132496185481151139769870776246362252788] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["2", "!![3, -1; -1, 1]", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[4.442882938158366247015880990060693698614621689375690223085395606956434793099339 .. 4.442882938158366247015880990060693698614621689375690223085395606956434793099547] == [4.442882938158366247015880990060693698614621689375690223085395606956434793099339 .. 4.442882938158366247015880990060693698614621689375690223085395606956434793099547] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

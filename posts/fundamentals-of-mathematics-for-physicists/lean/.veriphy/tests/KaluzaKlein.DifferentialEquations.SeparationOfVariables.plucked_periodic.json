@@ -1,0 +1,69 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.SeparationOfVariables.plucked_periodic",
+ "statement":
+ "∀ (n : ℕ) (t x : ℝ), sin (↑n * x) * cos (↑n * (t + 2 * π)) = sin (↑n * x) * cos (↑n * t)",
+ "seed": 0,
+ "script_hash": "6011230584312814340",
+ "script":
+ "# name: de-plucked-periodic-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.SeparationOfVariables.plucked_periodic file \"de-plucked-periodic-test.sage\"\n# description: sin nx cos n(t + 2π) = sin nx cos nt by Sage at n = 0 (edge), 1, 5\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\nt_ = var('t_')\ninstances = [\n    oracle_instance('0', 't_', 'x',\n                    lhs=(sin(0*x)*cos(0*(t_ + 2*pi))).simplify_full(),\n                    rhs=sin(0*x)*cos(0*t_), relation='==', edge=True),\n    oracle_instance('1', 't_', 'x',\n                    lhs=(sin(1*x)*cos(1*(t_ + 2*pi))).simplify_full(),\n                    rhs=sin(1*x)*cos(1*t_), relation='==', edge=False),\n    oracle_instance('5', 't_', 'x',\n                    lhs=(sin(5*x)*cos(5*(t_ + 2*pi))).simplify_full(),\n                    rhs=sin(5*x)*cos(5*t_), relation='==', edge=False),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4", "x5"],
+  "universal":
+  [{"type": "ℕ", "name": "n"},
+   {"type": "ℝ", "name": "t"},
+   {"type": "ℝ", "name": "x"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "sin (↑n * x) * cos (↑n * (t + 2 * π)) = sin (↑n * x) * cos (↑n * t)",
+   "rhs_poly": "(x0 * x2)",
+   "rhs": "sin (↑n * x) * cos (↑n * t)",
+   "rel": "eq",
+   "poly": "((x0 * x1)) - ((x0 * x2))",
+   "lhs_poly": "(x0 * x1)",
+   "lhs": "sin (↑n * x) * cos (↑n * (t + 2 * π))",
+   "kind": "rel",
+   "expr":
+   "((sin((x3 * x4)) * cos((x3 * (x5 + (2 * pi)))))) - ((sin((x3 * x4)) * cos((x3 * x5))))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["sin (↑n * x)", "cos (↑n * (t + 2 * π))", "cos (↑n * t)", "n", "x", "t"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℕ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "t_", "x"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1", "t_", "x"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "cos(t_)*sin(x) == cos(t_)*sin(x) (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values": ["5", "t_", "x"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "5*(16*cos(t_)*sin(t_)^4 - 12*cos(t_)*sin(t_)^2 + cos(t_))*cos(x)^4*sin(x) - 10*(16*cos(t_)*sin(t_)^4 - 12*cos(t_)*sin(t_)^2 + cos(t_))*cos(x)^2*sin(x)^3 + (16*cos(t_)*sin(t_)^4 - 12*cos(t_)*sin(t_)^2 + cos(t_))*sin(x)^5 == cos(5*t_)*sin(5*x) (exact)",
+   "edge": false,
+   "accepted": true}]}

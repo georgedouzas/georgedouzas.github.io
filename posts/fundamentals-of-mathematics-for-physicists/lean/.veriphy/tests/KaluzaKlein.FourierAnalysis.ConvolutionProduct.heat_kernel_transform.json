@@ -1,0 +1,78 @@
+{"target":
+ "KaluzaKlein.FourierAnalysis.ConvolutionProduct.heat_kernel_transform",
+ "statement":
+ "∀ (κ t : ℝ),\n  0 < κ → 0 < t → ∀ (k : ℝ), ∫ (x : ℝ), ↑(heatKernel κ t x) * cexp (-(↑k * ↑x) * I) = cexp (-(↑κ * ↑k ^ 2 * ↑t))",
+ "seed": 0,
+ "script_hash": "9752780194238333915",
+ "script":
+ "# name: fa-heat-kernel-transform-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.ConvolutionProduct.heat_kernel_transform file \"fa-heat-kernel-transform-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ny = var('y'); k_ = var('k_'); x_ = var('x_'); assume(y, 'real')\ninstances = []\nCASES = [(['1', '1', 'one_pos', 'one_pos', '0'], True, {'kap': '1', 't': '1', 'k': '0'}), (['2', '1/2', '_', '_', '1'], False, {'kap': '2', 't': '1/2', 'k': '1'}), (['1/3', '3', '_', '_', '-2'], False, {'kap': '1/3', 't': '3', 'k': '-2'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('integrate(exp(-y**2/(4*kap*t))/sqrt(4*pi*kap*t)*exp(-k*y*I), y, -oo, oo)', scope))\n    R = side(eval('exp(-kap*k**2*t)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4"],
+  "universal":
+  [{"type": "ℝ", "name": "κ"},
+   {"type": "ℝ", "name": "t"},
+   {"type": "0 < κ", "name": "hκ"},
+   {"type": "0 < t", "name": "ht"},
+   {"type": "ℝ", "name": "k"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < κ", "rel": "lt", "name": "hκ", "expr": "(0) - (x2)"},
+   {"text": "0 < t", "rel": "lt", "name": "ht", "expr": "(0) - (x3)"}],
+  "goal":
+  {"text":
+   "∫ (x : ℝ), ↑(heatKernel κ t x) * cexp (-(↑k * ↑x) * I) = cexp (-(↑κ * ↑k ^ 2 * ↑t))",
+   "rhs_poly": "x1",
+   "rhs": "cexp (-(↑κ * ↑k ^ 2 * ↑t))",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs": "∫ (x : ℝ), ↑(heatKernel κ t x) * cexp (-(↑k * ↑x) * I)",
+   "kind": "rel",
+   "expr": "(x0) - (exp((-((x2 * (x4)^(2)) * x3))))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms":
+  ["∫ (x : ℝ), ↑(heatKernel κ t x) * cexp (-(↑k * ↑x) * I)",
+   "cexp (-(↑κ * ↑k ^ 2 * ↑t))",
+   "κ",
+   "t",
+   "k"],
+  "atom_types": ["ℂ", "ℂ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "1", "one_pos", "one_pos", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "1/2", "_", "_", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.3678794411714423215955237701614608674447 .. 0.3678794411714423215955237701614608674463] == [0.3678794411714423215955237701614608674447 .. 0.3678794411714423215955237701614608674463] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1/3", "3", "_", "_", "-2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.01831563888873418029371802127324124221190 .. 0.01831563888873418029371802127324124221200] == [0.01831563888873418029371802127324124221190 .. 0.01831563888873418029371802127324124221200] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

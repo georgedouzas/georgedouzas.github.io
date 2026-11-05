@@ -1,0 +1,11 @@
+# name: set-three-bijective-test
+# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand
+# goal: sage_test KaluzaKlein.Sets.Bijective.three_bijective
+# description: the claim at the instances below, each proved independently of the claim
+SEED = 0
+CASES = [
+    (['Fin 3', '0', '1', '2', '(by decide)', '(by decide)', '(by decide)', '(by decide)'], True, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ {β : Type} (x y z : β) (hxy : x ≠ y) (hxz : x ≠ z) (hyz : y ≠ z) (h : ∀ b, b = x ∨ b = y ∨ b = z), Function.Bijective ![x, y, z] := by\n  intro β x y z hxy hxz hyz h\n  refine ⟨fun i j hij => ?_, fun b => ?_⟩\n  · fin_cases i <;> fin_cases j <;> simp_all [eq_comm]\n  · rcases h b with rfl | rfl | rfl\n    · exact ⟨0, rfl⟩\n    · exact ⟨1, rfl⟩\n    · exact ⟨2, rfl⟩\nexact @key (Fin 3) (0) (1) (2) ((by decide)) ((by decide)) ((by decide)) ((by decide))'),
+    (['Fin 3', '2', '0', '1', '(by decide)', '(by decide)', '(by decide)', '(by decide)'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ {β : Type} (x y z : β) (hxy : x ≠ y) (hxz : x ≠ z) (hyz : y ≠ z) (h : ∀ b, b = x ∨ b = y ∨ b = z), Function.Bijective ![x, y, z] := by\n  intro β x y z hxy hxz hyz h\n  refine ⟨fun i j hij => ?_, fun b => ?_⟩\n  · fin_cases i <;> fin_cases j <;> simp_all [eq_comm]\n  · rcases h b with rfl | rfl | rfl\n    · exact ⟨0, rfl⟩\n    · exact ⟨1, rfl⟩\n    · exact ⟨2, rfl⟩\nexact @key (Fin 3) (2) (0) (1) ((by decide)) ((by decide)) ((by decide)) ((by decide))'),
+    (['Fin 3', '1', '2', '0', '(by decide)', '(by decide)', '(by decide)', '(by decide)'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ {β : Type} (x y z : β) (hxy : x ≠ y) (hxz : x ≠ z) (hyz : y ≠ z) (h : ∀ b, b = x ∨ b = y ∨ b = z), Function.Bijective ![x, y, z] := by\n  intro β x y z hxy hxz hyz h\n  refine ⟨fun i j hij => ?_, fun b => ?_⟩\n  · fin_cases i <;> fin_cases j <;> simp_all [eq_comm]\n  · rcases h b with rfl | rfl | rfl\n    · exact ⟨0, rfl⟩\n    · exact ⟨1, rfl⟩\n    · exact ⟨2, rfl⟩\nexact @key (Fin 3) (1) (2) (0) ((by decide)) ((by decide)) ((by decide)) ((by decide))'),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]

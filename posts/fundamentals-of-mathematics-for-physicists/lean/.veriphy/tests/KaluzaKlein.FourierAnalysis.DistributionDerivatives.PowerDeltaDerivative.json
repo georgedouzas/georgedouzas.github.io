@@ -1,0 +1,69 @@
+{"target":
+ "KaluzaKlein.FourierAnalysis.DistributionDerivatives.PowerDeltaDerivative",
+ "statement":
+ "∀ (n : ℕ) (φ : ℝ → ℝ), ContDiff ℝ (↑n) φ → iteratedDeriv n (fun x => x ^ n * φ x) 0 = ↑n.factorial * φ 0",
+ "seed": 0,
+ "script_hash": "14508355326056844623",
+ "script":
+ "# name: fa-power-delta-derivative-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.DistributionDerivatives.PowerDeltaDerivative file \"fa-power-delta-derivative-test.sage\"\n# description: Sage evaluates (x^n φ)^{(n)}(0) for φ = cos, eˣ, 1/(1 + x) and compares with n! φ(0)\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\nz_ = var('z_')\ninstances = []\nCASES = [(['0', 'Real.cos', '_'], True, {'n': '0', 'p': 'lambda t: cos(t)'}), (['3', 'Real.exp', '_'], False, {'n': '3', 'p': 'lambda t: exp(t)'}), (['5', 'fun x => 1 / (1 + x ^ 2)', '_'], False, {'n': '5', 'p': 'lambda t: 1/(1 + t**2)'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('diff(z_**n*p(z_), z_, int(n)).subs(z_=0)', scope))\n    R = side(eval('factorial(n)*p(0)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℕ", "name": "n"},
+   {"type": "ℝ → ℝ", "name": "φ"},
+   {"type": "ContDiff ℝ (↑n) φ", "name": "a._@._internal._hyg.0"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text": "iteratedDeriv n (fun x => x ^ n * φ x) 0 = ↑n.factorial * φ 0",
+   "rhs_poly": "(x1 * x2)",
+   "rhs": "↑n.factorial * φ 0",
+   "rel": "eq",
+   "poly": "(x0) - ((x1 * x2))",
+   "lhs_poly": "x0",
+   "lhs": "iteratedDeriv n (fun x => x ^ n * φ x) 0",
+   "kind": "rel",
+   "expr": "(x0) - ((typed(factorial(x3), 'ℕ') * F__(0)))"},
+  "functions": [{"sage": "F__", "lean": "φ", "arity": 1}],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["iteratedDeriv n (fun x => x ^ n * φ x) 0", "↑n.factorial", "φ 0", "n"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℕ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "Real.cos", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["3", "Real.exp", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[6.000000000000000000000000000000000000000 .. 6.000000000000000000000000000000000000000] == [6.000000000000000000000000000000000000000 .. 6.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["5", "fun x => 1 / (1 + x ^ 2)", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[120.0000000000000000000000000000000000000 .. 120.0000000000000000000000000000000000000] == [120.0000000000000000000000000000000000000 .. 120.0000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

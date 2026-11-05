@@ -1,0 +1,62 @@
+{"target": "KaluzaKlein.FourierAnalysis.Uncertainty.box_width_infinite",
+ "statement":
+ "∀ (a : ℝ), a ≠ 0 → ¬Integrable (fun k => 4 * Real.sin (a * k) ^ 2) volume",
+ "seed": 0,
+ "script_hash": "10933152360331989451",
+ "script":
+ "# name: fa-box-width-infinite-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.Uncertainty.box_width_infinite file \"fa-box-width-infinite-test.sage\"\n# description: Sage evaluates ∫₀^{100π/|a|} 4 sin² ak dk = 200π/|a|, which grows without bound with the upper limit\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ny = var('y'); k_ = var('k_'); x_ = var('x_'); assume(y, 'real')\ninstances = []\nCASES = [(['1', 'one_ne_zero'], True, {'a': '1'}), (['2', '_'], False, {'a': '2'}), (['-1/2', '_'], False, {'a': '-1/2'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('integrate(4*sin(a*y)**2, y, 0, 100*pi/abs(a))', scope))\n    R = side(eval('200*pi/abs(a)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal": [{"type": "ℝ", "name": "a"}, {"type": "a ≠ 0", "name": "ha"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "a ≠ 0",
+    "rel": "ne",
+    "poly": "(x0) - (0)",
+    "name": "ha",
+    "expr": "(x0) - (0)"}],
+  "goal":
+  {"text": "¬Integrable (fun k => 4 * Real.sin (a * k) ^ 2) volume",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["a"],
+  "atom_types": ["ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "one_ne_zero"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[628.3185307179586476925286766559005768382 .. 628.3185307179586476925286766559005768443] == [628.3185307179586476925286766559005768382 .. 628.3185307179586476925286766559005768443] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[314.1592653589793238462643383279502884191 .. 314.1592653589793238462643383279502884222] == [314.1592653589793238462643383279502884191 .. 314.1592653589793238462643383279502884222] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-1/2", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1256.637061435917295385057353311801153676 .. 1256.637061435917295385057353311801153689] == [1256.637061435917295385057353311801153676 .. 1256.637061435917295385057353311801153689] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

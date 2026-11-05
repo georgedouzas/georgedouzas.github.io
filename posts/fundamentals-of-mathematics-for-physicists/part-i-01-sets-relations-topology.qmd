@@ -24,6 +24,8 @@ in which every later definition is phrased. Each definition is followed by three
 and three exercises of increasing difficulty with hidden solutions; the counting results of the section are
 collected in @prp-count-maps, after the definition of the inverse map.
 
+For more on this topic, see @chirivi2020selected [Theory Ch. 1], @komjath2006problems [Ch. 1, Ch. 6] and @radozycki2020solving [Ch. 1].
+
 ### Sets
 
 Before anything can be counted, mapped or given a shape, one has to say what a collection of objects is and when
@@ -1418,6 +1420,8 @@ set with an element of another. The section defines composition, equivalence rel
 products, with the remainders modulo $n$, the angles on a circle and the rotations with a common image of the pole
 as running examples.
 
+For more on this topic, see @komjath2006problems [Ch. 2-3] and @radozycki2020solving [Ch. 1].
+
 ### Composition
 
 Two maps whose domains and codomains fit together can be performed one after the other, and the result is a single
@@ -2553,6 +2557,8 @@ this section, continuity, homeomorphism, the topology of a subspace or of a quot
 sets alone. The section starts from the open sets of $\mathbb{R}^n$, abstracts them to the axioms, and then shows how
 the circle, the sphere and the rotation group acquire their topologies as subspaces of $\mathbb{R}^n$ and as
 quotients; a Sage enumeration of all topologies on three points makes the axioms concrete.
+
+For more on this topic, see @gasinski2014exercises [Ch. 1].
 
 ### Open sets in $\mathbb{R}^n$
 
@@ -3869,6 +3875,8 @@ continuous function is bounded and attains its extremes, and on which the eigenv
 discrete set; a connected space is one in one piece. The section defines the three properties, with intervals,
 spheres, rotation groups and finite graphs as examples, and ends with the enumeration of the Hausdorff topologies
 on three points.
+
+For more on this topic, see @cheung2024metric [Ch. 1, Ch. 3], @gasinski2014exercises [Ch. 2] and @radozycki2020solving [Ch. 6].
 
 ### Hausdorff spaces
 

@@ -1,0 +1,86 @@
+{"target": "KaluzaKlein.FourierAnalysis.FourierCoefficients.sawtooth_bn",
+ "statement":
+ "∀ (n : ℕ), n ≠ 0 → 1 / π * ∫ (x : ℝ) in -π..π, x * sin (↑n * x) = 2 * (-1) ^ (n + 1) / ↑n",
+ "seed": 0,
+ "script_hash": "1070092207065563805",
+ "script":
+ "# name: fa-sawtooth-bn-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.FourierCoefficients.sawtooth_bn file \"fa-sawtooth-bn-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ny = var('y')\ninstances = []\nCASES = [(['1', 'one_ne_zero'], True, {'n': '1'}), (['2', 'two_ne_zero'], False, {'n': '2'}), (['5', '(by norm_num)'], False, {'n': '5'}), (['6', '(by norm_num)'], False, {'n': '6'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('1/pi*integrate(y*sin(n*y), y, -pi, pi)', scope))\n    R = side(eval('2*(-1)**(n+1)/n', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal": [{"type": "ℕ", "name": "n"}, {"type": "n ≠ 0", "name": "hn"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals":
+  [{"var": "i0_",
+    "upper_text": "π",
+    "upper": "pi",
+    "lower_text": "-π",
+    "lower": "(-pi)",
+    "function": "fun x => x * sin (↑n * x)",
+    "body": "(i0_ * sin((x3 * i0_)))"}],
+  "hyps": [{"text": "n ≠ 0", "rel": "ne", "name": "hn", "expr": "(x3) - (0)"}],
+  "goal":
+  {"text":
+   "1 / π * ∫ (x : ℝ) in -π..π, x * sin (↑n * x) = 2 * (-1) ^ (n + 1) / ↑n",
+   "rhs_poly": "x2",
+   "rhs": "2 * (-1) ^ (n + 1) / ↑n",
+   "rel": "eq",
+   "poly": "((x0 * x1)) - (x2)",
+   "lhs_poly": "(x0 * x1)",
+   "lhs": "1 / π * ∫ (x : ℝ) in -π..π, x * sin (↑n * x)",
+   "kind": "rel",
+   "expr":
+   "(((1 / pi) * definite_integral((i0_ * sin((x3 * i0_))), i0_, (-pi), pi))) - (((2 * ((-1))^((x3 + 1))) / x3))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "π ≠ 0", "kind": "ne", "expr": "pi"},
+   {"text": "↑n ≠ 0", "kind": "ne", "expr": "x3"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["1 / π",
+   "∫ (x : ℝ) in -π..π, x * sin (↑n * x)",
+   "2 * (-1) ^ (n + 1) / ↑n",
+   "n"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℕ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "one_ne_zero"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.000000000000000000000000000000000000000 .. 2.000000000000000000000000000000000000000] == [2.000000000000000000000000000000000000000 .. 2.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "two_ne_zero"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-1.000000000000000000000000000000000000000 .. -1.000000000000000000000000000000000000000] == [-1.000000000000000000000000000000000000000 .. -1.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["5", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.3999999999999999999999999999999999999988 .. 0.4000000000000000000000000000000000000003] == [0.3999999999999999999999999999999999999988 .. 0.4000000000000000000000000000000000000003] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["6", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-0.3333333333333333333333333333333333333339 .. -0.3333333333333333333333333333333333333323] == [-0.3333333333333333333333333333333333333339 .. -0.3333333333333333333333333333333333333323] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

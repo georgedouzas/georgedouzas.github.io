@@ -1,0 +1,61 @@
+{"target": "KaluzaKlein.RealAnalysis.Sequences.cauchy_converges",
+ "statement":
+ "∀ (a : ℕ → ℝ), (∀ ε > 0, ∃ N, ∀ (m n : ℕ), N ≤ m → N ≤ n → |a m - a n| < ε) → ∃ L, Tendsto a atTop (𝓝 L)",
+ "seed": 0,
+ "script_hash": "11928914462252220222",
+ "script":
+ "# name: ra-cauchy-converges-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Sequences.cauchy_converges file \"ra-cauchy-converges-test.sage\"\n# description: Cauchy sequences converge: Sage computes the limit of the partial sums of ∑1/k!, ∑2^-k and of 1/n\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nn, k = var('n k')\ninstances = [O(['(fun n : ℕ => ∑ k ∈ Finset.range (n + 1), 1 / (k ! : ℝ))', '‹_›'], sum(1 / factorial(k), k, 0, oo), e),\n             O(['(fun n : ℕ => ∑ k ∈ Finset.range (n + 1), (1 / 2 : ℝ) ^ k)', '‹_›'], sum(QQ(1) / 2 ** k, k, 0, oo), QQ(2)),\n             O(['(fun _ : ℕ => (0 : ℝ))', '‹_›'], limit(0 * n, n=oo), QQ(0), edge=True)]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal":
+  [{"type": "ℕ → ℝ", "name": "a"},
+   {"type": "∀ ε > 0, ∃ N, ∀ (m n : ℕ), N ≤ m → N ≤ n → |a m - a n| < ε",
+    "name": "h"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "∀ ε > 0, ∃ N, ∀ (m n : ℕ), N ≤ m → N ≤ n → |a m - a n| < ε",
+    "name": "h"}],
+  "goal": {"text": "∃ L, Tendsto a atTop (𝓝 L)", "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["L"],
+  "atom_types": ["ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values":
+   ["(fun n : ℕ => ∑ k ∈ Finset.range (n + 1), 1 / (k ! : ℝ))", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.718281828459045235360287471352662497757247093699959574966967627724076630353519 .. 2.718281828459045235360287471352662497757247093699959574966967627724076630353555] == [2.718281828459045235360287471352662497757247093699959574966967627724076630353519 .. 2.718281828459045235360287471352662497757247093699959574966967627724076630353555] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun n : ℕ => ∑ k ∈ Finset.range (n + 1), (1 / 2 : ℝ) ^ k)", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "2 == 2 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values": ["(fun _ : ℕ => (0 : ℝ))", "‹_›"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true}]}

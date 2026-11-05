@@ -1,0 +1,58 @@
+{"target": "KaluzaKlein.FourierAnalysis.Convergence.riemann_lebesgue",
+ "statement":
+ "∀ (f : ℝ → ℂ), Tendsto (fun w => ∫ (v : ℝ), fourierChar (-(w * v)) • f v) (cocompact ℝ) (𝓝 0)",
+ "seed": 0,
+ "script_hash": "4709638970607402332",
+ "script":
+ "# name: fa-riemann-lebesgue-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.Convergence.riemann_lebesgue file \"fa-riemann-lebesgue-test.sage\"\n# description: for the Gaussian f(v) = e^{-v²} Sage evaluates ∫ e^{-2πivw} f(v) dv = √π e^{-π²w²}, which tends to 0\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ny = var('y'); k = var('k'); i = var('i'); n = var('n'); z = var('z'); v = var('v')\ninstances = []\nCASES = [(['fun v => Complex.exp (-(v : ℂ) ^ 2)'], True, {'w': '0'}), (['fun v => Complex.exp (-(v : ℂ) ^ 2)'], False, {'w': '1'}), (['fun v => Complex.exp (-(v : ℂ) ^ 2)'], False, {'w': '3'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('integrate(exp(-2*pi*I*v*w)*exp(-v**2), v, -oo, oo)', scope))\n    R = side(eval('sqrt(pi)*exp(-pi**2*w**2)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal": [{"type": "ℝ → ℂ", "name": "f"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "Tendsto (fun w => ∫ (v : ℝ), fourierChar (-(w * v)) • f v) (cocompact ℝ) (𝓝 0)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["fun v => Complex.exp (-(v : ℂ) ^ 2)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.772453850905516027298167483341145182791 .. 1.772453850905516027298167483341145182804] == [1.772453850905516027298167483341145182791 .. 1.772453850905516027298167483341145182804] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["fun v => Complex.exp (-(v : ℂ) ^ 2)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.00009167696056805018079538776346419706678552 .. 0.00009167696056805018079538776346419706679988] == [0.00009167696056805018079538776346419706678552 .. 0.00009167696056805018079538776346419706679988] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["fun v => Complex.exp (-(v : ℂ) ^ 2)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[4.696154394632137086287382726480800915577e-39 .. 4.696154394632137086287382726480800924473e-39] == [4.696154394632137086287382726480800915577e-39 .. 4.696154394632137086287382726480800924473e-39] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

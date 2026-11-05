@@ -1,0 +1,65 @@
+{"target": "KaluzaKlein.RealAnalysis.Integral.erf_deriv",
+ "statement":
+ "∀ (x : ℝ), HasDerivAt (fun x => ∫ (t : ℝ) in 0..x, rexp (-t ^ 2)) (rexp (-x ^ 2)) x",
+ "seed": 0,
+ "script_hash": "7270788798333080333",
+ "script":
+ "# name: ra-erf-deriv-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Integral.erf_deriv file \"ra-erf-deriv-test.sage\"\n# description: Sage's derivative of ∫₀ˣ e^(-t²) dt = √π/2 erf(x) is e^(-x²)\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx, s = var('x s')\nassume(x > 0)\nF = integrate(exp(-s ** 2), s, 0, x)   # √π/2 erf(x)\nforget()\ninstances = [O([str(v)], diff(F, x).subs(x=v), exp(-SR(v) ** 2), edge=(v == 0)) for v in [0, 1, -2, QQ(1) / 2]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal": [{"type": "ℝ", "name": "x"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "HasDerivAt (fun x => ∫ (t : ℝ) in 0..x, rexp (-t ^ 2)) (rexp (-x ^ 2)) x",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [1.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. 1.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.3678794411714423215955237701614608674458111310317678345078368016974614957448981 .. 0.3678794411714423215955237701614608674458111310317678345078368016974614957449025] == [0.3678794411714423215955237701614608674458111310317678345078368016974614957448981 .. 0.3678794411714423215955237701614608674458111310317678345078368016974614957449025] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.01831563888873418029371802127324124221191206755347559476959992743925043159811410 .. 0.01831563888873418029371802127324124221191206755347559476959992743925043159811438] == [0.01831563888873418029371802127324124221191206755347559476959992743925043159811410 .. 0.01831563888873418029371802127324124221191206755347559476959992743925043159811438] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1/2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.7788007830714048682451702669783206472967722904261414742413173662682456120535183 .. 0.7788007830714048682451702669783206472967722904261414742413173662682456120535270] == [0.7788007830714048682451702669783206472967722904261414742413173662682456120535183 .. 0.7788007830714048682451702669783206472967722904261414742413173662682456120535270] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

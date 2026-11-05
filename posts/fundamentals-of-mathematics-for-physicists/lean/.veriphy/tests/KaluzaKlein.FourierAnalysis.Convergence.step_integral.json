@@ -1,0 +1,87 @@
+{"target": "KaluzaKlein.FourierAnalysis.Convergence.step_integral",
+ "statement":
+ "∀ (l c d : ℝ), l ≠ 0 → ∫ (t : ℝ) in c..d, sin (l * t) = (cos (l * c) - cos (l * d)) / l",
+ "seed": 0,
+ "script_hash": "11186885860268029464",
+ "script":
+ "# name: fa-step-integral-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.Convergence.step_integral file \"fa-step-integral-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ny = var('y'); k = var('k'); i = var('i'); n = var('n'); z = var('z'); v = var('v')\ninstances = []\nCASES = [(['1', '0', '0', 'one_ne_zero'], True, {'l': '1', 'c': '0', 'd': '0'}), (['3', '1/2', '2', '_'], False, {'l': '3', 'c': '1/2', 'd': '2'}), (['-5/2', '-1', '4', '_'], False, {'l': '-5/2', 'c': '-1', 'd': '4'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('integrate(sin(l*y), y, c, d)', scope))\n    R = side(eval('(cos(l*c) - cos(l*d))/l', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4"],
+  "universal":
+  [{"type": "ℝ", "name": "l"},
+   {"type": "ℝ", "name": "c"},
+   {"type": "ℝ", "name": "d"},
+   {"type": "l ≠ 0", "name": "hl"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals":
+  [{"var": "i0_",
+    "upper_text": "d",
+    "upper": "x4",
+    "lower_text": "c",
+    "lower": "x3",
+    "function": "fun t => sin (l * t)",
+    "body": "sin((x2 * i0_))"}],
+  "hyps":
+  [{"text": "l ≠ 0",
+    "rel": "ne",
+    "poly": "(x2) - (0)",
+    "name": "hl",
+    "expr": "(x2) - (0)"}],
+  "goal":
+  {"text": "∫ (t : ℝ) in c..d, sin (l * t) = (cos (l * c) - cos (l * d)) / l",
+   "rhs_poly": "x1",
+   "rhs": "(cos (l * c) - cos (l * d)) / l",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs": "∫ (t : ℝ) in c..d, sin (l * t)",
+   "kind": "rel",
+   "expr":
+   "(definite_integral(sin((x2 * i0_)), i0_, x3, x4)) - (((cos((x2 * x3)) - cos((x2 * x4))) / x2))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "l ≠ 0", "kind": "ne", "expr": "x2", "discharged_by": "hl"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["∫ (t : ℝ) in c..d, sin (l * t)",
+   "(cos (l * c) - cos (l * d)) / l",
+   "l",
+   "c",
+   "d"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "0", "0", "one_ne_zero"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["3", "1/2", "2", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-0.2964776949942210368191541488295518987910 .. -0.2964776949942210368191541488295518987850] == [-0.2964776949942210368191541488295518987910 .. -0.2964776949942210368191541488295518987850] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-5/2", "-1", "4", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-0.01517116541180749497014446294268526803884 .. -0.01517116541180749497014446294268526803295] == [-0.01517116541180749497014446294268526803884 .. -0.01517116541180749497014446294268526803295] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

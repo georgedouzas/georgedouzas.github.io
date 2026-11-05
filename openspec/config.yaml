@@ -1,13 +1,15 @@
 schema: spec-driven
 
 context: |
-  This repo is a Quarto blog that also hosts a lecture-notes post in
-  posts/_kaluza–klein-theories-and-coset-space-dimensional-reduction-lectures-with-verified-computations/.
+  This repo is a Quarto blog. Its tutorials are post folders holding all their own
+  artifacts: posts/fundamentals-of-mathematics-for-physicists/,
+  posts/fundamentals-of-theoretical-physics/ and posts/kaluza-klein-theories/.
   Changes named kk-csdr-* and the specs bibliography, document-build,
-  figure-generation, result-verification and tutorial-content belong to that
-  post: paths in them (scripts/, tutorial/, figures/, sage/, verification/,
-  KaluzaKlein/, Makefile, references.bib) are relative to that directory, and
-  their commands run from it. All other paths are relative to the repo root.
+  figure-generation, result-verification and tutorial-content belong to those
+  tutorials. Older paths in them map as follows, inside the post that owns the
+  chapter: tutorial/ is the post folder, KaluzaKlein/ and .veriphy/ are under
+  lean/, sage/exercises/ is sage-exercises/, and references/ is _references/.
+  All other paths are relative to the repo root.
 
 # Project context (optional)
 # Add only constraints that should guide OpenSpec artifacts and workflows.

@@ -1,0 +1,2665 @@
+# Verification manifest of tutorial/part-i-01-sets-relations-topology.qmd (design D28-D30): every block, its
+# claims, the Lean declaration of each, and its Veriphy level: a recipe and certificate script, or a test
+# (Veriphy's sage_test fallback) with its record in .veriphy/tests/. Checked by scripts/check_verification.py.
+chapter: part-i-01-sets-relations-topology
+blocks:
+  - label: def-set
+    none: 'a definition of vocabulary; it states no value, identity, inequality or property'
+  - label: exm-set-finite
+    claims:
+      - claim: '{1, 2, 3} has three elements'
+        lean: KaluzaKlein.Sets.Sets.card_three
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.card_three
+        level: kernel-test
+        instances: 3
+      - claim: '{0, 2, 4} is a subset of {0, 1, 2, 3, 4, 5}'
+        lean: KaluzaKlein.Sets.Sets.doubles_subset
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.doubles_subset
+        level: kernel-test
+        instances: 3
+      - claim: 'the rotations of a hexagon by multiples of 60 degrees are six'
+        lean: KaluzaKlein.Sets.Sets.card_rotations
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.card_rotations
+        level: kernel-test
+        instances: 3
+  - label: exm-set-numbers
+    claims:
+      - claim: 'Z, R and C are infinite'
+        lean: KaluzaKlein.Sets.Sets.infinite_of_charZero
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.infinite_of_charZero
+        level: kernel-test
+        instances: 3
+      - claim: 'R^n is infinite for n >= 1'
+        lean: KaluzaKlein.Sets.Sets.infinite_rn
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.infinite_rn
+        level: kernel-test
+        instances: 3
+      - claim: 'Z ⊆ R ⊆ C'
+        lean: KaluzaKlein.Sets.Sets.int_real_complex_inclusions
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.int_real_complex_inclusions
+        level: kernel-test
+        instances: 3
+  - label: exm-set-geometric
+    claims:
+      - claim: 'the circle and the sphere are cut out by one equation'
+        lean: KaluzaKlein.Sets.Sets.mem_circle_sphere
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.mem_circle_sphere
+        level: kernel-test
+        instances: 3
+      - claim: 'SO(3) is cut out by R^T R = 1 and det R = 1'
+        lean: KaluzaKlein.Sets.Sets.mem_SO3_iff
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.mem_SO3_iff
+        level: kernel-test
+        instances: 3
+  - label: exr-set-subsets
+    claims:
+      - claim: '{a, b, c} has 2^3 = 8 subsets'
+        lean: KaluzaKlein.Sets.Sets.card_powerset
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.card_powerset
+        level: kernel-test
+        instances: 3
+  - label: exr-set-inclusions
+    claims:
+      - claim: '-1 is not a natural number'
+        lean: KaluzaKlein.Sets.Sets.neg_not_nat
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.neg_not_nat
+        level: kernel-test
+        instances: 3
+      - claim: '1/2 is not an integer'
+        lean: KaluzaKlein.Sets.Sets.half_odd_not_int
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.half_odd_not_int
+        level: kernel-test
+        instances: 3
+      - claim: 'sqrt 2 is irrational'
+        lean: KaluzaKlein.Sets.Sets.sqrt_prime_irrational
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.sqrt_prime_irrational
+        level: kernel-test
+        instances: 3
+      - claim: 'i is not real'
+        lean: KaluzaKlein.Sets.Sets.imag_not_real
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.imag_not_real
+        level: kernel-test
+        instances: 3
+      - claim: 'Z ⊆ R ⊆ C'
+        lean: KaluzaKlein.Sets.Sets.int_real_complex_inclusions
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.int_real_complex_inclusions
+        level: kernel-test
+        instances: 3
+      - claim: 'open disc ⊆ closed disc, S^1 ⊆ D, S^1 misses the open disc'
+        lean: KaluzaKlein.Sets.Sets.disc_inclusions
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.disc_inclusions
+        level: kernel-test
+        instances: 3
+  - label: exr-set-circle-line
+    claims:
+      - claim: 'the circle meets Y = c in two points (+-sqrt(1 - c^2), c)'
+        lean: KaluzaKlein.Sets.Sets.circle_slice
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.circle_slice
+        level: kernel-test
+        instances: 3
+      - claim: 'sqrt(1 - 1/4) = sqrt(3)/2'
+        lean: KaluzaKlein.Sets.Sets.sqrt_three_quarters
+        recipe: transcendental_rewrite
+        certificate: set-sqrt-three-quarters.sage
+      - claim: 'the sphere meets Z = c in an infinite circle of radius sqrt(1 - c^2)'
+        lean: KaluzaKlein.Sets.Sets.sphere_slice
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.sphere_slice
+        level: kernel-test
+        instances: 3
+  - label: def-map
+    none: 'a definition of vocabulary; it states no value, identity, inequality or property'
+  - label: exm-map-finite
+    claims:
+      - claim: 'f = (x, x, y) has image {x, y} and f^-1{x} = {1, 2}'
+        lean: KaluzaKlein.Sets.Maps.finite_map_image_preimage
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.finite_map_image_preimage
+        level: kernel-test
+        instances: 3
+      - claim: 'there are 2^3 = 8 maps from three elements to two'
+        lean: KaluzaKlein.Sets.Maps.card_maps
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.card_maps
+        level: kernel-test
+        instances: 3
+  - label: exm-map-functions
+    claims:
+      - claim: 'cos has image [-1, 1]'
+        lean: KaluzaKlein.Sets.Maps.range_mul_cos
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.range_mul_cos
+        level: kernel-test
+        instances: 3
+      - claim: 'phi -> (cos phi, sin phi) has image the circle'
+        lean: KaluzaKlein.Sets.Maps.range_wrap
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.range_wrap
+        level: kernel-test
+        instances: 3
+      - claim: 'the preimage of (1, 0) is the multiples of 2 pi'
+        lean: KaluzaKlein.Sets.Maps.wrap_preimage
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.wrap_preimage
+        level: kernel-test
+        instances: 3
+  - label: exm-map-projection
+    claims:
+      - claim: 'the height function on the sphere has image [-1, 1]'
+        lean: KaluzaKlein.Sets.Maps.coordinate_image_sphere
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.coordinate_image_sphere
+        level: kernel-test
+        instances: 3
+      - claim: 'the orbit map sends SO(3) onto the sphere'
+        lean: KaluzaKlein.Sets.Maps.orbit_image
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.orbit_image
+        level: kernel-test
+        instances: 4
+  - label: exr-map-image-preimage
+    claims:
+      - claim: 'image {a, c}, preimages {1, 3, 4}, empty, everything'
+        lean: KaluzaKlein.Sets.Maps.finite_map_four
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.finite_map_four
+        level: kernel-test
+        instances: 3
+  - label: exr-map-square
+    claims:
+      - claim: 'x^2 has image [0, inf)'
+        lean: KaluzaKlein.Sets.Maps.range_sq_add
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.range_sq_add
+        level: kernel-test
+        instances: 3
+      - claim: 'the preimage of [1, 4] is [-2, -1] ∪ [1, 2]'
+        lean: KaluzaKlein.Sets.Maps.sq_preimage_Icc
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.sq_preimage_Icc
+        level: kernel-test
+        instances: 3
+      - claim: 'the preimage of {-1} is empty'
+        lean: KaluzaKlein.Sets.Maps.sq_preimage_neg
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.sq_preimage_neg
+        level: kernel-test
+        instances: 3
+  - label: exr-map-height-cap
+    claims:
+      - claim: 'h^-1((1/2, 1]) is the open cap, containing the north pole'
+        lean: KaluzaKlein.Sets.Maps.height_cap
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.height_cap
+        level: kernel-test
+        instances: 3
+      - claim: 'h^-1(c), -1 < c < 1, is a circle of latitude (the equator for c = 0)'
+        lean: KaluzaKlein.Sets.Sets.sphere_slice
+        recipe: mathlib
+        why: 'a general statement about finite sets, number systems or the subsets of R^n cut out by equations, with the parameters of the example as binders; no recipe certifies set equalities, cardinalities or membership statements of this shape'
+        test: KaluzaKlein.Sets.Sets.sphere_slice
+        level: kernel-test
+        instances: 3
+      - claim: 'h^-1([2, 3]) is empty'
+        lean: KaluzaKlein.Sets.Maps.height_preimage_empty
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.height_preimage_empty
+        level: kernel-test
+        instances: 3
+  - label: def-injective
+    claims:
+      - claim: 'injective iff every point has at most one preimage'
+        lean: KaluzaKlein.Sets.Injective.injective_iff_preimage_subsingleton
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.injective_iff_preimage_subsingleton
+        level: kernel-test
+        instances: 3
+  - label: exm-injective-finite
+    claims:
+      - claim: '1 -> x, 2 -> y is injective'
+        lean: KaluzaKlein.Sets.Injective.pair_injective
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.pair_injective
+        level: kernel-test
+        instances: 3
+      - claim: 'no map from three elements to two is injective'
+        lean: KaluzaKlein.Sets.Injective.no_injection
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.no_injection
+        level: kernel-test
+        instances: 3
+  - label: exm-injective-exp
+    claims:
+      - claim: 'exp is injective'
+        lean: KaluzaKlein.Sets.Injective.exp_mul_injective
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.exp_mul_injective
+        level: kernel-test
+        instances: 3
+      - claim: 'x^2 is not injective: (-1)^2 = 1^2'
+        lean: KaluzaKlein.Sets.Injective.sq_not_injective
+        recipe: witness
+        certificate: set-witness-search.sage
+  - label: exm-injective-chart
+    claims:
+      - claim: 'phi -> (cos phi, sin phi) is injective on (0, 2 pi)'
+        lean: KaluzaKlein.Sets.Injective.wrap_injOn
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.wrap_injOn
+        level: kernel-test
+        instances: 3
+      - claim: 'phi and phi + 2 pi give the same point'
+        lean: KaluzaKlein.Sets.Injective.wrap_periodic
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.wrap_periodic
+        level: kernel-test
+        instances: 3
+  - label: exr-injective-finite-check
+    claims:
+      - claim: '(a, b, c), (d, c, b) injective, (a, a, b) not'
+        lean: KaluzaKlein.Sets.Injective.three_maps_injectivity
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.three_maps_injectivity
+        level: kernel-test
+        instances: 3
+      - claim: '4 * 3 * 2 = 24 injective maps from three to four'
+        lean: KaluzaKlein.Sets.Injective.card_injections
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.card_injections
+        level: kernel-test
+        instances: 4
+  - label: exr-injective-monotone
+    claims:
+      - claim: 'f''(x) = 3x^2 + 1'
+        lean: KaluzaKlein.Sets.Injective.deriv_cubic
+        recipe: derivative
+        certificate: set-deriv.sage
+      - claim: 'x^3 + x is strictly increasing, hence injective'
+        lean: KaluzaKlein.Sets.Injective.cubic_strictMono
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.cubic_strictMono
+        level: kernel-test
+        instances: 3
+      - claim: 'x^3 - x has the three roots -1, 0, 1'
+        lean: KaluzaKlein.Sets.Injective.cubic_three_roots
+        recipe: witness
+        certificate: set-witness-search.sage
+      - claim: 'x^3 - x is not injective'
+        lean: KaluzaKlein.Sets.Injective.cubic_not_injective
+        recipe: witness
+        certificate: set-witness-search.sage
+  - label: exr-injective-sphere-parametrisation
+    claims:
+      - claim: 'injective on (0, pi) x (0, 2 pi)'
+        lean: KaluzaKlein.Sets.Injective.sph_injOn
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.sph_injOn
+        level: kernel-test
+        instances: 3
+      - claim: 'every (0, phi) goes to the north pole'
+        lean: KaluzaKlein.Sets.Injective.sph_pole
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.sph_pole
+        level: kernel-test
+        instances: 3
+  - label: def-surjective
+    claims:
+      - claim: 'surjective iff the image is the codomain'
+        lean: KaluzaKlein.Sets.Surjective.surjective_iff_range
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.surjective_iff_range
+        level: kernel-test
+        instances: 3
+  - label: exm-surjective-finite
+    claims:
+      - claim: '1, 2 -> x, 3 -> y is surjective'
+        lean: KaluzaKlein.Sets.Surjective.finite_map_surjective
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.finite_map_surjective
+        level: kernel-test
+        instances: 3
+      - claim: 'six of the eight maps from three elements to two are surjective'
+        lean: KaluzaKlein.Sets.Surjective.card_surjections_two
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.card_surjections_two
+        level: kernel-test
+        instances: 3
+  - label: exm-surjective-cube
+    claims:
+      - claim: 'x^3 is surjective'
+        lean: KaluzaKlein.Sets.Surjective.odd_pow_surjective
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.odd_pow_surjective
+        level: kernel-test
+        instances: 3
+      - claim: 'x^2 misses the negative numbers'
+        lean: KaluzaKlein.Sets.Maps.sq_preimage_neg
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.sq_preimage_neg
+        level: kernel-test
+        instances: 3
+      - claim: 'exp has image the positive numbers'
+        lean: KaluzaKlein.Sets.Surjective.range_mul_exp
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.range_mul_exp
+        level: kernel-test
+        instances: 3
+  - label: exm-surjective-orbit
+    claims:
+      - claim: 'phi -> (cos phi, sin phi) is onto the circle'
+        lean: KaluzaKlein.Sets.Maps.range_wrap
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.range_wrap
+        level: kernel-test
+        instances: 3
+      - claim: 'g -> g (0, 0, 1) is onto the sphere'
+        lean: KaluzaKlein.Sets.Maps.orbit_image
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.orbit_image
+        level: kernel-test
+        instances: 4
+  - label: exr-surjective-count
+    claims:
+      - claim: '16 - 2 = 14 surjections from four elements to two'
+        lean: KaluzaKlein.Sets.Surjective.card_surjections_two
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.card_surjections_two
+        level: kernel-test
+        instances: 3
+      - claim: 'from three to three, surjective iff injective'
+        lean: KaluzaKlein.Sets.Surjective.surjective_iff_injective_self
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.surjective_iff_injective_self
+        level: kernel-test
+        instances: 3
+      - claim: '3! = 6 surjections from three elements to three'
+        lean: KaluzaKlein.Sets.Surjective.card_surjections_self
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.card_surjections_self
+        level: kernel-test
+        instances: 3
+  - label: exr-surjective-sin
+    claims:
+      - claim: 'sin has image [-1, 1]'
+        lean: KaluzaKlein.Sets.Surjective.range_mul_sin
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.range_mul_sin
+        level: kernel-test
+        instances: 3
+      - claim: 'sin is not surjective onto R'
+        lean: KaluzaKlein.Sets.Surjective.mul_sin_not_surjective
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.mul_sin_not_surjective
+        level: kernel-test
+        instances: 3
+      - claim: 'x^2 + 1 has image [1, inf)'
+        lean: KaluzaKlein.Sets.Maps.range_sq_add
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.range_sq_add
+        level: kernel-test
+        instances: 3
+      - claim: 'every map is surjective onto its image'
+        lean: KaluzaKlein.Sets.Surjective.surjective_onto_range
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.surjective_onto_range
+        level: kernel-test
+        instances: 3
+  - label: exr-surjective-rotation-orbit
+    claims:
+      - claim: 'g -> g (1, 0) from SO(2) onto the circle is a bijection'
+        lean: KaluzaKlein.Sets.Surjective.SO2_orbit_bijective
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.SO2_orbit_bijective
+        level: kernel-test
+        instances: 3
+      - claim: 'the rotations fixing the pole are the rotations about the Z-axis'
+        lean: KaluzaKlein.Sets.Surjective.stabilizer_eq
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.stabilizer_eq
+        level: kernel-test
+        instances: 3
+      - claim: 'the preimage of g0 (0, 0, 1) is g0 SO(2)'
+        lean: KaluzaKlein.Sets.Surjective.orbit_fiber
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.orbit_fiber
+        level: kernel-test
+        instances: 3
+  - label: def-bijection
+    claims:
+      - claim: 'bijective iff every y is the value of exactly one x'
+        lean: KaluzaKlein.Sets.Bijective.bijective_iff_existsUnique
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.bijective_iff_existsUnique
+        level: kernel-test
+        instances: 3
+      - claim: 'sets related by a bijection have the same size'
+        lean: KaluzaKlein.Sets.Bijective.card_eq_of_bijective
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.card_eq_of_bijective
+        level: kernel-test
+        instances: 3
+  - label: exm-bijection-finite
+    claims:
+      - claim: '(x, y, z) is a bijection'
+        lean: KaluzaKlein.Sets.Bijective.three_bijective
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.three_bijective
+        level: kernel-test
+        instances: 3
+      - claim: 'there are 3! = 6 permutations'
+        lean: KaluzaKlein.Sets.Bijective.card_perm
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.card_perm
+        level: kernel-test
+        instances: 3
+  - label: exm-bijection-cube
+    claims:
+      - claim: 'x^3 is a bijection of R'
+        lean: KaluzaKlein.Sets.Bijective.odd_pow_bijective
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.odd_pow_bijective
+        level: kernel-test
+        instances: 3
+      - claim: '2x + 1 is a bijection of R'
+        lean: KaluzaKlein.Sets.Bijective.affine_bijective
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.affine_bijective
+        level: kernel-test
+        instances: 3
+      - claim: 'exp is a bijection onto (0, inf)'
+        lean: KaluzaKlein.Sets.Bijective.mul_exp_bijOn
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.mul_exp_bijOn
+        level: kernel-test
+        instances: 3
+      - claim: 'tan is a bijection of (-pi/2, pi/2) onto R'
+        lean: KaluzaKlein.Sets.Bijective.mul_tan_bijOn
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.mul_tan_bijOn
+        level: kernel-test
+        instances: 3
+  - label: exm-bijection-chart
+    claims:
+      - claim: 'the angle on (0, 2 pi) is a bijection onto the circle minus (1, 0)'
+        lean: KaluzaKlein.Sets.Bijective.wrap_bijOn
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.wrap_bijOn
+        level: kernel-test
+        instances: 3
+  - label: exr-bijection-count-4
+    claims:
+      - claim: '4! = 24 bijections'
+        lean: KaluzaKlein.Sets.Bijective.card_perm
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.card_perm
+        level: kernel-test
+        instances: 3
+      - claim: '3! = 6 of them fix 4'
+        lean: KaluzaKlein.Sets.Bijective.card_perm_fixing
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.card_perm_fixing
+        level: kernel-test
+        instances: 3
+  - label: exr-bijection-affine
+    claims:
+      - claim: '2x + 1 = y has the unique solution (y - 1)/2'
+        lean: KaluzaKlein.Sets.Bijective.affine_unique_solution
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.affine_unique_solution
+        level: kernel-test
+        instances: 3
+      - claim: '2 (y - 1)/2 + 1 = y'
+        lean: KaluzaKlein.Sets.Bijective.affine_solution_check
+        recipe: ideal_membership
+        certificate: ideal_membership.sage
+      - claim: 'on Z: injective, not surjective, image the odd integers'
+        lean: KaluzaKlein.Sets.Bijective.int_affine
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.int_affine
+        level: kernel-test
+        instances: 3
+  - label: exr-bijection-stereographic
+    claims:
+      - claim: 'the inverse point lies on the sphere'
+        lean: KaluzaKlein.Sets.Bijective.stereoInv_sphere
+        recipe: ideal_membership
+        certificate: ideal_membership.sage
+      - claim: 'it is not the north pole (height 1 - 2w < 1)'
+        lean: KaluzaKlein.Sets.Bijective.stereoInv_height
+        recipe: ideal_membership
+        certificate: ideal_membership.sage
+      - claim: 'projecting it gives back (u, v)'
+        lean: KaluzaKlein.Sets.Bijective.stereo_stereoInv
+        recipe: ideal_membership
+        certificate: ideal_membership.sage
+      - claim: 'the inverse of a projected point is the point'
+        lean: KaluzaKlein.Sets.Bijective.stereoInv_stereo
+        recipe: ideal_membership
+        certificate: ideal_membership.sage
+  - label: def-inverse-map
+    claims:
+      - claim: 'a map is a bijection iff it has a two-sided inverse'
+        lean: KaluzaKlein.Sets.Inverse.bijective_iff_has_inverse
+        recipe: mathlib
+        why: 'a general statement on inverse maps (arbitrary parameters) proved from mathlib; no recipe certifies inverse functions'
+        test: KaluzaKlein.Sets.Inverse.bijective_iff_has_inverse
+        level: kernel-test
+        instances: 3
+  - label: exm-inverse-shift
+    claims:
+      - claim: 'k -> k + 1 on Z6 is a bijection with inverse k -> k - 1'
+        lean: KaluzaKlein.Sets.Inverse.shift_inverse
+        recipe: mathlib
+        why: 'a general statement on inverse maps (arbitrary parameters) proved from mathlib; no recipe certifies inverse functions'
+        test: KaluzaKlein.Sets.Inverse.shift_inverse
+        level: kernel-test
+        instances: 3
+      - claim: 'k -> 2k sends 0 and 3 to 0'
+        lean: KaluzaKlein.Sets.Inverse.double_not_injective
+        recipe: witness
+        certificate: set-zmod6-double-noninjective.sage
+  - label: exm-inverse-log
+    claims:
+      - claim: 'log inverts exp'
+        lean: KaluzaKlein.Sets.Inverse.log_exp_inverse
+        recipe: mathlib
+        why: 'a general statement on inverse maps (arbitrary parameters) proved from mathlib; no recipe certifies inverse functions'
+        test: KaluzaKlein.Sets.Inverse.log_exp_inverse
+        level: kernel-test
+        instances: 3
+      - claim: 'arctan inverts tan on (-pi/2, pi/2)'
+        lean: KaluzaKlein.Sets.Inverse.arctan_tan_inverse
+        recipe: mathlib
+        why: 'a general statement on inverse maps (arbitrary parameters) proved from mathlib; no recipe certifies inverse functions'
+        test: KaluzaKlein.Sets.Inverse.arctan_tan_inverse
+        level: kernel-test
+        instances: 3
+      - claim: 'the cube root inverts x^3'
+        lean: KaluzaKlein.Sets.Inverse.cbrt_inverse
+        recipe: mathlib
+        why: 'a general statement on inverse maps (arbitrary parameters) proved from mathlib; no recipe certifies inverse functions'
+        test: KaluzaKlein.Sets.Inverse.cbrt_inverse
+        level: kernel-test
+        instances: 3
+  - label: exm-inverse-rotation
+    claims:
+      - claim: 'R(alpha) R(-alpha) = 1'
+        lean: KaluzaKlein.Sets.Inverse.Rz_mul_Rz_neg
+        recipe: matrix_from_goal
+        certificate: set-matrix-trig.sage
+      - claim: 'R^-1 = R(-alpha) = R^T'
+        lean: KaluzaKlein.Sets.Inverse.Rz_neg_eq_transpose
+        recipe: matrix_from_goal
+        certificate: set-matrix-trig.sage
+      - claim: 'the inverse of the angle bijection reads off the angle'
+        lean: KaluzaKlein.Sets.Bijective.wrap_bijOn
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.wrap_bijOn
+        level: kernel-test
+        instances: 3
+  - label: exr-inverse-check
+    claims:
+      - claim: 'the shift has inverse k -> k - 1'
+        lean: KaluzaKlein.Sets.Inverse.shift_inverse
+        recipe: mathlib
+        why: 'a general statement on inverse maps (arbitrary parameters) proved from mathlib; no recipe certifies inverse functions'
+        test: KaluzaKlein.Sets.Inverse.shift_inverse
+        level: kernel-test
+        instances: 3
+      - claim: 'doubling is not injective (0 and 3)'
+        lean: KaluzaKlein.Sets.Inverse.double_not_injective
+        recipe: witness
+        certificate: set-zmod6-double-noninjective.sage
+      - claim: 'doubling is not surjective (image {0, 2, 4})'
+        lean: KaluzaKlein.Sets.Inverse.double_not_surjective
+        recipe: witness
+        certificate: set-zmod6-double-nonsurjective.sage
+  - label: exr-inverse-moebius
+    claims:
+      - claim: 'f(f^-1(y)) = y'
+        lean: KaluzaKlein.Sets.Inverse.moebius_f_finv
+        recipe: ideal_membership
+        certificate: ideal_membership.sage
+      - claim: 'f^-1(f(x)) = x'
+        lean: KaluzaKlein.Sets.Inverse.moebius_finv_f
+        recipe: ideal_membership
+        certificate: ideal_membership.sage
+      - claim: 'f is a bijection of R - {-1} onto R - {1} with inverse (1 + y)/(1 - y)'
+        lean: KaluzaKlein.Sets.Inverse.moebius_bijOn
+        recipe: mathlib
+        why: 'a general statement on inverse maps (arbitrary parameters) proved from mathlib; no recipe certifies inverse functions'
+        test: KaluzaKlein.Sets.Inverse.moebius_bijOn
+        level: kernel-test
+        instances: 3
+  - label: exr-inverse-rotation-matrix
+    claims:
+      - claim: 'R(alpha) R(-alpha) = 1'
+        lean: KaluzaKlein.Sets.Inverse.Rz_mul_Rz_neg
+        recipe: matrix_from_goal
+        certificate: set-matrix-trig.sage
+      - claim: 'R(-alpha) = R(alpha)^T'
+        lean: KaluzaKlein.Sets.Inverse.Rz_neg_eq_transpose
+        recipe: matrix_from_goal
+        certificate: set-matrix-trig.sage
+      - claim: 'R(alpha)^T R(alpha) = 1'
+        lean: KaluzaKlein.Sets.Inverse.Rz_transpose_mul
+        recipe: matrix_from_goal
+        certificate: set-matrix-trig.sage
+  - label: prp-count-maps
+    claims:
+      - claim: '8 maps from three elements to two'
+        lean: KaluzaKlein.Sets.Maps.card_maps
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.card_maps
+        level: kernel-test
+        instances: 3
+      - claim: 'none of them injective'
+        lean: KaluzaKlein.Sets.Injective.no_injection
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.no_injection
+        level: kernel-test
+        instances: 3
+      - claim: '6 bijections of a three-element set'
+        lean: KaluzaKlein.Sets.Bijective.card_perm
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.card_perm
+        level: kernel-test
+        instances: 3
+      - claim: 'k -> k + 1 is a bijection of Z6'
+        lean: KaluzaKlein.Sets.Inverse.shift_inverse
+        recipe: mathlib
+        why: 'a general statement on inverse maps (arbitrary parameters) proved from mathlib; no recipe certifies inverse functions'
+        test: KaluzaKlein.Sets.Inverse.shift_inverse
+        level: kernel-test
+        instances: 3
+  - label: exm-count-product
+    claims:
+      - claim: 'a map {1, 2, 3} -> Y is a triple of values'
+        lean: KaluzaKlein.Sets.Counting.maps_three_as_triples
+        recipe: mathlib
+        why: 'a general counting formula for maps between finite sets proved from mathlib; no recipe certifies a cardinality'
+        test: KaluzaKlein.Sets.Counting.maps_three_as_triples
+        level: kernel-test
+        instances: 3
+      - claim: 'the maps X -> Y number |Y|^|X|'
+        lean: KaluzaKlein.Sets.Counting.card_fun
+        recipe: mathlib
+        why: 'a general counting formula for maps between finite sets proved from mathlib; no recipe certifies a cardinality'
+        test: KaluzaKlein.Sets.Counting.card_fun
+        level: kernel-test
+        instances: 3
+  - label: exm-count-factorial
+    claims:
+      - claim: '(n + 1)! = (n + 1) n!, the tree of choices'
+        lean: KaluzaKlein.Sets.Counting.card_perm_succ
+        recipe: mathlib
+        why: 'a general counting formula for maps between finite sets proved from mathlib; no recipe certifies a cardinality'
+        test: KaluzaKlein.Sets.Counting.card_perm_succ
+        level: kernel-test
+        instances: 3
+      - claim: '3! = 6'
+        lean: KaluzaKlein.Sets.Bijective.card_perm
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.card_perm
+        level: kernel-test
+        instances: 3
+  - label: exm-count-pigeonhole
+    claims:
+      - claim: '|X| <= |Y| for an injective map'
+        lean: KaluzaKlein.Sets.Counting.card_le_of_injective
+        recipe: mathlib
+        why: 'a general counting formula for maps between finite sets proved from mathlib; no recipe certifies a cardinality'
+        test: KaluzaKlein.Sets.Counting.card_le_of_injective
+        level: kernel-test
+        instances: 3
+      - claim: 'no injection from three to two'
+        lean: KaluzaKlein.Sets.Injective.no_injection
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.no_injection
+        level: kernel-test
+        instances: 3
+  - label: exr-count-maps-4-3
+    claims:
+      - claim: '3^4 = 81 maps'
+        lean: KaluzaKlein.Sets.Maps.card_maps
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.card_maps
+        level: kernel-test
+        instances: 3
+      - claim: 'no injective ones'
+        lean: KaluzaKlein.Sets.Injective.no_injection
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.no_injection
+        level: kernel-test
+        instances: 3
+      - claim: '36 surjective ones'
+        lean: KaluzaKlein.Sets.Counting.surjections_4_3
+        recipe: witness
+        certificate: set-surjections-4-3.sage
+  - label: exr-count-maps
+    claims:
+      - claim: '2^3 = 8 maps'
+        lean: KaluzaKlein.Sets.Maps.card_maps
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.card_maps
+        level: kernel-test
+        instances: 3
+      - claim: 'no injective ones'
+        lean: KaluzaKlein.Sets.Injective.no_injection
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.no_injection
+        level: kernel-test
+        instances: 3
+      - claim: '8 - 2 = 6 surjective ones'
+        lean: KaluzaKlein.Sets.Surjective.card_surjections_two
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.card_surjections_two
+        level: kernel-test
+        instances: 3
+      - claim: '3! = 6 bijections'
+        lean: KaluzaKlein.Sets.Bijective.card_perm
+        recipe: mathlib
+        why: 'a general statement on bijections (arbitrary parameters, sizes or labels) proved from mathlib; no recipe certifies bijectivity or a count of permutations'
+        test: KaluzaKlein.Sets.Bijective.card_perm
+        level: kernel-test
+        instances: 3
+  - label: exr-count-general
+    claims:
+      - claim: 'n^m maps'
+        lean: KaluzaKlein.Sets.Maps.card_maps
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.card_maps
+        level: kernel-test
+        instances: 3
+      - claim: 'n(n-1)...(n-m+1) injective maps'
+        lean: KaluzaKlein.Sets.Injective.card_injections
+        recipe: mathlib
+        why: 'a general statement on injectivity (arbitrary maps, labels, sizes or parameters) proved from mathlib; no recipe certifies injectivity of a map'
+        test: KaluzaKlein.Sets.Injective.card_injections
+        level: kernel-test
+        instances: 4
+      - claim: 'no injective maps for m > n'
+        lean: KaluzaKlein.Sets.Counting.descFactorial_eq_zero
+        recipe: mathlib
+        why: 'a general counting formula for maps between finite sets proved from mathlib; no recipe certifies a cardinality'
+        test: KaluzaKlein.Sets.Counting.descFactorial_eq_zero
+        level: kernel-test
+        instances: 3
+      - claim: 'n! bijections when m = n, none otherwise'
+        lean: KaluzaKlein.Sets.Counting.card_bijections
+        recipe: mathlib
+        why: 'a general counting formula for maps between finite sets proved from mathlib; no recipe certifies a cardinality'
+        test: KaluzaKlein.Sets.Counting.card_bijections
+        level: kernel-test
+        instances: 3
+  - label: def-composition
+    claims:
+      - claim: 'f^-1 o f = id, f o f^-1 = id'
+        lean: KaluzaKlein.Sets.Composition.inverse_comp
+        recipe: mathlib
+        why: 'a general statement on composition (arbitrary maps, angles) proved from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.Composition.inverse_comp
+        level: kernel-test
+        instances: 3
+  - label: exm-composition-permutations
+    claims:
+      - claim: 't o s and s o t differ'
+        lean: KaluzaKlein.Sets.Composition.swap_cycle_noncommute
+        recipe: witness
+        certificate: set-perm-noncommute.sage
+  - label: exm-composition-transition
+    claims:
+      - claim: 'the transition map is the inversion (u, v)/(u^2 + v^2)'
+        lean: KaluzaKlein.Sets.Composition.transition_inversion
+        recipe: ideal_membership
+        certificate: ideal_membership.sage
+      - claim: 'the inversion is its own inverse'
+        lean: KaluzaKlein.Sets.Composition.inversion_involutive
+        recipe: ideal_membership
+        certificate: ideal_membership.sage
+  - label: exm-composition-rotations
+    claims:
+      - claim: 'R(alpha) R(beta) = R(alpha + beta)'
+        lean: KaluzaKlein.Sets.Composition.Rz_mul
+        recipe: matrix_from_goal
+        certificate: set-matrix-trig.sage
+      - claim: 'rotations about different axes do not commute'
+        lean: KaluzaKlein.Sets.Composition.rotations_noncommute
+        recipe: mathlib
+        why: 'a general statement on composition (arbitrary maps, angles) proved from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.Composition.rotations_noncommute
+        level: kernel-test
+        instances: 3
+  - label: exr-compose-permutations
+    claims:
+      - claim: 'the two orders give different permutations'
+        lean: KaluzaKlein.Sets.Composition.swap_cycle_noncommute
+        recipe: witness
+        certificate: set-perm-noncommute.sage
+      - claim: 't^-1 = (1 3 2) and t o t^-1 = id'
+        lean: KaluzaKlein.Sets.Composition.cycle_inverse
+        recipe: witness
+        certificate: set-perm-inverse.sage
+  - label: exr-compose-associative
+    claims:
+      - claim: '(h o g) o f = h o (g o f)'
+        lean: KaluzaKlein.Sets.Composition.comp_assoc
+        recipe: mathlib
+        why: 'a general statement on composition (arbitrary maps, angles) proved from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.Composition.comp_assoc
+        level: kernel-test
+        instances: 3
+  - label: exr-compose-rotations-noncommute
+    claims:
+      - claim: 'R_z(alpha) R_x(beta)'
+        lean: KaluzaKlein.Sets.Composition.Rz_mul_Rx
+        recipe: matrix_from_goal
+        certificate: set-matrix-trig.sage
+      - claim: 'R_x(beta) R_z(alpha)'
+        lean: KaluzaKlein.Sets.Composition.Rx_mul_Rz
+        recipe: matrix_from_goal
+        certificate: set-matrix-trig.sage
+      - claim: 'the (1, 3) entries sin alpha sin beta and 0 differ'
+        lean: KaluzaKlein.Sets.Composition.rotations_noncommute
+        recipe: mathlib
+        why: 'a general statement on composition (arbitrary maps, angles) proved from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.Composition.rotations_noncommute
+        level: kernel-test
+        instances: 3
+  - label: def-equivalence-relation
+    none: 'a definition of vocabulary; it states no value, identity, inequality or property'
+  - label: exm-equivalence-mod
+    claims:
+      - claim: 'congruence modulo n is an equivalence relation'
+        lean: KaluzaKlein.Sets.Equivalence.modEq_equivalence
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.modEq_equivalence
+        level: kernel-test
+        instances: 3
+  - label: exm-equivalence-angle
+    claims:
+      - claim: 'congruence modulo 2 pi is an equivalence relation'
+        lean: KaluzaKlein.Sets.Equivalence.angle_equivalence
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.angle_equivalence
+        level: kernel-test
+        instances: 3
+  - label: exm-equivalence-coset
+    claims:
+      - claim: 'same value under a map is an equivalence relation'
+        lean: KaluzaKlein.Sets.Equivalence.sameValue_equivalence
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.sameValue_equivalence
+        level: kernel-test
+        instances: 3
+  - label: exr-equivalence-check
+    claims:
+      - claim: 'same parity is an equivalence relation'
+        lean: KaluzaKlein.Sets.Equivalence.modEq_equivalence
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.modEq_equivalence
+        level: kernel-test
+        instances: 3
+      - claim: '<= is reflexive and transitive'
+        lean: KaluzaKlein.Sets.Equivalence.le_refl_trans
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.le_refl_trans
+        level: kernel-test
+        instances: 3
+      - claim: '<= is not symmetric (1 <= 2, not 2 <= 1)'
+        lean: KaluzaKlein.Sets.Equivalence.le_not_symm
+        recipe: witness
+        certificate: set-le-not-symm.sage
+      - claim: '|a - b| <= 1 is reflexive and symmetric'
+        lean: KaluzaKlein.Sets.Equivalence.close_refl_symm
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.close_refl_symm
+        level: kernel-test
+        instances: 3
+      - claim: '|a - b| <= 1 is not transitive (1, 2, 3)'
+        lean: KaluzaKlein.Sets.Equivalence.close_not_trans
+        recipe: witness
+        certificate: set-close-not-trans.sage
+  - label: exr-equivalence-parity
+    claims:
+      - claim: 'even difference is an equivalence relation'
+        lean: KaluzaKlein.Sets.Equivalence.modEq_equivalence
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.modEq_equivalence
+        level: kernel-test
+        instances: 3
+      - claim: 'odd difference is neither reflexive nor transitive'
+        lean: KaluzaKlein.Sets.Equivalence.odd_diff_not_equivalence
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.odd_diff_not_equivalence
+        level: kernel-test
+        instances: 3
+  - label: exr-equivalence-closeness
+    claims:
+      - claim: 'closeness is not transitive (0, 0.9, 1.8)'
+        lean: KaluzaKlein.Sets.Equivalence.closeness_not_trans
+        recipe: witness
+        certificate: set-closeness-not-trans.sage
+      - claim: 'the generated equivalence relation relates every pair'
+        lean: KaluzaKlein.Sets.Equivalence.closeness_eqvGen
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.closeness_eqvGen
+        level: kernel-test
+        instances: 3
+      - claim: 'on (0, 1) ∪ (5, 6) there are two classes'
+        lean: KaluzaKlein.Sets.Equivalence.closeness_two_pieces
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.closeness_two_pieces
+        level: kernel-test
+        instances: 3
+  - label: def-equivalence-class
+    claims:
+      - claim: 'classes are equal or disjoint and partition X'
+        lean: KaluzaKlein.Sets.Equivalence.classes_partition
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.classes_partition
+        level: kernel-test
+        instances: 3
+  - label: exm-class-mod
+    claims:
+      - claim: 'the classes modulo 3 in {0, ..., 11}'
+        lean: KaluzaKlein.Sets.Equivalence.class_mod
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.class_mod
+        level: kernel-test
+        instances: 4
+  - label: exm-class-angle
+    claims:
+      - claim: 'one angle of each class in every interval of length 2 pi'
+        lean: KaluzaKlein.Sets.Equivalence.class_angle_unique
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.class_angle_unique
+        level: kernel-test
+        instances: 3
+  - label: exm-class-rotations
+    claims:
+      - claim: 'the class of g is {g h : h a rotation about Z}'
+        lean: KaluzaKlein.Sets.Surjective.orbit_fiber
+        recipe: mathlib
+        why: 'a general statement on surjectivity or on fibres of orbit maps (arbitrary parameters, sizes or points) proved from mathlib; no recipe certifies surjectivity or a count of maps'
+        test: KaluzaKlein.Sets.Surjective.orbit_fiber
+        level: kernel-test
+        instances: 3
+  - label: exr-equivalence-classes
+    claims:
+      - claim: 'the three classes modulo 3 in {0, ..., 11}'
+        lean: KaluzaKlein.Sets.Equivalence.class_mod
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.class_mod
+        level: kernel-test
+        instances: 4
+      - claim: 'they partition the set'
+        lean: KaluzaKlein.Sets.Equivalence.classes_partition
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.classes_partition
+        level: kernel-test
+        instances: 3
+  - label: exr-class-square
+    claims:
+      - claim: '[x] = {x, -x}, two elements unless x = 0'
+        lean: KaluzaKlein.Sets.Equivalence.class_square
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.class_square
+        level: kernel-test
+        instances: 3
+      - claim: 'the classes of same cosine are {+-x + 2 pi k}'
+        lean: KaluzaKlein.Sets.Equivalence.class_cos
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.class_cos
+        level: kernel-test
+        instances: 3
+      - claim: 'x and -x are congruent exactly for x in pi Z'
+        lean: KaluzaKlein.Sets.Equivalence.neg_congruent_iff
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.neg_congruent_iff
+        level: kernel-test
+        instances: 3
+  - label: exr-class-partition-proof
+    claims:
+      - claim: 'classes sharing an element are equal; the classes cover X'
+        lean: KaluzaKlein.Sets.Equivalence.classes_partition
+        recipe: mathlib
+        why: 'a general statement on equivalence relations and their classes (arbitrary modulus, period, map, set or point) proved from mathlib; no recipe certifies a relation property or a class'
+        test: KaluzaKlein.Sets.Equivalence.classes_partition
+        level: kernel-test
+        instances: 3
+  - label: def-quotient-set
+    claims:
+      - claim: 'the quotient map is surjective and f = f-bar o pi'
+        lean: KaluzaKlein.Sets.Quotients.quotient_descends
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.quotient_descends
+        level: kernel-test
+        instances: 3
+  - label: exm-quotient-zn
+    claims:
+      - claim: 'Z/nZ has n elements'
+        lean: KaluzaKlein.Sets.Quotients.card_zmod
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.card_zmod
+        level: kernel-test
+        instances: 3
+      - claim: 'addition descends to the remainders'
+        lean: KaluzaKlein.Sets.Quotients.add_descends
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.add_descends
+        level: kernel-test
+        instances: 3
+  - label: exm-quotient-circle
+    claims:
+      - claim: 'R/2 pi Z is the circle via [phi] -> (cos phi, sin phi)'
+        lean: KaluzaKlein.Sets.Quotients.circle_quotient_bijective
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.circle_quotient_bijective
+        level: kernel-test
+        instances: 3
+      - claim: 'a function descends iff it is 2 pi-periodic; cos and sin do'
+        lean: KaluzaKlein.Sets.Quotients.descends_iff_periodic
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.descends_iff_periodic
+        level: kernel-test
+        instances: 3
+      - claim: 'phi -> phi does not descend'
+        lean: KaluzaKlein.Sets.Quotients.id_not_periodic
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.id_not_periodic
+        level: kernel-test
+        instances: 3
+  - label: exm-quotient-sphere
+    claims:
+      - claim: 'SO(3) by same image of the pole is the sphere'
+        lean: KaluzaKlein.Sets.Quotients.orbit_quotient_bijective
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.orbit_quotient_bijective
+        level: kernel-test
+        instances: 3
+  - label: exr-quotient-z5-table
+    claims:
+      - claim: 'addition is well defined on classes'
+        lean: KaluzaKlein.Sets.Quotients.add_descends
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.add_descends
+        level: kernel-test
+        instances: 3
+      - claim: 'the addition table of Z5'
+        lean: KaluzaKlein.Sets.Quotients.zmod_ops
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.zmod_ops
+        level: kernel-test
+        instances: 5
+  - label: exr-descend
+    claims:
+      - claim: 'a function descends iff it is 2 pi-periodic'
+        lean: KaluzaKlein.Sets.Quotients.descends_iff_periodic
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.descends_iff_periodic
+        level: kernel-test
+        instances: 3
+      - claim: 'cos 2 phi is 2 pi-periodic'
+        lean: KaluzaKlein.Sets.Quotients.cos_two_mul_periodic
+        recipe: transcendental_rewrite
+        certificate: set-trig-periodic.sage
+      - claim: 'e^{i phi} is 2 pi-periodic'
+        lean: KaluzaKlein.Sets.Quotients.exp_I_periodic
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.exp_I_periodic
+        level: kernel-test
+        instances: 3
+      - claim: 'cos(phi/2) changes sign under phi -> phi + 2 pi'
+        lean: KaluzaKlein.Sets.Quotients.cos_half_antiperiodic
+        recipe: transcendental_rewrite
+        certificate: set-trig-periodic.sage
+      - claim: 'so cos(phi/2) does not descend'
+        lean: KaluzaKlein.Sets.Quotients.cos_half_changes
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.cos_half_changes
+        level: kernel-test
+        instances: 3
+  - label: exr-quotient-square
+    claims:
+      - claim: 'the generated relation identifies points with equal coordinates mod the edges'
+        lean: KaluzaKlein.Sets.Quotients.glue_eqvGen_iff
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.glue_eqvGen_iff
+        level: kernel-test
+        instances: 3
+      - claim: 'the four corners form one class'
+        lean: KaluzaKlein.Sets.Quotients.corners_one_class
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.corners_one_class
+        level: kernel-test
+        instances: 3
+      - claim: 'edge points have two-element classes, interior points one'
+        lean: KaluzaKlein.Sets.Quotients.edge_interior_classes
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.edge_interior_classes
+        level: kernel-test
+        instances: 3
+      - claim: 'the quotient is the torus'
+        lean: KaluzaKlein.Sets.QuotientTopology.torus_quotient_homeomorph
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.torus_quotient_homeomorph
+        level: kernel-test
+        instances: 3
+  - label: def-product
+    claims:
+      - claim: '|X x Y| = |X| |Y|'
+        lean: KaluzaKlein.Sets.Products.card_prod
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.card_prod
+        level: kernel-test
+        instances: 3
+      - claim: 'the projections are surjective'
+        lean: KaluzaKlein.Sets.Products.projections_surjective
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.projections_surjective
+        level: kernel-test
+        instances: 3
+  - label: exm-product-rn
+    claims:
+      - claim: 'R^{n+1} = R x R^n'
+        lean: KaluzaKlein.Sets.Products.rn_succ_prod
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.rn_succ_prod
+        level: kernel-test
+        instances: 3
+      - claim: 'a point of the torus S^1 x S^1 is labelled by a pair of angles'
+        lean: KaluzaKlein.Sets.Products.torus_pairs_of_angles
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.torus_pairs_of_angles
+        level: kernel-test
+        instances: 3
+  - label: exm-product-spacetime
+    none: 'describes configuration spaces and spacetimes as products (a modelling statement); it states no value, identity or property beyond the definition of the product'
+  - label: exm-product-maps
+    claims:
+      - claim: 'a map {1, 2, 3} -> {x, y} is a triple'
+        lean: KaluzaKlein.Sets.Counting.maps_three_as_triples
+        recipe: mathlib
+        why: 'a general counting formula for maps between finite sets proved from mathlib; no recipe certifies a cardinality'
+        test: KaluzaKlein.Sets.Counting.maps_three_as_triples
+        level: kernel-test
+        instances: 3
+      - claim: '2 * 2 * 2 = 8 such triples'
+        lean: KaluzaKlein.Sets.Maps.card_maps
+        recipe: mathlib
+        why: 'a general statement (images and preimages of maps with a parameter, or maps between finite sets with arbitrary labels) proved from mathlib; no recipe certifies set equalities of images and preimages'
+        test: KaluzaKlein.Sets.Maps.card_maps
+        level: kernel-test
+        instances: 3
+  - label: exr-product-count
+    claims:
+      - claim: '{1, 2} x {a, b, c} has 6 pairs, 2 * 3 * 2 = 12 triples'
+        lean: KaluzaKlein.Sets.Products.card_prod
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.card_prod
+        level: kernel-test
+        instances: 3
+  - label: exr-product-torus-point
+    claims:
+      - claim: '(cos pi/3, sin pi/3, cos pi/2, sin pi/2) = (1/2, sqrt3/2, 0, 1)'
+        lean: KaluzaKlein.Sets.Products.torus_point_r4
+        recipe: transcendental_rewrite
+        certificate: set-trig-values.sage
+      - claim: 'the torus of revolution gives (1, sqrt 3, 1)'
+        lean: KaluzaKlein.Sets.Products.torus_point_r3
+        recipe: transcendental_rewrite
+        certificate: set-trig-values.sage
+  - label: exr-product-of-maps
+    claims:
+      - claim: 'f x g injective (surjective) iff f and g are'
+        lean: KaluzaKlein.Sets.Products.prodMap_injective_surjective
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.prodMap_injective_surjective
+        level: kernel-test
+        instances: 3
+  - label: prp-quotient-z3
+    claims:
+      - claim: 'Z/3Z has 3 elements, Z/5Z has 5, Z/nZ has n'
+        lean: KaluzaKlein.Sets.Quotients.card_zmod
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.card_zmod
+        level: kernel-test
+        instances: 3
+  - label: exm-z3-elements
+    claims:
+      - claim: 'every integer has exactly one remainder'
+        lean: KaluzaKlein.Sets.Products.unique_remainder
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.unique_remainder
+        level: kernel-test
+        instances: 3
+  - label: exm-z3-table
+    claims:
+      - claim: '1 + 2 = 0, 2 + 2 = 1, 2 * 2 = 1 in Z3'
+        lean: KaluzaKlein.Sets.Quotients.zmod_ops
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.zmod_ops
+        level: kernel-test
+        instances: 5
+      - claim: 'Z3 is a field'
+        lean: KaluzaKlein.Sets.Products.zmod_prime_field
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.zmod_prime_field
+        level: kernel-test
+        instances: 3
+  - label: exm-z3-general
+    claims:
+      - claim: 'Zn has n elements'
+        lean: KaluzaKlein.Sets.Quotients.card_zmod
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.card_zmod
+        level: kernel-test
+        instances: 3
+      - claim: 'Zn is cyclic, generated by 1'
+        lean: KaluzaKlein.Sets.Products.zmod_cyclic
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.zmod_cyclic
+        level: kernel-test
+        instances: 3
+  - label: exr-quotient-z5-card
+    claims:
+      - claim: 'every integer has one of the remainders 0, ..., 4'
+        lean: KaluzaKlein.Sets.Products.unique_remainder
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.unique_remainder
+        level: kernel-test
+        instances: 3
+      - claim: 'distinct remainders are not congruent'
+        lean: KaluzaKlein.Sets.Products.remainders_distinct
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.remainders_distinct
+        level: kernel-test
+        instances: 3
+      - claim: 'the inverses [2]^-1 = [3], [4]^-1 = [4]'
+        lean: KaluzaKlein.Sets.Products.zmod5_inverses
+        recipe: witness
+        certificate: set-zmod5-inverses.sage
+      - claim: 'Z5 is a field'
+        lean: KaluzaKlein.Sets.Products.zmod_prime_field
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.zmod_prime_field
+        level: kernel-test
+        instances: 3
+  - label: exr-quotient-z12-classes
+    claims:
+      - claim: 'the multiples of 4 lie in [0], [4], [8]'
+        lean: KaluzaKlein.Sets.Products.multiples_of_four
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.multiples_of_four
+        level: kernel-test
+        instances: 4
+      - claim: 'Z12 -> Z4 is onto with three-element preimages'
+        lean: KaluzaKlein.Sets.Products.z12_to_z4
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.z12_to_z4
+        level: kernel-test
+        instances: 3
+  - label: exr-quotient-general-card
+    claims:
+      - claim: 'division with remainder gives one representative per class'
+        lean: KaluzaKlein.Sets.Products.unique_remainder
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.unique_remainder
+        level: kernel-test
+        instances: 3
+      - claim: 'distinct remainders give distinct classes'
+        lean: KaluzaKlein.Sets.Products.remainders_distinct
+        recipe: mathlib
+        why: 'a general statement on products and on Z/nZ (arbitrary sets, sizes, moduli) proved from mathlib; no recipe certifies a cardinality or a quotient count'
+        test: KaluzaKlein.Sets.Products.remainders_distinct
+        level: kernel-test
+        instances: 3
+      - claim: 'so Z/nZ has n elements'
+        lean: KaluzaKlein.Sets.Quotients.card_zmod
+        recipe: mathlib
+        why: 'a general statement on quotient sets (arbitrary relation, period, modulus or base point) proved from mathlib; no recipe certifies a quotient construction'
+        test: KaluzaKlein.Sets.Quotients.card_zmod
+        level: kernel-test
+        instances: 3
+  - label: def-open-set
+    none: 'a definition of vocabulary; it states no value, identity, inequality or property'
+  - label: exm-open-intervals
+    claims:
+      - claim: '(0, 2 pi) open, [0, 2 pi] closed not open, [0, 2 pi) neither'
+        lean: KaluzaKlein.Sets.OpenSets.intervals_open_closed
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.intervals_open_closed
+        level: kernel-test
+        instances: 3
+  - label: exm-open-disc
+    claims:
+      - claim: 'open disc open, closed disc and circle closed, circle not open'
+        lean: KaluzaKlein.Sets.OpenSets.discs_open_closed
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.discs_open_closed
+        level: kernel-test
+        instances: 3
+  - label: exm-open-rectangle
+    claims:
+      - claim: '(0, pi) x (0, 2 pi) and R^2 are open'
+        lean: KaluzaKlein.Sets.OpenSets.rectangle_open
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.rectangle_open
+        level: kernel-test
+        instances: 3
+      - claim: 'R^n minus a point is open'
+        lean: KaluzaKlein.Sets.OpenSets.punctured_open
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.punctured_open
+        level: kernel-test
+        instances: 3
+  - label: exr-open-decide
+    claims:
+      - claim: '(1, 2] is neither open nor closed'
+        lean: KaluzaKlein.Sets.OpenSets.Ioc_neither
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.Ioc_neither
+        level: kernel-test
+        instances: 3
+      - claim: 'Z is closed, not open'
+        lean: KaluzaKlein.Sets.OpenSets.multiples_closed_not_open
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.multiples_closed_not_open
+        level: kernel-test
+        instances: 3
+      - claim: '{v > u^2} open, {uv = 1} closed, R^2 - {0} open'
+        lean: KaluzaKlein.Sets.OpenSets.parabola_hyperbola
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.parabola_hyperbola
+        level: kernel-test
+        instances: 3
+      - claim: 'an explicit ball around a point above the parabola stays above it'
+        lean: KaluzaKlein.Sets.OpenSets.parabola_ball
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.parabola_ball
+        level: kernel-test
+        instances: 3
+  - label: exr-open-ball-is-open
+    claims:
+      - claim: 'B_delta(x) ⊆ B_eps(p) for delta = eps - |x - p|'
+        lean: KaluzaKlein.Sets.OpenSets.ball_radius_subset
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.ball_radius_subset
+        level: kernel-test
+        instances: 3
+  - label: exr-open-union-intersection
+    claims:
+      - claim: 'unions and finite intersections of open sets are open'
+        lean: KaluzaKlein.Sets.OpenSets.union_inter_open
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.union_inter_open
+        level: kernel-test
+        instances: 3
+      - claim: 'the intervals (-1/n, 1/n) intersect in {0}, not open'
+        lean: KaluzaKlein.Sets.OpenSets.infinite_inter_not_open
+        recipe: mathlib
+        why: 'a general topological statement about subsets of R^n (arbitrary endpoints, radii, points) proved from mathlib; no recipe certifies openness or closedness'
+        test: KaluzaKlein.Sets.OpenSets.infinite_inter_not_open
+        level: kernel-test
+        instances: 3
+  - label: def-topological-space
+    none: 'a definition of vocabulary; it states no value, identity, inequality or property'
+  - label: exm-topology-rn
+    claims:
+      - claim: 'the open sets of R^n form a topology'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.ball_opens_topology
+        recipe: mathlib
+        why: 'a general statement on the axioms of a topology (arbitrary set or family) proved from mathlib or by evaluation; no recipe certifies a topology'
+        test: KaluzaKlein.Sets.TopologicalSpaces.ball_opens_topology
+        level: kernel-test
+        instances: 3
+  - label: exm-topology-discrete
+    claims:
+      - claim: 'discrete and indiscrete topologies'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.discrete_indiscrete
+        recipe: mathlib
+        why: 'a general statement on the axioms of a topology (arbitrary set or family) proved from mathlib or by evaluation; no recipe certifies a topology'
+        test: KaluzaKlein.Sets.TopologicalSpaces.discrete_indiscrete
+        level: kernel-test
+        instances: 3
+      - claim: '29 topologies on a three-point set'
+        lean: KaluzaKlein.Sets.FiniteTopologies.topologies_three
+        recipe: witness
+        certificate: set-topologies-three.sage
+  - label: exm-topology-finite
+    claims:
+      - claim: '{∅, {1}, {1, 2}, X} is a topology (a chain)'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.chain_isFinTop
+        recipe: mathlib
+        why: 'a general statement on the axioms of a topology (arbitrary set or family) proved from mathlib or by evaluation; no recipe certifies a topology'
+        test: KaluzaKlein.Sets.TopologicalSpaces.chain_isFinTop
+        level: kernel-test
+        instances: 3
+      - claim: '{∅, {1}, {2}, X} is not: {1, 2} is missing'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.not_topology_union
+        recipe: witness
+        certificate: set-topology-missing-union.sage
+  - label: exr-topology-axioms-check
+    claims:
+      - claim: '{∅, {1}, {2, 3}, X} is a topology'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.complement_pair_isFinTop
+        recipe: mathlib
+        why: 'a general statement on the axioms of a topology (arbitrary set or family) proved from mathlib or by evaluation; no recipe certifies a topology'
+        test: KaluzaKlein.Sets.TopologicalSpaces.complement_pair_isFinTop
+        level: kernel-test
+        instances: 3
+      - claim: '{∅, {1}, {1, 2}, {1, 3}, X} is a topology'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.particular_point_isFinTop
+        recipe: mathlib
+        why: 'a general statement on the axioms of a topology (arbitrary set or family) proved from mathlib or by evaluation; no recipe certifies a topology'
+        test: KaluzaKlein.Sets.TopologicalSpaces.particular_point_isFinTop
+        level: kernel-test
+        instances: 3
+      - claim: '{∅, {1, 2}, {2, 3}, X} is not: {2} is missing'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.not_topology_inter
+        recipe: witness
+        certificate: set-topology-missing-inter.sage
+      - claim: 'on a finite set pairwise unions suffice for the axioms'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.isFinTop_iff
+        recipe: mathlib
+        why: 'a general statement on the axioms of a topology (arbitrary set or family) proved from mathlib or by evaluation; no recipe certifies a topology'
+        test: KaluzaKlein.Sets.TopologicalSpaces.isFinTop_iff
+        level: kernel-test
+        instances: 3
+  - label: exr-topology-two-points
+    claims:
+      - claim: 'the four topologies on {1, 2}'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.topologies_two
+        recipe: witness
+        certificate: set-topologies-two.sage
+  - label: exr-topology-intersection
+    claims:
+      - claim: 'the intersection of two topologies is a topology'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.inter_isTopologyOn
+        recipe: mathlib
+        why: 'a general statement on the axioms of a topology (arbitrary set or family) proved from mathlib or by evaluation; no recipe certifies a topology'
+        test: KaluzaKlein.Sets.TopologicalSpaces.inter_isTopologyOn
+        level: kernel-test
+        instances: 3
+      - claim: 'on two points unions of topologies are topologies'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.union_two_points
+        recipe: mathlib
+        why: 'a general statement on the axioms of a topology (arbitrary set or family) proved from mathlib or by evaluation; no recipe certifies a topology'
+        test: KaluzaKlein.Sets.TopologicalSpaces.union_two_points
+        level: kernel-test
+        instances: 3
+      - claim: 'on three points the union of {∅, {1}, X} and {∅, {2}, X} is not'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.union_not_topology
+        recipe: witness
+        certificate: set-union-not-topology.sage
+  - label: def-subspace-topology
+    none: 'a definition of vocabulary; it states no value, identity, inequality or property'
+  - label: exm-subspace-circle
+    claims:
+      - claim: 'an open arc is the trace of an open half-plane, open in the circle'
+        lean: KaluzaKlein.Sets.Subspace.arc_open
+        recipe: mathlib
+        why: 'a general statement on subspace topologies (arbitrary arcs, caps, parameters) proved from mathlib; no recipe certifies openness in a subspace'
+        test: KaluzaKlein.Sets.Subspace.arc_open
+        level: kernel-test
+        instances: 3
+  - label: exm-subspace-sphere
+    claims:
+      - claim: 'caps are open in the sphere; entries in open ranges give open sets of SO(3)'
+        lean: KaluzaKlein.Sets.Subspace.caps_and_entries_open
+        recipe: mathlib
+        why: 'a general statement on subspace topologies (arbitrary arcs, caps, parameters) proved from mathlib; no recipe certifies openness in a subspace'
+        test: KaluzaKlein.Sets.Subspace.caps_and_entries_open
+        level: kernel-test
+        instances: 3
+  - label: exm-subspace-interval
+    claims:
+      - claim: '[0, 1/2) = (-1/2, 1/2) ∩ [0, 1) is open in [0, 1), not in R'
+        lean: KaluzaKlein.Sets.Subspace.half_open_relative
+        recipe: mathlib
+        why: 'a general statement on subspace topologies (arbitrary arcs, caps, parameters) proved from mathlib; no recipe certifies openness in a subspace'
+        test: KaluzaKlein.Sets.Subspace.half_open_relative
+        level: kernel-test
+        instances: 3
+  - label: exr-subspace-open
+    claims:
+      - claim: 'the open upper half of the circle is open'
+        lean: KaluzaKlein.Sets.Subspace.upper_part_open
+        recipe: mathlib
+        why: 'a general statement on subspace topologies (arbitrary arcs, caps, parameters) proved from mathlib; no recipe certifies openness in a subspace'
+        test: KaluzaKlein.Sets.Subspace.upper_part_open
+        level: kernel-test
+        instances: 3
+      - claim: 'the closed upper half is not'
+        lean: KaluzaKlein.Sets.Subspace.closed_part_not_open
+        recipe: mathlib
+        why: 'a general statement on subspace topologies (arbitrary arcs, caps, parameters) proved from mathlib; no recipe certifies openness in a subspace'
+        test: KaluzaKlein.Sets.Subspace.closed_part_not_open
+        level: kernel-test
+        instances: 3
+  - label: exr-subspace-discrete
+    claims:
+      - claim: 'Z is discrete'
+        lean: KaluzaKlein.Sets.Subspace.multiples_discrete
+        recipe: mathlib
+        why: 'a general statement on subspace topologies (arbitrary arcs, caps, parameters) proved from mathlib; no recipe certifies openness in a subspace'
+        test: KaluzaKlein.Sets.Subspace.multiples_discrete
+        level: kernel-test
+        instances: 3
+      - claim: '{1/n} is discrete'
+        lean: KaluzaKlein.Sets.Subspace.reciprocals_discrete
+        recipe: mathlib
+        why: 'a general statement on subspace topologies (arbitrary arcs, caps, parameters) proved from mathlib; no recipe certifies openness in a subspace'
+        test: KaluzaKlein.Sets.Subspace.reciprocals_discrete
+        level: kernel-test
+        instances: 3
+      - claim: '{0} ∪ {1/n} is not'
+        lean: KaluzaKlein.Sets.Subspace.reciprocals_zero_not_discrete
+        recipe: mathlib
+        why: 'a general statement on subspace topologies (arbitrary arcs, caps, parameters) proved from mathlib; no recipe certifies openness in a subspace'
+        test: KaluzaKlein.Sets.Subspace.reciprocals_zero_not_discrete
+        level: kernel-test
+        instances: 3
+  - label: exr-subspace-transitive
+    claims:
+      - claim: 'the subspace topology of a subspace is the subspace topology'
+        lean: KaluzaKlein.Sets.Subspace.subspace_transitive
+        recipe: mathlib
+        why: 'a general statement on subspace topologies (arbitrary arcs, caps, parameters) proved from mathlib; no recipe certifies openness in a subspace'
+        test: KaluzaKlein.Sets.Subspace.subspace_transitive
+        level: kernel-test
+        instances: 3
+  - label: def-continuous-map
+    claims:
+      - claim: 'for metric spaces continuity is the eps-delta condition'
+        lean: KaluzaKlein.Sets.Continuous.continuous_iff_eps_delta
+        recipe: mathlib
+        why: 'a general statement on continuity (arbitrary maps, parameters) proved from mathlib; no recipe certifies continuity'
+        test: KaluzaKlein.Sets.Continuous.continuous_iff_eps_delta
+        level: kernel-test
+        instances: 3
+  - label: exm-continuous-elementary
+    claims:
+      - claim: 'cos, sin, exp, polynomials and combinations are continuous'
+        lean: KaluzaKlein.Sets.Continuous.elementary_continuous
+        recipe: mathlib
+        why: 'a general statement on continuity (arbitrary maps, parameters) proved from mathlib; no recipe certifies continuity'
+        test: KaluzaKlein.Sets.Continuous.elementary_continuous
+        level: kernel-test
+        instances: 3
+      - claim: 'the step function is not: the preimage of (1/2, 2) is [0, inf)'
+        lean: KaluzaKlein.Sets.Continuous.step_not_continuous
+        recipe: mathlib
+        why: 'a general statement on continuity (arbitrary maps, parameters) proved from mathlib; no recipe certifies continuity'
+        test: KaluzaKlein.Sets.Continuous.step_not_continuous
+        level: kernel-test
+        instances: 3
+  - label: exm-continuous-chart
+    claims:
+      - claim: 'the parametrisations of the circle and the sphere are continuous'
+        lean: KaluzaKlein.Sets.Continuous.parametrisations_continuous
+        recipe: mathlib
+        why: 'a general statement on continuity (arbitrary maps, parameters) proved from mathlib; no recipe certifies continuity'
+        test: KaluzaKlein.Sets.Continuous.parametrisations_continuous
+        level: kernel-test
+        instances: 3
+  - label: exm-continuous-matrix
+    claims:
+      - claim: 'matrix multiplication, det and the orbit map are continuous'
+        lean: KaluzaKlein.Sets.Continuous.matrix_maps_continuous
+        recipe: mathlib
+        why: 'a general statement on continuity (arbitrary maps, parameters) proved from mathlib; no recipe certifies continuity'
+        test: KaluzaKlein.Sets.Continuous.matrix_maps_continuous
+        level: kernel-test
+        instances: 3
+  - label: exr-preimages
+    claims:
+      - claim: 'the step function''s preimage [0, inf) is not open'
+        lean: KaluzaKlein.Sets.Continuous.step_not_continuous
+        recipe: mathlib
+        why: 'a general statement on continuity (arbitrary maps, parameters) proved from mathlib; no recipe certifies continuity'
+        test: KaluzaKlein.Sets.Continuous.step_not_continuous
+        level: kernel-test
+        instances: 3
+      - claim: 'cos(pi/3) = 1/2'
+        lean: KaluzaKlein.Sets.Continuous.cos_pi_third_value
+        recipe: transcendental_rewrite
+        certificate: set-trig-values.sage
+      - claim: 'cos^-1((1/2, 2)) is the union of (-pi/3 + 2 pi k, pi/3 + 2 pi k), open'
+        lean: KaluzaKlein.Sets.Continuous.cos_preimage
+        recipe: mathlib
+        why: 'a general statement on continuity (arbitrary maps, parameters) proved from mathlib; no recipe certifies continuity'
+        test: KaluzaKlein.Sets.Continuous.cos_preimage
+        level: kernel-test
+        instances: 3
+  - label: exr-continuous-floor
+    claims:
+      - claim: 'floor^-1((k - 1/2, k + 1/2)) = [k, k + 1); discontinuous at k, continuous between'
+        lean: KaluzaKlein.Sets.Continuous.floor_discontinuity
+        recipe: mathlib
+        why: 'a general statement on continuity (arbitrary maps, parameters) proved from mathlib; no recipe certifies continuity'
+        test: KaluzaKlein.Sets.Continuous.floor_discontinuity
+        level: kernel-test
+        instances: 3
+  - label: exr-continuous-composition
+    claims:
+      - claim: 'compositions of continuous maps are continuous'
+        lean: KaluzaKlein.Sets.Continuous.comp_continuous
+        recipe: mathlib
+        why: 'a general statement on continuity (arbitrary maps, parameters) proved from mathlib; no recipe certifies continuity'
+        test: KaluzaKlein.Sets.Continuous.comp_continuous
+        level: kernel-test
+        instances: 3
+      - claim: 't -> R(t)(0, 0, 1) is a continuous curve on the sphere'
+        lean: KaluzaKlein.Sets.Continuous.rotation_curve
+        recipe: mathlib
+        why: 'a general statement on continuity (arbitrary maps, parameters) proved from mathlib; no recipe certifies continuity'
+        test: KaluzaKlein.Sets.Continuous.rotation_curve
+        level: kernel-test
+        instances: 3
+  - label: def-homeomorphism
+    none: 'a definition of vocabulary; it states no value, identity, inequality or property'
+  - label: exm-homeomorphism-interval
+    claims:
+      - claim: 'tan is a homeomorphism (-pi/2, pi/2) -> R'
+        lean: KaluzaKlein.Sets.Homeomorphism.tan_homeomorph
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.tan_homeomorph
+        level: kernel-test
+        instances: 3
+      - claim: 'a closed interval is not homeomorphic to an open one'
+        lean: KaluzaKlein.Sets.Homeomorphism.Icc_not_homeomorph_Ioo
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.Icc_not_homeomorph_Ioo
+        level: kernel-test
+        instances: 3
+  - label: exm-homeomorphism-sphere
+    claims:
+      - claim: 'stereographic projection is continuous off the pole'
+        lean: KaluzaKlein.Sets.Homeomorphism.stereo_continuousOn
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.stereo_continuousOn
+        level: kernel-test
+        instances: 3
+      - claim: 'its inverse is continuous'
+        lean: KaluzaKlein.Sets.Homeomorphism.stereoInv_continuous
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.stereoInv_continuous
+        level: kernel-test
+        instances: 3
+      - claim: 'and they are inverse bijections'
+        lean: KaluzaKlein.Sets.Bijective.stereoInv_sphere
+        recipe: ideal_membership
+        certificate: ideal_membership.sage
+      - claim: '[0, 2 pi) -> S^1 is a continuous bijection with discontinuous inverse'
+        lean: KaluzaKlein.Sets.Homeomorphism.wrap_Ico_not_homeomorph
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.wrap_Ico_not_homeomorph
+        level: kernel-test
+        instances: 3
+  - label: exm-homeomorphism-square
+    claims:
+      - claim: 'the boundary of a square is homeomorphic to the circle'
+        lean: KaluzaKlein.Sets.Homeomorphism.square_homeomorph_circle
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.square_homeomorph_circle
+        level: kernel-test
+        instances: 3
+      - claim: 'the circle minus a point is connected'
+        lean: KaluzaKlein.Sets.Homeomorphism.circle_minus_point_connected
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.circle_minus_point_connected
+        level: kernel-test
+        instances: 3
+      - claim: 'the figure eight minus its crossing point is not'
+        lean: KaluzaKlein.Sets.Homeomorphism.figureEight_minus_origin_not_connected
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.figureEight_minus_origin_not_connected
+        level: kernel-test
+        instances: 3
+      - claim: 'so the figure eight is not homeomorphic to the circle'
+        lean: KaluzaKlein.Sets.Homeomorphism.figureEight_not_homeomorph_circle
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.figureEight_not_homeomorph_circle
+        level: kernel-test
+        instances: 3
+  - label: exr-homeomorphism-tan
+    claims:
+      - claim: 'tan and arctan are inverse continuous bijections'
+        lean: KaluzaKlein.Sets.Homeomorphism.tan_homeomorph
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.tan_homeomorph
+        level: kernel-test
+        instances: 3
+      - claim: 'arctan(tan x) = x, tan(arctan y) = y'
+        lean: KaluzaKlein.Sets.Inverse.arctan_tan_inverse
+        recipe: mathlib
+        why: 'a general statement on inverse maps (arbitrary parameters) proved from mathlib; no recipe certifies inverse functions'
+        test: KaluzaKlein.Sets.Inverse.arctan_tan_inverse
+        level: kernel-test
+        instances: 3
+      - claim: 'the derivative of x/(1 - x^2) is (1 + x^2)/(1 - x^2)^2'
+        lean: KaluzaKlein.Sets.Homeomorphism.deriv_x_div
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.deriv_x_div
+        level: kernel-test
+        instances: 3
+      - claim: 'which is positive on (-1, 1)'
+        lean: KaluzaKlein.Sets.Homeomorphism.deriv_x_div_pos
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.deriv_x_div_pos
+        level: kernel-test
+        instances: 3
+      - claim: 'x/(1 - x^2) is a homeomorphism (-1, 1) -> R'
+        lean: KaluzaKlein.Sets.Homeomorphism.x_div_homeomorph
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.x_div_homeomorph
+        level: kernel-test
+        instances: 3
+  - label: exr-homeomorphism-half-open
+    claims:
+      - claim: '[0, 1) and (0, 1) are not homeomorphic'
+        lean: KaluzaKlein.Sets.Homeomorphism.Ico_not_homeomorph_Ioo
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.Ico_not_homeomorph_Ioo
+        level: kernel-test
+        instances: 3
+  - label: exr-homeomorphism-invariance
+    claims:
+      - claim: 'homeomorphisms send open sets to open sets, closed to closed'
+        lean: KaluzaKlein.Sets.Homeomorphism.homeomorph_open_closed
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.homeomorph_open_closed
+        level: kernel-test
+        instances: 3
+  - label: def-quotient-topology
+    claims:
+      - claim: 'a map from the quotient is continuous iff its composition with the quotient map is'
+        lean: KaluzaKlein.Sets.QuotientTopology.quotient_continuous_iff
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.quotient_continuous_iff
+        level: kernel-test
+        instances: 3
+  - label: exm-quotient-circle-top
+    claims:
+      - claim: 'R/2 pi Z is homeomorphic to the circle'
+        lean: KaluzaKlein.Sets.QuotientTopology.circle_quotient_homeomorph
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.circle_quotient_homeomorph
+        level: kernel-test
+        instances: 3
+      - claim: 'open intervals of angles go to open arcs'
+        lean: KaluzaKlein.Sets.Subspace.arc_open
+        recipe: mathlib
+        why: 'a general statement on subspace topologies (arbitrary arcs, caps, parameters) proved from mathlib; no recipe certifies openness in a subspace'
+        test: KaluzaKlein.Sets.Subspace.arc_open
+        level: kernel-test
+        instances: 3
+  - label: exm-quotient-sphere-top
+    claims:
+      - claim: 'SO(3)/SO(2) is homeomorphic to the sphere'
+        lean: KaluzaKlein.Sets.QuotientTopology.sphere_quotient_homeomorph
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.sphere_quotient_homeomorph
+        level: kernel-test
+        instances: 3
+  - label: exm-quotient-torus
+    claims:
+      - claim: 'the square with glued edges is homeomorphic to the torus'
+        lean: KaluzaKlein.Sets.QuotientTopology.torus_quotient_homeomorph
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.torus_quotient_homeomorph
+        level: kernel-test
+        instances: 3
+  - label: exr-quotient-interval-circle
+    claims:
+      - claim: '[0, 2 pi] with 0 ~ 2 pi is homeomorphic to the circle'
+        lean: KaluzaKlein.Sets.QuotientTopology.interval_quotient_homeomorph
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.interval_quotient_homeomorph
+        level: kernel-test
+        instances: 3
+      - claim: 'on [0, 2 pi) the same map is not a homeomorphism'
+        lean: KaluzaKlein.Sets.Homeomorphism.wrap_Ico_not_homeomorph
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.wrap_Ico_not_homeomorph
+        level: kernel-test
+        instances: 3
+  - label: exr-quotient-open-sets
+    claims:
+      - claim: 'open sets of R/2 pi Z are periodic open sets; the quotient map is open'
+        lean: KaluzaKlein.Sets.QuotientTopology.quotient_open_sets
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.quotient_open_sets
+        level: kernel-test
+        instances: 3
+  - label: exr-quotient-moebius
+    claims:
+      - claim: 'the boundary of the Möbius band is one circle'
+        lean: KaluzaKlein.Sets.QuotientTopology.moebius_boundary_connected
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.moebius_boundary_connected
+        level: kernel-test
+        instances: 3
+      - claim: 'the cylinder has two boundary circles'
+        lean: KaluzaKlein.Sets.QuotientTopology.cylinder_boundary_disconnected
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.cylinder_boundary_disconnected
+        level: kernel-test
+        instances: 3
+  - label: prp-finite-topologies
+    claims:
+      - claim: '29 topologies on a three-element set'
+        lean: KaluzaKlein.Sets.FiniteTopologies.topologies_three
+        recipe: witness
+        certificate: set-topologies-three.sage
+      - claim: 'topologies on a finite set are the families satisfying the axioms'
+        lean: KaluzaKlein.Sets.FiniteTopologies.card_topologies
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.card_topologies
+        level: kernel-test
+        instances: 3
+  - label: exm-topologies-two
+    claims:
+      - claim: '4 topologies on two points'
+        lean: KaluzaKlein.Sets.TopologicalSpaces.topologies_two
+        recipe: witness
+        certificate: set-topologies-two.sage
+  - label: exm-topologies-lattice
+    claims:
+      - claim: 'every topology lies between the indiscrete and the discrete one'
+        lean: KaluzaKlein.Sets.FiniteTopologies.between_indiscrete_discrete
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.between_indiscrete_discrete
+        level: kernel-test
+        instances: 3
+      - claim: 'finer domains and coarser codomains keep maps continuous'
+        lean: KaluzaKlein.Sets.FiniteTopologies.finer_coarser
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.finer_coarser
+        level: kernel-test
+        instances: 3
+  - label: exm-topologies-count-grows
+    claims:
+      - claim: '355 topologies on four points, 6942 on five'
+        lean: KaluzaKlein.Sets.FiniteTopologies.topologies_count_claim
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.topologies_count_claim
+        level: oracle-test
+        instances: 6
+  - label: exr-finite-topologies
+    claims:
+      - claim: '2^8 = 256 families of subsets'
+        lean: KaluzaKlein.Sets.FiniteTopologies.card_families
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.card_families
+        level: kernel-test
+        instances: 4
+      - claim: '29 of them are topologies'
+        lean: KaluzaKlein.Sets.FiniteTopologies.topologies_three
+        recipe: witness
+        certificate: set-topologies-three.sage
+  - label: exr-topology-t0-count
+    claims:
+      - claim: '19 of the 29 are T0'
+        lean: KaluzaKlein.Sets.FiniteTopologies.t0_topologies_three
+        recipe: witness
+        certificate: set-t0-three.sage
+  - label: exr-topology-four-points
+    claims:
+      - claim: '2^16 = 65536 families'
+        lean: KaluzaKlein.Sets.FiniteTopologies.card_families
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.card_families
+        level: kernel-test
+        instances: 4
+      - claim: '355 topologies on four points'
+        lean: KaluzaKlein.Sets.FiniteTopologies.topologies_count_claim
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.topologies_count_claim
+        level: oracle-test
+        instances: 6
+  - label: def-hausdorff
+    claims:
+      - claim: 'limits are unique and points closed in a Hausdorff space'
+        lean: KaluzaKlein.Sets.Hausdorff.hausdorff_consequences
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.hausdorff_consequences
+        level: kernel-test
+        instances: 3
+  - label: exm-hausdorff-rn
+    claims:
+      - claim: 'distinct points have disjoint balls of radius d/2'
+        lean: KaluzaKlein.Sets.Hausdorff.disjoint_balls
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.disjoint_balls
+        level: kernel-test
+        instances: 3
+      - claim: 'subspaces of Hausdorff spaces are Hausdorff'
+        lean: KaluzaKlein.Sets.Hausdorff.subspace_hausdorff
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.subspace_hausdorff
+        level: kernel-test
+        instances: 5
+  - label: exm-hausdorff-finite
+    claims:
+      - claim: 'discrete Hausdorff, indiscrete not'
+        lean: KaluzaKlein.Sets.Hausdorff.discrete_indiscrete_hausdorff
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.discrete_indiscrete_hausdorff
+        level: kernel-test
+        instances: 3
+      - claim: 'only the discrete of the 29 is Hausdorff'
+        lean: KaluzaKlein.Sets.FiniteTopologies.hausdorff_three
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.hausdorff_three
+        level: kernel-test
+        instances: 3
+  - label: exm-hausdorff-quotient
+    claims:
+      - claim: 'R/Q has only the trivial open sets and is not Hausdorff'
+        lean: KaluzaKlein.Sets.Hausdorff.rat_quotient_not_hausdorff
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.rat_quotient_not_hausdorff
+        level: kernel-test
+        instances: 3
+      - claim: 'SO(3)/SO(2) is Hausdorff'
+        lean: KaluzaKlein.Sets.Hausdorff.coset_space_hausdorff
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.coset_space_hausdorff
+        level: kernel-test
+        instances: 3
+  - label: exr-hausdorff-check-finite
+    claims:
+      - claim: 'only the discrete of the 4 two-point topologies'
+        lean: KaluzaKlein.Sets.FiniteTopologies.hausdorff_two
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.hausdorff_two
+        level: kernel-test
+        instances: 3
+      - claim: 'only the discrete of the 29 three-point topologies'
+        lean: KaluzaKlein.Sets.FiniteTopologies.hausdorff_three
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.hausdorff_three
+        level: kernel-test
+        instances: 3
+  - label: exr-hausdorff-points-closed
+    claims:
+      - claim: 'points are closed in a Hausdorff space'
+        lean: KaluzaKlein.Sets.Hausdorff.points_closed
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.points_closed
+        level: kernel-test
+        instances: 3
+      - claim: 'the cofinite topology has closed points, not Hausdorff'
+        lean: KaluzaKlein.Sets.Hausdorff.cofinite_not_hausdorff
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.cofinite_not_hausdorff
+        level: kernel-test
+        instances: 3
+  - label: exr-hausdorff-two-origins
+    claims:
+      - claim: 'the line with two origins is not Hausdorff'
+        lean: KaluzaKlein.Sets.Hausdorff.doubled_point_not_hausdorff
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.doubled_point_not_hausdorff
+        level: kernel-test
+        instances: 3
+  - label: def-compact
+    claims:
+      - claim: 'Heine-Borel'
+        lean: KaluzaKlein.Sets.Compact.heine_borel
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.heine_borel
+        level: kernel-test
+        instances: 3
+      - claim: 'extreme values on compact sets'
+        lean: KaluzaKlein.Sets.Compact.extreme_values
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.extreme_values
+        level: kernel-test
+        instances: 3
+  - label: exm-compact-interval
+    claims:
+      - claim: '[0, 1] compact; (0, 1) and R not'
+        lean: KaluzaKlein.Sets.Compact.intervals_compact
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.intervals_compact
+        level: kernel-test
+        instances: 3
+      - claim: 'the cover (1/n, 1) has no finite subcover'
+        lean: KaluzaKlein.Sets.Compact.cover_no_finite_subcover
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.cover_no_finite_subcover
+        level: kernel-test
+        instances: 3
+      - claim: 'an open interval is not homeomorphic to a closed one'
+        lean: KaluzaKlein.Sets.Homeomorphism.Icc_not_homeomorph_Ioo
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.Icc_not_homeomorph_Ioo
+        level: kernel-test
+        instances: 3
+  - label: exm-compact-spheres
+    claims:
+      - claim: 'S^1, S^2, T^2, SO(3) are closed and bounded, hence compact'
+        lean: KaluzaKlein.Sets.Compact.compact_of_closed_bounded
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.compact_of_closed_bounded
+        level: kernel-test
+        instances: 5
+      - claim: 'coset spaces of compact groups are compact'
+        lean: KaluzaKlein.Sets.Compact.quotient_compact
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.quotient_compact
+        level: kernel-test
+        instances: 3
+  - label: exm-compact-plane
+    claims:
+      - claim: 'R^n and the open disc are not compact'
+        lean: KaluzaKlein.Sets.Compact.plane_disc_not_compact
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.plane_disc_not_compact
+        level: kernel-test
+        instances: 3
+      - claim: 'the hyperboloid is not compact'
+        lean: KaluzaKlein.Sets.Compact.hyperboloid_not_compact
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.hyperboloid_not_compact
+        level: kernel-test
+        instances: 3
+  - label: exr-compact-proof
+    claims:
+      - claim: '(1/n, 1) covers (0, 1) without a finite subcover'
+        lean: KaluzaKlein.Sets.Compact.cover_no_finite_subcover
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.cover_no_finite_subcover
+        level: kernel-test
+        instances: 3
+      - claim: 'for [0, 1] the family misses 0 and 1; with neighbourhoods of the endpoints finitely many U_n cover it'
+        lean: KaluzaKlein.Sets.Compact.closed_interval_cover
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.closed_interval_cover
+        level: kernel-test
+        instances: 3
+  - label: exr-compact-extremes
+    claims:
+      - claim: 'f''(x) = (1 - x) e^-x'
+        lean: KaluzaKlein.Sets.Compact.deriv_x_exp
+        recipe: derivative
+        certificate: set-deriv.sage
+      - claim: 'the maximum e^-1 at x = 1'
+        lean: KaluzaKlein.Sets.Compact.x_exp_le
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.x_exp_le
+        level: kernel-test
+        instances: 3
+      - claim: 'the minimum f(0) = 0 on [0, 2]'
+        lean: KaluzaKlein.Sets.Compact.x_exp_nonneg
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.x_exp_nonneg
+        level: kernel-test
+        instances: 3
+      - claim: 'on (0, 2) no minimum, infimum 0'
+        lean: KaluzaKlein.Sets.Compact.x_exp_no_min
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.x_exp_no_min
+        level: kernel-test
+        instances: 3
+      - claim: 'compactness guarantees attained extremes'
+        lean: KaluzaKlein.Sets.Compact.extreme_values
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.extreme_values
+        level: kernel-test
+        instances: 3
+  - label: exr-compact-closed-subset
+    claims:
+      - claim: 'closed subsets of compact sets are compact'
+        lean: KaluzaKlein.Sets.Compact.closed_subset_compact
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.closed_subset_compact
+        level: kernel-test
+        instances: 3
+      - claim: 'the circle and the spheres are compact'
+        lean: KaluzaKlein.Sets.Compact.compact_of_closed_bounded
+        recipe: mathlib
+        why: 'a general statement on compactness (arbitrary sets, functions, parameters) proved from mathlib; no recipe certifies compactness'
+        test: KaluzaKlein.Sets.Compact.compact_of_closed_bounded
+        level: kernel-test
+        instances: 5
+  - label: def-connected
+    claims:
+      - claim: 'the components partition the space'
+        lean: KaluzaKlein.Sets.Connected.components_partition
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.components_partition
+        level: kernel-test
+        instances: 3
+  - label: exm-connected-circle
+    claims:
+      - claim: 'S^1, S^2, T^2, R^n are connected'
+        lean: KaluzaKlein.Sets.Connected.connected_of_range
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.connected_of_range
+        level: kernel-test
+        instances: 3
+      - claim: 'the circle minus a point is connected'
+        lean: KaluzaKlein.Sets.Homeomorphism.circle_minus_point_connected
+        recipe: mathlib
+        why: 'a general statement on homeomorphisms (arbitrary parameters, intervals, radii) proved from mathlib; no recipe certifies a homeomorphism or its absence'
+        test: KaluzaKlein.Sets.Homeomorphism.circle_minus_point_connected
+        level: kernel-test
+        instances: 3
+      - claim: 'minus two points it is not'
+        lean: KaluzaKlein.Sets.Connected.circle_minus_two_points
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.circle_minus_two_points
+        level: kernel-test
+        instances: 3
+  - label: exm-connected-groups
+    claims:
+      - claim: 'O(3) has the two components det = 1 and det = -1'
+        lean: KaluzaKlein.Sets.Connected.O3_components
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.O3_components
+        level: kernel-test
+        instances: 3
+  - label: exm-connected-finite
+    claims:
+      - claim: 'the graph AB, BC, DE has two components'
+        lean: KaluzaKlein.Sets.Connected.graph_components
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.graph_components
+        level: kernel-test
+        instances: 4
+      - claim: 'the six-cycle minus a vertex is connected'
+        lean: KaluzaKlein.Sets.Connected.cycle_minus_one
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.cycle_minus_one
+        level: kernel-test
+        instances: 3
+      - claim: 'minus two opposite vertices it has two components'
+        lean: KaluzaKlein.Sets.Connected.cycle_minus_two
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.cycle_minus_two
+        level: kernel-test
+        instances: 3
+  - label: exr-connected-components
+    claims:
+      - claim: 'components {A, B, C}, {D, E}'
+        lean: KaluzaKlein.Sets.Connected.graph_components
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.graph_components
+        level: kernel-test
+        instances: 4
+      - claim: 'six-cycle minus one vertex connected'
+        lean: KaluzaKlein.Sets.Connected.cycle_minus_one
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.cycle_minus_one
+        level: kernel-test
+        instances: 3
+      - claim: 'minus two opposite vertices, two components'
+        lean: KaluzaKlein.Sets.Connected.cycle_minus_two
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.cycle_minus_two
+        level: kernel-test
+        instances: 3
+  - label: exr-connected-gl2
+    claims:
+      - claim: 'GL(2, R) is not connected'
+        lean: KaluzaKlein.Sets.Connected.GL_not_connected
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.GL_not_connected
+        level: kernel-test
+        instances: 3
+      - claim: 'O(2) has two components, rotations and reflections'
+        lean: KaluzaKlein.Sets.Connected.O2_components
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.O2_components
+        level: kernel-test
+        instances: 3
+      - claim: 'a path of rotations with determinant 1'
+        lean: KaluzaKlein.Sets.Connected.rot2_path
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.rot2_path
+        level: kernel-test
+        instances: 3
+  - label: exr-connected-image
+    claims:
+      - claim: 'continuous images of connected sets are connected; the intermediate value theorem'
+        lean: KaluzaKlein.Sets.Connected.connected_image_ivt
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.connected_image_ivt
+        level: kernel-test
+        instances: 3
+  - label: def-path-connected
+    claims:
+      - claim: 'path-connected implies connected'
+        lean: KaluzaKlein.Sets.Connected.pathConnected_connected
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.pathConnected_connected
+        level: kernel-test
+        instances: 3
+  - label: exm-path-sphere
+    claims:
+      - claim: 'any two points of S^2 are joined by a path'
+        lean: KaluzaKlein.Sets.Connected.sphere_joined
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.sphere_joined
+        level: kernel-test
+        instances: 3
+      - claim: 'straight segments join points of R^n'
+        lean: KaluzaKlein.Sets.Connected.segment_joined
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.segment_joined
+        level: kernel-test
+        instances: 3
+  - label: exm-path-rotations
+    claims:
+      - claim: 'every rotation is joined to the identity; no path to a reflection'
+        lean: KaluzaKlein.Sets.Connected.rotations_joined
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.rotations_joined
+        level: kernel-test
+        instances: 3
+  - label: exm-path-graph
+    claims:
+      - claim: 'a graph is connected iff every pair is joined by a walk'
+        lean: KaluzaKlein.Sets.Connected.graph_connected_iff
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.graph_connected_iff
+        level: kernel-test
+        instances: 3
+  - label: exr-path-great-circle
+    claims:
+      - claim: 'gamma(t) stays on the sphere'
+        lean: KaluzaKlein.Sets.Connected.great_circle_on_sphere
+        recipe: transcendental_rewrite
+        certificate: set-trig-pythagoras.sage
+      - claim: 'gamma(0) is the north pole, gamma(1) = (1, 0, 0)'
+        lean: KaluzaKlein.Sets.Connected.great_circle_endpoints
+        recipe: transcendental_rewrite
+        certificate: set-trig-values.sage
+  - label: exr-path-rotations-connect
+    claims:
+      - claim: 'any two rotations are joined by a path of rotations'
+        lean: KaluzaKlein.Sets.Connected.rotations_connect
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.rotations_connect
+        level: kernel-test
+        instances: 3
+  - label: exr-path-connected-implies
+    claims:
+      - claim: 'a path-connected space is connected'
+        lean: KaluzaKlein.Sets.Connected.pathConnected_connected
+        recipe: mathlib
+        why: 'a general statement on connectedness and paths (arbitrary points, matrices, sizes, graphs'' vertices) proved from mathlib or by evaluation; no recipe certifies connectedness'
+        test: KaluzaKlein.Sets.Connected.pathConnected_connected
+        level: kernel-test
+        instances: 3
+  - label: prp-hausdorff-topologies
+    claims:
+      - claim: 'exactly one of the 29 topologies is Hausdorff, the discrete one'
+        lean: KaluzaKlein.Sets.FiniteTopologies.hausdorff_three
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.hausdorff_three
+        level: kernel-test
+        instances: 3
+  - label: exm-hausdorff-two-points
+    claims:
+      - claim: 'only the discrete of the 4 is Hausdorff'
+        lean: KaluzaKlein.Sets.FiniteTopologies.hausdorff_two
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.hausdorff_two
+        level: kernel-test
+        instances: 3
+  - label: exm-hausdorff-discrete-general
+    claims:
+      - claim: 'a finite Hausdorff space is discrete'
+        lean: KaluzaKlein.Sets.Hausdorff.finite_hausdorff_discrete
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.finite_hausdorff_discrete
+        level: kernel-test
+        instances: 3
+  - label: exm-hausdorff-infinite
+    claims:
+      - claim: 'on R the usual and the discrete topologies are both Hausdorff and differ'
+        lean: KaluzaKlein.Sets.Hausdorff.two_hausdorff_topologies
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.two_hausdorff_topologies
+        level: kernel-test
+        instances: 3
+  - label: exr-hausdorff-finite
+    claims:
+      - claim: 'a finite Hausdorff space is discrete'
+        lean: KaluzaKlein.Sets.Hausdorff.finite_hausdorff_discrete
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.finite_hausdorff_discrete
+        level: kernel-test
+        instances: 3
+      - claim: 'points are closed'
+        lean: KaluzaKlein.Sets.Hausdorff.points_closed
+        recipe: mathlib
+        why: 'a general statement on separation (arbitrary spaces, points, parameters) proved from mathlib; no recipe certifies the Hausdorff property'
+        test: KaluzaKlein.Sets.Hausdorff.points_closed
+        level: kernel-test
+        instances: 3
+      - claim: 'one Hausdorff topology among the 29'
+        lean: KaluzaKlein.Sets.FiniteTopologies.hausdorff_three
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.hausdorff_three
+        level: kernel-test
+        instances: 3
+  - label: exr-hausdorff-count-t1
+    claims:
+      - claim: 'one topology on three points has all points closed'
+        lean: KaluzaKlein.Sets.FiniteTopologies.t1_three
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.t1_three
+        level: kernel-test
+        instances: 3
+  - label: exr-hausdorff-sierpinski
+    claims:
+      - claim: 'neighbourhoods, limits and closed points of the Sierpinski space'
+        lean: KaluzaKlein.Sets.FiniteTopologies.sierpinski_facts
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.sierpinski_facts
+        level: kernel-test
+        instances: 4
+      - claim: 'it is not Hausdorff'
+        lean: KaluzaKlein.Sets.FiniteTopologies.hausdorff_two
+        recipe: mathlib
+        why: 'a statement about all families of subsets of a small finite set, proved by evaluation or from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.FiniteTopologies.hausdorff_two
+        level: kernel-test
+        instances: 3
+  - label: exr-circle-quotient-compact
+    claims:
+      - claim: 'R/2 pi Z is compact and Hausdorff, R is not compact'
+        lean: KaluzaKlein.Sets.Exercises.circle_quotient_compact_hausdorff
+        recipe: mathlib
+        why: 'a general statement on quotients, compactness and continuity (arbitrary period, spaces, maps) proved from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.Exercises.circle_quotient_compact_hausdorff
+        level: kernel-test
+        instances: 3
+  - label: exr-sphere-quotient-homeomorphism
+    claims:
+      - claim: 'a continuous bijection from compact to Hausdorff is a homeomorphism'
+        lean: KaluzaKlein.Sets.Exercises.compact_to_hausdorff
+        recipe: mathlib
+        why: 'a general statement on quotients, compactness and continuity (arbitrary period, spaces, maps) proved from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.Exercises.compact_to_hausdorff
+        level: kernel-test
+        instances: 3
+      - claim: 'SO(3)/SO(2) is homeomorphic to the sphere'
+        lean: KaluzaKlein.Sets.QuotientTopology.sphere_quotient_homeomorph
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.sphere_quotient_homeomorph
+        level: kernel-test
+        instances: 3
+  - label: exr-descend-continuity
+    claims:
+      - claim: 'f-bar is continuous iff f is'
+        lean: KaluzaKlein.Sets.QuotientTopology.quotient_continuous_iff
+        recipe: mathlib
+        why: 'a general statement on quotient topologies (arbitrary period, side, base point) proved from mathlib; no recipe certifies a homeomorphism of quotients'
+        test: KaluzaKlein.Sets.QuotientTopology.quotient_continuous_iff
+        level: kernel-test
+        instances: 3
+      - claim: 'continuous periodic functions descend to continuous functions on the circle'
+        lean: KaluzaKlein.Sets.Exercises.periodic_descends_continuous
+        recipe: mathlib
+        why: 'a general statement on quotients, compactness and continuity (arbitrary period, spaces, maps) proved from mathlib; no recipe certifies it'
+        test: KaluzaKlein.Sets.Exercises.periodic_descends_continuous
+        level: kernel-test
+        instances: 3

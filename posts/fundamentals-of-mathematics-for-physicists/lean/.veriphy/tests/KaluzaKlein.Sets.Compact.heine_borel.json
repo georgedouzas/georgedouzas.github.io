@@ -1,0 +1,64 @@
+{"target": "KaluzaKlein.Sets.Compact.heine_borel",
+ "statement":
+ "∀ (E : Type) [inst : MetricSpace E] [ProperSpace E] (K : Set E), IsCompact K ↔ IsClosed K ∧ Bornology.IsBounded K",
+ "seed": 0,
+ "script_hash": "17199389666801860975",
+ "script":
+ "# name: set-heine-borel-test\n# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand\n# goal: sage_test KaluzaKlein.Sets.Compact.heine_borel\n# description: the claim at the instances below, each proved independently of the claim\nSEED = 0\nCASES = [\n    (['ℝ', 'inferInstance', 'inferInstance', 'Set.Icc 0 1'], False, 'have key : ∀ (E : Type) [inst1 : MetricSpace E] [inst2 : ProperSpace E] (K : Set E), IsCompact K ↔ IsClosed K ∧ Bornology.IsBounded K := by\\n  intro E inst1 inst2 K\\n  exact (Metric.isCompact_iff_isClosed_bounded)\\nexact @key (ℝ) (inferInstance) (inferInstance) (Set.Icc 0 1)'),\n    (['ℝ', 'inferInstance', 'inferInstance', '∅'], True, 'have key : ∀ (E : Type) [inst1 : MetricSpace E] [inst2 : ProperSpace E] (K : Set E), IsCompact K ↔ IsClosed K ∧ Bornology.IsBounded K := by\\n  intro E inst1 inst2 K\\n  exact (Metric.isCompact_iff_isClosed_bounded)\\nexact @key (ℝ) (inferInstance) (inferInstance) (∅)'),\n    (['ℝ × ℝ', 'inferInstance', 'inferInstance', 'KaluzaKlein.Sets.Sets.circle'], False, 'have key : ∀ (E : Type) [inst1 : MetricSpace E] [inst2 : ProperSpace E] (K : Set E), IsCompact K ↔ IsClosed K ∧ Bornology.IsBounded K := by\\n  intro E inst1 inst2 K\\n  exact (Metric.isCompact_iff_isClosed_bounded)\\nexact @key (ℝ × ℝ) (inferInstance) (inferInstance) (KaluzaKlein.Sets.Sets.circle)'),\n]\ninstances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "Type", "name": "E"},
+   {"type": "MetricSpace E",
+    "name":
+    "inst._@..veriphy._authoring_KaluzaKlein_PartI_Sets_CertAll.3354117103._hygCtx._hyg.3"},
+   {"type": "ProperSpace E",
+    "name":
+    "inst._@..veriphy._authoring_KaluzaKlein_PartI_Sets_CertAll.3354117103._hygCtx._hyg.6"},
+   {"type": "Set E", "name": "K"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "IsCompact K ↔ IsClosed[PseudoMetricSpace.toUniformSpace.toTopologicalSpace] K ∧ Bornology.IsBounded K",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "kernel-test",
+ "instances":
+ [{"values": ["ℝ", "inferInstance", "inferInstance", "Set.Icc 0 1"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values": ["ℝ", "inferInstance", "inferInstance", "∅"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["ℝ × ℝ", "inferInstance", "inferInstance", "KaluzaKlein.Sets.Sets.circle"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

@@ -19,6 +19,8 @@ subgroups, and Maurer-Cartan forms carry the bracket over the whole group as lef
 obeying the Maurer-Cartan equation. Every statement is followed by three examples and three exercises with hidden
 solutions, and many exercises have Sage solutions.
 
+For more on this topic, see @gadea2013analysis [Ch. 4], @lee2013introduction [Ch. 7, Ch. 8, Ch. 20], @lee2018global [Ch. 1-2], @mukunda2022continuous [Ch. 4, Ch. 7-8], @pal2015introductory [Ch. 3], @rudolph2013differential [Ch. 5], @scott2023problems [Ch. 3] and @torresdelcastillo2020differentiable [Ch. 7].
+
 ### Lie groups {#sec-lie-groups}
 
 Symmetries of a space form a group, and when the symmetries depend smoothly on parameters, as rotations depend on
@@ -3668,6 +3670,8 @@ hexagon of roots, highest weights, simple roots and the Cartan matrix. Branching
 subalgebras, works the branching of $\mathfrak{su}(3)$ under $\mathfrak{su}(2) \times \mathfrak{u}(1)$ and splits
 $\mathfrak{so}(4)$ into two commuting copies of $\mathfrak{su}(2)$. Every statement is followed by three examples and
 three exercises with hidden solutions, and many of the computations use Sage's `WeylCharacterRing` and `RootSystem`.
+
+For more on this topic, see @keskivakkuri2022mathematical [Ch. 6] and @mukunda2022continuous [Ch. 5].
 
 ### Weights and the representations of su(2) {#sec-weights-su2}
 

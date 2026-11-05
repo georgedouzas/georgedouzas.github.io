@@ -24,6 +24,8 @@ Every statement is followed by three examples of increasing complexity and three
 
 A gauge theory makes a global symmetry local by introducing a connection, the gauge field, whose curvature is the field strength; electromagnetism is the abelian case and Yang-Mills theory the non-abelian one. This part has two sections. Abelian gauge invariance starts from the phase symmetry of a complex scalar, defines local symmetries, the gauge field, the covariant derivative and the field strength, and ends with Maxwell's action. Yang-Mills theory repeats the construction for a non-abelian group, where the field strength acquires a commutator, the equations become nonlinear and a constant potential can carry a field strength; the Bianchi identity is the structural identity that every such field satisfies.
 
+For more on this topic, see @aitchison2024gauge [Secs. 2.4-2.6], @hamilton2017mathematical [Ch. 5, Ch. 7], @nastase2019classical [Ch. 27], @paganini2023fundamentals [Ch. 12], @pal2015introductory [Ch. 11] and @strocchi2021symmetry [Ch. 29].
+
 ### Abelian gauge invariance {#sec-abelian-gauge}
 
 A global phase rotation of a charged field is a symmetry; making its angle depend on position breaks the
@@ -1737,6 +1739,8 @@ transports in different directions do not commute, while for a constant abelian 
 
 A symmetry of the equations need not be a symmetry of the ground state: spontaneous symmetry breaking produces massless Goldstone bosons for global symmetries and massive gauge bosons for local ones, the Higgs mechanism. This part has two sections. Spontaneous symmetry breaking defines vacua, broken and unbroken symmetries and Goldstone bosons, with the Mexican-hat potential as the running example, and proves Goldstone's theorem. The Higgs mechanism gauges the broken symmetry, removes the Goldstone bosons by a choice of gauge and reads the masses of the gauge bosons from the covariant kinetic term, for the abelian model, an $SU(2)$ doublet and an $SO(3)$ triplet.
 
+For more on this topic, see @hamilton2017mathematical [Ch. 8], @hosotani2025introduction [Secs. 2.1-2.6], @paganini2023fundamentals [Ch. 4, Ch. 9-11], @pal2015introductory [Ch. 15, Ch. 16-19] and @strocchi2021symmetry [Ch. 1-2, Ch. 7-9].
+
 ### Spontaneous symmetry breaking {#sec-ssb}
 
 A symmetry of the equations need not be a symmetry of their solutions: a pencil balanced on its tip is
@@ -3098,6 +3102,8 @@ bosons tangent to the orbit $SU(3)/(SU(2) \times U(1)) = \mathbb{CP}^2$, and fou
 ## Lattice gauge theory {#sec-lattice-gauge}
 
 The quantum field theory chapter put a scalar field on the sites of a Euclidean lattice, evaluated the free theory exactly (@prp-fpi-lattice-correlator) and sampled the interacting one by Metropolis updates (@def-fpi-metropolis). A gauge field cannot be discretised in the same way, because the difference $\phi(x + a\hat\mu) - \phi(x)$ of a charged field compares values at two points and is not gauge covariant. Wilson's solution is to make the parallel transporters along the edges of the lattice, rather than the potential, the basic variables. Gauge invariance is then exact at every lattice spacing, the action is built from the transport around the smallest closed loops, and the theory can be studied away from weak coupling, where perturbation theory fails.
+
+For more on this topic, see @nastase2019classical [Ch. 24, Ch. 28].
 
 This part has five sections and a set of integrative exercises. The first defines link variables, plaquettes and the Wilson action, and shows that the action tends to the Euclidean Yang-Mills action of @def-yang-mills-action. The second treats the three groups used throughout, $\mathbb{Z}_2$, compact $U(1)$ and $SU(2)$, and solves all three exactly in two dimensions. The third introduces Wilson loops, the strong-coupling expansion and the area law that signals confinement. The fourth proves Elitzur's theorem, that a local symmetry cannot break spontaneously, which qualifies the Higgs mechanism of the previous part. The fifth describes the Monte Carlo updates of link variables that produce the numbers quoted in the figures. The sources are @boudreau2018applied [Secs. 24.3-24.5 and Exercises 24.2-24.17], @williams2023introduction [Secs. 9.1.2 and 9.2.5] and @guidry2022symmetry [Sec. 26.5]; the renormalisation chapter uses the same lattice as a regulator of the scalar theory (@def-ren-lattice-regularisation).
 

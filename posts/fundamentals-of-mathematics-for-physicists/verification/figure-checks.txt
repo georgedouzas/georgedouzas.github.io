@@ -1,0 +1,1152 @@
+== affine_group_fields.sage
+[PASS] X and Y are left-invariant: dL(X) = X at the image point, dL(Y) = Y at the image point: True
+[PASS] [X, Y] = Y (a non-abelian two-dimensional Lie algebra): True
+wrote tutorial/figures/affine_group_fields.svg
+== atlas_circle.sage
+[PASS] the two angle charts form the atlas of the circle in SageManifolds: True
+[PASS] both pieces of the transition map, phi' = phi and phi' = phi - 2*pi, have derivative 1: True
+wrote tutorial/figures/atlas_circle.svg
+== basis_change.sage
+[PASS] coordinates of v in the basis (f1, f2) are (2, 1): True
+[PASS] (f1, f2) is linearly independent: True
+wrote tutorial/figures/basis_change.svg
+wrote tutorial/figures/interactive/basis_change.html
+== binomial_poisson_gaussian.sage
+[PASS] Binomial(n, p): probabilities sum to 1, mean np, variance np(1 - p) for (n, p) = (10, 1/3), (20, 1/4), (64, 1/2), exactly: True
+[PASS] the binomial characteristic function is (1 - p + p e^{it})^n (n = 5, symbolic in p and t): True
+[PASS] Poisson(lambda): sum 1, mean lambda, variance lambda and characteristic function exp(lambda (e^{it} - 1)), by symbolic summation: True
+[PASS] N(mu, sigma^2): the density integrates to 1, has mean mu, variance sigma^2 and characteristic function exp(i mu t - sigma^2 t^2/2): True
+[PASS] Poisson limit: Binomial(n, 2/n) probabilities at k <= 5 approach e^{-2} 2^k/k!, max difference ['0.0313', '0.0027', '0.0003'] decreasing and below 1/1000 at n = 1000: True
+[PASS] de Moivre-Laplace: for Binomial(400, 1/2), P(|X - 200| <= 10) = 0.7063 is within 0.03 of P(|Z| <= 1) = erf(1/sqrt 2) = 0.6827: True
+wrote tutorial/figures/binomial_poisson_gaussian.svg
+wrote tutorial/figures/interactive/binomial_poisson_gaussian.html
+== branching_su3.sage
+[PASS] the adjoint of A2 branches to the Levi A1 as 0 + 2 x (1/2) + 1 (singlet, two doublets, triplet): True
+[PASS] the lambda_8 charges of the adjoint weights are -sqrt3, 0, sqrt3 with 2, 4, 2 weights: True
+wrote tutorial/figures/branching_su3.svg
+== cayley_graph.sage
+[PASS] Z_6 is abelian and S_3 is not: True
+[PASS] (12)(13) and (13)(12) differ, and (123) has order 3: True
+wrote tutorial/figures/cayley_graph.svg
+[PASS] the sign of g h is the product of the signs (the table has the block pattern of S_3/A_3 = Z_2): True
+[PASS] every row and column of the table is a permutation of S_3: True
+wrote tutorial/figures/interactive/cayley_graph.html
+== complex_plane.sage
+[PASS] the sixth roots of unity e^{2 pi i k/6}, k = 0..5, satisfy z^6 = 1: True
+[PASS] their sum is 0 and their product is -1: True
+[PASS] (Z^6 - 1).roots(QQbar) returns six distinct roots, two real (1 and -1) and four complex: True
+[PASS] de Moivre: (cos t + i sin t)^3 = cos 3t + i sin 3t: True
+[PASS] |z| = sqrt(5) and |z|^2 = z conj(z) for z = 2 + i: True
+[PASS] Log(-1) = i pi while Log(-1) + Log(-1) = 2 i pi differs from Log((-1)(-1)) = 0: True
+wrote tutorial/figures/complex_plane.svg
+wrote tutorial/figures/interactive/complex_plane.html
+== components_graph.sage
+[PASS] the first graph has two components: True
+[PASS] the six-cycle minus one vertex is connected and minus two opposite vertices has two components: True
+wrote tutorial/figures/components_graph.svg
+== conditional_probability.sage
+[PASS] two dice: P(sum >= 10) = 1/6, P(first die >= 4) = 1/2 and P(sum >= 10 | first die >= 4) = 1/3: True
+[PASS] sum = 7 is independent of the first die: P(sum = 7 | first die = i) = 1/6 = P(sum = 7) for every i: True
+[PASS] law of total probability: sum_i P(sum >= 10 | first die = i) P(first die = i) = 1/6: True
+[PASS] Bayes: prevalence 1/10, sensitivity 9/10, false-positive rate 1/5 give P(ill | positive) = 1/3: True
+[PASS] Bayes: prevalence 1/100, sensitivity 99/100, false-positive rate 1/20 give P(ill | positive) = 1/6: True
+[PASS] the 2^3 = 8 subsets of {1, 2, 3} are closed under complement and union (a sigma-algebra): True
+[PASS] inclusion-exclusion on two dice: P(A or B) = P(A) + P(B) - P(A and B) = 1/2 for A = sum >= 10, B = first >= 4: True
+wrote tutorial/figures/conditional_probability.svg
+== contours_poles.sage
+[PASS] the integral of z^n over |z| = 1 is 2 pi i for n = -1 and 0 for the other n in -3..3: True
+[PASS] the pole of 1/(z - 3) lies outside |z| = 1: the Taylor series on |z| < 3 has no 1/z term and the parametrised integral is 0 to 1e-9: True
+[PASS] Cauchy's integral formula: the residue of e^z/z at 0 is e^0 = 1 and that of e^z/z^2 is (e^z)'(0) = 1: True
+[PASS] the parametrised integral of e^z/z over the unit circle is 2 pi i to 1e-9 (the formula with f = e^z, z_0 = 0): True
+[PASS] the integral of z^2 along the straight segment from 0 to 1 + i equals the primitive difference (1 + i)^3/3: True
+wrote tutorial/figures/contours_poles.svg
+== coordinate_velocities.sage
+[PASS] |d_theta E| = 1 and |d_phi E| = sin(theta): Gram matrix diag(1, sin^2 theta): True
+[PASS] the columns are orthogonal and d_phi E vanishes at the pole: True
+wrote tutorial/figures/coordinate_velocities.png
+== coset_tangent_plane.sage
+[PASS] L3 fixes the pole (isotropy): True
+[PASS] L1 . pole and L2 . pole are tangent (orthogonal to the pole): True
+[PASS] [L3, L1] = L2 and [L3, L2] = -L1 (L3 rotates k): True
+wrote tutorial/figures/coset_tangent_plane.png
+== coset_vielbein_sphere.sage
+[PASS] the frame is dual to the vielbein, e^a(E_b) = delta^a_b: True
+[PASS] the frame vectors have unit ambient length and are orthogonal: True
+wrote tutorial/figures/coset_vielbein_sphere.png
+== coset_z6.sage
+[PASS] 1 + H = {1, 3, 5}: True
+[PASS] the two cosets partition Z_6: True
+[PASS] quotient table: (1+H) + (1+H) = H: True
+wrote tutorial/figures/coset_z6.svg
+== covariant_polar.sage
+[PASS] polar components of d/dx are (cos phi, -sin phi / r): True
+[PASS] the covariant derivative of d/dx vanishes in polar coordinates, although its components vary: True
+wrote tutorial/figures/covariant_polar.svg
+== delta_sequence.sage
+[PASS] the Gaussians g_eps have unit integral for every eps > 0: True
+[PASS] int g_eps cos x = e^{-eps^2/4} -> 1 = cos 0 and int g_eps (x^2 + 1) = 1 + eps^2/2 -> 1 as eps -> 0: True
+[PASS] the derivative: int g_eps'(x) sin x dx = -e^{-eps^2/4} -> -1 = -(sin)'(0), the action of delta': True
+[PASS] x delta' = -delta: int x g_eps'(x) cos x dx -> -1 = -cos 0: True
+[PASS] theta' = delta: -int_0^oo f'(x) dx = f(0) for f = (1 + x) e^{-x^2}: True
+[PASS] (1/2 pi) int_{-L}^{L} e^{ikx} dk = sin(Lx)/(pi x), of unit integral for every L > 0: True
+[PASS] int sin(Lx)/(pi x) cos x dx = 1 = cos 0 exactly for every L > 1 (the kernel acts as delta on e^{ix}): True
+[PASS] the principal value PV int_{-1}^{2} dx/x = log 2: True
+[PASS] Sokhotski-Plemelj: Im 1/(x - i eps) = eps/(x^2 + eps^2) has integral pi for every eps > 0, and int sin(kx)/x dx = pi sgn k: True
+wrote tutorial/figures/delta_sequence.svg
+wrote tutorial/figures/interactive/delta_sequence.html
+== domain_colouring.sage
+[PASS] z^2 = (x^2 - y^2) + i 2xy satisfies the Cauchy-Riemann equations: True
+[PASS] z^3 and e^z = e^x cos y + i e^x sin y satisfy the Cauchy-Riemann equations: True
+[PASS] conj(z) = x - i y violates the Cauchy-Riemann equations: True
+[PASS] u = x^2 - y^2 and u = e^x cos y are harmonic (Laplacian zero): True
+[PASS] the Jacobian of z -> z^2 has determinant |2z|^2 = 4(x^2 + y^2) and orthogonal columns of equal length (a rotation times a scaling): True
+[PASS] f = (z - 1)/(z^2 + 1) has its zero at z = 1 and its poles at z = +-i: True
+wrote tutorial/figures/domain_colouring.svg
+wrote tutorial/figures/interactive/domain_colouring.html
+== double_cover.sage
+[PASS] exp(t T_3) = diag(e^{-it/2}, e^{it/2}) and exp(2 pi T_3) = -1: True
+[PASS] exp(t L_3) is the rotation by t about Z, with period 2 pi: True
+wrote tutorial/figures/double_cover.svg
+[PASS] Ad_{+-exp(t n.T)} = exp(t n.L) at the 36 sampled points (max error < 1e-12): True
+wrote tutorial/figures/interactive/double_cover.html
+== exp_circle.sage
+[PASS] exp(i t) has modulus 1 and exp(2 pi i) = 1: True
+[PASS] exp is a homomorphism (R, +) -> U(1): e^{i(s+t)} = e^{is} e^{it}: True
+wrote tutorial/figures/exp_circle.svg
+== exterior_derivative_plane.sage
+[PASS] d(-y dx + x dy) = 2 dx^dy and d(x dx + y dy) = 0: True
+[PASS] x dx + y dy is exact, the differential of r^2/2, and d(d f) = 0: True
+wrote tutorial/figures/exterior_derivative_plane.svg
+== finite_topologies.sage
+[PASS] number of topologies on a 3-point set: 29: True
+[PASS] exactly one topology on a 3-point set is Hausdorff, the discrete one: True
+== flow_rotation.sage
+[PASS] the solution of the rotation flow from (1, 0) is (cos t, sin t): True
+[PASS] the flows form one-parameter groups, Phi_s(Phi_t(p)) = Phi_{s+t}(p): True
+wrote tutorial/figures/flow_rotation.svg
+== fourier_gaussian.sage
+[PASS] the transform of e^{-x^2/(2 sigma^2)} is sigma sqrt(2 pi) e^{-sigma^2 k^2/2}: True
+[PASS] inversion: (1/2 pi) int ghat(k) e^{ikx} dk returns e^{-x^2/(2 sigma^2)}: True
+[PASS] the box on [-a, a] transforms to 2 sin(ak)/k and e^{-a|x|} to 2a/(a^2 + k^2): True
+[PASS] the derivative rule: the transform of f' is ik fhat for the Gaussian e^{-x^2/2}: True
+[PASS] the convolution rule: box * box is the triangle (2a - |x|)_+, whose transform is (2 sin(ak)/k)^2: True
+[PASS] for 0 <= x <= 2a the convolution integral int_{x-a}^{a} dy equals 2a - x: True
+[PASS] Plancherel for the box: int |f|^2 = 2a and (1/2 pi) int |fhat|^2 = (1/2 pi) int 4 sin^2(ak)/k^2 dk = 2a: True
+[PASS] uncertainty: for the Gaussian Delta x = sigma/sqrt 2, Delta k = 1/(sigma sqrt 2) and Delta x Delta k = 1/2: True
+[PASS] for e^{-a|x|} the product Delta x Delta k = 1/sqrt 2 exceeds 1/2: True
+wrote tutorial/figures/fourier_gaussian.svg
+wrote tutorial/figures/interactive/fourier_gaussian.html
+== fourier_square_wave.sage
+[PASS] orthogonality: the integral of e^{inx} e^{-imx} over [0, 2 pi] is 2 pi delta_nm for n, m in -3..3: True
+[PASS] the square wave sgn(x) on (-pi, pi) has a_n = 0 and b_n = 4/(pi n) for odd n, 0 for even n (n <= 6): True
+[PASS] the sawtooth x on (-pi, pi) has a_n = 0 and b_n = 2 (-1)^(n+1)/n for n <= 6: True
+[PASS] Parseval for the sawtooth: (1/pi) int x^2 = 2 pi^2/3 = sum b_n^2 = 4 sum 1/n^2, so sum 1/n^2 = pi^2/6: True
+[PASS] the partial sum S_5 of the square wave is 4/pi (sin x + sin 3x/3 + sin 5x/5), as fourier_series_partial_sum returns: True
+[PASS] the Dirichlet kernel: sum_{|n| <= 3} e^{inx} = sin(7x/2)/sin(x/2), with integral 2 pi over a period: True
+[PASS] the L^2 error of S_9 for the square wave is int (f - S_9)^2 = 2 pi - pi sum_{odd n <= 9} (4/(pi n))^2 = 0.2538... (Parseval for the tail): True
+[PASS] Gibbs: S_199 at its first maximum x = pi/200 is 1.1790 to 1e-3, the limit (2/pi) Si(pi) = 1.17897974...: True
+wrote tutorial/figures/fourier_square_wave.svg
+wrote tutorial/figures/interactive/fourier_square_wave.html
+== gamma_function.sage
+[PASS] Gamma(n + 1) = n! for n = 0..10: True
+[PASS] Gamma(1/2) = sqrt(pi), Gamma(5/2) = 3 sqrt(pi)/4 and Gamma(-1/2) = -2 sqrt(pi): True
+[PASS] the residue of Gamma at -n is (-1)^n/n! for n = 0..4: True
+[PASS] B(2, 3) = 1/12 = Gamma(2) Gamma(3)/Gamma(5) and B(1/2, 1/2) = pi: True
+[PASS] the reflection formula Gamma(1/4) Gamma(3/4) = pi sqrt(2) holds to 1e-12 (numerically): True
+[PASS] zeta(2) = pi^2/6, zeta(4) = pi^4/90, zeta(0) = -1/2 and zeta(-1) = -1/12: True
+[PASS] Wick rotation: the k^0 integral of 1/(k^2 - E^2 + i eps) is 2 pi i times the upper residue, -i pi/E as eps -> 0, equal to -i times the Euclidean integral pi/E: True
+[PASS] numerically, with E = 1 and eps = 1e-4, the imaginary part of the k^0 integral is -pi to 1e-3: True
+wrote tutorial/figures/gamma_function.svg
+wrote tutorial/figures/interactive/gamma_function.html
+== gauss_bonnet_torus.sage
+[PASS] scalar curvature of the torus R = 2 cos a / (r (R + r cos a)): True
+[PASS] Gauss-Bonnet: integral of K dA over the torus is 0: True
+wrote tutorial/figures/gauss_bonnet_torus.svg
+== geodesics_sphere.sage
+[PASS] the equator theta = pi/2, phi = t satisfies the geodesic equation: True
+[PASS] meridians theta = t, phi = const satisfy it (Gamma^k_thth = 0): True
+wrote tutorial/figures/geodesics_sphere.png
+[PASS] the transported vector keeps unit length around the parallel: True
+[PASS] after one turn around theta = pi/3 the transported d/dtheta is reversed (rotated by pi = cap area): True
+wrote tutorial/figures/interactive/geodesics_sphere.html
+== gram_schmidt_projection.sage
+[PASS] Gram-Schmidt on 1, x, x^2, x^3 in L^2(-1, 1) gives P_0, P_1, (2/3) P_2, (2/5) P_3: True
+[PASS] the normalised polynomials are sqrt((2k + 1)/2) P_k: True
+[PASS] the projection of (1, 2) onto the line of (2, 1) is (8/5, 4/5) and the residual (-3/5, 6/5) is orthogonal to the line: True
+[PASS] Sage's gram_schmidt returns v1 and the residual: True
+[PASS] the L^2 error of the Legendre projection of e^x (degree 2) is smaller than the Taylor error: True  errors: 0.00144057 0.00898658  with P_3 added: 0.0000222889
+[PASS] the projection error equals ||e^x||^2 - sum |<e_k, e^x>|^2 (Pythagoras): True
+       int P_k e^x dx for k = 0..3: [(e^2 - 1)*e^(-1), 2*e^(-1), (e^2 - 7)*e^(-1), -(5*e^2 - 37)*e^(-1)]  |<e_k, e^x>|^2: [2.76220, 0.812012, 0.0512124, 0.00141828]  projection polynomial coefficients: [0.99630, 1.1036, 0.53671]
+[PASS] the Fourier coefficients of x are <e_n, x> = sqrt(2 pi) i (-1)^n / n and the partial Parseval sums equal 4 pi sum_{n <= N} 1/n^2 and increase towards 2 pi^3/3: True
+       partial sums for N = 1, 5, 10: [12.566, 18.392, 19.475]  ||x||^2 = 20.671
+[PASS] Cauchy-Schwarz |<u, w>| <= ||u|| ||w|| for u = (1, i, 0), w = (1, 1, 1), with equality only for parallel vectors: True
+wrote tutorial/figures/gram_schmidt_projection.svg
+== greens_function_laplacian.sage
+[PASS] G = -1/(4 pi r) is harmonic away from the origin in three dimensions: True
+[PASS] the flux of grad G through every sphere around the origin is 1, so Laplacian G = delta: True
+[PASS] in two dimensions G = log(r) / (2 pi) is harmonic away from the origin with unit flux through every circle: True
+[PASS] the Yukawa function e^(-mr)/(4 pi r) satisfies (-Laplacian + m^2) G = 0 away from the origin: True
+[PASS] the inward flux of grad(e^(-mr)/(4 pi r)) through the sphere of radius R is e^(-mR)(1 + mR), tending to 1 as R -> 0: True
+[PASS] the Fourier integral (2 pi^2 r)^(-1) int_0^oo k sin(kr)/(k^2 + m^2) dk of 1/(k^2 + m^2) equals e^(-mr)/(4 pi r): True
+[PASS] the Dirichlet Green's function of -d^2/dx^2 on [0, 1] has slope jump -1 at x = xi and gives u = x(1 - x)/2 for f = 1: True
+[PASS] the Green's function is symmetric, G(x, xi) = G(xi, x): True
+wrote tutorial/figures/greens_function_laplacian.svg
+wrote tutorial/figures/interactive/greens_function_laplacian.html
+== heat_trace_circle.sage
+[PASS] Poisson summation: sum_n e^{-t n^2} = sqrt(pi/t) sum_k e^{-pi^2 k^2/t} to 1e-18 at t = 1/10, 1/2, 1: True
+[PASS] Z(t) - sqrt(pi/t) is within 1% of 2 sqrt(pi/t) e^{-pi^2/t} for t = 0.2, 0.4, 0.6, 0.8, 1: True
+[PASS] the sphere heat trace sum (2l + 1) e^{-t l(l + 1)} differs from 1/t + 1/3 + t/15 by less than 0.02 t^2 for t = 0.2, 0.1, 0.05, 0.025: True
+[PASS] zeta(-1) = -1/12, zeta(0) = -1/2, zeta(-3) = 1/120 exactly and zeta'(0) = -log(2 pi)/2 to 25 digits: True
+[PASS] the cutoff sum sum_{n >= 1} n e^{-eps n} = 1/eps^2 - 1/12 + eps^2/240 + O(eps^4): True
+[PASS] tr(AB) = tr(BA) and det e^A = e^{tr A} for an explicit 3 x 3 matrix: True
+[PASS] tr G = sum 1/(n pi)^2 = int_0^1 (x - x^2) dx = 1/6, and sin(sqrt z)/sqrt z = 1 - z/6 + z^2/120 - ...: True
+wrote tutorial/figures/heat_trace_circle.svg
+wrote tutorial/figures/interactive/heat_trace_circle.html
+== height_levels.sage
+[PASS] dZ in the (u, v) chart is radial, 4(u, v)/(1 + u^2 + v^2)^2: True
+[PASS] dZ vanishes on the rotation field (-v, u): True
+wrote tutorial/figures/height_levels.svg
+== hermitian_spectrum.sage
+[PASS] A = [[2, 1], [1, 2]] has eigenvalues 3 and 1 with orthonormal eigenvectors (1, 1)/sqrt 2 and (1, -1)/sqrt 2: True
+[PASS] A = 3 P_+ + P_- with P_+- = (1 +- sigma_1)/2 projections summing to 1 with P_+ P_- = 0: True
+[PASS] e^{itA} = e^{2it}(cos t + i sin t sigma_1) is unitary with eigenvalues e^{3it} and e^{it}: True
+[PASS] (sqrt 3 P_+ + P_-)^2 = A, the positive square root of A: True
+[PASS] the semi-axes of A(S^1) are 3 and 1 along the eigenvectors (max and min of |A u| over the unit circle): True
+[PASS] M = [[2, i, 0], [-i, 2, i], [0, -i, 2]] is Hermitian with eigenvalues 2 + sqrt 2, 2 - sqrt 2, 2: True
+[PASS] the normalised eigenvectors of M form a unitary U with U^dagger U = 1 and M = U D U^dagger: True
+[PASS] p(M) = sum_k p(lambda_k) P_k for p(x) = x^3 - 2x + 1 and the eigenprojections P_k = |e_k><e_k|: True
+[PASS] e^{iM} is unitary with det e^{iM} = e^{6i} = e^{i tr M}: True
+wrote tutorial/figures/hermitian_spectrum.svg
+== homomorphism_diagram.sage
+[PASS] k -> k mod 2 is a homomorphism Z_6 -> Z_2: True
+[PASS] its kernel is {0, 2, 4} and the fibre over 1 is {1, 3, 5}: True
+wrote tutorial/figures/homomorphism_diagram.svg
+== hopf.sage
+[PASS] Hopf map sends the fibre over (theta, phi) to that point of S^2, for every t: True
+[PASS] |a|^2 + |b|^2 = 1 on the fibre: True
+wrote tutorial/figures/hopf.png
+linking numbers of two fibres over theta = pi/3, and over theta = pi/3 and 2 pi/3: 1.0002 1.0001
+[PASS] distinct Hopf fibres are linked once (|lk| = 1): True
+[PASS] the projected fibre is a round circle (coplanar, equidistant from the circumcentre): True
+wrote tutorial/figures/interactive/hopf.html
+== horizontal_lift.sage
+[PASS] the horizontal lift of the base loop ends at y = -2 pi c = -integral of A: True
+[PASS] the curvature of A = c dx vanishes (flat connection) although the holonomy is non-trivial: True
+wrote tutorial/figures/horizontal_lift.svg
+== jacobian_polar.sage
+[PASS] the Jacobian determinant of the polar map is r: True
+[PASS] the ratio of the image areas equals the ratio of the midpoint radii: True
+wrote tutorial/figures/jacobian_polar.svg
+== laplacian_spectra.sage
+[PASS] on the circle of radius R the SageManifolds Laplacian gives -Delta e^{in theta} = (n^2/R^2) e^{in theta} for n <= 4: True
+[PASS] on the sphere of radius R, -Delta Y_lm = (l(l + 1)/R^2) Y_lm for all l <= 3 (SageManifolds laplacian): True
+[PASS] the Y_lm with l <= 2 are orthonormal in L^2(S^2) and the multiplicity of l(l + 1) is 2l + 1: True
+[PASS] on the torus with radii R1, R2, -Delta e^{i(m theta + n phi)} = (m^2/R1^2 + n^2/R2^2) e^{i(m theta + n phi)} for |m|, |n| <= 2: True
+[PASS] on the square torus the multiplicities r_2(N), N <= 30, are the lattice-point counts, with r_2(25) = 12 and r_2(N) = 0 for N = 3, 6, 7: True
+[PASS] Weyl's law on the torus: N(10^4) = 31417 is within 0.01% of pi 10^4: True
+[PASS] [x, p] f = i f for p = -i d/dx on a symbolic function f: True
+[PASS] the Gaussian of width s is normalised with (Delta x)^2 = s^2, (Delta p)^2 = 1/(4 s^2) and product 1/4: True
+wrote tutorial/figures/laplacian_spectra.svg
+wrote tutorial/figures/interactive/laplacian_spectra.html
+== laurent_series.sage
+[PASS] partial fractions: 1/((z - 1)(z - 2)) = 1/(z - 2) - 1/(z - 1): True
+[PASS] the annulus partial sums converge: the error at z = 1.5 i falls below 1e-3 by N = 24 and decreases from N to N + 2 at every step: True
+[PASS] residues: Res_{z=1} f = -1, Res_{z=2} f = 1, Res_{z=i} 1/(1 + z^2) = 1/(2i) = -i/2: True
+[PASS] the integral of 1/(1 + x^2) over the real line is pi = 2 pi i Res_{z=i}: True
+[PASS] the integral of 1/(1 + x^4) over the real line is pi/sqrt(2) = 2 pi i (sum of the two upper residues): True
+[PASS] the integral of cos x/(1 + x^2) over the real line is pi/e = 2 pi i Res_{z=i} e^{iz}/(1 + z^2): True
+[PASS] the Laurent series of 1/sin z at 0 starts 1/z + z/6 + 7 z^3/360 (a simple pole with residue 1): True
+wrote tutorial/figures/laurent_series.svg
+wrote tutorial/figures/interactive/laurent_series.html
+== law_of_large_numbers.sage
+[PASS] Chebyshev for the sum of two dice (mean 7, variance 35/6): P(|S - 7| >= k sigma) <= 1/k^2 for k = 1, 3/2, 2, 3, exactly: True
+[PASS] weak law for coin flips: the mean of n flips has variance 1/(4n); at n = 100 the exact P(|mean - 1/2| >= 1/10) = 0.0569 is below Chebyshev's 25/n = 1/4: True
+[PASS] central limit: P(|S_n - 7n/2| <= sigma sqrt n) for n = 1, 2, 10, 30 dice is ['0.6667', '0.6667', '0.6870', '0.6887'] against erf(1/sqrt 2) = 0.6827; the n = 30 value is within 0.02: True
+[PASS] Gaussian moments: E X^{2n} = (2n-1)!! sigma^{2n} for n <= 5 by symbolic integration, and the odd moments vanish: True
+[PASS] Wick pairings: the perfect matchings of 2n points number [1, 3, 15, 105, 945] = (2n-1)!! for n <= 5: True
+[PASS] characteristic function of the standardised sum of n signs: cos(t/sqrt n)^n -> exp(-t^2/2), by the symbolic limit of n log cos(t/sqrt n) = -t^2/2: True
+[PASS] the five seeded running averages at n = 2000 are ['0.5130', '0.5110', '0.4950', '0.5135', '0.4875'] all within 2/sqrt(2000) = 0.0447 of 1/2: True
+wrote tutorial/figures/law_of_large_numbers.svg
+wrote tutorial/figures/interactive/law_of_large_numbers.html
+== level_sets.sage
+[PASS] alpha(v) = 3 for v = (1, 1) and alpha(w) = 0 for w = (1/2, -1): True
+wrote tutorial/figures/level_sets.svg
+== map_diagram.sage
+[PASS] the third map is a bijection (its values are all distinct and fill the codomain): True
+[PASS] number of maps from a 3-element set to a 2-element set is 2^3 = 8: True
+wrote tutorial/figures/map_diagram.svg
+== matrix_exp_flow.sage
+[PASS] exp(tJ) for J = [[0, 1], [-1, 0]] is the rotation matrix [[cos t, sin t], [-sin t, cos t]]: True
+[PASS] exp(tA) for A = [[0, 1], [-2, -2]] equals e^(-t) [[cos t + sin t, sin t], [-2 sin t, cos t - sin t]]: True
+[PASS] d/dt exp(tA) = A exp(tA) and exp(0 A) = 1: True
+[PASS] the eigenvalues of A are -1 + i and -1 - i, so the origin is a spiral sink (tr A = -2 < 0, det A = 2 > 0): True
+[PASS] the saddle S = diag(1, -1) has eigenvectors e1 (eigenvalue 1) and e2 (eigenvalue -1), and det S < 0: True
+[PASS] exp(tA) exp(sA) = exp((t + s)A) (one-parameter group): True
+wrote tutorial/figures/matrix_exp_flow.svg
+wrote tutorial/figures/interactive/matrix_exp_flow.html
+== metric_ellipses.sage
+[PASS] the unit ellipse of the polar metric has semi-axes 1 and 1/r (long axis along phi for r < 1): True
+[PASS] the sphere metric gives |d/dphi| = sin(theta), so the phi semi-axis is 1/sin(theta): True
+wrote tutorial/figures/metric_ellipses.svg
+wrote tutorial/figures/interactive/metric_ellipses.html
+== minkowski_cone.sage
+[PASS] the Minkowski form on R^2 has signature (1 positive, 1 negative): True
+[PASS] the three drawn vectors are timelike, spacelike and null: True
+wrote tutorial/figures/minkowski_cone.svg
+wrote tutorial/figures/interactive/minkowski_cone.html
+== mobius_cylinder.sage
+[PASS] the Moebius section s(u) = 0.6 cos(u/2) changes sign across the glued edge, s(2 pi) = -s(0), and vanishes at u = pi: True
+[PASS] the cylinder section s = 1/2 is constant and never zero: True
+wrote tutorial/figures/mobius_cylinder.png
+== monte_carlo_pi.sage
+[PASS] the indicator of the quarter disc has mean pi/4 and variance (pi/4)(1 - pi/4), so the estimate 4 I_N has standard deviation 4 sqrt(p(1 - p)/N) = 1.6422/sqrt N: True
+[PASS] the 42 seeded errors are all below three predicted standard deviations (42 of 42): True
+[PASS] estimators: E[sample mean] = mu, E[s^2] = sigma^2 with the divisor n - 1 and (n - 1)sigma^2/n with the divisor n, for n = 3, 4, 5 by symbolic expectation: True
+[PASS] Gaussian maximum likelihood on the data (1, 2, 2, 5): mu_hat = sample mean 5/2 and sigma_hat^2 = biased sample variance 9/4: True
+[PASS] Poisson maximum likelihood on the counts (2, 0, 3, 1, 4): lambda_hat = sample mean 2: True
+[PASS] the 95 percent Gaussian quantile: P(|Z| <= 1.96) = erf(1.96/sqrt 2) = 0.9500 to four decimals, and P(|Z| <= 1) = 0.6827: True
+[PASS] chi-squared test of a die, counts (8, 12, 9, 11, 7, 13) in 60 rolls: chi^2 = 14/5 = 2.8 with 5 degrees of freedom, p-value 0.731 > 0.05, the die is not rejected: True
+wrote tutorial/figures/monte_carlo_pi.svg
+== ode_phase_portrait.sage
+desolve returns the logistic solution implicitly: -log(Y(x) - 1) + log(Y(x)) == -I*pi + x - log(2) - log(1/2)
+[PASS] the logistic solution y = 1/(1 + e^(-x)) satisfies y' = y(1 - y) and y(0) = 1/2: True
+[PASS] the linear equation y' + 2y = e^(-x) has general solution y = e^(-x) + C e^(-2x): True
+[PASS] the separable equation y' = -x/y has the circles x^2 + y^2 = C as solutions (implicit derivative): True
+[PASS] the fourth Picard iterate of y' = y, y(0) = 1 is the Taylor polynomial 1 + x + x^2/2 + x^3/6 + x^4/24: True
+[PASS] the pendulum energy E = omega^2/2 - cos theta obeys dE/dt = -gamma omega^2 along the flow: True
+[PASS] the equilibria of the damped pendulum are (k pi, 0): True
+wrote tutorial/figures/ode_phase_portrait.svg
+wrote tutorial/figures/interactive/ode_phase_portrait.html
+== ode_resonance.sage
+[PASS] the steady-state amplitude of x'' + 2 gamma x' + omega0^2 x = F cos(omega t) is F / sqrt((omega0^2 - omega^2)^2 + 4 gamma^2 omega^2): True
+[PASS] the particular solution a cos(omega t) + b sin(omega t) with these coefficients satisfies the equation identically: True
+[PASS] the amplitude is maximal at omega_r = sqrt(omega0^2 - 2 gamma^2) (the derivative of A^2 vanishes there): True
+[PASS] without damping and at omega = omega0 the solution x = F t sin(omega0 t) / (2 omega0) grows linearly: True
+[PASS] at omega = omega0 the response lags the force by a quarter period (phase pi/2) and has amplitude F/(2 gamma omega0): True
+wrote tutorial/figures/ode_resonance.svg
+wrote tutorial/figures/interactive/ode_resonance.html
+== open_sets.sage
+[PASS] the ball of radius 1 - |P| around an interior point P lies in the open disc: True
+[PASS] every ball around the boundary point Q leaves the closed disc (the point (1+e) Q is outside for any e > 0): True
+wrote tutorial/figures/open_sets.svg
+== operator_norm_ellipse.sage
+[PASS] the operator norm of A = [[2, 1], [0, 1]] is sqrt(3 + sqrt 5), the largest singular value: True
+[PASS] the semi-axes of the ellipse A(S^1) are the singular values and their product is |det A| = 2: True
+[PASS] A maps the eigenvectors of A^T A to orthogonal vectors of lengths sigma_1, sigma_2: True
+[PASS] <M u, v> = <u, M^dagger v> identically for symbolic u, v in C^3: True
+[PASS] the identity fails for the plain transpose: True
+[PASS] P = (1/2)[[1, 1], [1, 1]] satisfies P^2 = P = P^dagger and has norm 1: True
+[PASS] the rotation R_theta satisfies R^T R = 1 and preserves ||w||^2 for symbolic w: True
+[PASS] the Pauli matrices satisfy [sigma_a, sigma_b] = 2 i eps_abc sigma_c and {sigma_a, sigma_b} = 2 delta_ab: True
+[PASS] tr[A, B] = 0 for symbolic 3 x 3 matrices, so [X, P] = i 1 has no matrix solution: True
+wrote tutorial/figures/operator_norm_ellipse.svg
+== polar_grid.sage
+[PASS] |d/dphi| = r and the plane is flat (Riemann = 0): True True
+wrote tutorial/figures/polar_grid.svg
+== product_chart.sage
+[PASS] the torus chart is a product chart with coordinate ranges (0, 2pi) x (0, 2pi): True
+wrote tutorial/figures/product_chart.svg
+== product_square.sage
+[PASS] the diagonal curve closes: E(0, 0) and E(2pi, 2pi) coincide: True
+wrote tutorial/figures/product_square.png
+wrote tutorial/figures/interactive/product_square.html
+== quotient_circle.sage
+[PASS] the three angles of each class map to the same point of the circle: True
+wrote tutorial/figures/quotient_circle.svg
+== riemann_sums.sage
+[PASS] lower and upper Riemann sums of x^2 on [0, 1] bracket 1/3 for n = 4 and n = 16, and converge to it: True
+[PASS] integral of x^2 over [0, 1] = 1/3 and the lower sums (n-1)n(2n-1)/(6n^3) -> 1/3: True
+[PASS] the Gaussian integral int_{-oo}^{oo} e^{-x^2} dx = sqrt(pi) and int_0^oo e^{-x} dx = 1: True
+[PASS] the fundamental theorem on sin: int_0^pi sin x dx = -cos(pi) + cos(0) = 2: True
+wrote tutorial/figures/riemann_sums.svg
+wrote tutorial/figures/interactive/riemann_sums.html
+== s2_chart.sage
+[PASS] induced metric of the chart is diag(1, sin^2 theta): True
+[PASS] chart degenerates at the poles: det g = sin^2 theta vanishes at theta = 0, pi: True
+wrote tutorial/figures/s2_chart.png
+wrote tutorial/figures/interactive/s2_chart.html
+== s2_killing.sage
+[PASS] |K_0|^2 from the metric equals the ambient squared length: True (-cos(ph)^2*sin(th)^2 + 1)
+[PASS] L_K0 g = 0 (Killing): True
+[PASS] |K_1|^2 from the metric equals the ambient squared length: True (-sin(ph)^2*sin(th)^2 + 1)
+[PASS] L_K1 g = 0 (Killing): True
+[PASS] |K_2|^2 from the metric equals the ambient squared length: True (sin(th)^2)
+[PASS] L_K2 g = 0 (Killing): True
+[PASS] K_2 = d/dphi has length sin(theta): True
+wrote tutorial/figures/s2_killing.png
+[PASS] the circles about the a-th axis are integral curves of the ambient rotation field xi_a = n_a x position: True
+wrote tutorial/figures/interactive/s2_killing.html
+== s3_representation.sage
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1  0 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1  0 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1  0 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 0  1 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 0  1 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 0  1 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  -3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  -3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  -3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  -3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  -3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 1/2  -3/2 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1/2  -1/2 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1  0 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1  0 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( -1  0 )' at the point (0.0,-1.45) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 0  1 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 0  1 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+verbose 0 (162: primitive.py, options) WARNING: Ignoring option 'fontfamily'=monospace
+verbose 0 (162: primitive.py, options) 
+The allowed options for Text '( 0  1 )' at the point (0.0,-1.8) are:
+    alpha          A float (0.0 transparent through 1.0 opaque)                
+    axis_coords    If True use axis coordinates: (0,0) lower left and (1,1) upper right
+    background_colorThe background color                                        
+    bounding_box   A dictionary specifying a bounding box                      
+    clip           Whether to clip or not                                      
+    fontsize       How big the text is. Either the size in points or a relative size, e.g. 'smaller', 'x-large', etc
+    fontstyle      A string either 'normal', 'italic' or 'oblique'             
+    fontweight     A numeric value in the range 0-1000 or a string'ultralight', 'light', 'normal', 'regular', 'book','medium', 'roman', 'semibold', 'demibold', 'demi','bold,', 'heavy', 'extra bold', 'black'
+    horizontal_alignmentHow to align horizontally: left, center, right              
+    hue            The color given as a hue                                    
+    rgbcolor       The color as an RGB tuple                                   
+    rotation       How to rotate the text: angle in degrees, vertical, horizontal
+    vertical_alignmentHow to align vertically: top, center, bottom                
+    zorder         The layer level in which to draw                            
+
+[PASS] the 2 x 2 matrices form a representation, rho(gh) = rho(g) rho(h): True
+[PASS] it is irreducible: the only matrices commuting with all rho(g) are scalars: True
+wrote tutorial/figures/s3_representation.svg
+== sequence_limits.sage
+[PASS] the limits of 1/n, (-1)^n/n and (1 + 1/n)^n are 0, 0 and e: True
+[PASS] for epsilon = 0.3 the terms of 1/n stay within epsilon of 0 from n = 4 and those of (1 + 1/n)^n within epsilon of e from n = 4: True
+[PASS] n^(1/n) -> 1, and H_n - log n is within 1e-4 of Euler's constant gamma = 0.5772... for n = 10000: True
+wrote tutorial/figures/sequence_limits.svg
+wrote tutorial/figures/interactive/sequence_limits.html
+== series_partial_sums.sage
+[PASS] sum 1/2^n = 1 and sum 1/n^2 = pi^2/6 exactly, and Sage reports the harmonic series as divergent: True
+[PASS] the exponential series sum x^n/n! = e^x and the alternating series sum (-1)^(n+1)/n = log 2: True
+[PASS] the geometric partial sum s_N = 1 - 2^(-N) for N = 40: True
+wrote tutorial/figures/series_partial_sums.svg
+wrote tutorial/figures/interactive/series_partial_sums.html
+== so3_orbits.sage
+[PASS] exp(t L3) preserves the height z (orbits are parallels): True
+[PASS] SO(3) moves the pole to (0, -sin(pi/3), cos(pi/3)): True
+wrote tutorial/figures/so3_orbits.png
+[PASS] each coset g exp(s L3) sends the pole to g . o and turns the tangent plane at g . o: True
+wrote tutorial/figures/interactive/so3_orbits.html
+== sphere_christoffel_plot.sage
+[PASS] Gamma^theta_phiphi = -sin cos and Gamma^phi_thetaphi = cos/sin from SageManifolds: True
+[PASS] exactly two independent symbols are non-zero: True
+wrote tutorial/figures/sphere_christoffel_plot.svg
+== sphere_vector_fields.sage
+[PASS] the two fields commute, [d/dphi, -sin(theta) d/dtheta] = 0: True
+[PASS] the ambient length of d/dphi is sin(theta), vanishing at the poles: True
+wrote tutorial/figures/sphere_vector_fields.png
+wrote tutorial/figures/interactive/sphere_vector_fields.html
+== spherical_harmonics.sage
+[PASS] Delta Y_lm = -l(l+1) Y_lm for every l <= 3 and |m| <= l: True
+[PASS] Y_00 = 1/sqrt(4 pi), Y_10 = sqrt(3/4 pi) cos theta and Y_11 = -sqrt(3/8 pi) sin theta e^{i phi} (Condon-Shortley phase): True
+[PASS] orthonormality: the integral of Y_lm conj(Y_l'm') sin theta over the sphere is delta_ll' delta_mm' for l, l' <= 2: True
+[PASS] L_z Y_lm = m Y_lm and L_+ Y_lm = sqrt((l - m)(l + m + 1)) Y_{l,m+1} for l <= 2, with L_+ Y_ll = 0: True
+[PASS] r^l Y_lm are the harmonic polynomials z, (x + iy), 2z^2 - x^2 - y^2, z(x + iy), (x + iy)^2 (up to normalisation), each with zero Laplacian: True
+[PASS] the harmonic homogeneous polynomials of degree l in three variables form a space of dimension 2l + 1 for l <= 6 (the dimension of the spin-l representation): True
+[PASS] the addition theorem for l = 1: sum_m Y_1m(n) conj(Y_1m(n')) = (3/4 pi) cos(angle between n and n'): True
+[PASS] the spin-1 Wigner matrix d^1(theta) satisfies d' = -i J_y d with d(0) = 1, so d^1(theta) = exp(-i theta J_y): True
+[PASS] [J_z, J_+] = J_+, [J_+, J_-] = 2 J_z for the spin-1 matrices, and d^1(theta) is orthogonal with determinant 1: True
+[PASS] the middle column of D^1(phi, theta, psi): D^1_{m0} = sqrt(4 pi/3) conj(Y_1m(theta, phi)), independent of psi: True
+[PASS] the Haar measure sin theta dtheta dphi dpsi/(16 pi^2) has total volume 1, and D^{1/2} is unitary with determinant 1: True
+[PASS] Schur orthogonality for j = 1/2: int D_{ij} conj(D_{kl}) dg = delta_ik delta_jl / 2: True
+[PASS] Schur orthogonality for j = 1 (1/3 = 1/(2j + 1)) and between j = 1/2 and j = 1 (zero): True
+[PASS] the characters chi_j = sin((2j + 1) theta/2)/sin(theta/2), j <= 3/2, are orthonormal for the class measure sin^2(theta/2) dtheta/pi on [0, 2 pi], and chi_{1/2}^2 = chi_0 + chi_1: True
+wrote tutorial/figures/spherical_harmonics.svg
+wrote tutorial/figures/interactive/spherical_harmonics.html
+== stereographic.sage
+[PASS] u = X/(1 - Z) = cot(theta/2): True
+[PASS] u -> infinity at the north pole and u = 0 at the south pole: True
+wrote tutorial/figures/stereographic.svg
+== structure_constants.sage
+[PASS] the structure constants of the L_a are the Levi-Civita symbol, f_ab^c = eps_abc: True
+[PASS] Sage's so(3) is a three-dimensional Lie algebra closed under the bracket: True
+wrote tutorial/figures/structure_constants.svg
+== sturm_liouville_modes.sage
+[PASS] the Legendre polynomials P_n, n <= 5, satisfy ((1 - x^2) P_n')' + n(n + 1) P_n = 0: True
+[PASS] orthogonality: the integral of P_m P_n over [-1, 1] is 2/(2n + 1) delta_mn for m, n <= 4: True
+[PASS] Rodrigues' formula P_n = (2^n n!)^(-1) d^n/dx^n (x^2 - 1)^n for n <= 5: True
+[PASS] the Dirichlet modes sin(n x) on [0, pi] solve -u'' = n^2 u and are orthogonal with norm pi/2: True
+[PASS] the truncated Bessel series of J_0, J_1, J_2 satisfy x^2 J'' + x J' + (x^2 - n^2) J = 0 up to the single truncation monomial: True
+[PASS] the first zero of J_0 is 2.404825... and J_0(0) = 1, J_1(0) = 0: True
+[PASS] the recurrence J_{n-1} + J_{n+1} = (2n/x) J_n holds numerically for n = 1, 2 at x = 1.7: True
+wrote tutorial/figures/sturm_liouville_modes.svg
+wrote tutorial/figures/interactive/sturm_liouville_modes.html
+== su2_weights.sage
+[PASS] spin j has the 2j+1 weights j, j-1, ..., -j, each once: True
+[PASS] 1 (x) 1 = 2 + 1 + 0 and 1/2 (x) 1/2 = 1 + 0 (WeylCharacterRing): True
+wrote tutorial/figures/su2_weights.svg
+== su3_weights.sage
+[PASS] roots: [('-1', '-sqrt(3)'), ('-1', 'sqrt(3)'), ('-2', '0'), ('1', '-sqrt(3)'), ('1', 'sqrt(3)'), ('2', '0')]
+[PASS] the roots are the pairwise differences of the fundamental weights: True
+[PASS] all roots have the same length sqrt(4) = 2: True
+wrote tutorial/figures/su3_weights.svg
+[PASS] the nonzero weights of the adjoint from the WeylCharacterRing are the six roots of the Gell-Mann computation: True
+[PASS] the 10 has ten weights of multiplicity one: True
+wrote tutorial/figures/interactive/su3_weights.html
+== tangent_vectors.sage
+[PASS] the coordinate basis vectors are tangent (orthogonal to the position vector): True
+[PASS] |d/dtheta| = 1 and |d/dphi| = sin(theta) at the point: True
+wrote tutorial/figures/tangent_vectors.png
+== taylor_sin.sage
+[PASS] T_7(x) = x - x^3/6 + x^5/120 - x^7/5040: True
+[PASS] |sin x - T_7(x)| <= |x|^9/9! at x = 1, 2, 3 (Taylor's remainder): True
+[PASS] derivatives: (sin x^2)' = 2x cos x^2, (x^2 e^x)' = (x^2 + 2x) e^x, (log x)' = 1/x: True
+[PASS] the mean value theorem on x^3 over [0, 2]: the slope 4 is attained at c = 2/sqrt(3) in (0, 2): True
+wrote tutorial/figures/taylor_sin.svg
+wrote tutorial/figures/interactive/taylor_sin.html
+== tensor_components_polar.sage
+[PASS] polar components of dx (x) dx are cos^2, -r sin cos, r^2 sin^2: True
+[PASS] the components are symmetric, T_rphi = T_phir: True
+wrote tutorial/figures/tensor_components_polar.svg
+== tensor_grid.sage
+[PASS] (u (x) v)^{ij} = u^i v^j has rank 1, the sum of two elementary tensors rank 2, the general tensor rank 3: True
+[PASS] V (x) V has dimension 9 = 3 * 3: True
+wrote tutorial/figures/tensor_grid.svg
+wrote tutorial/figures/interactive/tensor_grid.html
+== torus_curvature.sage
+[PASS] Gauss curvature of the torus K = cos(a) / (r (R + r cos a)): True
+[PASS] K > 0 on the outer equator, K < 0 on the inner one, K = 0 at a = pi/2: True
+wrote tutorial/figures/torus_curvature.png
+== torus_embedding.sage
+[PASS] induced metric g = r^2 da^2 + (R + r cos a)^2 db^2: True
+[PASS] tube circles have length 2 pi r; axis circles have length 2 pi (R + r cos a): True
+wrote tutorial/figures/torus_embedding.png
+wrote tutorial/figures/interactive/torus_embedding.html
+== uniform_convergence.sage
+[PASS] sup |x^n - limit| = 1 for every n (not uniform) while sup |sin(nx)/n| = 1/n -> 0 (uniform): True
+[PASS] the area of the unit disc by the polar change of variables int_0^{2pi} int_0^1 r dr dphi = pi: True
+[PASS] the Gaussian integral squared in polar coordinates: int_0^{2pi} int_0^oo e^{-r^2} r dr dphi = pi, so int e^{-x^2} dx = sqrt(pi): True
+[PASS] Fubini on x^2 y over [0, 1] x [0, 2]: both iterated integrals equal 2/3: True
+[PASS] differentiating int e^{-a x^2} dx = sqrt(pi/a) under the integral gives int x^2 e^{-a x^2} dx = sqrt(pi)/(2 a^{3/2}): True
+wrote tutorial/figures/uniform_convergence.svg
+wrote tutorial/figures/interactive/uniform_convergence.html
+== wave_dalembert.sage
+[PASS] u = f(x - ct) + g(x + ct) solves the wave equation u_tt - c^2 u_xx = 0 for arbitrary f, g: True
+[PASS] d'Alembert's formula solves the wave equation with u(0, x) = e^(-x^2), u_t(0, x) = cos x: True
+[PASS] the standing wave sin(kx) cos(kct) solves the wave equation and vanishes at x = 0 and x = pi for integer k: True
+[PASS] the heat kernel (4 pi kappa t)^(-1/2) exp(-x^2 / 4 kappa t) solves u_t = kappa u_xx and has unit integral: True
+[PASS] separation of variables: e^(-kappa k^2 t) sin(kx) solves the heat equation: True
+[PASS] x^2 - y^2 and log(x^2 + y^2) are harmonic in the plane (Laplace's equation): True
+[PASS] the plane wave e^{i(k.x - omega t)} solves (Box + m^2) phi = 0 exactly when omega^2 = k^2 + m^2: True
+[PASS] classification: u_tt - c^2 u_xx has B^2 - AC = c^2 > 0 (hyperbolic), u_xx + u_yy has -1 < 0 (elliptic), u_t - kappa u_xx has 0 (parabolic): True
+wrote tutorial/figures/wave_dalembert.svg
+wrote tutorial/figures/interactive/wave_dalembert.html

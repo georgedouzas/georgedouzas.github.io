@@ -32,6 +32,8 @@ two classes of first-order equations that every physicist meets, separable and l
 portrait, the picture of all solutions of an autonomous system at once. The proposition at the end collects the
 closed-form solutions, each of which satisfies its equation by direct substitution.
 
+For more on this topic, see @arrigo2023introduction [Ch. 5], @borodzik2019problems [Ch. 5], @knauf2018mathematical [Ch. 3] and @magnus2023essential [Ch. 2, Ch. 4 and 6].
+
 ### Ordinary differential equations
 
 :::: {.statement-box}
@@ -1563,6 +1565,8 @@ by linear algebra: the solution is $x(t) = e^{tA}x(0)$, and the eigenvalues of $
 as $t \to \infty$. This section defines linear systems, eigenvalues, the matrix exponential and stability, then
 applies them to the damped harmonic oscillator, whose response to a periodic force exhibits resonance. The
 proposition at the end collects the matrix exponentials in closed form, with the resonance formulas.
+
+For more on this topic, see @aliev2024mathematical [Ch. 2-4], @arrigo2023introduction [Ch. 3], @axler2024linear [Ch. 5 and 8], @knauf2018mathematical [Ch. 4-5] and @magnus2023essential [Ch. 1, Ch. 5].
 
 ### Linear systems
 
@@ -3675,6 +3679,8 @@ This section defines boundary value problems and the Sturm-Liouville form, the w
 the eigenfunctions are orthogonal, quotes the Sturm-Liouville theorem, and introduces the Legendre polynomials and
 Bessel functions, the eigenfunctions that appear when the Laplacian is separated in spherical and cylindrical
 coordinates. The proposition at the end collects the identities of these functions used later.
+
+For more on this topic, see @magnus2023essential [Ch. 7].
 
 ### Boundary value problems
 
@@ -5983,6 +5989,8 @@ problems of @sec-sturm-liouville, closes the section, and the proposition collec
 which satisfies its equation by substitution. The d'Alembertian is $\Box = \partial_t^2 - \nabla^2$ in the signature $(+, -, -, -)$
 of @sec-conventions.
 
+For more on this topic, see @borodzik2019problems [Ch. 3, Ch. 4].
+
 ### Partial differential equations
 
 :::: {.statement-box}
@@ -8107,6 +8115,8 @@ Green's functions of the Laplacian and of the static Klein-Gordon operator; for 
 \delta$ has several solutions, it describes the retarded and the Feynman prescriptions in outline. The proposition
 collects the properties of $-1/(4\pi r)$ and of the Yukawa function, and the figure shows the
 radial Green's functions and the Green's function of a string.
+
+For more on this topic, see @aliev2024mathematical [Ch. 1].
 
 ### The delta function
 

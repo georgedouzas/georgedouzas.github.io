@@ -38,6 +38,8 @@ through the Dirichlet kernel, states the convergence theorems of Dirichlet and o
 Parseval's identity, with the square wave and the sawtooth of @fig-fourier-square-wave as running examples whose
 coefficients, partial sums and overshoot are collected in @prp-fourier-series-values.
 
+For more on this topic, see @arrigo2023introduction [Ch. 4].
+
 ![Partial Fourier sums $S_1, S_3, S_9, S_{29}$ of the square wave $\operatorname{sgn} x$ (left) and of the sawtooth
 $x$ (right) on $(-\pi, \pi)$. The sums converge to the function away from the jumps, to the midpoint $0$ at the
 jumps, and overshoot by about $9\%$ of the jump next to it however many terms are taken: the Gibbs phenomenon, with
@@ -1442,6 +1444,8 @@ and its inverse, computes it for the box, the two-sided exponential and the Gaus
 theorem, states Plancherel's theorem and the uncertainty inequality, and ends with a proposition that collects
 the explicit transforms; the figure shows the trade-off between the width of a Gaussian and the width of
 its transform.
+
+For more on this topic, see @aliev2024mathematical [Ch. 8], @arrigo2023introduction [Ch. 6] and @borodzik2019problems [Ch. 2].
 
 ![Gaussians $e^{-x^2/2\sigma^2}$ of width $\sigma = \tfrac12, 1, 2$ (left) and their Fourier transforms
 $\sigma\sqrt{2\pi}\,e^{-\sigma^2k^2/2}$ (right): the narrower the function, the wider its transform, with
@@ -4726,6 +4730,8 @@ $S^2$ and the spherical harmonics, connects them to the spin-$l$ representations
 states the Peter-Weyl theorem, and describes the mode expansion of a function on a coset space $G/H$; the figure
 shows the harmonics for $l \leq 3$, and the eigenvalue equations, the orthonormality and the
 representation-theoretic identities are collected in the proposition at its end.
+
+For more on this topic, see @aliev2024mathematical [Ch. 7].
 
 ![The real parts of the spherical harmonics $Y_{lm}(\theta, \varphi)$ for $l \leq 3$ and $0 \leq m \leq l$, on the
 rectangle $0 \leq \varphi \leq 2\pi$ (horizontal), $0 \leq \theta \leq \pi$ (vertical): $l - m$ counts the nodal

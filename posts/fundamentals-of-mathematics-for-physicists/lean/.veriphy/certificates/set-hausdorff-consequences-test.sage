@@ -1,0 +1,11 @@
+# name: set-hausdorff-consequences-test
+# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand
+# goal: sage_test KaluzaKlein.Sets.Hausdorff.hausdorff_consequences
+# description: the claim at the instances below, each proved independently of the claim
+SEED = 0
+CASES = [
+    (['ℝ', 'inferInstance', 'inferInstance', 'fun _ => 0', '0', '0', 'tendsto_const_nhds', 'tendsto_const_nhds'], True, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (X : Type) [inst1 : TopologicalSpace X] [inst2 : T2Space X] (u : ℕ → X) (a b : X) (ha : Tendsto u atTop (𝓝 a)) (hb : Tendsto u atTop (𝓝 b)), a = b ∧ IsClosed ({a} : Set X) := by\n  intro X inst1 inst2 u a b ha hb\n  exact (⟨tendsto_nhds_unique ha hb, isClosed_singleton⟩)\nexact @key (ℝ) (inferInstance) (inferInstance) (fun _ => 0) (0) (0) (tendsto_const_nhds) (tendsto_const_nhds)'),
+    (['ℝ', 'inferInstance', 'inferInstance', 'fun n => 1 / ((n : ℝ) + 1)', '0', '0', 'tendsto_one_div_add_atTop_nhds_zero_nat', 'tendsto_one_div_add_atTop_nhds_zero_nat'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (X : Type) [inst1 : TopologicalSpace X] [inst2 : T2Space X] (u : ℕ → X) (a b : X) (ha : Tendsto u atTop (𝓝 a)) (hb : Tendsto u atTop (𝓝 b)), a = b ∧ IsClosed ({a} : Set X) := by\n  intro X inst1 inst2 u a b ha hb\n  exact (⟨tendsto_nhds_unique ha hb, isClosed_singleton⟩)\nexact @key (ℝ) (inferInstance) (inferInstance) (fun n => 1 / ((n : ℝ) + 1)) (0) (0) (tendsto_one_div_add_atTop_nhds_zero_nat) (tendsto_one_div_add_atTop_nhds_zero_nat)'),
+    (['ℝ × ℝ', 'inferInstance', 'inferInstance', 'fun _ => (1, 2)', '(1, 2)', '(1, 2)', 'tendsto_const_nhds', 'tendsto_const_nhds'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (X : Type) [inst1 : TopologicalSpace X] [inst2 : T2Space X] (u : ℕ → X) (a b : X) (ha : Tendsto u atTop (𝓝 a)) (hb : Tendsto u atTop (𝓝 b)), a = b ∧ IsClosed ({a} : Set X) := by\n  intro X inst1 inst2 u a b ha hb\n  exact (⟨tendsto_nhds_unique ha hb, isClosed_singleton⟩)\nexact @key (ℝ × ℝ) (inferInstance) (inferInstance) (fun _ => (1, 2)) ((1, 2)) ((1, 2)) (tendsto_const_nhds) (tendsto_const_nhds)'),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]

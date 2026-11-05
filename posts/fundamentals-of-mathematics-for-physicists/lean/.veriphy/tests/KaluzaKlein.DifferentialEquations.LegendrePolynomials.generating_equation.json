@@ -1,0 +1,76 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.LegendrePolynomials.generating_equation",
+ "statement":
+ "∀ (x t : ℝ),\n  0 < 1 - 2 * x * t + t ^ 2 →\n    (1 - 2 * x * t + t ^ 2) * deriv (fun s => (1 - 2 * x * s + s ^ 2) ^ (-(1 / 2))) t =\n      (x - t) * (1 - 2 * x * t + t ^ 2) ^ (-(1 / 2))",
+ "seed": 0,
+ "script_hash": "3782604566989186502",
+ "script":
+ "# name: de-generating-equation-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.LegendrePolynomials.generating_equation file \"de-generating-equation-test.sage\"\n# description: (1 - 2xt + t²) ∂_t (1 - 2xt + t²)^{-1/2} against (x - t)(1 - 2xt + t²)^{-1/2} by Sage, exactly, at (x, t) = (0, 0) (edge), (1/2, 1/3), (-1, 2)\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\nxs, ys, zs, rs, s_, th, ph, xi, tt, kk, ms, ks = var('xs ys zs rs s_ th ph xi tt kk ms ks')\ninstances = [\n    oracle_instance('0', '0', '_',\n                    lhs=((1-2*(0)*s_+s_^2)*diff((1-2*(0)*s_+s_^2)^(-1/2), s_) - ((0)-s_)*(1-2*(0)*s_+s_^2)^(-1/2)).subs(s_=0).simplify_full(),\n                    rhs=0, relation='==', edge=True),\n    oracle_instance('1/2', '1/3', '_',\n                    lhs=((1-2*(1/2)*s_+s_^2)*diff((1-2*(1/2)*s_+s_^2)^(-1/2), s_) - ((1/2)-s_)*(1-2*(1/2)*s_+s_^2)^(-1/2)).subs(s_=1/3).simplify_full(),\n                    rhs=0, relation='==', edge=False),\n    oracle_instance('-1', '2', '_',\n                    lhs=((1-2*(-1)*s_+s_^2)*diff((1-2*(-1)*s_+s_^2)^(-1/2), s_) - ((-1)-s_)*(1-2*(-1)*s_+s_^2)^(-1/2)).subs(s_=2).simplify_full(),\n                    rhs=0, relation='==', edge=False),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1"],
+  "universal":
+  [{"type": "ℝ", "name": "x"},
+   {"type": "ℝ", "name": "t"},
+   {"type": "0 < 1 - 2 * x * t + t ^ 2", "name": "h"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < 1 - 2 * x * t + t ^ 2",
+    "rel": "lt",
+    "poly": "(0) - (((1 - ((2 * x0) * x1)) + (x1)^2))",
+    "name": "h",
+    "expr": "(0) - (((1 - ((2 * x0) * x1)) + (x1)^(2)))"}],
+  "goal":
+  {"text":
+   "(1 - 2 * x * t + t ^ 2) * deriv (fun s => (1 - 2 * x * s + s ^ 2) ^ (-(1 / 2))) t =\n  (x - t) * (1 - 2 * x * t + t ^ 2) ^ (-(1 / 2))",
+   "rel": "eq",
+   "kind": "other",
+   "expr":
+   "((((1 - ((2 * x0) * x1)) + (x1)^(2)) * diff((((1 - ((2 * x0) * d0_)) + (d0_)^(2)))^((-(1 / 2))), d0_).subs({d0_: x1}))) - (((x0 - x1) * (((1 - ((2 * x0) * x1)) + (x1)^(2)))^((-(1 / 2)))))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "0 < 1 - 2 * x * t + t ^ 2",
+    "kind": "pos",
+    "expr": "((1 - ((2 * x0) * x1)) + (x1)^(2))",
+    "discharged_by": "h"}],
+  "derivatives":
+  [{"var": "d0_",
+    "point": "x1",
+    "function": "fun s => (1 - 2 * x * s + s ^ 2) ^ (-(1 / 2))",
+    "body": "(((1 - ((2 * x0) * d0_)) + (d0_)^(2)))^((-(1 / 2)))",
+    "at": "t"}],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["x", "t"],
+  "atom_types": ["ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0", "0", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1/2", "1/3", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-1", "2", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation": "0 == 0 (exact)",
+   "edge": false,
+   "accepted": true}]}

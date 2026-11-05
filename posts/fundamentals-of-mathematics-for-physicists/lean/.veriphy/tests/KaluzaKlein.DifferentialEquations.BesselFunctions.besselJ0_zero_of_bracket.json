@@ -1,0 +1,98 @@
+{"target":
+ "KaluzaKlein.DifferentialEquations.BesselFunctions.besselJ0_zero_of_bracket",
+ "statement":
+ "∀ (a b : ℝ),\n  0 ≤ a →\n    a < b →\n      b ≤ 4 →\n        0 <\n            1 - (a / 2) ^ 2 + (a / 2) ^ 4 / 4 - (a / 2) ^ 6 / 36 + (a / 2) ^ 8 / 576 - (a / 2) ^ 10 / 14400 +\n                (a / 2) ^ 12 / 518400 -\n              (a / 2) ^ 14 / 25401600 →\n          1 - (b / 2) ^ 2 + (b / 2) ^ 4 / 4 - (b / 2) ^ 6 / 36 + (b / 2) ^ 8 / 576 - (b / 2) ^ 10 / 14400 +\n                    (b / 2) ^ 12 / 518400 -\n                  (b / 2) ^ 14 / 25401600 +\n                (b / 2) ^ 16 / 1625702400 <\n              0 →\n            ∃ x ∈ Set.Ioo a b, besselJ 0 x = 0",
+ "seed": 0,
+ "script_hash": "1885363835595620938",
+ "script":
+ "# name: de-bessel-bracket-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or in interval arithmetic\n#   (test_fallback recipe, oracle instances; the binders are functions, matrices or need exact symbolic values)\n# goal: sage_test KaluzaKlein.DifferentialEquations.BesselFunctions.besselJ0_zero_of_bracket file \"de-bessel-bracket-test.sage\"\n# description: a sign change of the bounds brackets a zero: Sage's find_root of bessel_J(0, x) lies in (a, b) for (a, b) = (2.404825, 2.404826), (2.4, 2.41) (edge: the textbook bracket), (2.40482, 2.40483)\nSEED = 0  # the instances are listed by hand\nx = SR.var('x')\nRIF = RealIntervalField(64)\ndef B(c):\n    return ZZ(1) if bool(c) else ZZ(0)\nRIF = RealIntervalField(53)\ninstances = [\n    oracle_instance('2.404825', '2.404826', '_', '_', '_', '_', '_',\n                    lhs=RIF(find_root(bessel_J(0, x), 2, 3)),\n                    rhs=RIF(2.404825, 2.404826), relation='==', edge=False),\n    oracle_instance('2.4', '2.41', '_', '_', '_', '_', '_',\n                    lhs=RIF(find_root(bessel_J(0, x), 2, 3)),\n                    rhs=RIF(2.4, 2.41), relation='==', edge=True),\n    oracle_instance('2.40482', '2.40483', '_', '_', '_', '_', '_',\n                    lhs=RIF(find_root(bessel_J(0, x), 2, 3)),\n                    rhs=RIF(2.40482, 2.40483), relation='==', edge=False),\n]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2"],
+  "universal":
+  [{"type": "ℝ", "name": "a"},
+   {"type": "ℝ", "name": "b"},
+   {"type": "0 ≤ a", "name": "ha"},
+   {"type": "a < b", "name": "hab"},
+   {"type": "b ≤ 4", "name": "hb"},
+   {"type":
+    "0 <\n  1 - (a / 2) ^ 2 + (a / 2) ^ 4 / 4 - (a / 2) ^ 6 / 36 + (a / 2) ^ 8 / 576 - (a / 2) ^ 10 / 14400 +\n      (a / 2) ^ 12 / 518400 -\n    (a / 2) ^ 14 / 25401600",
+    "name": "hA"},
+   {"type":
+    "1 - (b / 2) ^ 2 + (b / 2) ^ 4 / 4 - (b / 2) ^ 6 / 36 + (b / 2) ^ 8 / 576 - (b / 2) ^ 10 / 14400 +\n        (b / 2) ^ 12 / 518400 -\n      (b / 2) ^ 14 / 25401600 +\n    (b / 2) ^ 16 / 1625702400 <\n  0",
+    "name": "hB"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 ≤ a",
+    "rel": "le",
+    "poly": "(0) - (x1)",
+    "name": "ha",
+    "expr": "(0) - (x1)"},
+   {"text": "a < b",
+    "rel": "lt",
+    "poly": "(x1) - (x2)",
+    "name": "hab",
+    "expr": "(x1) - (x2)"},
+   {"text": "b ≤ 4",
+    "rel": "le",
+    "poly": "(x2) - (4)",
+    "name": "hb",
+    "expr": "(x2) - (4)"},
+   {"text":
+    "0 <\n  1 - (a / 2) ^ 2 + (a / 2) ^ 4 / 4 - (a / 2) ^ 6 / 36 + (a / 2) ^ 8 / 576 - (a / 2) ^ 10 / 14400 +\n      (a / 2) ^ 12 / 518400 -\n    (a / 2) ^ 14 / 25401600",
+    "rel": "lt",
+    "poly":
+    "(0) - ((((((((1 - ((x1 / 2))^2) + (((x1 / 2))^4 / 4)) - (((x1 / 2))^6 / 36)) + (((x1 / 2))^8 / 576)) - (((x1 / 2))^10 / 14400)) + (((x1 / 2))^12 / 518400)) - (((x1 / 2))^14 / 25401600)))",
+    "name": "hA",
+    "expr":
+    "(0) - ((((((((1 - ((x1 / 2))^(2)) + (((x1 / 2))^(4) / 4)) - (((x1 / 2))^(6) / 36)) + (((x1 / 2))^(8) / 576)) - (((x1 / 2))^(10) / 14400)) + (((x1 / 2))^(12) / 518400)) - (((x1 / 2))^(14) / 25401600)))"},
+   {"text":
+    "1 - (b / 2) ^ 2 + (b / 2) ^ 4 / 4 - (b / 2) ^ 6 / 36 + (b / 2) ^ 8 / 576 - (b / 2) ^ 10 / 14400 +\n        (b / 2) ^ 12 / 518400 -\n      (b / 2) ^ 14 / 25401600 +\n    (b / 2) ^ 16 / 1625702400 <\n  0",
+    "rel": "lt",
+    "poly":
+    "(((((((((1 - ((x2 / 2))^2) + (((x2 / 2))^4 / 4)) - (((x2 / 2))^6 / 36)) + (((x2 / 2))^8 / 576)) - (((x2 / 2))^10 / 14400)) + (((x2 / 2))^12 / 518400)) - (((x2 / 2))^14 / 25401600)) + (((x2 / 2))^16 / 1625702400))) - (0)",
+    "name": "hB",
+    "expr":
+    "(((((((((1 - ((x2 / 2))^(2)) + (((x2 / 2))^(4) / 4)) - (((x2 / 2))^(6) / 36)) + (((x2 / 2))^(8) / 576)) - (((x2 / 2))^(10) / 14400)) + (((x2 / 2))^(12) / 518400)) - (((x2 / 2))^(14) / 25401600)) + (((x2 / 2))^(16) / 1625702400))) - (0)"}],
+  "goal": {"text": "∃ x ∈ Set.Ioo a b, besselJ 0 x = 0", "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["x", "a", "b"],
+  "atom_types": ["ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["2.404825", "2.404826", "_", "_", "_", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.4048255576958070 .. 2.4048255576958071] == [2.4048250000000002 .. 2.4048260000000000] at 53 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["2.4", "2.41", "_", "_", "_", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.4048255576958070 .. 2.4048255576958071] == [2.3999999999999999 .. 2.4100000000000002] at 53 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2.40482", "2.40483", "_", "_", "_", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.4048255576958070 .. 2.4048255576958071] == [2.4048199999999999 .. 2.4048300000000001] at 53 bits",
+   "edge": false,
+   "accepted": true}]}

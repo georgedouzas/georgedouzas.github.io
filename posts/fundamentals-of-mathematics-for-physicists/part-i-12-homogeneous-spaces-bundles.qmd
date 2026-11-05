@@ -21,6 +21,8 @@ charges for each running example. Coset vielbeins pulls the Maurer-Cartan form b
 connection for the isotropy group and the invariant metric, all computed explicitly for the sphere. Every statement is
 followed by three examples and three exercises with hidden solutions, many of them solved with Sage.
 
+For more on this topic, see @gadea2013analysis [Sec. 4.8, Ch. 6], @lee2013introduction [Ch. 21] and @rudolph2013differential [Sec. 5.7, Ch. 6].
+
 ### Coset spaces {#sec-coset-spaces}
 
 The cosets of a subgroup were defined as sets in @sec-cosets-quotients. For a Lie group $S$ and a closed subgroup
@@ -2307,6 +2309,8 @@ simplest non-trivial principal bundle, the three-sphere over the two-sphere with
 connection, the field of a magnetic monopole, and computes its Chern number, the integer that measures the twisting.
 Every statement is followed by three examples and three exercises with hidden solutions, and many exercises are
 solved with SageManifolds.
+
+For more on this topic, see @gadea2013analysis [Ch. 5], @lee2013introduction [Ch. 10] and @rudolph2013differential [Ch. 2].
 
 ### Fibre bundles {#sec-bundles}
 

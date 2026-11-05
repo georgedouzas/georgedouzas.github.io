@@ -25,6 +25,8 @@ spaces, linear combinations, spans, linear independence, bases and dimension, ar
 later definition is phrased; the two propositions at its end record two dimension counts and the coordinates of one
 vector in a skewed basis.
 
+For more on this topic, see @axler2024linear [Ch. 1-2].
+
 ### Vector spaces
 
 Everything in this chapter rests on two operations, adding two vectors and stretching one by a number, together with
@@ -1997,6 +1999,8 @@ numbers that every computation in these lectures manipulates. The linear maps to
 form the dual space, and the dual basis turns coordinates into functionals. Four definitions and two propositions,
 on a kernel vector and on the dual basis of $f$.
 
+For more on this topic, see @axler2024linear [Ch. 3] and @scott2023problems [Ch. 2].
+
 ### Linear maps
 
 A map between vector spaces is useful only if it respects the two operations, and the maps that do are the subject of
@@ -3417,6 +3421,8 @@ of special relativity as the running examples; the light cone of @fig-minkowski-
 Four definitions and one proposition on the values of the Minkowski form; a degenerate form on the plane serves as
 the counterexample throughout.
 
+For more on this topic, see @axler2024linear [Secs. 9A].
+
 ### Bilinear forms
 
 Two vectors in, one number out, linearly in each slot: this is the structure the rest of the chapter is about. The
@@ -4625,6 +4631,8 @@ A multilinear map takes several vectors and covectors and returns a number, line
 an array of components that transforms in a fixed way under a change of basis. This section defines tensors on a
 single vector space $V$: multilinear maps, the tensor product space, elementary tensors, tensors of mixed type,
 their components and their contractions, with a closing proposition on the dimension of a tensor product.
+
+For more on this topic, see @axler2024linear.
 
 ### Multilinear maps
 

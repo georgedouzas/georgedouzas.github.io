@@ -1,0 +1,65 @@
+{"target": "KaluzaKlein.Sets.Hausdorff.finite_hausdorff_discrete",
+ "statement":
+ "∀ (X : Type) [Finite X] [inst : TopologicalSpace X] [T2Space X], DiscreteTopology X",
+ "seed": 0,
+ "script_hash": "11699460277862838098",
+ "script":
+ "# name: set-finite-hausdorff-test\n# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand\n# goal: sage_test KaluzaKlein.Sets.Hausdorff.finite_hausdorff_discrete\n# description: the claim at the instances below, each proved independently of the claim\nSEED = 0\nCASES = [\n    (['Fin 3', 'inferInstance', '⊥', '(@DiscreteTopology.toT2Space _ ⊥ ⟨rfl⟩)'], False, 'exact ⟨rfl⟩'),\n    (['Fin 1', 'inferInstance', '⊥', '(@DiscreteTopology.toT2Space _ ⊥ ⟨rfl⟩)'], True, 'exact ⟨rfl⟩'),\n    (['Bool', 'inferInstance', '⊥', '(@DiscreteTopology.toT2Space _ ⊥ ⟨rfl⟩)'], False, 'exact ⟨rfl⟩'),\n]\ninstances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "Type", "name": "X"},
+   {"type": "Finite X",
+    "name":
+    "inst._@..veriphy._authoring_KaluzaKlein_PartI_Sets_CertAll.4011036272._hygCtx._hyg.3"},
+   {"type": "TopologicalSpace X",
+    "name":
+    "inst._@..veriphy._authoring_KaluzaKlein_PartI_Sets_CertAll.4011036272._hygCtx._hyg.6"},
+   {"type": "T2Space X",
+    "name":
+    "inst._@..veriphy._authoring_KaluzaKlein_PartI_Sets_CertAll.4011036272._hygCtx._hyg.9"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal": {"text": "DiscreteTopology X", "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["Fin 3", "inferInstance", "⊥", "(@DiscreteTopology.toT2Space _ ⊥ ⟨rfl⟩)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["Fin 1", "inferInstance", "⊥", "(@DiscreteTopology.toT2Space _ ⊥ ⟨rfl⟩)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["Bool", "inferInstance", "⊥", "(@DiscreteTopology.toT2Space _ ⊥ ⟨rfl⟩)"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true}]}

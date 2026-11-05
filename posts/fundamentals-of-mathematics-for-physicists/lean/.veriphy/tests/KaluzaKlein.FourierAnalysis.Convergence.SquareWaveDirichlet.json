@@ -1,0 +1,66 @@
+{"target": "KaluzaKlein.FourierAnalysis.Convergence.SquareWaveDirichlet",
+ "statement":
+ "∀ (x : ℝ), 0 < x → x < π → Tendsto (fun N => squarePartial N x) atTop (𝓝 1)",
+ "seed": 0,
+ "script_hash": "10560071533340952241",
+ "script":
+ "# name: fa-square-wave-dirichlet-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.Convergence.SquareWaveDirichlet file \"fa-square-wave-dirichlet-test.sage\"\n# description: Sage evaluates |S_N(x) - 1| at N = 2000 in intervals and checks it against Abel's tail bound 4/(π (N+1) sin x)\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ndef SN(N, x):\n    return sum(RI(4) / (RI(pi) * (2 * j + 1)) * RI(sin((2 * j + 1) * x)) for j in range(N // 2))\ninstances = []\nCASES = [(['π / 2', '_', '_'], True, {'x': 'pi/2'}), (['1', '_', '_'], False, {'x': '1'}), (['1/10', '_', '_'], False, {'x': '1/10'}), (['3', '_', '_'], False, {'x': '3'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('abs(SN(2000, x) - 1)', scope))\n    R = side(eval('4/(pi*2001*sin(x))', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='<=', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℝ", "name": "x"},
+   {"type": "0 < x", "name": "a._@._internal._hyg.0"},
+   {"type": "x < π", "name": "a._@._internal._hyg.0"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text": "Tendsto (fun N => squarePartial N x) atTop (𝓝 1)", "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["π / 2", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.0003183098066064185971261446887095908350889 .. 0.0003183098066064185971261446887095953166613] <= [0.0006363016215568029416047326871464842060303 .. 0.0006363016215568029416047326871464842060390] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.0001388888189733220238299065377680577560056 .. 0.0001388888189733220238299065377680622170068] <= [0.0007561777328567868869276726439765282855735 .. 0.0007561777328567868869276726439765282855966] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1/10", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.001539403019516023814134524625851520152851 .. 0.001539403019516023814134524625851524893033] <= [0.006373633628184748064770373972087651215792 .. 0.006373633628184748064770373972087651215999] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["3", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.002042193316654412679769986940464603142070 .. 0.002042193316654412679769986940464607614827] <= [0.004508939804530518740390202248708185877287 .. 0.004508939804530518740390202248708185877403] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

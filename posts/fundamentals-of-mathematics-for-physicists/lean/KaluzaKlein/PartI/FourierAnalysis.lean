@@ -1,0 +1,27 @@
+import KaluzaKlein.PartI.FourierAnalysis.PeriodicFunctions
+import KaluzaKlein.PartI.FourierAnalysis.FourierCoefficients
+import KaluzaKlein.PartI.FourierAnalysis.PartialSums
+import KaluzaKlein.PartI.FourierAnalysis.Convergence
+import KaluzaKlein.PartI.FourierAnalysis.Parseval
+import KaluzaKlein.PartI.FourierAnalysis.SeriesComputations
+import KaluzaKlein.PartI.FourierAnalysis.TheTransform
+import KaluzaKlein.PartI.FourierAnalysis.Inversion
+import KaluzaKlein.PartI.FourierAnalysis.ConvolutionProduct
+import KaluzaKlein.PartI.FourierAnalysis.Plancherel
+import KaluzaKlein.PartI.FourierAnalysis.Uncertainty
+import KaluzaKlein.PartI.FourierAnalysis.TransformComputations
+import KaluzaKlein.PartI.FourierAnalysis.TestFunctions
+import KaluzaKlein.PartI.FourierAnalysis.Distributions
+import KaluzaKlein.PartI.FourierAnalysis.DistributionDerivatives
+import KaluzaKlein.PartI.FourierAnalysis.PrincipalValue
+import KaluzaKlein.PartI.FourierAnalysis.DistributionTransform
+import KaluzaKlein.PartI.FourierAnalysis.DistributionComputations
+import KaluzaKlein.PartI.FourierAnalysis.SphereLaplacian
+import KaluzaKlein.PartI.FourierAnalysis.SphericalHarmonics
+import KaluzaKlein.PartI.FourierAnalysis.MatrixCoefficients
+import KaluzaKlein.PartI.FourierAnalysis.PeterWeyl
+import KaluzaKlein.PartI.FourierAnalysis.CosetModes
+import KaluzaKlein.PartI.FourierAnalysis.HarmonicComputations
+import KaluzaKlein.PartI.FourierAnalysis.ChapterExercises
+
+/-! # Fourier analysis: every claim of tutorial/part-i-06-fourier-analysis.qmd, one module per section -/

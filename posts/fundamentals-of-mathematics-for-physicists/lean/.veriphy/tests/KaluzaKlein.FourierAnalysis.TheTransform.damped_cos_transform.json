@@ -1,0 +1,76 @@
+{"target": "KaluzaKlein.FourierAnalysis.TheTransform.damped_cos_transform",
+ "statement":
+ "∀ (k : ℝ),\n  ∫ (x : ℝ), ↑(rexp (-2 * |x|) * Real.cos (5 * x)) * cexp (-(↑k * ↑x) * I) =\n    ↑(2 / (4 + (k - 5) ^ 2) + 2 / (4 + (k + 5) ^ 2))",
+ "seed": 0,
+ "script_hash": "2626874916727834215",
+ "script":
+ "# name: fa-damped-cos-transform-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.TheTransform.damped_cos_transform file \"fa-damped-cos-transform-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ny = var('y'); k_ = var('k_'); x_ = var('x_'); assume(y, 'real')\ninstances = []\nCASES = [(['0'], True, {'k': '0'}), (['5'], False, {'k': '5'}), (['-1'], False, {'k': '-1'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('integrate(exp(2*y)*cos(5*y)*exp(-k*y*I), y, -oo, 0) + integrate(exp(-2*y)*cos(5*y)*exp(-k*y*I), y, 0, oo)', scope))\n    R = side(eval('2/(4 + (k - 5)**2) + 2/(4 + (k + 5)**2)', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2"],
+  "universal": [{"type": "ℝ", "name": "k"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "∫ (x : ℝ), ↑(rexp (-2 * |x|) * Real.cos (5 * x)) * cexp (-(↑k * ↑x) * I) =\n  ↑(2 / (4 + (k - 5) ^ 2) + 2 / (4 + (k + 5) ^ 2))",
+   "rhs_poly": "x1",
+   "rhs": "↑(2 / (4 + (k - 5) ^ 2) + 2 / (4 + (k + 5) ^ 2))",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs":
+   "∫ (x : ℝ), ↑(rexp (-2 * |x|) * Real.cos (5 * x)) * cexp (-(↑k * ↑x) * I)",
+   "kind": "rel",
+   "expr":
+   "(x0) - (((2 / (4 + ((x2 - 5))^(2))) + (2 / (4 + ((x2 + 5))^(2)))))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "4 + (k - 5) ^ 2 ≠ 0",
+    "kind": "ne",
+    "expr": "(4 + ((x2 - 5))^(2))"},
+   {"text": "4 + (k + 5) ^ 2 ≠ 0",
+    "kind": "ne",
+    "expr": "(4 + ((x2 + 5))^(2))"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms":
+  ["∫ (x : ℝ), ↑(rexp (-2 * |x|) * Real.cos (5 * x)) * cexp (-(↑k * ↑x) * I)",
+   "↑(2 / (4 + (k - 5) ^ 2) + 2 / (4 + (k + 5) ^ 2))",
+   "k"],
+  "atom_types": ["ℂ", "ℂ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.1379310344827586206896551724137931034476 .. 0.1379310344827586206896551724137931034485] == [0.1379310344827586206896551724137931034476 .. 0.1379310344827586206896551724137931034485] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["5"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.5192307692307692307692307692307692307665 .. 0.5192307692307692307692307692307692307695] == [0.5192307692307692307692307692307692307665 .. 0.5192307692307692307692307692307692307695] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.1499999999999999999999999999999999999995 .. 0.1500000000000000000000000000000000000003] == [0.1499999999999999999999999999999999999995 .. 0.1500000000000000000000000000000000000003] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

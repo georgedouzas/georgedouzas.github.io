@@ -1,0 +1,11 @@
+# name: set-int-affine-test
+# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand
+# goal: sage_test KaluzaKlein.Sets.Bijective.int_affine
+# description: the claim at the instances below, each proved independently of the claim
+SEED = 0
+CASES = [
+    (['1', '(by decide)'], True, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (b : ℤ) (hb : Odd b), Function.Injective (fun k : ℤ => 2 * k + b) ∧ ¬ Function.Surjective (fun k : ℤ => 2 * k + b) ∧ Set.range (fun k : ℤ => 2 * k + b) = {n | Odd n} := by\n  intro b hb\n  obtain ⟨c, rfl⟩ := hb\n  refine ⟨fun x y h => by simpa using h, fun h => ?_, ?_⟩\n  · obtain ⟨k, hk⟩ := h 0\n    simp only at hk\n    omega\n  · ext n\n    simp only [Set.mem_range, Set.mem_setOf_eq, Odd]\n    constructor\n    · rintro ⟨k, rfl⟩; exact ⟨k + c, by ring⟩\n    · rintro ⟨m, rfl⟩; exact ⟨m - c, by ring⟩\nexact @key (1) ((by decide))'),
+    (['3', '(by decide)'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (b : ℤ) (hb : Odd b), Function.Injective (fun k : ℤ => 2 * k + b) ∧ ¬ Function.Surjective (fun k : ℤ => 2 * k + b) ∧ Set.range (fun k : ℤ => 2 * k + b) = {n | Odd n} := by\n  intro b hb\n  obtain ⟨c, rfl⟩ := hb\n  refine ⟨fun x y h => by simpa using h, fun h => ?_, ?_⟩\n  · obtain ⟨k, hk⟩ := h 0\n    simp only at hk\n    omega\n  · ext n\n    simp only [Set.mem_range, Set.mem_setOf_eq, Odd]\n    constructor\n    · rintro ⟨k, rfl⟩; exact ⟨k + c, by ring⟩\n    · rintro ⟨m, rfl⟩; exact ⟨m - c, by ring⟩\nexact @key (3) ((by decide))'),
+    (['-1', '(by decide)'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ (b : ℤ) (hb : Odd b), Function.Injective (fun k : ℤ => 2 * k + b) ∧ ¬ Function.Surjective (fun k : ℤ => 2 * k + b) ∧ Set.range (fun k : ℤ => 2 * k + b) = {n | Odd n} := by\n  intro b hb\n  obtain ⟨c, rfl⟩ := hb\n  refine ⟨fun x y h => by simpa using h, fun h => ?_, ?_⟩\n  · obtain ⟨k, hk⟩ := h 0\n    simp only at hk\n    omega\n  · ext n\n    simp only [Set.mem_range, Set.mem_setOf_eq, Odd]\n    constructor\n    · rintro ⟨k, rfl⟩; exact ⟨k + c, by ring⟩\n    · rintro ⟨m, rfl⟩; exact ⟨m - c, by ring⟩\nexact @key (-1) ((by decide))'),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]

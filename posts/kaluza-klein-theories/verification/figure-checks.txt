@@ -1,0 +1,247 @@
+== add_planck.sage
+[PASS] Gauss law: the short- and long-distance potentials agree at r = R, and matching Vlong to m1 m2/(M_Pl^2 r) gives M_Pl^2 = M^{n+2} R^n: True
+[PASS] n = 1, M = 1 TeV: R = 2.9e+13 m, of solar-system size, excluded: True
+[PASS] n = 2, M = 1 TeV: R = 2.41 mm, the millimetre range of torsion-balance tests of Newton's law: True
+[PASS] n = 6, M = 1 TeV: R = 4.5e-14 m, about 10^-14 m (1/R of a few MeV): True
+[PASS] R decreases with n for M = 1 TeV and with M for fixed n: True
+[PASS] KK graviton spacing 1/R for n = 2, M = 1 TeV: 8.2e-05 eV, a nearly continuous tower: True
+[PASS] summed emission rate: (E R)^n/M_Pl^2 = E^n/M^{n+2} with M_Pl^2 = M^{n+2} R^n: True
+[PASS] KK modes on a torus of radius R_c below E: (E R_c)^n up to the ball volume factor (n = 2, E R_c = 30: 2821 vs pi 900 = 2827): True
+wrote tutorial/figures/add_planck.svg
+[PASS] slider: in every frame R^n M^{n+2} = M_Pl^2 for each n (relative error < 1e-9): True
+wrote tutorial/figures/interactive/add_planck.html
+== csdr_constraints.sage
+charges of the off-diagonal units E_ij: {(0, 1): 0, (0, 2): 1, (1, 0): 0, (1, 2): 1, (2, 0): -1, (2, 1): -1}
+[PASS] adjoint of su(3) under the embedded U(1): 4 states of charge 0, 2 of charge +1, 2 of charge -1: True
+[PASS] [Q_3, Q_+-] = +-i Q_+-: the tangent space of the sphere has R-charges +-1: True
+wrote tutorial/figures/csdr_constraints.svg
+T_3 weights of the charge-0 states: [-1, 0, 0, 1] ; of the charge +1 states: [-1/2, 1/2]
+[PASS] charge 0: T_3 weights -1, 0, 0, 1 (triplet + singlet, the adjoint of SU(2) x U(1)); charge +1: T_3 = -1/2, 1/2 (a doublet): True
+[PASS] matching: k has one state of charge +1, g has a doublet of charge +1, so one complex doublet (4 real scalars) survives: True
+wrote tutorial/figures/interactive/csdr_constraints.html
+== csdr_embedding.sage
+eigenvalues of ad tau on E_ij: {(0, 1): 0, (0, 2): I, (1, 0): 0, (1, 2): I, (2, 0): -I, (2, 1): -I}
+[PASS] ad tau has eigenvalue +i on E_13, E_23, -i on E_31, E_32 and 0 on the block-diagonal units: True
+[PASS] the kernel of ad tau is the block-diagonal algebra (x13 = x23 = x31 = x32 = 0): True
+wrote tutorial/figures/csdr_embedding.svg
+[PASS] tau = (i/3) diag(1, 1, -2) is anti-Hermitian and traceless, an element of su(3): True
+[PASS] exp(alpha tau) has determinant 1, is the identity at alpha = 6 pi and equals exp(4 pi i/3) times the identity at alpha = 4 pi (a central element of SU(3)): True
+[PASS] inside su(3) (real dimension 8) the kernel of ad tau has real dimension 4 and its image (the two eigenspaces) dimension 4: True
+== csdr_potential.sage
+V = 1/2*p^2*pb^2 + p*pb*q*qb + 1/2*q^2*qb^2 - p*pb - q*qb + 2/3
+[PASS] V = r^2/2 - r + 2/3 with r = |p|^2 + |q|^2: True
+[PASS] the minimum of V is 1/6 at r = 1 (V = (r-1)^2/2 + 1/6): True
+wrote tutorial/figures/csdr_potential.svg
+[PASS] at the vacuum F_12 = -Q_em/2 with Q_em = (i/3) diag(2, -1, -1), so V_min = -Tr(Q_em^2)/4 = 1/6: True
+[PASS] Q_em = T_3 + tau/2: True
+[PASS] the unbroken subalgebra of h at the vacuum is one-dimensional and spanned by Q_em: True
+[PASS] Y_n = lambda_8/2 has Tr Y_n^2 = Tr T_3^2 = 1/2 and eigenvalue sqrt(3)/2 on the doublet: True
+[PASS] matching g' Y = g sqrt(3)/2 with Y = 1/2: g' = sqrt(3) g and sin^2 theta_W = g'^2/(g^2 + g'^2) = 3/4: True
+gauge boson mass matrix (units 1/R^2): [1/2, 0, 0, 0, 0, 1/2, 0, 0, 0, 0, 1/2, -1/2*sqrt(3), 0, 0, -1/2*sqrt(3), 3/2] eigenvalues [0, 1/2, 1/2, 2]
+[PASS] gauge boson masses^2 (units 1/R^2): photon 0, W 1/2, 1/2, Z 2; the massless direction is Q_em; M_W^2/M_Z^2 = 1/4 = cos^2 theta_W: True
+[PASS] along the radial direction q = 1 + rho: V = 1/6 + 2 rho^2 + O(rho^3), so with kinetic term (d rho)^2 the Higgs mass^2 is 2/R^2 = 4 M_W^2: True
+wrote tutorial/figures/interactive/csdr_potential.html
+== csdr_solution.sage
+rank of the constraint system on 16 real unknowns: 12 -> solution space of dimension 4
+[PASS] the constraints leave a 4-dimensional real solution space, one complex SU(2) doublet: True
+basis of the solution space (coefficients of lambda_1..lambda_8 for phi_1 | phi_2):
+[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0]
+[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0]
+[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+wrote tutorial/figures/csdr_solution.svg
+[PASS] phi_1 = (phi_+ + phi_-)/2, phi_2 = (i/2)(phi_+ - phi_-) with phi_+ = p E_13 + q E_23 solve [tau, phi_1] = phi_2, [tau, phi_2] = -phi_1 for all p, q: True
+[PASS] phi_1 and phi_2 are anti-Hermitian and traceless, elements of su(3): True
+[PASS] the four doublet directions (Re p, Im p, Re q, Im q) are independent, so they span the whole 4-dimensional solution space: True
+[PASS] -Tr(phi_1^2 + phi_2^2) = |p|^2 + |q|^2 = r: True
+[PASS] [phi_1, phi_2] = (i/2) (Phi Phi^dagger (+) -|Phi|^2) in block form: True
+[PASS] [X, phi_+] for X block diagonal is (U - u) acting on the column (p, q): the doublet transformation of H: True
+== flux_potential.sage
+[PASS] Dirac quantisation: F = N/(2 q R^2) vol on the sphere of radius R has flux int F = 2 pi N/q: True
+[PASS] the patch potentials A_+- = (N/2q)(+-1 - cos theta) dphi both have dA = F and differ by (N/q) dphi: True
+[PASS] the transition function exp(i q (N/q) phi) is single valued on phi -> phi + 2 pi exactly for integer N: True
+[PASS] scalings: the flux term is proportional to N^2/R^6 and the curvature term to -1/R^4: True
+[PASS] dV/dR = 0 at R^2 = 3 a N^2/(2 b): the flux fixes the radius, R_min grows linearly with N: True
+[PASS] V(R_min) = -4 b^3/(27 a^2 N^4) < 0: the stabilised vacuum is anti-de Sitter: True
+[PASS] V''(R_min) = 64 b^4/(27 a^3 N^6) > 0: a minimum, the modulus is massive: True
+[PASS] V -> 0 from below as R -> infinity and V -> +infinity as R -> 0: the single critical point is the global minimum on R > 0: True
+[PASS] Bousso-Polchinski count: pi^50/50! * 10^100 = 2.37e+60, of order 10^60: True
+[PASS] the count is the volume pi^{d/2} r^d/Gamma(d/2 + 1) of the ball with d = 100, r = 10: True
+[PASS] landscape panel: V = -60 + n_1^2 + sqrt(5) n_2^2 has exactly 8 flux vacua with |V| < 1 in the window shown: True
+wrote tutorial/figures/flux_potential.svg
+[PASS] slider: every frame's marked point is the lowest sampled value of its curve: True
+wrote tutorial/figures/interactive/flux_potential.html
+== hodge_diamond.sage
+[PASS] degree-t hypersurface in CP^4: c_1 = (5 - t) J, so c_1 = 0 (Calabi-Yau) exactly for t = 5: True
+[PASS] quintic: c(TX) = 1 + 0 J + 10 J^2 - 40 J^3, so c_3 = -40 J^3: True
+[PASS] quintic: chi = int c_3 = -40 * 5 = -200: True
+[PASS] quintic: h^{2,1} = 126 - 25 = 101 (degree-5 monomials in 5 variables minus dim GL(5)): True
+[PASS] quintic: the alternating sum of the Hodge diamond is chi = 2(h^{1,1} - h^{2,1}) = -200: True
+[PASS] quintic: net generations |h^{1,1} - h^{2,1}| = |chi|/2 = 100: True
+[PASS] T^6/Z_3 (resolved): chi = 2(36 - 0) = 72 and 36 net generations: True
+[PASS] quartic in CP^3 (K3): c_1 = 0, c_2 = 6 J^2, chi = 6 * 4 = 24: True
+[PASS] nearly-Kahler cosets: chi(G_2/SU(3)) = 12/6 = 2, chi(Sp(4)/(SU(2) x U(1))) = 8/2 = 4, chi(SU(3)/U(1)^2) = 6/1 = 6: True
+[PASS] nearly-Kahler cosets: chi/2 = 1, 2, 3 generations: True
+wrote tutorial/figures/hodge_diamond.svg
+== killing_inner_products.sage
+average of K_a . K_b over the unit sphere:
+[2/3   0   0]
+[  0 2/3   0]
+[  0   0 2/3]
+[PASS] the average of K_a . K_b over the unit sphere is (2/3) delta_ab: True
+R_6 for A^1_x = c t: 1/2*c^2*cos(ph6)^2*sin(th6)^2 - 1/2*c^2 - 2
+[PASS] R_6 = -2 - (c^2/2) K_1 . K_1 = -2 - (c^2/2)(1 - sin^2 th cos^2 ph), varying over the sphere: True
+wrote tutorial/figures/killing_inner_products.svg
+[PASS] K_1.K_1, K_2.K_2, K_3.K_3 are related by the axis permutations (1 - n_a^2): True
+wrote tutorial/figures/interactive/killing_inner_products.html
+== kk_circle.sage
+R of dx^2 + phi^2 (dy + A dx)^2 = -2*diff(phi(x), x, x)/phi(x)
+[PASS] R = -2 phi''/phi independent of A: True
+wrote tutorial/figures/kk_circle.svg
+wrote tutorial/figures/interactive/kk_circle.html
+== kk_dilaton_curvature.sage
+R5 for eta - phi(x)^2 dw^2: 2*diff(phi(x), x, x)/phi(x)
+[PASS] with A = 0 and phi = phi(x): R5 = 2 phi''/phi = -(2/phi) Box phi: True
+R5 for the constant electric field: -1/2*B^2 ; (phi^2/4) F^2 = -1/2*B^2
+[PASS] with phi = 1 and F_{tx} = B: R5 = (1/4) F^2 = -B^2/2: True
+wrote tutorial/figures/kk_dilaton_curvature.svg
+== kk_einstein_frame.sage
+R = 2 ; R~ = 8*(2*cos(th)^2 + 8*cos(th) + 5)/(cos(th)^4 + 8*cos(th)^3 + 24*cos(th)^2 + 32*cos(th) + 16)
+[PASS] two dimensions: R~ = Omega^{-2}(R - 2 Box ln Omega) for Omega = 1 + cos(theta)/2: True
+[PASS] four dimensions: R~ = Omega^{-2} R - 6 Omega^{-3} Box Omega on de Sitter space with Omega = Omega(t): True
+wrote tutorial/figures/kk_einstein_frame.svg
+== kk_gauge_shift.sage
+metric components in the shifted chart: A(xp)^2*phi(xp)^2 - 2*A(xp)*phi(xp)^2*diff(eps(xp), xp) + phi(xp)^2*diff(eps(xp), xp)^2 + 1 , A(xp)*phi(xp)^2 - phi(xp)^2*diff(eps(xp), xp) , phi(xp)^2
+[PASS] in the chart y' = y + eps(x) the ansatz keeps its form with A' = A - eps'(x): True
+wrote tutorial/figures/kk_gauge_shift.svg
+== kk_jets.sage
+[PASS] det g5 = -phi^2 det g4 as a polynomial identity: True
+[PASS] the six Christoffel patterns of the ansatz hold as polynomial identities in the jets: True
+[PASS] R5 = R4 + (phi^2/4) F^2 - (2/phi) Box phi as a polynomial identity in the jets (ginv free, generic 4D metric): True
+sizes: monomials in R5 = 2980 , in R4 = 2406 , in Ric5_00 = 1403 , Ric5_04 = 933 , Ric5_44 = 418
+[PASS] R_44 = phi Box phi + (phi^4/4) F^2: True
+[PASS] R_{mu 4} = A_mu R_44 + (phi^2/2) nabla^k F_{k mu} - (3 phi/2) d_k phi F_mu^k: True
+[PASS] R_{mu nu} = R4_{mu nu} + (phi^2/2) F_mu^k F_nu k - (1/phi) nabla_mu d_nu phi + A_mu R_{nu 4} + A_nu R_{mu 4} - A_mu A_nu R_44: True
+== kk_reduction.sage
+computing the five-dimensional curvature scalar of the ansatz metric ...
+[PASS] R5 = R4 + (phi^2/4) F^2 - (2/phi) Box phi on the explicit configuration (exact rational functions): True
+[PASS] det g5 = -phi^2 det g4 on the explicit configuration: True
+at a sample point: R5 = -1457145532695437826653322688885866232/254998422328976101432804050399004227 , R4 = -174454500697056290204914872/55260223337458898907974809 , (phi^2/4)F^2 = -372889098141848224/207925509135189033 , (2/phi) Box phi = 10063444124064596079332880/13172221682794510094653561
+== kk_tower.sage
+[PASS] -d^2/dy^2 e^{i n y/R} = (n/R)^2 e^{i n y/R}: True
+[PASS] e^{i n (y + 2 pi R)/R} = e^{i n y/R} for integer n and not for n = 1/2: True
+wrote tutorial/figures/kk_tower.svg
+[PASS] the number of modes with |n|/R < E is 2 floor(E R) + 1 (E R not an integer), checked for E = 2 and R = 0.3, 1.3, 2.7: True
+wrote tutorial/figures/interactive/kk_tower.html
+== kk_weyl.sage
+with ginv free: identity using the jet derivative of ginv~: False ; using the formal -ginv~ dg~ ginv~: False
+sizes: monomials in R~ (jet) = 13308  target = 2648
+[PASS] R[Omega^2 g] = Omega^{-2} R[g] - 6 Omega^{-3} Box Omega in four dimensions at random points with the true inverse (jet derivative of ginv~): True
+[PASS] the same with the formal inverse-derivative rule -ginv~ dg~ ginv~: True
+[PASS] -6 Box ln Omega - 6 (d ln Omega)^2 = -6 Omega^{-1} Box Omega as rational functions: True
+== kkr_couplings.sage
+[PASS] Einstein-frame Maxwell weight: sqrt(-g) phi (phi^2 F^2)_g = phi^3 sqrt(-gE) (F^2)_E: True
+[PASS] Einstein-frame Kaluza-Klein mass squared n^2/(R^2 phi^3) from Box_5 on phi^{-1} eta - phi^2 dy^2: True
+[PASS] the charge-to-mass ratio q_n/m_n = n e phi^{-3/2}/(n/(R phi^{3/2})) = sqrt(2) kappa for every phi: True
+wrote tutorial/figures/kkr_couplings.svg
+wrote tutorial/figures/interactive/kkr_couplings.html
+== nak_isometry_count.sage
+[PASS] the rotation fields x_i d_j - x_j d_i of S^n are n(n+1)/2 independent tangent fields, n = 1, ..., 6: True
+[PASS] S^2: the three fields K_a are Killing (isometry algebra so(3), dimension 3): True
+[PASS] round S^3: the left-invariant e_a and right-invariant xi_a are six Killing fields, [e_a, xi_b] = 0, independent over R: True
+[PASS] Berger S^3 (a != b): xi_1, xi_2, xi_3 and e_3 are Killing, e_1 and e_2 are not (isometry algebra su(2) + u(1), dimension 4): True
+wrote tutorial/figures/nak_isometry_count.svg
+wrote tutorial/figures/interactive/nak_isometry_count.html
+== nonabelian_gauge_rotation.sage
+[PASS] L_xi g_{mu m} = K_{m c} (d_mu eps^c + eps_abc A^a_mu eps^b) for xi = eps^a(x) K_a, all mu: True
+wrote tutorial/figures/nonabelian_gauge_rotation.svg
+== nonabelian_reduction.sage
+computing the six-dimensional curvature scalar ...
+[info] R_6 = R_4 - 2 + (1/4) K_a.K_b F^a F^b with F^c = dA^c -1 eps_abc A^a A^b: False
+[PASS] R_6 = R_4 - 2 + (1/4) K_a.K_b F^a F^b with F^c = dA^c +1 eps_abc A^a A^b: True
+[PASS] R_6 depends on the point of the sphere (the ansatz is not a vacuum solution): R_6 at the poles differs from the equator: True
+== s2_gauge_fields.sage
+[PASS] [K_a, K_b] = -eps_abc K_c for the three Killing vectors of the sphere: True
+[PASS] K_a . K_b = delta_ab - n_a n_b pointwise on the unit sphere: True
+wrote tutorial/figures/s2_gauge_fields.svg
+[PASS] the push-forward of K_a to R^3 is the rotation field e_a x n: True
+wrote tutorial/figures/interactive/s2_gauge_fields.html
+== vcr_equivariant.sage
+[PASS] equivariant m = 1 potential: V = (g^2/2) tr(c - phi phi^+)^2 + (g^2/2) tr(phi^+ phi - c)^2 = (k0-k1) g^2 c^2/2 + g^2 tr(c - phi^+ phi)^2, c = 1/(4 g^2 R^2), with V = (k0 - k1)/(32 g^2 R^4) at phi^0 = (0; 1/(2gR)), for (k0,k1) = (1,1), (2,1), (3,1), (2,2), (3,2): True
+[PASS] (k0, k1) = (1, 1): V = g^2(|phi|^2 - c)^2 is minimal at |phi| = 1/(2gR) with V = 0; expanding phi = v + (h + i chi)/sqrt(2) gives the Higgs mass mu_h = 1/R and a massless Goldstone chi: True
+[PASS] (k0, k1) = (2, 1), SU(3) -> SU(2) x U(1) -> U(1): the vector mass matrix (Dolan-Szabo eq. 4.17) has eigenvalues 0, 1/(8R^2) twice, 1/(2R^2), so mu_W = 1/(2 sqrt 2 R), mu_Z = 2 mu_W, photon (sqrt 3 W^3 + B)/2 and sin^2 theta_W = 3/4: True
+[PASS] equal-rank vacua (Dolan-Szabo eq. 3.11, n = 1): phi_i^0 = sqrt(i(m - i + 1))/(2gR) solves [phi, phi^+] = Sigma/(4 g^2 R^2), Sigma = diag(m, m-2, ..., -m), for m = 1, ..., 5: True
+[PASS] fuzzy sphere: the spin-j matrices of dimension N = 2j + 1 satisfy [J_a, J_b] = i eps_abc J_c and J_a J_a = (N^2 - 1)/4, so F_ab = [phi_a, phi_b] - i eps_abc phi_c and V = (1/4) tr F^+ F vanish at phi_a = J_a, for N = 2, ..., 6: True
+wrote tutorial/figures/vcr_equivariant.svg
+wrote tutorial/figures/interactive/vcr_equivariant.html
+== vcr_freund_rubin.sage
+[PASS] explicit metrics in signature (+,-,...,-): Poincare AdS_4 of radius L = 1/(2m) has R_mu nu = 12 m^2 g_mu nu and the round S^7 of radius a = 1/m has R_mn = -6 m^2 h_mn: True
+[PASS] with F_{mu nu rho sigma} = 3m eps: F_{mu PQR} F_nu^{PQR} = -54 m^2 g_mu nu, F^2 = -216 m^2, R = 6 m^2, and R_MN - g_MN R/2 = -(1/3)(F_MPQR F_N^PQR - g_MN F^2/8) holds on AdS_4 x S^7 component by component: True
+[PASS] the flux equation d * F = 0: sqrt|g| F^{0123} = -3m is constant on AdS_4, so its divergence vanishes (F ^ F = 0 since F lives on four dimensions): True
+[PASS] AdS_p x S^q with a p-form flux c eps_p: R_mu nu = -(q-1)c^2/(2(D-2)) g, R_mn = (p-1)c^2/(2(D-2)) g, hence a/L = (q-1)/(p-1): 2, 1, 1/2 for (p, q) = (4, 7), (5, 5), (7, 4): True
+[PASS] the relation 2D - 4 = (p-1)(D-p-1) of Cvetic-Lu-Pope has exactly the solutions (D, p) = (11, 4), (10, 5), (11, 7) for 2 <= p, D >= p + 2 (search up to D = 59; D = p + 3 + 4/(p - 3) in general): True
+[PASS] the dilaton coupling a^2 = 4 - 2(p-1)(D-p-1)/(D-2) equals 2(D-1)/(D-2) for p = 2 and 8/(D-2) for p = 3, positive in every D: True
+[PASS] the relation (D-1)/2 = (n-2)/(n-4) of Hohm-Samtleben has exactly the solutions (D, n) = (7, 5), (5, 6), (4, 8) for n > 4: True
+wrote tutorial/figures/vcr_freund_rubin.svg
+wrote tutorial/figures/interactive/vcr_freund_rubin.html
+== vcr_group_manifold.sage
+[PASS] Maurer-Cartan equations d sigma_a = -(1/2) eps_abc sigma_b ^ sigma_c for the SU(2) forms in Euler angles: True
+[PASS] the left-invariant metric sum a_a^2 sigma_a^2 has constant scalar curvature R = (2 a1^2 a2^2 + 2 a2^2 a3^2 + 2 a3^2 a1^2 - a1^4 - a2^4 - a3^4)/(2 a1^2 a2^2 a3^2), R = 6 at a_a = 1/2: True
+[PASS] the frame components Ric(e_a, e_b) of the left-invariant metric are constants (no dependence on theta, phi, psi), diagonal, Ric(e_3, e_3) = (a3^4 - (a1^2 - a2^2)^2)/(2 a1^2 a2^2): True
+[PASS] at fixed volume (a1 = a2 = t^(-1/2), a3 = t) R(t) = 2t - t^4/2, stationary and maximal at the round point t = 1 (R = 3/2): True
+[PASS] unimodularity f_ab^b = 0 holds for su(2) and the Heisenberg algebra (both satisfy Jacobi), and fails for the two-dimensional algebra [t1, t2] = t2: True
+[PASS] Heisenberg nilmanifold: g^{-1} dg has entries sigma^y = dy (from -m sigma^y), sigma^1 = dz1 + m y dz2, sigma^2 = dz2, with d sigma^1 = m sigma^y ^ sigma^2 and d sigma^y = d sigma^2 = 0: True
+[PASS] on the unit S^2 the Killing vectors K_a are Killing, and K_a . K_b = delta_ab - n_a n_b varies over the sphere (only the trace sum_a K_a . K_a = 2 is constant): True
+wrote tutorial/figures/vcr_group_manifold.svg
+wrote tutorial/figures/interactive/vcr_group_manifold.html
+== vcr_scherk_schwarz.sage
+[PASS] twisted modes: f = e^{i(n/R + omega) y} has f(y + 2 pi R) = e^{2 pi i omega R} f(y) for integer n and -f'' = (n/R + omega)^2 f: True
+[PASS] the twisted spectrum |n + omega R| is invariant under omega R -> omega R + 1 and omega R -> -omega R (n relabelled), on a grid of 41 twists: True
+[PASS] the lightest twisted mass is |omega| for |omega R| <= 1/2 and the charge of mode n is n + omega R: True
+[PASS] axion twist chi(x, y) = chi(x) + m y: the horizontal derivative (d_mu - A_mu d_y) chi = d_mu chi - m A_mu (Stueckelberg coupling): True
+[PASS] torus T^2: det G = A^2 and the mass of the mode e^{i k.y} is G^{mn} k_m k_n = |k_2 - k_1 tau|^2 / (A tau_2): True
+[PASS] the T^2 spectrum is SL(2,Z) invariant: tau -> tau + 1 with (k1, k2) -> (k1, k2 + k1), tau -> -1/tau with (k1, k2) -> (-k2, k1): True
+[PASS] square torus (tau = i, A = 1): the levels M^2 = 1, 2, 5, 25 have 4, 4, 8, 12 modes: True
+wrote tutorial/figures/vcr_scherk_schwarz.svg
+wrote tutorial/figures/interactive/vcr_scherk_schwarz.html
+== warp_factor.sage
+[PASS] warped metric: G_{mu nu} = (3 A'' - 6 A'^2) g_{mu nu} and G_{yy} = -6 A'^2 g_{yy}, off-diagonal components vanish: True
+[PASS] A = k y solves the bulk equations G_MN - Lambda g_MN = 0 (y > 0) exactly when Lambda = -6 k^2: True
+[PASS] the same holds for A = -k y (y < 0), hence for A = k|y| on both sides of the brane: True
+[PASS] for a general A the yy equation gives A'^2 = -Lambda/6 (so Lambda < 0, AdS_5) and the mu nu equation then A'' = 0: True
+[PASS] brane tension: 3 [A'] = 6k = kappa_5^2 V gives V = 6k/kappa_5^2, which is 24 M^3 k with kappa_5^2 = 1/(4 M^3): True
+[PASS] in Randall-Sundrum normalisation (2 M^3 R term, Lambda_RS = Lambda/kappa_5^2) k^2 = -Lambda_RS/(24 M^3): True
+[PASS] M_Pl^2 = M^3 r_c int_{-pi}^{pi} e^{-2 k r_c |phi|} dphi = (M^3/k)(1 - e^{-2 k r_c pi}), finite as r_c -> infinity: True
+[PASS] warped Higgs: after H -> e^{k r_c pi} H the kinetic term is canonical and the vacuum value is v = e^{-k r_c pi} v0: True
+[PASS] a hierarchy e^{k r_c pi} = 10^15 needs only k r_c = 15 ln 10/pi = 10.99: True
+[PASS] zero mode: psihat_0 = (k z + 1)^{-3/2} solves -1/2 psihat'' + 15 k^2/(8 (k z + 1)^2) psihat = 0 for z > 0: True
+[PASS] the delta -(3k/2) delta(z) fixes the jump: psihat'(0+) - psihat'(0-) = -3k psihat(0) for psihat = (k|z| + 1)^{-3/2}: True
+[PASS] sqrt(k) (k|z| + 1)^{-3/2} has unit norm: the graviton is a normalisable bound state although z ranges over the real line: True
+[PASS] in y the zero mode is psi = e^{-2k|y|}: -1/2 psi'' + 2 k^2 psi = 0 for y > 0 and psi'(0+) - psi'(0-) = -4k psi(0), the delta -2k delta(y): True
+[PASS] the change of variables: psihat(z) = psi(y) e^{k y/2} with y = log(kz + 1)/k maps e^{-2ky} to (kz + 1)^{-3/2}: True
+wrote tutorial/figures/warp_factor.svg
+[PASS] slider: every frame's zero mode has unit norm to 5e-3 (trapezoidal sum over |z| < 4 plus the exact tail 1/(kz + 1)^2 at z = 4): True
+wrote tutorial/figures/interactive/warp_factor.html
+== wz_closure.sage
+[PASS] (delta_2 delta_1 - delta_1 delta_2) phi = i(-eps_1 sigma^mu eps_2^dag + eps_2 sigma^mu eps_1^dag) d_mu phi: True
+[PASS] the same commutator on the auxiliary field F, off-shell (eq. 3.1.16): True
+[PASS] the same commutator on psi_alpha, off-shell thanks to F (eq. 3.1.16): True
+== wz_invariance.sage
+number of terms in delta L: 38
+[PASS] delta L = d_mu K^mu exactly (off-shell, with the auxiliary field): True
+[PASS] the massless free model without F: delta_0 L_0 = d_mu K_0^mu (Martin eq. 3.1.8): True
+exit 0
+== z3_orbifold.sage
+[PASS] in lattice coordinates z = x + y omega the rotation is M = [[0, -1], [1, -1]], of order 3: True
+[PASS] z -> omega z has exactly 3 fixed points on T^2: (0,0), (2/3,1/3), (1/3,2/3) in lattice coordinates: True
+[PASS] Lefschetz number: det(1 - M) = 3 = number of fixed points: True
+[PASS] on T^6 = (T^2)^3 with z^i -> omega z^i: 3^3 = 27 fixed points: True
+[PASS] the action preserves dz^1 dz^2 dz^3 (omega^3 = 1), so Z_3 lies in SU(3) and one supersymmetry survives: True
+[PASS] untwisted sector: h^{1,1} = 9 (all dz^i dzbar^j invariant), h^{2,1} = 0 (dz dz dzbar picks up omega): True
+[PASS] twisted sectors add one (1,1)-class per fixed point: h^{1,1} = 9 + 27 = 36, h^{2,1} = 0: True
+[PASS] orbifold Euler number (1/3)(0 + 8 * 27) = 72 = 2(h^{1,1} - h^{2,1}): True
+[PASS] the rhombus (0, centre, 1 + omega, centre) has 1/3 of the area of the cell, a fundamental domain of Z_3: True
+[PASS] the two non-lattice fixed points are the centres of the equilateral triangles (0, 1, 1 + omega) and (0, 1 + omega, omega): True
+wrote tutorial/figures/z3_orbifold.svg
+[PASS] slider: the corners 0 and the two centres of the domain rotated by 120 degrees are fixed points modulo the lattice: True
+wrote tutorial/figures/interactive/z3_orbifold.html

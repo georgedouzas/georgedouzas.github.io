@@ -60,6 +60,8 @@ the Galilean transformation, keeps time absolute; Einstein's two postulates forc
 transformation, in which time and space mix. The sources are @maggiore2023electrodynamics [Secs. 7.1-7.2] and
 @boskoff2024journey [Secs. 9.1-9.3], and most examples and exercises come from @blennow2022relativity [Secs. 1.1-1.4].
 
+For more on this topic, see @macchi2023problems [Ch. 9].
+
 ### Inertial frames and the interval
 
 An **event** is something that happens at a point and at an instant: a flash, a collision, the tick of a clock. To
@@ -1396,6 +1398,8 @@ part describes that space, its light cones, the clocks carried along worldlines 
 The sources are @maggiore2023electrodynamics [Secs. 7.2.2-7.2.3], @boskoff2024journey [Secs. 9.2-9.3] and
 @blennow2022relativity [Secs. 1.1-1.4]; the bilinear form itself is the Minkowski form of @prp-minkowski-values.
 
+For more on this topic, see @gourgoulhon2013special [Ch. 1-5, Ch. 12-13].
+
 ### Minkowski spacetime and its light cones
 
 The events form an affine space: there is no preferred origin, but two events determine a displacement, and
@@ -2651,6 +2655,8 @@ little groups, which is the group-theoretical definition of a particle. The gene
 algebras and exponentials is that of @sec-lie-groups-algebras; spin groups in all dimensions are in @sec-spin-groups.
 The sources are @maggiore2023electrodynamics [Sec. 7.3], @boudreau2018applied [Secs. 14.3-14.5], @odonnell2011wigner for
 the Wigner rotation and @bekaert2006unitary [Secs. 1-3] for the Poincaré group and its representations.
+
+For more on this topic, see @gourgoulhon2013special [Ch. 6-8, Ch. 9-11, Ch. 17-20], @mukunda2022continuous [Ch. 10], @talagrand2022what [Ch. 4, Ch. 8-9] and @tornetta2022mathematical [Ch. 2].
 
 ### Boosts along one axis
 
@@ -7349,6 +7355,8 @@ results are the working tools of particle physics: invariant masses, decay momen
 variables. The examples and exercises follow @blennow2022relativity [Secs. 1.4 and 1.6], with masses from the
 particle-physics tables; units are $c = 1$ and energies in MeV unless stated.
 
+For more on this topic, see @godinho2014introduction [Ch. 6], @gray2019student [Appendix A], @knauf2018mathematical [Ch. 16], @moretti2023analytical [Ch. 10], @paganini2023fundamentals [Ch. 2, Ch. 3], @pal2015introductory [Ch. 2] and @pierrus2018solved [Ch. 12].
+
 ### Four-velocity and four-momentum
 
 A worldline parametrised by its proper time has a tangent of unit length. This tangent is the relativistic velocity, and
@@ -10293,6 +10301,8 @@ units with $c = 1$, $F_{0i} = E^i$, $F_{ij} = -\epsilon_{ijk}B^k$, so that $F^{i
 @maggiore2023electrodynamics [Secs. 8.5-8.6] and @blennow2022relativity [Sec. 1.7]. The same physics in vector form, with Maxwell's equations, the potentials, the fields of moving charges and
 radiation, is in @sec-electromagnetism (@sec-em-maxwell, @sec-em-radiation); the covariant form adds the manifest invariance
 under boosts.
+
+For more on this topic, see @emam2021covariant [Ch. 4].
 
 ### The field tensor under Lorentz transformations
 

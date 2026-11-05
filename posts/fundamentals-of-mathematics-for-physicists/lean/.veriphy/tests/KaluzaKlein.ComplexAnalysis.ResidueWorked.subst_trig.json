@@ -1,0 +1,65 @@
+{"target": "KaluzaKlein.ComplexAnalysis.ResidueWorked.subst_trig",
+ "statement":
+ "∀ (θ : ℝ),\n  ↑(Real.cos θ) = (cexp (↑θ * I) + (cexp (↑θ * I))⁻¹) / 2 ∧\n    ↑(Real.sin θ) = (cexp (↑θ * I) - (cexp (↑θ * I))⁻¹) / (2 * I) ∧\n      HasDerivAt (fun t => cexp (↑t * I)) (I * cexp (↑θ * I)) θ",
+ "seed": 0,
+ "script_hash": "8707527962054274708",
+ "script":
+ "# name: ca-res-subst-trig-test\n# technique: test fallback (instances; oracle instances are evaluated by Sage exactly or in Arb's\n#   rigorous ball arithmetic, kernel instances are checked by Lean)\n# goal: KaluzaKlein.ComplexAnalysis.ResidueWorked.subst_trig: cos θ = (z + 1/z)/2, sin θ = (z - 1/z)/(2i) for z = e^(iθ)\n# description: Sage evaluates both identities exactly (the derivative is checked by Lean in the proof)\nSEED = 0\ndef V(*named, **kw):\n    \"\"\"The binders' values as Lean text, by binder name ('_' for an oracle instance's hypotheses).\"\"\"\n    for d in named:\n        kw.update(d)\n    return [kw.get(name, '_') for name, _ in universal]\ndef X(v):\n    \"\"\"An exact symbolic value, radicals canonicalised (Sage's exact comparison then succeeds).\"\"\"\n    return SR(v).canonicalize_radical().simplify_full()\nRIq = RealIntervalField(128); CIq = ComplexIntervalField(128)\ndef G(a, b):\n    return RIq(abs(CIq(a) - CIq(b)))\ndef d(t):\n    u = exp(I*t)\n    return G(cos(t), (u + 1/u)/2) + G(sin(t), (u - 1/u)/(2*I))\ninstances = [oracle_instance(*V(θ=tt), lhs=d(t), rhs=RIq(0), edge=(tt == '0')) for tt, t in\n             [('0', 0), ('Real.pi / 3', pi/3), ('Real.pi / 4', pi/4), ('2', 2)]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal": [{"type": "ℝ", "name": "θ"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "↑(Real.cos θ) = (cexp (↑θ * I) + (cexp (↑θ * I))⁻¹) / 2 ∧\n  ↑(Real.sin θ) = (cexp (↑θ * I) - (cexp (↑θ * I))⁻¹) / (2 * I) ∧\n    HasDerivAt (fun t => cexp (↑t * I)) (I * cexp (↑θ * I)) θ",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["Real.pi / 3"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.459098025803364444486249549504070282180e-38] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["Real.pi / 4"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 5.877471754111437539843682686111228389094e-39] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 5.107179673505515888844642114395020312109e-39] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

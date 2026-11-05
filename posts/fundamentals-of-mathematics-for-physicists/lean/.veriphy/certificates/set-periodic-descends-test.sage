@@ -1,0 +1,11 @@
+# name: set-periodic-descends-test
+# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand
+# goal: sage_test KaluzaKlein.Sets.Exercises.periodic_descends_continuous
+# description: the claim at the instances below, each proved independently of the claim
+SEED = 0
+CASES = [
+    (['2 * Real.pi', 'Real.cos', 'Real.continuous_cos', 'Real.cos_periodic'], False, "set_option maxHeartbeats 2000000 in\nhave key : ∀ (T : ℝ) (f : ℝ → ℝ) (hf : Continuous f) (hp : Function.Periodic f T), ∃ g : Quotient (angleSetoid T) → ℝ, Continuous g ∧ ∀ x, g (Quotient.mk _ x) = f x := by\n  intro T f hf hp\n  have hc : ∀ a b, angleSetoid T a b → f a = f b := fun a b h => (descends_iff_periodic T f).2 hp a b h\n  refine ⟨Quotient.lift f hc, ?_, fun x => rfl⟩\n  rw [isQuotientMap_quotient_mk'.continuous_iff]\n  exact hf\nexact @key (2 * Real.pi) (Real.cos) (Real.continuous_cos) (Real.cos_periodic)"),
+    (['1', 'fun _ => 0', 'continuous_const', '(fun _ => rfl)'], True, "set_option maxHeartbeats 2000000 in\nhave key : ∀ (T : ℝ) (f : ℝ → ℝ) (hf : Continuous f) (hp : Function.Periodic f T), ∃ g : Quotient (angleSetoid T) → ℝ, Continuous g ∧ ∀ x, g (Quotient.mk _ x) = f x := by\n  intro T f hf hp\n  have hc : ∀ a b, angleSetoid T a b → f a = f b := fun a b h => (descends_iff_periodic T f).2 hp a b h\n  refine ⟨Quotient.lift f hc, ?_, fun x => rfl⟩\n  rw [isQuotientMap_quotient_mk'.continuous_iff]\n  exact hf\nexact @key (1) (fun _ => 0) (continuous_const) ((fun _ => rfl))"),
+    (['2 * Real.pi', 'Real.sin', 'Real.continuous_sin', 'Real.sin_periodic'], False, "set_option maxHeartbeats 2000000 in\nhave key : ∀ (T : ℝ) (f : ℝ → ℝ) (hf : Continuous f) (hp : Function.Periodic f T), ∃ g : Quotient (angleSetoid T) → ℝ, Continuous g ∧ ∀ x, g (Quotient.mk _ x) = f x := by\n  intro T f hf hp\n  have hc : ∀ a b, angleSetoid T a b → f a = f b := fun a b h => (descends_iff_periodic T f).2 hp a b h\n  refine ⟨Quotient.lift f hc, ?_, fun x => rfl⟩\n  rw [isQuotientMap_quotient_mk'.continuous_iff]\n  exact hf\nexact @key (2 * Real.pi) (Real.sin) (Real.continuous_sin) (Real.sin_periodic)"),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]

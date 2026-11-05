@@ -1,0 +1,75 @@
+{"target": "KaluzaKlein.RealAnalysis.Sequences.poly_ratio_limit_zero",
+ "statement":
+ "∀ (P Q : Polynomial ℝ),\n  P.degree < Q.degree → Tendsto (fun n => Polynomial.eval (↑n) P / Polynomial.eval (↑n) Q) atTop (𝓝 0)",
+ "seed": 0,
+ "script_hash": "8176533756427154346",
+ "script":
+ "# name: ra-poly-ratio-limit-zero-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Sequences.poly_ratio_limit_zero file \"ra-poly-ratio-limit-zero-test.sage\"\n# description: Sage computes lim P(n)/Q(n) = 0 for deg P < deg Q\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx = var('x')\ninstances = []\nfor P, Q, edge in [('x', 'x ** 2 + 1', False), ('1', 'x', True), ('x ** 2 - 3', 'x ** 3', False)]:\n    lean = lambda s: s.replace('x', 'Polynomial.X').replace('**', '^')\n    instances.append(O([f'({lean(P)} : Polynomial ℝ)', f'({lean(Q)} : Polynomial ℝ)', '(by compute_degree!)'],\n                       limit(SR(P) / SR(Q), x=oo), QQ(0), edge=edge))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "Polynomial ℝ", "name": "P"},
+   {"type": "Polynomial ℝ", "name": "Q"},
+   {"type": "P.degree < Q.degree", "name": "h"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "P.degree < Q.degree",
+    "rel": "lt",
+    "poly": "(x0) - (x1)",
+    "name": "h",
+    "expr": "((x2).degree(X)) - ((x3).degree(X))"}],
+  "goal":
+  {"text":
+   "Tendsto (fun n => Polynomial.eval (↑n) P / Polynomial.eval (↑n) Q) atTop (𝓝 0)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "WithBot ℕ",
+  "atoms": ["P.degree", "Q.degree", "P", "Q"],
+  "atom_types": ["other", "other", "other", "other"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values":
+   ["(Polynomial.X : Polynomial ℝ)",
+    "(Polynomial.X ^ 2 + 1 : Polynomial ℝ)",
+    "(by compute_degree!)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(1 : Polynomial ℝ)",
+    "(Polynomial.X : Polynomial ℝ)",
+    "(by compute_degree!)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values":
+   ["(Polynomial.X ^ 2 - 3 : Polynomial ℝ)",
+    "(Polynomial.X ^ 3 : Polynomial ℝ)",
+    "(by compute_degree!)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000000000000000000000000000000000000000000] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

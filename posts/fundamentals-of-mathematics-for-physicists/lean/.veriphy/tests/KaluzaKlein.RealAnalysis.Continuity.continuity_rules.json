@@ -1,0 +1,70 @@
+{"target": "KaluzaKlein.RealAnalysis.Continuity.continuity_rules",
+ "statement":
+ "∀ (f g : ℝ → ℝ),\n  Continuous f →\n    Continuous g →\n      (Continuous fun x => f x + g x) ∧\n        (Continuous fun x => f x * g x) ∧ Continuous (g ∘ f) ∧ ((∀ (x : ℝ), g x ≠ 0) → Continuous fun x => f x / g x)",
+ "seed": 0,
+ "script_hash": "2949023668450492313",
+ "script":
+ "# name: ra-continuity-rules-test\n# technique: test a claim no recipe certifies, at instances the kernel checks by computation\n# goal: sage_test KaluzaKlein.RealAnalysis.Continuity.continuity_rules file \"ra-continuity-rules-test.sage\"\n# description: the rules at explicit continuous functions (sin, exp, x², cos)\nSEED = 0  # the instances are listed, no sampling\nPROOF = 'refine ⟨by fun_prop, by fun_prop, by fun_prop, fun h => by fun_prop⟩'\nCASES = [(['Real.sin', 'Real.exp', 'Real.continuous_sin', 'Real.continuous_exp'], False, None), (['(fun x : ℝ => x ^ 2)', 'Real.cos', '(continuous_pow 2)', 'Real.continuous_cos'], False, None), (['(fun _ : ℝ => (0 : ℝ))', '(fun _ : ℝ => (1 : ℝ))', 'continuous_const', 'continuous_const'], True, None)]\ninstances = [kernel_instance(*values, proof=(p if p is not None else PROOF), edge=edge) for values, edge, p in CASES]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal":
+  [{"type": "ℝ → ℝ", "name": "f"},
+   {"type": "ℝ → ℝ", "name": "g"},
+   {"type": "Continuous f", "name": "hf"},
+   {"type": "Continuous g", "name": "hg"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "Continuous f", "name": "hf"},
+   {"text": "Continuous g", "name": "hg"}],
+  "goal":
+  {"text":
+   "(Continuous fun x => f x + g x) ∧\n  (Continuous fun x => f x * g x) ∧ Continuous (g ∘ f) ∧ ((∀ (x : ℝ), g x ≠ 0) → Continuous fun x => f x / g x)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "kernel-test",
+ "instances":
+ [{"values":
+   ["Real.sin", "Real.exp", "Real.continuous_sin", "Real.continuous_exp"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun x : ℝ => x ^ 2)",
+    "Real.cos",
+    "(continuous_pow 2)",
+    "Real.continuous_cos"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["(fun _ : ℝ => (0 : ℝ))",
+    "(fun _ : ℝ => (1 : ℝ))",
+    "continuous_const",
+    "continuous_const"],
+   "reason": "",
+   "kind": "kernel",
+   "evaluation": "",
+   "edge": true,
+   "accepted": true}]}

@@ -1,4 +1,6 @@
 ---
+nocite: |
+  @krasnov2020formulations
 pagetitle: "General relativity"
 ---
 
@@ -31,6 +33,8 @@ source is @carroll1997, who uses the signature $(-, +, +, +)$; we convert to our
 @sec-conventions-indices, which flips the signs of $R$ and of the gravitational Lagrangian but not those of
 $\Gamma$, $R^\rho{}_{\sigma\mu\nu}$ and $R_{\mu\nu}$, and we note his different normalisation of the action where it
 matters.
+
+For more on this topic, see @emam2021covariant [Ch. 5-7], @gray2019student [Ch. 1, Ch. 4] and @needham2021visual [Ch. 30].
 
 ### Spacetime and the equivalence principle
 
@@ -876,6 +880,8 @@ stress tensor and the cosmological constant, and checks the equations on two exp
 the Einstein tensor vanishes identically, and de Sitter space, the simplest curved solution, computed in full in
 three dimensions and, in an exercise, in four. Both return in Part VI, where internal spheres and de Sitter or anti-de
 Sitter spacetimes are the vacua of supergravity compactifications.
+
+For more on this topic, see @nastase2019classical [Ch. 40].
 
 ### The variation of the action
 
@@ -1986,6 +1992,8 @@ Schwarzschild metric; it contains a horizon, describes black holes, and its geod
 Mercury and the bending of light. A homogeneous and isotropic universe is described by the FLRW metric, whose single
 function $a(t)$ obeys the Friedmann equations. In this section we keep $G$ explicit in the definitions and set $G = c
 = 1$ in computations, writing $m = GM$ for the mass in units of length.
+
+For more on this topic, see @boskoff2024journey [Ch. 9-10], @buchbinder2021introduction [Ch. 12] and @godinho2014introduction [Ch. 6].
 
 ### The Schwarzschild solution
 

@@ -1,4 +1,6 @@
 ---
+nocite: |
+  @blennow2022relativity
 pagetitle: "Classical field theory"
 ---
 
@@ -19,6 +21,8 @@ Weyl representation, the spinor representation of the Lorentz group, with its fa
 $2\pi$, and the Dirac equation. Throughout, the signature is $(+, -, -, -)$, so that $\Box = \partial_t^2 - \nabla^2$
 and $(\gamma^0)^2 = 1$. Every statement is followed by three examples and three exercises with hidden solutions, and
 many exercises are solved in Sage.
+
+For more on this topic, see @emam2021covariant [Sec. 9.4].
 
 ### Scalar fields {#sec-scalar-fields}
 
@@ -2320,6 +2324,8 @@ signature is $(+, -, -, -)$ throughout: $\mathcal{L} = \tfrac12\partial_\mu\phi\
 Klein-Gordon equation is $(\Box + m^2)\phi = 0$ with $\Box = \partial_t^2 - \nabla^2$, and the energy density
 $T_{00}$ is non-negative. Every statement is followed by three examples and three exercises with hidden solutions,
 many of them solved in Sage.
+
+For more on this topic, see @buchbinder2021introduction [Ch. 2, Ch. 3-4], @emam2021covariant [Ch. 8] and @gourgoulhon2013special [Ch. 19].
 
 ### Actions and Euler-Lagrange equations {#sec-actions}
 

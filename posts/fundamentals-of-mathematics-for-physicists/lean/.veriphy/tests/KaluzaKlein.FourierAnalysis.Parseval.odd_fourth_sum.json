@@ -1,0 +1,57 @@
+{"target": "KaluzaKlein.FourierAnalysis.Parseval.odd_fourth_sum",
+ "statement":
+ "∀ (a : ℝ), HasSum (fun k => a / (2 * ↑k + 1) ^ 4) (a * π ^ 4 / 96)",
+ "seed": 0,
+ "script_hash": "17936041520916791231",
+ "script":
+ "# name: fa-odd-fourth-sum-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.Parseval.odd_fourth_sum file \"fa-odd-fourth-sum-test.sage\"\n# description: no recipe certifies the general statement; instances with an edge case first\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\ny = var('y'); k = var('k'); i = var('i'); n = var('n'); z = var('z'); v = var('v')\ninstances = []\nCASES = [(['0'], True, {'a': '0'}), (['1'], False, {'a': '1'}), (['16/pi^2'], False, {'a': '16/pi**2'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('sum(a/(2*k + 1)**4, k, 0, oo)', scope))\n    R = side(eval('a*pi**4/96', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": [],
+  "universal": [{"type": "ℝ", "name": "a"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text": "HasSum (fun k => a / (2 * ↑k + 1) ^ 4) (a * π ^ 4 / 96)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "",
+  "atoms": [],
+  "atom_types": []},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.014678031604192054546253465507344908833 .. 1.014678031604192054546253465507344908875] == [1.014678031604192054546253465507344908833 .. 1.014678031604192054546253465507344908875] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["16/pi^2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.644934066848226436472415166646025189203 .. 1.644934066848226436472415166646025189239] == [1.644934066848226436472415166646025189203 .. 1.644934066848226436472415166646025189239] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

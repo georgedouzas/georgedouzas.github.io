@@ -1,0 +1,39 @@
+# name: fa-heat-gaussian-solution-test
+# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic
+# goal: sage_test KaluzaKlein.FourierAnalysis.ConvolutionProduct.heat_gaussian_solution file "fa-heat-gaussian-solution-test.sage"
+# description: no recipe certifies the general statement; instances with an edge case first
+SEED = 0
+RI = RealIntervalField(128)
+CI = ComplexIntervalField(128)
+def num(e):
+    try:
+        return RI(e)
+    except (TypeError, ValueError):
+        pass
+    e = SR(e)
+    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):
+        try:
+            return RI(f(e))
+        except (TypeError, ValueError):
+            pass
+    try:
+        return CI(e)
+    except (TypeError, ValueError):
+        return RI(e.n(prec=256))
+def side(e):
+    v = num(e)
+    return v
+y = var('y'); k_ = var('k_'); x_ = var('x_'); assume(y, 'real')
+s_ = var('s_'); z_ = var('z_')
+instances = []
+CASES = [(['1', '0', '0', 'one_pos', 'le_refl 0'], True, {'kap': '1', 't': '0', 'x': '0'}), (['2', '1/2', '1', '_', '_'], False, {'kap': '2', 't': '1/2', 'x': '1'}), (['1/3', '3', '-2', '_', '_'], False, {'kap': '1/3', 't': '3', 'x': '-2'})]
+for values, edge, env in CASES:
+    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}
+    scope = dict(globals()); scope.update(env)
+    L = side(eval('abs(diff(exp(-x**2/(2*(1 + 2*kap*s_)))/sqrt(1 + 2*kap*s_), s_).subs(s_=t) - kap*diff(exp(-z_**2/(2*(1 + 2*kap*t)))/sqrt(1 + 2*kap*t), z_, 2).subs(z_=x)) + abs(exp(-x**2/2) - exp(-x**2/2))', scope))
+    R = side(eval('0', scope))
+    if L.parent() is CI or R.parent() is CI:
+        d = CI(L) - CI(R)
+        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)
+    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))
+    print(values, L, R)

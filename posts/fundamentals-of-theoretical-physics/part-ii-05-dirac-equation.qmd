@@ -39,6 +39,8 @@ Hamiltonian form, finds the algebra its coefficients must satisfy and the smalle
 that it keeps its form under Lorentz transformations when the wave function transforms as a spinor, and builds from it
 the bilinear covariants and the conserved current, following @zhelnorovich2019spinors [Secs. 3.2 and 5.1-5.2].
 
+For more on this topic, see @aitchison2024gauge [Ch. 4], @galitski2013exploring [Ch. 15] and @nastase2023quantum [Ch. 54].
+
 ### Derivation
 
 A relativistic particle has energy $E = \sqrt{\vec p^{\,2} + m^2}$, and quantum mechanics replaces $E$ by $i\partial_t$
@@ -4526,6 +4528,8 @@ kinds of reduced fermion, the Weyl fermion of one chirality and the Majorana fer
 @pal2011majorana and @zhelnorovich2019spinors [Sec. 5.7]. The algebra of the charge-conjugation matrix in every dimension is in
 @sec-clifford-algebras; here the dimension is four and the physics is the subject.
 
+For more on this topic, see @pal2015introductory [Ch. 6, Ch. 7] and @shankar2017quantum [Ch. 9].
+
 ### Charge conjugation
 
 The Dirac equation for a particle of charge $q$ and the equation for charge $-q$ are related by complex conjugation and
@@ -5763,6 +5767,8 @@ together with the trembling motion that the interference of the two energy signs
 field. The sources are @calogeracos1999klein for the paradox and its history, @cini2023quantum [Chap. 13] for the
 non-relativistic step, and @costella1995foldy for the trembling motion and its disappearance in the Foldy-Wouthuysen
 representation.
+
+For more on this topic, see @aitchison2024gauge [Ch. 3].
 
 ### The Klein paradox
 

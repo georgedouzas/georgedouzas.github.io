@@ -1,0 +1,88 @@
+{"target": "KaluzaKlein.RealAnalysis.Integral.gaussian_linear",
+ "statement":
+ "∀ (a b : ℝ), 0 < a → ∫ (x : ℝ), rexp (-a * x ^ 2 + b * x) = √(π / a) * rexp (b ^ 2 / (4 * a))",
+ "seed": 0,
+ "script_hash": "15182633048545688379",
+ "script":
+ "# name: ra-gaussian-linear-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Integral.gaussian_linear file \"ra-gaussian-linear-test.sage\"\n# description: Sage's ∫ e^(-ax² + bx) dx = √(π/a) e^(b²/4a)\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx = var('x')\ninstances = [O([str(a), str(b), '(by norm_num)'], integrate(exp(-a * x ** 2 + b * x), x, -oo, oo), sqrt(pi / a) * exp(SR(b) ** 2 / (4 * a)), edge=(b == 0))\n             for a, b in [(1, 0), (1, 1), (2, -3), (QQ(1) / 2, 2)]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4"],
+  "universal":
+  [{"type": "ℝ", "name": "a"},
+   {"type": "ℝ", "name": "b"},
+   {"type": "0 < a", "name": "ha"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < a",
+    "rel": "lt",
+    "poly": "(0) - (x3)",
+    "name": "ha",
+    "expr": "(0) - (x3)"}],
+  "goal":
+  {"text":
+   "∫ (x : ℝ), rexp (-a * x ^ 2 + b * x) = √(π / a) * rexp (b ^ 2 / (4 * a))",
+   "rhs_poly": "(x1 * x2)",
+   "rhs": "√(π / a) * rexp (b ^ 2 / (4 * a))",
+   "rel": "eq",
+   "poly": "(x0) - ((x1 * x2))",
+   "lhs_poly": "x0",
+   "lhs": "∫ (x : ℝ), rexp (-a * x ^ 2 + b * x)",
+   "kind": "rel",
+   "expr": "(x0) - ((sqrt((pi / x3)) * exp(((x4)^(2) / (4 * x3)))))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain":
+  [{"text": "0 ≤ π / a", "kind": "nonneg", "expr": "(pi / x3)"},
+   {"text": "a ≠ 0", "kind": "ne", "expr": "x3", "discharged_by": "ha"},
+   {"text": "4 * a ≠ 0", "kind": "ne", "expr": "(4 * x3)"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms":
+  ["∫ (x : ℝ), rexp (-a * x ^ 2 + b * x)",
+   "√(π / a)",
+   "rexp (b ^ 2 / (4 * a))",
+   "a",
+   "b"],
+  "atom_types": ["ℝ", "ℝ", "ℝ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "0", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.772453850905516027298167483341145182797549456122387128213807789852911284591007 .. 1.772453850905516027298167483341145182797549456122387128213807789852911284591060] == [1.772453850905516027298167483341145182797549456122387128213807789852911284591007 .. 1.772453850905516027298167483341145182797549456122387128213807789852911284591060] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1", "1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[2.275875794468747235519605763832549270803981740501494417679363322780803581327340 .. 2.275875794468747235519605763832549270803981740501494417679363322780803581327480] == [2.275875794468747235519605763832549270803981740501494417679363322780803581327340 .. 2.275875794468747235519605763832549270803981740501494417679363322780803581327480] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["2", "-3", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[3.860479322746370903180452437420973988286005034512859253733327681514510079724013 .. 3.860479322746370903180452437420973988286005034512859253733327681514510079724360] == [3.860479322746370903180452437420973988286005034512859253733327681514510079724083 .. 3.860479322746370903180452437420973988286005034512859253733327681514510079724360] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1/2", "2", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[18.52161694041420713558382915580884144085525487605989125246843626240146252691345 .. 18.52161694041420713558382915580884144085525487605989125246843626240146252691539] == [18.52161694041420713558382915580884144085525487605989125246843626240146252691345 .. 18.52161694041420713558382915580884144085525487605989125246843626240146252691539] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

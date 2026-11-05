@@ -1,0 +1,63 @@
+{"target": "KaluzaKlein.RealAnalysis.Series.zeta_even",
+ "statement":
+ "∀ (k : ℕ),\n  1 ≤ k →\n    HasSum (fun n => 1 / ↑n ^ (2 * k))\n      ((-1) ^ (k + 1) * 2 ^ (2 * k - 1) * π ^ (2 * k) * ↑(bernoulli (2 * k)) / ↑(2 * k)!)",
+ "seed": 0,
+ "script_hash": "8926465450278616662",
+ "script":
+ "# name: ra-zeta-even-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.Series.zeta_even file \"ra-zeta-even-test.sage\"\n# description: Sage's ζ(2k) (π²/6, π⁴/90, π⁶/945) against Euler's formula with B_2k (B_6 = 1/42)\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\ninstances = []\nfor kk in [1, 2, 3]:\n    formula = (-1) ** (kk + 1) * 2 ** (2 * kk - 1) * pi ** (2 * kk) * bernoulli(2 * kk) / factorial(2 * kk)\n    instances.append(O([str(kk), '(by norm_num)'], zeta(2 * kk), formula, edge=(kk == 1)))\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal": [{"type": "ℕ", "name": "k"}, {"type": "1 ≤ k", "name": "hk"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "1 ≤ k",
+    "rel": "le",
+    "poly": "(1) - (x0)",
+    "name": "hk",
+    "expr": "(1) - (x0)"}],
+  "goal":
+  {"text":
+   "HasSum (fun n => 1 / ↑n ^ (2 * k)) ((-1) ^ (k + 1) * 2 ^ (2 * k - 1) * π ^ (2 * k) * ↑(bernoulli (2 * k)) / ↑(2 * k)!)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℕ",
+  "atoms": ["k"],
+  "atom_types": ["ℕ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.644934066848226436472415166646025189218949901206798437735558229370007470403150 .. 1.644934066848226436472415166646025189218949901206798437735558229370007470403255] == [1.644934066848226436472415166646025189218949901206798437735558229370007470403150 .. 1.644934066848226436472415166646025189218949901206798437735558229370007470403255] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.082323233711138191516003696541167902774750951918726907682976215444120616186917 .. 1.082323233711138191516003696541167902774750951918726907682976215444120616187039] == [1.082323233711138191516003696541167902774750951918726907682976215444120616186917 .. 1.082323233711138191516003696541167902774750951918726907682976215444120616187039] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["3", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.017343061984449139714517929790920527901817490032853561842408664004332182901875 .. 1.017343061984449139714517929790920527901817490032853561842408664004332182902066] == [1.017343061984449139714517929790920527901817490032853561842408664004332182901875 .. 1.017343061984449139714517929790920527901817490032853561842408664004332182902066] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

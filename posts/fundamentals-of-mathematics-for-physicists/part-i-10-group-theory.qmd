@@ -24,6 +24,8 @@ these groups. This section defines groups and subgroups and works every notion o
 rotation groups, so that the Lie groups of @sec-lie-groups and the coset spaces of @sec-coset-spaces arrive with
 their algebra already familiar.
 
+For more on this topic, see @mukunda2022continuous [Ch. 2].
+
 ### Groups
 
 The transformations of an object that preserve its shape can be performed one after the other, undone, and include
@@ -852,6 +854,8 @@ of @sec-coset-spaces, including the sphere $SO(3)/SO(2)$, are exactly these sets
 section defines cosets, proves Lagrange's theorem, and introduces quotient groups, group actions, orbits and
 stabilisers.
 
+For more on this topic, see @chirivi2020selected [Theory Ch. 4].
+
 ### Cosets
 
 Multiplying every element of a subgroup by a fixed element $g$ produces a translated copy of the subgroup. These
@@ -1667,6 +1671,8 @@ image a subgroup, and the quotient by the kernel is the image. The double cover 
 permutation and reduction modulo $2$ are the examples this section works, and the correspondence between
 representations of a group and of its Lie algebra in later chapters is a homomorphism too.
 
+For more on this topic, see @chirivi2020selected [Theory Ch. 1].
+
 ### Homomorphisms and kernels
 
 Two groups can be compared by a map that sends products to products. Such a map transports the multiplication table
@@ -2468,6 +2474,8 @@ A representation makes a group act by matrices, and almost every use of symmetry
 fields and quantum states transform in representations of a symmetry group, and selection rules are statements about
 which representations of one group can be matched with representations of another. Schur's lemma is the tool that
 decides such matching, and this section defines representations and proves it.
+
+For more on this topic, see @keskivakkuri2022mathematical [Ch. 3] and @mukunda2022continuous [Ch. 1].
 
 ### Representations
 

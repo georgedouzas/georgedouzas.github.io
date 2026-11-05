@@ -1,0 +1,71 @@
+{"target": "KaluzaKlein.FourierAnalysis.MatrixCoefficients.WignerExponential",
+ "statement":
+ "∀ (θ : ℝ),\n  NormedSpace.exp (θ • !![0, -(√2 / 2), 0; √2 / 2, 0, -(√2 / 2); 0, √2 / 2, 0]) =\n    !![(1 + cos θ) / 2, -(√2 / 2) * sin θ, (1 - cos θ) / 2;\n      √2 / 2 * sin θ, cos θ, -(√2 / 2) * sin θ;\n      (1 - cos θ) / 2, √2 / 2 * sin θ, (1 + cos θ) / 2]",
+ "seed": 0,
+ "script_hash": "10572097012944902288",
+ "script":
+ "# name: fa-wigner-exponential-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates in interval arithmetic\n# goal: sage_test KaluzaKlein.FourierAnalysis.MatrixCoefficients.WignerExponential file \"fa-wigner-exponential-test.sage\"\n# description: Sage sums the exponential series of θA to order 90 in 128-bit intervals (with its tail bound) and compares with d¹(θ) entrywise\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\ndef num(e):\n    try:\n        return RI(e)\n    except (TypeError, ValueError):\n        pass\n    e = SR(e)\n    for f in (lambda t: t, lambda t: t.simplify_full(), lambda t: t.canonicalize_radical()):\n        try:\n            return RI(f(e))\n        except (TypeError, ValueError):\n            pass\n    try:\n        return CI(e)\n    except (TypeError, ValueError):\n        return RI(e.n(prec=256))\ndef side(e):\n    v = num(e)\n    return v\nA = matrix(SR, [[0, -sqrt(2)/2, 0], [sqrt(2)/2, 0, -sqrt(2)/2], [0, sqrt(2)/2, 0]])\nd1 = lambda t: matrix(SR, [[(1 + cos(t))/2, -(sqrt(2)/2)*sin(t), (1 - cos(t))/2], [sqrt(2)/2*sin(t), cos(t), -(sqrt(2)/2)*sin(t)], [(1 - cos(t))/2, sqrt(2)/2*sin(t), (1 + cos(t))/2]])\ndef diffnorm(t):\n    At = matrix(RI, 3, 3, [RI(SR(t)*x) for x in A.list()])\n    E = identity_matrix(RI, 3)\n    term = identity_matrix(RI, 3)\n    for k in range(1, 90):\n        term = term*At/k\n        E += term\n    nrm = RI(abs(SR(t)))*RI(sqrt(2))\n    tail = nrm**90/factorial(90)*nrm.exp()\n    D = d1(t)\n    return sum(abs(E[i, j] - RI(D[i, j])) for i in range(3) for j in range(3)) + RI(-tail.upper(), tail.upper())\ninstances = []\nCASES = [(['0'], True, {'t': '0'}), (['1'], False, {'t': '1'}), (['5/2'], False, {'t': '5/2'})]\nfor values, edge, env in CASES:\n    env = {k: (eval(v, globals()) if isinstance(v, str) and v.startswith('lambda') else SR(v)) for k, v in env.items()}\n    scope = dict(globals()); scope.update(env)\n    L = side(eval('diffnorm(t)', scope))\n    R = side(eval('0', scope))\n    if L.parent() is CI or R.parent() is CI:\n        d = CI(L) - CI(R)\n        L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2"],
+  "universal": [{"type": "ℝ", "name": "θ"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps": [],
+  "goal":
+  {"text":
+   "NormedSpace.exp (θ • !![0, -(√2 / 2), 0; √2 / 2, 0, -(√2 / 2); 0, √2 / 2, 0]) =\n  !![(1 + cos θ) / 2, -(√2 / 2) * sin θ, (1 - cos θ) / 2;\n    √2 / 2 * sin θ, cos θ, -(√2 / 2) * sin θ;\n    (1 - cos θ) / 2, √2 / 2 * sin θ, (1 + cos θ) / 2]",
+   "rhs_poly": "x1",
+   "rhs":
+   "!![(1 + cos θ) / 2, -(√2 / 2) * sin θ, (1 - cos θ) / 2;\n  √2 / 2 * sin θ, cos θ, -(√2 / 2) * sin θ;\n  (1 - cos θ) / 2, √2 / 2 * sin θ, (1 + cos θ) / 2]",
+   "rel": "eq",
+   "poly": "(x0) - (x1)",
+   "lhs_poly": "x0",
+   "lhs":
+   "NormedSpace.exp (θ • !![0, -(√2 / 2), 0; √2 / 2, 0, -(√2 / 2); 0, √2 / 2, 0])",
+   "kind": "rel",
+   "expr":
+   "(x0) - (matrix(SR, [[((1 + cos(x2)) / 2), ((-(sqrt(2) / 2)) * sin(x2)), ((1 - cos(x2)) / 2)], [((sqrt(2) / 2) * sin(x2)), cos(x2), ((-(sqrt(2) / 2)) * sin(x2))], [((1 - cos(x2)) / 2), ((sqrt(2) / 2) * sin(x2)), ((1 + cos(x2)) / 2)]]))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [{"text": "0 ≤ 2", "kind": "nonneg", "expr": "2"}],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "Matrix (Fin 3) (Fin 3) ℝ",
+  "atoms":
+  ["NormedSpace.exp (θ • !![0, -(√2 / 2), 0; √2 / 2, 0, -(√2 / 2); 0, √2 / 2, 0])",
+   "!![(1 + cos θ) / 2, -(√2 / 2) * sin θ, (1 - cos θ) / 2;\n  √2 / 2 * sin θ, cos θ, -(√2 / 2) * sin θ;\n  (1 - cos θ) / 2, √2 / 2 * sin θ, (1 + cos θ) / 2]",
+   "θ"],
+  "atom_types": ["matrix", "matrix", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-9.740901712132358343663790835146895499867e-125 .. 5.245643540544458004310486797354271337288e-37] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["5/2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[-5.302463177522284521912166989121080804305e-88 .. 8.529680883154223729698144498218920199716e-37] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

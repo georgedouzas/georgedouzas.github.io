@@ -1,0 +1,73 @@
+{"target": "KaluzaKlein.FourierAnalysis.TheTransform.ft_deriv",
+ "statement":
+ "∀ (f : ℝ → ℂ),\n  Integrable f volume → Differentiable ℝ f → Integrable (deriv f) volume → ∀ (k : ℝ), ft (deriv f) k = I * ↑k * ft f k",
+ "seed": 0,
+ "script_hash": "4354697459791030537",
+ "script":
+ "# name: fa-ft-deriv-test\n# technique: test fallback (test_fallback recipe): the claim at instances Sage evaluates with rigorous ball integration\n# goal: sage_test KaluzaKlein.FourierAnalysis.TheTransform.ft_deriv file \"fa-ft-deriv-test.sage\"\n# description: no recipe certifies the derivative rule for every integrable differentiable f; at f = e^{-x²} and\n#   f = x e^{-x²} Sage integrates f'(x) e^{-ikx} and i k f(x) e^{-ikx} over [-10, 10] with complex balls (Arb) and widens\n#   both by the tail bound e^{-90}; the two enclosures must overlap\nSEED = 0\nRI = RealIntervalField(128)\nCI = ComplexIntervalField(128)\nCB = ComplexBallField(128)\ndef enclose(g, k):\n    val = CB.integral(lambda x, _: g(x) * (-CB(I) * CB(k) * x).exp(), -10, 10)\n    t = RI(exp(-90))\n    return CI(RI(val.real().lower() - t.upper(), val.real().upper() + t.upper()),\n              RI(val.imag().lower() - t.upper(), val.imag().upper() + t.upper()))\ngauss = lambda x: (-x * x).exp()\ngauss_d = lambda x: -2 * x * (-x * x).exp()\nxgauss = lambda x: x * (-x * x).exp()\nxgauss_d = lambda x: (1 - 2 * x * x) * (-x * x).exp()\ninstances = []\nCASES = [(['fun x => Complex.exp (-(x : ℂ) ^ 2)', '_', '_', '_', '0'], True, (gauss, gauss_d, 0)),\n         (['fun x => Complex.exp (-(x : ℂ) ^ 2)', '_', '_', '_', '1'], False, (gauss, gauss_d, 1)),\n         (['fun x => (x : ℂ) * Complex.exp (-(x : ℂ) ^ 2)', '_', '_', '_', '2'], False, (xgauss, xgauss_d, 2))]\nfor values, edge, (f, fp, k) in CASES:\n    L = enclose(fp, k)\n    R = CI(I * k) * enclose(f, k)\n    d = CI(L) - CI(R)\n    L, R = RI(d.real().abs() + d.imag().abs()), RI(0)\n    instances.append(oracle_instance(*values, lhs=L, rhs=R, relation='==', edge=edge))\n    print(values, L, R)\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3", "x4"],
+  "universal":
+  [{"type": "ℝ → ℂ", "name": "f"},
+   {"type": "Integrable f volume", "name": "hf"},
+   {"type": "Differentiable ℝ f", "name": "hd"},
+   {"type": "Integrable (deriv f) volume", "name": "hf'"},
+   {"type": "ℝ", "name": "k"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "Integrable f volume", "name": "hf"},
+   {"text": "Differentiable ℝ f", "name": "hd"},
+   {"text": "Integrable (deriv f) volume", "name": "hf'"}],
+  "goal":
+  {"text": "ft (deriv f) k = I * ↑k * ft f k",
+   "rhs_poly": "((x1 * x2) * x3)",
+   "rhs": "I * ↑k * ft f k",
+   "rel": "eq",
+   "poly": "(x0) - (((x1 * x2) * x3))",
+   "lhs_poly": "x0",
+   "lhs": "ft (deriv f) k",
+   "kind": "rel",
+   "expr": "(x0) - (((I * x4) * x3))"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms": ["ft (deriv f) k", "I", "↑k", "ft f k", "k"],
+  "atom_types": ["ℂ", "ℂ", "ℂ", "ℂ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["fun x => Complex.exp (-(x : ℂ) ^ 2)", "_", "_", "_", "0"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 4.313760073102886751200922252643061875288e-37] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["fun x => Complex.exp (-(x : ℂ) ^ 2)", "_", "_", "_", "1"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.185835931472759530721951290679239923531e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values":
+   ["fun x => (x : ℂ) * Complex.exp (-(x : ℂ) ^ 2)", "_", "_", "_", "2"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.207440430620835565912786248625420163402e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}

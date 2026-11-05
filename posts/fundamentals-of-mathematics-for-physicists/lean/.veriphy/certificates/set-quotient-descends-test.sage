@@ -1,0 +1,11 @@
+# name: set-quotient-descends-test
+# technique: test fallback (test_fallback recipe): instances the kernel checks, chosen by hand
+# goal: sage_test KaluzaKlein.Sets.Quotients.quotient_descends
+# description: the claim at the instances below, each proved independently of the claim
+SEED = 0
+CASES = [
+    (['ℤ', 'ℤ', '⟨fun a b => (3 : ℤ) ∣ a - b, KaluzaKlein.Sets.Equivalence.modEq_equivalence 3⟩', 'fun a => a % 3', "(fun a b h => by have h' : (3 : ℤ) ∣ a - b := h; show a % 3 = b % 3; omega)"], False, "set_option maxHeartbeats 2000000 in\nhave key : ∀ {X Y : Type} (s : Setoid X) (f : X → Y) (hf : ∀ a b, s a b → f a = f b), Function.Surjective (Quotient.mk s) ∧ (fun x => Quotient.lift f hf (Quotient.mk s x)) = f := by\n  intro X Y s f hf\n  exact (⟨Quotient.mk_surjective, rfl⟩)\nexact @key (ℤ) (ℤ) (⟨fun a b => (3 : ℤ) ∣ a - b, KaluzaKlein.Sets.Equivalence.modEq_equivalence 3⟩) (fun a => a % 3) ((fun a b h => by have h' : (3 : ℤ) ∣ a - b := h; show a % 3 = b % 3; omega))"),
+    (['Unit', 'Unit', '⊥', 'id', '(fun a b _ => rfl)'], True, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ {X Y : Type} (s : Setoid X) (f : X → Y) (hf : ∀ a b, s a b → f a = f b), Function.Surjective (Quotient.mk s) ∧ (fun x => Quotient.lift f hf (Quotient.mk s x)) = f := by\n  intro X Y s f hf\n  exact (⟨Quotient.mk_surjective, rfl⟩)\nexact @key (Unit) (Unit) (⊥) (id) ((fun a b _ => rfl))'),
+    (['ℝ', 'ℝ', '⟨fun a b : ℝ => ∃ k : ℤ, b - a = k * (2 * Real.pi), KaluzaKlein.Sets.Equivalence.angle_equivalence _⟩', 'Real.cos', '(fun a b ⟨k, hk⟩ => by rw [show b = a + k * (2 * Real.pi) by linarith, Real.cos_add_int_mul_two_pi])'], False, 'set_option maxHeartbeats 2000000 in\nhave key : ∀ {X Y : Type} (s : Setoid X) (f : X → Y) (hf : ∀ a b, s a b → f a = f b), Function.Surjective (Quotient.mk s) ∧ (fun x => Quotient.lift f hf (Quotient.mk s x)) = f := by\n  intro X Y s f hf\n  exact (⟨Quotient.mk_surjective, rfl⟩)\nexact @key (ℝ) (ℝ) (⟨fun a b : ℝ => ∃ k : ℤ, b - a = k * (2 * Real.pi), KaluzaKlein.Sets.Equivalence.angle_equivalence _⟩) (Real.cos) ((fun a b ⟨k, hk⟩ => by rw [show b = a + k * (2 * Real.pi) by linarith, Real.cos_add_int_mul_two_pi]))'),
+]
+instances = [kernel_instance(*values, proof=proof, edge=edge) for values, edge, proof in CASES]

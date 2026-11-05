@@ -1,0 +1,63 @@
+{"target": "KaluzaKlein.RealAnalysis.MultipleIntegrals.gaussian_sq",
+ "statement":
+ "∀ (b : ℝ), 0 < b → (∫ (x : ℝ), rexp (-b * x ^ 2)) ^ 2 = π / b ∧ ∫ (x : ℝ), rexp (-b * x ^ 2) = √(π / b)",
+ "seed": 0,
+ "script_hash": "14733225771099998319",
+ "script":
+ "# name: ra-gaussian-sq-test\n# technique: test a claim no recipe certifies, at instances Sage evaluates exactly or by intervals\n# goal: sage_test KaluzaKlein.RealAnalysis.MultipleIntegrals.gaussian_sq file \"ra-gaussian-sq-test.sage\"\n# description: Sage's (∫ e^(-bx²))² = π/b\nSEED = 0  # the instances are listed, no sampling\nR = RealIntervalField(128)\ndef B(b):\n    return QQ(1 if bool(b) else 0)\nRI = RealIntervalField(256)\ndef O(values, lhs, rhs, rel='==', edge=False):\n    # symbolic values (π, e, logs, limits Sage computed) are compared by 256-bit intervals; rationals exactly\n    if any(hasattr(v, 'parent') and v.parent() is SR for v in (lhs, rhs)):\n        lhs, rhs = RI(lhs), RI(rhs)\n    return oracle_instance(*values, lhs=lhs, rhs=rhs, relation=rel, edge=edge)\nx = var('x')\ninstances = [O([str(b), '(by norm_num)'], integrate(exp(-b * x ** 2), x, -oo, oo) ** 2, pi / b, edge=bool(b == 1)) for b in [1, 2, QQ(1) / 3]]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0"],
+  "universal": [{"type": "ℝ", "name": "b"}, {"type": "0 < b", "name": "hb"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "0 < b",
+    "rel": "lt",
+    "poly": "(0) - (x0)",
+    "name": "hb",
+    "expr": "(0) - (x0)"}],
+  "goal":
+  {"text":
+   "(∫ (x : ℝ), rexp (-b * x ^ 2)) ^ 2 = π / b ∧ ∫ (x : ℝ), rexp (-b * x ^ 2) = √(π / b)",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℝ",
+  "atoms": ["b"],
+  "atom_types": ["ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[3.141592653589793238462643383279502884197169399375105820974944592307816406286198 .. 3.141592653589793238462643383279502884197169399375105820974944592307816406286233] == [3.141592653589793238462643383279502884197169399375105820974944592307816406286198 .. 3.141592653589793238462643383279502884197169399375105820974944592307816406286233] at 256 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["2", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[1.570796326794896619231321691639751442098584699687552910487472296153908203143099 .. 1.570796326794896619231321691639751442098584699687552910487472296153908203143117] == [1.570796326794896619231321691639751442098584699687552910487472296153908203143099 .. 1.570796326794896619231321691639751442098584699687552910487472296153908203143117] at 256 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["1/3", "(by norm_num)"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[9.424777960769379715387930149838508652591508198125317462924833776923449218858524 .. 9.424777960769379715387930149838508652591508198125317462924833776923449218858802] == [9.424777960769379715387930149838508652591508198125317462924833776923449218858524 .. 9.424777960769379715387930149838508652591508198125317462924833776923449218858802] at 256 bits",
+   "edge": false,
+   "accepted": true}]}

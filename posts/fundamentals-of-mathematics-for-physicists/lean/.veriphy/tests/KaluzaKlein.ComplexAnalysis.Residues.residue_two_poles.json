@@ -1,0 +1,71 @@
+{"target": "KaluzaKlein.ComplexAnalysis.Residues.residue_two_poles",
+ "statement":
+ "∀ (a b : ℂ),\n  a ≠ b →\n    ∀ (ρ : ℝ),\n      0 < ρ →\n        ρ < ‖a - b‖ →\n          residue (fun z => 1 / ((z - a) * (z - b))) a ρ = 1 / (a - b) ∧\n            Tendsto (fun z => (z - a) * (1 / ((z - a) * (z - b)))) (𝓝[≠] a) (𝓝 (1 / (a - b))) ∧\n              residue (fun z => 1 / ((z - a) * (z - b))) b ρ = 1 / (b - a) ∧\n                Tendsto (fun z => (z - b) * (1 / ((z - a) * (z - b)))) (𝓝[≠] b) (𝓝 (1 / (b - a)))",
+ "seed": 0,
+ "script_hash": "4800088913427554757",
+ "script":
+ "# name: ca-res-residue-two-poles-test\n# technique: test fallback (instances; oracle instances are evaluated by Sage exactly or in Arb's\n#   rigorous ball arithmetic, kernel instances are checked by Lean)\n# goal: KaluzaKlein.ComplexAnalysis.Residues.residue_two_poles: the residues 1/(a - b), 1/(b - a) of 1/((z - a)(z - b))\n# description: Arb's rigorous small circle integrals around a and b compared with 1/(a - b) and 1/(b - a)\nSEED = 0\ndef V(*named, **kw):\n    \"\"\"The binders' values as Lean text, by binder name ('_' for an oracle instance's hypotheses).\"\"\"\n    for d in named:\n        kw.update(d)\n    return [kw.get(name, '_') for name, _ in universal]\ndef X(v):\n    \"\"\"An exact symbolic value, radicals canonicalised (Sage's exact comparison then succeeds).\"\"\"\n    return SR(v).canonicalize_radical().simplify_full()\nCBF = ComplexBallField(128)\nRIFp = RealIntervalField(128)\nCI = CBF(0, 1)\nTWO_PI_I = 2 * CBF.pi() * CI\ndef circ(f, c, rho):\n    \"\"\"Arb's rigorous enclosure of the circle integral of f over |z - c| = rho.\"\"\"\n    c = CBF(c); rho = CBF(rho)\n    return CBF.integral(lambda t, _: f(c + rho * (CI * t).exp()) * CI * rho * (CI * t).exp(), 0, 2 * CBF.pi().real())\ndef seg(f, a, b):\n    \"\"\"Arb's rigorous enclosure of the integral of f(t) dt over [a, b].\"\"\"\n    return CBF.integral(lambda t, _: f(t), CBF(a), CBF(b))\ndef gap(x, y):\n    \"\"\"The interval of |x - y| (contains 0 exactly when the enclosures are compatible).\"\"\"\n    d = (CBF(x) - CBF(y)).abs()\n    return RIFp(d.lower(), d.upper())\ndef bnd(x):\n    \"\"\"The interval of |x|.\"\"\"\n    d = CBF(x).abs()\n    return RIFp(d.lower(), d.upper())\ndef eq(x, y, *values, edge=False):\n    return oracle_instance(*values, lhs=gap(x, y), rhs=RIFp(0), relation='==', edge=edge)\n\ndef inst(a, b, rho, at, bt, edge=False):\n    f = lambda w: 1/((w - CBF(a))*(w - CBF(b)))\n    d = gap(circ(f, a, rho) / TWO_PI_I, 1/(CBF(a) - CBF(b))) + gap(circ(f, b, rho) / TWO_PI_I, 1/(CBF(b) - CBF(a)))\n    return oracle_instance(*V(a=at, b=bt, ρ=str(rho)), lhs=d, rhs=RIFp(0), relation='==', edge=edge)\ninstances = [inst(1, 2, 1/2, '1', '2', True), inst(0, CBF(0, 1), 1/2, '0', 'Complex.I', False), inst(-1, 1, 1, '-1', '1', False)]\n",
+ "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+ "problem":
+ {"vars": ["x0", "x1", "x2", "x3"],
+  "universal":
+  [{"type": "ℂ", "name": "a"},
+   {"type": "ℂ", "name": "b"},
+   {"type": "a ≠ b", "name": "hab"},
+   {"type": "ℝ", "name": "ρ"},
+   {"type": "0 < ρ", "name": "hρ"},
+   {"type": "ρ < ‖a - b‖", "name": "hρa"}],
+  "table_problems": [],
+  "namespaces": ["mathlib", "project"],
+  "matrix_indices": [],
+  "integrals": [],
+  "hyps":
+  [{"text": "a ≠ b",
+    "rel": "ne",
+    "poly": "(x0) - (x1)",
+    "name": "hab",
+    "expr": "(x0) - (x1)"},
+   {"text": "0 < ρ", "rel": "lt", "name": "hρ", "expr": "(0) - (x2)"},
+   {"text": "ρ < ‖a - b‖", "rel": "lt", "name": "hρa", "expr": "(x2) - (x3)"}],
+  "goal":
+  {"text":
+   "residue (fun z => 1 / ((z - a) * (z - b))) a ρ = 1 / (a - b) ∧\n  Tendsto (fun z => (z - a) * (1 / ((z - a) * (z - b)))) (𝓝[≠] a) (𝓝 (1 / (a - b))) ∧\n    residue (fun z => 1 / ((z - a) * (z - b))) b ρ = 1 / (b - a) ∧\n      Tendsto (fun z => (z - b) * (1 / ((z - a) * (z - b)))) (𝓝[≠] b) (𝓝 (1 / (b - a)))",
+   "kind": "other"},
+  "functions": [],
+  "extensions":
+  [{"rewrites": [],
+    "namespace": "project",
+    "functions": [],
+    "conventions": null,
+    "constants": [],
+    "coercions": []}],
+  "exists_function": null,
+  "domain": [],
+  "derivatives": [],
+  "definitions": [],
+  "carrier": "ℂ",
+  "atoms": ["a", "b", "ρ", "‖a - b‖"],
+  "atom_types": ["ℂ", "ℂ", "ℝ", "ℝ"]},
+ "level": "oracle-test",
+ "instances":
+ [{"values": ["1", "2", "_", "1/2", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.723065601414603522770820158663114142866e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": true,
+   "accepted": true},
+  {"values": ["0", "Complex.I", "_", "1/2", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 1.685747433536525867667154276888891433881e-36] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true},
+  {"values": ["-1", "1", "_", "1", "_", "_"],
+   "reason": "",
+   "kind": "oracle",
+   "evaluation":
+   "[0.000000000000000000000000000000000000000 .. 8.406318217444682048275226589269600746416e-37] == [0.000000000000000000000000000000000000000 .. -0.000000000000000000000000000000000000000] at 128 bits",
+   "edge": false,
+   "accepted": true}]}
